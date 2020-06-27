@@ -5,9 +5,13 @@
 html {
     font-family: Helvetica, Arial, sans-serif;
     font-size  : 17px;
+    width: 100%;
     color: #1c1c1c;
 }
 
+div {
+    width: 100%;
+}
 /* ==================================================================
     BASIC GRID FOR PROFILE PIC
 ================================================================== */
@@ -58,20 +62,19 @@ html {
 
 .franklin-content {
     position: relative;
-    padding-left: 12.5%;
-    padding-right: 12.5%;
+    width:    100%;
     line-height: 1.35em; }
 
 /* on wide screens, fix content width to a max value */
-@media (min-width: 940px) {
+@media (min-width: 100px) {
     .franklin-content {
-        width: 705px;
+        width: 100px;
         margin-left: auto;
-        margin-right: auto; }
+        margin-right: 0px; }
     }
 
 /* on narrow device, reduce margins */
-@media (max-width: 480px) {
+@media (max-width: 100px) {
     .franklin-content {
         padding-left: 6%;
         padding-right: 6%; }
@@ -115,11 +118,12 @@ html {
 
 .franklin-content table {
     margin-left: auto;
-    margin-right: auto;
+    margin-right: 0px;
     border-collapse: collapse;
     text-align: center;}
 .franklin-content th, td{
     padding: 10px;
+    text-align: left;
     border: 1px solid black;}
 
 .franklin-content blockquote {
@@ -164,7 +168,7 @@ html {
     margin-bottom: 10px;}
 .franklin-content .fndef tr, td {
     padding: 0;
-    border: 0;
+    border: 1px solid black;
     text-align: left;}
 .franklin-content .fndef tr {
     border-left: 2px solid lightgray;
@@ -182,9 +186,9 @@ html {
 ================================================================== */
 
 .franklin-content img {
-    width: 70%;
+/*    width: 10%;*/
     text-align: center;
-    padding-left: 10%; }
+    padding-left: 0%; }
 
 .franklin-content .img-small img {
     width: 50%;
