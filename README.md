@@ -7,4 +7,4 @@ I used to have a Jekyll-powered website, but Franklin has the advantages:
 * It has in-built support for KaTeX. As most of my work now involves maths, TeX support is essential.
 
 ## Licence
-Parts of this repository that are my own, namely [FunctionIntegrator.md](FunctionIntegrator.md), [_assets/Root_mean_square_computation_time_FunctionIntegrator.jl.png]([_assets/Root_mean_square_computation_time_FunctionIntegrator.jl.png) and [index.md](index.md) are licensed under [GNU GPLv3](LICENCE). The rest is likely licensed under [this licence](https://github.com/tlienart/FranklinTemplates.jl/blob/master/LICENSE.md).
+Parts of this repository that are my own, namely [favicon.png](_assets/favicon.png), [FunctionIntegrator.md](FunctionIntegrator.md), [_assets/Root_mean_square_computation_time_FunctionIntegrator.jl.png]([_assets/Root_mean_square_computation_time_FunctionIntegrator.jl.png) and [index.md](index.md) are licensed under [GNU GPLv3](LICENCE). The rest is likely licensed under [this licence](https://github.com/tlienart/FranklinTemplates.jl/blob/master/LICENSE.md).
