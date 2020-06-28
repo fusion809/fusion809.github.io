@@ -1,4 +1,6 @@
 # fusion809.github.io
+![Build and Deploy](https://github.com/fusion809/fusion809.github.io/workflows/Build%20and%20Deploy/badge.svg)
+
 This is a website I've created using Franklin. It is based on a [Franklin website template](https://github.com/tlienart/FranklinTemplates.jl), so not all of the code in this is my own.
 
 I used to have a Jekyll-powered website, but Franklin has the advantages:
