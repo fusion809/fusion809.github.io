@@ -1,5 +1,5 @@
 # fusion809.github.io
-This is a website I've created using Franklin. It is based on the Franklin website template, so not all of the code in this is my own.
+This is a website I've created using Franklin. It is based on a [Franklin website template](https://github.com/tlienart/FranklinTemplates.jl), so not all of the code in this is my own.
 
 I used to have a Jekyll-powered website, but Franklin has the advantages:
 
