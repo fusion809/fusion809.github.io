@@ -2,7 +2,7 @@
 @def tags = ["packages", "julia"]
 
 ![Travis](https://travis-ci.com/fusion809/FunctionIntegrator.jl.svg?branch=master)
-![CompatHelper](https://github.com/fusion809/FunctionIntegrator.jl/workflows/CompatHelper/badge.svg?event=push)
+![CompatHelper](https://github.com/fusion809/FunctionIntegrator.jl/workflows/CompatHelper/badge.svg)
 
 This package should be treated as a second-rate alternative to the excellent [QuadGK](https://github.com/JuliaMath/QuadGK.jl) package. QuadGK provides more accurate integration for many problems, and also provides an error estimate which functions in this package do not. Likewise this package is less user-friendly as it requires you to decide which $N$ value you are going to go with.
 
