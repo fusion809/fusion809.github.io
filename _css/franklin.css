@@ -201,7 +201,10 @@ div {
 
 body { counter-reset: eqnum; }
 
-.katex { font-size: 1em !important; }
+.katex { 
+    font-size: 1em !important; 
+    white-space: nowrap;
+}
 
 .katex-display .katex {
     display: inline-block; } /* overwrite katex settings */
