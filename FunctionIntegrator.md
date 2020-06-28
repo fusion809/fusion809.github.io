@@ -62,7 +62,7 @@ The [test/](https://github.com/fusion809/FunctionIntegrator.jl/tree/master/test/
 
 **Notes**:
 1. `rectangle_rule` is not included because it failed to provide the required level of accuracy for many tests with all practically viable `N` values.
-2. The $x\in[-1,1]$ refers to the quadrature notes, which are also referred to in the weighting function column.
+2. The $x\in[-1,1]$ refers to the quadrature nodes, which are also referred to in the weighting function column.
 
 ## Acknowledgements
 I'd like to thank the Julia discourse community for their generous help through my Julia journey, and I would also like to thank the developers of  Julia, as without their work this package would not even be possible (I know, obviously, as this is a Julia package). Likewise, I'd also like to thank the developers of [FastGaussQuadrature.jl](https://github.com/JuliaApproximation/FastGaussQuadrature.jl), as without their efficient algorithms for finding the nodes and weights for various Gaussian quadrature techniques, several of the functions in this repository would be far less efficient (especially `legendre_quadrature`), or may not even exist. I'd also like to thank the developers of [SpecialFunctions.jl](https://github.com/JuliaMath/SpecialFunctions.jl), as some of their functions are useful for testing the functions in this package.
