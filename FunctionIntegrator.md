@@ -65,5 +65,187 @@ The [test/](https://github.com/fusion809/FunctionIntegrator.jl/tree/master/test/
 1. `rectangle_rule` is not included because it failed to provide the required level of accuracy for many tests with all practically viable `N` values.
 2. The $x\in[-1,1]$ refers to the quadrature nodes, which are also referred to in the weighting function column.
 
+## Examples
+In the following examples, the following integral (henceforth called integral 1) is being computed:
+
+$\displaystyle \int_0^{\frac{\pi}{2}} \cos{x} \hspace{0.1cm} dx$
+
+and compared to the analytical solution of $1$. The value being printed is difference between the computed solution and the analytical solution.
+
+### chebyshev_quadrature
+
+$k=1$:
+```julia:./code/chebyshev1
+using FunctionIntegrator
+a = abs(chebyshev_quadrature(x -> cos(x), 1000, 1, 0, pi/2) - 1);
+show(a)
+```
+\output{./code/chebyshev1}
+
+$k=2$:
+```julia:./code/chebyshev2
+using FunctionIntegrator
+a = abs(chebyshev_quadrature(x -> cos(x), 1000, 2, 0, pi/2) - 1);
+show(a)
+```
+\output{./code/chebyshev2}
+
+$k=3$:
+```julia:./code/chebyshev3
+using FunctionIntegrator
+a = abs(chebyshev_quadrature(x -> cos(x), 1000, 3, 0, pi/2) - 1);
+show(a)
+```
+\output{./code/chebyshev3}
+
+$k=4$:
+```julia:./code/chebyshev4
+using FunctionIntegrator
+a = abs(chebyshev_quadrature(x -> cos(x), 1000, 4, 0, pi/2) - 1);
+show(a)
+```
+\output{./code/chebyshev4}
+
+### hermite_quadrature
+In the following examples the integral:
+
+$\displaystyle \int_{-\infty}^{\infty} x^2 e^{-x^2} dx.$
+
+The exact solution of which is $\dfrac{\sqrt{\pi}}{2}$. The plot of the integrand is (truncated to the domain $x\in[-10,10]$):
+
+```julia:./code/hermite_plot
+using PyPlot
+x = LinRange(-10,10,1001);
+clf()
+y = (x.^2).*exp.(-x.^2);
+PyPlot.plot(x,y)
+PyPlot.savefig(joinpath(@OUTPUT, "hermite_plot.png"), dpi=50)
+```
+\fig{./code/output/hermite_plot.png}
+
+~~~<br>~~~
+$k=1$:
+
+```julia:./code/hermite1
+using FunctionIntegrator
+a = abs(hermite_quadrature(x -> x^2*exp(-x^2), 100, 1)-sqrt(pi)/2)
+show(a)
+```
+\output{./code/hermite1}
+
+$k=2$:
+
+```julia:./code/hermite2
+using FunctionIntegrator
+a = abs(hermite_quadrature(x -> x^2, 100, 2)-sqrt(pi)/2)
+show(a)
+```
+\output{./code/hermite2}
+
+## jacobi_quadrature
+In this example, we will approximate (1).
+$\alpha=\beta=1$:
+
+```julia:./code/jacobi1
+using FunctionIntegrator
+a = abs(jacobi_quadrature(x -> cos.(x), 1000, 1, 1, 0, pi/2)-1);
+show(a)
+```
+\output{./code/jacobi1}
+
+## laguerre_quadrature
+In this section, the integral:
+
+$\displaystyle \int_0^{\infty} xe^{-x} dx$
+
+is being approximated and compared to the analytical result of 1. The integrand has the following curve:
+
+```julia:./code/laguerre_plot
+using PyPlot
+x = LinRange(0,15,1001);
+clf()
+y = x.*exp.(-x);
+PyPlot.plot(x,y)
+PyPlot.savefig(joinpath(@OUTPUT, "laguerre_plot.png"), dpi=50)
+```
+\fig{./code/output/laguerre_plot.png}
+
+~~~<br>~~~
+$k=1$:
+```julia:./code/laguerre1
+using FunctionIntegrator
+a = abs(laguerre_quadrature(x -> x*exp(-x), 100, 1)-1)
+show(a)
+```
+\output{./code/laguerre1}
+
+$k=2$:
+```julia:./code/laguerre2
+using FunctionIntegrator
+a = abs(laguerre_quadrature(x -> x, 100, 2)-1)
+show(a)
+```
+\output{./code/laguerre2}
+
+## legendre_quadrature
+In this section, integral 1 is being approximated and compared to the analytical result. 
+
+```julia:./code/legendre
+using FunctionIntegrator
+a = abs(legendre_quadrature(x -> cos(x), 1000, 0, pi/2)-1)
+show(a)
+```
+\output{./code/legendre}
+
+## lobatto_quadrature
+In this section, integral 1 is being approximated and compared to the analytical result. 
+
+```julia:./code/lobatto
+using FunctionIntegrator
+a = abs(lobatto_quadrature(x -> cos(x), 1000, 0, pi/2)-1)
+show(a)
+```
+\output{./code/lobatto}
+
+## radau_quadrature
+In this section, integral 1 is being approximated and compared to the analytical result. 
+
+```julia:./code/radau
+using FunctionIntegrator
+a = abs(radau_quadrature(x -> cos(x), 1000, 0, pi/2)-1)
+show(a)
+```
+\output{./code/radau}
+
+## rectangle_rule
+In this section, integral 1 is being approximated and compared to the analytical result. 
+
+```julia:./code/rectangle
+using FunctionIntegrator
+a = abs(rectangle_rule(x -> cos(x), 1000, 0, pi/2)-1)
+show(a)
+```
+\output{./code/rectangle}
+
+## simpsons_rule
+In this section, integral 1 is being approximated and compared to the analytical result. 
+
+```julia:./code/simpsons
+using FunctionIntegrator
+a = abs(simpsons_rule(x -> cos(x), 1000, 0, pi/2)-1)
+show(a)
+```
+\output{./code/simpsons}
+
+## trapezoidal_rule
+In this section, integral 1 is being approximated and compared to the analytical result. 
+
+```julia:./code/trapezoidal
+using FunctionIntegrator
+a = abs(trapezoidal_rule(x -> cos(x), 1000, 0, pi/2)-1)
+show(a)
+```
+\output{./code/trapezoidal}
+
 ## Acknowledgements
 I'd like to thank the Julia discourse community for their help through my Julia journey, and I would also like to thank the developers of Julia, as without their work this package would not even be possible (I know, obviously, as this is a Julia package). Likewise, I'd also like to thank the developers of [FastGaussQuadrature.jl](https://github.com/JuliaApproximation/FastGaussQuadrature.jl), as without their efficient algorithms for finding the nodes and weights for various Gaussian quadrature techniques, several of the functions in this repository would be far less efficient (especially `legendre_quadrature`), or may not even exist. I'd also like to thank the developers of [SpecialFunctions.jl](https://github.com/JuliaMath/SpecialFunctions.jl), as some of their functions are useful for testing the functions in this package.
