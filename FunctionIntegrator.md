@@ -66,13 +66,12 @@ The [test/](https://github.com/fusion809/FunctionIntegrator.jl/tree/master/test/
 2. The $x\in[-1,1]$ refers to the quadrature nodes, which are also referred to in the weighting function column.
 
 ## Examples
+### chebyshev_quadrature
 In the following examples, the following integral (henceforth called integral 1) is being computed:
 
 $\displaystyle \int_0^{\frac{\pi}{2}} \cos{x} \hspace{0.1cm} dx$
 
 and compared to the analytical solution of $1$. The value being printed is difference between the computed solution and the analytical solution.
-
-### chebyshev_quadrature
 
 $k=1$:
 ```julia:./code/chebyshev1
