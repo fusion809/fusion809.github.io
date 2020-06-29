@@ -1,3 +1,1 @@
-ArgumentError: Package FunctionIntegrator not found in current path:
-- Run `import Pkg; Pkg.add("FunctionIntegrator")` to install the FunctionIntegrator package.
-
+6.446739609922147e-7
