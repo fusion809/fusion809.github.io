@@ -142,8 +142,7 @@ show(a)
 \output{./code/hermite2}
 
 ## jacobi_quadrature
-In this example, we will approximate (1).
-$\alpha=\beta=1$:
+In this example, we will approximate integral 1 and compare the result to the analytical result of $1$. For this example, we are setting both $\alpha$ and $\beta$ to 1.
 
 ```julia:./code/jacobi1
 using FunctionIntegrator
