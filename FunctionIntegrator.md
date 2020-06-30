@@ -20,7 +20,7 @@ This package provides the following functions:
 * `simpsons_rule(f::Function, N::Number, a::Number, b::Number)`
 * `trapezoidal_rule(f::Function, N::Number, a::Number, b::Number)`
 
-use Julia's help function (e.g. by typing `?chebyshev_quadrature`) to find out usage information, should you need it.
+use Julia's help function (e.g. by typing `?chebyshev_quadrature`) to find out usage information, should you need it. The choice of function table below also explains some of the details of each of these functions, such as their arguments. 
 
 This package is currently in Julia's General registry, thus to install it one merely needs to run:
 
@@ -33,6 +33,8 @@ and import it using:
 ```julia-repl
 julia> using FunctionIntegrator
 ```
+
+\toc
 
 ## Choice of function
 As a general rule of thumb, `simpsons_rule` should be the function you use when you are unsure which function to use as its approximations with large N (e.g. $1 \times 10^{4}$) are nearly always accurate to at least 6 digits. Despite this, for many problems some of the `_quadrature` functions may provide more accurate results with a smaller N value. The main time when `simpsons_rule` should be avoided is when there are unremovable singularities at the endpoints of the domain of integration, in which case using `chebyshev_quadrature` with $k=1$ or using `legendre_quadrature` is likely best.
@@ -141,7 +143,7 @@ show(a)
 ```
 \output{./code/hermite2}
 
-## jacobi_quadrature
+### jacobi_quadrature
 In this example, we will approximate integral 1 and compare the result to the analytical result of $1$. For this example, we are setting both $\alpha$ and $\beta$ to 1.
 
 ```julia:./code/jacobi1
@@ -151,7 +153,7 @@ show(a)
 ```
 \output{./code/jacobi1}
 
-## laguerre_quadrature
+### laguerre_quadrature
 In this section, the integral:
 
 $\displaystyle \int_0^{\infty} xe^{-x} dx$
@@ -185,7 +187,7 @@ show(a)
 ```
 \output{./code/laguerre2}
 
-## legendre_quadrature
+### legendre_quadrature
 In this section, integral 1 is being approximated and the result compared to the analytical result. 
 
 ```julia:./code/legendre
@@ -195,7 +197,7 @@ show(a)
 ```
 \output{./code/legendre}
 
-## lobatto_quadrature
+### lobatto_quadrature
 In this section, integral 1 is being approximated and the result compared to the analytical result. 
 
 ```julia:./code/lobatto
@@ -205,7 +207,7 @@ show(a)
 ```
 \output{./code/lobatto}
 
-## radau_quadrature
+### radau_quadrature
 In this section, integral 1 is being approximated and the result compared to the analytical result. 
 
 ```julia:./code/radau
@@ -215,7 +217,7 @@ show(a)
 ```
 \output{./code/radau}
 
-## rectangle_rule
+### rectangle_rule
 In this section, integral 1 is being approximated and the result compared to the analytical result. 
 
 ```julia:./code/rectangle
@@ -225,7 +227,7 @@ show(a)
 ```
 \output{./code/rectangle}
 
-## simpsons_rule
+### simpsons_rule
 In this section, integral 1 is being approximated and the result compared to the analytical result. 
 
 ```julia:./code/simpsons
@@ -235,7 +237,7 @@ show(a)
 ```
 \output{./code/simpsons}
 
-## trapezoidal_rule
+### trapezoidal_rule
 In this section, integral 1 is being approximated and the result compared to the analytical result. 
 
 ```julia:./code/trapezoidal
