@@ -71,7 +71,7 @@ In the following examples, the following integral (henceforth called integral 1)
 
 $\displaystyle \int_0^{\frac{\pi}{2}} \cos{x} \hspace{0.1cm} dx$
 
-and compared to the analytical solution of $1$. The value being printed is difference between the computed solution and the analytical solution.
+and the result compared to the analytical solution of $1$. The value being printed is difference between the computed solution and the analytical solution.
 
 $k=1$:
 ```julia:./code/chebyshev1
@@ -157,7 +157,7 @@ In this section, the integral:
 
 $\displaystyle \int_0^{\infty} xe^{-x} dx$
 
-is being approximated and compared to the analytical result of 1. The integrand has the following curve:
+is being approximated and the result compared to the analytical result of 1. The integrand has the following curve:
 
 ```julia:./code/laguerre_plot
 using PyPlot
@@ -187,7 +187,7 @@ show(a)
 \output{./code/laguerre2}
 
 ## legendre_quadrature
-In this section, integral 1 is being approximated and compared to the analytical result. 
+In this section, integral 1 is being approximated and the result compared to the analytical result. 
 
 ```julia:./code/legendre
 using FunctionIntegrator
@@ -197,7 +197,7 @@ show(a)
 \output{./code/legendre}
 
 ## lobatto_quadrature
-In this section, integral 1 is being approximated and compared to the analytical result. 
+In this section, integral 1 is being approximated and the result compared to the analytical result. 
 
 ```julia:./code/lobatto
 using FunctionIntegrator
@@ -207,7 +207,7 @@ show(a)
 \output{./code/lobatto}
 
 ## radau_quadrature
-In this section, integral 1 is being approximated and compared to the analytical result. 
+In this section, integral 1 is being approximated and the result compared to the analytical result. 
 
 ```julia:./code/radau
 using FunctionIntegrator
@@ -217,7 +217,7 @@ show(a)
 \output{./code/radau}
 
 ## rectangle_rule
-In this section, integral 1 is being approximated and compared to the analytical result. 
+In this section, integral 1 is being approximated and the result compared to the analytical result. 
 
 ```julia:./code/rectangle
 using FunctionIntegrator
@@ -227,7 +227,7 @@ show(a)
 \output{./code/rectangle}
 
 ## simpsons_rule
-In this section, integral 1 is being approximated and compared to the analytical result. 
+In this section, integral 1 is being approximated and the result compared to the analytical result. 
 
 ```julia:./code/simpsons
 using FunctionIntegrator
@@ -237,7 +237,7 @@ show(a)
 \output{./code/simpsons}
 
 ## trapezoidal_rule
-In this section, integral 1 is being approximated and compared to the analytical result. 
+In this section, integral 1 is being approximated and the result compared to the analytical result. 
 
 ```julia:./code/trapezoidal
 using FunctionIntegrator
