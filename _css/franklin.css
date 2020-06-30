@@ -119,6 +119,7 @@ div {
 .franklin-toc {
     border: 2px solid black;
     width: 300px;
+    font-size: 18px;
 }
 
 .franklin-toc p {
