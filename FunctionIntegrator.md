@@ -16,7 +16,9 @@ This package provides the following functions:
 * `legendre_quadrature(f::Function, N::Number, a::Number, b::Number)`
 * `lobatto_quadrature(f::Function, N::Number, a::Number, b::Number)`
 * `radau_quadrature(f::Function, N::Number, a::Number, b::Number)`
-* `rectangle_rule(f::Function, N::Number, a::Number, b::Number)`
+* `rectangle_rule_left(f::Function, N::Number, a::Number, b::Number)`
+* `rectangle_rule_midpoint(f::Function, N::Number, a::Number, b::Number)`
+* `rectangle_rule_right(f::Function, N::Number, a::Number, b::Number)`
 * `simpsons_rule(f::Function, N::Number, a::Number, b::Number)`
 * `trapezoidal_rule(f::Function, N::Number, a::Number, b::Number)`
 
@@ -59,7 +61,9 @@ The [test/](https://github.com/fusion809/FunctionIntegrator.jl/tree/master/test/
 | `legendre_quadrature`  | $[a,b]$~~~<br/>~~~$x\in[-1,1]$ | 1 | `f`, the function being integrated.~~~<br/>~~~`N`, the number of grid points.~~~<br/>~~~`a`, the start of the domain of integration.~~~<br/>~~~`b`, the end of the domain of integration. | Uses [Gauss-Legendre quadrature](https://en.wikipedia.org/wiki/Gauss%E2%80%93Legendre_quadrature). Generally, this is the best `_quadrature` function to go with when you are otherwise unsure which to go with. |
 | `lobatto_quadrature`   | $[a,b]$~~~<br/>~~~$x\in[-1,1]$ | 1 | `f`, the function being integrated.~~~<br/>~~~`N`, the number of grid points.~~~<br/>~~~`a`, the start of the domain of integration.~~~<br/>~~~`b`, the end of the domain of integration. | Uses [Gauss-Lobatto quadrature](https://en.wikipedia.org/wiki/Gaussian_quadrature#Gauss%E2%80%93Lobatto_rules). This function includes, in the calculation, the values of the integrand at one of the endpoints. Consequently, if there are unremovable singularities at the endpoints, this function may fail to give an accurate result even if you adjust the endpoints slightly to avoid the singularities. |
 | `radau_quadrature`     | $[a,b]$~~~<br/>~~~$x\in[-1,1]$ | 1 | `f`, the function being integrated.~~~<br/>~~~`N`, the number of grid points.~~~<br/>~~~`a`, the start of the domain of integration.~~~<br/>~~~`b`, the end of the domain of integration. | Uses Gauss–Radau quadrature, for which there is no Wikipedia article, the best article (simplest) I could find on it are [these lecture notes](https://web.archive.org/web/20200628202423/http://www.math.hkbu.edu.hk/ICM/LecturesAndSeminars/08OctMaterials/2/Slide3.pdf). This function includes, in the calculation, the values of the function at the endpoints. Consequently, if there are unremovable singularities at either or both of the endpoints, this function will fail to give an accurate result even if you adjust the endpoints slightly to avoid the singularities. |
-| `rectangle_rule`       | $[a,b]$ | N/A | `f`, the function being integrated.~~~<br/>~~~`N`. $N$ is the number of grid points used in the integration.~~~<br/>~~~`a`, the start of the domain of integration.~~~<br/>~~~`b`, the end of the domain of integration. | Uses the rectangle rule, specifically the [left Riemann sum](https://en.wikipedia.org/wiki/Riemann_sum#Left_Riemann_sum). Usually this is the least accurate method. In fact, many of the tests in the FunctionIntegrator.jl repository fail to get accuracy to 7 significant figures with `rectangle_rule` with any practically viable value of `N`. |
+| `rectangle_rule_left`  | $[a,b]$ | N/A | `f`, the function being integrated.~~~<br/>~~~`N`. $N$ is the number of grid points used in the integration.~~~<br/>~~~`a`, the start of the domain of integration.~~~<br/>~~~`b`, the end of the domain of integration. | Uses the rectangle rule, specifically the [left Riemann sum](https://en.wikipedia.org/wiki/Riemann_sum#Left_Riemann_sum). Usually this or `rectangle_rule_right` is the least accurate method. In fact, many of the tests in the FunctionIntegrator.jl repository fail to get accuracy to 7 significant figures with `rectangle_rule_left` with any practically viable value of `N`. |
+| `rectangle_rule_midpoint`  | $[a,b]$ | N/A | `f`, the function being integrated.~~~<br/>~~~`N`. $N$ is the number of grid points used in the integration.~~~<br/>~~~`a`, the start of the domain of integration.~~~<br/>~~~`b`, the end of the domain of integration. | Uses the rectangle rule, specifically the [Riemann midpoint rule](https://en.wikipedia.org/wiki/Riemann_sum#Midpoint_rule). Usually this is more accurate than `rectangle_rule_left` and `rectangle_rule_right` and sometimes rivals `trapezoidal_rule` for accuracy. |
+| `rectangle_rule_right`  | $[a,b]$ | N/A | `f`, the function being integrated.~~~<br/>~~~`N`. $N$ is the number of grid points used in the integration.~~~<br/>~~~`a`, the start of the domain of integration.~~~<br/>~~~`b`, the end of the domain of integration. | Uses the rectangle rule, specifically the [right Riemann sum](https://en.wikipedia.org/wiki/Riemann_sum#Right_Riemann_sum). Usually this or `rectangle_rule_left` is the least accurate method. In fact, many of the tests in the FunctionIntegrator.jl repository fail to get accuracy to 7 significant figures with `rectangle_rule_right` with any practically viable value of `N`. |
 | `simpsons_rule`        | $[a,b]$ | N/A | `f`, the function being integrated.~~~<br/>~~~`N`. $N+1$ is the number of grid points, if endpoints are included.~~~<br/>~~~`a`, the start of the domain of integration.~~~<br/>~~~`b`, the end of the domain of integration. | Uses [Simpson's rule](https://en.wikipedia.org/wiki/Simpson%27s_rule). The best function to use when you are unsure which to use, provided there are no unremovable singularities within the integration domain, including the endpoints. It is the best in the sense of being, on average, the most efficient (providing the most accurate result for the least amount of computing time). |
 | `trapezoidal_rule`     | $[a,b]$ | N/A | `f`, the function being integrated.~~~<br/>~~~`N`. $N+1$ is the number of grid points, if endpoints are included.~~~<br/>~~~`a`, the start of the domain of integration.~~~<br/>~~~`b`, the end of the domain of integration. | Uses the [trapezoidal rule](https://en.wikipedia.org/wiki/Trapezoidal_rule). This is the second most efficient integration function after `simpsons_rule`. It has the same caveats. |
 
@@ -217,15 +221,35 @@ show(a)
 ```
 \output{./code/radau}
 
-### rectangle_rule
+### rectangle\_rule\_left
 In this section, integral 1 is being approximated and the result compared to the analytical result. 
 
-```julia:./code/rectangle
+```julia:./code/rectangle_left
 using FunctionIntegrator
-a = abs(rectangle_rule(x -> cos(x), 1000, 0, pi/2)-1)
+a = abs(rectangle_rule_left(x -> cos(x), 1000, 0, pi/2)-1)
 show(a)
 ```
-\output{./code/rectangle}
+\output{./code/rectangle_left}
+
+### rectangle\_rule\_midpoint
+In this section, integral 1 is being approximated and the result compared to the analytical result. 
+
+```julia:./code/rectangle_midpoint
+using FunctionIntegrator
+a = abs(rectangle_rule_midpoint(x -> cos(x), 1000, 0, pi/2)-1)
+show(a)
+```
+\output{./code/rectangle_midpoint}
+
+### rectangle\_rule\_right
+In this section, integral 1 is being approximated and the result compared to the analytical result. 
+
+```julia:./code/rectangle_right
+using FunctionIntegrator
+a = abs(rectangle_rule_right(x -> cos(x), 1000, 0, pi/2)-1)
+show(a)
+```
+\output{./code/rectangle_right}
 
 ### simpsons_rule
 In this section, integral 1 is being approximated and the result compared to the analytical result. 
