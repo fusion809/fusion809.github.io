@@ -146,7 +146,7 @@ In this example, we will approximate integral 1 and compare the result to the an
 
 ```julia:./code/jacobi1
 using FunctionIntegrator
-a = abs(jacobi_quadrature(x -> cos.(x), 1000, 1, 1, 0, pi/2)-1);
+a = abs(jacobi_quadrature(x -> cos(x), 1000, 1, 1, 0, pi/2)-1);
 show(a)
 ```
 \output{./code/jacobi1}
