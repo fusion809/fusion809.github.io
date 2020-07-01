@@ -189,6 +189,7 @@ trapezoidal_error        = zeros(length(nc));
     trapezoidal_error[i]        = abs(trapezoidal_rule(x -&gt; sech(x), nc[i], <span class=hljs-number >0</span>, <span class=hljs-number >100</span>)-<span class=hljs-literal >pi</span>/<span class=hljs-number >2</span>);
 <span class=hljs-keyword >end</span>
 
+pygui(<span class=hljs-literal >false</span>)
 PyPlot.figure(<span class=hljs-number >1</span>)
 PyPlot.clf()
 PyPlot.plot(nc, chebyshev1_error);
