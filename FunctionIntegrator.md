@@ -48,7 +48,7 @@ The [test/](https://github.com/fusion809/FunctionIntegrator.jl/tree/master/test/
 ~~~
 <figure float="center">
     <img src="/assets/Root_mean_square_computation_time_FunctionIntegrator.jl.svg" width="100%">
-    <figcaption><b>Figure 1: a bar graph to compare the computation times for each fo the flexible-domain methods provided by the package, except <code>rectange_rule_left</code> and <code>rectangle_rule_right</code>.<sup>1</sup> Data is from <a href="https://travis-ci.com/github/fusion809/FunctionIntegrator.jl/jobs/354648732" link="_blank">this build</a>.</b></caption>
+    <figcaption><b>Figure 1: a bar graph to compare the computation times for each fo the flexible-domain methods provided by the package, except <code>rectange_rule_left</code> and <code>rectangle_rule_right</code>.<sup>1</sup> Data is from <a href="https://travis-ci.com/github/fusion809/FunctionIntegrator.jl/jobs/355708079" link="_blank">this build</a>.</b></caption>
 </figure>
 ~~~
 
@@ -418,7 +418,7 @@ PyPlot.savefig(joinpath(@OUTPUT, "rectangle_right_error_plot.png"), dpi=80)
 PyPlot.figure(13)
 PyPlot.clf()
 PyPlot.plot(nc, simpsons_error)
-PyPlot.title("Simpsons rule")
+PyPlot.title("Simpson's rule")
 xscale("log")
 xlabel("N")
 yscale("log")
