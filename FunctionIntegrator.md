@@ -273,7 +273,7 @@ show(a)
 
 ## Error analysis
 ```julia:./code/error_analysis
-using FunctionIntegrator, PyPlot, SpecialFunctions
+using FunctionIntegrator, PyPlot
 nc = round.(exp.(1/4*log(10)*(1:24)));
 chebyshev1_error         = zeros(length(nc));
 chebyshev2_error         = zeros(length(nc));

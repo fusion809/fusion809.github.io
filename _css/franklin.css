@@ -9,16 +9,13 @@ html {
     color: #1c1c1c;
 }
 
-div {
-    width: 100%;
-}
 /* ==================================================================
     BASIC GRID FOR PROFILE PIC
 ================================================================== */
 
-.franklin-content .row {
+/*.franklin-content .row {
   display: block; }
-
+*/
 .franklin-content .left {
   float: left;
   margin-right: 15px; }
@@ -61,15 +58,15 @@ div {
 ================================================================== */
 
 .franklin-content {
-    position: relative;
+    position: left;
     width:    100%;
     line-height: 1.35em; }
 
 /* on wide screens, fix content width to a max value */
 @media (min-width: 100px) {
     .franklin-content {
-        width: 100px;
-        margin-left: auto;
+        width: 100%;
+        margin-left: 0px;
         margin-right: 0px; }
     }
 
