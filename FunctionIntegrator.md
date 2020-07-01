@@ -112,11 +112,11 @@ show(a)
 \output{./code/chebyshev4}
 
 ### hermite_quadrature
-In the following examples the integral:
+In the following examples, the integral:
 
 $\displaystyle \int_{-\infty}^{\infty} x^2 e^{-x^2} dx.$
 
-The exact solution of which is $\dfrac{\sqrt{\pi}}{2}$. The plot of the integrand is (truncated to the domain $x\in[-10,10]$):
+the exact solution of which is $\dfrac{\sqrt{\pi}}{2}$, will be approximated using `hermite_quadrature` and the result will be compared to the analytical solution. The plot of the integrand is (truncated to the domain $x\in[-10,10]$):
 
 ```julia:./code/hermite_plot
 using PyPlot
