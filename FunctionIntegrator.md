@@ -308,6 +308,7 @@ for i=1:length(nc)
     trapezoidal_error[i]        = abs(trapezoidal_rule(x -> sech(x), nc[i], 0, 100)-pi/2);
 end
 
+pygui(false)
 PyPlot.figure(1)
 PyPlot.clf()
 PyPlot.plot(nc, chebyshev1_error);
