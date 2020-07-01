@@ -272,6 +272,7 @@ show(a)
 \output{./code/trapezoidal}
 
 ## Error analysis
+### Code
 ```julia:./code/error_analysis
 using FunctionIntegrator, PyPlot
 nc = round.(exp.(1/4*log(10)*(1:24)));
@@ -435,6 +436,7 @@ ylabel("Error")
 PyPlot.savefig(joinpath(@OUTPUT, "trapezoidal_error_plot.png"), dpi=80)
 ```
 
+### Plots
 \fig{./code/output/chebyshev1_error_plot.png}
 \fig{./code/output/chebyshev2_error_plot.png}
 \fig{./code/output/chebyshev3_error_plot.png}
