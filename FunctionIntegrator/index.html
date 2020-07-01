@@ -1,7 +1,7 @@
 <!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/libs/katex/katex.min.css"> <link rel=stylesheet  href="/libs/highlight/github.min.css"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/pure.css"> <!--<link rel=stylesheet  href="/css/side-menu.css">--> <!--The width specified in frankin content under @media determines how wide the website is--> <style> .franklin-content{padding-left:0px;} @media (min-width: 940px) { .franklin-content {width: 100%; margin: 0px; padding-left: 1px} .header {width: 900px;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>FunctionIntegrator.jl</title> <div id=layout > <div id=main > <div class=header > <h1>FunctionIntegrator.jl</h1> </div> <div class=franklin-content ><p><img src="https://github.com/fusion809/FunctionIntegrator.jl/workflows/CompatHelper/badge.svg" alt=CompatHelper  /> <img src="https://github.com/fusion809/FunctionIntegrator.jl/workflows/TagBot/badge.svg" alt=TagBot  /> <img src="https://travis-ci.com/fusion809/FunctionIntegrator.jl.svg?branch&#61;master" alt=Travis  /></p> <p><a href="https://github.com/fusion809/FunctionIntegrator.jl">FunctionIntegrator.jl</a> should be treated as a second-rate alternative to the excellent <a href="https://github.com/JuliaMath/QuadGK.jl">QuadGK</a> package. QuadGK provides more accurate integration for many problems, and also provides an error estimate which functions in this package do not. Likewise this package is less user-friendly as it requires you to decide which <span class=katex ><span class=katex-mathml ><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class=katex-html  aria-hidden=true ><span class=base ><span class=strut  style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span></span></span></span> value you are going to go with.</p> <p>This package provides the following functions:</p> <ul> <li><p><code>chebyshev_quadrature&#40;f::Function, N::Number, k::Integer, a::Number, b::Number&#41;</code></p> <li><p><code>hermite_quadrature&#40;f::Function, N::Number, k::Integer&#41;</code></p> <li><p><code>jacobi_quadrature&#40;f::Function, N::Number, α::Number, β::Number, a::Number, b::Number&#41;</code></p> <li><p><code>laguerre_quadrature&#40;f::Function, N::Number, k::Integer&#41;</code></p> <li><p><code>legendre_quadrature&#40;f::Function, N::Number, a::Number, b::Number&#41;</code></p> <li><p><code>lobatto_quadrature&#40;f::Function, N::Number, a::Number, b::Number&#41;</code></p> <li><p><code>radau_quadrature&#40;f::Function, N::Number, a::Number, b::Number&#41;</code></p> <li><p><code>rectangle_rule_left&#40;f::Function, N::Number, a::Number, b::Number&#41;</code></p> <li><p><code>rectangle_rule_midpoint&#40;f::Function, N::Number, a::Number, b::Number&#41;</code></p> <li><p><code>rectangle_rule_right&#40;f::Function, N::Number, a::Number, b::Number&#41;</code></p> <li><p><code>simpsons_rule&#40;f::Function, N::Number, a::Number, b::Number&#41;</code></p> <li><p><code>trapezoidal_rule&#40;f::Function, N::Number, a::Number, b::Number&#41;</code></p> </ul> <p>use Julia&#39;s help function &#40;e.g. by typing <code>?chebyshev_quadrature</code>&#41; to find out usage information, should you need it. The choice of function table below also explains some of the details of each of these functions, such as their arguments. </p> <p>This package is currently in Julia&#39;s General registry, thus to install it one merely needs to run:</p> <pre><code class="julia-repl hljs"><span class=hljs-metap>(v1.4) pkg&gt;</span> add FunctionIntegrator</code></pre>
 <p>and import it using:</p>
 <pre><code class="julia-repl hljs"><span class=hljs-meta >julia&gt;</span><span class=julia > <span class=hljs-keyword >using</span> FunctionIntegrator</span></code></pre>
-<div class=franklin-toc ><ol><li><a href="#choice_of_function">Choice of function</a><li><a href="#examples">Examples</a><ol><li><a href="#chebyshev_quadrature">chebyshev_quadrature</a><li><a href="#hermite_quadrature">hermite_quadrature</a><li><a href="#jacobi_quadrature">jacobi_quadrature</a><li><a href="#laguerre_quadrature">laguerre_quadrature</a><li><a href="#legendre_quadrature">legendre_quadrature</a><li><a href="#lobatto_quadrature">lobatto_quadrature</a><li><a href="#radau_quadrature">radau_quadrature</a><li><a href="#rectangleruleleft">rectangle&#95;rule&#95;left</a><li><a href="#rectanglerulemidpoint">rectangle&#95;rule&#95;midpoint</a><li><a href="#rectangleruleright">rectangle&#95;rule&#95;right</a><li><a href="#simpsons_rule">simpsons_rule</a><li><a href="#trapezoidal_rule">trapezoidal_rule</a></ol><li><a href="#acknowledgements">Acknowledgements</a></ol></div>
+<div class=franklin-toc ><ol><li><a href="#choice_of_function">Choice of function</a><li><a href="#examples">Examples</a><ol><li><a href="#chebyshev_quadrature">chebyshev_quadrature</a><li><a href="#hermite_quadrature">hermite_quadrature</a><li><a href="#jacobi_quadrature">jacobi_quadrature</a><li><a href="#laguerre_quadrature">laguerre_quadrature</a><li><a href="#legendre_quadrature">legendre_quadrature</a><li><a href="#lobatto_quadrature">lobatto_quadrature</a><li><a href="#radau_quadrature">radau_quadrature</a><li><a href="#rectangleruleleft">rectangle&#95;rule&#95;left</a><li><a href="#rectanglerulemidpoint">rectangle&#95;rule&#95;midpoint</a><li><a href="#rectangleruleright">rectangle&#95;rule&#95;right</a><li><a href="#simpsons_rule">simpsons_rule</a><li><a href="#trapezoidal_rule">trapezoidal_rule</a></ol><li><a href="#error_analysis">Error analysis</a><li><a href="#acknowledgements">Acknowledgements</a></ol></div>
 <h2 id=choice_of_function ><a href="#choice_of_function">Choice of function</a></h2>  As a general rule of thumb, <code>simpsons_rule</code> should be the function you use when you are unsure which function to use as its approximations with large N &#40;e.g. <span class=katex ><span class=katex-mathml ><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>×</mo><mn>1</mn><msup><mn>0</mn><mn>4</mn></msup></mrow><annotation encoding="application/x-tex">1 \times 10^{4}</annotation></semantics></math></span><span class=katex-html  aria-hidden=true ><span class=base ><span class=strut  style="height:0.72777em;vertical-align:-0.08333em;"></span><span class=mord >1</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span><span class=mbin >×</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span></span><span class=base ><span class=strut  style="height:0.8141079999999999em;vertical-align:0em;"></span><span class=mord >1</span><span class=mord ><span class=mord >0</span><span class=msupsub ><span class=vlist-t ><span class=vlist-r ><span class=vlist  style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class=pstrut  style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span></span></span></span></span>&#41; are nearly always accurate to at least 6 digits. Despite this, for many problems some of the <code>_quadrature</code> functions may provide more accurate results with a smaller N value. The main time when <code>simpsons_rule</code> should be avoided is when there are unremovable singularities at the endpoints of the domain of integration, in which case using <code>chebyshev_quadrature</code> with <span class=katex ><span class=katex-mathml ><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">k=1</annotation></semantics></math></span><span class=katex-html  aria-hidden=true ><span class=base ><span class=strut  style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class=mspace  style="margin-right:0.2777777777777778em;"></span><span class=mrel >=</span><span class=mspace  style="margin-right:0.2777777777777778em;"></span></span><span class=base ><span class=strut  style="height:0.64444em;vertical-align:0em;"></span><span class=mord >1</span></span></span></span> or using <code>legendre_quadrature</code> is likely best.</p>
 <p>Each of the functions whose name ends with <code>_quadrature</code> uses <a href="https://en.wikipedia.org/wiki/Gaussian_quadrature">Gaussian quadrature</a>, the specifics of which differ between functions. Out of them, <code>legendre_quadrature</code> is perhaps the best to go with when you are uncertain which out of the <code>_quadrature</code> functions to go with as it can be applied to any grid and any problem and <em>usually</em> arrives at a result that is accurate to at least 7 decimal places provided <span class=katex ><span class=katex-mathml ><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>≥</mo><mn>1</mn><mo>×</mo><mn>1</mn><msup><mn>0</mn><mn>4</mn></msup></mrow><annotation encoding="application/x-tex">N \geq 1 \times 10^{4}</annotation></semantics></math></span><span class=katex-html  aria-hidden=true ><span class=base ><span class=strut  style="height:0.8193em;vertical-align:-0.13597em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class=mspace  style="margin-right:0.2777777777777778em;"></span><span class=mrel >≥</span><span class=mspace  style="margin-right:0.2777777777777778em;"></span></span><span class=base ><span class=strut  style="height:0.72777em;vertical-align:-0.08333em;"></span><span class=mord >1</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span><span class=mbin >×</span><span class=mspace  style="margin-right:0.2222222222222222em;"></span></span><span class=base ><span class=strut  style="height:0.8141079999999999em;vertical-align:0em;"></span><span class=mord >1</span><span class=mord ><span class=mord >0</span><span class=msupsub ><span class=vlist-t ><span class=vlist-r ><span class=vlist  style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class=pstrut  style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span></span></span></span></span>. <code>legendre_quadrature</code> has the added benefit of being perhaps the fastest <code>_quadrature</code> function after controlling for accuracy of the result obtained.</p>
 <p>The <a href="https://github.com/fusion809/FunctionIntegrator.jl/tree/master/test/">test/</a> folder has test scripts that approximate various different integrals &#40;each file, except <a href="https://github.com/fusion809/FunctionIntegrator.jl/blob/master/test/runtests.jl">test/runtests.jl</a>, pertains to a different integral&#41;; the N values given are the smallest possible to pass each of the tests listed &#40;except when the test involves a less than &#40;&lt;&#41; sign&#41;. If you want to know which function to use for which integral, these tests may be useful as a rough guide.</p>
@@ -66,13 +66,13 @@ h400000v40h-400000z'/></svg></span></span></span><span class=vlist-s >​</span>
 <p>and the result compared to the analytical solution of <span class=katex ><span class=katex-mathml ><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class=katex-html  aria-hidden=true ><span class=base ><span class=strut  style="height:0.64444em;vertical-align:0em;"></span><span class=mord >1</span></span></span></span>. The value being printed is difference between the computed solution and the analytical solution.</p>
 <span class=katex ><span class=katex-mathml ><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">k=1</annotation></semantics></math></span><span class=katex-html  aria-hidden=true ><span class=base ><span class=strut  style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class=mspace  style="margin-right:0.2777777777777778em;"></span><span class=mrel >=</span><span class=mspace  style="margin-right:0.2777777777777778em;"></span></span><span class=base ><span class=strut  style="height:0.64444em;vertical-align:0em;"></span><span class=mord >1</span></span></span></span>: <pre><code class="julia hljs"><span class=hljs-keyword >using</span> FunctionIntegrator
 a = abs(chebyshev_quadrature(x -&gt; cos(x), <span class=hljs-number >1000</span>, <span class=hljs-number >1</span>, <span class=hljs-number >0</span>, <span class=hljs-literal >pi</span>/<span class=hljs-number >2</span>) - <span class=hljs-number >1</span>);
-show(a)</code></pre> <pre><code class="plaintext hljs">3.229819229844111e-7</code></pre>
+show(a)</code></pre> <pre><code class="plaintext hljs">3.229819232064557e-7</code></pre>
 <span class=katex ><span class=katex-mathml ><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">k=2</annotation></semantics></math></span><span class=katex-html  aria-hidden=true ><span class=base ><span class=strut  style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class=mspace  style="margin-right:0.2777777777777778em;"></span><span class=mrel >=</span><span class=mspace  style="margin-right:0.2777777777777778em;"></span></span><span class=base ><span class=strut  style="height:0.64444em;vertical-align:0em;"></span><span class=mord >2</span></span></span></span>: <pre><code class="julia hljs"><span class=hljs-keyword >using</span> FunctionIntegrator
 a = abs(chebyshev_quadrature(x -&gt; cos(x), <span class=hljs-number >1000</span>, <span class=hljs-number >2</span>, <span class=hljs-number >0</span>, <span class=hljs-literal >pi</span>/<span class=hljs-number >2</span>) - <span class=hljs-number >1</span>);
 show(a)</code></pre> <pre><code class="plaintext hljs">6.446739609922147e-7</code></pre>
 <span class=katex ><span class=katex-mathml ><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">k=3</annotation></semantics></math></span><span class=katex-html  aria-hidden=true ><span class=base ><span class=strut  style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class=mspace  style="margin-right:0.2777777777777778em;"></span><span class=mrel >=</span><span class=mspace  style="margin-right:0.2777777777777778em;"></span></span><span class=base ><span class=strut  style="height:0.64444em;vertical-align:0em;"></span><span class=mord >3</span></span></span></span>: <pre><code class="julia hljs"><span class=hljs-keyword >using</span> FunctionIntegrator
 a = abs(chebyshev_quadrature(x -&gt; cos(x), <span class=hljs-number >1000</span>, <span class=hljs-number >3</span>, <span class=hljs-number >0</span>, <span class=hljs-literal >pi</span>/<span class=hljs-number >2</span>) - <span class=hljs-number >1</span>);
-show(a)</code></pre> <pre><code class="plaintext hljs">6.453189421717909e-7</code></pre>
+show(a)</code></pre> <pre><code class="plaintext hljs">6.453189426158801e-7</code></pre>
 <span class=katex ><span class=katex-mathml ><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">k=4</annotation></semantics></math></span><span class=katex-html  aria-hidden=true ><span class=base ><span class=strut  style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class=mspace  style="margin-right:0.2777777777777778em;"></span><span class=mrel >=</span><span class=mspace  style="margin-right:0.2777777777777778em;"></span></span><span class=base ><span class=strut  style="height:0.64444em;vertical-align:0em;"></span><span class=mord >4</span></span></span></span>: <pre><code class="julia hljs"><span class=hljs-keyword >using</span> FunctionIntegrator
 a = abs(chebyshev_quadrature(x -&gt; cos(x), <span class=hljs-number >1000</span>, <span class=hljs-number >4</span>, <span class=hljs-number >0</span>, <span class=hljs-literal >pi</span>/<span class=hljs-number >2</span>) - <span class=hljs-number >1</span>);
 show(a)</code></pre> <pre><code class="plaintext hljs">3.226596516636704e-7</code></pre>
@@ -119,7 +119,7 @@ PyPlot.plot(x,y)
 PyPlot.savefig(joinpath(<span class=hljs-meta >@OUTPUT</span>, <span class=hljs-string >&quot;laguerre_plot.png&quot;</span>), dpi=<span class=hljs-number >80</span>)</code></pre> <img src="/assets/FunctionIntegrator/code/output/laguerre_plot.png" alt="">
 <br> <span class=katex ><span class=katex-mathml ><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">k=1</annotation></semantics></math></span><span class=katex-html  aria-hidden=true ><span class=base ><span class=strut  style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class=mspace  style="margin-right:0.2777777777777778em;"></span><span class=mrel >=</span><span class=mspace  style="margin-right:0.2777777777777778em;"></span></span><span class=base ><span class=strut  style="height:0.64444em;vertical-align:0em;"></span><span class=mord >1</span></span></span></span>: <pre><code class="julia hljs"><span class=hljs-keyword >using</span> FunctionIntegrator
 a = abs(laguerre_quadrature(x -&gt; x*exp(-x), <span class=hljs-number >100</span>, <span class=hljs-number >1</span>)-<span class=hljs-number >1</span>)
-show(a)</code></pre> <pre><code class="plaintext hljs">3.1086244689504383e-15</code></pre>
+show(a)</code></pre> <pre><code class="plaintext hljs">3.219646771412954e-15</code></pre>
 <span class=katex ><span class=katex-mathml ><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">k=2</annotation></semantics></math></span><span class=katex-html  aria-hidden=true ><span class=base ><span class=strut  style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class=mspace  style="margin-right:0.2777777777777778em;"></span><span class=mrel >=</span><span class=mspace  style="margin-right:0.2777777777777778em;"></span></span><span class=base ><span class=strut  style="height:0.64444em;vertical-align:0em;"></span><span class=mord >2</span></span></span></span>: <pre><code class="julia hljs"><span class=hljs-keyword >using</span> FunctionIntegrator
 a = abs(laguerre_quadrature(x -&gt; x, <span class=hljs-number >100</span>, <span class=hljs-number >2</span>)-<span class=hljs-number >1</span>)
 show(a)</code></pre> <pre><code class="plaintext hljs">3.1086244689504383e-15</code></pre>
@@ -130,11 +130,11 @@ show(a)</code></pre> <pre><code class="plaintext hljs">0.0</code></pre>
 <h3 id=lobatto_quadrature ><a href="#lobatto_quadrature">lobatto_quadrature</a></h3>  In this section, integral 1 is being approximated and the result compared to the analytical result. </p>
 <pre><code class="julia hljs"><span class=hljs-keyword >using</span> FunctionIntegrator
 a = abs(lobatto_quadrature(x -&gt; cos(x), <span class=hljs-number >1000</span>, <span class=hljs-number >0</span>, <span class=hljs-literal >pi</span>/<span class=hljs-number >2</span>)-<span class=hljs-number >1</span>)
-show(a)</code></pre> <pre><code class="plaintext hljs">8.881784197001252e-16</code></pre>
+show(a)</code></pre> <pre><code class="plaintext hljs">6.661338147750939e-16</code></pre>
 <h3 id=radau_quadrature ><a href="#radau_quadrature">radau_quadrature</a></h3>  In this section, integral 1 is being approximated and the result compared to the analytical result. </p>
 <pre><code class="julia hljs"><span class=hljs-keyword >using</span> FunctionIntegrator
 a = abs(radau_quadrature(x -&gt; cos(x), <span class=hljs-number >1000</span>, <span class=hljs-number >0</span>, <span class=hljs-literal >pi</span>/<span class=hljs-number >2</span>)-<span class=hljs-number >1</span>)
-show(a)</code></pre> <pre><code class="plaintext hljs">0.0</code></pre>
+show(a)</code></pre> <pre><code class="plaintext hljs">2.220446049250313e-16</code></pre>
 <h3 id=rectangleruleleft ><a href="#rectangleruleleft">rectangle&#95;rule&#95;left</a></h3>  In this section, integral 1 is being approximated and the result compared to the analytical result. </p>
 <pre><code class="julia hljs"><span class=hljs-keyword >using</span> FunctionIntegrator
 a = abs(rectangle_rule_left(x -&gt; cos(x), <span class=hljs-number >1000</span>, <span class=hljs-number >0</span>, <span class=hljs-literal >pi</span>/<span class=hljs-number >2</span>)-<span class=hljs-number >1</span>)
@@ -155,10 +155,171 @@ show(a)</code></pre> <pre><code class="plaintext hljs">3.8413716652030416e-14</c
 <pre><code class="julia hljs"><span class=hljs-keyword >using</span> FunctionIntegrator
 a = abs(trapezoidal_rule(x -&gt; cos(x), <span class=hljs-number >1000</span>, <span class=hljs-number >0</span>, <span class=hljs-literal >pi</span>/<span class=hljs-number >2</span>)-<span class=hljs-number >1</span>)
 show(a)</code></pre> <pre><code class="plaintext hljs">2.0561676361552372e-7</code></pre>
+<h2 id=error_analysis ><a href="#error_analysis">Error analysis</a></h2>  <pre><code class="julia hljs"><span class=hljs-keyword >using</span> FunctionIntegrator, PyPlot, SpecialFunctions
+nc = round.(exp.(<span class=hljs-number >1</span>/<span class=hljs-number >4</span>*log(<span class=hljs-number >10</span>)*(<span class=hljs-number >1</span>:<span class=hljs-number >24</span>)));
+chebyshev1_error         = zeros(length(nc));
+chebyshev2_error         = zeros(length(nc));
+chebyshev3_error         = zeros(length(nc));
+chebyshev4_error         = zeros(length(nc));
+jacobi_error             = zeros(length(nc));
+laguerre_error           = zeros(length(nc));
+legendre_error           = zeros(length(nc));
+lobatto_error            = zeros(length(nc));
+radau_error              = zeros(length(nc));
+rectangle_left_error     = zeros(length(nc));
+rectangle_midpoint_error = zeros(length(nc));
+rectangle_right_error    = zeros(length(nc));
+simpsons_error           = zeros(length(nc));
+trapezoidal_error        = zeros(length(nc));
+
+<span class=hljs-keyword >for</span> i=<span class=hljs-number >1</span>:length(nc)
+    chebyshev1_error[i]         = abs(chebyshev_quadrature(x -&gt; sech(x), nc[i], <span class=hljs-number >1</span>, <span class=hljs-number >0</span>, <span class=hljs-number >100</span>)-<span class=hljs-literal >pi</span>/<span class=hljs-number >2</span>);
+    chebyshev2_error[i]         = abs(chebyshev_quadrature(x -&gt; sech(x), nc[i], <span class=hljs-number >2</span>, <span class=hljs-number >0</span>, <span class=hljs-number >100</span>)-<span class=hljs-literal >pi</span>/<span class=hljs-number >2</span>);
+    chebyshev3_error[i]         = abs(chebyshev_quadrature(x -&gt; sech(x), nc[i], <span class=hljs-number >3</span>, <span class=hljs-number >0</span>, <span class=hljs-number >100</span>)-<span class=hljs-literal >pi</span>/<span class=hljs-number >2</span>);
+    chebyshev4_error[i]         = abs(chebyshev_quadrature(x -&gt; sech(x), nc[i], <span class=hljs-number >4</span>, <span class=hljs-number >0</span>, <span class=hljs-number >100</span>)-<span class=hljs-literal >pi</span>/<span class=hljs-number >2</span>);
+    jacobi_error[i]             = abs(jacobi_quadrature(x -&gt; sech(x), nc[i], <span class=hljs-number >1</span>, <span class=hljs-number >1</span>, <span class=hljs-number >0</span>, <span class=hljs-number >100</span>)-<span class=hljs-literal >pi</span>/<span class=hljs-number >2</span>);
+    laguerre_error[i]           = abs(laguerre_quadrature(x -&gt; sech(x), nc[i], <span class=hljs-number >1</span>)-<span class=hljs-literal >pi</span>/<span class=hljs-number >2</span>);
+    legendre_error[i]           = abs(legendre_quadrature(x -&gt; sech(x), nc[i], <span class=hljs-number >0</span>, <span class=hljs-number >100</span>)-<span class=hljs-literal >pi</span>/<span class=hljs-number >2</span>);
+    lobatto_error[i]            = abs(lobatto_quadrature(x -&gt; sech(x), nc[i], <span class=hljs-number >0</span>, <span class=hljs-number >100</span>)-<span class=hljs-literal >pi</span>/<span class=hljs-number >2</span>);
+    radau_error[i]              = abs(radau_quadrature(x -&gt; sech(x), nc[i], <span class=hljs-number >0</span>, <span class=hljs-number >100</span>)-<span class=hljs-literal >pi</span>/<span class=hljs-number >2</span>);
+    rectangle_left_error[i]     = abs(rectangle_rule_left(x -&gt; sech(x), nc[i], <span class=hljs-number >0</span>, <span class=hljs-number >100</span>)-<span class=hljs-literal >pi</span>/<span class=hljs-number >2</span>);
+    rectangle_midpoint_error[i] = abs(rectangle_rule_midpoint(x -&gt; sech(x), nc[i], <span class=hljs-number >0</span>, <span class=hljs-number >100</span>)-<span class=hljs-literal >pi</span>/<span class=hljs-number >2</span>);
+    rectangle_right_error[i]    = abs(rectangle_rule_right(x -&gt; sech(x), nc[i], <span class=hljs-number >0</span>, <span class=hljs-number >100</span>)-<span class=hljs-literal >pi</span>/<span class=hljs-number >2</span>);
+    simpsons_error[i]           = abs(simpsons_rule(x -&gt; sech(x), nc[i], <span class=hljs-number >0</span>, <span class=hljs-number >100</span>)-<span class=hljs-literal >pi</span>/<span class=hljs-number >2</span>);
+    trapezoidal_error[i]        = abs(trapezoidal_rule(x -&gt; sech(x), nc[i], <span class=hljs-number >0</span>, <span class=hljs-number >100</span>)-<span class=hljs-literal >pi</span>/<span class=hljs-number >2</span>);
+<span class=hljs-keyword >end</span>
+
+PyPlot.figure(<span class=hljs-number >1</span>)
+PyPlot.clf()
+PyPlot.plot(nc, chebyshev1_error);
+PyPlot.title(<span class=hljs-string >&quot;Chebyshev k=1&quot;</span>)
+xscale(<span class=hljs-string >&quot;log&quot;</span>)
+xlabel(<span class=hljs-string >&quot;N&quot;</span>)
+yscale(<span class=hljs-string >&quot;log&quot;</span>)
+ylabel(<span class=hljs-string >&quot;error&quot;</span>)
+PyPlot.savefig(joinpath(<span class=hljs-meta >@OUTPUT</span>, <span class=hljs-string >&quot;chebyshev1_error_plot.png&quot;</span>), dpi=<span class=hljs-number >80</span>)
+PyPlot.figure(<span class=hljs-number >2</span>)
+PyPlot.clf()
+PyPlot.plot(nc, chebyshev2_error); 
+PyPlot.title(<span class=hljs-string >&quot;Chebyshev k=2&quot;</span>)
+xscale(<span class=hljs-string >&quot;log&quot;</span>)
+xlabel(<span class=hljs-string >&quot;N&quot;</span>)
+yscale(<span class=hljs-string >&quot;log&quot;</span>)
+ylabel(<span class=hljs-string >&quot;error&quot;</span>)
+PyPlot.savefig(joinpath(<span class=hljs-meta >@OUTPUT</span>, <span class=hljs-string >&quot;chebyshev2_error_plot.png&quot;</span>), dpi=<span class=hljs-number >80</span>)
+PyPlot.figure(<span class=hljs-number >3</span>)
+PyPlot.clf()
+PyPlot.plot(nc, chebyshev3_error); 
+PyPlot.title(<span class=hljs-string >&quot;Chebyshev k=3&quot;</span>)
+xscale(<span class=hljs-string >&quot;log&quot;</span>)
+xlabel(<span class=hljs-string >&quot;N&quot;</span>)
+yscale(<span class=hljs-string >&quot;log&quot;</span>)
+ylabel(<span class=hljs-string >&quot;error&quot;</span>)
+PyPlot.savefig(joinpath(<span class=hljs-meta >@OUTPUT</span>, <span class=hljs-string >&quot;chebyshev3_error_plot.png&quot;</span>), dpi=<span class=hljs-number >80</span>)
+PyPlot.figure(<span class=hljs-number >4</span>)
+PyPlot.clf()
+PyPlot.plot(nc, chebyshev4_error)
+PyPlot.title(<span class=hljs-string >&quot;Chebyshev k=4&quot;</span>)
+xscale(<span class=hljs-string >&quot;log&quot;</span>)
+xlabel(<span class=hljs-string >&quot;N&quot;</span>)
+yscale(<span class=hljs-string >&quot;log&quot;</span>)
+ylabel(<span class=hljs-string >&quot;error&quot;</span>)
+PyPlot.savefig(joinpath(<span class=hljs-meta >@OUTPUT</span>, <span class=hljs-string >&quot;chebyshev4_error_plot.png&quot;</span>), dpi=<span class=hljs-number >80</span>)
+PyPlot.figure(<span class=hljs-number >5</span>)
+PyPlot.clf()
+PyPlot.plot(nc, jacobi_error)
+PyPlot.title(<span class=hljs-string >&quot;Jacobi&quot;</span>)
+xscale(<span class=hljs-string >&quot;log&quot;</span>)
+xlabel(<span class=hljs-string >&quot;N&quot;</span>)
+yscale(<span class=hljs-string >&quot;log&quot;</span>)
+ylabel(<span class=hljs-string >&quot;error&quot;</span>)
+PyPlot.savefig(joinpath(<span class=hljs-meta >@OUTPUT</span>, <span class=hljs-string >&quot;jacobi_error_plot.png&quot;</span>), dpi=<span class=hljs-number >80</span>)
+PyPlot.figure(<span class=hljs-number >6</span>)
+PyPlot.clf()
+PyPlot.plot(nc, laguerre_error)
+PyPlot.title(<span class=hljs-string >&quot;Laguerre&quot;</span>)
+xscale(<span class=hljs-string >&quot;log&quot;</span>)
+xlabel(<span class=hljs-string >&quot;N&quot;</span>)
+yscale(<span class=hljs-string >&quot;log&quot;</span>)
+ylabel(<span class=hljs-string >&quot;error&quot;</span>)
+PyPlot.savefig(joinpath(<span class=hljs-meta >@OUTPUT</span>, <span class=hljs-string >&quot;laguerre_error_plot.png&quot;</span>), dpi=<span class=hljs-number >80</span>)
+PyPlot.figure(<span class=hljs-number >7</span>)
+PyPlot.clf()
+PyPlot.plot(nc, legendre_error)
+PyPlot.title(<span class=hljs-string >&quot;Legendre&quot;</span>)
+xscale(<span class=hljs-string >&quot;log&quot;</span>)
+xlabel(<span class=hljs-string >&quot;N&quot;</span>)
+yscale(<span class=hljs-string >&quot;log&quot;</span>)
+ylabel(<span class=hljs-string >&quot;error&quot;</span>)
+PyPlot.savefig(joinpath(<span class=hljs-meta >@OUTPUT</span>, <span class=hljs-string >&quot;legendre_error_plot.png&quot;</span>), dpi=<span class=hljs-number >80</span>)
+PyPlot.figure(<span class=hljs-number >8</span>)
+PyPlot.clf()
+PyPlot.plot(nc, lobatto_error)
+PyPlot.title(<span class=hljs-string >&quot;Lobatto&quot;</span>)
+xscale(<span class=hljs-string >&quot;log&quot;</span>)
+xlabel(<span class=hljs-string >&quot;N&quot;</span>)
+yscale(<span class=hljs-string >&quot;log&quot;</span>)
+ylabel(<span class=hljs-string >&quot;error&quot;</span>)
+PyPlot.savefig(joinpath(<span class=hljs-meta >@OUTPUT</span>, <span class=hljs-string >&quot;lobatto_error_plot.png&quot;</span>), dpi=<span class=hljs-number >80</span>)
+PyPlot.figure(<span class=hljs-number >9</span>)
+PyPlot.clf()
+PyPlot.plot(nc, radau_error)
+PyPlot.title(<span class=hljs-string >&quot;Radau&quot;</span>)
+xscale(<span class=hljs-string >&quot;log&quot;</span>)
+xlabel(<span class=hljs-string >&quot;N&quot;</span>)
+yscale(<span class=hljs-string >&quot;log&quot;</span>)
+ylabel(<span class=hljs-string >&quot;error&quot;</span>)
+PyPlot.savefig(joinpath(<span class=hljs-meta >@OUTPUT</span>, <span class=hljs-string >&quot;radau_error_plot.png&quot;</span>), dpi=<span class=hljs-number >80</span>)
+PyPlot.figure(<span class=hljs-number >10</span>)
+PyPlot.clf()
+PyPlot.plot(nc, rectangle_left_error)
+PyPlot.title(<span class=hljs-string >&quot;Rectangle rule (left)&quot;</span>)
+xscale(<span class=hljs-string >&quot;log&quot;</span>)
+xlabel(<span class=hljs-string >&quot;N&quot;</span>)
+yscale(<span class=hljs-string >&quot;log&quot;</span>)
+ylabel(<span class=hljs-string >&quot;error&quot;</span>)
+PyPlot.savefig(joinpath(<span class=hljs-meta >@OUTPUT</span>, <span class=hljs-string >&quot;rectangle_left_error_plot.png&quot;</span>), dpi=<span class=hljs-number >80</span>)
+PyPlot.figure(<span class=hljs-number >11</span>)
+PyPlot.clf()
+PyPlot.plot(nc, rectangle_midpoint_error)
+PyPlot.title(<span class=hljs-string >&quot;Rectangle rule (midpoint)&quot;</span>)
+xscale(<span class=hljs-string >&quot;log&quot;</span>)
+xlabel(<span class=hljs-string >&quot;N&quot;</span>)
+yscale(<span class=hljs-string >&quot;log&quot;</span>)
+ylabel(<span class=hljs-string >&quot;error&quot;</span>)
+PyPlot.savefig(joinpath(<span class=hljs-meta >@OUTPUT</span>, <span class=hljs-string >&quot;rectangle_midpoint_error_plot.png&quot;</span>), dpi=<span class=hljs-number >80</span>)
+PyPlot.figure(<span class=hljs-number >12</span>)
+PyPlot.clf()
+PyPlot.plot(nc, rectangle_right_error)
+PyPlot.title(<span class=hljs-string >&quot;Rectangle rule (right)&quot;</span>)
+xscale(<span class=hljs-string >&quot;log&quot;</span>)
+xlabel(<span class=hljs-string >&quot;N&quot;</span>)
+yscale(<span class=hljs-string >&quot;log&quot;</span>)
+ylabel(<span class=hljs-string >&quot;error&quot;</span>)
+PyPlot.savefig(joinpath(<span class=hljs-meta >@OUTPUT</span>, <span class=hljs-string >&quot;rectangle_right_error_plot.png&quot;</span>), dpi=<span class=hljs-number >80</span>)
+PyPlot.figure(<span class=hljs-number >13</span>)
+PyPlot.clf()
+PyPlot.plot(nc, simpsons_error)
+PyPlot.title(<span class=hljs-string >&quot;Simpsons rule&quot;</span>)
+xscale(<span class=hljs-string >&quot;log&quot;</span>)
+xlabel(<span class=hljs-string >&quot;N&quot;</span>)
+yscale(<span class=hljs-string >&quot;log&quot;</span>)
+ylabel(<span class=hljs-string >&quot;error&quot;</span>)
+PyPlot.savefig(joinpath(<span class=hljs-meta >@OUTPUT</span>, <span class=hljs-string >&quot;simpsons_error_plot.png&quot;</span>), dpi=<span class=hljs-number >80</span>)
+PyPlot.figure(<span class=hljs-number >14</span>)
+PyPlot.clf()
+PyPlot.plot(nc, trapezoidal_error)
+PyPlot.title(<span class=hljs-string >&quot;Trapezoidal rule&quot;</span>)
+xscale(<span class=hljs-string >&quot;log&quot;</span>)
+xlabel(<span class=hljs-string >&quot;N&quot;</span>)
+yscale(<span class=hljs-string >&quot;log&quot;</span>)
+ylabel(<span class=hljs-string >&quot;error&quot;</span>)
+PyPlot.savefig(joinpath(<span class=hljs-meta >@OUTPUT</span>, <span class=hljs-string >&quot;trapezoidal_error_plot.png&quot;</span>), dpi=<span class=hljs-number >80</span>)</code></pre>
+<p><span style="color:red;">// Image matching '/assets/FunctionIntegrator/code/output/chebyshev1_error_plot.png' not found. //</span></p> <p><span style="color:red;">// Image matching '/assets/FunctionIntegrator/code/output/chebyshev2_error_plot.png' not found. //</span></p> <p><span style="color:red;">// Image matching '/assets/FunctionIntegrator/code/output/chebyshev3_error_plot.png' not found. //</span></p> <p><span style="color:red;">// Image matching '/assets/FunctionIntegrator/code/output/chebyshev4_error_plot.png' not found. //</span></p> <p><span style="color:red;">// Image matching '/assets/FunctionIntegrator/code/output/jacobi_error_plot.png' not found. //</span></p> <p><span style="color:red;">// Image matching '/assets/FunctionIntegrator/code/output/laguerre_error_plot.png' not found. //</span></p> <p><span style="color:red;">// Image matching '/assets/FunctionIntegrator/code/output/legendre_error_plot.png' not found. //</span></p> <p><span style="color:red;">// Image matching '/assets/FunctionIntegrator/code/output/lobatto_error_plot.png' not found. //</span></p> <p><span style="color:red;">// Image matching '/assets/FunctionIntegrator/code/output/radau_error_plot.png' not found. //</span></p> <p><span style="color:red;">// Image matching '/assets/FunctionIntegrator/code/output/rectangle_left_error_plot.png' not found. //</span></p> <p><span style="color:red;">// Image matching '/assets/FunctionIntegrator/code/output/rectangle_midpoint_error_plot.png' not found. //</span></p> <p><span style="color:red;">// Image matching '/assets/FunctionIntegrator/code/output/rectangle_right_error_plot.png' not found. //</span></p> <p><span style="color:red;">// Image matching '/assets/FunctionIntegrator/code/output/simpsons_error_plot.png' not found. //</span></p> <p><span style="color:red;">// Image matching '/assets/FunctionIntegrator/code/output/trapezoidal_error_plot.png' not found. //</span></p>
 <h2 id=acknowledgements ><a href="#acknowledgements">Acknowledgements</a></h2>  I would like to thank the Julia discourse community for their help through my Julia journey, and I would also like to thank the developers of Julia, as without their work this package would not even be possible &#40;I know, obviously, as this is a Julia package&#41;. Likewise, I would also like to thank the developers of <a href="https://github.com/JuliaApproximation/FastGaussQuadrature.jl">FastGaussQuadrature.jl</a>, as without their efficient algorithms for finding the nodes and weights for various Gaussian quadrature techniques, several of the functions in this repository would be far less efficient &#40;especially <code>legendre_quadrature</code>&#41;, or may not even exist. I would also like to thank the developers of <a href="https://github.com/JuliaMath/SpecialFunctions.jl">SpecialFunctions.jl</a>, as some of their functions are useful for testing the functions in this package.</p>
 <div class=page-foot >
   <div class=copyright >
-    &copy; Brenton Horne. Last modified: June 30, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a>.
+    &copy; Brenton Horne. Last modified: July 01, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a>.
   </div>
 </div>
 </div>
