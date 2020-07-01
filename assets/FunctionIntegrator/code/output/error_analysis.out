@@ -1,3 +1,0 @@
-ArgumentError: Package SpecialFunctions not found in current path:
-- Run `import Pkg; Pkg.add("SpecialFunctions")` to install the SpecialFunctions package.
-
