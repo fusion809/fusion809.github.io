@@ -30,7 +30,7 @@ for i=1:length(nc)
     rectangle_left_error[i]     = abs(rectangle_rule_left(x -> sech(x), nc[i], 0, 100)-pi/2);
     rectangle_midpoint_error[i] = abs(rectangle_rule_midpoint(x -> sech(x), nc[i], 0, 100)-pi/2);
     rectangle_right_error[i]    = abs(rectangle_rule_right(x -> sech(x), nc[i], 0, 100)-pi/2);
-    simpsons_error[i]           = abs(simpsons_rule(x -> sech(x), nc[i], 0, 100)-pi/2);
+    simpsons_error[i]           = abs(simpsons_rule(x -> sech(x), 2*round(nc[i]/2), 0, 100)-pi/2);
     simpsons38_error[i]         = abs(simpsons38_rule(x -> sech(x), 3*round(nc[i]/3), 0, 100)-pi/2);
     trapezoidal_error[i]        = abs(trapezoidal_rule(x -> sech(x), nc[i], 0, 100)-pi/2);
 end
@@ -145,7 +145,7 @@ ylabel("Error")
 PyPlot.savefig(joinpath(@OUTPUT, "rectangle_right_error_plot.png"), dpi=80)
 PyPlot.figure(13)
 PyPlot.clf()
-PyPlot.plot(nc, simpsons_error)
+PyPlot.plot(2*round.(nc/2), simpsons_error)
 PyPlot.title("Simpson's rule")
 xscale("log")
 xlabel("N")
@@ -154,7 +154,7 @@ ylabel("Error")
 PyPlot.savefig(joinpath(@OUTPUT, "simpsons_error_plot.png"), dpi=80)
 PyPlot.figure(14)
 PyPlot.clf()
-PyPlot.plot(nc, simpsons38_error)
+PyPlot.plot(3*round.(nc/3), simpsons38_error)
 PyPlot.title("Simpson's 3/8 rule")
 xscale("log")
 xlabel("N")
