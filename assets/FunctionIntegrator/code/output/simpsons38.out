@@ -1,0 +1,1 @@
+The input N in simpsons38_rule(f::Function, N::Number, a::Number, b::Number) must be divisible by 3 in order for it to be possible to apply Simpson's 3/8 rule.
