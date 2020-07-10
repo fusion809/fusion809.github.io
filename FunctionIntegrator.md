@@ -76,8 +76,23 @@ The [test/](https://github.com/fusion809/FunctionIntegrator.jl/tree/master/test/
 2. The $-1\leq x \leq 1$ refers to the quadrature nodes, which are also referred to in the weighting function column.
 
 ## Examples
+### adaptive_simpsons_rule
+In the following example, the following integral (henceforth called integral 1) is being computed:
+
+$\displaystyle \int_0^{\frac{\pi}{2}} \cos{x} \hspace{0.1cm} dx$
+
+and the result compared to the analytical solution of $1$.
+
+```julia:./code/adaptive_simpsons
+using FunctionIntegrator
+a = abs(adaptive_simpsons_rule(x -> cos(x), 0, pi/2)-1);
+show(a)
+```
+
+\output{./code/adaptive_simpsons}
+
 ### chebyshev_quadrature
-In the following examples is the following integral (henceforth called integral 1) is being computed:
+In the following examples, the following integral (henceforth called integral 1) is being computed:
 
 $\displaystyle \int_0^{\frac{\pi}{2}} \cos{x} \hspace{0.1cm} dx$
 
