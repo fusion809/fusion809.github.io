@@ -76,7 +76,7 @@ The [test/](https://github.com/fusion809/FunctionIntegrator.jl/tree/master/test/
 2. The $-1\leq x \leq 1$ refers to the quadrature nodes, which are also referred to in the weighting function column.
 
 ## Examples
-### adaptive_simpsons_rule
+### adaptive\_simpsons\_rule
 In the following example, the following integral (henceforth called integral 1) is being computed:
 
 $\displaystyle \int_0^{\frac{\pi}{2}} \cos{x} \hspace{0.1cm} dx$
