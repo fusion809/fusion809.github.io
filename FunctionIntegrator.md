@@ -92,11 +92,7 @@ show(a)
 \output{./code/adaptive_simpsons}
 
 ### chebyshev_quadrature
-In the following examples, the following integral (henceforth called integral 1) is being computed:
-
-$\displaystyle \int_0^{\frac{\pi}{2}} \cos{x} \hspace{0.1cm} dx$
-
-and the result compared to the analytical solution of $1$. The value being printed is difference between the computed solution and the analytical solution.
+In the following examples, integral 1 is being computing and the result compared to the analytical solution of $1$. The value being printed is difference between the computed solution and the analytical solution.
 
 $k=1$:
 ```julia:./code/chebyshev1
