@@ -20,6 +20,7 @@ This package provides the following functions:
 * `rectangle_rule_left(f::Function, N::Number, a::Number, b::Number)`
 * `rectangle_rule_midpoint(f::Function, N::Number, a::Number, b::Number)`
 * `rectangle_rule_right(f::Function, N::Number, a::Number, b::Number)`
+* `rombergs_method(f::Function, N::Number, a::Number, b::Number)`
 * `simpsons_rule(f::Function, N::Number, a::Number, b::Number)`
 * `simpsons38_rule(f::Function, N::Number, a::Number, b::Number)`
 * `trapezoidal_rule(f::Function, N::Number, a::Number, b::Number)`
@@ -50,7 +51,7 @@ The [test/](https://github.com/fusion809/FunctionIntegrator.jl/tree/master/test/
 ~~~
 <figure float="center">
     <img src="/assets/Root_mean_square_computation_time_FunctionIntegrator.jl.png" width="100%">
-    <figcaption><b>Figure 1: a bar graph to compare the computation times for each fo the flexible-domain methods provided by the package except for <code>rectange_rule_left</code> and <code>rectangle_rule_right</code>.<sup>1</sup> Data is from <a href="https://travis-ci.com/github/fusion809/FunctionIntegrator.jl/jobs/359262615" link="_blank">this build</a>.</b></caption>
+    <figcaption><b>Figure 1: a bar graph to compare the computation times for each fo the flexible-domain methods provided by the package except for <code>rectange_rule_left</code>, <code>rectangle_rule_right</code> and <code>rombergs_method</code>.<sup>1</sup> Data is from <a href="https://travis-ci.com/github/fusion809/FunctionIntegrator.jl/jobs/359262615" link="_blank">this build</a>.</b></caption>
 </figure>
 ~~~
 
@@ -67,6 +68,7 @@ The [test/](https://github.com/fusion809/FunctionIntegrator.jl/tree/master/test/
 | `rectangle_rule_left`  | $[a,b]$ | N/A | `f` is the function being integrated.~~~<br/>~~~`N`. $N$ is the number of grid points used in the integration.~~~<br/>~~~`a` is the start of the domain of integration.~~~<br/>~~~`b` is the end of the domain of integration. | Uses the rectangle rule, specifically the [left Riemann sum](https://en.wikipedia.org/wiki/Riemann_sum#Left_Riemann_sum). Usually this or `rectangle_rule_right` is the least accurate method. In fact, many of the tests in the FunctionIntegrator.jl repository fail to get accuracy to 7 significant figures with `rectangle_rule_left` with any practically viable value of `N`. |
 | `rectangle_rule_midpoint`  | $[a,b]$ | N/A | `f` is the function being integrated.~~~<br/>~~~`N`. $N$ is the number of grid points used in the integration.~~~<br/>~~~`a` is the start of the domain of integration.~~~<br/>~~~`b` is the end of the domain of integration. | Uses the rectangle rule, specifically the [Riemann midpoint rule](https://en.wikipedia.org/wiki/Riemann_sum#Midpoint_rule). Usually this is more accurate than `rectangle_rule_left` and `rectangle_rule_right` and sometimes rivals `trapezoidal_rule` for accuracy. Interestingly, going by my Travis tests it appears to be even more efficient than `simpsons_rule`. |
 | `rectangle_rule_right`  | $[a,b]$ | N/A | `f` is the function being integrated.~~~<br/>~~~`N`. $N$ is the number of grid points used in the integration.~~~<br/>~~~`a` is the start of the domain of integration.~~~<br/>~~~`b` is the end of the domain of integration. | Uses the rectangle rule, specifically the [right Riemann sum](https://en.wikipedia.org/wiki/Riemann_sum#Right_Riemann_sum). Usually this or `rectangle_rule_left` is the least accurate method. In fact, many of the tests in the FunctionIntegrator.jl repository fail to get accuracy to 7 significant figures with `rectangle_rule_right` with any practically viable value of `N`. |
+| `rombergs_method`      | $[a,b]$ | N/A | `f` is the function being integrated.~~~<br/>~~~`N`. Equal to $n$ in [this article](https://en.wikipedia.org/wiki/Romberg's_method) that describes the method.~~~<br/>~~~`a` is the start of the domain of integration.~~~<br/>~~~`b` is the end of the domain of integration. | Uses [Romberg's method](https://en.wikipedia.org/wiki/Romberg's_method). If your PC has only 16 GB RAM, you should not exceed $N=30$, as otherwise you will likely run out of RAM. For most problems, $N\leq20$ should suffice.
 | `simpsons_rule`        | $[a,b]$ | N/A | `f` is the function being integrated.~~~<br/>~~~`N`. $N+1$ is the number of grid points, if endpoints are included. $N$ must be even, otherwise this function will throw an error. ~~~<br/>~~~`a` is the start of the domain of integration.~~~<br/>~~~`b` is the end of the domain of integration. | Uses [Simpson's rule](https://en.wikipedia.org/wiki/Simpson%27s_rule). It is one of the best functions to use when you are unsure which to use, provided there are no unremovable singularities within the integration domain, including the endpoints. |
 | `simpsons38_rule`        | $[a,b]$ | N/A | `f` is the function being integrated.~~~<br/>~~~`N`. $N+1$ is the number of grid points, if endpoints are included. $N$ must be divisible by three, as otherwise this function will throw an error. ~~~<br/>~~~`a` is the start of the domain of integration.~~~<br/>~~~`b` is the end of the domain of integration. | Uses [Simpson's 3/8 rule](https://en.wikipedia.org/wiki/Simpson%27s_rule#Simpson's_3/8_rule). It is less robust than `simpsons_rule`. |
 | `trapezoidal_rule`     | $[a,b]$ | N/A | `f` is the function being integrated.~~~<br/>~~~`N`. $N+1$ is the number of grid points, if endpoints are included.~~~<br/>~~~`a` is the start of the domain of integration.~~~<br/>~~~`b` is the end of the domain of integration. | Uses the [trapezoidal rule](https://en.wikipedia.org/wiki/Trapezoidal_rule). It has the same caveats as `simpsons_rule`. |
@@ -266,6 +268,17 @@ show(a)
 ```
 \output{./code/rectangle_right}
 
+### rombergs_method
+In this section, integral is being approximated and the result compared to the analytical result.
+
+```julia:./code/rombergs
+using FunctionIntegrator
+a = abs(rombergs_method(x -> cos(x), 10, 0, pi/2)-1)
+show(a)
+```
+
+\output{./code/rombergs}
+
 ### simpsons_rule
 In this section, integral 1 is being approximated and the result compared to the analytical result. 
 
@@ -313,6 +326,7 @@ radau_error              = zeros(length(nc));
 rectangle_left_error     = zeros(length(nc));
 rectangle_midpoint_error = zeros(length(nc));
 rectangle_right_error    = zeros(length(nc));
+rombergs_error           = zeros(length(nc));
 simpsons_error           = zeros(length(nc));
 simpsons38_error         = zeros(length(nc));
 trapezoidal_error        = zeros(length(nc));
@@ -330,6 +344,7 @@ for i=1:length(nc)
     rectangle_left_error[i]     = abs(rectangle_rule_left(x -> sech(x), nc[i], 0, 100)-pi/2);
     rectangle_midpoint_error[i] = abs(rectangle_rule_midpoint(x -> sech(x), nc[i], 0, 100)-pi/2);
     rectangle_right_error[i]    = abs(rectangle_rule_right(x -> sech(x), nc[i], 0, 100)-pi/2);
+    rombergs_error[i]           = abs(rombergs_method(x -> sech(x), i, 0, 100)-pi/2);
     simpsons_error[i]           = abs(simpsons_rule(x -> sech(x), 2*round(nc[i]/2), 0, 100)-pi/2);
     simpsons38_error[i]         = abs(simpsons38_rule(x -> sech(x), 3*round(nc[i]/3), 0, 100)-pi/2);
     trapezoidal_error[i]        = abs(trapezoidal_rule(x -> sech(x), nc[i], 0, 100)-pi/2);
@@ -445,6 +460,15 @@ ylabel("Error")
 PyPlot.savefig(joinpath(@OUTPUT, "rectangle_right_error_plot.png"), dpi=80)
 PyPlot.figure(13)
 PyPlot.clf()
+PyPlot.plot(nc, rombergs_error)
+PyPlot.title("Romberg's method")
+xscale("log")
+xlabel("N")
+yscale("log")
+ylabel("Error")
+PyPlot.savefig(joinpath(@OUTPUT, "rombergs_error_plot.png"), dpi=80)
+PyPlot.figure(14)
+PyPlot.clf()
 PyPlot.plot(2*round.(nc/2), simpsons_error)
 PyPlot.title("Simpson's rule")
 xscale("log")
@@ -452,7 +476,7 @@ xlabel("N")
 yscale("log")
 ylabel("Error")
 PyPlot.savefig(joinpath(@OUTPUT, "simpsons_error_plot.png"), dpi=80)
-PyPlot.figure(14)
+PyPlot.figure(15)
 PyPlot.clf()
 PyPlot.plot(3*round.(nc/3), simpsons38_error)
 PyPlot.title("Simpson's 3/8 rule")
@@ -461,7 +485,7 @@ xlabel("N")
 yscale("log")
 ylabel("Error")
 PyPlot.savefig(joinpath(@OUTPUT, "simpsons38_error_plot.png"), dpi=80)
-PyPlot.figure(15)
+PyPlot.figure(16)
 PyPlot.clf()
 PyPlot.plot(nc, trapezoidal_error)
 PyPlot.title("Trapezoidal rule")
@@ -485,6 +509,7 @@ PyPlot.savefig(joinpath(@OUTPUT, "trapezoidal_error_plot.png"), dpi=80)
 \fig{./code/output/rectangle_left_error_plot.png}
 \fig{./code/output/rectangle_midpoint_error_plot.png}
 \fig{./code/output/rectangle_right_error_plot.png}
+\fig{./code/output/rombergs_error_plot.png}
 \fig{./code/output/simpsons_error_plot.png}
 \fig{./code/output/simpsons38_error_plot.png}
 \fig{./code/output/trapezoidal_error_plot.png}
