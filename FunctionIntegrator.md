@@ -50,8 +50,8 @@ The [test/](https://github.com/fusion809/FunctionIntegrator.jl/tree/master/test/
 
 ~~~
 <figure float="center">
-    <img src="/assets/Root_mean_square_computation_time_FunctionIntegrator.jl.png" width="100%">
-    <figcaption><b>Figure 1: a bar graph to compare the computation times for each fo the flexible-domain methods provided by the package except for <code>rectange_rule_left</code>, <code>rectangle_rule_right</code> and <code>rombergs_method</code>.<sup>1</sup> Data is from <a href="https://travis-ci.com/github/fusion809/FunctionIntegrator.jl/jobs/359262615" link="_blank">this build</a>.</b></caption>
+    <img src="/assets/Root_mean_square_computation_time_FunctionIntegrator.jl.svg" width="100%">
+    <figcaption><b>Figure 1: a bar graph to compare the computation times for each fo the flexible-domain methods provided by the package except for <code>rectange_rule_left</code> and <code>rectangle_rule_right</code>.<sup>1</sup> Data is from <a href="https://travis-ci.com/github/fusion809/FunctionIntegrator.jl/jobs/359262615" link="_blank">this build</a>.</b></caption>
 </figure>
 ~~~
 
