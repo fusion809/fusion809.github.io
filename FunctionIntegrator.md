@@ -81,7 +81,7 @@ The [test/](https://github.com/fusion809/FunctionIntegrator.jl/tree/master/test/
 ### adaptive\_simpsons\_rule
 In the following example, the following integral (henceforth called integral 1) is being computed:
 
-$\displaystyle \int_0^{\frac{\pi}{2}} \cos{x} \hspace{0.1cm} dx$
+$$ \int_0^{\frac{\pi}{2}} \cos{x} \hspace{0.1cm} dx$$
 
 and the result compared to the analytical solution of $1$.
 
@@ -131,7 +131,7 @@ show(a)
 ### hermite_quadrature
 In the following examples is the integral:
 
-$\displaystyle \int_{-\infty}^{\infty} x^2 e^{-x^2} dx.$
+$$ \int_{-\infty}^{\infty} x^2 e^{-x^2} dx.$$
 
 the exact solution of which is $\dfrac{\sqrt{\pi}}{2}$, will be approximated using `hermite_quadrature` and the result will be compared to the analytical solution. The plot of the integrand is (truncated to the domain $x\in[-10,10]$):
 
@@ -177,7 +177,7 @@ show(a)
 ### laguerre_quadrature
 In this section is the integral:
 
-$\displaystyle \int_0^{\infty} xe^{-x} dx$
+$$ \int_0^{\infty} xe^{-x} dx$$
 
 is being approximated and the result compared to the analytical result of 1. The integrand has the following curve:
 
@@ -309,6 +309,10 @@ show(a)
 ```
 \output{./code/trapezoidal}
 
+```julia
+function f
+```
+
 ## Error analysis
 ### Code
 ```julia:./code/error_analysis
@@ -326,7 +330,7 @@ radau_error              = zeros(length(nc));
 rectangle_left_error     = zeros(length(nc));
 rectangle_midpoint_error = zeros(length(nc));
 rectangle_right_error    = zeros(length(nc));
-rombergs_error           = zeros(length(nc));
+rombergs_error           = zeros(30);
 simpsons_error           = zeros(length(nc));
 simpsons38_error         = zeros(length(nc));
 trapezoidal_error        = zeros(length(nc));
@@ -344,10 +348,13 @@ for i=1:length(nc)
     rectangle_left_error[i]     = abs(rectangle_rule_left(x -> sech(x), nc[i], 0, 100)-pi/2);
     rectangle_midpoint_error[i] = abs(rectangle_rule_midpoint(x -> sech(x), nc[i], 0, 100)-pi/2);
     rectangle_right_error[i]    = abs(rectangle_rule_right(x -> sech(x), nc[i], 0, 100)-pi/2);
-    rombergs_error[i]           = abs(rombergs_method(x -> sech(x), i, 0, 100)-pi/2);
     simpsons_error[i]           = abs(simpsons_rule(x -> sech(x), 2*round(nc[i]/2), 0, 100)-pi/2);
     simpsons38_error[i]         = abs(simpsons38_rule(x -> sech(x), 3*round(nc[i]/3), 0, 100)-pi/2);
     trapezoidal_error[i]        = abs(trapezoidal_rule(x -> sech(x), nc[i], 0, 100)-pi/2);
+end
+
+for i=1:30
+    rombergs_error[i]           = abs(rombergs_method(x -> sech(x), i, 0, 100)-pi/2);
 end
 
 PyPlot.figure(1)
@@ -460,7 +467,7 @@ ylabel("Error")
 PyPlot.savefig(joinpath(@OUTPUT, "rectangle_right_error_plot.png"), dpi=80)
 PyPlot.figure(13)
 PyPlot.clf()
-PyPlot.plot(1:24, rombergs_error)
+PyPlot.plot(1:30, rombergs_error)
 PyPlot.title("Romberg's method")
 xscale("log")
 xlabel("N")
