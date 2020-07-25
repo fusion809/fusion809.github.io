@@ -269,7 +269,7 @@ show(a)
 \output{./code/rectangle_right}
 
 ### rombergs_method
-In this section, integral is being approximated and the result compared to the analytical result.
+In this section, integral 1 is being approximated and the result compared to the analytical result.
 
 ```julia:./code/rombergs
 using FunctionIntegrator
