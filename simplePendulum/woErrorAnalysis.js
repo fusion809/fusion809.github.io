@@ -116,9 +116,9 @@ function fillTable() {
     document.getElementById('tableOutputs').innerHTML = '';
     tableContents = '<tr>';
     tableContents += '<th>Index</th>';
-    tableContents += '<th>Time (seconds)</th>';
+    tableContents += '<th>t (seconds)</th>';
     tableContents += '<th>&theta; (radians) </th>';
-    tableContents += '<th>&theta; dot (radians &middot; s<sup>-1</sup>)</th>';
+    tableContents += '<th>&theta; dot <br/>(radians &middot; s<sup>-1</sup>)</th>';
     tableContents += "</tr>";
     for (let j = 0; j < theta.length; j++) {
         tableContents += '<tr>';

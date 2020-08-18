@@ -132,10 +132,10 @@ function fillTable() {
     document.getElementById('tableOutputs').innerHTML = '';
     tableContents = '<tr>';
     tableContents += '<th>Index</th>';
-    tableContents += '<th>Time (seconds)</th>';
+    tableContents += '<th>t (seconds)</th>';
     tableContents += '<th>&theta; (radians) </th>';
-    tableContents += '<th>&theta; dot (radians &middot; s<sup>-1</sup>)</th>';
-    tableContents += '<th>Error in &theta; dot</th>';
+    tableContents += '<th>&theta; dot<br/>(radians &middot; s<sup>-1</sup>)</th>';
+    tableContents += '<th>&theta; dot error</th>';
     tableContents += '</tr>';
     for (let j = 0; j < theta.length; j++) {
         tableContents += '<tr>';
@@ -143,7 +143,7 @@ function fillTable() {
         tableContents += '<td>' + t[j].toFixed(Math.ceil(Math.log10(1/epsilon))) + '</td>';
         tableContents += '<td>' + theta[j].toFixed(Math.ceil(Math.log10(1/epsilon))) + '</td>';
         tableContents += '<td>' + dtheta[j].toFixed(Math.ceil(Math.log10(1/epsilon))) + '</td>';
-        tableContents += '<td>' + errorDtheta[j].toExponential(10) + '</td>';
+        tableContents += '<td>' + errorDtheta[j].toExponential(5) + '</td>';
         tableContents += '</tr>';
     }
     tableContents += '<tr>';
