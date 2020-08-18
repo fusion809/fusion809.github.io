@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Simple pendulum Runge-Kutta-Fehlberg solver</title>
+        <!--We need a few external JS libraries to provide LaTeX and plot rendering. -->
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+        <script src="https://unpkg.com/mathjs@7.1.0/dist/math.min.js"></script>
+        <script>
+// RHS of our ODE system
+function f(t, theta, dtheta) {
+    return [dtheta, -9.8*Math.cos(theta)];
+}
+
+// Our initial conditions and time bounds
+var t0 = 0.0;
+// The period of our problem, ellipk(1/2)/sqrt(2.45)
+var tf = 2.3690497221753453;
+var theta0 = 0;
+var dtheta0 = 0;
+
+// Details of our numerical approximation
+// epsilon is our error tolerance
+var epsilon = 1e-12;
+var dtInitial = 0.1;
+
+// Initialize arrays, dt and i
+var t = [t0];
+var theta = [theta0];
+var dtheta = [dtheta0];
+var dt = dtInitial;
+var i = 0;
+
+while ( t[i] < tf ) {
+    dt = Math.min(dt, tf-t[i]);
+
+    // Runge-Kutta-Fehlberg approximators
+    k1 = dt*f(t[i], theta[i], dtheta[i])[0];
+    l1 = dt*f(t[i], theta[i], dtheta[i])[1];
+    k2 = dt*f(t[i]+dt/4, theta[i]+k1/4, dtheta[i]+l1/4)[0];
+    l2 = dt*f(t[i]+dt/4, theta[i]+k1/4, dtheta[i]+l1/4)[1];
+    k3 = dt*f(t[i]+3*dt/8, theta[i]+3*k1/32+9*k2/32, dtheta[i]+3*l1/32+9*l2/32)[0];
+    l3 = dt*f(t[i]+3*dt/8, theta[i]+3*k1/32+9*k2/32, dtheta[i]+3*l1/32+9*l2/32)[1];
+    k4 = dt*f(t[i]+12*dt/13, theta[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, dtheta[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197)[0];
+    l4 = dt*f(t[i]+12*dt/13, theta[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, dtheta[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197)[1];
+    k5 = dt*f(t[i]+dt, theta[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, dtheta[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104)[0];
+    l5 = dt*f(t[i]+dt, theta[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, dtheta[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104)[1];
+    k6 = dt*f(t[i]+dt/2, theta[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, dtheta[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40)[0];
+    l6 = dt*f(t[i]+dt/2, theta[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, dtheta[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40)[1];
+
+    // theta1 and dtheta1 are our fourth order approximations
+    theta1 = theta[i] + 25*k1/216+1408*k3/2565+2197*k4/4104-k5/5;
+    dtheta1 = dtheta[i] + 25*l1/216+1408*l3/2565+2197*l4/4104-l5/5;
+    // theta2 and dtheta2 are our fifth order approximations
+    theta2 = theta[i] + 16*k1/135+6656*k3/12825+28561*k4/56430-9*k5/50+2*k6/55;
+    dtheta2 = dtheta[i] + 16*l1/135+6656*l3/12825+28561*l4/56430-9*l5/50+2*l6/55;
+
+    // The following are used to correct the step size
+    Rtheta = Math.abs(theta1-theta2)/dt;
+    Rdtheta = Math.abs(dtheta1-dtheta2)/dt;
+    stheta = 0.84*Math.pow(epsilon/Rtheta, 1/4);                
+    sdtheta = 0.84*Math.pow(epsilon/Rdtheta, 1/4);
+    R = Math.max(Rtheta, Rdtheta);
+    s = Math.min(stheta, sdtheta);
+    if ( R <= epsilon ) {
+        t.push(t[i]+dt);
+        theta.push(theta1);
+        dtheta.push(dtheta1);
+        i++;
+        dt *= s;
+    } else {
+        dt *= s;
+    }
+}
+
+// Put our data into a table
+document.write("<table border='1px'>")
+document.write("<tr>")
+document.write("<th>Index</th>")
+document.write("<th>t</th>")
+document.write("<th>theta</th>")
+document.write("<th>dtheta</th>")
+document.write("</tr>")
+for (let j = 0; j < theta.length; j++) {
+    document.write("<tr>")
+    document.write("<td>" + j + "</td>")
+    document.write("<td>" + t[j] + "</td>");
+    document.write("<td>" + theta[j] + "</td>");
+    document.write("<td>" + dtheta[j] + "</td>");
+    document.write("</tr>");
+}
+document.write("</table>");
+
+// Create our plot using Plotly
+var plot1 = {
+    x: t,
+    y: theta,
+    type: 'scatter',
+    name: "Theta"
+};
+
+var plot2 = {
+    x: t,
+    y: dtheta,
+    type: 'scatter',
+    name: "dtheta"
+};
+
+var layout1 = {
+    title: 'dtheta and theta against time plots',
+    xaxis: {
+        title: 'Time'
+    }
+}
+
+data1 = [plot1, plot2];
+
+var plot3 = {
+    x: theta,
+    y: dtheta,
+    type: 'scatter',
+    name: "Phase plot"
+};
+
+var layout2 = {
+    title: "Phase plot of dtheta against theta",
+    xaxis: {
+        title: "theta"
+    },
+    yaxis: {
+        title: "dtheta"
+    }
+};
+
+data2 = [plot3];
+
+document.write("<div id='myDiv' style='width:1000px; height:700px;'></div>");
+Plotly.newPlot('myDiv', data1, layout1);
+document.write("<div id='phasePlot' style='width:1000px; height:700px;'></div>");
+Plotly.newPlot('phasePlot', data2, layout2);
+	</script>
+    </head>
+    <body>
+        <h1>Simple pendulum JavaScript integrator</h1>
+        <div>
+            This webpage uses the <a href='https://en.wikipedia.org/wiki/Runge-Kutta-Fehlberg_method' link='_blank'>Runge-Kutta-Fehlberg</a> fourth-order method with fifth-order error checking (RKF45) to approximate the solution to the problem of the simple pendulum:
+
+            $$\dfrac{d^2 \theta}{dt^2} = -\dfrac{g}{l} \cos{\theta}$$
+
+            where g is the acceleration due to gravity in metres per second squared, l is the length of the pendulum in metres, &theta; is the angle from the positive x axis (in radians) and t is the time in seconds. Below you can specify the various parameters for the problem we will solve. The error in &theta; dot mentioned in the table below is approximated using this formula derived by integrating the above equation:
+
+            $$\dot{\theta} = \pm \sqrt{\dot{\theta}_0^2 + \dfrac{2g}{l}\left(\sin{\theta_0} - \sin{\theta}\right)}$$.
+
+            Our &theta; approximations are substituted in, and our &theta; dot RK45 approximation is subtracted from this value. 
+        </div>
+        <!--A form for users to enter in all the parameters of the problem-->
+        <form name="requiredData">
+            <table>
+            <tr style="border: none;">
+                <td><label for="g">g:</label></td>
+                <td><input type="Number"
+                    id="g"
+                    name="g"
+                    value="9.81"></td>
+            </tr>
+            <tr>
+                <td><label for="l">l:</label></td>
+                <td><input type="Number"
+                    id="l"
+                    name="l"
+                    value="1"></td>
+            </tr>
+            <tr>
+                <td><label for="t0">Starting time (seconds; t<sub>0</sub>):</label></td>
+                <td><input type="Number"
+                    id="t0"
+                    name="t0"
+                    value="0"></td>
+            </tr>
+            <tr>
+                <td><label for="tf">End time (seconds):</label></td>
+                <td><input type="Number"
+                    id="tf"
+                    name="tf"
+                    value="9.471367790304951"></td>
+            </tr>
+            <tr>
+                <td><label for="theta0">Value of &theta; (in radians) at t<sub>0</sub>:</label></td>
+                <td><input type="Number"
+                    id="theta0"
+                    name="theta0"
+                    value="0"></td>
+            </tr>
+            <tr>
+                <td><label for="dtheta0">Value of &theta; dot (in radians per second) at t<sub>0</sub>:</label></td>
+                <td><input type="Number"
+                    id="dtheta0"
+                    name="dtheta0"
+                    value="0"></td>
+            </tr>
+            <tr>
+                <td><label for="epsilon">Error tolerance:</label></td>
+                <td><input type="Number"
+                   id="epsilon"
+                   name="epsilon"
+                   value="1e-11"></td>
+            </tr>
+            <tr>
+                <td><label for="dtInitial">Initial guess for step size (seconds):</label></td>
+                <td><input type="Number"
+                        id="dtInitial"
+                        name="dtInitial"
+                        value="0.1"></td>
+            </tr>
+            </table>
+        </form>
+        <!--Buttons for solving the problem, generating a table of the solution and plotting the solution-->
+        <button type="button" onclick="solveProblem()">Solve the problem</button><br/>
+        <button type="button" onclick="fillTable()">Tabulate the solution</button><br/>
+        <button type="button" onclick="generatePlots()">Plot the solution</button>
+
+        <!--Where the table and plot goes-->
+        <table id="tableOutputs">
+        </table>
+        <div id='timePlot'></div>
+        <div id='errorPlot'></div>
+        <div id='phasePlot'></div>
+        <style>
+            div {
+                margin: 1px;
+            }
+            #tableOutputs, #tableOutputs tr, #tableOutputs th, #tableOutputs td {
+              border: 1px solid black;
+              border-collapse: collapse;
+            }
+            #tableOutputs td {
+                padding: 2px;
+            }
+            #timePlot, #errorPlot, #phasePlot {
+                width: 100%;
+            }
+        </style>
+    </body>
+</html>
