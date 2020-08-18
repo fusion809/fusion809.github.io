@@ -123,9 +123,9 @@ function fillTable() {
     for (let j = 0; j < theta.length; j++) {
         tableContents += '<tr>';
         tableContents += '<td>' + j + '</td>';
-        tableContents += '<td>' + t[j] + '</td>';
-        tableContents += '<td>' + theta[j] + '</td>';
-        tableContents += '<td>' + dtheta[j] + '</td>';
+        tableContents += '<td>' + t[j].toFixed(Math.ceil(Math.log10(1/epsilon))) + '</td>';
+        tableContents += '<td>' + theta[j].toFixed(Math.ceil(Math.log10(1/epsilon))) + '</td>';
+        tableContents += '<td>' + dtheta[j].toFixed(Math.ceil(Math.log10(1/epsilon))) + '</td>';
         tableContents += '</tr>';
     }
     document.getElementById('tableOutputs').innerHTML = tableContents;
