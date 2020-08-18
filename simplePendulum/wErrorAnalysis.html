@@ -10,24 +10,24 @@
         onload="renderMathInElement(document.body);"></script>
         <script src="https://unpkg.com/mathjs@7.1.0/dist/math.min.js"></script>
         <script>
-// RHS of our ODE system
+/* RHS of our ODE system */
 function f(t, theta, dtheta) {
     return [dtheta, -9.8*Math.cos(theta)];
 }
 
-// Our initial conditions and time bounds
+/* Our initial conditions and time bounds*/
 var t0 = 0.0;
-// The period of our problem, ellipk(1/2)/sqrt(2.45)
+/* The period of our problem, ellipk(1/2)/sqrt(2.45)*/
 var tf = 2.3690497221753453;
 var theta0 = 0;
 var dtheta0 = 0;
 
-// Details of our numerical approximation
-// epsilon is our error tolerance
+
+
 var epsilon = 1e-12;
 var dtInitial = 0.1;
 
-// Initialize arrays, dt and i
+
 var t = [t0];
 var theta = [theta0];
 var dtheta = [dtheta0];
@@ -76,7 +76,7 @@ while ( t[i] < tf ) {
     }
 }
 
-// Put our data into a table
+
 document.write("<table border='1px'>")
 document.write("<tr>")
 document.write("<th>Index</th>")
@@ -94,7 +94,7 @@ for (let j = 0; j < theta.length; j++) {
 }
 document.write("</table>");
 
-// Create our plot using Plotly
+
 var plot1 = {
     x: t,
     y: theta,
