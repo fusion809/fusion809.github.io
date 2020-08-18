@@ -217,4 +217,6 @@ function generatePlots() {
 function removePlots() {
     document.getElementById("timePlot").innerHTML = '';
     document.getElementById("phasePlot").innerHTML = '';
+    document.getElementById("timePlot").style = '';
+    document.getElementById("phasePlot").style = '';
 };

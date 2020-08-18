@@ -253,7 +253,7 @@ function generatePlots() {
 };
 
 /**
- * Removes solution plots
+ * Removes solution plots and associated element formatting
  * 
  * @params       None.
  * @return       Nothing. Just removes the solution plots.
@@ -262,4 +262,7 @@ function removePlots() {
     document.getElementById("timePlot").innerHTML = '';
     document.getElementById("errorPlot").innerHTML = '';
     document.getElementById("phasePlot").innerHTML = '';
+    document.getElementById("timePlot").style = ''
+    document.getElementById("errorPlot").style = '';
+    document.getElementById("phasePlot").style = '';
 }
