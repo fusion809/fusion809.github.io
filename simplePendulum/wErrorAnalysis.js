@@ -13,7 +13,7 @@
  */
 function f(g, l, t, theta, dtheta) {
     return [dtheta, -g/l*Math.cos(theta)];
-}
+};
 
 // Initialize our global variables
 var solution = {
@@ -109,7 +109,7 @@ function solveProblem() {
         errorDtheta: errorDtheta,
         logErrorDtheta: logErrorDtheta,
     };
-}
+};
 
 /**
  * Tabulates solution data.
@@ -151,7 +151,7 @@ function fillTable() {
     tableContents += '</td>';
     tableContents += '</tr>';
     document.getElementById('tableOutputs').innerHTML = tableContents;
-}
+};
 
 /**
  * Generate two plots:
@@ -165,7 +165,7 @@ function generatePlots() {
     if ( solution["t"].length == 0) {
         alert('You haven\'t solved the problem yet! Before pressing the "Plot the solution" button again, press the "Solve the problem" button.');
         return
-    }
+    };
     t = solution["t"];
     theta = solution["theta"];
     dtheta = solution["dtheta"];
@@ -238,4 +238,4 @@ function generatePlots() {
     Plotly.newPlot('timePlot', data1, layout1);
     Plotly.newPlot('errorPlot', data2, layout2);
     Plotly.newPlot('phasePlot', data3, layout3);
-}
+};
