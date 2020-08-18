@@ -148,7 +148,7 @@ function fillTable() {
     }
     tableContents += '<tr>';
     tableContents += '<td colspan = "6">RMS error in &theta; dot is: ';
-    tableContents += rmsErrorDtheta;
+    tableContents += rmsErrorDtheta.toExponential(10);
     tableContents += '</td>';
     tableContents += '</tr>';
     document.getElementById('tableOutputs').innerHTML = tableContents;
