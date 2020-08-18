@@ -132,6 +132,16 @@ function fillTable() {
 }
 
 /**
+ * Removes the solution table
+ * 
+ * @params       None.
+ * @return       Nothing. Just removes the solution table.
+ */
+function removeTable() {
+    document.getElementById('tableOutputs').innerHTML = '';
+}
+
+/**
  * Generate two plots:
  * - one of dtheta and theta against t; and
  * - a phase plot of dtheta against theta.
@@ -196,4 +206,15 @@ function generatePlots() {
     // Generate plots
     Plotly.newPlot('timePlot', data1, layout1);
     Plotly.newPlot('phasePlot', data2, layout2);
-}
+};
+
+/**
+ * Removes solution plots
+ * 
+ * @params       None.
+ * @return       Nothing. Just removes the solution plots.
+ */
+function removePlots() {
+    document.getElementById("timePlot").innerHTML = '';
+    document.getElementById("phasePlot").innerHTML = '';
+};
