@@ -7,18 +7,18 @@
  * @param t      Time (seconds).
  * @param theta  Angle of the pendulum from the positive x-axis (in
  * radians)
- * @param dtheta Rate of change against time of the angle from the positive x-axis.
- * @return       [dtheta/dt, d2theta/dt2]
+ * @param thetadot Rate of change against time of the angle from the positive x-axis.
+ * @return       [thetadot/dt, d2theta/dt2]
  */
-function f(g, l, t, theta, dtheta) {
-    return [dtheta, -g/l*Math.cos(theta)];
+function f(g, l, t, theta, thetadot) {
+    return [thetadot, -g/l*Math.cos(theta)];
 }
 
 // Initialize our global variables
 var solution = {
     t: [],
     theta: [],
-    dtheta: []
+    thetadot: []
 };
 var T, epsilon;
 
@@ -36,19 +36,19 @@ function solveProblem() {
     t0 = parseFloat(document.getElementById("t0").value);
     tf = parseFloat(document.getElementById("tf").value);
     theta0 = parseFloat(document.getElementById("theta0").value);
-    dtheta0 = parseFloat(document.getElementById("dtheta0").value);
+    thetadot0 = parseFloat(document.getElementById("thetadot0").value);
     epsilon = parseFloat(document.getElementById("epsilon").value);
     dtInitial = parseFloat(document.getElementById("dtInitial").value);
 
     // T is the period of the problem, including it can be used from the console to determine an appropriate tf
-    if ( (theta0 == 0) && (dtheta0 == 0) ) {
+    if ( (theta0 == 0) && (thetadot0 == 0) ) {
         T = Math.sqrt(l/(g*Math.PI))*(math.gamma(1/4)**2);
     }
 
     // Initialize the arrays used and loop variables
     t = [t0];
     theta = [theta0];
-    dtheta = [dtheta0];
+    thetadot = [thetadot0];
     dt = dtInitial;
     i = 0;
 
@@ -57,39 +57,39 @@ function solveProblem() {
         // Step size, as dictated by the method
         dt = Math.min(dt, tf-t[i]);
 
-        // Runge-Kutta-Fehlberg approximations of the change in theta and dtheta
+        // Runge-Kutta-Fehlberg approximations of the change in theta and thetadot
         // over the step
-        k1 = dt*f(g, l, t[i], theta[i], dtheta[i])[0];
-        l1 = dt*f(g, l, t[i], theta[i], dtheta[i])[1];
-        k2 = dt*f(g, l, t[i]+dt/4, theta[i]+k1/4, dtheta[i]+l1/4)[0];
-        l2 = dt*f(g, l, t[i]+dt/4, theta[i]+k1/4, dtheta[i]+l1/4)[1];
-        k3 = dt*f(g, l, t[i]+3*dt/8, theta[i]+3*k1/32+9*k2/32, dtheta[i]+3*l1/32+9*l2/32)[0];
-        l3 = dt*f(g, l, t[i]+3*dt/8, theta[i]+3*k1/32+9*k2/32, dtheta[i]+3*l1/32+9*l2/32)[1];
-        k4 = dt*f(g, l, t[i]+12*dt/13, theta[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, dtheta[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197)[0];
-        l4 = dt*f(g, l, t[i]+12*dt/13, theta[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, dtheta[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197)[1];
-        k5 = dt*f(g, l, t[i]+dt, theta[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, dtheta[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104)[0];
-        l5 = dt*f(g, l, t[i]+dt, theta[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, dtheta[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104)[1];
-        k6 = dt*f(g, l, t[i]+dt/2, theta[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, dtheta[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40)[0];
-        l6 = dt*f(g, l, t[i]+dt/2, theta[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, dtheta[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40)[1];
+        k1 = dt*f(g, l, t[i], theta[i], thetadot[i])[0];
+        l1 = dt*f(g, l, t[i], theta[i], thetadot[i])[1];
+        k2 = dt*f(g, l, t[i]+dt/4, theta[i]+k1/4, thetadot[i]+l1/4)[0];
+        l2 = dt*f(g, l, t[i]+dt/4, theta[i]+k1/4, thetadot[i]+l1/4)[1];
+        k3 = dt*f(g, l, t[i]+3*dt/8, theta[i]+3*k1/32+9*k2/32, thetadot[i]+3*l1/32+9*l2/32)[0];
+        l3 = dt*f(g, l, t[i]+3*dt/8, theta[i]+3*k1/32+9*k2/32, thetadot[i]+3*l1/32+9*l2/32)[1];
+        k4 = dt*f(g, l, t[i]+12*dt/13, theta[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, thetadot[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197)[0];
+        l4 = dt*f(g, l, t[i]+12*dt/13, theta[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, thetadot[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197)[1];
+        k5 = dt*f(g, l, t[i]+dt, theta[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, thetadot[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104)[0];
+        l5 = dt*f(g, l, t[i]+dt, theta[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, thetadot[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104)[1];
+        k6 = dt*f(g, l, t[i]+dt/2, theta[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, thetadot[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40)[0];
+        l6 = dt*f(g, l, t[i]+dt/2, theta[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, thetadot[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40)[1];
 
-        // theta1 and dtheta1 are our fourth order approximations
+        // theta1 and thetadot1 are our fourth order approximations
         theta1 = theta[i] + 25*k1/216+1408*k3/2565+2197*k4/4104-k5/5;
-        dtheta1 = dtheta[i] + 25*l1/216+1408*l3/2565+2197*l4/4104-l5/5;
-        // theta2 and dtheta2 are our fifth order approximations
+        thetadot1 = thetadot[i] + 25*l1/216+1408*l3/2565+2197*l4/4104-l5/5;
+        // theta2 and thetadot2 are our fifth order approximations
         theta2 = theta[i] + 16*k1/135+6656*k3/12825+28561*k4/56430-9*k5/50+2*k6/55;
-        dtheta2 = dtheta[i] + 16*l1/135+6656*l3/12825+28561*l4/56430-9*l5/50+2*l6/55;
+        thetadot2 = thetadot[i] + 16*l1/135+6656*l3/12825+28561*l4/56430-9*l5/50+2*l6/55;
 
         // The following are used to correct the step size
         Rtheta = Math.abs(theta1-theta2)/dt;
-        Rdtheta = Math.abs(dtheta1-dtheta2)/dt;
+        Rthetadot = Math.abs(thetadot1-thetadot2)/dt;
         stheta = 0.84*Math.pow(epsilon/Rtheta, 1/4);                
-        sdtheta = 0.84*Math.pow(epsilon/Rdtheta, 1/4);
-        R = Math.max(Rtheta, Rdtheta);
-        s = Math.min(stheta, sdtheta);
+        sthetadot = 0.84*Math.pow(epsilon/Rthetadot, 1/4);
+        R = Math.max(Rtheta, Rthetadot);
+        s = Math.min(stheta, sthetadot);
         if ( R <= epsilon ) {
             t.push(t[i]+dt);
             theta.push(theta1);
-            dtheta.push(dtheta1);
+            thetadot.push(thetadot1);
             i++;
             dt *= s;
         } else {
@@ -97,11 +97,11 @@ function solveProblem() {
         }
     }
 
-    // Write t, theta and dtheta to our solution object
+    // Write t, theta and thetadot to our solution object
     solution = {
         t: t,
         theta: theta,
-        dtheta: dtheta,
+        thetadot: thetadot,
     };
 }
 
@@ -118,7 +118,7 @@ function fillTable() {
     }
     t = solution["t"];
     theta = solution["theta"];
-    dtheta = solution["dtheta"];
+    thetadot = solution["thetadot"];
     document.getElementById('tableOutputs').innerHTML = '';
     tableContents = '<tr>';
     tableContents += '<th>Index</th>';
@@ -131,7 +131,7 @@ function fillTable() {
         tableContents += '<td>' + j + '</td>';
         tableContents += '<td>' + t[j].toFixed(Math.ceil(Math.log10(1/epsilon))) + '</td>';
         tableContents += '<td>' + theta[j].toFixed(Math.ceil(Math.log10(1/epsilon))) + '</td>';
-        tableContents += '<td>' + dtheta[j].toFixed(Math.ceil(Math.log10(1/epsilon))) + '</td>';
+        tableContents += '<td>' + thetadot[j].toFixed(Math.ceil(Math.log10(1/epsilon))) + '</td>';
         tableContents += '</tr>';
     }
     document.getElementById('tableOutputs').innerHTML = tableContents;
@@ -149,8 +149,8 @@ function removeTable() {
 
 /**
  * Generate two plots:
- * - one of dtheta and theta against t; and
- * - a phase plot of dtheta against theta.
+ * - one of thetadot and theta against t; and
+ * - a phase plot of thetadot against theta.
  * 
  * @params    None.
  * @return    Nothing. Just generates the plots.
@@ -162,7 +162,7 @@ function generatePlots() {
     }
     t = solution["t"];
     theta = solution["theta"];
-    dtheta = solution["dtheta"];
+    thetadot = solution["thetadot"];
 
     // Height and width of plots
     windowInnerWidth  = window.innerWidth;
@@ -170,7 +170,7 @@ function generatePlots() {
     document.getElementById("timePlot").style = "height: " + windowInnerHeight + "px;";
     document.getElementById("phasePlot").style = "height: " + windowInnerHeight + "px;";
 
-    // Characteristics of the theta and dtheta against time plot
+    // Characteristics of the theta and thetadot against time plot
     var plot1 = {
         x: t,
         y: theta,
@@ -179,7 +179,7 @@ function generatePlots() {
     };
     var plot2 = {
         x: t,
-        y: dtheta,
+        y: thetadot,
         type: 'scatter',
         name: "theta dot (radians per second)"
     };
@@ -194,7 +194,7 @@ function generatePlots() {
     // Characteristics of the phase plot
     var plot3 = {
         x: theta,
-        y: dtheta,
+        y: thetadot,
         type: 'scatter',
         name: "Phase plot"
     };
