@@ -46,10 +46,8 @@ function solveProblem() {
     dtInitial = parseFloat(document.getElementById("dtInitial").value);
 
     // T is the period of the problem, including it can be used from the console to determine an appropriate tf
-    if ( ( g == 9.81 ) && (l == 1) && (theta0 == 0) && (dtheta0 == 0) ) {
-        T = 2.367841947576238;
-    } else if ( ( g == 9.8 ) && (l == 1) && (theta0 == 0) && (dtheta0 == 0) ) {
-        T = 2.3690497221753453;
+    if ( (theta0 == 0) && (dtheta0 == 0) ) {
+        T = Math.sqrt(l/(g*Math.PI))*(math.gamma(1/4)**2);
     }
 
     // Initialize the arrays used and loop variables
