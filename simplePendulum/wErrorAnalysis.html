@@ -24,81 +24,89 @@
 
             $$\dot{\theta} = \pm \sqrt{\dot{\theta}_0^2 + \dfrac{2g}{l}\left(\sin{\theta_0} - \sin{\theta}\right)}$$.
 
-            Our \(\theta\) approximations are substituted in, and our \(\dot{\theta}\) RKF45 approximation is subtracted from this value.
+            Our \(\theta\) approximations are substituted in, and our \(\dot{\theta}\) RKF45 approximation is subtracted from this value. From this equation, the period of the default problem is approximated, namely as:
+
+            \[
+            \begin{aligned}
+            t &= 2\int_{-\pi}^0 \dfrac{d\theta}{\sqrt{-19.62 \sin{\theta}}} \\
+              &= \dfrac{2 \mathrm{K}(1/2)}{\sqrt{2.4525}} \\
+              &\approx 2.367841947576238 \hspace{0.1cm}\mathrm{s}
+            \end{aligned}
+            \]
         </div>
         
         <!--A form for users to enter in all the parameters of the problem-->
         <form name="requiredData">
             <table>
-            <tr>
-                <th>Parameter</th>
-                <th>Value</th>
-                <th>Explanation</th>
-            </tr>
-            <tr>
-                <td><label for="g">\(g\):</label></td>
-                <td><input type="Number"
-                    id="g"
-                    name="g"
-                    value="9.81"></td>
-                <td>Acceleration due to gravity in \(\mathrm{m} \cdot \mathrm{s}^{-2}\).</td>
-            </tr>
-            <tr>
-                <td><label for="l">\(l\):</label></td>
-                <td><input type="Number"
-                    id="l"
-                    name="l"
-                    value="1"></td>
-                <td>Length of the pendulum rod in metres.</td>
-            </tr>
-            <tr>
-                <td><label for="t0">\(t_0\):</label></td>
-                <td><input type="Number"
-                    id="t0"
-                    name="t0"
-                    value="0"></td>
-                <td>Starting time for the simulation in seconds (s).</td>
-            </tr>
-            <tr>
-                <td><label for="tf">\(t_f\):</label></td>
-                <td><input type="Number"
-                    id="tf"
-                    name="tf"
-                    value="9.471367790304951"></td>
-                <td>End time for the simulation in seconds. The default \(t_f - t_0\) value is equal to four times the period \(T\) of the problem with the other default parameters.</td>
-            </tr>
-            <tr>
-                <td><label for="theta0">\(\theta_0\):</label></td>
-                <td><input type="Number"
-                    id="theta0"
-                    name="theta0"
-                    value="0"></td>
-                <td>Angle from the positive \(x\)-axis in radians at time \(t_0\).</td>
-            </tr>
-            <tr>
-                <td><label for="dtheta0">\(\dot{\theta}_0\):</label></td>
-                <td><input type="Number"
-                    id="dtheta0"
-                    name="dtheta0"
-                    value="0"></td>
-                <td>First derivative of \(\theta\) with respect to \(t\) at \(t_0\) (in \(\mathrm{radians}\cdot \mathrm{s}^{-1}\)).</td>
-            </tr>
-            <tr>
-                <td><label for="epsilon">\(\epsilon\):</label></td>
-                <td><input type="Number"
-                   id="epsilon"
-                   name="epsilon"
-                   value="1e-11"></td>
-                <td>Error tolerance in both \(\theta\) and \(\dot{\theta}\). At below 2e-12, this webpage is liable to freeze.</td>
-            </tr>
-            <tr>
-                <td><label for="dtInitial">dtInitial:</label></td>
-                <td><input type="Number"
-                        id="dtInitial"
-                        name="dtInitial"
-                        value="0.1"></td>
-                <td>Initial guess for step size; as per the method it is adapted according to the specified level of accuracy.</td>
-            </tr>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Value</th>
+                    <th>Explanation</th>
+                </tr>
+                <tr>
+                    <td><label for="g">\(g\):</label></td>
+                    <td><input type="Number"
+                        id="g"
+                        name="g"
+                        value="9.81"></td>
+                    <td>Acceleration due to gravity in \(\mathrm{m} \cdot \mathrm{s}^{-2}\).</td>
+                </tr>
+                <tr>
+                    <td><label for="l">\(l\):</label></td>
+                    <td><input type="Number"
+                        id="l"
+                        name="l"
+                        value="1"></td>
+                    <td>Length of the pendulum rod in metres (m).</td>
+                </tr>
+                <tr>
+                    <td><label for="t0">\(t_0\):</label></td>
+                    <td><input type="Number"
+                        id="t0"
+                        name="t0"
+                        value="0"></td>
+                    <td>Starting time for the simulation in seconds (s).</td>
+                </tr>
+                <tr>
+                    <td><label for="tf">\(t_f\):</label></td>
+                    <td><input type="Number"
+                        id="tf"
+                        name="tf"
+                        value="9.471367790304951"></td>
+                    <td>End time for the simulation in seconds. The default \(t_f - t_0\) value is equal to four times the period \(T\) of the problem with the other default parameters.</td>
+                </tr>
+                <tr>
+                    <td><label for="theta0">\(\theta_0\):</label></td>
+                    <td><input type="Number"
+                        id="theta0"
+                        name="theta0"
+                        value="0"></td>
+                    <td>Angle from the positive \(x\)-axis in radians at time \(t_0\).</td>
+                </tr>
+                <tr>
+                    <td><label for="dtheta0">\(\dot{\theta}_0\):</label></td>
+                    <td><input type="Number"
+                        id="dtheta0"
+                        name="dtheta0"
+                        value="0"></td>
+                    <td>First derivative of \(\theta\) with respect to \(t\) at \(t_0\) (in \(\mathrm{radians}\cdot \mathrm{s}^{-1}\)).</td>
+                </tr>
+                <tr>
+                    <td><label for="epsilon">\(\epsilon\):</label></td>
+                    <td><input type="Number"
+                    id="epsilon"
+                    name="epsilon"
+                    value="1e-11"></td>
+                    <td>Error tolerance in both \(\theta\) and \(\dot{\theta}\). At below 2e-12, this webpage is liable to freeze.</td>
+                </tr>
+                <tr>
+                    <td><label for="dtInitial">dtInitial:</label></td>
+                    <td><input type="Number"
+                            id="dtInitial"
+                            name="dtInitial"
+                            value="0.1"></td>
+                    <td>Initial guess for step size; as per the method it is adapted according to the specified level of accuracy.</td>
+                </tr>
             </table>
         </form>
 

@@ -14,11 +14,25 @@
     <body>
         <h1>Simple pendulum JavaScript integrator</h1>
         <div>
-            This webpage uses the Runge-Kutta-Fehlberg fourth-order method with fifth-order error checking to approximate the solution to the problem of the simple pendulum:
+            This webpage uses the <a href='https://en.wikipedia.org/wiki/Runge-Kutta-Fehlberg_method' link='_blank'>Runge-Kutta-Fehlberg</a> fourth-order method with fifth-order error checking (RKF45) to approximate the solution to the problem of the simple pendulum:
 
             $$\dfrac{d^2 \theta}{dt^2} = -\dfrac{g}{l} \cos{\theta}$$
 
-            where g is the acceleration due to gravity in metres per second squared, l is the length of the pendulum in metres, &theta; is the angle from the positive x axis (in radians) and t is the time in seconds. Below you can specify the various parameters for the problem we will solve. 
+            where \(g\) is the acceleration due to gravity in metres per second squared, \(l\) is the length of the pendulum in metres, \(\theta\) is the angle from the positive \(x\) axis (in radians) and \(t\) is the time in seconds. Below you can specify the various parameters for the problem we will solve. 
+            
+            Integrating our ODE with respect to \(\theta\), multiplying by two and square rooting yields:
+            
+            $$\dot{\theta} = \pm \sqrt{\dot{\theta}_0^2 + \dfrac{2g}{l}\left(\sin{\theta_0} - \sin{\theta}\right)}$$.
+            
+            From this equation, the period of the default problem is approximated, namely as:
+
+            \[
+            \begin{aligned}
+            t &= 2\int_{-\pi}^0 \dfrac{d\theta}{\sqrt{-19.62 \sin{\theta}}} \\
+              &= \dfrac{2 \mathrm{K}(1/2)}{\sqrt{2.4525}} \\
+              &\approx 2.367841947576238 \hspace{0.1cm}\mathrm{s}
+            \end{aligned}
+            \]
         </div>
 
         <!--A form for users to enter in all the parameters of the problem-->
@@ -43,7 +57,7 @@
                         id="l"
                         name="l"
                         value="1"></td>
-                    <td>Length of the pendulum rod in metres.</td>
+                    <td>Length of the pendulum rod in metres (m).</td>
                 </tr>
                 <tr>
                     <td><label for="t0">\(t_0\):</label></td>
