@@ -25,7 +25,7 @@ var solution = {
 };
 var windowInnerWidth;
 var windowInnerHeight;
-var epsilon;
+var epsilon, T;
 
 /** 
  * Solve the problem using RK45.
@@ -44,6 +44,13 @@ function solveProblem() {
     dtheta0 = parseFloat(document.getElementById("dtheta0").value);
     epsilon = parseFloat(document.getElementById("epsilon").value);
     dtInitial = parseFloat(document.getElementById("dtInitial").value);
+
+    // T is the period of the problem, including it can be used from the console to determine an appropriate tf
+    if ( ( g == 9.81 ) && (l == 1) && (theta0 == 0) && (dtheta0 == 0) ) {
+        T = 2.367841947576238;
+    } else if ( ( g == 9.8 ) && (l == 1) && (theta0 == 0) && (dtheta0 == 0) ) {
+        T = 2.3690497221753453;
+    }
 
     // Initialize the arrays used and loop variables
     t = [t0];
