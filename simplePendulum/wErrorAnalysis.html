@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Simple pendulum Runge-Kutta-Fehlberg solver</title>
+        <title>Simple pendulum Runge-Kutta-Fehlberg solver with error analysis</title>
         <!--We need a few external JS libraries to provide LaTeX and plot rendering. -->
         <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
@@ -12,7 +12,7 @@
         <link rel="icon" href="/assets/favicon.png">
     </head>
     <body>
-        <h1>Simple pendulum JavaScript integrator with some error analysis</h1>
+        <h1>Simple pendulum problem solver with error analysis</h1>
         <div>
             This webpage uses the <a href='https://en.wikipedia.org/wiki/Runge-Kutta-Fehlberg_method' link='_blank'>Runge-Kutta-Fehlberg</a> fourth-order method with fifth-order error checking (RKF45) to approximate the solution to the problem of the simple pendulum:
 
@@ -123,6 +123,9 @@
         <div id='errorPlot'></div>
         <div id='phasePlot'></div>
         <style>
+            h1 {
+                font-size: 30px;
+            }
             div {
                 margin: 1px;
             }
