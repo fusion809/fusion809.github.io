@@ -12,6 +12,7 @@
         <link rel="icon" href="/assets/favicon.png">
     </head>
     <body>
+        <h1>Simple pendulum JavaScript integrator</h1>
         <div>
             This webpage uses the Runge-Kutta-Fehlberg fourth-order method with fifth-order error checking to approximate the solution to the problem of the simple pendulum:
 
@@ -23,62 +24,75 @@
         <!--A form for users to enter in all the parameters of the problem-->
         <form name="requiredData">
             <table>
-            <tr style="border: none;">
-                <td><label for="g">g:</label></td>
-                <td><input type="Number"
-                    id="g"
-                    name="g"
-                    value="9.81"></td>
-            </tr>
-            <tr>
-                <td><label for="l">l:</label></td>
-                <td><input type="Number"
-                    id="l"
-                    name="l"
-                    value="1"></td>
-            </tr>
-            <tr>
-                <td><label for="t0">Starting time (seconds; t<sub>0</sub>):</label></td>
-                <td><input type="Number"
-                    id="t0"
-                    name="t0"
-                    value="0"></td>
-            </tr>
-            <tr>
-                <td><label for="tf">End time (seconds):</label></td>
-                <td><input type="Number"
-                    id="tf"
-                    name="tf"
-                    value="9.471367790304951"></td>
-            </tr>
-            <tr>
-                <td><label for="theta0">Value of &theta; (in radians) at t<sub>0</sub>:</label></td>
-                <td><input type="Number"
-                    id="theta0"
-                    name="theta0"
-                    value="0"></td>
-            </tr>
-            <tr>
-                <td><label for="dtheta0">Value of &theta; dot (in radians per second) at t<sub>0</sub>:</label></td>
-                <td><input type="Number"
-                    id="dtheta0"
-                    name="dtheta0"
-                    value="0"></td>
-            </tr>
-            <tr>
-                <td><label for="epsilon">Error tolerance:</label></td>
-                <td><input type="Number"
-                   id="epsilon"
-                   name="epsilon"
-                   value="1e-11"></td>
-            </tr>
-            <tr>
-                <td><label for="dtInitial">Initial guess for step size (seconds):</label></td>
-                <td><input type="Number"
-                        id="dtInitial"
-                        name="dtInitial"
-                        value="0.1"></td>
-            </tr>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Value</th>
+                    <th>Explanation</th>
+                </tr>
+                <tr>
+                    <td><label for="g">\(g\):</label></td>
+                    <td><input type="Number"
+                        id="g"
+                        name="g"
+                        value="9.81"></td>
+                    <td>Acceleration due to gravity in \(\mathrm{m} \cdot \mathrm{s}^{-2}\).</td>
+                </tr>
+                <tr>
+                    <td><label for="l">\(l\):</label></td>
+                    <td><input type="Number"
+                        id="l"
+                        name="l"
+                        value="1"></td>
+                    <td>Length of the pendulum rod in metres.</td>
+                </tr>
+                <tr>
+                    <td><label for="t0">\(t_0\):</label></td>
+                    <td><input type="Number"
+                        id="t0"
+                        name="t0"
+                        value="0"></td>
+                    <td>Starting time for the simulation in seconds (s).</td>
+                </tr>
+                <tr>
+                    <td><label for="tf">\(t_f\):</label></td>
+                    <td><input type="Number"
+                        id="tf"
+                        name="tf"
+                        value="9.471367790304951"></td>
+                    <td>End time for the simulation in seconds. The default \(t_f - t_0\) value is equal to four times the period \(T\) of the problem with the other default parameters.</td>
+                </tr>
+                <tr>
+                    <td><label for="theta0">\(\theta_0\):</label></td>
+                    <td><input type="Number"
+                        id="theta0"
+                        name="theta0"
+                        value="0"></td>
+                    <td>Angle from the positive \(x\)-axis in radians at time \(t_0\).</td>
+                </tr>
+                <tr>
+                    <td><label for="dtheta0">\(\dot{\theta}_0\):</label></td>
+                    <td><input type="Number"
+                        id="dtheta0"
+                        name="dtheta0"
+                        value="0"></td>
+                    <td>First derivative of \(\theta\) with respect to \(t\) at \(t_0\) (in \(\mathrm{radians}\cdot \mathrm{s}^{-1}\)).</td>
+                </tr>
+                <tr>
+                    <td><label for="epsilon">\(\epsilon\):</label></td>
+                    <td><input type="Number"
+                       id="epsilon"
+                       name="epsilon"
+                       value="1e-11"></td>
+                    <td>Error tolerance in both \(\theta\) and \(\dot{\theta}\). At below 2e-12, this webpage is liable to freeze.</td>
+                </tr>
+                <tr>
+                    <td><label for="dtInitial">dtInitial:</label></td>
+                    <td><input type="Number"
+                            id="dtInitial"
+                            name="dtInitial"
+                            value="0.1"></td>
+                    <td>Initial guess for step size; as per the method it is adapted according to the specified level of accuracy.</td>
+                </tr>
             </table>
         </form>
         
@@ -95,17 +109,17 @@
         <div id='timePlot'></div>
         <div id='phasePlot'></div>
         <style>
-            #div {
+            div {
                 margin: 1px;
             }
-            #tableOutputs, #tableOutputs tr, #tableOutputs th, #tableOutputs td {
+            table, tr, th, td {
               border: 1px solid black;
               border-collapse: collapse;
             }
-            #tableOutputs td {
+            td {
                 padding: 2px;
             }
-            #timePlot, #phasePlot {
+            #timePlot, #errorPlot, #phasePlot {
                 width: 100%;
             }
         </style>
