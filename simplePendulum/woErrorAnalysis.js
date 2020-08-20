@@ -25,8 +25,8 @@ var T, epsilon;
 /** 
  * Solve the problem using RK45.
  *
- * @params       None. Uses parameter values in the forum.
- * @return       Nothing. But it enters the solution values into the solution
+ * @params           None. Uses parameter values in the forum.
+ * @return           Nothing. But it enters the solution values into the solution
  * object.
  */
 function solveProblem() {
@@ -108,8 +108,8 @@ function solveProblem() {
 /**
  * Tabulates solution data.
  *
- * @params       None. Uses the entries of the solution object, however. 
- * @return       Nothing. Just populates the table with the solution values. 
+ * @params           None. Uses the entries of the solution object, however. 
+ * @return           Nothing. Just populates the table with the solution values. 
  */
 function fillTable() {
     if ( solution["t"].length == 0) {
@@ -140,8 +140,8 @@ function fillTable() {
 /**
  * Removes the solution table
  * 
- * @params       None.
- * @return       Nothing. Just removes the solution table.
+ * @params           None.
+ * @return           Nothing. Just removes the solution table.
  */
 function removeTable() {
     document.getElementById('tableOutputs').innerHTML = '';
@@ -152,8 +152,8 @@ function removeTable() {
  * - one of thetaDot and theta against t; and
  * - a phase plot of thetaDot against theta.
  * 
- * @params    None.
- * @return    Nothing. Just generates the plots.
+ * @params           None.
+ * @return           Nothing. Just generates the plots.
  */
 function generatePlots() {
     if ( solution["t"].length == 0) {
@@ -217,8 +217,8 @@ function generatePlots() {
 /**
  * Removes solution plots
  * 
- * @params       None.
- * @return       Nothing. Just removes the solution plots.
+ * @params           None.
+ * @return           Nothing. Just removes the solution plots.
  */
 function removePlots() {
     document.getElementById("timePlot").innerHTML = '';

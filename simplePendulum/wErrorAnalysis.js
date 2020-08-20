@@ -2,14 +2,14 @@
  * Right-hand side of our second-order ODE written as a system of 
  * first-order ODEs.
  *
- * @param g         Acceleration due to gravity in metres per second 
+ * @param g          Acceleration due to gravity in metres per second 
  * squared.
- * @param l         Length of the pendulum in metres.
- * @param t         Time.
- * @param theta     Angle of the pendulum from the positive x-axis.
- * @param thetaDot  Rate of change against time of the angle from the 
+ * @param l          Length of the pendulum in metres.
+ * @param t          Time.
+ * @param theta      Angle of the pendulum from the positive x-axis.
+ * @param thetaDot   Rate of change against time of the angle from the 
  * positive x-axis.
- * @return          [dtheta/dt, d2theta/dt2]
+ * @return           [dtheta/dt, d2theta/dt2]
  */
 function f(g, l, t, theta, thetaDot) {
     return [thetaDot, -g/l*Math.cos(theta)];
@@ -30,8 +30,8 @@ var epsilon, T;
 /** 
  * Solve the problem using RK45.
  *
- * @params       None. Uses parameter values in the forum.
- * @return       Nothing. But it enters the solution values and error estimates
+ * @params           None. Uses parameter values in the forum.
+ * @return           Nothing. But it enters the solution values and error estimates
  * into the solution object.
  */
 function solveProblem() {
@@ -120,8 +120,8 @@ function solveProblem() {
 /**
  * Tabulates solution data.
  *
- * @params       None.
- * @return       Nothing. Just populates the table with the solution values. 
+ * @params           None.
+ * @return           Nothing. Just populates the table with the solution values. 
  */
 function fillTable() {
     if ( solution["t"].length == 0) {
@@ -162,8 +162,8 @@ function fillTable() {
 /**
  * Removes the solution table
  * 
- * @params       None.
- * @return       Nothing. Just removes the solution table.
+ * @params           None.
+ * @return           Nothing. Just removes the solution table.
  */
 function removeTable() {
     document.getElementById('tableOutputs').innerHTML = '';
@@ -176,8 +176,8 @@ function removeTable() {
  * based on theta; and
  * - a phase plot of thetaDot against theta.
  * 
- * @params       None.
- * @return       Nothing. Just generates the plots.
+ * @params           None.
+ * @return           Nothing. Just generates the plots.
  */
 function generatePlots() {
     if ( solution["t"].length == 0) {
@@ -261,8 +261,8 @@ function generatePlots() {
 /**
  * Removes solution plots and associated element formatting
  * 
- * @params       None.
- * @return       Nothing. Just removes the solution plots.
+ * @params           None.
+ * @return           Nothing. Just removes the solution plots.
  */
 function removePlots() {
     document.getElementById("timePlot").innerHTML = '';
