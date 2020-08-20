@@ -20,16 +20,15 @@
 
             where \(g\) is the acceleration due to gravity in metres per second squared, \(l\) is the length of the pendulum in metres, \(\theta\) is the angle from the positive \(x\) axis (in radians) and \(t\) is the time in seconds. Below you can specify the various parameters for the problem we will solve. 
             
-            Integrating our ODE with respect to \(\theta\), multiplying by two and square rooting yields:
-            
+            Integrating our ordinary differential equation with respect to \(\theta\), multiplying by two and square rooting yields:
+
             $$\dot{\theta} = \pm \sqrt{\dot{\theta}_0^2 + \dfrac{2g}{l}\left(\sin{\theta_0} - \sin{\theta}\right)}$$.
             
             From this equation, the period of the default problem is approximated, namely as:
 
             \[
             \begin{aligned}
-            t &= 2\int_{-\pi}^0 \dfrac{d\theta}{\sqrt{-19.62 \sin{\theta}}} \\
-              &= \dfrac{2 \mathrm{K}(1/2)}{\sqrt{2.4525}} \\
+            T &= 2\int_{-\pi}^0 \dfrac{d\theta}{\sqrt{-19.62 \sin{\theta}}} \\
               &\approx 2.367841947576238 \hspace{0.1cm}\mathrm{s}
             \end{aligned}
             \]
