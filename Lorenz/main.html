@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Lotka-Volterra equation solver</title>
+        <title>Lorenz equations solver</title>
         <!--We need a few external JS libraries to provide LaTeX and plot rendering. -->
         <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
@@ -12,18 +12,17 @@
         <link rel="icon" href="/assets/favicon.png">
     </head>
     <body>
-        <h1>Lotka-Volterra equation solver</h1>
+        <h1>Lorenz equations solver</h1>
         <div>
-            This webpage uses the <a href='https://en.wikipedia.org/wiki/Runge-Kutta-Fehlberg_method' link='_blank'>Runge-Kutta-Fehlberg</a> fourth-order method with fifth-order error checking (RKF45) to approximate the solution to Lotka-Volterra equations:
+            This webpage uses the <a href='https://en.wikipedia.org/wiki/Runge-Kutta-Fehlberg_method' link='_blank'>Runge-Kutta-Fehlberg</a> fourth-order method with fifth-order error checking (RKF45) to approximate the solution to <a href='https://en.wikipedia.org/wiki/Lorenz_system' link='_blank'>Lorenz equations</a>:
 
             \[
             \begin{aligned}
-            \dfrac{dx}{dt} &= \alpha x - \beta xy \\
-            \dfrac{dy}{dt} &= \delta xy - \gamma y
+            \dfrac{dx}{dt} &= \sigma (y-x) \\
+            \dfrac{dy}{dt} &= x (\rho - z) - y \\
+            \dfrac{dz}{dt} &= xy - \beta z
             \end{aligned}
             \]
-
-            where \(x\) is the number of prey animals and \(y\) is the number of predator animals and \(\alpha, \beta, \gamma\), and \(\delta\) describe their interactions with one another.
         </div>
 
         <!--A form for users to enter in all the parameters of the problem-->
@@ -34,12 +33,19 @@
                     <th>Value</th>
                     <th>Explanation</th>
                 </tr>
-                <tr>
-                    <td><label for="alpha">\(\alpha\):</label></td>
+                <td><label for="sigma">\(\sigma\):</label></td>
                     <td><input type="Number"
-                        id="alpha"
-                        name="alpha"
-                        value="1.1"></td>
+                        id="sigma"
+                        name="sigma"
+                        value="10"></td>
+                    <td>Interaction parameter.</td>
+                </tr>
+                <tr>
+                    <td><label for="rho">\(\rho\):</label></td>
+                    <td><input type="Number"
+                        id="rho"
+                        name="rho"
+                        value="28"></td>
                     <td>Interaction parameter.</td>
                 </tr>
                 <tr>
@@ -47,25 +53,10 @@
                     <td><input type="Number"
                         id="beta"
                         name="beta"
-                        value="0.4"></td>
+                        value="2.66666666666666667"></td>
                     <td>Interaction parameter.</td>
                 </tr>
                 <tr>
-                <td><label for="gamma">\(\gamma\):</label></td>
-                    <td><input type="Number"
-                        id="gamma"
-                        name="gamma"
-                        value="0.4"></td>
-                    <td>Interaction parameter.</td>
-                </tr>
-                <tr>
-                    <td><label for="delta">\(\delta\):</label></td>
-                    <td><input type="Number"
-                        id="delta"
-                        name="delta"
-                        value="0.1"></td>
-                    <td>Interaction parameter.</td>
-                </tr>
                 <tr>
                     <td><label for="t0">\(t_0\):</label></td>
                     <td><input type="Number"
@@ -79,7 +70,7 @@
                     <td><input type="Number"
                         id="tf"
                         name="tf"
-                        value="37"></td>
+                        value="100"></td>
                     <td>End time for the simulation in seconds.</td>
                 </tr>
                 <tr>
@@ -87,24 +78,32 @@
                     <td><input type="Number"
                         id="x0"
                         name="x0"
-                        value="100"></td>
-                    <td>Prey population.</td>
+                        value="1"></td>
+                    <td>Value of \(x\) at \(t_0\).</td>
                 </tr>
                 <tr>
                     <td><label for="y0">\(y_0\):</label></td>
                     <td><input type="Number"
                         id="y0"
                         name="y0"
-                        value="10"></td>
-                    <td>Predator population.</td>
+                        value="1"></td>
+                    <td>Value of \(y\) at \(t_0\).</td>
+                </tr>
+                <tr>
+                    <td><label for="z0">\(z_0\):</label></td>
+                    <td><input type="Number"
+                        id="z0"
+                        name="z0"
+                        value="1"></td>
+                    <td>Value of \(z\) at \(t_0\).</td>
                 </tr>
                 <tr>
                     <td><label for="epsilon">\(\epsilon\):</label></td>
                     <td><input type="Number"
                        id="epsilon"
                        name="epsilon"
-                       value="1e-9"></td>
-                    <td>Error tolerance in both \(\x\) and \(y\). \(\epsilon \lt \)1e-7 often freezes the webpage with \(t_f \geq 100\).</td>
+                       value="1e-8"></td>
+                    <td>Error tolerance.</td>
                 </tr>
                 <tr>
                     <td><label for="dtInitial">dtInitial:</label></td>
@@ -127,7 +126,6 @@
         <!--Where the table and plot goes-->
         <table id="tableOutputs">
         </table>
-        <div id='timePlot'></div>
         <div id='phasePlot'></div>
         <style>
             h1 {
