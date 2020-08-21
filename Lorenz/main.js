@@ -189,7 +189,11 @@ function generatePlots() {
     // Height and width of plots
     windowInnerWidth  = window.innerWidth;
     windowInnerHeight = window.innerHeight;
-    document.getElementById("phasePlot").style = "height: " + windowInnerHeight + "px;";
+    document.getElementById("timePlot").style = "height: " + windowInnerHeight + "px;";
+    document.getElementById("phasePlotXYZ").style = "height: " + windowInnerHeight + "px;";
+    document.getElementById("phasePlotXY").style = "height: " + windowInnerHeight + "px;";
+    document.getElementById("phasePlotXZ").style = "height: " + windowInnerHeight + "px;";
+    document.getElementById("phasePlotYZ").style = "height: " + windowInnerHeight + "px;";
 
     // Characteristics of the x and y against time plot
     var plot1 = {
@@ -204,13 +208,90 @@ function generatePlots() {
             reversescale: false
         }
     };
+
+    var plot2 = {
+        x: t,
+        y: x,
+        type: 'scatter',
+        mode: 'lines',
+        opacity: 1,
+        name: 'x'
+    };
+
+    var plot3 = {
+        x: t,
+        y: y,
+        type: 'scatter',
+        mode: 'lines',
+        opacity: 1,
+        name: 'y'
+    };
+
+    var plot4 = {
+        x: t,
+        y: z,
+        type: 'scatter',
+        mode: 'lines',
+        opacity: 1,
+        name: 'z'
+    };
+
+    var plotxy = {
+        x: x,
+        y: y,
+        type: 'scatter',
+        mode: 'lines',
+        opacity: 1
+    };
+
+    var plotxz = {
+        x: x,
+        y: z,
+        type: 'scatter',
+        mode: 'lines',
+        opacity: 1
+    };
+
+    var plotyz = {
+        x: y,
+        y: z,
+        type: 'scatter',
+        mode: 'lines',
+        opacity: 1
+    };
+
     var layout1 = {
         title: 'Phase plot of the solution to the Lorenz equations'
     };
+
+    var layout2 = {
+        title: "Time plots of the solution to the problem"
+    };
+
+    var layoutxy = {
+        title: "xy phase plot"
+    };
+
+    var layoutxz = {
+        title: "xz phase plot"
+    };
+
+    var layoutyz = {
+        title: "yz phase plot"
+    };
+
     data1 = [plot1];
+    data2 = [plot2, plot3, plot4];
+    dataxy = [plotxy];
+    dataxz = [plotxz];
+    datayz = [plotyz];
 
     // Generate plots
-    Plotly.newPlot('phasePlot', data1, layout1)
+    Plotly.newPlot('timePlot', data2, layout2);
+    Plotly.newPlot('phasePlotXYZ', data1, layout1);
+    Plotly.newPlot('phasePlotXY', dataxy, layoutxy);
+    Plotly.newPlot('phasePlotXZ', dataxz, layoutxz);
+    Plotly.newPlot('phasePlotYZ', datayz, layoutyz);
 };
 
 /**
@@ -221,7 +302,13 @@ function generatePlots() {
  */
 function removePlots() {
     document.getElementById("timePlot").innerHTML = '';
-    document.getElementById("phasePlot").innerHTML = '';
+    document.getElementById("phasePlotXYZ").innerHTML = '';
+    document.getElementById("phasePlotXY").innerHTML = '';
+    document.getElementById("phasePlotXZ").innerHTML = '';
+    document.getElementById("phasePlotYZ").innerHTML = '';
     document.getElementById("timePlot").style = '';
-    document.getElementById("phasePlot").style = '';
+    document.getElementById("phasePlotXYZ").style = '';
+    document.getElementById("phasePlotXY").style = '';
+    document.getElementById("phasePlotXZ").style = '';
+    document.getElementById("phasePlotYZ").style = '';
 };
