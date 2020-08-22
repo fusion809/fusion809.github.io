@@ -135,8 +135,7 @@ function solveProblem() {
 function fillTable() {
     // Return an error if solveProblem() hasn't been run
     if ( solution["t"].length == 0) {
-        alert('You haven\'t solved the problem yet! Press the "Solve the problem" button before pressing the "Tabulate the solution" button again.');
-        return
+        solveProblem();
     }
 
     // Extract coordinate arrays from the solution object
