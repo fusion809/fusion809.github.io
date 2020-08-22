@@ -111,12 +111,16 @@ function solveProblem() {
  */
 function fillTable() {
     if ( solution["t"].length == 0) {
-        alert('You haven\'t solved the problem yet! Press the "Solve the problem" button before pressing the "Tabulate the solution" button again.');
-        return
+        solveProblem();
     }
+
+    // Extra solution data from solution object
     t = solution["t"];
     x = solution["x"];
     y = solution["y"];
+
+    // Clear innerHTML in case the table already exists and we're replacing 
+    // it
     document.getElementById('tableOutputs').innerHTML = '';
     tableContents = '<tr>';
     tableContents += '<th>Index</th>';
@@ -146,57 +150,35 @@ function removeTable() {
 }
 
 /**
- * Generate two plots:
- * - one of y and x against t; and
- * - a phase plot of y against x.
+ * Generate phase plot
  * 
  * @params           None.
- * @return           Nothing. Just generates the plots.
+ * @return           Nothing. Just generates the phase plot.
  */
-function generatePlots() {
+function generatePhasePlot() {
+    // If solveProblem() hasn't been run, re-run it. 
     if ( solution["t"].length == 0) {
-        alert('You haven\'t solved the problem yet! Before pressing the "Plot the solution" button again, press the "Solve the problem" button.');
-        return
+        solveProblem();
     }
+
+    // Extract solution data from solution object
     t = solution["t"];
     x = solution["x"];
     y = solution["y"];
 
-    // Height and width of plots
+    // Height and width of plot
     windowInnerWidth  = window.innerWidth;
     windowInnerHeight = window.innerHeight;
-    document.getElementById("timePlot").style = "height: " + windowInnerHeight + "px;";
     document.getElementById("phasePlot").style = "height: " + windowInnerHeight + "px;";
 
-    // Characteristics of the x and y against time plot
-    var plot1 = {
-        x: t,
-        y: x,
-        type: 'scatter',
-        name: "x"
-    };
-    var plot2 = {
-        x: t,
-        y: y,
-        type: 'scatter',
-        name: "y"
-    };
-    var layout1 = {
-        title: 'y and x against time plots',
-        xaxis: {
-           title: 'Time (seconds)'
-        }
-    };
-    data1 = [plot1, plot2];
-
     // Characteristics of the phase plot
-    var plot3 = {
+    var plot = {
         x: x,
         y: y,
         type: 'scatter',
         name: "Phase plot"
     };
-    var layout2 = {
+    var layout = {
         title: "Phase plot of y against x",
         xaxis: {
             title: "x"
@@ -205,11 +187,70 @@ function generatePlots() {
             title: "y"
         }
     };
-    data2 = [plot3];
+    data = [plot];
+
+    // Generate plot
+    Plotly.newPlot('phasePlot', data, layout);    
+}
+
+/**
+ * Generate a plot of x and y against time
+ * 
+ * @params           None.
+ * @return           Nothing. Just generates a plot of x and y against time.
+ */
+function generateTimePlot() {
+    // Solve the problem if it hasn't been already
+    if ( solution["t"].length == 0) {
+        solveProblem();
+    }
+
+    // Extract solution data from solution object
+    t = solution["t"];
+    x = solution["x"];
+    y = solution["y"];
+
+    // Height and width of plots
+    windowInnerWidth  = window.innerWidth;
+    windowInnerHeight = window.innerHeight;
+    document.getElementById("timePlot").style = "height: " + windowInnerHeight + "px;";
+
+    // Characteristics of the x and y against time plot
+    var plotx = {
+        x: t,
+        y: x,
+        type: 'scatter',
+        name: "x"
+    };
+    var ploty = {
+        x: t,
+        y: y,
+        type: 'scatter',
+        name: "y"
+    };
+    var layout = {
+        title: 'y and x against time plots',
+        xaxis: {
+           title: 'Time (seconds)'
+        }
+    };
+    data = [plotx, ploty];
 
     // Generate plots
-    Plotly.newPlot('timePlot', data1, layout1);
-    Plotly.newPlot('phasePlot', data2, layout2);
+    Plotly.newPlot('timePlot', data, layout);
+}
+
+/**
+ * Generate two plots:
+ * - one of y and x against t; and
+ * - a phase plot of y against x.
+ * 
+ * @params           None.
+ * @return           Nothing. Just generates the plots.
+ */
+function generatePlots() {
+    generatePhasePlot();
+    generateTimePlot();
 };
 
 /**
