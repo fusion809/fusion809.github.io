@@ -57,28 +57,29 @@ function solveProblem() {
         // Step size, as dictated by the method
         dt = Math.min(dt, tf-t[i]);
 
-        // Runge-Kutta-Fehlberg approximations of the change in x and y
+        // Runge-Kutta-Fehlberg approximations of the change in x, y and z
         // over the step
+        // 1st approx
         k1 = dt*f(sigma, rho, beta, t[i], x[i], y[i], z[i])[0];
         l1 = dt*f(sigma, rho, beta, t[i], x[i], y[i], z[i])[1];
         m1 = dt*f(sigma, rho, beta, t[i], x[i], y[i], z[i])[2];
-
+        // 2nd approx
         k2 = dt*f(sigma, rho, beta, t[i]+dt/4, x[i]+k1/4, y[i]+l1/4, z[i]+m1/4)[0];
         l2 = dt*f(sigma, rho, beta, t[i]+dt/4, x[i]+k1/4, y[i]+l1/4, z[i]+m1/4)[1];
         m2 = dt*f(sigma, rho, beta, t[i]+dt/4, x[i]+k1/4, y[i]+l1/4, z[i]+m1/4)[2];
-
+        // 3rd approx
         k3 = dt*f(sigma, rho, beta, t[i]+3*dt/8, x[i]+3*k1/32+9*k2/32, y[i]+3*l1/32+9*l2/32, z[i]+3*m1/32+9*m2/32)[0];
         l3 = dt*f(sigma, rho, beta, t[i]+3*dt/8, x[i]+3*k1/32+9*k2/32, y[i]+3*l1/32+9*l2/32, z[i]+3*m1/32+9*m2/32)[1];
         m3 = dt*f(sigma, rho, beta, t[i]+3*dt/8, x[i]+3*k1/32+9*k2/32, y[i]+3*l1/32+9*l2/32, z[i]+3*m1/32+9*m2/32)[2];
-
+        // 4th approx
         k4 = dt*f(sigma, rho, beta, t[i]+12*dt/13, x[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, y[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197, z[i]+1932*m1/2197-7200*m2/2197+7296*m3/2197)[0];
         l4 = dt*f(sigma, rho, beta, t[i]+12*dt/13, x[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, y[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197, z[i]+1932*m1/2197-7200*m2/2197+7296*m3/2197)[1];
         m4 = dt*f(sigma, rho, beta, t[i]+12*dt/13, x[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, y[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197, z[i]+1932*m1/2197-7200*m2/2197+7296*m3/2197)[2];
-
+        // 5th approx
         k5 = dt*f(sigma, rho, beta, t[i]+dt, x[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, y[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104, z[i]+439*m1/216-8*m2+3680*m3/513-845*m4/4104)[0];
         l5 = dt*f(sigma, rho, beta, t[i]+dt, x[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, y[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104, z[i]+439*m1/216-8*m2+3680*m3/513-845*m4/4104)[1];
         m5 = dt*f(sigma, rho, beta, t[i]+dt, x[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, y[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104, z[i]+439*m1/216-8*m2+3680*m3/513-845*m4/4104)[2];
-
+        // 6th approx
         k6 = dt*f(sigma, rho, beta, t[i]+dt/2, x[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, y[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40, z[i]-8*m1/27+2*m2-3544*m3/2565+1859*m4/4104-11*m5/40)[0];
         l6 = dt*f(sigma, rho, beta, t[i]+dt/2, x[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, y[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40, z[i]-8*m1/27+2*m2-3544*m3/2565+1859*m4/4104-11*m5/40)[1];
         m6 = dt*f(sigma, rho, beta, t[i]+dt/2, x[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, y[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40, z[i]-8*m1/27+2*m2-3544*m3/2565+1859*m4/4104-11*m5/40)[2];
@@ -102,6 +103,8 @@ function solveProblem() {
         sz = 0.84*Math.pow(epsilon/Rz, 1/4);
         R = Math.max(Rx, Ry, Rz);
         s = Math.min(sx, sy, sz);
+
+        // If R is less than or equal to epsilon move onto the next step
         if ( R <= epsilon ) {
             t.push(t[i]+dt);
             x.push(x1);
@@ -114,7 +117,7 @@ function solveProblem() {
         }
     }
 
-    // Write t, x and y to our solution object
+    // Write t, x, y and z to our solution object
     solution = {
         t: t,
         x: x,
@@ -130,14 +133,19 @@ function solveProblem() {
  * @return           Nothing. Just populates the table with the solution values. 
  */
 function fillTable() {
+    // Return an error if solveProblem() hasn't been run
     if ( solution["t"].length == 0) {
         alert('You haven\'t solved the problem yet! Press the "Solve the problem" button before pressing the "Tabulate the solution" button again.');
         return
     }
+
+    // Extract coordinate arrays from the solution object
     t = solution["t"];
     x = solution["x"];
     y = solution["y"];
     z = solution["z"];
+
+    // Write to table
     document.getElementById('tableOutputs').innerHTML = '';
     tableContents = '<tr>';
     tableContents += '<th>Index</th>';
@@ -165,6 +173,7 @@ function fillTable() {
  * @return           Nothing. Just removes the solution table.
  */
 function removeTable() {
+    // Clear table content
     document.getElementById('tableOutputs').innerHTML = '';
 }
 
@@ -199,6 +208,7 @@ function generatePlots() {
     document.getElementById("phasePlotYZ").style = "height: " + windowInnerHeight + "px;";
 
     // Characteristics of the x and y against time plot
+    // Plot objects and data object arrays
     var plotXYZ = {
         x: x,
         y: y,
@@ -211,7 +221,6 @@ function generatePlots() {
             reversescale: false
         }
     };
-
     var plotTX = {
         x: t,
         y: x,
@@ -220,7 +229,6 @@ function generatePlots() {
         opacity: 1,
         name: 'x'
     };
-
     var plotTY = {
         x: t,
         y: y,
@@ -229,7 +237,6 @@ function generatePlots() {
         opacity: 1,
         name: 'y'
     };
-
     var plotTZ = {
         x: t,
         y: z,
@@ -238,7 +245,6 @@ function generatePlots() {
         opacity: 1,
         name: 'z'
     };
-
     var plotXY = {
         x: x,
         y: y,
@@ -246,7 +252,6 @@ function generatePlots() {
         mode: 'lines',
         opacity: 1
     };
-
     var plotXZ = {
         x: x,
         y: z,
@@ -254,7 +259,6 @@ function generatePlots() {
         mode: 'lines',
         opacity: 1
     };
-
     var plotYZ = {
         x: y,
         y: z,
@@ -262,34 +266,30 @@ function generatePlots() {
         mode: 'lines',
         opacity: 1
     };
-
-    var layoutXYZ = {
-        title: 'Phase plot of the solution to the Lorenz equations'
-    };
-
-    var layoutTimePlot = {
-        title: "Time plots of the solution to the problem"
-    };
-
-    var layoutXY = {
-        title: "xy phase plot"
-    };
-
-    var layoutXZ = {
-        title: "xz phase plot"
-    };
-
-    var layoutYZ = {
-        title: "yz phase plot"
-    };
-
     dataXYZ = [plotXYZ];
     dataTimePlot = [plotTX, plotTY, plotTZ];
     dataXY = [plotXY];
     dataXZ = [plotXZ];
     dataYZ = [plotYZ];
 
-    // Generate plots
+    // layout objects
+    var layoutXYZ = {
+        title: 'Phase plot of the solution to the Lorenz equations'
+    };
+    var layoutTimePlot = {
+        title: "Time plots of the solution to the problem"
+    };
+    var layoutXY = {
+        title: "xy phase plot"
+    };
+    var layoutXZ = {
+        title: "xz phase plot"
+    };
+    var layoutYZ = {
+        title: "yz phase plot"
+    };
+
+    // Generate plots from these objects and object arrays
     Plotly.newPlot('phasePlotXYZ', dataXYZ, layoutXYZ);
     Plotly.newPlot('phasePlotXY', dataXY, layoutXY);
     Plotly.newPlot('phasePlotXZ', dataXZ, layoutXZ);
@@ -304,6 +304,7 @@ function generatePlots() {
  * @return           Nothing. Just removes the solution plots.
  */
 function removePlots() {
+    // Clear HTML and CSS of the plots
     document.getElementById("timePlot").innerHTML = '';
     document.getElementById("phasePlotXYZ").innerHTML = '';
     document.getElementById("phasePlotXY").innerHTML = '';
