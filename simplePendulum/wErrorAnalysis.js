@@ -212,6 +212,17 @@ function generatePhasePlot() {
 }
 
 /**
+ * Remove phase plot
+ * 
+ * @params           None.
+ * @return           Nothing. Just removes the plot.
+ */
+function removePhasePlot() {
+    document.getElementById("phasePlot").innerHTML = '';
+    document.getElementById("phasePlot").style = '';
+}
+
+/**
  * Generate semilog plot of an error estimate in theta dot against time
  * 
  * @params           None.
@@ -252,6 +263,17 @@ function generateErrorPlot() {
     
     // Generate plot
     Plotly.newPlot('errorPlot', data, layout);
+}
+
+/**
+ * Remove error plot
+ * 
+ * @params           None.
+ * @return           Nothing. Just removes the plot.
+ */
+function removeErrorPlot() {
+    document.getElementById("errorPlot").innerHTML = '';
+    document.getElementById("errorPlot").style = '';
 }
 
 /**
@@ -300,6 +322,18 @@ function generateTimePlot() {
     // Generate plots
     Plotly.newPlot('timePlot', data, layout);
 }
+
+/**
+ * Remove time plot
+ * 
+ * @params           None.
+ * @return           Nothing. Just removes the plot.
+ */
+function removeTimePlot() {
+    document.getElementById("timePlot").innerHTML = '';
+    document.getElementById("timePlot").style = '';
+}
+
 /**
  * Generate three plots:
  * - one of thetaDot and theta against t;
