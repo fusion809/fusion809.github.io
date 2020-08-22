@@ -103,7 +103,7 @@
                        id="epsilon"
                        name="epsilon"
                        value="1e-9"></td>
-                    <td>Error tolerance.</td>
+                    <td>Error tolerance. \(\epsilon \lt\) 1.8e-10 usually freezes the webpage up.</td>
                 </tr>
                 <tr>
                     <td><label for="dtInitial">dtInitial:</label></td>
@@ -134,13 +134,16 @@
         <style>
             h1 {
                 font-size: 30px;
+                max-width: 100%;
             }
             div {
                 margin: 1px;
+                max-width: 100%;
             }
             table, tr, th, td {
               border: 1px solid black;
               border-collapse: collapse;
+              max-width: 100%;
             }
             td {
                 padding: 2px;
