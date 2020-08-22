@@ -119,10 +119,24 @@
         
         <!--Buttons-->
         <button type="button" onclick="solveProblem()">Solve the problem</button> (necessary to press this if you have changed the parameters since clicking the buttons below)<br/><br/>
-        <button type="button" onclick="fillTable()">Tabulate the solution</button>&nbsp;<button type="button" onclick="removeTable()">Remove the solution table</button><br/><br/>
-        <button type="button" onclick="generatePhasePlot()">Generate phase plot</button>&nbsp;<button type="button" onclick="removePhasePlot()">Remove plot</button><br/>
-        <button type="button" onclick="generateTimePlot()">Generate time plot</button>&nbsp;<button type="button" onclick="removeTimePlot()">Remove plot</button><br/>
-        <button type="button" onclick="generatePlots()">Generate all solution plots</button>&nbsp;<button type="button" onclick="removePlots()">Remove all solution plots</button>
+        <table id="buttontable">
+            <tr>
+                <td><button type="button" onclick="fillTable()">Tabulate the solution</button></td>
+                <td><button type="button" onclick="removeTable()">Remove the solution table</button></td>
+            </tr>
+            <tr>
+                <td><button type="button" onclick="generatePhasePlot()">Generate phase plot</button></td>
+                <td><button type="button" onclick="removePhasePlot()">Remove plot</button></td>
+            </tr>
+            <tr>
+                <td><button type="button" onclick="generateTimePlot()">Generate time plot</button></td>
+                <td><button type="button" onclick="removeTimePlot()">Remove plot</button></td>
+            </tr>
+            <tr>
+                <td><button type="button" onclick="generatePlots()">Generate all solution plots</button></td>
+                <td><button type="button" onclick="removePlots()">Remove all solution plots</button></td>
+            </tr>
+        </table>
 
         <!--Where the table and plot goes-->
         <table id="tableOutputs">
@@ -145,6 +159,10 @@
             }
             td {
                 padding: 2px;
+            }
+            #buttontable, #buttontable tr, #buttontable td {
+                border: none;
+                max-width: 100%;
             }
             #timePlot, #phasePlot {
                 width: 100%;

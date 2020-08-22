@@ -117,16 +117,39 @@
             </table>
         </form>
         
-        <!--Buttons-->
-        <button type="button" onclick="solveProblem()">Solve the problem</button> (press this whenever you update the parameters above).<br/><br/>
-        <button type="button" onclick="fillTable()">Tabulate the solution</button>&nbsp;<button type="button" onclick="removeTable()">Remove the solution table</button><br/><br/>
-        <button type="button" onclick="generate3DPhasePlot()">Generate 3D phase plot</button>&nbsp;<button type="button" onclick="remove3DPhasePlot()">Remove plot</button><br/>
-        <button type="button" onclick="generateXYPhasePlot()">Generate XY phase plot</button>&nbsp;<button type="button" onclick="removeXYPhasePlot()">Remove plot</button><br/>
-        <button type="button" onclick="generateXZPhasePlot()">Generate XZ phase plot</button>&nbsp;<button type="button" onclick="removeXZPhasePlot()">Remove plot</button><br/>
-        <button type="button" onclick="generateYZPhasePlot()">Generate YZ phase plot</button>&nbsp;<button type="button" onclick="removeYZPhasePlot()">Remove plot</button><br/>
-        <button type="button" onclick="generateTimePlot()">Generate x, y and z against time plot</button>&nbsp;<button type="button" onclick="removeTimePlot()">Remove plot</button><br/>
-        <button type="button" onclick="generatePlots()">Generate all solution plots</button>&nbsp;<button type="button" onclick="removePlots()">Remove the solution plots</button>
+        <button type="button" onclick="solveProblem()">Solve the problem</button> (press this whenever you update the parameters above)<br/><br/>
 
+        <!--Buttons-->
+        <table id="buttontable">
+            <tr>
+                <td><button type="button" onclick="fillTable()">Tabulate the solution</button></td>
+                <td><button type="button" onclick="removeTable()">Remove the solution table</button></td>
+            </tr>
+            <tr>
+                <td><button type="button" onclick="generate3DPhasePlot()">Generate 3D phase plot</button></td>
+                <td><button type="button" onclick="remove3DPhasePlot()">Remove plot</button><br/></td>
+            </tr>
+            <tr>
+                <td><button type="button" onclick="generateXYPhasePlot()">Generate XY phase plot</button></td>
+                <td><button type="button" onclick="removeXYPhasePlot()">Remove plot</button><br/></td>
+            </tr>
+            <tr>
+                <td><button type="button" onclick="generateXZPhasePlot()">Generate XZ phase plot</button></td>
+                <td><button type="button" onclick="removeXZPhasePlot()">Remove plot</button></td>
+            </tr>
+            <tr>
+                <td><button type="button" onclick="generateYZPhasePlot()">Generate YZ phase plot</button></td>
+                <td><button type="button" onclick="removeYZPhasePlot()">Remove plot</button></td>
+            </tr>
+            <tr>
+                <td><button type="button" onclick="generateTimePlot()">Generate x, y and z against time plot</button></td>
+                <td><button type="button" onclick="removeTimePlot()">Remove plot</button></td>
+            </tr>
+            <tr>
+                <td><button type="button" onclick="generatePlots()">Generate all solution plots</button></td>
+                <td><button type="button" onclick="removePlots()">Remove the solution plots</button></td>
+            </tr>
+        </table>
 
         <!--Where the table and plot goes-->
         <table id="tableOutputs">
@@ -148,6 +171,10 @@
             table, tr, th, td {
                 border: 1px solid black;
                 border-collapse: collapse;
+                max-width: 100%;
+            }
+            #buttontable, #buttontable tr, #buttontable td {
+                border: none;
                 max-width: 100%;
             }
             td {
