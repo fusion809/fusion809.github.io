@@ -176,6 +176,12 @@ function removeTable() {
     document.getElementById('tableOutputs').innerHTML = '';
 }
 
+/**
+ * Generates a 3D phase plot
+ * 
+ * @params           None.
+ * @return           Nothing.
+ */
 function generate3DPhasePlot() {
     // Run solveProblem if unrun
     if ( solution["t"].length == 0) {
@@ -216,6 +222,23 @@ function generate3DPhasePlot() {
     Plotly.newPlot('phasePlotXYZ', dataXYZ, layoutXYZ);
 }
 
+/**
+ * Remove 3D phase plot
+ * 
+ * @params           None.
+ * @return           Nothing. Just removes the plot.
+ */
+function remove3DPhasePlot() {
+    document.getElementById("phasePlotXYZ").innerHTML = '';
+    document.getElementById("phasePlotXYZ").style = '';
+}
+
+/**
+ * Generates a XY phase plot
+ * 
+ * @params           None.
+ * @return           Nothing.
+ */
 function generateXYPhasePlot() {
     // Run solveProblem if unrun
     if ( solution["t"].length == 0) {
@@ -250,6 +273,23 @@ function generateXYPhasePlot() {
     Plotly.newPlot('phasePlotXY', dataXY, layoutXY);
 }
 
+/**
+ * Remove XY phase plot
+ * 
+ * @params           None.
+ * @return           Nothing. Just removes the plot.
+ */
+function removeXYPhasePlot() {
+    document.getElementById("phasePlotXY").innerHTML = '';
+    document.getElementById("phasePlotXY").style = '';
+}
+
+/**
+ * Generates a XZ phase plot
+ * 
+ * @params           None.
+ * @return           Nothing.
+ */
 function generateXZPhasePlot() {
     // Run solveProblem if unrun
     if ( solution["t"].length == 0) {
@@ -284,6 +324,23 @@ function generateXZPhasePlot() {
     Plotly.newPlot('phasePlotXZ', dataXZ, layoutXZ);
 }
 
+/**
+ * Remove XZ phase plot
+ * 
+ * @params           None.
+ * @return           Nothing. Just removes the plot.
+ */
+function removeXZPhasePlot() {
+    document.getElementById("phasePlotXZ").innerHTML = '';
+    document.getElementById("phasePlotXZ").style = '';
+}
+
+/**
+ * Generates a YZ phase plot
+ * 
+ * @params           None.
+ * @return           Nothing.
+ */
 function generateYZPhasePlot() {
     // Run solveProblem if unrun
     if ( solution["t"].length == 0) {
@@ -318,6 +375,23 @@ function generateYZPhasePlot() {
     Plotly.newPlot('phasePlotYZ', dataYZ, layoutYZ);
 }
 
+/**
+ * Remove YZ phase plot
+ * 
+ * @params           None.
+ * @return           Nothing. Just removes the plot.
+ */
+function removeYZPhasePlot() {
+    document.getElementById("phasePlotYZ").innerHTML = '';
+    document.getElementById("phasePlotYZ").style = '';
+}
+
+/**
+ * Generates a time plot
+ * 
+ * @params           None.
+ * @return           Nothing.
+ */
 function generateTimePlot() {
     // Run solveProblem if unrun
     if ( solution["t"].length == 0) {
@@ -370,6 +444,18 @@ function generateTimePlot() {
     // Generate plot
     Plotly.newPlot('timePlot', dataTimePlot, layoutTimePlot);
 }
+
+/**
+ * Remove time plot
+ * 
+ * @params           None.
+ * @return           Nothing. Just removes the plot.
+ */
+function removeTimePlot() {
+    document.getElementById("timePlot").innerHTML = '';
+    document.getElementById("timePlot").style = '';
+}
+
 /**
  * Generate five plots:
  * - The first is a 3D phase plot of x, y and z.
