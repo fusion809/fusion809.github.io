@@ -169,9 +169,12 @@ function removeTable() {
 }
 
 /**
- * Generate two plots:
- * - one of y and x against t; and
- * - a phase plot of y against x.
+ * Generate five plots:
+ * - The first is a 3D phase plot of x, y and z.
+ * - The second is a 2D phase plot of y against x.
+ * - The third is a 2D phase plot of z against x.
+ * - The fourth is a 2D phase plot of z against y.
+ * - The fifth is a plot of x, y and z against time.
  * 
  * @params           None.
  * @return           Nothing. Just generates the plots.
@@ -196,7 +199,7 @@ function generatePlots() {
     document.getElementById("phasePlotYZ").style = "height: " + windowInnerHeight + "px;";
 
     // Characteristics of the x and y against time plot
-    var plot1 = {
+    var plotXYZ = {
         x: x,
         y: y,
         z: z,
@@ -209,7 +212,7 @@ function generatePlots() {
         }
     };
 
-    var plot2 = {
+    var plotTX = {
         x: t,
         y: x,
         type: 'scatter',
@@ -218,7 +221,7 @@ function generatePlots() {
         name: 'x'
     };
 
-    var plot3 = {
+    var plotTY = {
         x: t,
         y: y,
         type: 'scatter',
@@ -227,7 +230,7 @@ function generatePlots() {
         name: 'y'
     };
 
-    var plot4 = {
+    var plotTZ = {
         x: t,
         y: z,
         type: 'scatter',
@@ -236,7 +239,7 @@ function generatePlots() {
         name: 'z'
     };
 
-    var plotxy = {
+    var plotXY = {
         x: x,
         y: y,
         type: 'scatter',
@@ -244,7 +247,7 @@ function generatePlots() {
         opacity: 1
     };
 
-    var plotxz = {
+    var plotXZ = {
         x: x,
         y: z,
         type: 'scatter',
@@ -252,7 +255,7 @@ function generatePlots() {
         opacity: 1
     };
 
-    var plotyz = {
+    var plotYZ = {
         x: y,
         y: z,
         type: 'scatter',
@@ -260,38 +263,38 @@ function generatePlots() {
         opacity: 1
     };
 
-    var layout1 = {
+    var layoutXYZ = {
         title: 'Phase plot of the solution to the Lorenz equations'
     };
 
-    var layout2 = {
+    var layoutTimePlot = {
         title: "Time plots of the solution to the problem"
     };
 
-    var layoutxy = {
+    var layoutXY = {
         title: "xy phase plot"
     };
 
-    var layoutxz = {
+    var layoutXZ = {
         title: "xz phase plot"
     };
 
-    var layoutyz = {
+    var layoutYZ = {
         title: "yz phase plot"
     };
 
-    data1 = [plot1];
-    data2 = [plot2, plot3, plot4];
-    dataxy = [plotxy];
-    dataxz = [plotxz];
-    datayz = [plotyz];
+    dataXYZ = [plotXYZ];
+    dataTimePlot = [plotTX, plotTY, plotTZ];
+    dataXY = [plotXY];
+    dataXZ = [plotXZ];
+    dataYZ = [plotYZ];
 
     // Generate plots
-    Plotly.newPlot('timePlot', data2, layout2);
-    Plotly.newPlot('phasePlotXYZ', data1, layout1);
-    Plotly.newPlot('phasePlotXY', dataxy, layoutxy);
-    Plotly.newPlot('phasePlotXZ', dataxz, layoutxz);
-    Plotly.newPlot('phasePlotYZ', datayz, layoutyz);
+    Plotly.newPlot('phasePlotXYZ', dataXYZ, layoutXYZ);
+    Plotly.newPlot('phasePlotXY', dataXY, layoutXY);
+    Plotly.newPlot('phasePlotXZ', dataXZ, layoutXZ);
+    Plotly.newPlot('phasePlotYZ', dataYZ, layoutYZ);
+    Plotly.newPlot('timePlot', dataTimePlot, layoutTimePlot);
 };
 
 /**
