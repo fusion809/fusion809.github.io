@@ -115,14 +115,16 @@
                     <td>Initial guess for step size.</td>
                 </tr>
             </table>
-        </form>
+        </form><br/>
         
         <!--Buttons-->
-        <button type="button" onclick="solveProblem()">Solve the problem</button><br/>
+        <button type="button" onclick="solveProblem()">Solve the problem</button> (necessary to press this if you have changed the parameters since clicking the buttons below)<br/><br/>
         <button type="button" onclick="fillTable()">Tabulate the solution</button><br/>
-        <button type="button" onclick="removeTable()">Remove the solution table</button><br/>
-        <button type="button" onclick="generatePlots()">Generate solution plots</button><br/>
-        <button type="button" onclick="removePlots()">Remove the solution plots</button>
+        <button type="button" onclick="removeTable()">Remove the solution table</button><br/><br/>
+        <button type="button" onclick="generatePhasePlot()">Generate phase plot</button><br/>
+        <button type="button" onclick="generateTimePlot()">Generate time plot</button><br/>
+        <button type="button" onclick="generatePlots()">Generate all solution plots</button><br/>
+        <button type="button" onclick="removePlots()">Remove all solution plots</button>
 
         <!--Where the table and plot goes-->
         <table id="tableOutputs">

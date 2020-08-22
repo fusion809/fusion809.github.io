@@ -125,8 +125,7 @@ function solveProblem() {
  */
 function fillTable() {
     if ( solution["t"].length == 0) {
-        alert('You haven\'t solved the problem yet! Press the "Solve the problem" button before pressing the "Tabulate the solution" button again.');
-        return
+        solveProblem();
     }
     t = solution["t"];
     theta = solution["theta"];
@@ -170,6 +169,138 @@ function removeTable() {
 }
 
 /**
+ * Generate phase plot of theta dot against theta
+ * 
+ * @params           None.
+ * @return           Nothing. Just generates the relevant plot.
+ */
+function generatePhasePlot() {
+    // Run solveProblem() if previously unrun
+    if ( solution["t"].length == 0) {
+        solveProblem();
+    };
+
+    // Extract solution data from solution object
+    theta = solution["theta"];
+    thetaDot = solution["thetaDot"];
+
+    // Height and width of plot
+    windowInnerWidth  = window.innerWidth;
+    windowInnerHeight = window.innerHeight;
+    document.getElementById("phasePlot").style = "height: " + windowInnerHeight + "px;";
+
+    // Characteristics of the phase plot
+    var plot = {
+        x: theta,
+        y: thetaDot,
+        type: 'scatter',
+        name: "Phase plot"
+    };
+    var layout = {
+        title: "Phase plot of theta dot against theta",
+        xaxis: {
+            title: "theta (radians)"
+        },
+        yaxis: {
+            title: "theta dot (radians per second)"
+        }
+    };
+    data = [plot];
+
+    // Generate plot
+    Plotly.newPlot('phasePlot', data, layout);
+}
+
+/**
+ * Generate semilog plot of an error estimate in theta dot against time
+ * 
+ * @params           None.
+ * @return           Nothing. Just generates the relevant plot.
+ */
+function generateErrorPlot() {
+    // Run solveProblem() if previously unrun
+    if ( solution["t"].length == 0) {
+        solveProblem();
+    };
+    
+    // Extract solution data from solution object
+    t = solution["t"];
+    logErrorThetaDot = solution["logErrorThetaDot"];
+
+    // Height and width of plots
+    windowInnerWidth  = window.innerWidth;
+    windowInnerHeight = window.innerHeight;
+    document.getElementById("errorPlot").style = "height: " + windowInnerHeight + "px;";
+    
+    // Logarithmic plot of the error in thetaDot
+    var plot = {
+        x: t,
+        y: logErrorThetaDot,
+        type: 'scatter',
+        name: 'Semilog plot of error in theta dot',
+    };
+    data = [plot];
+    var layout = {
+        title: "Semilog plot of the error in theta dot against t",
+        xaxis: {
+            title: "Time (seconds)"
+        },
+        yaxis: {
+            title: "Log of the error in theta dot"
+        }
+    };
+    
+    // Generate plot
+    Plotly.newPlot('errorPlot', data, layout);
+}
+
+/**
+ * Generate plot of theta and theta dot against time
+ * 
+ * @params           None.
+ * @return           Nothing. Just generates the relevant plot.
+ */
+function generateTimePlot() {
+    // Run solveProblem() if previously unrun
+    if ( solution["t"].length == 0) {
+        solveProblem();
+    };
+
+    // Extract solution data from solution object
+    t = solution["t"];
+    theta = solution["theta"];
+    thetaDot = solution["thetaDot"];
+
+    // Height and width of plots
+    windowInnerWidth  = window.innerWidth;
+    windowInnerHeight = window.innerHeight;
+    document.getElementById("timePlot").style = "height: " + windowInnerHeight + "px;";
+
+    // Characteristics of the theta and theta dot against time plot
+    var plotTheta = {
+        x: t,
+        y: theta,
+        type: 'scatter',
+        name: "theta (radians)"
+    };
+    var plotThetaDot = {
+        x: t,
+        y: thetaDot,
+        type: 'scatter',
+        name: "theta dot (radians per second)"
+    };
+    var layout = {
+        title: 'theta and theta dot against time plots',
+        xaxis: {
+            title: 'Time (seconds)'
+        }
+    };
+    data = [plotTheta, plotThetaDot];
+
+    // Generate plots
+    Plotly.newPlot('timePlot', data, layout);
+}
+/**
  * Generate three plots:
  * - one of thetaDot and theta against t;
  * - one of the log of the difference between thetaDot and that calculated
@@ -180,82 +311,9 @@ function removeTable() {
  * @return           Nothing. Just generates the plots.
  */
 function generatePlots() {
-    if ( solution["t"].length == 0) {
-        alert('You haven\'t solved the problem yet! Before pressing the "Plot the solution" button again, press the "Solve the problem" button.');
-        return
-    };
-    t = solution["t"];
-    theta = solution["theta"];
-    thetaDot = solution["thetaDot"];
-
-    // Height and width of plots
-    windowInnerWidth  = window.innerWidth;
-    windowInnerHeight = window.innerHeight;
-    document.getElementById("timePlot").style = "height: " + windowInnerHeight + "px;";
-    document.getElementById("errorPlot").style = "height: " + windowInnerHeight + "px;";
-    document.getElementById("phasePlot").style = "height: " + windowInnerHeight + "px;";
-
-    // Characteristics of the theta and theta dot against time plot
-    var plot1 = {
-        x: t,
-        y: theta,
-        type: 'scatter',
-        name: "theta (radians)"
-    };
-    var plot2 = {
-        x: t,
-        y: thetaDot,
-        type: 'scatter',
-        name: "theta dot (radians per second)"
-    };
-    var layout1 = {
-        title: 'theta and theta dot against time plots',
-        xaxis: {
-            title: 'Time (seconds)'
-        }
-    };
-    data1 = [plot1, plot2];
-
-    // Logarithmic plot of the error in thetaDot
-    var plot3 = {
-        x: t,
-        y: logErrorThetaDot,
-        type: 'scatter',
-        name: 'Semilog plot of error in theta dot',
-    };
-    data2 = [plot3];
-    var layout2 = {
-        title: "Semilog plot of the error in theta dot against t",
-        xaxis: {
-            title: "Time (seconds)"
-        },
-        yaxis: {
-            title: "Log of the error in theta dot"
-        }
-    };
-    
-    // Characteristics of the phase plot
-    var plot4 = {
-        x: theta,
-        y: thetaDot,
-        type: 'scatter',
-        name: "Phase plot"
-    };
-    var layout3 = {
-        title: "Phase plot of theta dot against theta",
-        xaxis: {
-            title: "theta (radians)"
-        },
-        yaxis: {
-            title: "theta dot (radians per second)"
-        }
-    };
-    data3 = [plot4];
-
-    // Generate plots
-    Plotly.newPlot('timePlot', data1, layout1);
-    Plotly.newPlot('errorPlot', data2, layout2);
-    Plotly.newPlot('phasePlot', data3, layout3);
+    generateTimePlot();
+    generateErrorPlot();
+    generatePhasePlot();
 };
 
 /**

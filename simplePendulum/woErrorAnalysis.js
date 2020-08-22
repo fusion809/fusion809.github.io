@@ -148,57 +148,34 @@ function removeTable() {
 }
 
 /**
- * Generate two plots:
- * - one of thetaDot and theta against t; and
- * - a phase plot of thetaDot against theta.
+ * Generate phase plot of theta dot against theta
  * 
  * @params           None.
- * @return           Nothing. Just generates the plots.
+ * @return           Nothing. Just generates the relevant plot.
  */
-function generatePlots() {
+function generatePhasePlot() {
+    // Run solveProblem() if previously unrun
     if ( solution["t"].length == 0) {
-        alert('You haven\'t solved the problem yet! Before pressing the "Plot the solution" button again, press the "Solve the problem" button.');
-        return
-    }
-    t = solution["t"];
+        solveProblem();
+    };
+
+    // Extract solution data from solution object
     theta = solution["theta"];
     thetaDot = solution["thetaDot"];
 
-    // Height and width of plots
+    // Height and width of plot
     windowInnerWidth  = window.innerWidth;
     windowInnerHeight = window.innerHeight;
-    document.getElementById("timePlot").style = "height: " + windowInnerHeight + "px;";
     document.getElementById("phasePlot").style = "height: " + windowInnerHeight + "px;";
 
-    // Characteristics of the theta and thetaDot against time plot
-    var plot1 = {
-        x: t,
-        y: theta,
-        type: 'scatter',
-        name: "theta (radians)"
-    };
-    var plot2 = {
-        x: t,
-        y: thetaDot,
-        type: 'scatter',
-        name: "theta dot (radians per second)"
-    };
-    var layout1 = {
-        title: 'theta dot and theta against time plots',
-        xaxis: {
-           title: 'Time (seconds)'
-        }
-    };
-    data1 = [plot1, plot2];
-
     // Characteristics of the phase plot
-    var plot3 = {
+    var plot = {
         x: theta,
         y: thetaDot,
         type: 'scatter',
         name: "Phase plot"
     };
-    var layout2 = {
+    var layout = {
         title: "Phase plot of theta dot against theta",
         xaxis: {
             title: "theta (radians)"
@@ -207,11 +184,70 @@ function generatePlots() {
             title: "theta dot (radians per second)"
         }
     };
-    data2 = [plot3];
+    data = [plot];
+
+    // Generate plot
+    Plotly.newPlot('phasePlot', data, layout);
+}
+
+/**
+ * Generate plot of theta and theta dot against time
+ * 
+ * @params           None.
+ * @return           Nothing. Just generates the relevant plot.
+ */
+function generateTimePlot() {
+    // Run solveProblem() if previously unrun
+    if ( solution["t"].length == 0) {
+        solveProblem();
+    };
+
+    // Extract solution data from solution object
+    t = solution["t"];
+    theta = solution["theta"];
+    thetaDot = solution["thetaDot"];
+
+    // Height and width of plots
+    windowInnerWidth  = window.innerWidth;
+    windowInnerHeight = window.innerHeight;
+    document.getElementById("timePlot").style = "height: " + windowInnerHeight + "px;";
+
+    // Characteristics of the theta and theta dot against time plot
+    var plotTheta = {
+        x: t,
+        y: theta,
+        type: 'scatter',
+        name: "theta (radians)"
+    };
+    var plotThetaDot = {
+        x: t,
+        y: thetaDot,
+        type: 'scatter',
+        name: "theta dot (radians per second)"
+    };
+    var layout = {
+        title: 'theta and theta dot against time plots',
+        xaxis: {
+            title: 'Time (seconds)'
+        }
+    };
+    data = [plotTheta, plotThetaDot];
 
     // Generate plots
-    Plotly.newPlot('timePlot', data1, layout1);
-    Plotly.newPlot('phasePlot', data2, layout2);
+    Plotly.newPlot('timePlot', data, layout);
+}
+
+/**
+ * Generate two plots:
+ * - one of thetaDot and theta against t; and
+ * - a phase plot of thetaDot against theta.
+ * 
+ * @params           None.
+ * @return           Nothing. Just generates the plots.
+ */
+function generatePlots() {
+    generateTimePlot();
+    generatePhasePlot();
 };
 
 /**

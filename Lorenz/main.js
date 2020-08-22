@@ -135,8 +135,7 @@ function solveProblem() {
 function fillTable() {
     // Return an error if solveProblem() hasn't been run
     if ( solution["t"].length == 0) {
-        alert('You haven\'t solved the problem yet! Press the "Solve the problem" button before pressing the "Tabulate the solution" button again.');
-        return
+        solveProblem();
     }
 
     // Extract coordinate arrays from the solution object
@@ -177,38 +176,23 @@ function removeTable() {
     document.getElementById('tableOutputs').innerHTML = '';
 }
 
-/**
- * Generate five plots:
- * - The first is a 3D phase plot of x, y and z.
- * - The second is a 2D phase plot of y against x.
- * - The third is a 2D phase plot of z against x.
- * - The fourth is a 2D phase plot of z against y.
- * - The fifth is a plot of x, y and z against time.
- * 
- * @params           None.
- * @return           Nothing. Just generates the plots.
- */
-function generatePlots() {
+function generate3DPhasePlot() {
+    // Run solveProblem if unrun
     if ( solution["t"].length == 0) {
-        alert('You haven\'t solved the problem yet! Before pressing the "Plot the solution" button again, press the "Solve the problem" button.');
-        return
+        solveProblem();
     }
-    t = solution["t"];
+
+    // Extra solution data from solution object
     x = solution["x"];
     y = solution["y"];
     z = solution["z"];
 
-    // Height and width of plots
+    // Height and width of plot
     windowInnerWidth  = window.innerWidth;
     windowInnerHeight = window.innerHeight;
-    document.getElementById("timePlot").style = "height: " + windowInnerHeight + "px;";
     document.getElementById("phasePlotXYZ").style = "height: " + windowInnerHeight + "px;";
-    document.getElementById("phasePlotXY").style = "height: " + windowInnerHeight + "px;";
-    document.getElementById("phasePlotXZ").style = "height: " + windowInnerHeight + "px;";
-    document.getElementById("phasePlotYZ").style = "height: " + windowInnerHeight + "px;";
 
-    // Characteristics of the x and y against time plot
-    // Plot objects and data object arrays
+    // Plot object and data object array
     var plotXYZ = {
         x: x,
         y: y,
@@ -221,6 +205,137 @@ function generatePlots() {
             reversescale: false
         }
     };
+    dataXYZ = [plotXYZ];
+
+    // layout object
+    var layoutXYZ = {
+        title: 'Phase plot of the solution to the Lorenz equations'
+    };
+
+    // Generate plot
+    Plotly.newPlot('phasePlotXYZ', dataXYZ, layoutXYZ);
+}
+
+function generateXYPhasePlot() {
+    // Run solveProblem if unrun
+    if ( solution["t"].length == 0) {
+        solveProblem();
+    }
+
+    // Extra solution data from solution object
+    x = solution["x"];
+    y = solution["y"];
+
+    // Height and width of plot
+    windowInnerWidth  = window.innerWidth;
+    windowInnerHeight = window.innerHeight;
+    document.getElementById("phasePlotXY").style = "height: " + windowInnerHeight + "px;";
+
+    // Plot object and data object array
+    var plotXY = {
+        x: x,
+        y: y,
+        type: 'scatter',
+        mode: 'lines',
+        opacity: 1
+    };
+    dataXY = [plotXY];
+
+    // layout object
+    var layoutXY = {
+        title: "xy phase plot"
+    };
+
+    // Generate plot
+    Plotly.newPlot('phasePlotXY', dataXY, layoutXY);
+}
+
+function generateXZPhasePlot() {
+    // Run solveProblem if unrun
+    if ( solution["t"].length == 0) {
+        solveProblem();
+    }
+    
+    // Extra solution data from solution object
+    x = solution["x"];
+    z = solution["z"];
+    
+    // Height and width of plot
+    windowInnerWidth  = window.innerWidth;
+    windowInnerHeight = window.innerHeight;
+    document.getElementById("phasePlotXZ").style = "height: " + windowInnerHeight + "px;";
+    
+    // Plot object and data object array
+    var plotXZ = {
+        x: x,
+        y: z,
+        type: 'scatter',
+        mode: 'lines',
+        opacity: 1
+    };
+    dataXZ = [plotXZ];
+    
+    // layout object
+    var layoutXZ = {
+        title: "xz phase plot"
+    };
+    
+    // Generate plot
+    Plotly.newPlot('phasePlotXZ', dataXZ, layoutXZ);
+}
+
+function generateYZPhasePlot() {
+    // Run solveProblem if unrun
+    if ( solution["t"].length == 0) {
+        solveProblem();
+    }
+
+    // Extra solution data from solution object
+    y = solution["y"];
+    z = solution["z"];
+
+    // Height and width of plot
+    windowInnerWidth  = window.innerWidth;
+    windowInnerHeight = window.innerHeight;
+    document.getElementById("phasePlotYZ").style = "height: " + windowInnerHeight + "px;";
+
+    // Plot object and data object array
+    var plotYZ = {
+        x: y,
+        y: z,
+        type: 'scatter',
+        mode: 'lines',
+        opacity: 1
+    };
+    dataYZ = [plotYZ];
+
+    // layout object
+    var layoutYZ = {
+        title: "yz phase plot"
+    };
+
+    // Generate plot
+    Plotly.newPlot('phasePlotYZ', dataYZ, layoutYZ);
+}
+
+function generateTimePlot() {
+    // Run solveProblem if unrun
+    if ( solution["t"].length == 0) {
+        solveProblem();
+    }
+
+    // Extra solution data from solution object
+    t = solution["t"];
+    x = solution["x"];
+    y = solution["y"];
+    z = solution["z"];
+
+    // Height and width of plot
+    windowInnerWidth  = window.innerWidth;
+    windowInnerHeight = window.innerHeight;
+    document.getElementById("timePlot").style = "height: " + windowInnerHeight + "px;";
+
+    // Plot object and data object array
     var plotTX = {
         x: t,
         y: x,
@@ -245,56 +360,33 @@ function generatePlots() {
         opacity: 1,
         name: 'z'
     };
-    var plotXY = {
-        x: x,
-        y: y,
-        type: 'scatter',
-        mode: 'lines',
-        opacity: 1
-    };
-    var plotXZ = {
-        x: x,
-        y: z,
-        type: 'scatter',
-        mode: 'lines',
-        opacity: 1
-    };
-    var plotYZ = {
-        x: y,
-        y: z,
-        type: 'scatter',
-        mode: 'lines',
-        opacity: 1
-    };
-    dataXYZ = [plotXYZ];
     dataTimePlot = [plotTX, plotTY, plotTZ];
-    dataXY = [plotXY];
-    dataXZ = [plotXZ];
-    dataYZ = [plotYZ];
 
-    // layout objects
-    var layoutXYZ = {
-        title: 'Phase plot of the solution to the Lorenz equations'
-    };
+    // layout object
     var layoutTimePlot = {
         title: "Time plots of the solution to the problem"
     };
-    var layoutXY = {
-        title: "xy phase plot"
-    };
-    var layoutXZ = {
-        title: "xz phase plot"
-    };
-    var layoutYZ = {
-        title: "yz phase plot"
-    };
 
-    // Generate plots from these objects and object arrays
-    Plotly.newPlot('phasePlotXYZ', dataXYZ, layoutXYZ);
-    Plotly.newPlot('phasePlotXY', dataXY, layoutXY);
-    Plotly.newPlot('phasePlotXZ', dataXZ, layoutXZ);
-    Plotly.newPlot('phasePlotYZ', dataYZ, layoutYZ);
+    // Generate plot
     Plotly.newPlot('timePlot', dataTimePlot, layoutTimePlot);
+}
+/**
+ * Generate five plots:
+ * - The first is a 3D phase plot of x, y and z.
+ * - The second is a 2D phase plot of y against x.
+ * - The third is a 2D phase plot of z against x.
+ * - The fourth is a 2D phase plot of z against y.
+ * - The fifth is a plot of x, y and z against time.
+ * 
+ * @params           None.
+ * @return           Nothing. Just generates the plots.
+ */
+function generatePlots() {
+    generate3DPhasePlot();
+    generateXYPhasePlot();
+    generateXZPhasePlot();
+    generateYZPhasePlot();
+    generateTimePlot();
 };
 
 /**

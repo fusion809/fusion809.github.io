@@ -20,9 +20,10 @@
             \begin{aligned}
             \dfrac{dx}{dt} &= \sigma (y-x) \\
             \dfrac{dy}{dt} &= x (\rho - z) - y \\
-            \dfrac{dz}{dt} &= xy - \beta z
+            \dfrac{dz}{dt} &= xy - \beta z.
             \end{aligned}
             \]
+
         </div>
 
         <!--A form for users to enter in all the parameters of the problem-->
@@ -117,11 +118,17 @@
         </form>
         
         <!--Buttons-->
-        <button type="button" onclick="solveProblem()">Solve the problem</button><br/>
+        <button type="button" onclick="solveProblem()">Solve the problem</button> (press this whenever you update the parameters above).<br/><br/>
         <button type="button" onclick="fillTable()">Tabulate the solution</button><br/>
-        <button type="button" onclick="removeTable()">Remove the solution table</button><br/>
-        <button type="button" onclick="generatePlots()">Generate solution plots</button><br/>
+        <button type="button" onclick="removeTable()">Remove the solution table</button><br/><br/>
+        <button type="button" onclick="generate3DPhasePlot()">Generate 3D phase plot</button><br/>
+        <button type="button" onclick="generateXYPhasePlot()">Generate XY phase plot</button><br/>
+        <button type="button" onclick="generateXZPhasePlot()">Generate XZ phase plot</button><br/>
+        <button type="button" onclick="generateYZPhasePlot()">Generate YZ phase plot</button><br/>
+        <button type="button" onclick="generateTimePlot()">Generate x, y and z against time plot</button><br/>
+        <button type="button" onclick="generatePlots()">Generate all solution plots</button><br/>
         <button type="button" onclick="removePlots()">Remove the solution plots</button>
+
 
         <!--Where the table and plot goes-->
         <table id="tableOutputs">
