@@ -337,7 +337,7 @@ function generateThetaThetaDotPhasePlot() {
     
     // layout object
     var layoutThetaThetaDot = {
-        title: "Theta/theta dot phase plot"
+        title: "theta dot against theta phase plot"
     };
     
     // Generate plot
