@@ -215,7 +215,7 @@ function generate3DPhasePlot() {
 
     // layout object
     var layoutXYZ = {
-        title: 'Phase plot of the solution to the Rossler equations'
+        title: 'Phase plot of the solution to the Rössler equations'
     };
 
     // Generate plot
