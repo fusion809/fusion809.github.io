@@ -235,7 +235,7 @@ function generateXThetaPhasePlot() {
 
     // layout object
     var layoutXTheta = {
-        title: 'Phase plot of the solution'
+        title: 'Phase plot of theta against x'
     };
 
     // Generate plot
@@ -254,7 +254,7 @@ function removeXThetaPhasePlot() {
 }
 
 /**
- * Generates a XY phase plot
+ * Generates a xdot against x phase plot
  * 
  * @params           None.
  * @return           Nothing.
@@ -286,7 +286,7 @@ function generateXXDotPhasePlot() {
 
     // layout object
     var layoutXXDot = {
-        title: "x/k phase plot"
+        title: "xdot against x phase plot"
     };
 
     // Generate plot
@@ -294,7 +294,7 @@ function generateXXDotPhasePlot() {
 }
 
 /**
- * Remove x/xdot phase plot
+ * Remove xdot against x phase plot
  * 
  * @params           None.
  * @return           Nothing. Just removes the plot.
@@ -345,7 +345,7 @@ function generateThetaThetaDotPhasePlot() {
 }
 
 /**
- * Remove theta/theta dot phase plot
+ * Remove theta dot against theta phase plot
  * 
  * @params           None.
  * @return           Nothing. Just removes the plot.
@@ -435,21 +435,19 @@ function removeTimePlot() {
 }
 
 /**
- * Generate five plots:
- * - The first is a 3D phase plot of x, y and z.
- * - The second is a 2D phase plot of y against x.
- * - The third is a 2D phase plot of z against x.
- * - The fourth is a 2D phase plot of z against y.
- * - The fifth is a plot of x, y and z against time.
+ * Generate four plots:
+ * - The first is a phase plot of theta against x.
+ * - The second is a phase plot of x dot against x.
+ * - The third is a phase plot of theta dot against theta.
+ * - The fourth is a plot of x, x dot, theta and theta dot against time.
  * 
  * @params           None.
  * @return           Nothing. Just generates the plots.
  */
 function generatePlots() {
-    generate3DPhasePlot();
-    generateXYPhasePlot();
-    generateXZPhasePlot();
-    generateYZPhasePlot();
+    generateXThetaPhasePlot();
+    generateXXDotPhasePlot();
+    generateThetaThetaDotPhasePlot();
     generateTimePlot();
 };
 
@@ -461,14 +459,13 @@ function generatePlots() {
  */
 function removePlots() {
     // Clear HTML and CSS of the plots
+    // Time plots
     document.getElementById("timePlot").innerHTML = '';
-    document.getElementById("phasePlotXYZ").innerHTML = '';
-    document.getElementById("phasePlotXY").innerHTML = '';
-    document.getElementById("phasePlotXZ").innerHTML = '';
-    document.getElementById("phasePlotYZ").innerHTML = '';
     document.getElementById("timePlot").style = '';
-    document.getElementById("phasePlotXYZ").style = '';
-    document.getElementById("phasePlotXY").style = '';
-    document.getElementById("phasePlotXZ").style = '';
-    document.getElementById("phasePlotYZ").style = '';
+    document.getElementById("phasePlotThetaThetaDot").innerHTML = '';
+    document.getElementById("phasePlotThetaThetaDot").style = '';
+    document.getElementById("phasePlotXXDot").innerHTML = '';
+    document.getElementById("phasePlotXXDot").style = '';
+    document.getElementById("phasePlotXTheta").innerHTML = '';
+    document.getElementById("phasePlotXTheta").style = '';
 };
