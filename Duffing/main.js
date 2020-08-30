@@ -22,7 +22,7 @@ var solution = {
     x: [],
     xDot: []
 };
-var T, epsilon;
+var epsilon;
 
 /** 
  * Solve the problem using RK45.
@@ -44,11 +44,6 @@ function solveProblem() {
     xDot0 = parseFloat(document.getElementById("xDot0").value);
     epsilon = parseFloat(document.getElementById("epsilon").value);
     dtInitial = parseFloat(document.getElementById("dtInitial").value);
-
-    // T is the period of the problem, including it can be used from the console to determine an appropriate tf
-    if ( (x0 == 0) && (xDot0 == 0) ) {
-        T = Math.sqrt(l/(g*Math.PI))*(math.gamma(1/4)**2);
-    }
 
     // Initialize the arrays used and loop variables
     t = [t0];
