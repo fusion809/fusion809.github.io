@@ -27,6 +27,50 @@ var windowInnerWidth;
 var windowInnerHeight;
 var epsilon, T;
 
+var N, g, l, theta0, thetaDot0, thetaMax, thetaMaxInitial;
+var integral = 0;
+
+function thetaDotSq(theta) {
+    return thetaDot0**2 + 2*g/l * (Math.sin(theta0)-Math.sin(theta));
+}
+
+function thetaDotSqPrime(theta) {
+    value = -2*g/l * Math.cos(theta);
+    return value
+}
+
+function periodCalc() {
+    g = parseFloat(document.getElementById("g").value);
+    l = parseFloat(document.getElementById("l").value);
+    N = parseFloat(document.getElementById("N").value);
+    theta0 = parseFloat(document.getElementById("theta0").value);
+    thetaDot0 = parseFloat(document.getElementById("thetaDot0").value);
+    thetaMaxInitial = parseFloat(document.getElementById("thetaMaxInitial").value);
+
+    thetaMax = thetaMaxInitial;
+    adj = thetaDotSq(thetaMax)/thetaDotSqPrime(thetaMax);
+
+    // Calculate when thetaDot = 0, which should be halfway through the problem's period
+    while (Math.abs(adj) >= 1e-14) {
+        thetaMax -= adj;
+        adj = thetaDotSq(thetaMax)/thetaDotSqPrime(thetaMax);
+    }
+
+    var nodes = new Array(N);
+    var integrand = new Array(N);
+    var transformedGrid = new Array(N);
+    integral = 0;
+
+    for ( let i = 1; i < N+1; i++) {
+        nodes[i-1] = Math.cos((2*i-1)*Math.PI/(2*N));
+        transformedGrid[i-1] = (thetaMax-theta0)*nodes[i-1]/2+(thetaMax+theta0)/2;
+        integrand[i-1] = Math.sqrt(1-nodes[i-1]**2)*Math.pow(thetaDotSq(transformedGrid[i-1]),-1/2);
+        integral += ((thetaMax-theta0)/2) * (Math.PI/N)*integrand[i-1];
+    }
+    document.getElementById("integralDisplay").innerHTML = 2*Math.abs(integral);
+    document.getElementById("tf").value = 8*Math.abs(integral);
+}
+
 /** 
  * Solve the problem using RK45.
  *
@@ -124,9 +168,7 @@ function solveProblem() {
  * @return           Nothing. Just populates the table with the solution values. 
  */
 function fillTable() {
-    if ( solution["t"].length == 0) {
-        solveProblem();
-    }
+    solveProblem();
     t = solution["t"];
     theta = solution["theta"];
     thetaDot = solution["thetaDot"];
@@ -176,9 +218,7 @@ function removeTable() {
  */
 function generatePhasePlot() {
     // Run solveProblem() if previously unrun
-    if ( solution["t"].length == 0) {
-        solveProblem();
-    };
+    solveProblem();
 
     // Extract solution data from solution object
     theta = solution["theta"];
@@ -229,11 +269,8 @@ function removePhasePlot() {
  * @return           Nothing. Just generates the relevant plot.
  */
 function generateErrorPlot() {
-    // Run solveProblem() if previously unrun
-    if ( solution["t"].length == 0) {
-        solveProblem();
-    };
-    
+    solveProblem();
+
     // Extract solution data from solution object
     t = solution["t"];
     logErrorThetaDot = solution["logErrorThetaDot"];
@@ -283,10 +320,7 @@ function removeErrorPlot() {
  * @return           Nothing. Just generates the relevant plot.
  */
 function generateTimePlot() {
-    // Run solveProblem() if previously unrun
-    if ( solution["t"].length == 0) {
-        solveProblem();
-    };
+    solveProblem();
 
     // Extract solution data from solution object
     t = solution["t"];
