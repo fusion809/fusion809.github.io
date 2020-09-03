@@ -22,7 +22,7 @@ var solution = {
 };
 var windowInnerWidth;
 var windowInnerHeight;
-var epsilon, N, g, l, theta0, thetaDot0, thetaMax, thetaMaxInitial, adjMin, adjMax;
+var epsilon, N, g, l, theta0, thetaDot0, thetaMax, thetaMaxInitial, adjMin, adjMax, j, k;
 var integral = 0;
 
 /**
@@ -72,7 +72,7 @@ function periodCalc() {
     theta0 = parseFloat(document.getElementById("theta0").value);
     thetaDot0 = parseFloat(document.getElementById("thetaDot0").value);
     thetaMaxInitial = parseFloat(document.getElementById("thetaMaxInitial").value);
-    var errorTol = 1e-12;
+    var xi = parseFloat(document.getElementById("xi").value);
 
     // Take our initial guess for thetaMax
     var thetaMax = thetaMaxInitial;
@@ -80,28 +80,28 @@ function periodCalc() {
     adjMax = newtonsCorrection(thetaMax);
 
     // Calculate when thetaDot = 0 next, which will be halfway through the problem's period
-    i = 0; 
-    j = 0;
-    while ( ( Math.abs(adjMax) >= errorTol) && ( i < N )) {
+    j = 0; 
+    k = 0;
+    while ( ( Math.abs(adjMax) >= xi) && ( j < N )) {
         thetaMax += adjMax;
         adjMax = newtonsCorrection(thetaMax);
-        i++;
+        j++;
     }
 
     // Calculate thetaMin, which is when thetaDot = 0
     if (thetaDot0 != 0) {
         var thetaMin = theta0;
         adjMin = newtonsCorrection(thetaMin);    
-        while (( Math.abs(adjMin) >= errorTol) & (j < N)) {
+        while (( Math.abs(adjMin) >= xi) & (k < N)) {
             thetaMin += adjMin;
             adjMin = newtonsCorrection(thetaMin);
-            j++;
+            k++;
         }
     } else {
         thetaMin = theta0;
     }
 
-    if ( (i >= N ) || (j >= N ) ) {
+    if ( (j >= N ) || (k >= N ) ) {
         document.getElementById("integralDisplay").innerHTML = "Theta min and/or theta max could not be calculated due as the limit on Newton's method iterations was exceeded";
         document.getElementById("tf").value = 100;
         return
@@ -124,6 +124,12 @@ function periodCalc() {
     // Change what's displayed on the page accordingly
     document.getElementById("integralDisplay").innerHTML = period;
     document.getElementById("tf").value = 4*period;
+    document.getElementById("jDisplay").innerHTML = j;
+    document.getElementById("kDisplay").innerHTML = k;
+    document.getElementById("adjMinDisplay").innerHTML = adjMin;
+    document.getElementById("adjMaxDisplay").innerHTML = adjMax;
+    document.getElementById("thetaMinDisplay").innerHTML = thetaMin;
+    document.getElementById("thetaMaxDisplay").innerHTML = thetaMax;
 }
 
 /** 
@@ -225,12 +231,12 @@ function fillTable() {
     tableContents += '<th>&theta; (radians) </th>';
     tableContents += '<th>&theta; dot <br/>(radians &middot; s<sup>-1</sup>)</th>';
     tableContents += "</tr>";
-    for (let j = 0; j < theta.length; j++) {
+    for (let i = 0; i < theta.length; i++) {
         tableContents += '<tr>';
-        tableContents += '<td>' + j + '</td>';
-        tableContents += '<td>' + t[j].toFixed(Math.ceil(Math.log10(1/epsilon))) + '</td>';
-        tableContents += '<td>' + theta[j].toFixed(Math.ceil(Math.log10(1/epsilon))) + '</td>';
-        tableContents += '<td>' + thetaDot[j].toFixed(Math.ceil(Math.log10(1/epsilon))) + '</td>';
+        tableContents += '<td>' + i + '</td>';
+        tableContents += '<td>' + t[i].toFixed(Math.ceil(Math.log10(1/epsilon))) + '</td>';
+        tableContents += '<td>' + theta[i].toFixed(Math.ceil(Math.log10(1/epsilon))) + '</td>';
+        tableContents += '<td>' + thetaDot[i].toFixed(Math.ceil(Math.log10(1/epsilon))) + '</td>';
         tableContents += '</tr>';
     }
     document.getElementById('tableOutputs').innerHTML = tableContents;

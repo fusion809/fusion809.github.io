@@ -50,7 +50,9 @@
                     <td><input type="Number"
                         id="g"
                         name="g"
-                        value="9.81" onsubmit="periodCalc()" onchange="periodCalc()"></td>
+                        value="9.81" 
+                        onsubmit="periodCalc()" 
+                        onchange="periodCalc()"></td>
                     <td>Acceleration due to gravity in \(\mathrm{m} \cdot \mathrm{s}^{-2}\).</td>
                 </tr>
                 <tr>
@@ -58,7 +60,9 @@
                     <td><input type="Number"
                         id="l"
                         name="l"
-                        value="1" onsubmit="periodCalc()" onchange="periodCalc()"></td>
+                        value="1" 
+                        onsubmit="periodCalc()" 
+                        onchange="periodCalc()"></td>
                     <td>Length of the pendulum rod in metres (m).</td>
                 </tr>
                 <tr>
@@ -68,11 +72,6 @@
                         name="t0"
                         value="0"></td>
                     <td>Starting time for the simulation in seconds (s).</td>
-                </tr>
-                <tr>
-                    <td>\(T\):</td>
-                    <td><span id = "integralDisplay"></span></td>
-                    <td>Period of the problem, auto-calculated.</td>
                 </tr>
                 <tr>
                     <td><label for="tf">\(t_f\):</label></td>
@@ -87,7 +86,9 @@
                     <td><input type="Number"
                         id="theta0"
                         name="theta0"
-                        value="0" onsubmit="periodCalc()" onchange="periodCalc()"></td>
+                        value="0" 
+                        onsubmit="periodCalc()" 
+                        onchange="periodCalc()"></td>
                     <td>Angle from the positive \(x\)-axis in radians at time \(t_0\).</td>
                 </tr>
                 <tr>
@@ -95,7 +96,9 @@
                     <td><input type="Number"
                         id="thetaDot0"
                         name="thetaDot0"
-                        value="0" onsubmit="periodCalc()" onchange="periodCalc()"></td>
+                        value="0" 
+                        onsubmit="periodCalc()" 
+                        onchange="periodCalc()"></td>
                     <td>First derivative of \(\theta\) with respect to \(t\) at \(t_0\) (in \(\mathrm{radians}\cdot \mathrm{s}^{-1}\)).</td>
                 </tr>
                 <tr>
@@ -103,7 +106,9 @@
                     <td><input type="Number"
                         id="thetaMaxInitial"
                         name="thetaMaxInitial"
-                        value="-3.14" onsubmit="periodCalc()" onchange="periodCalc()"></td>
+                        value="-3.14" 
+                        onsubmit="periodCalc()" 
+                        onchange="periodCalc()"></td>
                     <td>Value of \(\dot{\theta}\) at \(t_0\).</td>
                 </tr>
                 <tr>
@@ -111,8 +116,20 @@
                     <td><input type="Number"
                         id="N"
                         name="N"
-                        value="1e6" onsubmit="periodCalc()" onchange="periodCalc()"></td>
+                        value="1e6" 
+                        onsubmit="periodCalc()" 
+                        onchange="periodCalc()"></td>
                     <td>Number of Chebyshev-Gauss quadrature nodes used to approximate the period of the problem. This is also equal to the maximum number of iterations that can be used to approximate \(\theta_\mathrm{min}\) and \(\theta_\mathrm{max}\). \(N \gt 1e7\) usually freezes up the page.</td>
+                </tr>
+                <tr>
+                    <td><label for="xi">\(\xi\):</label></td>
+                    <td><input type="Number"
+                        id="xi"
+                        name="xi"
+                        value="1e-12"
+                        onsubmit="periodCalc()"
+                        onchange="periodCalc()"></td>
+                    <td>Cut off for Newton's method corrections (i.e. once the correction's absolute value dips below this value, the iterations stop).</td>
                 </tr>
                 <tr>
                     <td><label for="epsilon">\(\epsilon\):</label></td>
@@ -132,6 +149,50 @@
                 </tr>
             </table>
         </form>
+
+        <br/>
+        <table>
+            <tr>
+                <th>Information</th>
+                <th>Data</th>
+                <th>Notes</th>
+            </tr>
+            <tr>
+                <td>\(T\):</td>
+                <td id="integralDisplay"></td>
+                <td>Period of the problem, auto-calculated.</td>
+            </tr>
+            <tr>
+                <td><code>adjMin</code></td>
+                <td id="adjMinDisplay"></td>
+                <td>Last correction to \(\theta_\mathrm{min}\).</td>
+            </tr>
+            <tr>
+                <td><code>adjMax</code></td>
+                <td id="adjMaxDisplay"></td>
+                <td>Last correction to \(\theta_\mathrm{max}\).</td>
+            </tr>
+            <tr>
+                <td>\(\theta_\mathrm{min}\)</td>
+                <td id="thetaMinDisplay"></td>
+                <td>The value of \(\theta_\mathrm{min}\) used in the above period equation.</td>
+            </tr>
+            <tr>
+                <td>\(\theta_\mathrm{max}\)</td>
+                <td id="thetaMaxDisplay"></td>
+                <td>The value of \(\theta_\mathrm{max}\) used in the above period equation.</td>
+            </tr>
+            <tr>
+                <td>\(j\)</td>
+                <td id="jDisplay"></td>
+                <td>Number of iterations used to calculate \(\theta_\mathrm{max}\).</td>
+            </tr>
+            <tr>
+                <td>\(k\)</td>
+                <td id="kDisplay"></td>
+                <td>Number of iterations used to calculate \(\theta_\mathrm{min}\).</td>
+            </tr>
+        </table>
         
         <!--Buttons-->
         <button type="button" onclick="solveProblem()">Solve the problem</button> (press this whenever you update the parameters above)<br/><br/>
