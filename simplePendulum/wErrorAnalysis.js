@@ -25,7 +25,7 @@ var solution = {
 };
 var windowInnerWidth;
 var windowInnerHeight;
-var epsilon, N, g, l, theta0, thetaDot0;
+var epsilon, N, g, l, theta0, thetaDot0, adjMax, adjMin, thetaMin, thetaMax;
 
 /**
  * Returns the value of theta dot squared.
@@ -74,29 +74,39 @@ function periodCalc() {
     theta0 = parseFloat(document.getElementById("theta0").value);
     thetaDot0 = parseFloat(document.getElementById("thetaDot0").value);
     var thetaMaxInitial = parseFloat(document.getElementById("thetaMaxInitial").value);
-    var errorTol = 1e-14;
+    var errorTol = 1e-12;
 
     // Take our initial guess for thetaMax
-    var thetaMax = thetaMaxInitial;
+    thetaMax = thetaMaxInitial;
     // thetaMax correction
-    adj = newtonsCorrection(thetaMax);
+    adjMax = newtonsCorrection(thetaMax);
 
     // Calculate when thetaDot = 0 next, which will be halfway through the problem's period
-    while (Math.abs(adj) >= errorTol) {
-        thetaMax += adj;
-        adj = newtonsCorrection(thetaMax);
+    i = 0; 
+    j = 0;
+    while ( ( Math.abs(adjMax) >= errorTol) && ( i < N )) {
+        thetaMax += adjMax;
+        adjMax = newtonsCorrection(thetaMax);
+        i++;
     }
 
     // Calculate thetaMin, which is when thetaDot = 0
     if (thetaDot0 != 0) {
-        var thetaMin = theta0;
-        adj = newtonsCorrection(thetaMin);
-        while (Math.abs(adj) >= errorTol) {
-            thetaMin += adj;
-            adj = newtonsCorrection(thetaMin);
+        thetaMin = theta0;
+        adjMin = newtonsCorrection(thetaMin);    
+        while (( Math.abs(adjMin) >= errorTol) & (j < N)) {
+            thetaMin += adjMin;
+            adjMin = newtonsCorrection(thetaMin);
+            j++;
         }
     } else {
         thetaMin = theta0;
+    }
+
+    if ( (i >= N ) || (j >= N ) ) {
+        document.getElementById("integralDisplay").innerHTML = "Theta min and/or theta max could not be calculated as the limit on Newton's method iterations was exceeded";
+        document.getElementById("tf").value = 100;
+        return
     }
 
     // Integrate problem from thetaMin to thetaMax to calculate the period
