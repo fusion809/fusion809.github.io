@@ -20,7 +20,97 @@ var solution = {
     theta: [],
     thetaDot: []
 };
-var T, epsilon;
+var windowInnerWidth;
+var windowInnerHeight;
+var epsilon, N, g, l, theta0, thetaDot0, thetaMax, thetaMaxInitial;
+var integral = 0;
+
+/**
+ * Returns the value of theta dot squared.
+ * 
+ * @param theta    Angle from the x-axis.
+ * @return         Theta dot squared value.
+ */
+function thetaDotSq(theta) {
+    return thetaDot0**2 + 2*g/l * (Math.sin(theta0)-Math.sin(theta));
+}
+
+/**
+ * The derivative with respect to theta of the theta dot squared expression
+ * 
+ * @param theta    Angle from the x-axis.
+ * @return         Theta derivative of the theta dot squared expression.
+ */
+function thetaDotSqPrime(theta) {
+    return -2*g/l * Math.cos(theta)
+}
+
+/**
+ * Correction to theta according to Newton's method
+ * 
+ * @param {*} theta 
+ */
+function newtonsCorrection(theta) {
+    return -thetaDotSq(theta)/thetaDotSqPrime(theta);
+}
+
+/**
+ * Calculates the value of theta when theta dot = 0 using Newton's method
+ * then uses Chebyshev-Gauss quadrature to compute the time taken to reach this period.
+ * 
+ * @params         None.
+ * @return         Nothing. Changes the element value/innerHTML of 
+ * integralDisplay and tf to T and 4*T, respectively.
+ */
+function periodCalc() {
+    // Parameters of the problem that are necessary to calculate the period
+    g = parseFloat(document.getElementById("g").value);
+    l = parseFloat(document.getElementById("l").value);
+    N = parseFloat(document.getElementById("N").value);
+    theta0 = parseFloat(document.getElementById("theta0").value);
+    thetaDot0 = parseFloat(document.getElementById("thetaDot0").value);
+    thetaMaxInitial = parseFloat(document.getElementById("thetaMaxInitial").value);
+    var errorTol = 1e-14;
+
+    // Take our initial guess for thetaMax
+    thetaMax = thetaMaxInitial;
+    // thetaMax correction
+    adj = newtonsCorrection(thetaMax);
+
+    // Calculate when thetaDot = 0 next, which will be halfway through the problem's period
+    while (Math.abs(adj) >= errorTol) {
+        thetaMax += adj;
+        adj = newtonsCorrection(thetaMax);
+    }
+
+    // Calculate thetaMin, which is when thetaDot = 0
+    if (thetaDot0 != 0) {
+        var thetaMin = theta0;
+        adj = newtonsCorrection(thetaMin);
+        while (Math.abs(adj) >= errorTol) {
+            thetaMin += adj;
+            adj = newtonsCorrection(thetaMin);
+        }
+    } else {
+        thetaMin = theta0;
+    }
+
+    // Integrate problem from thetaMin to thetaMax to calculate the period
+    // in seconds
+    var nodes = new Array(N);
+    var integrand = new Array(N);
+    var transformedGrid = new Array(N);
+    integral = 0;
+    for ( let i = 1; i < N+1; i++) {
+        nodes[i-1] = Math.cos((2*i-1)*Math.PI/(2*N));
+        transformedGrid[i-1] = (thetaMax-thetaMin)*nodes[i-1]/2+(thetaMax+thetaMin)/2;
+        integrand[i-1] = Math.sqrt(1-nodes[i-1]**2)*Math.pow(thetaDotSq(transformedGrid[i-1]),-1/2);
+        integral += ((thetaMax-thetaMin)/2) * (Math.PI/N)*integrand[i-1];
+    }
+    period = 2*Math.abs(integral);
+    document.getElementById("integralDisplay").innerHTML = period;
+    document.getElementById("tf").value = 4*period;
+}
 
 /** 
  * Solve the problem using RK45.
@@ -39,11 +129,6 @@ function solveProblem() {
     thetaDot0 = parseFloat(document.getElementById("thetaDot0").value);
     epsilon = parseFloat(document.getElementById("epsilon").value);
     dtInitial = parseFloat(document.getElementById("dtInitial").value);
-
-    // T is the period of the problem, including it can be used from the console to determine an appropriate tf
-    if ( (theta0 == 0) && (thetaDot0 == 0) ) {
-        T = Math.sqrt(l/(g*Math.PI))*(math.gamma(1/4)**2);
-    }
 
     // Initialize the arrays used and loop variables
     t = [t0];

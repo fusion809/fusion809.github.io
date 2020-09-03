@@ -29,7 +29,7 @@ var epsilon, N, g, l, theta0, thetaDot0, thetaMax, thetaMaxInitial;
 var integral = 0;
 
 /**
- * Returns the value of theta dot squared
+ * Returns the value of theta dot squared.
  * 
  * @param theta    Angle from the x-axis.
  * @return         Theta dot squared value.
@@ -49,6 +49,15 @@ function thetaDotSqPrime(theta) {
 }
 
 /**
+ * Correction to theta according to Newton's method
+ * 
+ * @param {*} theta 
+ */
+function newtonsCorrection(theta) {
+    return -thetaDotSq(theta)/thetaDotSqPrime(theta);
+}
+
+/**
  * Calculates the value of theta when theta dot = 0 using Newton's method
  * then uses Chebyshev-Gauss quadrature to compute the time taken to reach this period.
  * 
@@ -64,25 +73,26 @@ function periodCalc() {
     theta0 = parseFloat(document.getElementById("theta0").value);
     thetaDot0 = parseFloat(document.getElementById("thetaDot0").value);
     thetaMaxInitial = parseFloat(document.getElementById("thetaMaxInitial").value);
+    var errorTol = 1e-14;
 
     // Take our initial guess for thetaMax
     thetaMax = thetaMaxInitial;
     // thetaMax correction
-    adj = thetaDotSq(thetaMax)/thetaDotSqPrime(thetaMax);
+    adj = newtonsCorrection(thetaMax);
 
     // Calculate when thetaDot = 0 next, which will be halfway through the problem's period
-    while (Math.abs(adj) >= 1e-14) {
-        thetaMax -= adj;
-        adj = thetaDotSq(thetaMax)/thetaDotSqPrime(thetaMax);
+    while (Math.abs(adj) >= errorTol) {
+        thetaMax += adj;
+        adj = newtonsCorrection(thetaMax);
     }
 
     // Calculate thetaMin, which is when thetaDot = 0
     if (thetaDot0 != 0) {
         var thetaMin = theta0;
-        adj = thetaDotSq(thetaMin)/thetaDotSqPrime(thetaMin);
-        while (Math.abs(adj) >= 1e-14) {
-            thetaMin -= adj;
-            adj = thetaDotSq(thetaMin)/thetaDotSqPrime(thetaMin);
+        adj = newtonsCorrection(thetaMin);
+        while (Math.abs(adj) >= errorTol) {
+            thetaMin += adj;
+            adj = newtonsCorrection(thetaMin);
         }
     } else {
         thetaMin = theta0;
@@ -158,7 +168,7 @@ function solveProblem() {
         // theta2 and thetaDot2 are our fifth order approximations
         theta2 = theta[i] + 16*k1/135+6656*k3/12825+28561*k4/56430-9*k5/50+2*k6/55;
         thetaDot2 = thetaDot[i] + 16*l1/135+6656*l3/12825+28561*l4/56430-9*l5/50+2*l6/55;
-        errorThetaDot1 = Math.abs(thetaDot1 - Math.sign(thetaDot1)*Math.sqrt(Math.abs(thetaDot0**2+2*g*(Math.sin(theta0) - Math.sin(theta1))/l)));
+        errorThetaDot1 = Math.abs(thetaDot1 - Math.sign(thetaDot1)*Math.sqrt(Math.abs(thetaDotSq(theta1))));
 
         // The following are used to correct the step size
         Rtheta = Math.abs(theta1-theta2)/dt;
