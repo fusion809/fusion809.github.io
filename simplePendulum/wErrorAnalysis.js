@@ -51,7 +51,9 @@ function thetaDotSqPrime(theta) {
 /**
  * Correction to theta according to Newton's method
  * 
- * @param {*} theta 
+ * @param theta    Angle from the x-axis.
+ * @return         Correction to theta min/max value according to Newton's
+ * method.
  */
 function newtonsCorrection(theta) {
     return -thetaDotSq(theta)/thetaDotSqPrime(theta);
@@ -111,6 +113,8 @@ function periodCalc() {
         integral += ((thetaMax-thetaMin)/2) * (Math.PI/N)*integrand[i-1];
     }
     period = 2*Math.abs(integral);
+
+    // Change what's displayed on the page accordingly
     document.getElementById("integralDisplay").innerHTML = period;
     document.getElementById("tf").value = 4*period;
 }
