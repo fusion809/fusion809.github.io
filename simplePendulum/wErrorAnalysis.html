@@ -17,22 +17,27 @@
         <div>
             This webpage uses the <a href='https://en.wikipedia.org/wiki/Runge-Kutta-Fehlberg_method' link='_blank'>Runge-Kutta-Fehlberg</a> fourth-order method with fifth-order error checking (RKF45) to approximate the solution to the problem of the simple pendulum:
 
-            $$\dfrac{d^2 \theta}{dt^2} = -\dfrac{g}{l} \cos{\theta}$$
+            \[
+            \dfrac{d^2 \theta}{dt^2} = -\dfrac{g}{l} \cos{\theta}
+            \]
 
             where \(g\) is the acceleration due to gravity in metres per second squared, \(l\) is the length of the pendulum in metres, \(\theta\) is the angle from the positive \(x\) axis (in radians) and \(t\) is the time in seconds. Below you can specify the various parameters for the problem we will solve. 
             
             The error in \(\dot{\theta}\) mentioned in the table below is approximated using this formula derived by integrating the above equation:
 
-            $$\dot{\theta} = \pm \sqrt{\dot{\theta}_0^2 + \dfrac{2g}{l}\left(\sin{\theta_0} - \sin{\theta}\right)}$$.
+            \[
+            \dot{\theta} = \pm \sqrt{\dot{\theta}_0^2 + \dfrac{2g}{l}\left(\sin{\theta_0} - \sin{\theta}\right)}.
+            \]
 
             Our \(\theta\) approximations are substituted in, and our \(\dot{\theta}\) RKF45 approximation is subtracted from this value. From this equation, the period of the default problem is approximated, namely as:
 
             \[
             \begin{aligned}
-            T &= 2\int_{-\pi}^0 \dfrac{d\theta}{\sqrt{-19.62 \sin{\theta}}} \\
-              &\approx 2.36784194757624 \hspace{0.1cm}\mathrm{s}.
+            T &= 2\int_{\theta_0}^{\theta_1} \dfrac{d\theta}{\sqrt{\dot{\theta}_0^2 + \dfrac{2g}{l} (\sin{\theta_0} - \sin{\theta}})}
             \end{aligned}
             \]
+
+            where \(\theta_0\) and \(\theta_1\) re the two closest values for which \(\dot{\theta} = 0\). \(\theta_0\) and \(\theta_1\) are calculated using <a href="https://en.wikipedia.org/wiki/Newton's_method" link='_blank'>Newton's method</a> and \(T\) is calculated using <a href='https://en.wikipedia.org/wiki/Chebyshev-Gauss_quadrature' link='_blank'>Chebyshev-Gauss quadrature</a>.
         </div>
         
         <!--A form for users to enter in all the parameters of the problem-->
@@ -68,12 +73,17 @@
                     <td>Starting time for the simulation in seconds (s).</td>
                 </tr>
                 <tr>
+                    <td>\(T\):</td>
+                    <td><span id = "integralDisplay"></span></td>
+                    <td>Period of the problem, auto-calculated.</td>
+                </tr>
+                <tr>
                     <td><label for="tf">\(t_f\):</label></td>
                     <td><input type="Number"
                         id="tf"
                         name="tf"
                         value="9.4713677903049498"></td>
-                    <td>Problem period: <span id = "integralDisplay"></span>. End time for the simulation in seconds. The default \(t_f - t_0\) value is equal to four times the period \(T\) of the problem with the other default parameters.</td>
+                    <td>End time for the simulation in seconds. The default \(t_f - t_0\) value is equal to four times the period \(T\) of the problem.</td>
                 </tr>
                 <tr>
                     <td><label for="theta0">\(\theta_0\):</label></td>
