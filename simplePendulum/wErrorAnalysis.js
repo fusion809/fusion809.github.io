@@ -25,8 +25,7 @@ var solution = {
 };
 var windowInnerWidth;
 var windowInnerHeight;
-var epsilon, N, g, l, theta0, thetaDot0, thetaMax, thetaMaxInitial;
-var integral = 0;
+var epsilon, N, g, l, theta0, thetaDot0;
 
 /**
  * Returns the value of theta dot squared.
@@ -74,11 +73,11 @@ function periodCalc() {
     N = parseFloat(document.getElementById("N").value);
     theta0 = parseFloat(document.getElementById("theta0").value);
     thetaDot0 = parseFloat(document.getElementById("thetaDot0").value);
-    thetaMaxInitial = parseFloat(document.getElementById("thetaMaxInitial").value);
+    var thetaMaxInitial = parseFloat(document.getElementById("thetaMaxInitial").value);
     var errorTol = 1e-14;
 
     // Take our initial guess for thetaMax
-    thetaMax = thetaMaxInitial;
+    var thetaMax = thetaMaxInitial;
     // thetaMax correction
     adj = newtonsCorrection(thetaMax);
 
@@ -102,15 +101,15 @@ function periodCalc() {
 
     // Integrate problem from thetaMin to thetaMax to calculate the period
     // in seconds
-    var nodes = new Array(N);
-    var integrand = new Array(N);
-    var transformedGrid = new Array(N);
+    var nodes = 0;
+    var integrand = 0;
+    var transformedGrid = 0;
     integral = 0;
     for ( let i = 1; i < N+1; i++) {
-        nodes[i-1] = Math.cos((2*i-1)*Math.PI/(2*N));
-        transformedGrid[i-1] = (thetaMax-thetaMin)*nodes[i-1]/2+(thetaMax+thetaMin)/2;
-        integrand[i-1] = Math.sqrt(1-nodes[i-1]**2)*Math.pow(thetaDotSq(transformedGrid[i-1]),-1/2);
-        integral += ((thetaMax-thetaMin)/2) * (Math.PI/N)*integrand[i-1];
+        nodes = Math.cos((2*i-1)*Math.PI/(2*N));
+        transformedGrid = (thetaMax-thetaMin)*nodes/2+(thetaMax+thetaMin)/2;
+        integrand = Math.sqrt(1-nodes**2)*Math.pow(thetaDotSq(transformedGrid),-1/2);
+        integral += ((thetaMax-thetaMin)/2) * (Math.PI/N)*integrand;
     }
     period = 2*Math.abs(integral);
 
