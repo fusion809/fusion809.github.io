@@ -73,11 +73,6 @@
                     <td>Starting time for the simulation in seconds (s).</td>
                 </tr>
                 <tr>
-                    <td>\(T\):</td>
-                    <td><span id = "integralDisplay"></span></td>
-                    <td>Period of the problem, auto-calculated.</td>
-                </tr>
-                <tr>
                     <td><label for="tf">\(t_f\):</label></td>
                     <td><input type="Number"
                         id="tf"
@@ -115,7 +110,12 @@
                         id="N"
                         name="N"
                         value="1e6" onsubmit="periodCalc()" onchange="periodCalc()"></td>
-                    <td>Number of Chebyshev-Gauss quadrature nodes used to approximate the period of the problem.</td>
+                    <td>Number of Chebyshev-Gauss quadrature nodes used to approximate the period of the problem. This is also equal to the maximum number of iterations that can be used to approximate \(\theta_\mathrm{min}\) and \(\theta_\mathrm{max}\). \(N \gt 1e7\) usually freezes up the page.</td>
+                </tr>
+                <tr>
+                    <td>\(T\):</td>
+                    <td id="integralDisplay"></td>
+                    <td>Period of the problem, auto-calculated.</td>
                 </tr>
                 <tr>
                     <td><label for="epsilon">\(\epsilon\):</label></td>
@@ -183,6 +183,11 @@
             }
             td {
                 padding: 2px;
+            }
+            /* Equations are much smaller on mobile devices than the text
+            w/o this */
+            .katex {
+                font-size: 20px;
             }
             #buttontable, #buttontable tr, #buttontable td {
                 border: none;
