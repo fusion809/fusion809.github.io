@@ -29,15 +29,15 @@
             \dot{\theta} = \pm \sqrt{\dot{\theta}_0^2 + \dfrac{2g}{l}\left(\sin{\theta_0} - \sin{\theta}\right)}.
             \]
 
-            Our \(\theta\) approximations are substituted in, and our \(\dot{\theta}\) RKF45 approximation is subtracted from this value. From this equation, the period of the default problem is approximated, namely as:
+            Our \(\theta\) approximations are substituted in, and our \(\dot{\theta}\) RKF45 approximation is subtracted from this value. From this equation, the period \(T\) of the problem is approximated, namely as:
 
             \[
             \begin{aligned}
-            T &= 2\int_{\theta_0}^{\theta_1} \dfrac{d\theta}{\sqrt{\dot{\theta}_0^2 + \dfrac{2g}{l} (\sin{\theta_0} - \sin{\theta}})}
+            T &= 2 \left|\int_{\theta_\mathrm{min}}^{\theta_\mathrm{max}} \dfrac{d\theta}{\sqrt{\dot{\theta}_0^2 + \dfrac{2g}{l} (\sin{\theta_0} - \sin{\theta}})}\right|
             \end{aligned}
             \]
 
-            where \(\theta_0\) and \(\theta_1\) re the two closest values for which \(\dot{\theta} = 0\). \(\theta_0\) and \(\theta_1\) are calculated using <a href="https://en.wikipedia.org/wiki/Newton's_method" link='_blank'>Newton's method</a> and \(T\) is calculated using <a href='https://en.wikipedia.org/wiki/Chebyshev-Gauss_quadrature' link='_blank'>Chebyshev-Gauss quadrature</a>.
+            where \(\theta_\mathrm{min}\) and \(\theta_\mathrm{max}\) are the two closest values for which \(\dot{\theta} = 0\). \(\theta_\mathrm{min}\) and \(\theta_\mathrm{max}\) are calculated using <a href="https://en.wikipedia.org/wiki/Newton's_method" link='_blank'>Newton's method</a> and \(T\) is calculated using <a href='https://en.wikipedia.org/wiki/Chebyshev-Gauss_quadrature' link='_blank'>Chebyshev-Gauss quadrature</a> (Simpson's rule could not be used as there are unremovable singularities at the endpoints).
         </div>
         
         <!--A form for users to enter in all the parameters of the problem-->

@@ -13,7 +13,7 @@
         <script src="../woErrorAnalysis.js"></script>
         <link rel="icon" href="/assets/favicon.png">
     </head>
-    <body>
+    <body onload="periodCalc()">
         <h1>Simple pendulum JavaScript integrator</h1>
         <div>
             This webpage uses the <a href='https://en.wikipedia.org/wiki/Runge-Kutta-Fehlberg_method' link='_blank'>Runge-Kutta-Fehlberg</a> fourth-order method with fifth-order error checking (RKF45) to approximate the solution to the problem of the simple pendulum:
@@ -26,14 +26,15 @@
 
             $$\dot{\theta} = \pm \sqrt{\dot{\theta}_0^2 + \dfrac{2g}{l}\left(\sin{\theta_0} - \sin{\theta}\right)}$$.
             
-            From this equation, the period of the default problem is approximated, namely as:
+            From this equation, the period \(T\) of the problem is approximated, namely as:
 
             \[
             \begin{aligned}
-            T &= 2\int_{-\pi}^0 \dfrac{d\theta}{\sqrt{-19.62 \sin{\theta}}} \\
-              &\approx 2.367841947576237 \hspace{0.1cm}\mathrm{s}.
+            T &= 2 \left|\int_{\theta_\mathrm{min}}^{\theta_\mathrm{max}} \dfrac{d\theta}{\sqrt{\dot{\theta}_0^2 + \dfrac{2g}{l} (\sin{\theta_0} - \sin{\theta}})}\right|
             \end{aligned}
             \]
+
+            where \(\theta_\mathrm{min}\) and \(\theta_\mathrm{max}\) are the two closest values for which \(\dot{\theta} = 0\). \(\theta_\mathrm{min}\) and \(\theta_\mathrm{max}\) are calculated using <a href="https://en.wikipedia.org/wiki/Newton's_method" link='_blank'>Newton's method</a> and \(T\) is calculated using <a href='https://en.wikipedia.org/wiki/Chebyshev-Gauss_quadrature' link='_blank'>Chebyshev-Gauss quadrature</a> (Simpson's rule could not be used as there are unremovable singularities at the endpoints).
         </div>
 
         <!--A form for users to enter in all the parameters of the problem-->
@@ -49,7 +50,7 @@
                     <td><input type="Number"
                         id="g"
                         name="g"
-                        value="9.81"></td>
+                        value="9.81" onsubmit="periodCalc()" onchange="periodCalc()"></td>
                     <td>Acceleration due to gravity in \(\mathrm{m} \cdot \mathrm{s}^{-2}\).</td>
                 </tr>
                 <tr>
@@ -57,7 +58,7 @@
                     <td><input type="Number"
                         id="l"
                         name="l"
-                        value="1"></td>
+                        value="1" onsubmit="periodCalc()" onchange="periodCalc()"></td>
                     <td>Length of the pendulum rod in metres (m).</td>
                 </tr>
                 <tr>
@@ -69,19 +70,24 @@
                     <td>Starting time for the simulation in seconds (s).</td>
                 </tr>
                 <tr>
+                    <td>\(T\):</td>
+                    <td><span id = "integralDisplay"></span></td>
+                    <td>Period of the problem, auto-calculated.</td>
+                </tr>
+                <tr>
                     <td><label for="tf">\(t_f\):</label></td>
                     <td><input type="Number"
                         id="tf"
                         name="tf"
                         value="9.4713677903049498"></td>
-                    <td>End time for the simulation in seconds. The default \(t_f - t_0\) value is equal to four times the period \(T\) of the problem with the other default parameters.</td>
+                    <td>End time for the simulation in seconds. The default \(t_f - t_0\) value is equal to four times the period \(T\) of the problem.</td>
                 </tr>
                 <tr>
                     <td><label for="theta0">\(\theta_0\):</label></td>
                     <td><input type="Number"
                         id="theta0"
                         name="theta0"
-                        value="0"></td>
+                        value="0" onsubmit="periodCalc()" onchange="periodCalc()"></td>
                     <td>Angle from the positive \(x\)-axis in radians at time \(t_0\).</td>
                 </tr>
                 <tr>
@@ -89,15 +95,31 @@
                     <td><input type="Number"
                         id="thetaDot0"
                         name="thetaDot0"
-                        value="0"></td>
+                        value="0" onsubmit="periodCalc()" onchange="periodCalc()"></td>
                     <td>First derivative of \(\theta\) with respect to \(t\) at \(t_0\) (in \(\mathrm{radians}\cdot \mathrm{s}^{-1}\)).</td>
+                </tr>
+                <tr>
+                    <td><label for="thetaMaxInitial">Initial guess for \(\max{\theta}\):</label></td>
+                    <td><input type="Number"
+                        id="thetaMaxInitial"
+                        name="thetaMaxInitial"
+                        value="-3.14" onsubmit="periodCalc()" onchange="periodCalc()"></td>
+                    <td>Value of \(\dot{\theta}\) at \(t_0\).</td>
+                </tr>
+                <tr>
+                    <td><label for="N">\(N\):</label></td>
+                    <td><input type="Number"
+                        id="N"
+                        name="N"
+                        value="1e6" onsubmit="periodCalc()" onchange="periodCalc()"></td>
+                    <td>Number of Chebyshev-Gauss quadrature nodes used to approximate the period of the problem.</td>
                 </tr>
                 <tr>
                     <td><label for="epsilon">\(\epsilon\):</label></td>
                     <td><input type="Number"
-                       id="epsilon"
-                       name="epsilon"
-                       value="1e-11"></td>
+                        id="epsilon"
+                        name="epsilon"
+                        value="1e-11"></td>
                     <td>Error tolerance in both \(\theta\) and \(\dot{\theta}\). \(\epsilon \lt \)2e-12 often freezes the webpage.</td>
                 </tr>
                 <tr>
