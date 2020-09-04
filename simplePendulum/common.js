@@ -98,18 +98,31 @@ function thetaBounds(arrayOfInputs) {
     var thetaDot0 = arrayOfInputs[4];
     var thetaMaxInitial = arrayOfInputs[5];
     var xi = arrayOfInputs[6];
-
     // Take our initial guess for thetaMax
     var thetaMax = thetaMaxInitial;
     var thetaMin = theta0;
     // thetaMax correction
     var adjMax = newtonsCorrection(g, l, theta0, thetaDot0, thetaMax);
     var adjMin;
+    var j = 0;
+    var k = 0;
+
+    // Check if the problem satisfies the conditions for periodic behaviour
+    if ( thetaDot0**2 + 2*g/l * (Math.sin(theta0)-1) > 0) {
+        document.getElementById("integralDisplay").innerHTML = "Problem is not periodic.";
+        // Too high of tf in these cases can freeze the solver up
+        document.getElementById("tf").value = 10;
+        // The default, 1e-11, can freeze the webpage up for these problems
+        // e.g. with thetaDot0 > 5, this will likely be the case.
+        document.getElementById("epsilon").value = 1e-9;
+        // Add extra N to array, so that we can kill periodCalc() if we get 
+        // this far
+        arrayOfInputs.push(N);
+        return arrayOfInputs;
+    }
 
     // Calculate when thetaDot = 0 next, which will be halfway through the problem's period
-    var j = 0; 
-    var k = 0;
-    while ( ( Math.abs(adjMax) >= xi) && ( j < N )) {
+    while ( Math.abs(adjMax) >= xi ) {
         thetaMax += adjMax;
         adjMax = newtonsCorrection(g, l, theta0, thetaDot0, thetaMax);
         j++;
@@ -119,7 +132,7 @@ function thetaBounds(arrayOfInputs) {
     // Calculate thetaMin, which is when thetaDot = 0
     if (thetaDot0 != 0) {
         adjMin = newtonsCorrection(g, l, theta0, thetaDot0, thetaMin);    
-        while (( Math.abs(adjMin) >= xi) & (k < N)) {
+        while ( Math.abs(adjMin) >= xi ) {
             thetaMin += adjMin;
             adjMin = newtonsCorrection(g, l, theta0, thetaDot0, thetaMin);
             k++;
@@ -136,20 +149,6 @@ function thetaBounds(arrayOfInputs) {
     document.getElementById("thetaMaxDisplay").innerHTML = thetaMax;
     document.getElementById("adjMinDisplay").innerHTML = adjMin;
     document.getElementById("adjMaxDisplay").innerHTML = adjMax;
-
-    // If j and k reach N mention that in the table to let the user know
-    // that the maximum iterations were reached
-    if ( (j >= N ) || (k >= N ) ) {
-        document.getElementById("integralDisplay").innerHTML = "Theta min and/or theta max could not be calculated as the limit on Newton's method iterations was exceeded";
-        // Too high of tf in these cases can freeze the solver up
-        document.getElementById("tf").value = 10;
-        // The default, 1e-11, can freeze the webpage up for these problems
-        // e.g. with thetaDot0 > 5, this will likely be the case.
-        document.getElementById("epsilon").value = 1e-9;
-        // Add j and k to array, so that we can kill periodCalc() if j/k>=N
-        arrayOfInputs.push(j);
-        arrayOfInputs.push(k);
-    }
 
     // Add thetaMin and thetaMax to arrayOfInputs
     arrayOfInputs.push(thetaMin);
@@ -174,7 +173,7 @@ function periodCalc(arrayOfInputs) {
     var theta0 = arrayOfInputs[3];
     var thetaDot0 = arrayOfInputs[4];
     // Kill the function if j, k >= N
-    if (arrayOfInputs[11] != "1e6") {
+    if (arrayOfInputs[11] != N) {
         var thetaMin = arrayOfInputs[11];
         var thetaMax = arrayOfInputs[12];
     } else {
