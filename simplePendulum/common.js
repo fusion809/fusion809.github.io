@@ -130,7 +130,7 @@ function thetaBounds(arrayOfInputs) {
     }
 
     // Calculate when thetaDot = 0 next, which will be halfway through the problem's period
-    while ( Math.abs(adjMax) >= xi ) {
+    while ( ( Math.abs(adjMax) >= xi ) && ( j < N ) ) {
         thetaMax += adjMax;
         adjMax = newtonsCorrection(g, l, theta0, thetaDot0, thetaMax);
         j++;
@@ -140,7 +140,7 @@ function thetaBounds(arrayOfInputs) {
     // Calculate thetaMin, which is when thetaDot = 0
     if (thetaDot0 != 0) {
         adjMin = newtonsCorrection(g, l, theta0, thetaDot0, thetaMin);    
-        while ( Math.abs(adjMin) >= xi ) {
+        while ( ( Math.abs(adjMin) >= xi ) & (k < N) ) {
             thetaMin += adjMin;
             adjMin = newtonsCorrection(g, l, theta0, thetaDot0, thetaMin);
             k++;
