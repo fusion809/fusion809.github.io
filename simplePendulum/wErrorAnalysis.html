@@ -38,7 +38,7 @@
             \end{aligned}
             \]
 
-            where \(\theta_\mathrm{min}\) and \(\theta_\mathrm{max}\) are the two closest values for which \(\dot{\theta} = 0\). \(\theta_\mathrm{min}\) and \(\theta_\mathrm{max}\) are calculated using <a href="https://en.wikipedia.org/wiki/Newton's_method" link='_blank'>Newton's method</a> and \(T\) is calculated using <a href='https://en.wikipedia.org/wiki/Chebyshev-Gauss_quadrature' link='_blank'>Chebyshev-Gauss quadrature</a> (Simpson's rule could not be used as there are unremovable singularities at the endpoints).
+            where \(\theta_\mathrm{min}\) and \(\theta_\mathrm{max}\) are the two closest values for which \(\dot{\theta} = 0\). \(T\) is calculated using <a href='https://en.wikipedia.org/wiki/Chebyshev-Gauss_quadrature' link='_blank'>Chebyshev-Gauss quadrature</a> (Simpson's rule could not be used as there are unremovable singularities at the endpoints).
         </div>
         
         <!--A form for users to enter in all the parameters of the problem-->
@@ -108,16 +108,6 @@
                     <td>First derivative of \(\theta\) with respect to \(t\) at \(t_0\) (in \(\mathrm{radians}\cdot \mathrm{s}^{-1}\)).</td>
                 </tr>
                 <tr>
-                    <td><label for="thetaMaxInitial">Initial guess for \(\theta_{\mathrm{max}}\):</label></td>
-                    <td><input type="Number"
-                        id="thetaMaxInitial"
-                        name="thetaMaxInitial"
-                        value="-3.14" 
-                        onsubmit="periodCalc(thetaBounds(readInputs()))" 
-                        onchange="periodCalc(thetaBounds(readInputs()))"></td>
-                    <td>Value of \(\dot{\theta}\) at \(t_0\).</td>
-                </tr>
-                <tr>
                     <td><label for="N">\(N\):</label></td>
                     <td><input type="Number"
                         id="N"
@@ -168,16 +158,6 @@
                 <td>Period of the problem, auto-calculated.</td>
             </tr>
             <tr>
-                <td><code>adjMin</code></td>
-                <td id="adjMinDisplay"></td>
-                <td>Last correction to \(\theta_\mathrm{min}\).</td>
-            </tr>
-            <tr>
-                <td><code>adjMax</code></td>
-                <td id="adjMaxDisplay"></td>
-                <td>Last correction to \(\theta_\mathrm{max}\).</td>
-            </tr>
-            <tr>
                 <td>\(\theta_\mathrm{min}\)</td>
                 <td id="thetaMinDisplay"></td>
                 <td>The value of \(\theta_\mathrm{min}\) used in the above period equation.</td>
@@ -191,16 +171,6 @@
                 <td>RKF45 step number</td>
                 <td id="NRKF45"></td>
                 <td>Number of steps used in our Runge-Kutta-Fehlberg approximation of the solution.</td>
-            </tr>
-            <tr>
-                <td>\(j\)</td>
-                <td id="jDisplay"></td>
-                <td>Number of iterations used to calculate \(\theta_\mathrm{max}\).</td>
-            </tr>
-            <tr>
-                <td>\(k\)</td>
-                <td id="kDisplay"></td>
-                <td>Number of iterations used to calculate \(\theta_\mathrm{min}\).</td>
             </tr>
         </table>
 
