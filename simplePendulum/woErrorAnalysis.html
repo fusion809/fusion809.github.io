@@ -1,30 +1,27 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Simple pendulum Runge-Kutta-Fehlberg solver</title>
+        <title>Simple pendulum Runge-Kutta-Fehlberg solver without error analysis</title>
         <!--We need a few external JS libraries to provide LaTeX and plot rendering. -->
         <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
         <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
-        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
-        onload="renderMathInElement(document.body);"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
         <!-- Necessary for analytically finding the period of the problem-->
         <script src="https://unpkg.com/mathjs@7.1.0/dist/math.min.js"></script>
         <script src="../woErrorAnalysis.js"></script>
         <link rel="icon" href="/assets/favicon.png">
     </head>
-    <body onload="periodCalc()">
-        <h1>Simple pendulum JavaScript integrator</h1>
+    <body onload="periodCalc(thetaBounds(readInputs()))">
+        <h1>Simple pendulum problem solver with error analysis</h1>
         <div>
             This webpage uses the <a href='https://en.wikipedia.org/wiki/Runge-Kutta-Fehlberg_method' link='_blank'>Runge-Kutta-Fehlberg</a> fourth-order method with fifth-order error checking (RKF45) to approximate the solution to the problem of the simple pendulum:
 
-            $$\dfrac{d^2 \theta}{dt^2} = -\dfrac{g}{l} \cos{\theta}$$
+            \[
+            \dfrac{d^2 \theta}{dt^2} = -\dfrac{g}{l} \cos{\theta}
+            \]
 
             where \(g\) is the acceleration due to gravity in metres per second squared, \(l\) is the length of the pendulum in metres, \(\theta\) is the angle from the positive \(x\) axis (in radians) and \(t\) is the time in seconds. Below you can specify the various parameters for the problem we will solve. 
-            
-            Integrating our ordinary differential equation with respect to \(\theta\), multiplying by two and square rooting yields:
-
-            $$\dot{\theta} = \pm \sqrt{\dot{\theta}_0^2 + \dfrac{2g}{l}\left(\sin{\theta_0} - \sin{\theta}\right)}$$.
             
             From this equation, the period \(T\) of the problem is approximated, namely as:
 
@@ -36,7 +33,7 @@
 
             where \(\theta_\mathrm{min}\) and \(\theta_\mathrm{max}\) are the two closest values for which \(\dot{\theta} = 0\). \(\theta_\mathrm{min}\) and \(\theta_\mathrm{max}\) are calculated using <a href="https://en.wikipedia.org/wiki/Newton's_method" link='_blank'>Newton's method</a> and \(T\) is calculated using <a href='https://en.wikipedia.org/wiki/Chebyshev-Gauss_quadrature' link='_blank'>Chebyshev-Gauss quadrature</a> (Simpson's rule could not be used as there are unremovable singularities at the endpoints).
         </div>
-
+        
         <!--A form for users to enter in all the parameters of the problem-->
         <form name="requiredData">
             <table>
@@ -51,8 +48,8 @@
                         id="g"
                         name="g"
                         value="9.81" 
-                        onsubmit="periodCalc()" 
-                        onchange="periodCalc()"></td>
+                        onsubmit="periodCalc(thetaBounds(readInputs()))" 
+                        onchange="periodCalc(thetaBounds(readInputs()))"></td>
                     <td>Acceleration due to gravity in \(\mathrm{m} \cdot \mathrm{s}^{-2}\).</td>
                 </tr>
                 <tr>
@@ -61,8 +58,8 @@
                         id="l"
                         name="l"
                         value="1" 
-                        onsubmit="periodCalc()" 
-                        onchange="periodCalc()"></td>
+                        onsubmit="periodCalc(thetaBounds(readInputs()))" 
+                        onchange="periodCalc(thetaBounds(readInputs()))"></td>
                     <td>Length of the pendulum rod in metres (m).</td>
                 </tr>
                 <tr>
@@ -87,8 +84,8 @@
                         id="theta0"
                         name="theta0"
                         value="0" 
-                        onsubmit="periodCalc()" 
-                        onchange="periodCalc()"></td>
+                        onsubmit="periodCalc(thetaBounds(readInputs()))" 
+                        onchange="periodCalc(thetaBounds(readInputs()))"></td>
                     <td>Angle from the positive \(x\)-axis in radians at time \(t_0\).</td>
                 </tr>
                 <tr>
@@ -97,8 +94,8 @@
                         id="thetaDot0"
                         name="thetaDot0"
                         value="0" 
-                        onsubmit="periodCalc()" 
-                        onchange="periodCalc()"></td>
+                        onsubmit="periodCalc(thetaBounds(readInputs()))" 
+                        onchange="periodCalc(thetaBounds(readInputs()))"></td>
                     <td>First derivative of \(\theta\) with respect to \(t\) at \(t_0\) (in \(\mathrm{radians}\cdot \mathrm{s}^{-1}\)).</td>
                 </tr>
                 <tr>
@@ -107,8 +104,8 @@
                         id="thetaMaxInitial"
                         name="thetaMaxInitial"
                         value="-3.14" 
-                        onsubmit="periodCalc()" 
-                        onchange="periodCalc()"></td>
+                        onsubmit="periodCalc(thetaBounds(readInputs()))" 
+                        onchange="periodCalc(thetaBounds(readInputs()))"></td>
                     <td>Value of \(\dot{\theta}\) at \(t_0\).</td>
                 </tr>
                 <tr>
@@ -117,8 +114,8 @@
                         id="N"
                         name="N"
                         value="1e6" 
-                        onsubmit="periodCalc()" 
-                        onchange="periodCalc()"></td>
+                        onsubmit="periodCalc(thetaBounds(readInputs()))" 
+                        onchange="periodCalc(thetaBounds(readInputs()))"></td>
                     <td>Number of Chebyshev-Gauss quadrature nodes used to approximate the period of the problem. This is also equal to the maximum number of iterations that can be used to approximate \(\theta_\mathrm{min}\) and \(\theta_\mathrm{max}\). \(N \gt 1e7\) usually freezes up the page.</td>
                 </tr>
                 <tr>
@@ -127,8 +124,8 @@
                         id="xi"
                         name="xi"
                         value="1e-12"
-                        onsubmit="periodCalc()"
-                        onchange="periodCalc()"></td>
+                        onsubmit="periodCalc(thetaBounds(readInputs()))"
+                        onchange="periodCalc(thetaBounds(readInputs()))"></td>
                     <td>Cut off for Newton's method corrections (i.e. once the correction's absolute value dips below this value, the iterations stop).</td>
                 </tr>
                 <tr>
@@ -149,7 +146,6 @@
                 </tr>
             </table>
         </form>
-
         <br/>
         <table>
             <tr>
@@ -198,24 +194,24 @@
                 <td>Number of iterations used to calculate \(\theta_\mathrm{min}\).</td>
             </tr>
         </table>
-        
+
         <!--Buttons-->
-        <button type="button" onclick="solveProblem()">Solve the problem</button> (press this whenever you update the parameters above)<br/><br/>
+        <button type="button" onclick="solveProblem(readInputs())">Solve the problem</button> (press this whenever you update the parameters above)<br/><br/>
         <table id="buttontable">
             <tr>
-                <td><button type="button" onclick="fillTable()">Tabulate the solution</button></td>
+                <td><button type="button" onclick="fillTable(readInputs())">Tabulate the solution</button></td>
                 <td><button type="button" onclick="removeTable()">Remove the solution table</button></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generatePhasePlot()">Generate phase plot</button></td>
+                <td><button type="button" onclick="generatePhasePlot(readInputs())">Generate phase plot</button></td>
                 <td><button type="button" onclick="removePhasePlot()">Remove plot</button></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generateTimePlot()">Generate time plot</button></td>
+                <td><button type="button" onclick="generateTimePlot(readInputs())">Generate time plot</button></td>
                 <td><button type="button" onclick="removeTimePlot()">Remove plot</button></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generatePlots()">Generate all solution plots</button></td>
+                <td><button type="button" onclick="generatePlots(readInputs())">Generate all solution plots</button></td>
                 <td><button type="button" onclick="removePlots()">Remove all solution plots</button></td>
             </tr>
         </table>
@@ -242,11 +238,16 @@
             td {
                 padding: 2px;
             }
+            /* Equations are much smaller on mobile devices than the text
+            w/o this */
+            .katex {
+                font-size: 20px;
+            }
             #buttontable, #buttontable tr, #buttontable td {
                 border: none;
                 max-width: 100%;
             }
-            #timePlot, #errorPlot, #phasePlot {
+            #timePlot, #phasePlot {
                 width: 100%;
             }
         </style>
