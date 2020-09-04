@@ -141,8 +141,8 @@ function solveProblem(arrayOfInputs) {
     // Obtain the parameters of the problem
     g = arrayOfInputs[0]
     l = arrayOfInputs[1];
-    t0 = arrayOfInputs[9];
-    tf = arrayOfInputs[10];
+    t0 = arrayOfInputs[8];
+    tf = arrayOfInputs[9];
     theta0 = arrayOfInputs[3];
     thetaDot0 = arrayOfInputs[4];
     epsilon = parseFloat(document.getElementById("epsilon").value);

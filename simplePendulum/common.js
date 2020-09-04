@@ -11,7 +11,6 @@ function readInputs() {
     var N = parseFloat(document.getElementById("N").value);
     var theta0 = parseFloat(document.getElementById("theta0").value);
     var thetaDot0 = parseFloat(document.getElementById("thetaDot0").value);
-    var thetaMaxInitial = parseFloat(document.getElementById("thetaMaxInitial").value);
     var xi = parseFloat(document.getElementById("xi").value);
     var epsilon = parseFloat(document.getElementById("epsilon").value);
     var dtInitial = parseFloat(document.getElementById("dtInitial").value);
@@ -19,19 +18,18 @@ function readInputs() {
     var tf = parseFloat(document.getElementById("tf").value);
 
     // Add them to array
-    return [g, l, N, theta0, thetaDot0, thetaMaxInitial, xi, epsilon, dtInitial, t0, tf];
+    return [g, l, N, theta0, thetaDot0, xi, epsilon, dtInitial, t0, tf];
 
     // g:                 arrayOfInputs[0]
     // l:                 arrayOfInputs[1]
     // N:                 arrayOfInputs[2]
     // theta0:            arrayOfInputs[3]
     // thetaDot0:         arrayOfInputs[4]
-    // thetaMaxInitial:   arrayOfInputs[5]
-    // xi:                arrayOfInputs[6]
-    // epsilon:           arrayOfInputs[7]
-    // dtInitial:         arrayOfInputs[8]
-    // t0:                arrayOfInputs[9]
-    // tf:                arrayOfInputs[10]
+    // xi:                arrayOfInputs[5]
+    // epsilon:           arrayOfInputs[6]
+    // dtInitial:         arrayOfInputs[7]
+    // t0:                arrayOfInputs[8]
+    // tf:                arrayOfInputs[9]
 }
 
 /**
@@ -96,18 +94,9 @@ function thetaBounds(arrayOfInputs) {
     var N = arrayOfInputs[2];
     var theta0 = arrayOfInputs[3];
     var thetaDot0 = arrayOfInputs[4];
-    var thetaMaxInitial = arrayOfInputs[5];
-    var xi = arrayOfInputs[6];
-    var t0 = arrayOfInputs[10];
+    var xi = arrayOfInputs[5];
+    var t0 = arrayOfInputs[8];
     // Take our initial guess for thetaMax
-    var thetaMax = thetaMaxInitial;
-    var thetaMin = theta0;
-    // thetaMax correction
-    var adjMax = newtonsCorrection(g, l, theta0, thetaDot0, thetaMax);
-    var adjMin;
-    var j = 0;
-    var k = 0;
-
     // Check if the problem satisfies the conditions for periodic behaviour
     if ( thetaDot0**2 + 2*g/l * (Math.sin(theta0)-1) > 0) {
         document.getElementById("integralDisplay").innerHTML = "Problem is not periodic.";
@@ -129,35 +118,12 @@ function thetaBounds(arrayOfInputs) {
         // Return arrayOfInputs
         return arrayOfInputs;
     }
-
-    // Calculate when thetaDot = 0 next, which will be halfway through the problem's period
-    while ( ( Math.abs(adjMax) >= xi ) && ( j < N ) ) {
-        thetaMax += adjMax;
-        adjMax = newtonsCorrection(g, l, theta0, thetaDot0, thetaMax);
-        j++;
-    }
-    thetaMax += adjMax;
-
-    // Calculate thetaMin, which is when thetaDot = 0
-    if (thetaDot0 != 0) {
-        adjMin = newtonsCorrection(g, l, theta0, thetaDot0, thetaMin);    
-        while ( ( Math.abs(adjMin) >= xi ) & (k < N) ) {
-            thetaMin += adjMin;
-            adjMin = newtonsCorrection(g, l, theta0, thetaDot0, thetaMin);
-            k++;
-        }
-        thetaMin += adjMin;
-    } else {
-        thetaMin = theta0;
-    }
+    var thetaMin = Math.asin((thetaDot0**2+2*(g/l)*Math.sin(theta0))/(2*g/l));
+    var thetaMax = - thetaMin - Math.PI;
 
     // Mention theta bounds and Newton's info in data table
-    document.getElementById("jDisplay").innerHTML = j;
-    document.getElementById("kDisplay").innerHTML = k;
     document.getElementById("thetaMinDisplay").innerHTML = thetaMin;
     document.getElementById("thetaMaxDisplay").innerHTML = thetaMax;
-    document.getElementById("adjMinDisplay").innerHTML = adjMin;
-    document.getElementById("adjMaxDisplay").innerHTML = adjMax;
 
     // Add thetaMin and thetaMax to arrayOfInputs
     arrayOfInputs.push(thetaMin);
@@ -179,13 +145,13 @@ function periodCalc(arrayOfInputs) {
     var g = arrayOfInputs[0];
     var l = arrayOfInputs[1];
     var N = arrayOfInputs[2];
-    var t0 = arrayOfInputs[9];
+    var t0 = arrayOfInputs[8];
     var theta0 = arrayOfInputs[3];
     var thetaDot0 = arrayOfInputs[4];
     // Kill the function if j, k >= N
-    if (arrayOfInputs[11] != N) {
-        var thetaMin = arrayOfInputs[11];
-        var thetaMax = arrayOfInputs[12];
+    if (arrayOfInputs[10] != N) {
+        var thetaMin = arrayOfInputs[10];
+        var thetaMax = arrayOfInputs[11];
     } else {
         return;
     }
@@ -333,7 +299,7 @@ function removeTimePlot() {
 function fillTable(arrayOfInputs) {
     // Define all global variables
     var solution = solveProblem(arrayOfInputs);
-    var epsilon = arrayOfInputs[7];
+    var epsilon = arrayOfInputs[6];
     var t = solution["t"];
     var theta = solution["theta"];
     var thetaDot = solution["thetaDot"];
