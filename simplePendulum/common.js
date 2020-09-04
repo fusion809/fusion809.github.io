@@ -11,25 +11,23 @@ function readInputs() {
     var N = parseFloat(document.getElementById("N").value);
     var theta0 = parseFloat(document.getElementById("theta0").value);
     var thetaDot0 = parseFloat(document.getElementById("thetaDot0").value);
-    var xi = parseFloat(document.getElementById("xi").value);
     var epsilon = parseFloat(document.getElementById("epsilon").value);
     var dtInitial = parseFloat(document.getElementById("dtInitial").value);
     var t0 = parseFloat(document.getElementById("t0").value);
     var tf = parseFloat(document.getElementById("tf").value);
 
     // Add them to array
-    return [g, l, N, theta0, thetaDot0, xi, epsilon, dtInitial, t0, tf];
+    return [g, l, N, theta0, thetaDot0, epsilon, dtInitial, t0, tf];
 
     // g:                 arrayOfInputs[0]
     // l:                 arrayOfInputs[1]
     // N:                 arrayOfInputs[2]
     // theta0:            arrayOfInputs[3]
     // thetaDot0:         arrayOfInputs[4]
-    // xi:                arrayOfInputs[5]
-    // epsilon:           arrayOfInputs[6]
-    // dtInitial:         arrayOfInputs[7]
-    // t0:                arrayOfInputs[8]
-    // tf:                arrayOfInputs[9]
+    // epsilon:           arrayOfInputs[5]
+    // dtInitial:         arrayOfInputs[6]
+    // t0:                arrayOfInputs[7]
+    // tf:                arrayOfInputs[8]
 }
 
 /**
@@ -94,8 +92,7 @@ function thetaBounds(arrayOfInputs) {
     var N = arrayOfInputs[2];
     var theta0 = arrayOfInputs[3];
     var thetaDot0 = arrayOfInputs[4];
-    var xi = arrayOfInputs[5];
-    var t0 = arrayOfInputs[8];
+    var t0 = arrayOfInputs[7];
     // Take our initial guess for thetaMax
     // Check if the problem satisfies the conditions for periodic behaviour
     if ( thetaDot0**2 + 2*g/l * (Math.sin(theta0)-1) > 0) {
@@ -145,13 +142,13 @@ function periodCalc(arrayOfInputs) {
     var g = arrayOfInputs[0];
     var l = arrayOfInputs[1];
     var N = arrayOfInputs[2];
-    var t0 = arrayOfInputs[8];
+    var t0 = arrayOfInputs[7];
     var theta0 = arrayOfInputs[3];
     var thetaDot0 = arrayOfInputs[4];
-    // Kill the function if j, k >= N
-    if (arrayOfInputs[10] != N) {
-        var thetaMin = arrayOfInputs[10];
-        var thetaMax = arrayOfInputs[11];
+    // Kill the function if problem isn't periodic
+    if (arrayOfInputs[9] != N) {
+        var thetaMin = arrayOfInputs[9];
+        var thetaMax = arrayOfInputs[10];
     } else {
         return;
     }
@@ -299,7 +296,7 @@ function removeTimePlot() {
 function fillTable(arrayOfInputs) {
     // Define all global variables
     var solution = solveProblem(arrayOfInputs);
-    var epsilon = arrayOfInputs[6];
+    var epsilon = arrayOfInputs[5];
     var t = solution["t"];
     var theta = solution["theta"];
     var thetaDot = solution["thetaDot"];
