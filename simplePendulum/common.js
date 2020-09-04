@@ -106,12 +106,8 @@ function thetaBounds(arrayOfInputs) {
         // this far
         arrayOfInputs.push(N);
         // Clearing vars made irrelevant by non-periodicity
-        document.getElementById("jDisplay").innerHTML = '';
-        document.getElementById("kDisplay").innerHTML = '';
         document.getElementById("thetaMinDisplay").innerHTML = '';
         document.getElementById("thetaMaxDisplay").innerHTML = '';
-        document.getElementById("adjMinDisplay").innerHTML = '';
-        document.getElementById("adjMaxDisplay").innerHTML = '';
         // Return arrayOfInputs
         return arrayOfInputs;
     }
