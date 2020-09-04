@@ -68,7 +68,9 @@
                     <td><input type="Number"
                         id="t0"
                         name="t0"
-                        value="0"></td>
+                        value="0"
+                        onsubmit="periodCalc(thetaBounds(readInputs()))" 
+                        onchange="periodCalc(thetaBounds(readInputs()))"></td>
                     <td>Starting time for the simulation in seconds (s).</td>
                 </tr>
                 <tr>
