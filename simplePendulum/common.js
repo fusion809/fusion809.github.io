@@ -83,7 +83,8 @@ function newtonsCorrection(g, l, theta0, thetaDot0, theta) {
 }
 
 /**
- * Calculate the bounds of theta in our integration
+ * Calculate the bounds of theta in our integration by using Newton's method
+ * on our expression for theta dot squared. 
  * 
  * @param arrayOfInputs      An array of problem parameters.
  * @return                   Nothing. Just writes the relevant  
@@ -128,13 +129,6 @@ function thetaBounds(arrayOfInputs) {
         thetaMin = theta0;
     }
 
-    // If j and k reach N mention that in the table to let the user know
-    // that the maximum iterations were reached
-    if ( (j >= N ) || (k >= N ) ) {
-        document.getElementById("integralDisplay").innerHTML = "Theta min and/or theta max could not be calculated as the limit on Newton's method iterations was exceeded";
-        document.getElementById("tf").value = 100;
-    }
-
     // Mention theta bounds and Newton's info in data table
     document.getElementById("jDisplay").innerHTML = j;
     document.getElementById("kDisplay").innerHTML = k;
@@ -142,6 +136,20 @@ function thetaBounds(arrayOfInputs) {
     document.getElementById("thetaMaxDisplay").innerHTML = thetaMax;
     document.getElementById("adjMinDisplay").innerHTML = adjMin;
     document.getElementById("adjMaxDisplay").innerHTML = adjMax;
+
+    // If j and k reach N mention that in the table to let the user know
+    // that the maximum iterations were reached
+    if ( (j >= N ) || (k >= N ) ) {
+        document.getElementById("integralDisplay").innerHTML = "Theta min and/or theta max could not be calculated as the limit on Newton's method iterations was exceeded";
+        // Too high of tf in these cases can freeze the solver up
+        document.getElementById("tf").value = 10;
+        // The default, 1e-11, can freeze the webpage up for these problems
+        // e.g. with thetaDot0 > 5, this will likely be the case.
+        document.getElementById("epsilon").value = 1e-9;
+        // Add j and k to array, so that we can kill periodCalc() if j/k>=N
+        arrayOfInputs.push(j);
+        arrayOfInputs.push(k);
+    }
 
     // Add thetaMin and thetaMax to arrayOfInputs
     arrayOfInputs.push(thetaMin);
@@ -165,9 +173,13 @@ function periodCalc(arrayOfInputs) {
     var N = arrayOfInputs[2];
     var theta0 = arrayOfInputs[3];
     var thetaDot0 = arrayOfInputs[4];
-    var thetaMin = arrayOfInputs[11];
-    var thetaMax = arrayOfInputs[12];
-
+    // Kill the function if j, k >= N
+    if (arrayOfInputs[11] != "1e6") {
+        var thetaMin = arrayOfInputs[11];
+        var thetaMax = arrayOfInputs[12];
+    } else {
+        return;
+    }
     // Integrate problem from thetaMin to thetaMax to calculate the period
     // in seconds
     var nodes = 0;
