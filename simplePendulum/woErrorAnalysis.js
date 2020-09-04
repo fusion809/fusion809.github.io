@@ -208,6 +208,9 @@ function solveProblem() {
         theta: theta,
         thetaDot: thetaDot,
     };
+
+    // Write number of steps to table field
+    document.getElementById("NRKF45").innerHTML = t.length;
 }
 
 /**
