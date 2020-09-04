@@ -98,6 +98,7 @@ function thetaBounds(arrayOfInputs) {
     var thetaDot0 = arrayOfInputs[4];
     var thetaMaxInitial = arrayOfInputs[5];
     var xi = arrayOfInputs[6];
+    var t0 = arrayOfInputs[10];
     // Take our initial guess for thetaMax
     var thetaMax = thetaMaxInitial;
     var thetaMin = theta0;
@@ -111,7 +112,7 @@ function thetaBounds(arrayOfInputs) {
     if ( thetaDot0**2 + 2*g/l * (Math.sin(theta0)-1) > 0) {
         document.getElementById("integralDisplay").innerHTML = "Problem is not periodic.";
         // Too high of tf in these cases can freeze the solver up
-        document.getElementById("tf").value = 10;
+        document.getElementById("tf").value = t0 + 10;
         // The default, 1e-11, can freeze the webpage up for these problems
         // e.g. with thetaDot0 > 5, this will likely be the case.
         document.getElementById("epsilon").value = 1e-9;
@@ -178,6 +179,7 @@ function periodCalc(arrayOfInputs) {
     var g = arrayOfInputs[0];
     var l = arrayOfInputs[1];
     var N = arrayOfInputs[2];
+    var t0 = arrayOfInputs[9];
     var theta0 = arrayOfInputs[3];
     var thetaDot0 = arrayOfInputs[4];
     // Kill the function if j, k >= N
@@ -203,7 +205,7 @@ function periodCalc(arrayOfInputs) {
 
     // Change what's displayed on the page accordingly
     document.getElementById("integralDisplay").innerHTML = period;
-    document.getElementById("tf").value = 4*period;
+    document.getElementById("tf").value = t0 + 4*period;
     return period;
 }
 
