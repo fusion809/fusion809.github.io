@@ -109,17 +109,7 @@
                         value="1e6" 
                         onsubmit="periodCalc(thetaBounds(readInputs()))" 
                         onchange="periodCalc(thetaBounds(readInputs()))"></td>
-                    <td>Number of Chebyshev-Gauss quadrature nodes used to approximate the period of the problem. This is also equal to the maximum number of Newton's method iterations that can be used to approximate \(\theta_\mathrm{min}\) and \(\theta_\mathrm{max}\). \(N \gt 1e7\) usually freezes up the page.</td>
-                </tr>
-                <tr>
-                    <td><label for="xi">\(\xi\):</label></td>
-                    <td><input type="Number"
-                        id="xi"
-                        name="xi"
-                        value="1e-12"
-                        onsubmit="periodCalc(thetaBounds(readInputs()))"
-                        onchange="periodCalc(thetaBounds(readInputs()))"></td>
-                    <td>Cut off for Newton's method corrections (i.e. once the correction's absolute value dips below this value, the iterations stop).</td>
+                    <td>Number of Chebyshev-Gauss quadrature nodes used to approximate the period of the problem. \(N \gt 1e7\) usually freezes up the page.</td>
                 </tr>
                 <tr>
                     <td><label for="epsilon">\(\epsilon\):</label></td>
