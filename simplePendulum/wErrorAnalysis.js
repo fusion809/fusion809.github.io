@@ -148,6 +148,7 @@ function solveProblem(arrayOfInputs) {
     epsilon = parseFloat(document.getElementById("epsilon").value);
     dtInitial = parseFloat(document.getElementById("dtInitial").value);
 
+    // Solve the problem
     var solution = RKF45(dtInitial, epsilon, g, l, t0, tf, theta0, thetaDot0);
 
     // Write number of steps to table field
