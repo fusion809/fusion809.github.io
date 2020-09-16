@@ -39,8 +39,7 @@ function readInputs() {
  * @param l          Length of the pendulum in metres.
  * @param t          Time.
  * @param theta      Angle of the pendulum from the positive x-axis.
- * @param thetaDot   Rate of change against time of the angle from the 
- * positive x-axis.
+ * @param thetaDot   Rate of change against time of the angle from the positive x-axis.
  * @return           [dtheta/dt, d2theta/dt2]
  */
 function f(g, l, t, theta, thetaDot) {
@@ -71,8 +70,7 @@ function thetaDotSqPrime(g, l, theta) {
  * Correction to theta according to Newton's method
  * 
  * @param theta    Angle from the x-axis.
- * @return         Correction to theta min/max value according to Newton's
- * method.
+ * @return         Correction to theta min/max value according to Newton's  method.
  */
 function newtonsCorrection(g, l, theta0, thetaDot0, theta) {
     return -thetaDotSq(g, l, theta0, thetaDot0, theta)/thetaDotSqPrime(g, l, theta);
@@ -83,7 +81,7 @@ function newtonsCorrection(g, l, theta0, thetaDot0, theta) {
  * on our expression for theta dot squared. 
  * 
  * @param arrayOfInputs      An array of problem parameters.
- * @return                   Nothing. Just writes the relevant  
+ * @return                   Same array with the bounds for integration on theta added to the end.
  */
 function thetaBounds(arrayOfInputs) {
     // Parameters of the problem that are necessary to calculate the period
@@ -130,8 +128,7 @@ function thetaBounds(arrayOfInputs) {
  * then uses Chebyshev-Gauss quadrature to compute the time taken to reach this period.
  * 
  * @param arrayOfInputs  An array that contains all the problem parameters.
- * @return               Nothing. Changes the element value/innerHTML of 
- * integralDisplay and tf to T and 4*T, respectively.
+ * @return               Nothing. Changes the element value/innerHTML of integralDisplay and tf to T and 4*T, respectively.
  */
 function periodCalc(arrayOfInputs) {
     // Parameters of the problem that are necessary to calculate the period
@@ -164,7 +161,12 @@ function periodCalc(arrayOfInputs) {
 
     // Change what's displayed on the page accordingly
     document.getElementById("integralDisplay").innerHTML = period;
-    document.getElementById("tf").value = t0 + 4*period;
+    if ( period == Infinity ) {
+        document.getElementById("tf").value = t0 + 100;
+    }
+    else {
+        document.getElementById("tf").value = t0 + 4*period;
+    }
     return period;
 }
 
