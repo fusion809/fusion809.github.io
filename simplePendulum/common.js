@@ -163,8 +163,7 @@ function periodCalc(arrayOfInputs) {
     document.getElementById("integralDisplay").innerHTML = period;
     if ( period == Infinity ) {
         document.getElementById("tf").value = t0 + 100;
-    }
-    else {
+    } else {
         document.getElementById("tf").value = t0 + 4*period;
     }
     return period;
