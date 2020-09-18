@@ -164,9 +164,9 @@ function fillTable() {
     // Extract coordinate arrays from the solution object
     t = solution.t;
     x = solution.x;
-    xDot = solution["xDot"];
-    theta = solution["theta"];
-    thetaDot = solution["thetaDot"];
+    xDot = solution.xDot;
+    theta = solution.theta;
+    thetaDot = solution.thetaDot;
 
     // Write to table
     document.getElementById('tableOutputs').innerHTML = '';
@@ -216,7 +216,7 @@ function generateXThetaPhasePlot() {
 
     // Extra solution data from solution object
     x = solution.x;
-    theta = solution["theta"];
+    theta = solution.theta;
 
     // Height and width of plot
     windowInnerWidth  = window.innerWidth;
@@ -267,7 +267,7 @@ function generateXXDotPhasePlot() {
 
     // Extra solution data from solution object
     x = solution.x;
-    xDot = solution["xDot"];
+    xDot = solution.xDot;
 
     // Height and width of plot
     windowInnerWidth  = window.innerWidth;
@@ -317,8 +317,8 @@ function generateThetaThetaDotPhasePlot() {
     }
     
     // Extra solution data from solution object
-    theta = solution["theta"];
-    thetaDot = solution["thetaDot"];
+    theta = solution.theta;
+    thetaDot = solution.thetaDot;
     
     // Height and width of plot
     windowInnerWidth  = window.innerWidth;
@@ -370,9 +370,9 @@ function generateTimePlot() {
     // Extra solution data from solution object
     t = solution.t;
     x = solution.x;
-    xDot = solution["xDot"];
-    theta = solution["theta"];
-    thetaDot = solution["thetaDot"];
+    xDot = solution.xDot;
+    theta = solution.theta;
+    thetaDot = solution.thetaDot;
 
     // Height and width of plot
     windowInnerWidth  = window.innerWidth;
