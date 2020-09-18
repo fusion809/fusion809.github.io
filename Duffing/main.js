@@ -118,13 +118,13 @@ function fillTable() {
     }
     t = solution.t;
     x = solution.x;
-    xDot = solution["xDot"];
+    xDot = solution.xDot;
     document.getElementById('tableOutputs').innerHTML = '';
     tableContents = '<tr>';
     tableContents += '<th>Index</th>';
     tableContents += '<th>t (seconds)</th>';
-    tableContents += '<th>&x; (radians) </th>';
-    tableContents += '<th>&x; dot <br/>(radians &middot; s<sup>-1</sup>)</th>';
+    tableContents += '<th>x (radians) </th>';
+    tableContents += '<th>x dot <br/>(radians &middot; s<sup>-1</sup>)</th>';
     tableContents += "</tr>";
     for (let j = 0; j < x.length; j++) {
         tableContents += '<tr>';
@@ -161,7 +161,7 @@ function generatePhasePlot() {
 
     // Extract solution data from solution object
     x = solution.x;
-    xDot = solution["xDot"];
+    xDot = solution.xDot;
 
     // Height and width of plot
     windowInnerWidth  = window.innerWidth;
@@ -216,7 +216,7 @@ function generateTimePlot() {
     // Extract solution data from solution object
     t = solution.t;
     x = solution.x;
-    xDot = solution["xDot"];
+    xDot = solution.xDot;
 
     // Height and width of plots
     windowInnerWidth  = window.innerWidth;
