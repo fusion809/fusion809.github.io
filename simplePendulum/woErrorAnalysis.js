@@ -143,7 +143,7 @@ function solveProblem(arrayOfInputs) {
     var solution = RKF45(dtInitial, epsilon, g, l, t0, tf, theta0, thetaDot0);
 
     // Write number of steps to table field
-    document.getElementById("NRKF45").innerHTML = solution["t"].length;
+    document.getElementById("NRKF45").innerHTML = solution.t.length;
 
     return solution;
 };

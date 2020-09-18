@@ -157,13 +157,13 @@ function solveProblem() {
  */
 function fillTable() {
     // Return an error if solveProblem() hasn't been run
-    if ( solution["t"].length == 0) {
+    if ( solution.t.length == 0) {
         solveProblem();
     }
 
     // Extract coordinate arrays from the solution object
-    t = solution["t"];
-    x = solution["x"];
+    t = solution.t;
+    x = solution.x;
     xDot = solution["xDot"];
     theta = solution["theta"];
     thetaDot = solution["thetaDot"];
@@ -210,12 +210,12 @@ function removeTable() {
  */
 function generateXThetaPhasePlot() {
     // Run solveProblem if unrun
-    if ( solution["t"].length == 0) {
+    if ( solution.t.length == 0) {
         solveProblem();
     }
 
     // Extra solution data from solution object
-    x = solution["x"];
+    x = solution.x;
     theta = solution["theta"];
 
     // Height and width of plot
@@ -261,12 +261,12 @@ function removeXThetaPhasePlot() {
  */
 function generateXXDotPhasePlot() {
     // Run solveProblem if unrun
-    if ( solution["t"].length == 0) {
+    if ( solution.t.length == 0) {
         solveProblem();
     }
 
     // Extra solution data from solution object
-    x = solution["x"];
+    x = solution.x;
     xDot = solution["xDot"];
 
     // Height and width of plot
@@ -312,7 +312,7 @@ function removeXXDotPhasePlot() {
  */
 function generateThetaThetaDotPhasePlot() {
     // Run solveProblem if unrun
-    if ( solution["t"].length == 0) {
+    if ( solution.t.length == 0) {
         solveProblem();
     }
     
@@ -363,13 +363,13 @@ function removeThetaThetaDotPhasePlot() {
  */
 function generateTimePlot() {
     // Run solveProblem if unrun
-    if ( solution["t"].length == 0) {
+    if ( solution.t.length == 0) {
         solveProblem();
     }
 
     // Extra solution data from solution object
-    t = solution["t"];
-    x = solution["x"];
+    t = solution.t;
+    x = solution.x;
     xDot = solution["xDot"];
     theta = solution["theta"];
     thetaDot = solution["thetaDot"];

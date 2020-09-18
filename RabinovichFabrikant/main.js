@@ -132,15 +132,15 @@ function solveProblem() {
  */
 function fillTable() {
     // Return an error if solveProblem() hasn't been run
-    if ( solution["t"].length == 0) {
+    if ( solution.t.length == 0) {
         solveProblem();
     }
 
     // Extract coordinate arrays from the solution object
-    t = solution["t"];
-    x = solution["x"];
-    y = solution["y"];
-    z = solution["z"];
+    t = solution.t;
+    x = solution.x;
+    y = solution.y;
+    z = solution.z;
 
     // Write to table
     document.getElementById('tableOutputs').innerHTML = '';
@@ -182,14 +182,14 @@ function removeTable() {
  */
 function generate3DPhasePlot() {
     // Run solveProblem if unrun
-    if ( solution["t"].length == 0) {
+    if ( solution.t.length == 0) {
         solveProblem();
     }
 
     // Extra solution data from solution object
-    x = solution["x"];
-    y = solution["y"];
-    z = solution["z"];
+    x = solution.x;
+    y = solution.y;
+    z = solution.z;
 
     // Height and width of plot
     windowInnerWidth  = window.innerWidth;
@@ -239,13 +239,13 @@ function remove3DPhasePlot() {
  */
 function generateXYPhasePlot() {
     // Run solveProblem if unrun
-    if ( solution["t"].length == 0) {
+    if ( solution.t.length == 0) {
         solveProblem();
     }
 
     // Extra solution data from solution object
-    x = solution["x"];
-    y = solution["y"];
+    x = solution.x;
+    y = solution.y;
 
     // Height and width of plot
     windowInnerWidth  = window.innerWidth;
@@ -290,13 +290,13 @@ function removeXYPhasePlot() {
  */
 function generateXZPhasePlot() {
     // Run solveProblem if unrun
-    if ( solution["t"].length == 0) {
+    if ( solution.t.length == 0) {
         solveProblem();
     }
     
     // Extra solution data from solution object
-    x = solution["x"];
-    z = solution["z"];
+    x = solution.x;
+    z = solution.z;
     
     // Height and width of plot
     windowInnerWidth  = window.innerWidth;
@@ -341,13 +341,13 @@ function removeXZPhasePlot() {
  */
 function generateYZPhasePlot() {
     // Run solveProblem if unrun
-    if ( solution["t"].length == 0) {
+    if ( solution.t.length == 0) {
         solveProblem();
     }
 
     // Extra solution data from solution object
-    y = solution["y"];
-    z = solution["z"];
+    y = solution.y;
+    z = solution.z;
 
     // Height and width of plot
     windowInnerWidth  = window.innerWidth;
@@ -392,15 +392,15 @@ function removeYZPhasePlot() {
  */
 function generateTimePlot() {
     // Run solveProblem if unrun
-    if ( solution["t"].length == 0) {
+    if ( solution.t.length == 0) {
         solveProblem();
     }
 
     // Extra solution data from solution object
-    t = solution["t"];
-    x = solution["x"];
-    y = solution["y"];
-    z = solution["z"];
+    t = solution.t;
+    x = solution.x;
+    y = solution.y;
+    z = solution.z;
 
     // Height and width of plot
     windowInnerWidth  = window.innerWidth;

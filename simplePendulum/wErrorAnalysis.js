@@ -152,7 +152,7 @@ function solveProblem(arrayOfInputs) {
     var solution = RKF45(dtInitial, epsilon, g, l, t0, tf, theta0, thetaDot0);
 
     // Write number of steps to table field
-    document.getElementById("NRKF45").innerHTML = solution["t"].length;
+    document.getElementById("NRKF45").innerHTML = solution.t.length;
 
     return solution;
 };
@@ -168,7 +168,7 @@ function generateErrorPlot(arrayOfInputs) {
     var solution = solveProblem(arrayOfInputs);
 
     // Extract solution data from solution object
-    var t = solution["t"];
+    var t = solution.t;
     var logErrorThetaDot = solution["logErrorThetaDot"];
 
     // Height and width of plots
