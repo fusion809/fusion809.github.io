@@ -110,14 +110,14 @@ function solveProblem() {
  * @return           Nothing. Just populates the table with the solution values. 
  */
 function fillTable() {
-    if ( solution["t"].length == 0) {
+    if ( solution.t.length == 0) {
         solveProblem();
     }
 
     // Extra solution data from solution object
-    t = solution["t"];
-    x = solution["x"];
-    y = solution["y"];
+    t = solution.t;
+    x = solution.x;
+    y = solution.y;
 
     // Clear innerHTML in case the table already exists and we're replacing 
     // it
@@ -157,14 +157,14 @@ function removeTable() {
  */
 function generatePhasePlot() {
     // If solveProblem() hasn't been run, re-run it. 
-    if ( solution["t"].length == 0) {
+    if ( solution.t.length == 0) {
         solveProblem();
     }
 
     // Extract solution data from solution object
-    t = solution["t"];
-    x = solution["x"];
-    y = solution["y"];
+    t = solution.t;
+    x = solution.x;
+    y = solution.y;
 
     // Height and width of plot
     windowInnerWidth  = window.innerWidth;
@@ -212,14 +212,14 @@ function removePhasePlot() {
  */
 function generateTimePlot() {
     // Solve the problem if it hasn't been already
-    if ( solution["t"].length == 0) {
+    if ( solution.t.length == 0) {
         solveProblem();
     }
 
     // Extract solution data from solution object
-    t = solution["t"];
-    x = solution["x"];
-    y = solution["y"];
+    t = solution.t;
+    x = solution.x;
+    y = solution.y;
 
     // Height and width of plots
     windowInnerWidth  = window.innerWidth;

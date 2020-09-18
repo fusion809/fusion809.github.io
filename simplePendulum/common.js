@@ -190,8 +190,8 @@ function generatePhasePlot(arrayOfInputs) {
     var solution = solveProblem(arrayOfInputs);
 
     // Extract solution data from solution object
-    var theta = solution["theta"];
-    var thetaDot = solution["thetaDot"];
+    var theta = solution.theta;
+    var thetaDot = solution.thetaDot;
 
     // Height and width of plot
     var windowInnerHeight = window.innerHeight;
@@ -240,9 +240,9 @@ function generateTimePlot(arrayOfInputs) {
     var solution = solveProblem(arrayOfInputs);
 
     // Extract solution data from solution object
-    var t = solution["t"];
-    var theta = solution["theta"];
-    var thetaDot = solution["thetaDot"];
+    var t = solution.t;
+    var theta = solution.theta;
+    var thetaDot = solution.thetaDot;
 
     // Height and width of plots
     var windowInnerHeight = window.innerHeight;
@@ -294,9 +294,9 @@ function fillTable(arrayOfInputs) {
     // Define all global variables
     var solution = solveProblem(arrayOfInputs);
     var epsilon = arrayOfInputs[5];
-    var t = solution["t"];
-    var theta = solution["theta"];
-    var thetaDot = solution["thetaDot"];
+    var t = solution.t;
+    var theta = solution.theta;
+    var thetaDot = solution.thetaDot;
     var j = 0;
 
     // Check the number of elements in solution
@@ -306,7 +306,7 @@ function fillTable(arrayOfInputs) {
 
     // Add relevant vars if solution contains them
     if (j > 3) {
-        var errorThetaDot = solution["errorThetaDot"];
+        var errorThetaDot = solution.errorThetaDot;
         var rmsErrorthetaDot = Math.sqrt(math.dot(errorThetaDot, errorThetaDot)/(errorThetaDot.length-1));
     }
     

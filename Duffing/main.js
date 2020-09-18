@@ -112,12 +112,12 @@ function solveProblem() {
  * @return           Nothing. Just populates the table with the solution values. 
  */
 function fillTable() {
-    if ( solution["t"].length == 0) {
-        alert('You haven\'t solved the problem yet! Press the "Solve the problem" button before pressing the "Tabulate the solution" button again.');
+    if ( solution.t.length == 0) {
+        alert('You haven\'t solved the problem yet! Press the "Solve the problem" button before pressing the "Tabulate the solution.t button again.');
         return
     }
-    t = solution["t"];
-    x = solution["x"];
+    t = solution.t;
+    x = solution.x;
     xDot = solution["xDot"];
     document.getElementById('tableOutputs').innerHTML = '';
     tableContents = '<tr>';
@@ -155,12 +155,12 @@ function removeTable() {
  */
 function generatePhasePlot() {
     // Run solveProblem() if previously unrun
-    if ( solution["t"].length == 0) {
+    if ( solution.t.length == 0) {
         solveProblem();
     };
 
     // Extract solution data from solution object
-    x = solution["x"];
+    x = solution.x;
     xDot = solution["xDot"];
 
     // Height and width of plot
@@ -209,13 +209,13 @@ function removePhasePlot() {
  */
 function generateTimePlot() {
     // Run solveProblem() if previously unrun
-    if ( solution["t"].length == 0) {
+    if ( solution.t.length == 0) {
         solveProblem();
     };
 
     // Extract solution data from solution object
-    t = solution["t"];
-    x = solution["x"];
+    t = solution.t;
+    x = solution.x;
     xDot = solution["xDot"];
 
     // Height and width of plots
