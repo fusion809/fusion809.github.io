@@ -112,13 +112,18 @@ function solveProblem() {
  * @return           Nothing. Just populates the table with the solution values. 
  */
 function fillTable() {
+    // Solve the problem if not already solved
     if ( solution.t.length == 0) {
-        alert('You haven\'t solved the problem yet! Press the "Solve the problem" button before pressing the "Tabulate the solution.t button again.');
+        solveProblem();
         return
     }
+
+    // Extract solution values
     t = solution.t;
     x = solution.x;
     xDot = solution.xDot;
+
+    // Create table
     document.getElementById('tableOutputs').innerHTML = '';
     tableContents = '<tr>';
     tableContents += '<th>Index</th>';
