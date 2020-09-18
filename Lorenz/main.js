@@ -50,7 +50,7 @@ function solveProblem() {
     y = [y0];
     z = [z0];
     dt = dtInitial;
-    i = 0;
+    var i = 0;
 
     // Loop over each step until we reach the endpoint
     while ( t[i] < tf ) {

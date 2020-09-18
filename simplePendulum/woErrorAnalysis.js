@@ -14,7 +14,7 @@
  */
 function approximatorRKF45(g, l, dt, t, theta, thetaDot, i) {
     // Runge-Kutta-Fehlberg approximations of the change in theta and 
-    // thetaDot over the step/
+    // thetaDot over the step
     var k1 = dt*f(g, l, t[i], theta[i], thetaDot[i])[0];
     var l1 = dt*f(g, l, t[i], theta[i], thetaDot[i])[1];
     var k2 = dt*f(g, l, t[i]+dt/4, theta[i]+k1/4, thetaDot[i]+l1/4)[0];
@@ -110,19 +110,19 @@ function RKF45(dtInitial, epsilon, g, l, t0, tf, theta0, thetaDot0) {
         [i, dt, t, theta, thetaDot] = stepSizeChecker(theta1, theta2, thetaDot1, thetaDot2, epsilon, i, dt, t, theta, thetaDot);
     }
 
-    // Write values to solution object
+    // Write values to solution object and return it, 
+    // a replacement for multiple returns that some languages
+    // support.
     var solution = {
         t: t,
         theta: theta,
         thetaDot: thetaDot
     };
-
-    // Return object
     return solution;
 }
 
 /** 
- * Solve the problem using RK45.
+ * Solve the problem using RKF45.
  *
  * @param arrayOfInputs  An array that contains all the problem parameters.
  * @return               Nothing. But it enters the solution values and error
