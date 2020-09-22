@@ -12,3 +12,4 @@ Currently this website has the following pages, besides this one:
 - [R&ouml;ssler system solver](/Rossler/)
 - [Simple pendulum simulator with error analysis](/simplePendulum/wErrorAnalysis/)
 - [Simple pendulum simulator without error analysis](/simplePendulum/woErrorAnalysis/)
+- [SIR system](/SIR/)
