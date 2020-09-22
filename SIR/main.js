@@ -12,8 +12,14 @@
  * @return           [dx/dt, dy/dt, dz/dt]
  */
 function f(beta, gamma, delta, t, S, I, R) {
+    // Determine N
     var N = S+I+R;
-    return [-beta*S*I*(1-delta)/N, beta*S*I*(1-delta)/N-gamma*I*(1-delta), gamma*I*(1-delta)];
+    // Calculate derivatives
+    var dSdt = - beta * S * I * (1-delta)/N;
+    var dIdt = beta * S * I * (1-delta)/N - gamma * I * (1-delta);
+    var dRdt = gamma*I*(1-delta);
+    // Put into return value
+    return [dSdt, dIdt, dRdt];
 }
 
 // Initialize our global variables
