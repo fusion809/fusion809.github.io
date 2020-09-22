@@ -91,6 +91,7 @@ function thetaBounds(arrayOfInputs) {
     var theta0 = arrayOfInputs[3];
     var thetaDot0 = arrayOfInputs[4];
     var t0 = arrayOfInputs[7];
+
     // Take our initial guess for thetaMax
     // Check if the problem satisfies the conditions for periodic behaviour
     if ( thetaDot0**2 + 2*g/l * (Math.sin(theta0)-1) > 0) {
@@ -138,6 +139,11 @@ function periodCalc(arrayOfInputs) {
     var t0 = arrayOfInputs[7];
     var theta0 = arrayOfInputs[3];
     var thetaDot0 = arrayOfInputs[4];
+    var nodes = 0;
+    var integrand = 0;
+    var transformedGrid = 0;
+    var integral = 0;
+
     // Kill the function if problem isn't periodic
     if (arrayOfInputs[9] != N) {
         var thetaMin = arrayOfInputs[9];
@@ -145,12 +151,9 @@ function periodCalc(arrayOfInputs) {
     } else {
         return;
     }
+
     // Integrate problem from thetaMin to thetaMax to calculate the period
     // in seconds
-    var nodes = 0;
-    var integrand = 0;
-    var transformedGrid = 0;
-    integral = 0;
     for ( let i = 1; i < N+1; i++) {
         nodes = Math.cos((2*i-1)*Math.PI/(2*N));
         transformedGrid = (thetaMax-thetaMin)*nodes/2+(thetaMax+thetaMin)/2;
@@ -353,6 +356,7 @@ function fillTable(arrayOfInputs) {
 function generatePlots(arrayOfInputs) {
     generateTimePlot(arrayOfInputs);
     generatePhasePlot(arrayOfInputs);
+    // The following if statement is to ensure that errorPlot is only generated if it's present in HTML
     if (!!document.getElementById("errorPlot")) {
         generateErrorPlot(arrayOfInputs);
     }
