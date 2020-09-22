@@ -24,6 +24,7 @@
             \end{aligned}
             \]
 
+            Where \(S\) is the number of susceptible persons, \(I\) is the number of infected persons and \(R\) is the number of recovered persons. \(\beta\) is a parameter that pertains to the average number of contacts per person per time and the rate of transmission for the disease. \(\gamma\) is the inverse of the average time a person is infected with the disease. \(N\) is the total population.
         </div>
 
         <!--A form for users to enter in all the parameters of the problem-->
@@ -40,7 +41,7 @@
                         id="beta"
                         name="beta"
                         value="0.33"></td>
-                    <td>Problem parameter.</td>
+                    <td>A parameter that pertains to how many contacts there are per person and how easily the disease spreads from an infected person to an infected person.</td>
                 </tr>
                 <tr>
                     <td><label for="gamma">\(\gamma\):</label></td>
@@ -48,7 +49,7 @@
                         id="gamma"
                         name="gamma"
                         value="0.25"></td>
-                    <td>Problem parameter.</td>
+                    <td>A parameter that is a measure of how quickly people recover from the disease.</td>
                 </tr>
                 <tr>
                     <td><label for="delta">\(\delta\):</label></td>
@@ -56,7 +57,7 @@
                         id="delta"
                         name="delta"
                         value="0.5"></td>
-                    <td>Problem parameter.</td>
+                    <td>A parameter with values from 0 to 1 pertaining to how effective quarantine measures are at slowing the disease outbreak. If \(\delta = 0\), the measures are either non-existent or completely ineffective.</td>
                 </tr>
                 <tr>
                     <td><label for="t0">\(t_0\):</label></td>
