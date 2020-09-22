@@ -22,14 +22,171 @@ function f(beta, gamma, delta, t, S, I, R) {
     return [dSdt, dIdt, dRdt];
 }
 
-// Initialize our global variables
-var solution = {
-    t: [],
-    S: [],
-    I: [],
-    R: []
-};
-var epsilon;
+/**
+ * Calculates RKF45 approximations for S, I and R values for next step.
+ * 
+ * @param dt            Step size.
+ * @param beta          Problem parameter.
+ * @param gamma         Problem parameter.
+ * @param delta         Problem parameter.
+ * @param t             Array of t values.
+ * @param S             Array of S values.
+ * @param I             Array of I values.
+ * @param R             Array of R values.
+ * @param i             Loop counter index.
+ * @return              An array of 4th and 5th order approximations to S, I and R at time next step.
+ */
+function approximatorRKF45(dt, beta, gamma, delta, t, S, I, R, i) {
+    // Runge-Kutta-Fehlberg approximations of the change in S, I and R
+    // over the step
+    // 1st approx
+    var k1 = dt*f(beta, gamma, delta, t[i], S[i], I[i], R[i])[0];
+    var l1 = dt*f(beta, gamma, delta, t[i], S[i], I[i], R[i])[1];
+    var m1 = dt*f(beta, gamma, delta, t[i], S[i], I[i], R[i])[2];
+    // 2nd approx
+    var k2 = dt*f(beta, gamma, delta, t[i]+dt/4, S[i]+k1/4, I[i]+l1/4, R[i]+m1/4)[0];
+    var l2 = dt*f(beta, gamma, delta, t[i]+dt/4, S[i]+k1/4, I[i]+l1/4, R[i]+m1/4)[1];
+    var m2 = dt*f(beta, gamma, delta, t[i]+dt/4, S[i]+k1/4, I[i]+l1/4, R[i]+m1/4)[2];
+    // 3rd approx
+    var k3 = dt*f(beta, gamma, delta, t[i]+3*dt/8, S[i]+3*k1/32+9*k2/32, I[i]+3*l1/32+9*l2/32, R[i]+3*m1/32+9*m2/32)[0];
+    var l3 = dt*f(beta, gamma, delta, t[i]+3*dt/8, S[i]+3*k1/32+9*k2/32, I[i]+3*l1/32+9*l2/32, R[i]+3*m1/32+9*m2/32)[1];
+    var m3 = dt*f(beta, gamma, delta, t[i]+3*dt/8, S[i]+3*k1/32+9*k2/32, I[i]+3*l1/32+9*l2/32, R[i]+3*m1/32+9*m2/32)[2];
+    // 4th approx
+    var k4 = dt*f(beta, gamma, delta, t[i]+12*dt/13, S[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, I[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197, R[i]+1932*m1/2197-7200*m2/2197+7296*m3/2197)[0];
+    var l4 = dt*f(beta, gamma, delta, t[i]+12*dt/13, S[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, I[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197, R[i]+1932*m1/2197-7200*m2/2197+7296*m3/2197)[1];
+    var m4 = dt*f(beta, gamma, delta, t[i]+12*dt/13, S[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, I[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197, R[i]+1932*m1/2197-7200*m2/2197+7296*m3/2197)[2];
+    // 5th approx
+    var k5 = dt*f(beta, gamma, delta, t[i]+dt, S[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, I[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104, R[i]+439*m1/216-8*m2+3680*m3/513-845*m4/4104)[0];
+    var l5 = dt*f(beta, gamma, delta, t[i]+dt, S[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, I[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104, R[i]+439*m1/216-8*m2+3680*m3/513-845*m4/4104)[1];
+    var m5 = dt*f(beta, gamma, delta, t[i]+dt, S[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, I[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104, R[i]+439*m1/216-8*m2+3680*m3/513-845*m4/4104)[2];
+    // 6th approx
+    var k6 = dt*f(beta, gamma, delta, t[i]+dt/2, S[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, I[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40, R[i]-8*m1/27+2*m2-3544*m3/2565+1859*m4/4104-11*m5/40)[0];
+    var l6 = dt*f(beta, gamma, delta, t[i]+dt/2, S[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, I[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40, R[i]-8*m1/27+2*m2-3544*m3/2565+1859*m4/4104-11*m5/40)[1];
+    var m6 = dt*f(beta, gamma, delta, t[i]+dt/2, S[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, I[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40, R[i]-8*m1/27+2*m2-3544*m3/2565+1859*m4/4104-11*m5/40)[2];
+
+    // x1, y1 and z1 are our fourth order approximations
+    var x1 = S[i] + 25*k1/216+1408*k3/2565+2197*k4/4104-k5/5;
+    var y1 = I[i] + 25*l1/216+1408*l3/2565+2197*l4/4104-l5/5;
+    var z1 = R[i] + 25*m1/216+1408*m3/2565+2197*m4/4104-m5/5;
+
+    // x2, y2 and z2 are our fifth order approximations
+    var x2 = S[i] + 16*k1/135+6656*k3/12825+28561*k4/56430-9*k5/50+2*k6/55;
+    var y2 = I[i] + 16*l1/135+6656*l3/12825+28561*l4/56430-9*l5/50+2*l6/55;
+    var z2 = R[i] + 16*m1/135+6656*m3/12825+28561*m4/56430-9*m5/50+2*m6/55;
+    
+    return [x1, y1, z1, x2, y2, z2];
+}
+
+/**
+ * Step size checker and adapter function
+ * @param dt            Current step size.
+ * @param epsilon       Error tolerance.
+ * @param t             An array of t values.
+ * @param S             An array of previous S values against time.
+ * @param I             An array of previous I values against time.
+ * @param R             An array of previous R values against time.
+ * @param x1            4th order approx for S at next step 
+ * @param y1            4th order approx for I at next step
+ * @param z1            4th order approx for R at next step
+ * @param x2            5th order approx for S at next step
+ * @param y2            5th order approx for I at next step
+ * @param z2            5th order approx for R at next step
+ * @param i             Counter variable value.
+ * @return              Corrected dt and updated t, S, I, R and i.
+ */
+function stepSizeChecker(dt, epsilon, t, S, I, R, x1, y1, z1, x2, y2, z2, i) {
+    // The following are used to correct the step size
+    Rx = Math.abs(x1-x2)/dt;
+    Ry = Math.abs(y1-y2)/dt;
+    Rz = Math.abs(z1-z2)/dt;
+    sx = 0.84*Math.pow(epsilon/Rx, 1/4);                
+    sy = 0.84*Math.pow(epsilon/Ry, 1/4);
+    sz = 0.84*Math.pow(epsilon/Rz, 1/4);
+    RRKF45 = Math.max(Rx, Ry, Rz);
+    s = Math.min(sx, sy, sz);
+
+    // If R is less than or equal to epsilon move onto the next step
+    if ( RRKF45 <= epsilon ) {
+        t.push(t[i]+dt);
+        S.push(x1);
+        I.push(y1);
+        R.push(z1);
+        i++;
+        dt *= s;
+    } else {
+        dt *= s;
+    }
+
+    return [dt, t, S, I, R, i];
+}
+
+/**
+ * Runge-Kutta-Fehlberg 4/5th order integrator function
+ * 
+ * @param dtInitial     Initial guess for dt.
+ * @param epsilon       Error tolerance.
+ * @param beta          SIR parameter.
+ * @param gamma         SIR parameter.
+ * @param delta         SIR parameter.
+ * @param t0            Day the simulation starts
+ * @param tf            Day the simulation ends
+ * @param S0            Initial number of susceptible persons.
+ * @param I0            Initial number of infected persons.
+ * @param R0            Initial number of recovered persons.
+ * @return              Solution object containing arrays of time, S, I and R values.
+ */
+function RKF45(dtInitial, epsilon, beta, gamma, delta, t0, tf, S0, I0, R0) {
+    // Initialize the arrays used and loop variables
+    var t = [t0];
+    var S = [S0];
+    var I = [I0];
+    var R = [R0];
+    var dt = dtInitial;
+    var i = 0;
+    
+    // Loop over each step until we reach the endpoint
+    while ( t[i] < tf ) {
+        // Step size, as dictated by the method
+        dt = Math.min(dt, tf-t[i]);
+
+        // Use approximatorRKF45 to make approximations
+        var [x1, y1, z1, x2, y2, z2] = approximatorRKF45(dt, beta, gamma, delta, t, S, I, R, i);
+    
+        // Step size correction
+        [dt, t, S, I, R, i] = stepSizeChecker(dt, epsilon, t, S, I, R, x1, y1, z1, x2, y2, z2, i);
+    }
+    
+    // Write t, S, I and R to our solution object
+    var solution = {
+        t: t,
+        S: S,
+        I: I,
+        R: R
+    };
+
+    return solution;
+}
+
+/**
+ * Read inputs from the form and return them in an array
+ * 
+ * @param               Nothing.
+ * @return              An array containing all the form inputs.
+ */
+function readInputs() {
+    var beta = parseFloat(document.getElementById("beta").value);
+    var gamma = parseFloat(document.getElementById("gamma").value);
+    var delta = parseFloat(document.getElementById("delta").value);
+    var t0 = parseFloat(document.getElementById("t0").value);
+    var tf = parseFloat(document.getElementById("tf").value);
+    var S0 = parseFloat(document.getElementById("S0").value);
+    var I0 = parseFloat(document.getElementById("I0").value);
+    var R0 = parseFloat(document.getElementById("R0").value);
+    var epsilon = parseFloat(document.getElementById("epsilon").value);
+    var dtInitial = parseFloat(document.getElementById("dtInitial").value);
+
+    return [dtInitial, epsilon, beta, gamma, delta, t0, tf, S0, I0, R0];
+}
 
 /** 
  * Solve the problem using RK45.
@@ -38,99 +195,22 @@ var epsilon;
  * @return           Nothing. But it enters the solution values into the solution
  * object.
  */
-function solveProblem() {
+function solveProblem(arrayOfInputs) {
     // Obtain the parameters of the problem
-    beta = parseFloat(document.getElementById("beta").value);
-    gamma = parseFloat(document.getElementById("gamma").value);
-    delta = parseFloat(document.getElementById("delta").value);
-    t0 = parseFloat(document.getElementById("t0").value);
-    tf = parseFloat(document.getElementById("tf").value);
-    S0 = parseFloat(document.getElementById("S0").value);
-    I0 = parseFloat(document.getElementById("I0").value);
-    R0 = parseFloat(document.getElementById("R0").value);
-    epsilon = parseFloat(document.getElementById("epsilon").value);
-    dtInitial = parseFloat(document.getElementById("dtInitial").value);
+    var dtInitial = arrayOfInputs[0];
+    var epsilon = arrayOfInputs[1];
+    var beta = arrayOfInputs[2];
+    var gamma = arrayOfInputs[3];
+    var delta = arrayOfInputs[4];
+    var t0 = arrayOfInputs[5];
+    var tf = arrayOfInputs[6];
+    var S0 = arrayOfInputs[7];
+    var I0 = arrayOfInputs[8];
+    var R0 = arrayOfInputs[9];
 
-    // Initialize the arrays used and loop variables
-    t = [t0];
-    S = [S0];
-    I = [I0];
-    R = [R0];
-    dt = dtInitial;
-    var i = 0;
+    var solution = RKF45(dtInitial, epsilon, beta, gamma, delta, t0, tf, S0, I0, R0);
 
-    // Loop over each step until we reach the endpoint
-    while ( t[i] < tf ) {
-        // Step size, as dictated by the method
-        dt = Math.min(dt, tf-t[i]);
-
-        // Runge-Kutta-Fehlberg approximations of the change in S, I and R
-        // over the step
-        // 1st approx
-        k1 = dt*f(beta, gamma, delta, t[i], S[i], I[i], R[i])[0];
-        l1 = dt*f(beta, gamma, delta, t[i], S[i], I[i], R[i])[1];
-        m1 = dt*f(beta, gamma, delta, t[i], S[i], I[i], R[i])[2];
-        // 2nd approx
-        k2 = dt*f(beta, gamma, delta, t[i]+dt/4, S[i]+k1/4, I[i]+l1/4, R[i]+m1/4)[0];
-        l2 = dt*f(beta, gamma, delta, t[i]+dt/4, S[i]+k1/4, I[i]+l1/4, R[i]+m1/4)[1];
-        m2 = dt*f(beta, gamma, delta, t[i]+dt/4, S[i]+k1/4, I[i]+l1/4, R[i]+m1/4)[2];
-        // 3rd approx
-        k3 = dt*f(beta, gamma, delta, t[i]+3*dt/8, S[i]+3*k1/32+9*k2/32, I[i]+3*l1/32+9*l2/32, R[i]+3*m1/32+9*m2/32)[0];
-        l3 = dt*f(beta, gamma, delta, t[i]+3*dt/8, S[i]+3*k1/32+9*k2/32, I[i]+3*l1/32+9*l2/32, R[i]+3*m1/32+9*m2/32)[1];
-        m3 = dt*f(beta, gamma, delta, t[i]+3*dt/8, S[i]+3*k1/32+9*k2/32, I[i]+3*l1/32+9*l2/32, R[i]+3*m1/32+9*m2/32)[2];
-        // 4th approx
-        k4 = dt*f(beta, gamma, delta, t[i]+12*dt/13, S[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, I[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197, R[i]+1932*m1/2197-7200*m2/2197+7296*m3/2197)[0];
-        l4 = dt*f(beta, gamma, delta, t[i]+12*dt/13, S[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, I[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197, R[i]+1932*m1/2197-7200*m2/2197+7296*m3/2197)[1];
-        m4 = dt*f(beta, gamma, delta, t[i]+12*dt/13, S[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, I[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197, R[i]+1932*m1/2197-7200*m2/2197+7296*m3/2197)[2];
-        // 5th approx
-        k5 = dt*f(beta, gamma, delta, t[i]+dt, S[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, I[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104, R[i]+439*m1/216-8*m2+3680*m3/513-845*m4/4104)[0];
-        l5 = dt*f(beta, gamma, delta, t[i]+dt, S[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, I[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104, R[i]+439*m1/216-8*m2+3680*m3/513-845*m4/4104)[1];
-        m5 = dt*f(beta, gamma, delta, t[i]+dt, S[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, I[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104, R[i]+439*m1/216-8*m2+3680*m3/513-845*m4/4104)[2];
-        // 6th approx
-        k6 = dt*f(beta, gamma, delta, t[i]+dt/2, S[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, I[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40, R[i]-8*m1/27+2*m2-3544*m3/2565+1859*m4/4104-11*m5/40)[0];
-        l6 = dt*f(beta, gamma, delta, t[i]+dt/2, S[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, I[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40, R[i]-8*m1/27+2*m2-3544*m3/2565+1859*m4/4104-11*m5/40)[1];
-        m6 = dt*f(beta, gamma, delta, t[i]+dt/2, S[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, I[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40, R[i]-8*m1/27+2*m2-3544*m3/2565+1859*m4/4104-11*m5/40)[2];
-
-        // x1, y1 and z1 are our fourth order approximations
-        x1 = S[i] + 25*k1/216+1408*k3/2565+2197*k4/4104-k5/5;
-        y1 = I[i] + 25*l1/216+1408*l3/2565+2197*l4/4104-l5/5;
-        z1 = R[i] + 25*m1/216+1408*m3/2565+2197*m4/4104-m5/5;
-
-        // x2, y2 and z2 are our fifth order approximations
-        x2 = S[i] + 16*k1/135+6656*k3/12825+28561*k4/56430-9*k5/50+2*k6/55;
-        y2 = I[i] + 16*l1/135+6656*l3/12825+28561*l4/56430-9*l5/50+2*l6/55;
-        z2 = R[i] + 16*m1/135+6656*m3/12825+28561*m4/56430-9*m5/50+2*m6/55;
-
-        // The following are used to correct the step size
-        Rx = Math.abs(x1-x2)/dt;
-        Ry = Math.abs(y1-y2)/dt;
-        Rz = Math.abs(z1-z2)/dt;
-        sx = 0.84*Math.pow(epsilon/Rx, 1/4);                
-        sy = 0.84*Math.pow(epsilon/Ry, 1/4);
-        sz = 0.84*Math.pow(epsilon/Rz, 1/4);
-        RRKF45 = Math.max(Rx, Ry, Rz);
-        s = Math.min(sx, sy, sz);
-
-        // If R is less than or equal to epsilon move onto the next step
-        if ( RRKF45 <= epsilon ) {
-            t.push(t[i]+dt);
-            S.push(x1);
-            I.push(y1);
-            R.push(z1);
-            i++;
-            dt *= s;
-        } else {
-            dt *= s;
-        }
-    }
-
-    // Write t, S, I and R to our solution object
-    solution = {
-        t: t,
-        S: S,
-        I: I,
-        R: R
-    };
+    return solution;
 }
 
 /**
@@ -139,8 +219,9 @@ function solveProblem() {
  * @params           None. Uses the entries of the solution object, however. 
  * @return           Nothing. Just populates the table with the solution values. 
  */
-function fillTable() {
-    solveProblem();
+function fillTable(arrayOfInputs) {
+    var solution = solveProblem(arrayOfInputs);
+    var epsilon = arrayOfInputs[1];
 
     // Extract coordinate arrays from the solution object
     t = solution.t;
@@ -198,9 +279,9 @@ function setPlotElementDims(name) {
  * @params           None.
  * @return           Nothing.
  */
-function generate3DPhasePlot() {
+function generate3DPhasePlot(arrayOfInputs) {
     // Run solveProblem if unrun
-    solveProblem();
+    var solution = solveProblem(arrayOfInputs);
 
     // Extra solution data from solution object
     S = solution.S;
@@ -251,8 +332,8 @@ function remove3DPhasePlot() {
  * @params           None.
  * @return           Nothing.
  */
-function generateXYPhasePlot() {
-    solveProblem();
+function generateXYPhasePlot(arrayOfInputs) {
+    var solution = solveProblem(arrayOfInputs);
 
     // Extra solution data from solution object
     S = solution.S;
@@ -297,8 +378,8 @@ function removeXYPhasePlot() {
  * @params           None.
  * @return           Nothing.
  */
-function generateXZPhasePlot() {
-    solveProblem();
+function generateXZPhasePlot(arrayOfInputs) {
+    var solution = solveProblem(arrayOfInputs);
     
     // Extra solution data from solution object
     S = solution.S;
@@ -343,8 +424,8 @@ function removeXZPhasePlot() {
  * @params           None.
  * @return           Nothing.
  */
-function generateYZPhasePlot() {
-    solveProblem();
+function generateYZPhasePlot(arrayOfInputs) {
+    var solution = solveProblem(arrayOfInputs);
 
     // Extra solution data from solution object
     I = solution.I;
@@ -389,8 +470,8 @@ function removeYZPhasePlot() {
  * @params           None.
  * @return           Nothing.
  */
-function generateTimePlot() {
-    solveProblem();
+function generateTimePlot(arrayOfInputs) {
+    var solution = solveProblem(arrayOfInputs);
 
     // Extra solution data from solution object
     t = solution.t;
@@ -459,12 +540,12 @@ function removeTimePlot() {
  * @params           None.
  * @return           Nothing. Just generates the plots.
  */
-function generatePlots() {
-    generate3DPhasePlot();
-    generateXYPhasePlot();
-    generateXZPhasePlot();
-    generateYZPhasePlot();
-    generateTimePlot();
+function generatePlots(arrayOfInputs) {
+    generate3DPhasePlot(arrayOfInputs);
+    generateXYPhasePlot(arrayOfInputs);
+    generateXZPhasePlot(arrayOfInputs);
+    generateYZPhasePlot(arrayOfInputs);
+    generateTimePlot(arrayOfInputs);
 };
 
 /**
