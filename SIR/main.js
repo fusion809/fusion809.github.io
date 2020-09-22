@@ -140,10 +140,7 @@ function solveProblem() {
  * @return           Nothing. Just populates the table with the solution values. 
  */
 function fillTable() {
-    // Return an error if solveProblem() hasn't been run
-    if ( solution.t.length == 0) {
-        solveProblem();
-    }
+    solveProblem();
 
     // Extract coordinate arrays from the solution object
     t = solution.t;
@@ -184,6 +181,18 @@ function removeTable() {
 }
 
 /**
+ * Set the dimensions of specified plot element
+ * 
+ * @param name          Name of the plot HTML element.
+ * @return              None.
+ */
+function setPlotElementDims(name) {
+    var windowInnerWidth  = window.innerWidth;
+    var windowInnerHeight = window.innerHeight;
+    document.getElementById(name).style = "height: " + windowInnerHeight + "px;";
+}
+
+/**
  * Generates a 3D phase plot
  * 
  * @params           None.
@@ -191,9 +200,7 @@ function removeTable() {
  */
 function generate3DPhasePlot() {
     // Run solveProblem if unrun
-    if ( solution.t.length == 0) {
-        solveProblem();
-    }
+    solveProblem();
 
     // Extra solution data from solution object
     S = solution.S;
@@ -201,9 +208,7 @@ function generate3DPhasePlot() {
     R = solution.R;
 
     // Height and width of plot
-    windowInnerWidth  = window.innerWidth;
-    windowInnerHeight = window.innerHeight;
-    document.getElementById("phasePlotXYZ").style = "height: " + windowInnerHeight + "px;";
+    setPlotElementDims("phasePlotXYZ");
 
     // Plot object and data object array
     var plotXYZ = {
@@ -222,7 +227,7 @@ function generate3DPhasePlot() {
 
     // layout object
     var layoutXYZ = {
-        title: 'Phase plot of the solution to the SIR equations. x = S, y = I, z = R'
+        title: 'Phase plot of the solution to the SIR equations. x = S, y = I and z = R'
     };
 
     // Generate plot
@@ -247,19 +252,14 @@ function remove3DPhasePlot() {
  * @return           Nothing.
  */
 function generateXYPhasePlot() {
-    // Run solveProblem if unrun
-    if ( solution.t.length == 0) {
-        solveProblem();
-    }
+    solveProblem();
 
     // Extra solution data from solution object
     S = solution.S;
     I = solution.I;
 
     // Height and width of plot
-    windowInnerWidth  = window.innerWidth;
-    windowInnerHeight = window.innerHeight;
-    document.getElementById("phasePlotXY").style = "height: " + windowInnerHeight + "px;";
+    setPlotElementDims("phasePlotXY");
 
     // Plot object and data object array
     var plotXY = {
@@ -298,19 +298,14 @@ function removeXYPhasePlot() {
  * @return           Nothing.
  */
 function generateXZPhasePlot() {
-    // Run solveProblem if unrun
-    if ( solution.t.length == 0) {
-        solveProblem();
-    }
+    solveProblem();
     
     // Extra solution data from solution object
     S = solution.S;
     R = solution.R;
     
     // Height and width of plot
-    windowInnerWidth  = window.innerWidth;
-    windowInnerHeight = window.innerHeight;
-    document.getElementById("phasePlotXZ").style = "height: " + windowInnerHeight + "px;";
+    setPlotElementDims("phasePlotXZ");
     
     // Plot object and data object array
     var plotXZ = {
@@ -349,19 +344,14 @@ function removeXZPhasePlot() {
  * @return           Nothing.
  */
 function generateYZPhasePlot() {
-    // Run solveProblem if unrun
-    if ( solution.t.length == 0) {
-        solveProblem();
-    }
+    solveProblem();
 
     // Extra solution data from solution object
     I = solution.I;
     R = solution.R;
 
     // Height and width of plot
-    windowInnerWidth  = window.innerWidth;
-    windowInnerHeight = window.innerHeight;
-    document.getElementById("phasePlotYZ").style = "height: " + windowInnerHeight + "px;";
+    setPlotElementDims("phasePlotYZ");
 
     // Plot object and data object array
     var plotYZ = {
@@ -400,10 +390,7 @@ function removeYZPhasePlot() {
  * @return           Nothing.
  */
 function generateTimePlot() {
-    // Run solveProblem if unrun
-    if ( solution.t.length == 0) {
-        solveProblem();
-    }
+    solveProblem();
 
     // Extra solution data from solution object
     t = solution.t;
@@ -412,9 +399,7 @@ function generateTimePlot() {
     R = solution.R;
 
     // Height and width of plot
-    windowInnerWidth  = window.innerWidth;
-    windowInnerHeight = window.innerHeight;
-    document.getElementById("timePlot").style = "height: " + windowInnerHeight + "px;";
+    setPlotElementDims("timePlot");
 
     // Plot object and data object array
     var plotTX = {
