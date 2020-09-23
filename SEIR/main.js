@@ -15,7 +15,7 @@ function f(a, beta, gamma, delta, lambda, mu, t, S, E, I, R) {
     // Determine N
     var N = S + E + I + R;
     // Calculate derivatives
-    var exposure = beta * S * I * (1-delta)/N;
+    var exposure = (beta * S * I * (1-delta))/N;
     var dSdt = lambda*N - mu * S - exposure;
     var dEdt = exposure - (mu + a)*E;
     var dIdt = a*E - (mu + gamma) * I;
