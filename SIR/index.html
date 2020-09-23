@@ -19,12 +19,14 @@
             \[
             \begin{aligned}
             \dfrac{dS}{dt} &= -\dfrac{\beta I (1-\delta)S}{N} \\
-            \dfrac{dI}{dt} &= \dfrac{\beta I(1-\delta)S}{N} - \gamma I(1-\delta) \\
-            \dfrac{dR}{dt} &= \gamma I(1-\delta).
+            \dfrac{dI}{dt} &= \dfrac{\beta I(1-\delta)S}{N} - \gamma I \\
+            \dfrac{dR}{dt} &= \gamma I.
             \end{aligned}
             \]
 
             Where \(S\) is the number of susceptible persons, \(I\) is the number of infected persons and \(R\) is the number of recovered persons. \(\beta\) is a parameter that pertains to the average number of contacts per person per time and the rate of transmission for the disease. \(\gamma\) is the inverse of the average time a person is infected with the disease. \(N\) is the total population.
+
+            My original model had \(\gamma I\) multiplied by \(1-\delta\), but as quarantine should not affect how long it takes for people to recover, it should not affect this term.
         </div>
 
         <!--A form for users to enter in all the parameters of the problem-->

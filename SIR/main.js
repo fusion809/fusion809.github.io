@@ -16,8 +16,8 @@ function f(beta, gamma, delta, t, S, I, R) {
     var N = S+I+R;
     // Calculate derivatives
     var dSdt = - beta * S * I * (1-delta)/N;
-    var dIdt = beta * S * I * (1-delta)/N - gamma * I * (1-delta);
-    var dRdt = gamma*I*(1-delta);
+    var dIdt = beta * S * I * (1-delta)/N - gamma * I;
+    var dRdt = gamma*I;
     // Put into return value
     return [dSdt, dIdt, dRdt];
 }
