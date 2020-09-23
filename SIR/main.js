@@ -174,6 +174,7 @@ function RKF45(dtInitial, epsilon, beta, gamma, delta, t0, tf, S0, I0, R0) {
  * @return              An array containing all the form inputs.
  */
 function readInputs() {
+    // Take parameter values from the form
     var beta = parseFloat(document.getElementById("beta").value);
     var gamma = parseFloat(document.getElementById("gamma").value);
     var delta = parseFloat(document.getElementById("delta").value);
@@ -185,6 +186,7 @@ function readInputs() {
     var epsilon = parseFloat(document.getElementById("epsilon").value);
     var dtInitial = parseFloat(document.getElementById("dtInitial").value);
 
+    // Enter into arrayOfInputs
     return [dtInitial, epsilon, beta, gamma, delta, t0, tf, S0, I0, R0];
 }
 
@@ -208,8 +210,8 @@ function solveProblem(arrayOfInputs) {
     var I0 = arrayOfInputs[8];
     var R0 = arrayOfInputs[9];
 
+    // Solve problem using RKF45 and return result
     var solution = RKF45(dtInitial, epsilon, beta, gamma, delta, t0, tf, S0, I0, R0);
-
     return solution;
 }
 
