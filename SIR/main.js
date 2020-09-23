@@ -270,8 +270,10 @@ function removeTable() {
  * @return              None.
  */
 function setPlotElementDims(name) {
-    var windowInnerWidth  = window.innerWidth;
+    // Initialize variables
     var windowInnerHeight = window.innerHeight;
+
+    // Set dimensions
     document.getElementById(name).style = "height: " + windowInnerHeight + "px;";
 }
 
