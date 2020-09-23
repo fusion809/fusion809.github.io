@@ -170,7 +170,7 @@ function RKF45(dtInitial, epsilon, beta, gamma, delta, t0, tf, S0, I0, R0) {
 /**
  * Read inputs from the form and return them in an array
  * 
- * @param               Nothing.
+ * @params              Nothing.
  * @return              An array containing all the form inputs.
  */
 function readInputs() {
