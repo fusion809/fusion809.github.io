@@ -97,11 +97,7 @@ function newtonsCorrection(g, l, theta0, thetaDot0, theta) {
  */
 function thetaBounds(objectOfInputs) {
     // Parameters of the problem that are necessary to calculate the period
-    var g = objectOfInputs.g;
-    var l = objectOfInputs.l;
-    var theta0 = objectOfInputs.theta0;
-    var thetaDot0 = objectOfInputs.thetaDot0;
-    var t0 = objectOfInputs.t0;
+    var {g, l, theta0, thetaDot0, t0} = objectOfInputs;
 
     // Take our initial guess for thetaMax
     // Check if the problem satisfies the conditions for periodic behaviour
@@ -145,12 +141,7 @@ function thetaBounds(objectOfInputs) {
  */
 function periodCalc(objectOfInputs) {
     // Parameters of the problem that are necessary to calculate the period
-    var g = objectOfInputs.g;
-    var l = objectOfInputs.l;
-    var N = objectOfInputs.N;
-    var t0 = objectOfInputs.t0;
-    var theta0 = objectOfInputs.theta0;
-    var thetaDot0 = objectOfInputs.thetaDot0;
+    var {g, l, N, t0, theta0, thetaDot0} = objectOfInputs;
     var nodes = 0;
     var integrand = 0;
     var transformedGrid = 0;
@@ -202,12 +193,9 @@ function removeTable() {
  * @return               Nothing. Just generates the relevant plot.
  */
 function generatePhasePlot(objectOfInputs) {
-    // Run solveProblem() if previously unrun
+    // Solve the problem
     var solution = solveProblem(objectOfInputs);
-
-    // Extract solution data from solution object
-    var theta = solution.theta;
-    var thetaDot = solution.thetaDot;
+    var {theta, thetaDot} = solution;
 
     // Height and width of plot
     var windowInnerHeight = window.innerHeight;
@@ -256,9 +244,7 @@ function generateTimePlot(objectOfInputs) {
     var solution = solveProblem(objectOfInputs);
 
     // Extract solution data from solution object
-    var t = solution.t;
-    var theta = solution.theta;
-    var thetaDot = solution.thetaDot;
+    var {t, theta, thetaDot} = solution;
 
     // Height and width of plots
     var windowInnerHeight = window.innerHeight;
@@ -310,9 +296,7 @@ function fillTable(objectOfInputs) {
     // Define all global variables
     var solution = solveProblem(objectOfInputs);
     var epsilon = objectOfInputs.epsilon;
-    var t = solution.t;
-    var theta = solution.theta;
-    var thetaDot = solution.thetaDot;
+    var {t, theta, thetaDot} = solution.thetaDot;
     var j = 0;
 
     // Check the number of elements in solution
