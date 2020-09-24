@@ -15,6 +15,12 @@ function f(a, b, c, t, x, y, z) {
     return [-y-z, x + a*y, b + z*(x-c)];
 }
 
+/**
+ * Reads the form inputs and returns an object containing the inputs
+ * 
+ * @params              None.
+ * @return              An object of inputs.
+ */
 function readInputs() {
     var a = parseFloat(document.getElementById("a").value);
     var b = parseFloat(document.getElementById("b").value);
@@ -43,11 +49,10 @@ function readInputs() {
 }
 
 /** 
- * Solve the problem using RK45.
+ * Solve the problem using RKF45.
  *
- * @params           None. Uses parameter values in the forum.
- * @return           Nothing. But it enters the solution values into the solution
- * object.
+ * @param objectOfInputs An object containing all the problem parameters.
+ * @return               Nothing. But it enters the solution values into the solution object.
  */
 function solveProblem(objectOfInputs) {
     // Obtain the parameters of the problem
@@ -139,8 +144,8 @@ function solveProblem(objectOfInputs) {
 /**
  * Tabulates solution data.
  *
- * @params           None. Uses the entries of the solution object, however. 
- * @return           Nothing. Just populates the table with the solution values. 
+ * @param objectOfInputs An object containing all the problem parameters.
+ * @return               Nothing. Just populates the table with the solution values. 
  */
 function fillTable(objectOfInputs) {
     // Solve problem
@@ -184,8 +189,8 @@ function removeTable() {
 /**
  * Generates a 3D phase plot
  * 
- * @params           None.
- * @return           Nothing.
+ * @param objectOfInputs An object containing all the problem parameters.
+ * @return               Nothing.
  */
 function generate3DPhasePlot(objectOfInputs) {
     // Solve problem
@@ -236,12 +241,12 @@ function remove3DPhasePlot() {
 /**
  * Generates a XY phase plot
  * 
- * @params           None.
- * @return           Nothing.
+ * @param objectOfInputs An object containing all the problem parameters.
+ * @return               Nothing.
  */
 function generateXYPhasePlot(objectOfInputs) {
     // Solve problem
-    var solution = solveProblem();
+    var solution = solveProblem(objectOfInputs);
 
     // Extract solution data from solution object
     var {x, y} = solution;
@@ -283,8 +288,8 @@ function removeXYPhasePlot() {
 /**
  * Generates a XZ phase plot
  * 
- * @params           None.
- * @return           Nothing.
+ * @param objectOfInputs An object containing all the problem parameters.
+ * @return               Nothing.
  */
 function generateXZPhasePlot(objectOfInputs) {
     // Solve the problem
@@ -330,8 +335,8 @@ function removeXZPhasePlot() {
 /**
  * Generates a YZ phase plot
  * 
- * @params           None.
- * @return           Nothing.
+ * @param objectOfInputs An object containing all the problem parameters.
+ * @return               Nothing.
  */
 function generateYZPhasePlot(objectOfInputs) {
     // Solve the problem
@@ -377,8 +382,8 @@ function removeYZPhasePlot() {
 /**
  * Generates a time plot
  * 
- * @params           None.
- * @return           Nothing.
+ * @param objectOfInputs An object containing all the problem parameters.
+ * @return               Nothing.
  */
 function generateTimePlot(objectOfInputs) {
     // Solve the problem
