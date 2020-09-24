@@ -130,14 +130,7 @@ function RKF45(dtInitial, epsilon, g, l, t0, tf, theta0, thetaDot0) {
  */
 function solveProblem(objectOfInputs) {
     // Obtain the parameters of the problem
-    var g = objectOfInputs.g
-    var l = objectOfInputs.l;
-    var t0 = objectOfInputs.t0;
-    var tf = objectOfInputs.tf;
-    var theta0 = objectOfInputs.theta0;
-    var thetaDot0 = objectOfInputs.thetaDot0;
-    var epsilon = objectOfInputs.epsilon;
-    var dtInitial = objectOfInputs.dtInitial;
+    var {g, l, t0, tf, theta0, thetaDot0, epsilon, dtInitial} = objectOfInputs;
 
     // Solve the problem
     var solution = RKF45(dtInitial, epsilon, g, l, t0, tf, theta0, thetaDot0);

@@ -248,20 +248,7 @@ function readInputs() {
  */
 function solveProblem(objectOfInputs) {
     // Obtain the parameters of the problem
-    var dtInitial = objectOfInputs.dtInitial;
-    var epsilon = objectOfInputs.epsilon;
-    var a = objectOfInputs.a;
-    var beta = objectOfInputs.beta;
-    var gamma = objectOfInputs.gamma;
-    var delta = objectOfInputs.delta;
-    var lambda = objectOfInputs.lambda;
-    var mu = objectOfInputs.mu;
-    var t0 = objectOfInputs.t0;
-    var tf = objectOfInputs.tf;
-    var S0 = objectOfInputs.S0;
-    var E0 = objectOfInputs.E0;
-    var I0 = objectOfInputs.I0;
-    var R0 = objectOfInputs.R0;
+    var {a, beta, gamma, delta, lambda, mu, t0, tf, S0, E0, I0, R0, dtInitial, epsilon} = objectOfInputs;
 
     // Solve problem using RKF45 and return result
     var solution = RKF45(dtInitial, epsilon, a, beta, gamma, delta, lambda, mu, t0, tf, S0, E0, I0, R0);
@@ -277,11 +264,7 @@ function solveProblem(objectOfInputs) {
 function fillTable(objectOfInputs) {
     // Solve problem and extract relevant solution variables
     var solution = solveProblem(objectOfInputs);
-    var t = solution.t;
-    var S = solution.S;
-    var E = solution.E;
-    var I = solution.I;
-    var R = solution.R;
+    var {t, S, E, I, R} = solution;
     // Extract epsilon from objectOfInputs
     var epsilon = objectOfInputs.epsilon;
 
@@ -342,9 +325,7 @@ function setPlotElementDims(name) {
 function generate3DPhasePlot(objectOfInputs) {
     // Solve problem and extract relevant solution variables
     var solution = solveProblem(objectOfInputs);
-    var S = solution.S;
-    var I = solution.I;
-    var R = solution.R;
+    var {S, I, R} = solution;
 
     // Height and width of plot
     setPlotElementDims("phasePlotXYZ");
@@ -393,8 +374,7 @@ function remove3DPhasePlot() {
 function generateXYPhasePlot(objectOfInputs) {
     // Solve problem and extract relevant solution variables
     var solution = solveProblem(objectOfInputs);
-    var S = solution.S;
-    var I = solution.I;
+    var {S, I} = solution;
 
     // Height and width of plot
     setPlotElementDims("phasePlotXY");
@@ -438,8 +418,7 @@ function removeXYPhasePlot() {
 function generateXZPhasePlot(objectOfInputs) {
     // Solve problem and extract relevant solution variables
     var solution = solveProblem(objectOfInputs);
-    var S = solution.S;
-    var R = solution.R;
+    var {S, R} = solution;
     
     // Height and width of plot
     setPlotElementDims("phasePlotXZ");
@@ -483,8 +462,7 @@ function removeXZPhasePlot() {
 function generateYZPhasePlot(objectOfInputs) {
     // Solve problem and extract relevant solution variables
     var solution = solveProblem(objectOfInputs);
-    var I = solution.I;
-    var R = solution.R;
+    var {I, R} = solution;
 
     // Height and width of plot
     setPlotElementDims("phasePlotYZ");
@@ -528,11 +506,7 @@ function removeYZPhasePlot() {
 function generateTimePlot(objectOfInputs) {
     // Solve problem and extract relevant solution variables
     var solution = solveProblem(objectOfInputs);
-    var t = solution.t;
-    var S = solution.S;
-    var E = solution.E;
-    var I = solution.I;
-    var R = solution.R;
+    var {t, S, E, I, R} = solution;
 
     // Height and width of plot
     setPlotElementDims("timePlot");
