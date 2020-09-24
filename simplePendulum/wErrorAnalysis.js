@@ -62,12 +62,12 @@ function approximatorRKF45(g, l, dt, t, theta, thetaDot, i) {
  * @return                 i, dt, and updated t, theta and thetaDot arrays.
  */
 function stepSizeChecker(theta1, theta2, thetaDot1, thetaDot2, errorThetaDot1, epsilon, i, dt, t, theta, thetaDot, errorThetaDot, logErrorThetaDot) {
-    RTheta = Math.abs(theta1-theta2)/dt;
-    RThetaDot = Math.abs(thetaDot1-thetaDot2)/dt;
-    sTheta = 0.84*Math.pow(epsilon/RTheta, 1/4);                
-    sThetaDot = 0.84*Math.pow(epsilon/RThetaDot, 1/4);
-    R = Math.max(RTheta, RThetaDot);
-    s = Math.min(sTheta, sThetaDot);
+    var RTheta = Math.abs(theta1-theta2)/dt;
+    var RThetaDot = Math.abs(thetaDot1-thetaDot2)/dt;
+    var sTheta = 0.84*Math.pow(epsilon/RTheta, 1/4);                
+    var sThetaDot = 0.84*Math.pow(epsilon/RThetaDot, 1/4);
+    var R = Math.max(RTheta, RThetaDot);
+    var s = Math.min(sTheta, sThetaDot);
     if ( R <= epsilon ) {
         t.push(t[i]+dt);
         theta.push(theta1);
@@ -142,14 +142,14 @@ function RKF45(dtInitial, epsilon, g, l, t0, tf, theta0, thetaDot0) {
  */
 function solveProblem(arrayOfInputs) {
     // Obtain the parameters of the problem
-    g = arrayOfInputs[0]
-    l = arrayOfInputs[1];
-    t0 = arrayOfInputs[7];
-    tf = arrayOfInputs[8];
-    theta0 = arrayOfInputs[3];
-    thetaDot0 = arrayOfInputs[4];
-    epsilon = parseFloat(document.getElementById("epsilon").value);
-    dtInitial = parseFloat(document.getElementById("dtInitial").value);
+    var g = arrayOfInputs[0]
+    var l = arrayOfInputs[1];
+    var t0 = arrayOfInputs[7];
+    var tf = arrayOfInputs[8];
+    var theta0 = arrayOfInputs[3];
+    var thetaDot0 = arrayOfInputs[4];
+    var epsilon = parseFloat(document.getElementById("epsilon").value);
+    var dtInitial = parseFloat(document.getElementById("dtInitial").value);
 
     // Solve the problem
     var solution = RKF45(dtInitial, epsilon, g, l, t0, tf, theta0, thetaDot0);
@@ -185,7 +185,7 @@ function generateErrorPlot(arrayOfInputs) {
         type: 'scatter',
         name: 'Semilog plot of error in theta dot',
     };
-    data = [plot];
+    var data = [plot];
     var layout = {
         title: "Semilog plot of the error in theta dot against t",
         xaxis: {

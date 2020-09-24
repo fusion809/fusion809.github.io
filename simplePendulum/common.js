@@ -143,6 +143,7 @@ function periodCalc(arrayOfInputs) {
     var integrand = 0;
     var transformedGrid = 0;
     var integral = 0;
+    var period;
 
     // Kill the function if problem isn't periodic
     if (arrayOfInputs[9] != N) {
@@ -216,7 +217,7 @@ function generatePhasePlot(arrayOfInputs) {
             title: "theta dot (radians per second)"
         }
     };
-    data = [plot];
+    var data = [plot];
 
     // Generate plot
     Plotly.newPlot('phasePlot', data, layout);
@@ -270,7 +271,7 @@ function generateTimePlot(arrayOfInputs) {
             title: 'Time (seconds)'
         }
     };
-    data = [plotTheta, plotThetaDot];
+    var data = [plotTheta, plotThetaDot];
 
     // Generate plots
     Plotly.newPlot('timePlot', data, layout);
@@ -315,7 +316,7 @@ function fillTable(arrayOfInputs) {
     
     // Generate table
     document.getElementById('tableOutputs').innerHTML = '';
-    tableContents = '<tr>';
+    var tableContents = '<tr>';
     tableContents += '<th>Index</th>';
     tableContents += '<th>t (seconds)</th>';
     tableContents += '<th>&theta; (radians) </th>';
