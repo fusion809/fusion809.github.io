@@ -9,7 +9,7 @@
  * @param S          S value.
  * @param I          I value.
  * @param R          R value.
- * @return           [dx/dt, dy/dt, dz/dt]
+ * @return           [dS/dt, dI/dt, dR/dt]
  */
 function f(beta, gamma, delta, t, S, I, R) {
     // Determine N

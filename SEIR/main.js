@@ -2,14 +2,18 @@
  * Right-hand side of our second-order ODE written as a simple of first-order
  * ODEs.
  *
- * @param beta       Interaction parameter.
- * @param gamma      Interaction parameter.
- * @param delta      Interaction parameter.
+ * @param a          Inverse of the incubation period.
+ * @param beta       Infectivity parameter.
+ * @param gamma      Parameter that measures the rate of recovery.
+ * @param delta      Parameter that measures the effect of quarantine.
+ * @param lambda     Birth rate measured in people per day.
+ * @param mu         Death rate measured in people per day. 
  * @param t          Time (seconds).
- * @param S          S value.
- * @param I          I value.
- * @param R          R value.
- * @return           [dx/dt, dy/dt, dz/dt]
+ * @param S          Susceptible person count.
+ * @param E          Exposed person count.
+ * @param I          Infectious person count.
+ * @param R          Recovered person count.
+ * @return           [dS/dt, dE/dt, dI/dt, dR/dt]
  */
 function f(a, beta, gamma, delta, lambda, mu, t, S, E, I, R) {
     // Determine N
@@ -145,13 +149,17 @@ function stepSizeChecker(dt, epsilon, t, S, E, I, R, S1, E1, I1, R1, S2, E2, I2,
  * 
  * @param dtInitial     Initial guess for dt.
  * @param epsilon       Error tolerance.
- * @param beta          SIR parameter.
- * @param gamma         SIR parameter.
- * @param delta         SIR parameter.
+ * @param a             Inverse of the incubation period in days.
+ * @param beta          Infectivity parameter.
+ * @param gamma         Recovery rate parameter.
+ * @param delta         Quarantine effectiveness parameter.
+ * @param lambda        Birth rate.
+ * @param mu            Death rate.
  * @param t0            Day the simulation starts
  * @param tf            Day the simulation ends
  * @param S0            Initial number of susceptible persons.
- * @param I0            Initial number of infected persons.
+ * @param E0            Initial number of exposed persons.
+ * @param I0            Initial number of infectious persons.
  * @param R0            Initial number of recovered persons.
  * @return              Solution object containing arrays of time, S, I and R values.
  */
