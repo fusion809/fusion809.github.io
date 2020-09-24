@@ -117,16 +117,16 @@ function approximatorRKF45(dt, a, beta, gamma, delta, lambda, mu, t, S, E, I, R,
  */
 function stepSizeChecker(dt, epsilon, t, S, E, I, R, S1, E1, I1, R1, S2, E2, I2, R2, i) {
     // The following are used to correct the step size
-    RS = Math.abs(S1-S2)/dt;
-    RE = Math.abs(E1-E2)/dt;
-    RI = Math.abs(I1-I2)/dt;
-    RR = Math.abs(R1-R2)/dt;
-    sS = 0.84*Math.pow(epsilon/RS, 1/4);                
-    sE = 0.84*Math.pow(epsilon/RE, 1/4);
-    sI = 0.84*Math.pow(epsilon/RI, 1/4);
-    sR = 0.84*Math.pow(epsilon/RR, 1/4);
-    RRKF45 = Math.max(RS, RE, RI, RR);
-    s = Math.min(sS, sE, sI, sR);
+    var RS = Math.abs(S1-S2)/dt;
+    var RE = Math.abs(E1-E2)/dt;
+    var RI = Math.abs(I1-I2)/dt;
+    var RR = Math.abs(R1-R2)/dt;
+    var sS = 0.84*Math.pow(epsilon/RS, 1/4);                
+    var sE = 0.84*Math.pow(epsilon/RE, 1/4);
+    var sI = 0.84*Math.pow(epsilon/RI, 1/4);
+    var sR = 0.84*Math.pow(epsilon/RR, 1/4);
+    var RRKF45 = Math.max(RS, RE, RI, RR);
+    var s = Math.min(sS, sE, sI, sR);
 
     // If R is less than or equal to epsilon move onto the next step
     if ( RRKF45 <= epsilon ) {
@@ -193,7 +193,6 @@ function RKF45(dtInitial, epsilon, a, beta, gamma, delta, lambda, mu, t0, tf, S0
         I: I,
         R: R
     };
-
     return solution;
 }
 
@@ -264,15 +263,15 @@ function fillTable(arrayOfInputs) {
     var epsilon = arrayOfInputs[1];
 
     // Extract coordinate arrays from the solution object
-    t = solution.t;
-    S = solution.S;
-    E = solution.E;
-    I = solution.I;
-    R = solution.R;
+    var t = solution.t;
+    var S = solution.S;
+    var E = solution.E;
+    var I = solution.I;
+    var R = solution.R;
 
     // Write to table
     document.getElementById('tableOutputs').innerHTML = '';
-    tableContents = '<tr>';
+    var tableContents = '<tr>';
     tableContents += '<th>Index</th>';
     tableContents += '<th>t (seconds)</th>';
     tableContents += '<th>S</th>';
@@ -328,10 +327,10 @@ function generate3DPhasePlot(arrayOfInputs) {
     // Run solveProblem if unrun
     var solution = solveProblem(arrayOfInputs);
 
-    // Extra solution data from solution object
-    S = solution.S;
-    I = solution.I;
-    R = solution.R;
+    // Extract solution data from solution object
+    var S = solution.S;
+    var I = solution.I;
+    var R = solution.R;
 
     // Height and width of plot
     setPlotElementDims("phasePlotXYZ");
@@ -349,7 +348,7 @@ function generate3DPhasePlot(arrayOfInputs) {
             reversescale: false
         }
     };
-    dataXYZ = [plotXYZ];
+    var dataXYZ = [plotXYZ];
 
     // layout object
     var layoutXYZ = {
@@ -381,8 +380,8 @@ function generateXYPhasePlot(arrayOfInputs) {
     var solution = solveProblem(arrayOfInputs);
 
     // Extra solution data from solution object
-    S = solution.S;
-    I = solution.I;
+    var S = solution.S;
+    var I = solution.I;
 
     // Height and width of plot
     setPlotElementDims("phasePlotXY");
@@ -395,7 +394,7 @@ function generateXYPhasePlot(arrayOfInputs) {
         mode: 'lines',
         opacity: 1
     };
-    dataXY = [plotXY];
+    var dataXY = [plotXY];
 
     // layout object
     var layoutXY = {
@@ -427,8 +426,8 @@ function generateXZPhasePlot(arrayOfInputs) {
     var solution = solveProblem(arrayOfInputs);
     
     // Extra solution data from solution object
-    S = solution.S;
-    R = solution.R;
+    var S = solution.S;
+    var R = solution.R;
     
     // Height and width of plot
     setPlotElementDims("phasePlotXZ");
@@ -441,7 +440,7 @@ function generateXZPhasePlot(arrayOfInputs) {
         mode: 'lines',
         opacity: 1
     };
-    dataXZ = [plotXZ];
+    var dataXZ = [plotXZ];
     
     // layout object
     var layoutXZ = {
@@ -473,8 +472,8 @@ function generateYZPhasePlot(arrayOfInputs) {
     var solution = solveProblem(arrayOfInputs);
 
     // Extra solution data from solution object
-    I = solution.I;
-    R = solution.R;
+    var I = solution.I;
+    var R = solution.R;
 
     // Height and width of plot
     setPlotElementDims("phasePlotYZ");
@@ -487,7 +486,7 @@ function generateYZPhasePlot(arrayOfInputs) {
         mode: 'lines',
         opacity: 1
     };
-    dataYZ = [plotYZ];
+    var dataYZ = [plotYZ];
 
     // layout object
     var layoutYZ = {
@@ -519,11 +518,11 @@ function generateTimePlot(arrayOfInputs) {
     var solution = solveProblem(arrayOfInputs);
 
     // Extra solution data from solution object
-    t = solution.t;
-    S = solution.S;
-    E = solution.E;
-    I = solution.I;
-    R = solution.R;
+    var t = solution.t;
+    var S = solution.S;
+    var E = solution.E;
+    var I = solution.I;
+    var R = solution.R;
 
     // Height and width of plot
     setPlotElementDims("timePlot");
@@ -561,7 +560,7 @@ function generateTimePlot(arrayOfInputs) {
         opacity: 1,
         name: 'R'
     };
-    dataTimePlot = [plotTS, plotTE, plotTI, plotTR];
+    var dataTimePlot = [plotTS, plotTE, plotTI, plotTR];
 
     // layout object
     var layoutTimePlot = {

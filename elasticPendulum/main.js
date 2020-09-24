@@ -36,27 +36,27 @@ var epsilon;
  */
 function solveProblem() {
     // Obtain the parameters of the problem
-    g = parseFloat(document.getElementById("g").value);
-    l0 = parseFloat(document.getElementById("l0").value);
-    k = parseFloat(document.getElementById("k").value);
-    m = parseFloat(document.getElementById("m").value);
-    t0 = parseFloat(document.getElementById("t0").value);
-    tf = parseFloat(document.getElementById("tf").value);
-    x0 = parseFloat(document.getElementById("x0").value);
-    xDot0 = parseFloat(document.getElementById("xDot0").value);
-    theta0 = parseFloat(document.getElementById("theta0").value);
-    thetaDot0 = parseFloat(document.getElementById("thetaDot0").value);
-    epsilon = parseFloat(document.getElementById("epsilon").value);
-    dtInitial = parseFloat(document.getElementById("dtInitial").value);
+    var g = parseFloat(document.getElementById("g").value);
+    var l0 = parseFloat(document.getElementById("l0").value);
+    var k = parseFloat(document.getElementById("k").value);
+    var m = parseFloat(document.getElementById("m").value);
+    var t0 = parseFloat(document.getElementById("t0").value);
+    var tf = parseFloat(document.getElementById("tf").value);
+    var x0 = parseFloat(document.getElementById("x0").value);
+    var xDot0 = parseFloat(document.getElementById("xDot0").value);
+    var theta0 = parseFloat(document.getElementById("theta0").value);
+    var thetaDot0 = parseFloat(document.getElementById("thetaDot0").value);
+    var epsilon = parseFloat(document.getElementById("epsilon").value);
+    var dtInitial = parseFloat(document.getElementById("dtInitial").value);
 
     // Initialize the arrays used and loop variables
-    t = [t0];
-    x = [x0];
-    xDot = [xDot0];
-    theta = [theta0];
-    thetaDot = [thetaDot0];
-    dt = dtInitial;
-    i = 0;
+    var t = [t0];
+    var x = [x0];
+    var xDot = [xDot0];
+    var theta = [theta0];
+    var thetaDot = [thetaDot0];
+    var dt = dtInitial;
+    var i = 0;
 
     // Loop over each step until we reach the endpoint
     while ( t[i] < tf ) {
@@ -66,64 +66,64 @@ function solveProblem() {
         // Runge-Kutta-Fehlberg approximations of the change in x, y and z
         // over the step
         // 1st approx
-        k1 = dt*f(g, l0, k, m, t[i], x[i], xDot[i], theta[i], thetaDot[i])[0];
-        l1 = dt*f(g, l0, k, m, t[i], x[i], xDot[i], theta[i], thetaDot[i])[1];
-        m1 = dt*f(g, l0, k, m, t[i], x[i], xDot[i], theta[i], thetaDot[i])[2];
-        n1 = dt*f(g, l0, k, m, t[i], x[i], xDot[i], theta[i], thetaDot[i])[3];
+        var k1 = dt*f(g, l0, k, m, t[i], x[i], xDot[i], theta[i], thetaDot[i])[0];
+        var l1 = dt*f(g, l0, k, m, t[i], x[i], xDot[i], theta[i], thetaDot[i])[1];
+        var m1 = dt*f(g, l0, k, m, t[i], x[i], xDot[i], theta[i], thetaDot[i])[2];
+        var n1 = dt*f(g, l0, k, m, t[i], x[i], xDot[i], theta[i], thetaDot[i])[3];
 
         // 2nd approx
-        k2 = dt*f(g, l0, k, m, t[i]+dt/4, x[i]+k1/4, xDot[i]+l1/4, theta[i]+m1/4, thetaDot[i]+n1/4)[0];
-        l2 = dt*f(g, l0, k, m, t[i]+dt/4, x[i]+k1/4, xDot[i]+l1/4, theta[i]+m1/4, thetaDot[i]+n1/4)[1];
-        m2 = dt*f(g, l0, k, m, t[i]+dt/4, x[i]+k1/4, xDot[i]+l1/4, theta[i]+m1/4, thetaDot[i]+n1/4)[2];
-        n2 = dt*f(g, l0, k, m, t[i]+dt/4, x[i]+k1/4, xDot[i]+l1/4, theta[i]+m1/4, thetaDot[i]+n1/4)[3];
+        var k2 = dt*f(g, l0, k, m, t[i]+dt/4, x[i]+k1/4, xDot[i]+l1/4, theta[i]+m1/4, thetaDot[i]+n1/4)[0];
+        var l2 = dt*f(g, l0, k, m, t[i]+dt/4, x[i]+k1/4, xDot[i]+l1/4, theta[i]+m1/4, thetaDot[i]+n1/4)[1];
+        var m2 = dt*f(g, l0, k, m, t[i]+dt/4, x[i]+k1/4, xDot[i]+l1/4, theta[i]+m1/4, thetaDot[i]+n1/4)[2];
+        var n2 = dt*f(g, l0, k, m, t[i]+dt/4, x[i]+k1/4, xDot[i]+l1/4, theta[i]+m1/4, thetaDot[i]+n1/4)[3];
 
         // 3rd approx
-        k3 = dt*f(g, l0, k, m, t[i]+3*dt/8, x[i]+3*k1/32+9*k2/32, xDot[i]+3*l1/32+9*l2/32, theta[i]+3*m1/32+9*m2/32, thetaDot[i]+3*n1/32+9*n2/32)[0];
-        l3 = dt*f(g, l0, k, m, t[i]+3*dt/8, x[i]+3*k1/32+9*k2/32, xDot[i]+3*l1/32+9*l2/32, theta[i]+3*m1/32+9*m2/32, thetaDot[i]+3*n1/32+9*n2/32)[1];
-        m3 = dt*f(g, l0, k, m, t[i]+3*dt/8, x[i]+3*k1/32+9*k2/32, xDot[i]+3*l1/32+9*l2/32, theta[i]+3*m1/32+9*m2/32, thetaDot[i]+3*n1/32+9*n2/32)[2];
-        n3 = dt*f(g, l0, k, m, t[i]+3*dt/8, x[i]+3*k1/32+9*k2/32, xDot[i]+3*l1/32+9*l2/32, theta[i]+3*m1/32+9*m2/32, thetaDot[i]+3*n1/32+9*n2/32)[3];
+        var k3 = dt*f(g, l0, k, m, t[i]+3*dt/8, x[i]+3*k1/32+9*k2/32, xDot[i]+3*l1/32+9*l2/32, theta[i]+3*m1/32+9*m2/32, thetaDot[i]+3*n1/32+9*n2/32)[0];
+        var l3 = dt*f(g, l0, k, m, t[i]+3*dt/8, x[i]+3*k1/32+9*k2/32, xDot[i]+3*l1/32+9*l2/32, theta[i]+3*m1/32+9*m2/32, thetaDot[i]+3*n1/32+9*n2/32)[1];
+        var m3 = dt*f(g, l0, k, m, t[i]+3*dt/8, x[i]+3*k1/32+9*k2/32, xDot[i]+3*l1/32+9*l2/32, theta[i]+3*m1/32+9*m2/32, thetaDot[i]+3*n1/32+9*n2/32)[2];
+        var n3 = dt*f(g, l0, k, m, t[i]+3*dt/8, x[i]+3*k1/32+9*k2/32, xDot[i]+3*l1/32+9*l2/32, theta[i]+3*m1/32+9*m2/32, thetaDot[i]+3*n1/32+9*n2/32)[3];
 
         // 4th approx
-        k4 = dt*f(g, l0, k, m, t[i]+12*dt/13, x[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, xDot[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197, theta[i]+1932*m1/2197-7200*m2/2197+7296*m3/2197, thetaDot[i]+1932*n1/2197-7200*n2/2197+7296*n3/2197)[0];
-        l4 = dt*f(g, l0, k, m, t[i]+12*dt/13, x[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, xDot[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197, theta[i]+1932*m1/2197-7200*m2/2197+7296*m3/2197, thetaDot[i]+1932*n1/2197-7200*n2/2197+7296*n3/2197)[1];
-        m4 = dt*f(g, l0, k, m, t[i]+12*dt/13, x[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, xDot[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197, theta[i]+1932*m1/2197-7200*m2/2197+7296*m3/2197, thetaDot[i]+1932*n1/2197-7200*n2/2197+7296*n3/2197)[2];
-        n4 = dt*f(g, l0, k, m, t[i]+12*dt/13, x[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, xDot[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197, theta[i]+1932*m1/2197-7200*m2/2197+7296*m3/2197, thetaDot[i]+1932*n1/2197-7200*n2/2197+7296*n3/2197)[3];
+        var k4 = dt*f(g, l0, k, m, t[i]+12*dt/13, x[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, xDot[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197, theta[i]+1932*m1/2197-7200*m2/2197+7296*m3/2197, thetaDot[i]+1932*n1/2197-7200*n2/2197+7296*n3/2197)[0];
+        var l4 = dt*f(g, l0, k, m, t[i]+12*dt/13, x[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, xDot[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197, theta[i]+1932*m1/2197-7200*m2/2197+7296*m3/2197, thetaDot[i]+1932*n1/2197-7200*n2/2197+7296*n3/2197)[1];
+        var m4 = dt*f(g, l0, k, m, t[i]+12*dt/13, x[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, xDot[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197, theta[i]+1932*m1/2197-7200*m2/2197+7296*m3/2197, thetaDot[i]+1932*n1/2197-7200*n2/2197+7296*n3/2197)[2];
+        var n4 = dt*f(g, l0, k, m, t[i]+12*dt/13, x[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, xDot[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197, theta[i]+1932*m1/2197-7200*m2/2197+7296*m3/2197, thetaDot[i]+1932*n1/2197-7200*n2/2197+7296*n3/2197)[3];
 
         // 5th approx
-        k5 = dt*f(g, l0, k, m, t[i]+dt, x[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, xDot[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104, theta[i]+439*m1/216-8*m2+3680*m3/513-845*m4/4104, thetaDot[i]+439*n1/216-8*n2+3680*n3/513-845*n4/4104)[0];
-        l5 = dt*f(g, l0, k, m, t[i]+dt, x[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, xDot[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104, theta[i]+439*m1/216-8*m2+3680*m3/513-845*m4/4104, thetaDot[i]+439*n1/216-8*n2+3680*n3/513-845*n4/4104)[1];
-        m5 = dt*f(g, l0, k, m, t[i]+dt, x[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, xDot[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104, theta[i]+439*m1/216-8*m2+3680*m3/513-845*m4/4104, thetaDot[i]+439*n1/216-8*n2+3680*n3/513-845*n4/4104)[2];
-        n5 = dt*f(g, l0, k, m, t[i]+dt, x[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, xDot[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104, theta[i]+439*m1/216-8*m2+3680*m3/513-845*m4/4104, thetaDot[i]+439*n1/216-8*n2+3680*n3/513-845*n4/4104)[3];
+        var k5 = dt*f(g, l0, k, m, t[i]+dt, x[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, xDot[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104, theta[i]+439*m1/216-8*m2+3680*m3/513-845*m4/4104, thetaDot[i]+439*n1/216-8*n2+3680*n3/513-845*n4/4104)[0];
+        var l5 = dt*f(g, l0, k, m, t[i]+dt, x[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, xDot[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104, theta[i]+439*m1/216-8*m2+3680*m3/513-845*m4/4104, thetaDot[i]+439*n1/216-8*n2+3680*n3/513-845*n4/4104)[1];
+        var m5 = dt*f(g, l0, k, m, t[i]+dt, x[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, xDot[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104, theta[i]+439*m1/216-8*m2+3680*m3/513-845*m4/4104, thetaDot[i]+439*n1/216-8*n2+3680*n3/513-845*n4/4104)[2];
+        var n5 = dt*f(g, l0, k, m, t[i]+dt, x[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, xDot[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104, theta[i]+439*m1/216-8*m2+3680*m3/513-845*m4/4104, thetaDot[i]+439*n1/216-8*n2+3680*n3/513-845*n4/4104)[3];
 
         // 6th approx
-        k6 = dt*f(g, l0, k, m, t[i]+dt/2, x[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, xDot[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40, theta[i]-8*m1/27+2*m2-3544*m3/2565+1859*m4/4104-11*m5/40, thetaDot[i]-8*n1/27+2*n2-3544*n3/2565+1859*n4/4104-11*n5/40)[0];
-        l6 = dt*f(g, l0, k, m, t[i]+dt/2, x[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, xDot[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40, theta[i]-8*m1/27+2*m2-3544*m3/2565+1859*m4/4104-11*m5/40, thetaDot[i]-8*n1/27+2*n2-3544*n3/2565+1859*n4/4104-11*n5/40)[1];
-        m6 = dt*f(g, l0, k, m, t[i]+dt/2, x[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, xDot[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40, theta[i]-8*m1/27+2*m2-3544*m3/2565+1859*m4/4104-11*m5/40, thetaDot[i]-8*n1/27+2*n2-3544*n3/2565+1859*n4/4104-11*n5/40)[2];
-        n6 = dt*f(g, l0, k, m, t[i]+dt/2, x[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, xDot[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40, theta[i]-8*m1/27+2*m2-3544*m3/2565+1859*m4/4104-11*m5/40, thetaDot[i]-8*n1/27+2*n2-3544*n3/2565+1859*n4/4104-11*n5/40)[3];
+        var k6 = dt*f(g, l0, k, m, t[i]+dt/2, x[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, xDot[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40, theta[i]-8*m1/27+2*m2-3544*m3/2565+1859*m4/4104-11*m5/40, thetaDot[i]-8*n1/27+2*n2-3544*n3/2565+1859*n4/4104-11*n5/40)[0];
+        var l6 = dt*f(g, l0, k, m, t[i]+dt/2, x[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, xDot[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40, theta[i]-8*m1/27+2*m2-3544*m3/2565+1859*m4/4104-11*m5/40, thetaDot[i]-8*n1/27+2*n2-3544*n3/2565+1859*n4/4104-11*n5/40)[1];
+        var m6 = dt*f(g, l0, k, m, t[i]+dt/2, x[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, xDot[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40, theta[i]-8*m1/27+2*m2-3544*m3/2565+1859*m4/4104-11*m5/40, thetaDot[i]-8*n1/27+2*n2-3544*n3/2565+1859*n4/4104-11*n5/40)[2];
+        var n6 = dt*f(g, l0, k, m, t[i]+dt/2, x[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, xDot[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40, theta[i]-8*m1/27+2*m2-3544*m3/2565+1859*m4/4104-11*m5/40, thetaDot[i]-8*n1/27+2*n2-3544*n3/2565+1859*n4/4104-11*n5/40)[3];
 
-        // x1, y1 and z1 are our fourth order approximations
-        x1 = x[i] + 25*k1/216+1408*k3/2565+2197*k4/4104-k5/5;
-        xDot1 = xDot[i] + 25*l1/216+1408*l3/2565+2197*l4/4104-l5/5;
-        theta1 = theta[i] + 25*m1/216+1408*m3/2565+2197*m4/4104-m5/5;
-        thetaDot1 = thetaDot[i] + 25*n1/216+1408*n3/2565+2197*n4/4104-n5/5;
+        // x1, xDot1, theta1, thetaDot1 are our fourth order approximations
+        var x1 = x[i] + 25*k1/216+1408*k3/2565+2197*k4/4104-k5/5;
+        var xDot1 = xDot[i] + 25*l1/216+1408*l3/2565+2197*l4/4104-l5/5;
+        var theta1 = theta[i] + 25*m1/216+1408*m3/2565+2197*m4/4104-m5/5;
+        var thetaDot1 = thetaDot[i] + 25*n1/216+1408*n3/2565+2197*n4/4104-n5/5;
 
-        // x2, y2 and z2 are our fifth order approximations
-        x2 = x[i] + 16*k1/135+6656*k3/12825+28561*k4/56430-9*k5/50+2*k6/55;
-        xDot2 = xDot[i] + 16*l1/135+6656*l3/12825+28561*l4/56430-9*l5/50+2*l6/55;
-        theta2 = theta[i] + 16*m1/135+6656*m3/12825+28561*m4/56430-9*m5/50+2*m6/55;
-        thetaDot2 = thetaDot[i] + 16*n1/135+6656*n3/12825+28561*n4/56430-9*n5/50+2*n6/55;
+        // x2, xDot2, theta2 and thetaDot2 are our fifth order approximations
+        var x2 = x[i] + 16*k1/135+6656*k3/12825+28561*k4/56430-9*k5/50+2*k6/55;
+        var xDot2 = xDot[i] + 16*l1/135+6656*l3/12825+28561*l4/56430-9*l5/50+2*l6/55;
+        var theta2 = theta[i] + 16*m1/135+6656*m3/12825+28561*m4/56430-9*m5/50+2*m6/55;
+        var thetaDot2 = thetaDot[i] + 16*n1/135+6656*n3/12825+28561*n4/56430-9*n5/50+2*n6/55;
 
         // The following are used to correct the step size
-        Rx = Math.abs(x1-x2)/dt;
-        RxDot = Math.abs(xDot1-xDot2)/dt;
-        Rtheta = Math.abs(theta1-theta2)/dt;
-        RthetaDot = Math.abs(thetaDot1-thetaDot2)/dt;
-        sx = 0.84*Math.pow(epsilon/Rx, 1/4);                
-        sxDot = 0.84*Math.pow(epsilon/RxDot, 1/4);
-        stheta = 0.84*Math.pow(epsilon/Rtheta, 1/4);
-        sthetaDot = 0.84*Math.pow(epsilon/RthetaDot, 1/4);
-        R = Math.max(Rx, RxDot, Rtheta, RthetaDot);
-        s = Math.min(sx, sxDot, stheta, sthetaDot);
+        var Rx = Math.abs(x1-x2)/dt;
+        var RxDot = Math.abs(xDot1-xDot2)/dt;
+        var Rtheta = Math.abs(theta1-theta2)/dt;
+        var RthetaDot = Math.abs(thetaDot1-thetaDot2)/dt;
+        var sx = 0.84*Math.pow(epsilon/Rx, 1/4);                
+        var sxDot = 0.84*Math.pow(epsilon/RxDot, 1/4);
+        var stheta = 0.84*Math.pow(epsilon/Rtheta, 1/4);
+        var sthetaDot = 0.84*Math.pow(epsilon/RthetaDot, 1/4);
+        var R = Math.max(Rx, RxDot, Rtheta, RthetaDot);
+        var s = Math.min(sx, sxDot, stheta, sthetaDot);
 
         // If R is less than or equal to epsilon move onto the next step
         if ( R <= epsilon ) {
@@ -162,15 +162,15 @@ function fillTable() {
     }
 
     // Extract coordinate arrays from the solution object
-    t = solution.t;
-    x = solution.x;
-    xDot = solution.xDot;
-    theta = solution.theta;
-    thetaDot = solution.thetaDot;
+    var t = solution.t;
+    var x = solution.x;
+    var xDot = solution.xDot;
+    var theta = solution.theta;
+    var thetaDot = solution.thetaDot;
 
     // Write to table
     document.getElementById('tableOutputs').innerHTML = '';
-    tableContents = '<tr>';
+    var tableContents = '<tr>';
     tableContents += '<th>Index</th>';
     tableContents += '<th>t (seconds)</th>';
     tableContents += '<th>x</th>';
@@ -215,12 +215,11 @@ function generateXThetaPhasePlot() {
     }
 
     // Extra solution data from solution object
-    x = solution.x;
-    theta = solution.theta;
+    var x = solution.x;
+    var theta = solution.theta;
 
     // Height and width of plot
-    windowInnerWidth  = window.innerWidth;
-    windowInnerHeight = window.innerHeight;
+    var windowInnerHeight = window.innerHeight;
     document.getElementById("phasePlotXTheta").style = "height: " + windowInnerHeight + "px;";
 
     // Plot object and data object array
@@ -231,7 +230,7 @@ function generateXThetaPhasePlot() {
         mode: 'lines',
         opacity: 1
     };
-    dataXTheta = [plotXTheta];
+    var dataXTheta = [plotXTheta];
 
     // layout object
     var layoutXTheta = {
@@ -266,12 +265,11 @@ function generateXXDotPhasePlot() {
     }
 
     // Extra solution data from solution object
-    x = solution.x;
-    xDot = solution.xDot;
+    var x = solution.x;
+    var xDot = solution.xDot;
 
     // Height and width of plot
-    windowInnerWidth  = window.innerWidth;
-    windowInnerHeight = window.innerHeight;
+    var windowInnerHeight = window.innerHeight;
     document.getElementById("phasePlotXXDot").style = "height: " + windowInnerHeight + "px;";
 
     // Plot object and data object array
@@ -282,7 +280,7 @@ function generateXXDotPhasePlot() {
         mode: 'lines',
         opacity: 1
     };
-    dataXXDot = [plotXXDot];
+    var dataXXDot = [plotXXDot];
 
     // layout object
     var layoutXXDot = {
@@ -317,12 +315,11 @@ function generateThetaThetaDotPhasePlot() {
     }
     
     // Extra solution data from solution object
-    theta = solution.theta;
-    thetaDot = solution.thetaDot;
+    var theta = solution.theta;
+    var thetaDot = solution.thetaDot;
     
     // Height and width of plot
-    windowInnerWidth  = window.innerWidth;
-    windowInnerHeight = window.innerHeight;
+    var windowInnerHeight = window.innerHeight;
     document.getElementById("phasePlotThetaThetaDot").style = "height: " + windowInnerHeight + "px;";
     
     // Plot object and data object array
@@ -333,7 +330,7 @@ function generateThetaThetaDotPhasePlot() {
         mode: 'lines',
         opacity: 1
     };
-    dataThetaThetaDot = [plotThetaThetaDot];
+    var dataThetaThetaDot = [plotThetaThetaDot];
     
     // layout object
     var layoutThetaThetaDot = {
@@ -368,15 +365,14 @@ function generateTimePlot() {
     }
 
     // Extra solution data from solution object
-    t = solution.t;
-    x = solution.x;
-    xDot = solution.xDot;
-    theta = solution.theta;
-    thetaDot = solution.thetaDot;
+    var t = solution.t;
+    var x = solution.x;
+    var xDot = solution.xDot;
+    var theta = solution.theta;
+    var thetaDot = solution.thetaDot;
 
     // Height and width of plot
-    windowInnerWidth  = window.innerWidth;
-    windowInnerHeight = window.innerHeight;
+    var windowInnerHeight = window.innerHeight;
     document.getElementById("timePlot").style = "height: " + windowInnerHeight + "px;";
 
     // Plot object and data object array
@@ -412,7 +408,7 @@ function generateTimePlot() {
         opacity: 1,
         name: 'theta dot'
     };
-    dataTimePlot = [plotTX, plotTXDot, plotTTheta, plotTThetaDot];
+    var dataTimePlot = [plotTX, plotTXDot, plotTTheta, plotTThetaDot];
 
     // layout object
     var layoutTimePlot = {

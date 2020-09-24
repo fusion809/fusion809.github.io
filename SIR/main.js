@@ -96,14 +96,14 @@ function approximatorRKF45(dt, beta, gamma, delta, t, S, I, R, i) {
  */
 function stepSizeChecker(dt, epsilon, t, S, I, R, x1, y1, z1, x2, y2, z2, i) {
     // The following are used to correct the step size
-    Rx = Math.abs(x1-x2)/dt;
-    Ry = Math.abs(y1-y2)/dt;
-    Rz = Math.abs(z1-z2)/dt;
-    sx = 0.84*Math.pow(epsilon/Rx, 1/4);                
-    sy = 0.84*Math.pow(epsilon/Ry, 1/4);
-    sz = 0.84*Math.pow(epsilon/Rz, 1/4);
-    RRKF45 = Math.max(Rx, Ry, Rz);
-    s = Math.min(sx, sy, sz);
+    var Rx = Math.abs(x1-x2)/dt;
+    var Ry = Math.abs(y1-y2)/dt;
+    var Rz = Math.abs(z1-z2)/dt;
+    var sx = 0.84*Math.pow(epsilon/Rx, 1/4);                
+    var sy = 0.84*Math.pow(epsilon/Ry, 1/4);
+    var sz = 0.84*Math.pow(epsilon/Rz, 1/4);
+    var RRKF45 = Math.max(Rx, Ry, Rz);
+    var s = Math.min(sx, sy, sz);
 
     // If R is less than or equal to epsilon move onto the next step
     if ( RRKF45 <= epsilon ) {
@@ -163,7 +163,6 @@ function RKF45(dtInitial, epsilon, beta, gamma, delta, t0, tf, S0, I0, R0) {
         I: I,
         R: R
     };
-
     return solution;
 }
 
@@ -226,14 +225,14 @@ function fillTable(arrayOfInputs) {
     var epsilon = arrayOfInputs[1];
 
     // Extract coordinate arrays from the solution object
-    t = solution.t;
-    S = solution.S;
-    I = solution.I;
-    R = solution.R;
+    var t = solution.t;
+    var S = solution.S;
+    var I = solution.I;
+    var R = solution.R;
 
     // Write to table
     document.getElementById('tableOutputs').innerHTML = '';
-    tableContents = '<tr>';
+    var tableContents = '<tr>';
     tableContents += '<th>Index</th>';
     tableContents += '<th>t (seconds)</th>';
     tableContents += '<th>S</th>';
@@ -288,9 +287,9 @@ function generate3DPhasePlot(arrayOfInputs) {
     var solution = solveProblem(arrayOfInputs);
 
     // Extra solution data from solution object
-    S = solution.S;
-    I = solution.I;
-    R = solution.R;
+    var S = solution.S;
+    var I = solution.I;
+    var R = solution.R;
 
     // Height and width of plot
     setPlotElementDims("phasePlotXYZ");
@@ -340,8 +339,8 @@ function generateXYPhasePlot(arrayOfInputs) {
     var solution = solveProblem(arrayOfInputs);
 
     // Extra solution data from solution object
-    S = solution.S;
-    I = solution.I;
+    var S = solution.S;
+    var I = solution.I;
 
     // Height and width of plot
     setPlotElementDims("phasePlotXY");
@@ -386,8 +385,8 @@ function generateXZPhasePlot(arrayOfInputs) {
     var solution = solveProblem(arrayOfInputs);
     
     // Extra solution data from solution object
-    S = solution.S;
-    R = solution.R;
+    var S = solution.S;
+    var R = solution.R;
     
     // Height and width of plot
     setPlotElementDims("phasePlotXZ");
@@ -432,8 +431,8 @@ function generateYZPhasePlot(arrayOfInputs) {
     var solution = solveProblem(arrayOfInputs);
 
     // Extra solution data from solution object
-    I = solution.I;
-    R = solution.R;
+    var I = solution.I;
+    var R = solution.R;
 
     // Height and width of plot
     setPlotElementDims("phasePlotYZ");
@@ -478,10 +477,10 @@ function generateTimePlot(arrayOfInputs) {
     var solution = solveProblem(arrayOfInputs);
 
     // Extra solution data from solution object
-    t = solution.t;
-    S = solution.S;
-    I = solution.I;
-    R = solution.R;
+    var t = solution.t;
+    var S = solution.S;
+    var I = solution.I;
+    var R = solution.R;
 
     // Height and width of plot
     setPlotElementDims("timePlot");
