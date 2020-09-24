@@ -296,7 +296,7 @@ function fillTable(objectOfInputs) {
     // Define all global variables
     var solution = solveProblem(objectOfInputs);
     var epsilon = objectOfInputs.epsilon;
-    var {t, theta, thetaDot} = solution.thetaDot;
+    var {t, theta, thetaDot} = solution;
     var j = 0;
 
     // Check the number of elements in solution
