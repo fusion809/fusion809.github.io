@@ -254,7 +254,7 @@ function generateXThetaPhasePlot() {
         solveProblem();
     }
 
-    // Extra solution data from solution object
+    // Extract solution data from solution object
     var x = solution.x;
     var theta = solution.theta;
 
@@ -304,7 +304,7 @@ function generateXXDotPhasePlot() {
         solveProblem();
     }
 
-    // Extra solution data from solution object
+    // Extract solution data from solution object
     var x = solution.x;
     var xDot = solution.xDot;
 
@@ -354,7 +354,7 @@ function generateThetaThetaDotPhasePlot() {
         solveProblem();
     }
     
-    // Extra solution data from solution object
+    // Extract solution data from solution object
     var theta = solution.theta;
     var thetaDot = solution.thetaDot;
     
@@ -404,7 +404,7 @@ function generateTimePlot() {
         solveProblem();
     }
 
-    // Extra solution data from solution object
+    // Extract solution data from solution object
     var t = solution.t;
     var x = solution.x;
     var xDot = solution.xDot;

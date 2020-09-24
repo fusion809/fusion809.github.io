@@ -114,7 +114,7 @@ function fillTable() {
         solveProblem();
     }
 
-    // Extra solution data from solution object
+    // Extract solution data from solution object
     t = solution.t;
     x = solution.x;
     y = solution.y;
