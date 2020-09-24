@@ -44,7 +44,8 @@ function readInputs() {
  * @return           [dtheta/dt, d2theta/dt2]
  */
 function f(g, l, t, theta, thetaDot) {
-    return [thetaDot, -g/l*Math.cos(theta)];
+    var thetaDDot = -g/l * Math.cos(theta);
+    return [thetaDot, thetaDDot];
 };
 
 /**
