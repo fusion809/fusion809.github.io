@@ -48,6 +48,104 @@ function readInputs() {
     return objectOfInputs;
 }
 
+/**
+ * Returns RKF45 approximations to next x[i+1], y[i+1], z[i+1]
+ * 
+ * @param dt       Step size
+ * @param a        Problem parameter a.
+ * @param b        Problem parameter b.
+ * @param c        Problem parameter c.
+ * @param t        Array of t values.
+ * @param x        Array of x values.
+ * @param y        Array of y values.
+ * @param z        Array of z values.
+ * @param i        Counter variable.
+ * @return         [4th order approx to x, 4th order approx to y, 4th order approx to z, 5th order approx to x, 5th order approx to y, 5th order approx to z]
+ */
+function approximatorRKF45(dt, a, b, c, t, x, y, z, i) {
+    // Runge-Kutta-Fehlberg approximations of the change in x, y and z
+    // over the step 1st approx
+    var k1 = dt*f(a, b, c, t[i], x[i], y[i], z[i])[0];
+    var l1 = dt*f(a, b, c, t[i], x[i], y[i], z[i])[1];
+    var m1 = dt*f(a, b, c, t[i], x[i], y[i], z[i])[2];
+    // 2nd approx
+    var k2 = dt*f(a, b, c, t[i]+dt/4, x[i]+k1/4, y[i]+l1/4, z[i]+m1/4)[0];
+    var l2 = dt*f(a, b, c, t[i]+dt/4, x[i]+k1/4, y[i]+l1/4, z[i]+m1/4)[1];
+    var m2 = dt*f(a, b, c, t[i]+dt/4, x[i]+k1/4, y[i]+l1/4, z[i]+m1/4)[2];
+    // 3rd approx
+    var k3 = dt*f(a, b, c, t[i]+3*dt/8, x[i]+3*k1/32+9*k2/32, y[i]+3*l1/32+9*l2/32, z[i]+3*m1/32+9*m2/32)[0];
+    var l3 = dt*f(a, b, c, t[i]+3*dt/8, x[i]+3*k1/32+9*k2/32, y[i]+3*l1/32+9*l2/32, z[i]+3*m1/32+9*m2/32)[1];
+    var m3 = dt*f(a, b, c, t[i]+3*dt/8, x[i]+3*k1/32+9*k2/32, y[i]+3*l1/32+9*l2/32, z[i]+3*m1/32+9*m2/32)[2];
+    // 4th approx
+    var k4 = dt*f(a, b, c, t[i]+12*dt/13, x[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, y[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197, z[i]+1932*m1/2197-7200*m2/2197+7296*m3/2197)[0];
+    var l4 = dt*f(a, b, c, t[i]+12*dt/13, x[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, y[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197, z[i]+1932*m1/2197-7200*m2/2197+7296*m3/2197)[1];
+    var m4 = dt*f(a, b, c, t[i]+12*dt/13, x[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, y[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197, z[i]+1932*m1/2197-7200*m2/2197+7296*m3/2197)[2];
+    // 5th approx
+    var k5 = dt*f(a, b, c, t[i]+dt, x[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, y[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104, z[i]+439*m1/216-8*m2+3680*m3/513-845*m4/4104)[0];
+    var l5 = dt*f(a, b, c, t[i]+dt, x[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, y[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104, z[i]+439*m1/216-8*m2+3680*m3/513-845*m4/4104)[1];
+    var m5 = dt*f(a, b, c, t[i]+dt, x[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, y[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104, z[i]+439*m1/216-8*m2+3680*m3/513-845*m4/4104)[2];
+    // 6th approx
+    var k6 = dt*f(a, b, c, t[i]+dt/2, x[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, y[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40, z[i]-8*m1/27+2*m2-3544*m3/2565+1859*m4/4104-11*m5/40)[0];
+    var l6 = dt*f(a, b, c, t[i]+dt/2, x[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, y[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40, z[i]-8*m1/27+2*m2-3544*m3/2565+1859*m4/4104-11*m5/40)[1];
+    var m6 = dt*f(a, b, c, t[i]+dt/2, x[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, y[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40, z[i]-8*m1/27+2*m2-3544*m3/2565+1859*m4/4104-11*m5/40)[2];
+
+     // x1, y1 and z1 are our fourth order approximations
+    var x1 = x[i] + 25*k1/216+1408*k3/2565+2197*k4/4104-k5/5;
+    var y1 = y[i] + 25*l1/216+1408*l3/2565+2197*l4/4104-l5/5;
+    var z1 = z[i] + 25*m1/216+1408*m3/2565+2197*m4/4104-m5/5;
+
+    // x2, y2 and z2 are our fifth order approximations
+    var x2 = x[i] + 16*k1/135+6656*k3/12825+28561*k4/56430-9*k5/50+2*k6/55;
+    var y2 = y[i] + 16*l1/135+6656*l3/12825+28561*l4/56430-9*l5/50+2*l6/55;
+    var z2 = z[i] + 16*m1/135+6656*m3/12825+28561*m4/56430-9*m5/50+2*m6/55;
+
+    return [x1, y1, z1, x2, y2, z2];
+}
+
+/**
+ * Checks and adjusts step size.
+ * 
+ * @param dt      Current step size.
+ * @param epsilon Error tolerance.
+ * @param t       Array of t values.
+ * @param x       Array of x values.
+ * @param y       Array of y values.
+ * @param z       Array of z values.
+ * @param x1      4th order approximation to x[i+1]
+ * @param y1      4th order approximation to y[i+1]
+ * @param z1      4th order approximation to z[i+1]
+ * @param x2      5th order approximation to x[i+1]
+ * @param y2      5th order approximation to y[i+1]
+ * @param z2      5th order approximation to z[i+1]
+ * @param i       Counter variable value
+ * @return        Adjusted step size, t[0:i+1], x[0:i+1], y[0:i+1], z[0:i+1]
+ */
+function stepSizeChecker(dt, epsilon, t, x, y, z, x1, y1, z1, x2, y2, z2, i) {
+    // The following are used to correct the step size
+    var Rx = Math.abs(x1-x2)/dt;
+    var Ry = Math.abs(y1-y2)/dt;
+    var Rz = Math.abs(z1-z2)/dt;
+    var sx = 0.84*Math.pow(epsilon/Rx, 1/4);                
+    var sy = 0.84*Math.pow(epsilon/Ry, 1/4);
+    var sz = 0.84*Math.pow(epsilon/Rz, 1/4);
+    var R = Math.max(Rx, Ry, Rz);
+    var s = Math.min(sx, sy, sz);
+
+    // If R is less than or equal to epsilon move onto the next step
+    if ( R <= epsilon ) {
+        t.push(t[i]+dt);
+        x.push(x1);
+        y.push(y1);
+        z.push(z1);
+        i++;
+        dt *= s;
+    } else {
+        dt *= s;
+    }
+
+    return [dt, t, x, y, z];
+}
+
 /** 
  * Solve the problem using RKF45.
  *
@@ -68,67 +166,9 @@ function solveProblem(objectOfInputs) {
 
     // Loop over each step until we reach the endpoint
     while ( t[i] < tf ) {
-        // Step size, as dictated by the method
         dt = Math.min(dt, tf-t[i]);
-
-        // Runge-Kutta-Fehlberg approximations of the change in x, y and z
-        // over the step
-        // 1st approx
-        var k1 = dt*f(a, b, c, t[i], x[i], y[i], z[i])[0];
-        var l1 = dt*f(a, b, c, t[i], x[i], y[i], z[i])[1];
-        var m1 = dt*f(a, b, c, t[i], x[i], y[i], z[i])[2];
-        // 2nd approx
-        var k2 = dt*f(a, b, c, t[i]+dt/4, x[i]+k1/4, y[i]+l1/4, z[i]+m1/4)[0];
-        var l2 = dt*f(a, b, c, t[i]+dt/4, x[i]+k1/4, y[i]+l1/4, z[i]+m1/4)[1];
-        var m2 = dt*f(a, b, c, t[i]+dt/4, x[i]+k1/4, y[i]+l1/4, z[i]+m1/4)[2];
-        // 3rd approx
-        var k3 = dt*f(a, b, c, t[i]+3*dt/8, x[i]+3*k1/32+9*k2/32, y[i]+3*l1/32+9*l2/32, z[i]+3*m1/32+9*m2/32)[0];
-        var l3 = dt*f(a, b, c, t[i]+3*dt/8, x[i]+3*k1/32+9*k2/32, y[i]+3*l1/32+9*l2/32, z[i]+3*m1/32+9*m2/32)[1];
-        var m3 = dt*f(a, b, c, t[i]+3*dt/8, x[i]+3*k1/32+9*k2/32, y[i]+3*l1/32+9*l2/32, z[i]+3*m1/32+9*m2/32)[2];
-        // 4th approx
-        var k4 = dt*f(a, b, c, t[i]+12*dt/13, x[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, y[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197, z[i]+1932*m1/2197-7200*m2/2197+7296*m3/2197)[0];
-        var l4 = dt*f(a, b, c, t[i]+12*dt/13, x[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, y[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197, z[i]+1932*m1/2197-7200*m2/2197+7296*m3/2197)[1];
-        var m4 = dt*f(a, b, c, t[i]+12*dt/13, x[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, y[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197, z[i]+1932*m1/2197-7200*m2/2197+7296*m3/2197)[2];
-        // 5th approx
-        var k5 = dt*f(a, b, c, t[i]+dt, x[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, y[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104, z[i]+439*m1/216-8*m2+3680*m3/513-845*m4/4104)[0];
-        var l5 = dt*f(a, b, c, t[i]+dt, x[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, y[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104, z[i]+439*m1/216-8*m2+3680*m3/513-845*m4/4104)[1];
-        var m5 = dt*f(a, b, c, t[i]+dt, x[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, y[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104, z[i]+439*m1/216-8*m2+3680*m3/513-845*m4/4104)[2];
-        // 6th approx
-        var k6 = dt*f(a, b, c, t[i]+dt/2, x[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, y[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40, z[i]-8*m1/27+2*m2-3544*m3/2565+1859*m4/4104-11*m5/40)[0];
-        var l6 = dt*f(a, b, c, t[i]+dt/2, x[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, y[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40, z[i]-8*m1/27+2*m2-3544*m3/2565+1859*m4/4104-11*m5/40)[1];
-        var m6 = dt*f(a, b, c, t[i]+dt/2, x[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, y[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40, z[i]-8*m1/27+2*m2-3544*m3/2565+1859*m4/4104-11*m5/40)[2];
-
-        // x1, y1 and z1 are our fourth order approximations
-        var x1 = x[i] + 25*k1/216+1408*k3/2565+2197*k4/4104-k5/5;
-        var y1 = y[i] + 25*l1/216+1408*l3/2565+2197*l4/4104-l5/5;
-        var z1 = z[i] + 25*m1/216+1408*m3/2565+2197*m4/4104-m5/5;
-
-        // x2, y2 and z2 are our fifth order approximations
-        var x2 = x[i] + 16*k1/135+6656*k3/12825+28561*k4/56430-9*k5/50+2*k6/55;
-        var y2 = y[i] + 16*l1/135+6656*l3/12825+28561*l4/56430-9*l5/50+2*l6/55;
-        var z2 = z[i] + 16*m1/135+6656*m3/12825+28561*m4/56430-9*m5/50+2*m6/55;
-
-        // The following are used to correct the step size
-        var Rx = Math.abs(x1-x2)/dt;
-        var Ry = Math.abs(y1-y2)/dt;
-        var Rz = Math.abs(z1-z2)/dt;
-        var sx = 0.84*Math.pow(epsilon/Rx, 1/4);                
-        var sy = 0.84*Math.pow(epsilon/Ry, 1/4);
-        var sz = 0.84*Math.pow(epsilon/Rz, 1/4);
-        var R = Math.max(Rx, Ry, Rz);
-        var s = Math.min(sx, sy, sz);
-
-        // If R is less than or equal to epsilon move onto the next step
-        if ( R <= epsilon ) {
-            t.push(t[i]+dt);
-            x.push(x1);
-            y.push(y1);
-            z.push(z1);
-            i++;
-            dt *= s;
-        } else {
-            dt *= s;
-        }
+        var [x1, y1, z1, x2, y2, z2] = approximatorRKF45(dt, a, b, c, t, x, y, z, i);
+        var [dt, t, x, y, z] = stepSizeChecker(dt, epsilon, t, x, y, z, x1, y1, z1, x2, y2, z2, i);
     }
 
     // Write t, x, y and z to our solution object
@@ -187,6 +227,17 @@ function removeTable() {
 }
 
 /**
+ * Adjust the height of the specified plot element
+ * 
+ * @param title         Title of the plot element.
+ * @return              Nothing.
+ */
+function adjustPlotHeight(title) {
+    var windowInnerHeight = window.innerHeight;
+    document.getElementById(title).style = "height: " + windowInnerHeight + "px;";
+}
+
+/**
  * Generates a 3D phase plot
  * 
  * @param objectOfInputs An object containing all the problem parameters.
@@ -200,8 +251,7 @@ function generate3DPhasePlot(objectOfInputs) {
     var {x, y, z} = solution;
 
     // Height and width of plot
-    var windowInnerHeight = window.innerHeight;
-    document.getElementById("phasePlotXYZ").style = "height: " + windowInnerHeight + "px;";
+    adjustPlotHeight("plotXYZ");
 
     // Plot object and data object array
     var plotXYZ = {
@@ -252,8 +302,7 @@ function generateXYPhasePlot(objectOfInputs) {
     var {x, y} = solution;
 
     // Height and width of plot
-    var windowInnerHeight = window.innerHeight;
-    document.getElementById("phasePlotXY").style = "height: " + windowInnerHeight + "px;";
+    adjustPlotHeight("phasePlotXY");
 
     // Plot object and data object array
     var plotXY = {
@@ -299,8 +348,7 @@ function generateXZPhasePlot(objectOfInputs) {
     var {x, z} = solution;
     
     // Height and width of plot
-    var windowInnerHeight = window.innerHeight;
-    document.getElementById("phasePlotXZ").style = "height: " + windowInnerHeight + "px;";
+    adjustPlotHeight("phasePlotXZ");
     
     // Plot object and data object array
     var plotXZ = {
@@ -346,8 +394,7 @@ function generateYZPhasePlot(objectOfInputs) {
     var {y, z} = solution;
 
     // Height and width of plot
-    var windowInnerHeight = window.innerHeight;
-    document.getElementById("phasePlotYZ").style = "height: " + windowInnerHeight + "px;";
+    adjustPlotHeight("phasePlotYZ");
 
     // Plot object and data object array
     var plotYZ = {
@@ -393,8 +440,7 @@ function generateTimePlot(objectOfInputs) {
     var {t, x, y, z} = solution;
 
     // Height and width of plot
-    var windowInnerHeight = window.innerHeight;
-    document.getElementById("timePlot").style = "height: " + windowInnerHeight + "px;";
+    adjustPlotHeight("timePlot");
 
     // Plot object and data object array
     var plotTX = {
