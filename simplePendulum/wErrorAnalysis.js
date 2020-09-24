@@ -12,7 +12,7 @@
  * @return              Array of 4th and 5th order corrections to theta and 
  * theta dot
  */
-function approximatorRKF45(g, l, dt, t, theta, thetaDot, i) {
+function approximatorRKF45(g, l, theta0, thetaDot0, dt, t, theta, thetaDot, i) {
     // Runge-Kutta-Fehlberg approximations of the change in theta and 
     // thetaDot over the step
     var k1 = dt*f(g, l, t[i], theta[i], thetaDot[i])[0];
@@ -36,7 +36,7 @@ function approximatorRKF45(g, l, dt, t, theta, thetaDot, i) {
     var thetaDot2 = thetaDot[i] + 16*l1/135+6656*l3/12825+28561*l4/56430-9*l5/50+2*l6/55;
 
     // Error calculation
-    errorThetaDot1 = Math.abs(thetaDot1 - Math.sign(thetaDot1)*Math.sqrt(Math.abs(thetaDotSq(g, l, theta0, thetaDot0, theta1))));
+    var errorThetaDot1 = Math.abs(thetaDot1 - Math.sign(thetaDot1)*Math.sqrt(Math.abs(thetaDotSq(g, l, theta0, thetaDot0, theta1))));
 
     return [theta1, thetaDot1, theta2, thetaDot2, errorThetaDot1];
 }
@@ -114,7 +114,7 @@ function RKF45(dtInitial, epsilon, g, l, t0, tf, theta0, thetaDot0) {
         dt = Math.min(dt, tf-t[i]);
     
         // Use approximatorRKF45 to make approximations
-        [theta1, thetaDot1, theta2, thetaDot2, errorThetaDot1] = approximatorRKF45(g, l, dt, t, theta, thetaDot, i);
+        [theta1, thetaDot1, theta2, thetaDot2, errorThetaDot1] = approximatorRKF45(g, l, theta0, thetaDot0, dt, t, theta, thetaDot, i);
     
         // The following are used to correct the step size
         [i, dt, t, theta, thetaDot, errorThetaDot, logErrorThetaDot] = stepSizeChecker(theta1, theta2, thetaDot1, thetaDot2, errorThetaDot1, epsilon, i, dt, t, theta, thetaDot, errorThetaDot, logErrorThetaDot);
@@ -135,21 +135,21 @@ function RKF45(dtInitial, epsilon, g, l, t0, tf, theta0, thetaDot0) {
 /** 
  * Solve the problem using RKF45.
  *
- * @param arrayOfInputs  Parameters of the problem collected from form using 
+ * @param objectOfInputs  Parameters of the problem collected from form using 
  * readInput().
  * @return               Nothing. But it enters the solution values and error
  * estimates into the solution object.
  */
-function solveProblem(arrayOfInputs) {
+function solveProblem(objectOfInputs) {
     // Obtain the parameters of the problem
-    var g = arrayOfInputs[0]
-    var l = arrayOfInputs[1];
-    var t0 = arrayOfInputs[7];
-    var tf = arrayOfInputs[8];
-    var theta0 = arrayOfInputs[3];
-    var thetaDot0 = arrayOfInputs[4];
-    var epsilon = parseFloat(document.getElementById("epsilon").value);
-    var dtInitial = parseFloat(document.getElementById("dtInitial").value);
+    var g = objectOfInputs.g;
+    var l = objectOfInputs.l;
+    var t0 = objectOfInputs.t0;
+    var tf = objectOfInputs.tf;
+    var theta0 = objectOfInputs.theta0;
+    var thetaDot0 = objectOfInputs.thetaDot0;
+    var epsilon = objectOfInputs.epsilon;
+    var dtInitial = objectOfInputs.dtInitial;
 
     // Solve the problem
     var solution = RKF45(dtInitial, epsilon, g, l, t0, tf, theta0, thetaDot0);
@@ -163,12 +163,12 @@ function solveProblem(arrayOfInputs) {
 /**
  * Generate semilog plot of an error estimate in theta dot against time
  * 
- * @param arrayOfInputs  Parameters of the problem collected from form using 
+ * @param objectOfInputs  Parameters of the problem collected from form using 
  * readInput().
  * @return               Nothing. Just generates the relevant plot.
  */
-function generateErrorPlot(arrayOfInputs) {
-    var solution = solveProblem(arrayOfInputs);
+function generateErrorPlot(objectOfInputs) {
+    var solution = solveProblem(objectOfInputs);
 
     // Extract solution data from solution object
     var t = solution.t;

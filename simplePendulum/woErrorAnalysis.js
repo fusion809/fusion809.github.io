@@ -124,20 +124,20 @@ function RKF45(dtInitial, epsilon, g, l, t0, tf, theta0, thetaDot0) {
 /** 
  * Solve the problem using RKF45.
  *
- * @param arrayOfInputs  An array that contains all the problem parameters.
+ * @param objectOfInputs  An array that contains all the problem parameters.
  * @return               Nothing. But it enters the solution values and error
  * estimates into the solution object.
  */
-function solveProblem(arrayOfInputs) {
+function solveProblem(objectOfInputs) {
     // Obtain the parameters of the problem
-    var g = arrayOfInputs[0]
-    var l = arrayOfInputs[1];
-    var t0 = arrayOfInputs[7];
-    var tf = arrayOfInputs[8];
-    var theta0 = arrayOfInputs[3];
-    var thetaDot0 = arrayOfInputs[4];
-    var epsilon = parseFloat(document.getElementById("epsilon").value);
-    var dtInitial = parseFloat(document.getElementById("dtInitial").value);
+    var g = objectOfInputs.g
+    var l = objectOfInputs.l;
+    var t0 = objectOfInputs.t0;
+    var tf = objectOfInputs.tf;
+    var theta0 = objectOfInputs.theta0;
+    var thetaDot0 = objectOfInputs.thetaDot0;
+    var epsilon = objectOfInputs.epsilon;
+    var dtInitial = objectOfInputs.dtInitial;
 
     // Solve the problem
     var solution = RKF45(dtInitial, epsilon, g, l, t0, tf, theta0, thetaDot0);
