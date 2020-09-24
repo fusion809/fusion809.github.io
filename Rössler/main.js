@@ -22,6 +22,7 @@ function f(a, b, c, t, x, y, z) {
  * @return              An object of inputs.
  */
 function readInputs() {
+    // Extract parameters from the form
     var a = parseFloat(document.getElementById("a").value);
     var b = parseFloat(document.getElementById("b").value);
     var c = parseFloat(document.getElementById("c").value);
@@ -33,6 +34,7 @@ function readInputs() {
     var epsilon = parseFloat(document.getElementById("epsilon").value);
     var dtInitial = parseFloat(document.getElementById("dtInitial").value);
 
+    // Write to an object and return
     var objectOfInputs = {
         a: a,
         b: b,
@@ -227,17 +229,6 @@ function removeTable() {
 }
 
 /**
- * Adjust the height of the specified plot element
- * 
- * @param title         Title of the plot element.
- * @return              Nothing.
- */
-function adjustPlotHeight(title) {
-    var windowInnerHeight = window.innerHeight;
-    document.getElementById(title).style = "height: " + windowInnerHeight + "px;";
-}
-
-/**
  * Generates a 3D phase plot
  * 
  * @param objectOfInputs An object containing all the problem parameters.
@@ -284,8 +275,7 @@ function generate3DPhasePlot(objectOfInputs) {
  * @return           Nothing. Just removes the plot.
  */
 function remove3DPhasePlot() {
-    document.getElementById("phasePlotXYZ").innerHTML = '';
-    document.getElementById("phasePlotXYZ").style = '';
+    rmPlot("phasePlotXYZ");
 }
 
 /**
@@ -330,8 +320,7 @@ function generateXYPhasePlot(objectOfInputs) {
  * @return           Nothing. Just removes the plot.
  */
 function removeXYPhasePlot() {
-    document.getElementById("phasePlotXY").innerHTML = '';
-    document.getElementById("phasePlotXY").style = '';
+    rmPlot("phasePlotXY");
 }
 
 /**
@@ -376,8 +365,7 @@ function generateXZPhasePlot(objectOfInputs) {
  * @return           Nothing. Just removes the plot.
  */
 function removeXZPhasePlot() {
-    document.getElementById("phasePlotXZ").innerHTML = '';
-    document.getElementById("phasePlotXZ").style = '';
+    rmPlot("phasePlotXZ");
 }
 
 /**
@@ -422,8 +410,7 @@ function generateYZPhasePlot(objectOfInputs) {
  * @return           Nothing. Just removes the plot.
  */
 function removeYZPhasePlot() {
-    document.getElementById("phasePlotYZ").innerHTML = '';
-    document.getElementById("phasePlotYZ").style = '';
+    rmPlot("phasePlotYZ");
 }
 
 /**
@@ -485,8 +472,7 @@ function generateTimePlot(objectOfInputs) {
  * @return           Nothing. Just removes the plot.
  */
 function removeTimePlot() {
-    document.getElementById("timePlot").innerHTML = '';
-    document.getElementById("timePlot").style = '';
+    rmPlot("timePlot");
 }
 
 /**
@@ -516,14 +502,9 @@ function generatePlots(objectOfInputs) {
  */
 function removePlots() {
     // Clear HTML and CSS of the plots
-    document.getElementById("timePlot").innerHTML = '';
-    document.getElementById("phasePlotXYZ").innerHTML = '';
-    document.getElementById("phasePlotXY").innerHTML = '';
-    document.getElementById("phasePlotXZ").innerHTML = '';
-    document.getElementById("phasePlotYZ").innerHTML = '';
-    document.getElementById("timePlot").style = '';
-    document.getElementById("phasePlotXYZ").style = '';
-    document.getElementById("phasePlotXY").style = '';
-    document.getElementById("phasePlotXZ").style = '';
-    document.getElementById("phasePlotYZ").style = '';
+    removeTimePlot();
+    remove3DPhasePlot();
+    removeXYPhasePlot();
+    removeXZPhasePlot();
+    removeYZPhasePlot();
 };

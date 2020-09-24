@@ -194,9 +194,7 @@ function generate3DPhasePlot() {
     z = solution.z;
 
     // Height and width of plot
-    windowInnerWidth  = window.innerWidth;
-    windowInnerHeight = window.innerHeight;
-    document.getElementById("phasePlotXYZ").style = "height: " + windowInnerHeight + "px;";
+    adjustPlotHeight("phasePlotXYZ");
 
     // Plot object and data object array
     var plotXYZ = {
@@ -229,8 +227,7 @@ function generate3DPhasePlot() {
  * @return           Nothing. Just removes the plot.
  */
 function remove3DPhasePlot() {
-    document.getElementById("phasePlotXYZ").innerHTML = '';
-    document.getElementById("phasePlotXYZ").style = '';
+    rmPlot("phasePlotXYZ");
 }
 
 /**
@@ -250,9 +247,7 @@ function generateXYPhasePlot() {
     y = solution.y;
 
     // Height and width of plot
-    windowInnerWidth  = window.innerWidth;
-    windowInnerHeight = window.innerHeight;
-    document.getElementById("phasePlotXY").style = "height: " + windowInnerHeight + "px;";
+    adjustPlotHeight("phasePlotXY");
 
     // Plot object and data object array
     var plotXY = {
@@ -280,8 +275,7 @@ function generateXYPhasePlot() {
  * @return           Nothing. Just removes the plot.
  */
 function removeXYPhasePlot() {
-    document.getElementById("phasePlotXY").innerHTML = '';
-    document.getElementById("phasePlotXY").style = '';
+    rmPlot("phasePlotXY");
 }
 
 /**
@@ -301,9 +295,7 @@ function generateXZPhasePlot() {
     z = solution.z;
     
     // Height and width of plot
-    windowInnerWidth  = window.innerWidth;
-    windowInnerHeight = window.innerHeight;
-    document.getElementById("phasePlotXZ").style = "height: " + windowInnerHeight + "px;";
+    adjustPlotHeight("phasePlotXZ");
     
     // Plot object and data object array
     var plotXZ = {
@@ -331,8 +323,7 @@ function generateXZPhasePlot() {
  * @return           Nothing. Just removes the plot.
  */
 function removeXZPhasePlot() {
-    document.getElementById("phasePlotXZ").innerHTML = '';
-    document.getElementById("phasePlotXZ").style = '';
+    rmPlot("phasePlotXZ");
 }
 
 /**
@@ -352,9 +343,7 @@ function generateYZPhasePlot() {
     z = solution.z;
 
     // Height and width of plot
-    windowInnerWidth  = window.innerWidth;
-    windowInnerHeight = window.innerHeight;
-    document.getElementById("phasePlotYZ").style = "height: " + windowInnerHeight + "px;";
+    adjustPlotHeight("phasePlotYZ");
 
     // Plot object and data object array
     var plotYZ = {
@@ -382,8 +371,7 @@ function generateYZPhasePlot() {
  * @return           Nothing. Just removes the plot.
  */
 function removeYZPhasePlot() {
-    document.getElementById("phasePlotYZ").innerHTML = '';
-    document.getElementById("phasePlotYZ").style = '';
+    rmPlot("phasePlotYZ");
 }
 
 /**
@@ -405,9 +393,7 @@ function generateTimePlot() {
     z = solution.z;
 
     // Height and width of plot
-    windowInnerWidth  = window.innerWidth;
-    windowInnerHeight = window.innerHeight;
-    document.getElementById("timePlot").style = "height: " + windowInnerHeight + "px;";
+    adjustPlotHeight("timePlot");
 
     // Plot object and data object array
     var plotTX = {
@@ -452,8 +438,7 @@ function generateTimePlot() {
  * @return           Nothing. Just removes the plot.
  */
 function removeTimePlot() {
-    document.getElementById("timePlot").innerHTML = '';
-    document.getElementById("timePlot").style = '';
+    rmPlot("timePlot");
 }
 
 /**
@@ -483,14 +468,9 @@ function generatePlots() {
  */
 function removePlots() {
     // Clear HTML and CSS of the plots
-    document.getElementById("timePlot").innerHTML = '';
-    document.getElementById("phasePlotXYZ").innerHTML = '';
-    document.getElementById("phasePlotXY").innerHTML = '';
-    document.getElementById("phasePlotXZ").innerHTML = '';
-    document.getElementById("phasePlotYZ").innerHTML = '';
-    document.getElementById("timePlot").style = '';
-    document.getElementById("phasePlotXYZ").style = '';
-    document.getElementById("phasePlotXY").style = '';
-    document.getElementById("phasePlotXZ").style = '';
-    document.getElementById("phasePlotYZ").style = '';
+    removeTimePlot();
+    remove3DPhasePlot();
+    removeXYPhasePlot();
+    removeXZPhasePlot();
+    removeYZPhasePlot();
 };
