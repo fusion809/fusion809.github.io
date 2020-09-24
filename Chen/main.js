@@ -188,7 +188,7 @@ function generate3DPhasePlot() {
         solveProblem();
     }
 
-    // Extra solution data from solution object
+    // Extract solution data from solution object
     x = solution.x;
     y = solution.y;
     z = solution.z;
@@ -245,7 +245,7 @@ function generateXYPhasePlot() {
         solveProblem();
     }
 
-    // Extra solution data from solution object
+    // Extract solution data from solution object
     x = solution.x;
     y = solution.y;
 
@@ -296,7 +296,7 @@ function generateXZPhasePlot() {
         solveProblem();
     }
     
-    // Extra solution data from solution object
+    // Extract solution data from solution object
     x = solution.x;
     z = solution.z;
     
@@ -347,7 +347,7 @@ function generateYZPhasePlot() {
         solveProblem();
     }
 
-    // Extra solution data from solution object
+    // Extract solution data from solution object
     y = solution.y;
     z = solution.z;
 
@@ -398,7 +398,7 @@ function generateTimePlot() {
         solveProblem();
     }
 
-    // Extra solution data from solution object
+    // Extract solution data from solution object
     t = solution.t;
     x = solution.x;
     y = solution.y;
