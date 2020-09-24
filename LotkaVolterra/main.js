@@ -193,11 +193,6 @@ function removeTable() {
     document.getElementById('tableOutputs').innerHTML = '';
 }
 
-function adjustPlotHeight(element) {
-    windowInnerHeight = window.innerHeight;
-    document.getElementById(element).style = "height: " + windowInnerHeight + "px;";
-}
-
 /**
  * Generate phase plot
  * 
@@ -243,8 +238,7 @@ function generatePhasePlot(objectOfInputs) {
  * @return           Nothing. Just removes the plot.
  */
 function removePhasePlot() {
-    document.getElementById("phasePlot").innerHTML = '';
-    document.getElementById("phasePlot").style = '';
+    rmPlot("phasePlot");
 }
 
 /**
@@ -295,8 +289,7 @@ function generateTimePlot(objectOfInputs) {
  * @return           Nothing. Just removes the plot.
  */
 function removeTimePlot() {
-    document.getElementById("timePlot").innerHTML = '';
-    document.getElementById("timePlot").style = '';
+    rmPlot("timePlot");
 }
 
 /**
@@ -319,8 +312,6 @@ function generatePlots(objectOfInputs) {
  * @return           Nothing. Just removes the solution plots.
  */
 function removePlots() {
-    document.getElementById("timePlot").innerHTML = '';
-    document.getElementById("phasePlot").innerHTML = '';
-    document.getElementById("timePlot").style = '';
-    document.getElementById("phasePlot").style = '';
+    removePhasePlot();
+    removeTimePlot();
 };
