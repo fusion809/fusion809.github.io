@@ -47,6 +47,19 @@ function readInputs() {
     return objectOfInputs;
 }
 
+/**
+ * Generates 4th and 5th order approximations for x, y and z at next step.
+ * 
+ * @param dt            Step size.
+ * @param alpha         Problem parameter.
+ * @param gamma         Problem parameter.
+ * @param t             An array of t values.
+ * @param x             An array of x values.
+ * @param y             An array of y values.
+ * @param z             An array of z values.
+ * @param i             Counter variable.
+ * @return              An array of 4th and 5th order approximations to x, y, and z.
+ */
 function approximatorRKF45(dt, alpha, gamma, t, x, y, z, i) {
     // Runge-Kutta-Fehlberg approximations of the change in x, y and z over the step 1st approx
     var k1 = dt*f(alpha, gamma, t[i], x[i], y[i], z[i])[0];
@@ -86,6 +99,24 @@ function approximatorRKF45(dt, alpha, gamma, t, x, y, z, i) {
     return [x1, y1, z1, x2, y2, z2];
 }
 
+/**
+ * Step size checker and adapter.
+ * 
+ * @param dt            Step size.
+ * @param epsilon       Error tolerance.
+ * @param t             An array of t values.
+ * @param x             An array of x values.
+ * @param y             An array of y values.
+ * @param z             An array of z values.
+ * @param x1            4th order approximation to x[i+1].
+ * @param y1            4th order approximation to y[i+1].
+ * @param z1            4th order approximation to z[i+1].
+ * @param x2            5th order approximation to x[i+1].
+ * @param y2            5th order approximation to y[i+1].
+ * @param z2            5th order approximation to x[i+1].
+ * @param i             Counter variable.
+ * @return              [dt, t, x, y, z, i]
+ */
 function stepSizeChecker(dt, epsilon, t, x, y, z, x1, y1, z1, x2, y2, z2, i) {
     // The following are used to correct the step size
     var Rx = Math.abs(x1-x2)/dt;
@@ -114,9 +145,8 @@ function stepSizeChecker(dt, epsilon, t, x, y, z, x1, y1, z1, x2, y2, z2, i) {
 /** 
  * Solve the problem using RK45.
  *
- * @params           None. Uses parameter values in the forum.
- * @return           Nothing. But it enters the solution values into the solution
- * object.
+ * @param objectOfInputs An object containing the parameters in the form.
+ * @return               Nothing. But it enters the solution values into the solution object.
  */
 function solveProblem(objectOfInputs) {
     // Obtain the parameters of the problem
@@ -151,8 +181,8 @@ function solveProblem(objectOfInputs) {
 /**
  * Tabulates solution data.
  *
- * @params           None. Uses the entries of the solution object, however. 
- * @return           Nothing. Just populates the table with the solution values. 
+ * @param objectOfInputs An object containing the parameters in the form.
+ * @return               Nothing. Just populates the table with the solution values. 
  */
 function fillTable(objectOfInputs) {
     // Solve the problem
@@ -208,8 +238,8 @@ function adjustPlotHeight(element) {
 /**
  * Generates a 3D phase plot
  * 
- * @params           None.
- * @return           Nothing.
+ * @param objectOfInputs An object containing the parameters in the form.
+ * @return               Nothing.
  */
 function generate3DPhasePlot(objectOfInputs) {
     // Run solveProblem if unrun
@@ -259,8 +289,8 @@ function remove3DPhasePlot() {
 /**
  * Generates a XY phase plot
  * 
- * @params           None.
- * @return           Nothing.
+ * @param objectOfInputs An object containing the parameters in the form.
+ * @return               Nothing.
  */
 function generateXYPhasePlot(objectOfInputs) {
     // Solve the problem
@@ -305,8 +335,8 @@ function removeXYPhasePlot() {
 /**
  * Generates a XZ phase plot
  * 
- * @params           None.
- * @return           Nothing.
+ * @param objectOfInputs An object containing the parameters in the form.
+ * @return               Nothing.
  */
 function generateXZPhasePlot(objectOfInputs) {
     // Solve the problem
@@ -351,8 +381,8 @@ function removeXZPhasePlot() {
 /**
  * Generates a YZ phase plot
  * 
- * @params           None.
- * @return           Nothing.
+ * @param objectOfInputs An object containing the parameters in the form.
+ * @return               Nothing.
  */
 function generateYZPhasePlot(objectOfInputs) {
     // Solve the problem
@@ -397,8 +427,8 @@ function removeYZPhasePlot() {
 /**
  * Generates a time plot
  * 
- * @params           None.
- * @return           Nothing.
+ * @param objectOfInputs An object containing the parameters in the form.
+ * @return               Nothing.
  */
 function generateTimePlot(objectOfInputs) {
     // Solve the problem
@@ -465,8 +495,8 @@ function removeTimePlot() {
  * - The fourth is a 2D phase plot of z against y.
  * - The fifth is a plot of x, y and z against time.
  * 
- * @params           None.
- * @return           Nothing. Just generates the plots.
+ * @param objectOfInputs An object containing the parameters in the form.
+ * @return               Nothing. Just generates the plots.
  */
 function generatePlots(objectOfInputs) {
     generate3DPhasePlot(objectOfInputs);
