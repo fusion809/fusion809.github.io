@@ -197,10 +197,10 @@ function RKF45(dtInitial, epsilon, a, beta, gamma, delta, lambda, mu, t0, tf, S0
 }
 
 /**
- * Read inputs from the form and return them in an array
+ * Read inputs from the form and return them in an object
  * 
  * @params              Nothing.
- * @return              An array containing all the form inputs.
+ * @return              An object containing all the form inputs.
  */
 function readInputs() {
     // Take parameter values from the form
@@ -219,33 +219,49 @@ function readInputs() {
     var epsilon = parseFloat(document.getElementById("epsilon").value);
     var dtInitial = parseFloat(document.getElementById("dtInitial").value);
 
-    // Enter into arrayOfInputs
-    return [dtInitial, epsilon, a, beta, gamma, delta, lambda, mu, t0, tf, S0, E0, I0, R0];
+    // Create an objectOfInputs
+    var objectOfInputs = {
+        a: a,
+        beta: beta,
+        gamma: gamma,
+        delta: delta,
+        lambda: lambda,
+        mu: mu,
+        t0: t0,
+        tf: tf,
+        S0: S0,
+        E0: E0,
+        I0: I0,
+        R0: R0,
+        epsilon: epsilon,
+        dtInitial: dtInitial
+    };
+    return objectOfInputs;
 }
 
 /** 
- * Solve the problem using RK45.
+ * Solve the problem using RKF45.
  *
- * @params           None. Uses parameter values in the forum.
- * @return           Nothing. But it enters the solution values into the solution
+ * @param objectOfInputs An object containing all the form parameters. 
+ * @return               Nothing. But it enters the solution values into the solution
  * object.
  */
-function solveProblem(arrayOfInputs) {
+function solveProblem(objectOfInputs) {
     // Obtain the parameters of the problem
-    var dtInitial = arrayOfInputs[0];
-    var epsilon = arrayOfInputs[1];
-    var a = arrayOfInputs[2];
-    var beta = arrayOfInputs[3];
-    var gamma = arrayOfInputs[4];
-    var delta = arrayOfInputs[5];
-    var lambda = arrayOfInputs[6];
-    var mu = arrayOfInputs[7];
-    var t0 = arrayOfInputs[8];
-    var tf = arrayOfInputs[9];
-    var S0 = arrayOfInputs[10];
-    var E0 = arrayOfInputs[11];
-    var I0 = arrayOfInputs[12];
-    var R0 = arrayOfInputs[13];
+    var dtInitial = objectOfInputs.dtInitial;
+    var epsilon = objectOfInputs.epsilon;
+    var a = objectOfInputs.a;
+    var beta = objectOfInputs.beta;
+    var gamma = objectOfInputs.gamma;
+    var delta = objectOfInputs.delta;
+    var lambda = objectOfInputs.lambda;
+    var mu = objectOfInputs.mu;
+    var t0 = objectOfInputs.t0;
+    var tf = objectOfInputs.tf;
+    var S0 = objectOfInputs.S0;
+    var E0 = objectOfInputs.E0;
+    var I0 = objectOfInputs.I0;
+    var R0 = objectOfInputs.R0;
 
     // Solve problem using RKF45 and return result
     var solution = RKF45(dtInitial, epsilon, a, beta, gamma, delta, lambda, mu, t0, tf, S0, E0, I0, R0);
@@ -255,19 +271,19 @@ function solveProblem(arrayOfInputs) {
 /**
  * Tabulates solution data.
  *
- * @params           None. Uses the entries of the solution object, however. 
- * @return           Nothing. Just populates the table with the solution values. 
+ * @param objectOfInputs An object containing the problem parameters.
+ * @return               Nothing. Just populates the table with the solution values. 
  */
-function fillTable(arrayOfInputs) {
-    var solution = solveProblem(arrayOfInputs);
-    var epsilon = arrayOfInputs[1];
-
-    // Extract coordinate arrays from the solution object
+function fillTable(objectOfInputs) {
+    // Solve problem and extract relevant solution variables
+    var solution = solveProblem(objectOfInputs);
     var t = solution.t;
     var S = solution.S;
     var E = solution.E;
     var I = solution.I;
     var R = solution.R;
+    // Extract epsilon from objectOfInputs
+    var epsilon = objectOfInputs.epsilon;
 
     // Write to table
     document.getElementById('tableOutputs').innerHTML = '';
@@ -320,14 +336,12 @@ function setPlotElementDims(name) {
 /**
  * Generates a 3D phase plot
  * 
- * @params           None.
- * @return           Nothing.
+ * @param objectOfInputs An object containing all the form parameters. 
+ * @return               Nothing.
  */
-function generate3DPhasePlot(arrayOfInputs) {
-    // Run solveProblem if unrun
-    var solution = solveProblem(arrayOfInputs);
-
-    // Extract solution data from solution object
+function generate3DPhasePlot(objectOfInputs) {
+    // Solve problem and extract relevant solution variables
+    var solution = solveProblem(objectOfInputs);
     var S = solution.S;
     var I = solution.I;
     var R = solution.R;
@@ -373,13 +387,12 @@ function remove3DPhasePlot() {
 /**
  * Generates a XY phase plot
  * 
- * @params           None.
- * @return           Nothing.
+ * @param objectOfInputs An object containing all the form parameters. 
+ * @return               Nothing.
  */
-function generateXYPhasePlot(arrayOfInputs) {
-    var solution = solveProblem(arrayOfInputs);
-
-    // Extra solution data from solution object
+function generateXYPhasePlot(objectOfInputs) {
+    // Solve problem and extract relevant solution variables
+    var solution = solveProblem(objectOfInputs);
     var S = solution.S;
     var I = solution.I;
 
@@ -419,13 +432,12 @@ function removeXYPhasePlot() {
 /**
  * Generates a XZ phase plot
  * 
- * @params           None.
- * @return           Nothing.
+ * @param objectOfInputs An object containing all the form parameters. 
+ * @return               Nothing.
  */
-function generateXZPhasePlot(arrayOfInputs) {
-    var solution = solveProblem(arrayOfInputs);
-    
-    // Extra solution data from solution object
+function generateXZPhasePlot(objectOfInputs) {
+    // Solve problem and extract relevant solution variables
+    var solution = solveProblem(objectOfInputs);
     var S = solution.S;
     var R = solution.R;
     
@@ -465,13 +477,12 @@ function removeXZPhasePlot() {
 /**
  * Generates a YZ phase plot
  * 
- * @params           None.
- * @return           Nothing.
+ * @param objectOfInputs An object containing all the form parameters. 
+ * @return               Nothing.
  */
-function generateYZPhasePlot(arrayOfInputs) {
-    var solution = solveProblem(arrayOfInputs);
-
-    // Extra solution data from solution object
+function generateYZPhasePlot(objectOfInputs) {
+    // Solve problem and extract relevant solution variables
+    var solution = solveProblem(objectOfInputs);
     var I = solution.I;
     var R = solution.R;
 
@@ -511,13 +522,12 @@ function removeYZPhasePlot() {
 /**
  * Generates a time plot
  * 
- * @params           None.
- * @return           Nothing.
+ * @param objectOfInputs An object containing all the form parameters. 
+ * @return               Nothing.
  */
-function generateTimePlot(arrayOfInputs) {
-    var solution = solveProblem(arrayOfInputs);
-
-    // Extra solution data from solution object
+function generateTimePlot(objectOfInputs) {
+    // Solve problem and extract relevant solution variables
+    var solution = solveProblem(objectOfInputs);
     var t = solution.t;
     var S = solution.S;
     var E = solution.E;
@@ -590,15 +600,15 @@ function removeTimePlot() {
  * - The fourth is a 2D phase plot of R against I.
  * - The fifth is a plot of S, I and R.
  * 
- * @params           None.
- * @return           Nothing. Just generates the plots.
+ * @param objectOfInputs An object containing all the form parameters. 
+ * @return               Nothing. Just generates the plots.
  */
-function generatePlots(arrayOfInputs) {
-    generate3DPhasePlot(arrayOfInputs);
-    generateXYPhasePlot(arrayOfInputs);
-    generateXZPhasePlot(arrayOfInputs);
-    generateYZPhasePlot(arrayOfInputs);
-    generateTimePlot(arrayOfInputs);
+function generatePlots(objectOfInputs) {
+    generate3DPhasePlot(objectOfInputs);
+    generateXYPhasePlot(objectOfInputs);
+    generateXZPhasePlot(objectOfInputs);
+    generateYZPhasePlot(objectOfInputs);
+    generateTimePlot(objectOfInputs);
 };
 
 /**

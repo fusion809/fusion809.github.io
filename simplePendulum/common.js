@@ -17,17 +17,18 @@ function readInputs() {
     var tf = parseFloat(document.getElementById("tf").value);
 
     // Add them to array
-    return [g, l, N, theta0, thetaDot0, epsilon, dtInitial, t0, tf];
-
-    // g:                 arrayOfInputs[0]
-    // l:                 arrayOfInputs[1]
-    // N:                 arrayOfInputs[2]
-    // theta0:            arrayOfInputs[3]
-    // thetaDot0:         arrayOfInputs[4]
-    // epsilon:           arrayOfInputs[5]
-    // dtInitial:         arrayOfInputs[6]
-    // t0:                arrayOfInputs[7]
-    // tf:                arrayOfInputs[8]
+    var objectOfInputs = {
+        g: g,
+        l: l,
+        N: N,
+        theta0: theta0,
+        thetaDot0: thetaDot0,
+        epsilon: epsilon,
+        dtInitial: dtInitial,
+        t0: t0,
+        tf: tf
+    };
+    return objectOfInputs;
 }
 
 /**
@@ -49,7 +50,11 @@ function f(g, l, t, theta, thetaDot) {
 /**
  * Returns the value of theta dot squared.
  * 
- * @param theta    Angle from the x-axis.
+ * @param g        Acceleration due to gravity.
+ * @param l        Length of the pendulum.
+ * @param theta0   Initial angle from the positive x-axis.
+ * @param thetaDot0 Initial rate of change in the angle from the positive x-axis.
+ * @param theta    Angle from the positive x-axis.
  * @return         Theta dot squared value.
  */
 function thetaDotSq(g, l, theta0, thetaDot0, theta) {
@@ -59,6 +64,8 @@ function thetaDotSq(g, l, theta0, thetaDot0, theta) {
 /**
  * The derivative with respect to theta of the theta dot squared expression
  * 
+ * @param g        Acceleration due to gravity.
+ * @param l        Length of the pendulum.
  * @param theta    Angle from the x-axis.
  * @return         Theta derivative of the theta dot squared expression.
  */
@@ -69,6 +76,10 @@ function thetaDotSqPrime(g, l, theta) {
 /**
  * Correction to theta according to Newton's method
  * 
+ * @param g        Acceleration due to gravity.
+ * @param l        Length of the pendulum rod.
+ * @param theta0   Initial angle from the positive x-axis.
+ * @param thetaDot0 Initial rate of change against time of the angle from the positive x-axis.
  * @param theta    Angle from the x-axis.
  * @return         Correction to theta min/max value according to Newton's  method.
  */
@@ -80,17 +91,16 @@ function newtonsCorrection(g, l, theta0, thetaDot0, theta) {
  * Calculate the bounds of theta in our integration by using Newton's method
  * on our expression for theta dot squared. 
  * 
- * @param arrayOfInputs      An array of problem parameters.
- * @return                   Same array with the bounds for integration on theta added to the end.
+ * @param objectOfInputs      An object of problem parameters.
+ * @return                    Same array with the bounds for integration on theta added to the end.
  */
-function thetaBounds(arrayOfInputs) {
+function thetaBounds(objectOfInputs) {
     // Parameters of the problem that are necessary to calculate the period
-    var g = arrayOfInputs[0];
-    var l = arrayOfInputs[1];
-    var N = arrayOfInputs[2];
-    var theta0 = arrayOfInputs[3];
-    var thetaDot0 = arrayOfInputs[4];
-    var t0 = arrayOfInputs[7];
+    var g = objectOfInputs.g;
+    var l = objectOfInputs.l;
+    var theta0 = objectOfInputs.theta0;
+    var thetaDot0 = objectOfInputs.thetaDot0;
+    var t0 = objectOfInputs.t0;
 
     // Take our initial guess for thetaMax
     // Check if the problem satisfies the conditions for periodic behaviour
@@ -103,13 +113,14 @@ function thetaBounds(arrayOfInputs) {
         document.getElementById("epsilon").value = 1e-9;
         // Add extra N to array, so that we can kill periodCalc() if we get 
         // this far
-        arrayOfInputs.push(N);
+        objectOfInputs.periodic = false;
         // Clearing vars made irrelevant by non-periodicity
         document.getElementById("thetaMinDisplay").innerHTML = '';
         document.getElementById("thetaMaxDisplay").innerHTML = '';
-        // Return arrayOfInputs
-        return arrayOfInputs;
+        // Return objectOfInputs
+        return objectOfInputs;
     }
+    objectOfInputs.periodic = true;
     var thetaMin = Math.asin((thetaDot0**2+2*(g/l)*Math.sin(theta0))/(2*g/l));
     var thetaMax = - thetaMin - Math.PI;
 
@@ -117,28 +128,28 @@ function thetaBounds(arrayOfInputs) {
     document.getElementById("thetaMinDisplay").innerHTML = thetaMin;
     document.getElementById("thetaMaxDisplay").innerHTML = thetaMax;
 
-    // Add thetaMin and thetaMax to arrayOfInputs
-    arrayOfInputs.push(thetaMin);
-    arrayOfInputs.push(thetaMax);
+    // Add thetaMin and thetaMax to objectOfInputs
+    objectOfInputs.thetaMin = thetaMin;
+    objectOfInputs.thetaMax = thetaMax;
 
-    return arrayOfInputs;
+    return objectOfInputs;
 }
 
 /**
  * Calculates the value of theta when theta dot = 0 using Newton's method
  * then uses Chebyshev-Gauss quadrature to compute the time taken to reach this period.
  * 
- * @param arrayOfInputs  An array that contains all the problem parameters.
- * @return               Nothing. Changes the element value/innerHTML of integralDisplay and tf to T and 4*T, respectively.
+ * @param objectOfInputs  An object that contains all the problem parameters.
+ * @return                Nothing. Changes the element value/innerHTML of integralDisplay and tf to T and 4*T, respectively.
  */
-function periodCalc(arrayOfInputs) {
+function periodCalc(objectOfInputs) {
     // Parameters of the problem that are necessary to calculate the period
-    var g = arrayOfInputs[0];
-    var l = arrayOfInputs[1];
-    var N = arrayOfInputs[2];
-    var t0 = arrayOfInputs[7];
-    var theta0 = arrayOfInputs[3];
-    var thetaDot0 = arrayOfInputs[4];
+    var g = objectOfInputs.g;
+    var l = objectOfInputs.l;
+    var N = objectOfInputs.N;
+    var t0 = objectOfInputs.t0;
+    var theta0 = objectOfInputs.theta0;
+    var thetaDot0 = objectOfInputs.thetaDot0;
     var nodes = 0;
     var integrand = 0;
     var transformedGrid = 0;
@@ -146,9 +157,9 @@ function periodCalc(arrayOfInputs) {
     var period;
 
     // Kill the function if problem isn't periodic
-    if (arrayOfInputs[9] != N) {
-        var thetaMin = arrayOfInputs[9];
-        var thetaMax = arrayOfInputs[10];
+    if (objectOfInputs.periodic) {
+        var thetaMin = objectOfInputs.thetaMin;
+        var thetaMax = objectOfInputs.thetaMax;
     } else {
         return;
     }
@@ -186,12 +197,12 @@ function removeTable() {
 /**
  * Generate phase plot of theta dot against theta
  * 
- * @param arrayOfInputs  An array that contains all the problem parameters.
+ * @param objectOfInputs  An object that contains all the problem parameters.
  * @return               Nothing. Just generates the relevant plot.
  */
-function generatePhasePlot(arrayOfInputs) {
+function generatePhasePlot(objectOfInputs) {
     // Run solveProblem() if previously unrun
-    var solution = solveProblem(arrayOfInputs);
+    var solution = solveProblem(objectOfInputs);
 
     // Extract solution data from solution object
     var theta = solution.theta;
@@ -237,11 +248,11 @@ function removePhasePlot() {
 /**
  * Generate plot of theta and theta dot against time
  * 
- * @param arrayOfInputs  An array that contains all the problem parameters.
+ * @param objectOfInputs  An object that contains all the problem parameters.
  * @return               Nothing. Just generates the relevant plot.
  */
-function generateTimePlot(arrayOfInputs) {
-    var solution = solveProblem(arrayOfInputs);
+function generateTimePlot(objectOfInputs) {
+    var solution = solveProblem(objectOfInputs);
 
     // Extract solution data from solution object
     var t = solution.t;
@@ -291,13 +302,13 @@ function removeTimePlot() {
 /**
  * Tabulates solution data.
  *
- * @param arrayOfInputs  An array that contains all the problem parameters.
+ * @param objectOfInputs  An object that contains all the problem parameters.
  * @return               Nothing. Just populates the table with the solution values. 
  */
-function fillTable(arrayOfInputs) {
+function fillTable(objectOfInputs) {
     // Define all global variables
-    var solution = solveProblem(arrayOfInputs);
-    var epsilon = arrayOfInputs[5];
+    var solution = solveProblem(objectOfInputs);
+    var epsilon = objectOfInputs.epsilon;
     var t = solution.t;
     var theta = solution.theta;
     var thetaDot = solution.thetaDot;
@@ -351,15 +362,15 @@ function fillTable(arrayOfInputs) {
  * - one of thetaDot and theta against t;
  * - a phase plot of thetaDot against theta.
  * 
- * @param arrayOfInputs  An array that contains all the problem parameters.
+ * @param objectOfInputs  An object that contains all the problem parameters.
  * @return               Nothing. Just generates the plots.
  */
-function generatePlots(arrayOfInputs) {
-    generateTimePlot(arrayOfInputs);
-    generatePhasePlot(arrayOfInputs);
+function generatePlots(objectOfInputs) {
+    generateTimePlot(objectOfInputs);
+    generatePhasePlot(objectOfInputs);
     // The following if statement is to ensure that errorPlot is only generated if it's present in HTML
     if (!!document.getElementById("errorPlot")) {
-        generateErrorPlot(arrayOfInputs);
+        generateErrorPlot(objectOfInputs);
     }
 };
 

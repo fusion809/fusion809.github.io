@@ -14,7 +14,9 @@
  * @return           [dx/dt, d2x/dt2, dtheta/dt, d2theta/dt2]
  */
 function f(g, l0, k, m, t, x, xDot, theta, thetaDot) {
-    return [xDot, (l0+x)*thetaDot**2 - k*x/m + g*Math.sin(theta), thetaDot, -g*Math.cos(theta)/(l0+x)-2*xDot*thetaDot/(l0+x)];
+    var xDDot = (l0+x)*thetaDot**2 - k*x/m + g*Math.sin(theta);
+    var thetaDDot = -g*Math.cos(theta)/(l0+x)-2*xDot*thetaDot/(l0+x);
+    return [xDot, xDDot, thetaDot, thetaDDot];
 }
 
 // Initialize our global variables
@@ -27,15 +29,13 @@ var solution = {
 };
 var epsilon;
 
-/** 
- * Solve the problem using RK45.
- *
- * @params           None. Uses parameter values in the forum.
- * @return           Nothing. But it enters the solution values into the solution
- * object.
+/**
+ * Read inputs in the form and export them in an array.
+ * 
+ * @params              None.
+ * @return              An array of parameter values extracted from the form.
  */
-function solveProblem() {
-    // Obtain the parameters of the problem
+function readInputs() {
     var g = parseFloat(document.getElementById("g").value);
     var l0 = parseFloat(document.getElementById("l0").value);
     var k = parseFloat(document.getElementById("k").value);
@@ -48,6 +48,45 @@ function solveProblem() {
     var thetaDot0 = parseFloat(document.getElementById("thetaDot0").value);
     var epsilon = parseFloat(document.getElementById("epsilon").value);
     var dtInitial = parseFloat(document.getElementById("dtInitial").value);
+
+    var objectOfInputs = {
+        g: g,
+        l0: l0,
+        k: k,
+        m: m,
+        t0: t0,
+        tf: tf,
+        x0: x0,
+        xDot0: xDot0, 
+        theta0: theta0,
+        thetaDot0: thetaDot0,
+        epsilon: epsilon,
+        dtInitial: dtInitial
+    }
+    return objectOfInputs;
+}
+
+/** 
+ * Solve the problem using RK45.
+ *
+ * @params           None. Uses parameter values in the forum.
+ * @return           Nothing. But it enters the solution values into the solution
+ * object.
+ */
+function solveProblem(objectOfInputs) {
+    // Obtain the parameters of the problem
+    var g = objectOfInputs.g;
+    var l0 = objectOfInputs.l0;
+    var k = objectOfInputs.k;
+    var m = objectOfInputs.m;
+    var t0 = objectOfInputs.t0;
+    var tf = objectOfInputs.tf;
+    var x0 = objectOfInputs.x0;
+    var xDot0 = objectOfInputs.xDot0;
+    var theta0 = objectOfInputs.theta0;
+    var thetaDot0 = objectOfInputs.thetaDot0;
+    var epsilon = objectOfInputs.epsilon;
+    var dtInitial = objectOfInputs.dtInitial;
 
     // Initialize the arrays used and loop variables
     var t = [t0];
@@ -155,7 +194,7 @@ function solveProblem() {
  * @params           None. Uses the entries of the solution object, however. 
  * @return           Nothing. Just populates the table with the solution values. 
  */
-function fillTable() {
+function fillTable(objectOfInputs) {
     // Return an error if solveProblem() hasn't been run
     if ( solution.t.length == 0) {
         solveProblem();
@@ -167,6 +206,7 @@ function fillTable() {
     var xDot = solution.xDot;
     var theta = solution.theta;
     var thetaDot = solution.thetaDot;
+    var epsilon = objectOfInputs.epsilon;
 
     // Write to table
     document.getElementById('tableOutputs').innerHTML = '';
