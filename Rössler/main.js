@@ -51,16 +51,7 @@ function readInputs() {
  */
 function solveProblem(objectOfInputs) {
     // Obtain the parameters of the problem
-    var a = objectOfInputs.a;
-    var b = objectOfInputs.b;
-    var c = objectOfInputs.c;
-    var t0 = objectOfInputs.t0;
-    var tf = objectOfInputs.tf;
-    var x0 = objectOfInputs.x0;
-    var y0 = objectOfInputs.y0;
-    var z0 = objectOfInputs.z0;
-    var epsilon = objectOfInputs.epsilon;
-    var dtInitial = objectOfInputs.dtInitial;
+    var {a, b, c, t0, tf, x0, y0, z0, epsilon, dtInitial} = objectOfInputs;
 
     // Initialize the arrays used and loop variables
     var t = [t0];
