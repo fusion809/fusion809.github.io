@@ -147,7 +147,7 @@ function stepSizeChecker(dt, epsilon, t, x, y, z, x1, y1, z1, x2, y2, z2, i) {
  * Solve the problem using RKF45.
  *
  * @param objectOfInputs An object containing the parameters in the form.
- * @return               Nothing. But it enters the solution values into the solution object.
+ * @return               A solution object.
  */
 function solveProblem(objectOfInputs) {
     // Obtain the parameters of the problem

@@ -108,13 +108,15 @@ function approximatorRKF45(dt, alpha, beta, gamma, delta, omega, t, x, xDot, i) 
  * @return              [dt, t, x, xDot, i]
  */
 function stepSizeChecker(dt, epsilon, t, x, xDot, x1, xDot1, x2, xDot2, i) {
-    // The following are used to correct the step size
-    Rx = Math.abs(x1-x2)/dt;
-    RxDot = Math.abs(xDot1-xDot2)/dt;
-    sx = 0.84*Math.pow(epsilon/Rx, 1/4);                
-    sxDot = 0.84*Math.pow(epsilon/RxDot, 1/4);
-    R = Math.max(Rx, RxDot);
-    s = Math.min(sx, sxDot);
+    // Initialize relevant variables
+    var Rx = Math.abs(x1-x2)/dt;
+    var RxDot = Math.abs(xDot1-xDot2)/dt;
+    var sx = 0.84*Math.pow(epsilon/Rx, 1/4);                
+    var sxDot = 0.84*Math.pow(epsilon/RxDot, 1/4);
+    var R = Math.max(Rx, RxDot);
+    var s = Math.min(sx, sxDot);
+
+    // If R is less than the margin of error, move on to next iteration
     if ( R <= epsilon ) {
         t.push(t[i]+dt);
         x.push(x1);
@@ -125,6 +127,7 @@ function stepSizeChecker(dt, epsilon, t, x, xDot, x1, xDot1, x2, xDot2, i) {
         dt *= s;
     }
 
+    // Return what variables are needed by solveProblem()
     return [dt, t, x, xDot, i];
 }
 
@@ -132,7 +135,7 @@ function stepSizeChecker(dt, epsilon, t, x, xDot, x1, xDot1, x2, xDot2, i) {
  * Solve the problem using RKF45.
  *
  * @param objectOfInputs An object containing all the problem parameters.
- * @return               Nothing. But it enters the solution values into the solution object.
+ * @return               A solution object.
  */
 function solveProblem(objectOfInputs) {
     // Obtain the parameters of the problem

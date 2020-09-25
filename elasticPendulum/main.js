@@ -58,11 +58,129 @@ function readInputs() {
     return objectOfInputs;
 }
 
+/**
+ * Approximate 
+ * @param dt            Step size.
+ * @param g             Problem parameter.
+ * @param l0            Problem parameter.
+ * @param k             Problem parameter.
+ * @param m             Problem parameter.
+ * @param t             An array of t values.
+ * @param x             An array of x values.
+ * @param xDot          An array of xDot values.
+ * @param theta         An array of theta values.
+ * @param thetaDot      An array of thetaDot values.
+ * @param i             Counter variable.
+ * @return              [x1, xDot1, theta1, thetaDot1, x2, xDot2, theta2, thetaDot2]
+ */
+function approximatorRKF45(dt, g, l0, k, m, t, x, xDot, theta, thetaDot, i) {
+    // Runge-Kutta-Fehlberg approximations of the change in x, xDot, theta and thetaDot over the step
+    // 1st approx
+    var k1 = dt*f(g, l0, k, m, t[i], x[i], xDot[i], theta[i], thetaDot[i])[0];
+    var l1 = dt*f(g, l0, k, m, t[i], x[i], xDot[i], theta[i], thetaDot[i])[1];
+    var m1 = dt*f(g, l0, k, m, t[i], x[i], xDot[i], theta[i], thetaDot[i])[2];
+    var n1 = dt*f(g, l0, k, m, t[i], x[i], xDot[i], theta[i], thetaDot[i])[3];
+
+    // 2nd approx
+    var k2 = dt*f(g, l0, k, m, t[i]+dt/4, x[i]+k1/4, xDot[i]+l1/4, theta[i]+m1/4, thetaDot[i]+n1/4)[0];
+    var l2 = dt*f(g, l0, k, m, t[i]+dt/4, x[i]+k1/4, xDot[i]+l1/4, theta[i]+m1/4, thetaDot[i]+n1/4)[1];
+    var m2 = dt*f(g, l0, k, m, t[i]+dt/4, x[i]+k1/4, xDot[i]+l1/4, theta[i]+m1/4, thetaDot[i]+n1/4)[2];
+    var n2 = dt*f(g, l0, k, m, t[i]+dt/4, x[i]+k1/4, xDot[i]+l1/4, theta[i]+m1/4, thetaDot[i]+n1/4)[3];
+
+    // 3rd approx
+    var k3 = dt*f(g, l0, k, m, t[i]+3*dt/8, x[i]+3*k1/32+9*k2/32, xDot[i]+3*l1/32+9*l2/32, theta[i]+3*m1/32+9*m2/32, thetaDot[i]+3*n1/32+9*n2/32)[0];
+    var l3 = dt*f(g, l0, k, m, t[i]+3*dt/8, x[i]+3*k1/32+9*k2/32, xDot[i]+3*l1/32+9*l2/32, theta[i]+3*m1/32+9*m2/32, thetaDot[i]+3*n1/32+9*n2/32)[1];
+    var m3 = dt*f(g, l0, k, m, t[i]+3*dt/8, x[i]+3*k1/32+9*k2/32, xDot[i]+3*l1/32+9*l2/32, theta[i]+3*m1/32+9*m2/32, thetaDot[i]+3*n1/32+9*n2/32)[2];
+    var n3 = dt*f(g, l0, k, m, t[i]+3*dt/8, x[i]+3*k1/32+9*k2/32, xDot[i]+3*l1/32+9*l2/32, theta[i]+3*m1/32+9*m2/32, thetaDot[i]+3*n1/32+9*n2/32)[3];
+
+    // 4th approx
+    var k4 = dt*f(g, l0, k, m, t[i]+12*dt/13, x[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, xDot[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197, theta[i]+1932*m1/2197-7200*m2/2197+7296*m3/2197, thetaDot[i]+1932*n1/2197-7200*n2/2197+7296*n3/2197)[0];
+    var l4 = dt*f(g, l0, k, m, t[i]+12*dt/13, x[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, xDot[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197, theta[i]+1932*m1/2197-7200*m2/2197+7296*m3/2197, thetaDot[i]+1932*n1/2197-7200*n2/2197+7296*n3/2197)[1];
+    var m4 = dt*f(g, l0, k, m, t[i]+12*dt/13, x[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, xDot[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197, theta[i]+1932*m1/2197-7200*m2/2197+7296*m3/2197, thetaDot[i]+1932*n1/2197-7200*n2/2197+7296*n3/2197)[2];
+    var n4 = dt*f(g, l0, k, m, t[i]+12*dt/13, x[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, xDot[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197, theta[i]+1932*m1/2197-7200*m2/2197+7296*m3/2197, thetaDot[i]+1932*n1/2197-7200*n2/2197+7296*n3/2197)[3];
+
+    // 5th approx
+    var k5 = dt*f(g, l0, k, m, t[i]+dt, x[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, xDot[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104, theta[i]+439*m1/216-8*m2+3680*m3/513-845*m4/4104, thetaDot[i]+439*n1/216-8*n2+3680*n3/513-845*n4/4104)[0];
+    var l5 = dt*f(g, l0, k, m, t[i]+dt, x[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, xDot[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104, theta[i]+439*m1/216-8*m2+3680*m3/513-845*m4/4104, thetaDot[i]+439*n1/216-8*n2+3680*n3/513-845*n4/4104)[1];
+    var m5 = dt*f(g, l0, k, m, t[i]+dt, x[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, xDot[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104, theta[i]+439*m1/216-8*m2+3680*m3/513-845*m4/4104, thetaDot[i]+439*n1/216-8*n2+3680*n3/513-845*n4/4104)[2];
+    var n5 = dt*f(g, l0, k, m, t[i]+dt, x[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, xDot[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104, theta[i]+439*m1/216-8*m2+3680*m3/513-845*m4/4104, thetaDot[i]+439*n1/216-8*n2+3680*n3/513-845*n4/4104)[3];
+
+    // 6th approx
+    var k6 = dt*f(g, l0, k, m, t[i]+dt/2, x[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, xDot[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40, theta[i]-8*m1/27+2*m2-3544*m3/2565+1859*m4/4104-11*m5/40, thetaDot[i]-8*n1/27+2*n2-3544*n3/2565+1859*n4/4104-11*n5/40)[0];
+    var l6 = dt*f(g, l0, k, m, t[i]+dt/2, x[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, xDot[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40, theta[i]-8*m1/27+2*m2-3544*m3/2565+1859*m4/4104-11*m5/40, thetaDot[i]-8*n1/27+2*n2-3544*n3/2565+1859*n4/4104-11*n5/40)[1];
+    var m6 = dt*f(g, l0, k, m, t[i]+dt/2, x[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, xDot[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40, theta[i]-8*m1/27+2*m2-3544*m3/2565+1859*m4/4104-11*m5/40, thetaDot[i]-8*n1/27+2*n2-3544*n3/2565+1859*n4/4104-11*n5/40)[2];
+    var n6 = dt*f(g, l0, k, m, t[i]+dt/2, x[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, xDot[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40, theta[i]-8*m1/27+2*m2-3544*m3/2565+1859*m4/4104-11*m5/40, thetaDot[i]-8*n1/27+2*n2-3544*n3/2565+1859*n4/4104-11*n5/40)[3];
+
+    // x1, xDot1, theta1, thetaDot1 are our fourth order approximations
+    var x1 = x[i] + 25*k1/216+1408*k3/2565+2197*k4/4104-k5/5;
+    var xDot1 = xDot[i] + 25*l1/216+1408*l3/2565+2197*l4/4104-l5/5;
+    var theta1 = theta[i] + 25*m1/216+1408*m3/2565+2197*m4/4104-m5/5;
+    var thetaDot1 = thetaDot[i] + 25*n1/216+1408*n3/2565+2197*n4/4104-n5/5;
+
+    // x2, xDot2, theta2 and thetaDot2 are our fifth order approximations
+    var x2 = x[i] + 16*k1/135+6656*k3/12825+28561*k4/56430-9*k5/50+2*k6/55;
+    var xDot2 = xDot[i] + 16*l1/135+6656*l3/12825+28561*l4/56430-9*l5/50+2*l6/55;
+    var theta2 = theta[i] + 16*m1/135+6656*m3/12825+28561*m4/56430-9*m5/50+2*m6/55;
+    var thetaDot2 = thetaDot[i] + 16*n1/135+6656*n3/12825+28561*n4/56430-9*n5/50+2*n6/55;
+
+    return [x1, xDot1, theta1, thetaDot1, x2, xDot2, theta2, thetaDot2];
+}
+
+/**
+ * Check and correct step size
+ * 
+ * @param dt            Step size.
+ * @param epsilon       Error tolerance.
+ * @param t             An array of t values.
+ * @param x             An array of x values.
+ * @param xDot          An array of xDot values.
+ * @param theta         An array of theta values.
+ * @param thetaDot      An array of theta dot values.
+ * @param x1            4th order approx to x.
+ * @param xDot1         4th order approx to xDot.
+ * @param theta1        4th order approx to theta.
+ * @param thetaDot1     4th order approx to theta dot.
+ * @param x2            5th order approx to x.
+ * @param xDot2         5th order approx to xDot.
+ * @param theta2        5th order approx to theta.
+ * @param thetaDot2     5th order approx to theta dot.
+ * @param i             Counter variable.
+ * @return              [dt, t, x, xDot, theta, thetaDot, i]
+ */
+function stepSizeChecker(dt, epsilon, t, x, xDot, theta, thetaDot, x1, xDot1, theta1, thetaDot1, x2, xDot2, theta2, thetaDot2, i) {
+    // The following are used to correct the step size
+    var Rx = Math.abs(x1-x2)/dt;
+    var RxDot = Math.abs(xDot1-xDot2)/dt;
+    var Rtheta = Math.abs(theta1-theta2)/dt;
+    var RthetaDot = Math.abs(thetaDot1-thetaDot2)/dt;
+    var sx = 0.84*Math.pow(epsilon/Rx, 1/4);                
+    var sxDot = 0.84*Math.pow(epsilon/RxDot, 1/4);
+    var stheta = 0.84*Math.pow(epsilon/Rtheta, 1/4);
+    var sthetaDot = 0.84*Math.pow(epsilon/RthetaDot, 1/4);
+    var R = Math.max(Rx, RxDot, Rtheta, RthetaDot);
+    var s = Math.min(sx, sxDot, stheta, sthetaDot);
+
+    // If R is less than or equal to epsilon move onto the next step
+    if ( R <= epsilon ) {
+        t.push(t[i]+dt);
+        x.push(x1);
+        xDot.push(xDot1);
+        theta.push(theta1);
+        thetaDot.push(thetaDot1);
+        i++;
+        dt *= s;
+    } else {
+        dt *= s;
+    }
+
+    return [dt, t, x, xDot, theta, thetaDot, i];
+}
+
 /** 
  * Solve the problem using RKF45.
  *
  * @param objectOfInputs An object containing all the problem parameters.
- * @return               Nothing. But it enters the solution values into the solution object.
+ * @return               Solution object.
  */
 function solveProblem(objectOfInputs) {
     // Obtain the parameters of the problem
@@ -81,81 +199,8 @@ function solveProblem(objectOfInputs) {
     while ( t[i] < tf ) {
         // Step size, as dictated by the method
         dt = Math.min(dt, tf-t[i]);
-
-        // Runge-Kutta-Fehlberg approximations of the change in x, y and z
-        // over the step
-        // 1st approx
-        var k1 = dt*f(g, l0, k, m, t[i], x[i], xDot[i], theta[i], thetaDot[i])[0];
-        var l1 = dt*f(g, l0, k, m, t[i], x[i], xDot[i], theta[i], thetaDot[i])[1];
-        var m1 = dt*f(g, l0, k, m, t[i], x[i], xDot[i], theta[i], thetaDot[i])[2];
-        var n1 = dt*f(g, l0, k, m, t[i], x[i], xDot[i], theta[i], thetaDot[i])[3];
-
-        // 2nd approx
-        var k2 = dt*f(g, l0, k, m, t[i]+dt/4, x[i]+k1/4, xDot[i]+l1/4, theta[i]+m1/4, thetaDot[i]+n1/4)[0];
-        var l2 = dt*f(g, l0, k, m, t[i]+dt/4, x[i]+k1/4, xDot[i]+l1/4, theta[i]+m1/4, thetaDot[i]+n1/4)[1];
-        var m2 = dt*f(g, l0, k, m, t[i]+dt/4, x[i]+k1/4, xDot[i]+l1/4, theta[i]+m1/4, thetaDot[i]+n1/4)[2];
-        var n2 = dt*f(g, l0, k, m, t[i]+dt/4, x[i]+k1/4, xDot[i]+l1/4, theta[i]+m1/4, thetaDot[i]+n1/4)[3];
-
-        // 3rd approx
-        var k3 = dt*f(g, l0, k, m, t[i]+3*dt/8, x[i]+3*k1/32+9*k2/32, xDot[i]+3*l1/32+9*l2/32, theta[i]+3*m1/32+9*m2/32, thetaDot[i]+3*n1/32+9*n2/32)[0];
-        var l3 = dt*f(g, l0, k, m, t[i]+3*dt/8, x[i]+3*k1/32+9*k2/32, xDot[i]+3*l1/32+9*l2/32, theta[i]+3*m1/32+9*m2/32, thetaDot[i]+3*n1/32+9*n2/32)[1];
-        var m3 = dt*f(g, l0, k, m, t[i]+3*dt/8, x[i]+3*k1/32+9*k2/32, xDot[i]+3*l1/32+9*l2/32, theta[i]+3*m1/32+9*m2/32, thetaDot[i]+3*n1/32+9*n2/32)[2];
-        var n3 = dt*f(g, l0, k, m, t[i]+3*dt/8, x[i]+3*k1/32+9*k2/32, xDot[i]+3*l1/32+9*l2/32, theta[i]+3*m1/32+9*m2/32, thetaDot[i]+3*n1/32+9*n2/32)[3];
-
-        // 4th approx
-        var k4 = dt*f(g, l0, k, m, t[i]+12*dt/13, x[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, xDot[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197, theta[i]+1932*m1/2197-7200*m2/2197+7296*m3/2197, thetaDot[i]+1932*n1/2197-7200*n2/2197+7296*n3/2197)[0];
-        var l4 = dt*f(g, l0, k, m, t[i]+12*dt/13, x[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, xDot[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197, theta[i]+1932*m1/2197-7200*m2/2197+7296*m3/2197, thetaDot[i]+1932*n1/2197-7200*n2/2197+7296*n3/2197)[1];
-        var m4 = dt*f(g, l0, k, m, t[i]+12*dt/13, x[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, xDot[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197, theta[i]+1932*m1/2197-7200*m2/2197+7296*m3/2197, thetaDot[i]+1932*n1/2197-7200*n2/2197+7296*n3/2197)[2];
-        var n4 = dt*f(g, l0, k, m, t[i]+12*dt/13, x[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, xDot[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197, theta[i]+1932*m1/2197-7200*m2/2197+7296*m3/2197, thetaDot[i]+1932*n1/2197-7200*n2/2197+7296*n3/2197)[3];
-
-        // 5th approx
-        var k5 = dt*f(g, l0, k, m, t[i]+dt, x[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, xDot[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104, theta[i]+439*m1/216-8*m2+3680*m3/513-845*m4/4104, thetaDot[i]+439*n1/216-8*n2+3680*n3/513-845*n4/4104)[0];
-        var l5 = dt*f(g, l0, k, m, t[i]+dt, x[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, xDot[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104, theta[i]+439*m1/216-8*m2+3680*m3/513-845*m4/4104, thetaDot[i]+439*n1/216-8*n2+3680*n3/513-845*n4/4104)[1];
-        var m5 = dt*f(g, l0, k, m, t[i]+dt, x[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, xDot[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104, theta[i]+439*m1/216-8*m2+3680*m3/513-845*m4/4104, thetaDot[i]+439*n1/216-8*n2+3680*n3/513-845*n4/4104)[2];
-        var n5 = dt*f(g, l0, k, m, t[i]+dt, x[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, xDot[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104, theta[i]+439*m1/216-8*m2+3680*m3/513-845*m4/4104, thetaDot[i]+439*n1/216-8*n2+3680*n3/513-845*n4/4104)[3];
-
-        // 6th approx
-        var k6 = dt*f(g, l0, k, m, t[i]+dt/2, x[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, xDot[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40, theta[i]-8*m1/27+2*m2-3544*m3/2565+1859*m4/4104-11*m5/40, thetaDot[i]-8*n1/27+2*n2-3544*n3/2565+1859*n4/4104-11*n5/40)[0];
-        var l6 = dt*f(g, l0, k, m, t[i]+dt/2, x[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, xDot[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40, theta[i]-8*m1/27+2*m2-3544*m3/2565+1859*m4/4104-11*m5/40, thetaDot[i]-8*n1/27+2*n2-3544*n3/2565+1859*n4/4104-11*n5/40)[1];
-        var m6 = dt*f(g, l0, k, m, t[i]+dt/2, x[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, xDot[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40, theta[i]-8*m1/27+2*m2-3544*m3/2565+1859*m4/4104-11*m5/40, thetaDot[i]-8*n1/27+2*n2-3544*n3/2565+1859*n4/4104-11*n5/40)[2];
-        var n6 = dt*f(g, l0, k, m, t[i]+dt/2, x[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, xDot[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40, theta[i]-8*m1/27+2*m2-3544*m3/2565+1859*m4/4104-11*m5/40, thetaDot[i]-8*n1/27+2*n2-3544*n3/2565+1859*n4/4104-11*n5/40)[3];
-
-        // x1, xDot1, theta1, thetaDot1 are our fourth order approximations
-        var x1 = x[i] + 25*k1/216+1408*k3/2565+2197*k4/4104-k5/5;
-        var xDot1 = xDot[i] + 25*l1/216+1408*l3/2565+2197*l4/4104-l5/5;
-        var theta1 = theta[i] + 25*m1/216+1408*m3/2565+2197*m4/4104-m5/5;
-        var thetaDot1 = thetaDot[i] + 25*n1/216+1408*n3/2565+2197*n4/4104-n5/5;
-
-        // x2, xDot2, theta2 and thetaDot2 are our fifth order approximations
-        var x2 = x[i] + 16*k1/135+6656*k3/12825+28561*k4/56430-9*k5/50+2*k6/55;
-        var xDot2 = xDot[i] + 16*l1/135+6656*l3/12825+28561*l4/56430-9*l5/50+2*l6/55;
-        var theta2 = theta[i] + 16*m1/135+6656*m3/12825+28561*m4/56430-9*m5/50+2*m6/55;
-        var thetaDot2 = thetaDot[i] + 16*n1/135+6656*n3/12825+28561*n4/56430-9*n5/50+2*n6/55;
-
-        // The following are used to correct the step size
-        var Rx = Math.abs(x1-x2)/dt;
-        var RxDot = Math.abs(xDot1-xDot2)/dt;
-        var Rtheta = Math.abs(theta1-theta2)/dt;
-        var RthetaDot = Math.abs(thetaDot1-thetaDot2)/dt;
-        var sx = 0.84*Math.pow(epsilon/Rx, 1/4);                
-        var sxDot = 0.84*Math.pow(epsilon/RxDot, 1/4);
-        var stheta = 0.84*Math.pow(epsilon/Rtheta, 1/4);
-        var sthetaDot = 0.84*Math.pow(epsilon/RthetaDot, 1/4);
-        var R = Math.max(Rx, RxDot, Rtheta, RthetaDot);
-        var s = Math.min(sx, sxDot, stheta, sthetaDot);
-
-        // If R is less than or equal to epsilon move onto the next step
-        if ( R <= epsilon ) {
-            t.push(t[i]+dt);
-            x.push(x1);
-            xDot.push(xDot1);
-            theta.push(theta1);
-            thetaDot.push(thetaDot1);
-            i++;
-            dt *= s;
-        } else {
-            dt *= s;
-        }
+        var [x1, xDot1, theta1, thetaDot1, x2, xDot2, theta2, thetaDot2] = approximatorRKF45(dt, g, l0, k, m, t, x, xDot, theta, thetaDot, i);
+        var [dt, t, x, xDot, theta, thetaDot, i] = stepSizeChecker(dt, epsilon, t, x, xDot, theta, thetaDot, x1, xDot1, theta1, thetaDot1, x2, xDot2, theta2, thetaDot2, i);
     }
 
     // Write t, x, y and z to our solution object
@@ -172,8 +217,8 @@ function solveProblem(objectOfInputs) {
 /**
  * Tabulates solution data.
  *
- * @params           None. Uses the entries of the solution object, however. 
- * @return           Nothing. Just populates the table with the solution values. 
+ * @param objectOfInputs An object containing all the problem parameters.
+ * @return               Nothing. Just populates the table with the solution values. 
  */
 function fillTable(objectOfInputs) {
     // Run solveProblem
