@@ -104,12 +104,15 @@ function approximatorRKF45(dt, alpha, beta, gamma, delta, t, x, y, i) {
  * @return              [dt, t, x, y, i]
  */
 function stepSizeChecker(dt, epsilon, t, x, y, x1, y1, x2, y2, i) {
-    Rx = Math.abs(x1-x2)/dt;
-    Ry = Math.abs(y1-y2)/dt;
-    sx = 0.84*Math.pow(epsilon/Rx, 1/4);                
-    sy = 0.84*Math.pow(epsilon/Ry, 1/4);
-    R = Math.max(Rx, Ry);
-    s = Math.min(sx, sy);
+    // Initialize variables
+    var Rx = Math.abs(x1-x2)/dt;
+    var Ry = Math.abs(y1-y2)/dt;
+    var sx = 0.84*Math.pow(epsilon/Rx, 1/4);                
+    var sy = 0.84*Math.pow(epsilon/Ry, 1/4);
+    var R = Math.max(Rx, Ry);
+    var s = Math.min(sx, sy);
+
+    // Check if R is within our margin of error and move on if it is
     if ( R <= epsilon ) {
         t.push(t[i]+dt);
         x.push(x1);
@@ -120,6 +123,7 @@ function stepSizeChecker(dt, epsilon, t, x, y, x1, y1, x2, y2, i) {
         dt *= s;
     }
 
+    // Return what needs to be used later in solveProblem()
     return [dt, t, x, y, i];
 }
 
@@ -127,7 +131,7 @@ function stepSizeChecker(dt, epsilon, t, x, y, x1, y1, x2, y2, i) {
  * Solve the problem using RKF45.
  *
  * @param objectOfInputs An object containing all the problem parameters.
- * @return               Nothing. But it enters the solution values into the solution object.
+ * @return               A solution object.
  */
 function solveProblem(objectOfInputs) {
     // Obtain the parameters of the problem

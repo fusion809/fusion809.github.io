@@ -125,8 +125,7 @@ function RKF45(dtInitial, epsilon, g, l, t0, tf, theta0, thetaDot0) {
  * Solve the problem using RKF45.
  *
  * @param objectOfInputs  An array that contains all the problem parameters.
- * @return               Nothing. But it enters the solution values and error
- * estimates into the solution object.
+ * @return                A solution object.
  */
 function solveProblem(objectOfInputs) {
     // Obtain the parameters of the problem

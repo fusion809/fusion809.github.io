@@ -243,8 +243,7 @@ function readInputs() {
  * Solve the problem using RKF45.
  *
  * @param objectOfInputs An object containing all the form parameters. 
- * @return               Nothing. But it enters the solution values into the solution
- * object.
+ * @return               A solution object.
  */
 function solveProblem(objectOfInputs) {
     // Obtain the parameters of the problem
