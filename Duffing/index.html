@@ -11,6 +11,7 @@
         <!-- Necessary for analytically finding the period of the problem-->
         <script src="https://unpkg.com/mathjs@7.1.0/dist/math.min.js"></script>
         <script src="./main.js"></script>
+        <script src="/libs/common.js"></script>
         <link rel="icon" href="/assets/favicon.png">
     </head>
     <body>
@@ -123,22 +124,21 @@
         </form>
         
         <!--Buttons-->
-        <button type="button" onclick="solveProblem()">Solve the problem</button> (press this whenever you update the parameters above)<br/><br/>
         <table id="buttontable">
             <tr>
-                <td><button type="button" onclick="fillTable()">Tabulate the solution</button></td>
+                <td><button type="button" onclick="fillTable(readInputs())">Tabulate the solution</button></td>
                 <td><button type="button" onclick="removeTable()">Remove the solution table</button></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generatePhasePlot()">Generate phase plot</button></td>
+                <td><button type="button" onclick="generatePhasePlot(readInputs())">Generate phase plot</button></td>
                 <td><button type="button" onclick="removePhasePlot()">Remove plot</button></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generateTimePlot()">Generate time plot</button></td>
+                <td><button type="button" onclick="generateTimePlot(readInputs())">Generate time plot</button></td>
                 <td><button type="button" onclick="removeTimePlot()">Remove plot</button></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generatePlots()">Generate all solution plots</button></td>
+                <td><button type="button" onclick="generatePlots(readInputs())">Generate all solution plots</button></td>
                 <td><button type="button" onclick="removePlots()">Remove all solution plots</button></td>
             </tr>
         </table>
