@@ -198,8 +198,7 @@ function generatePhasePlot(objectOfInputs) {
     var {theta, thetaDot} = solution;
 
     // Height and width of plot
-    var windowInnerHeight = window.innerHeight;
-    document.getElementById("phasePlot").style = "height: " + windowInnerHeight + "px;";
+    adjustPlotHeight("phasePlot");
 
     // Characteristics of the phase plot
     var plot = {
@@ -230,8 +229,7 @@ function generatePhasePlot(objectOfInputs) {
  * @return           Nothing. Just removes the plot.
  */
 function removePhasePlot() {
-    document.getElementById("phasePlot").innerHTML = '';
-    document.getElementById("phasePlot").style = '';
+    rmPlot("phasePlot");
 }
 
 /**
@@ -247,8 +245,7 @@ function generateTimePlot(objectOfInputs) {
     var {t, theta, thetaDot} = solution;
 
     // Height and width of plots
-    var windowInnerHeight = window.innerHeight;
-    document.getElementById("timePlot").style = "height: " + windowInnerHeight + "px;";
+    adjustPlotHeight("timePlot");
 
     // Characteristics of the theta and theta dot against time plot
     var plotTheta = {
@@ -282,8 +279,7 @@ function generateTimePlot(objectOfInputs) {
  * @return           Nothing. Just removes the plot.
  */
 function removeTimePlot() {
-    document.getElementById("timePlot").innerHTML = '';
-    document.getElementById("timePlot").style = '';
+    rmPlot("timePlot");
 }
 
 /**
@@ -360,18 +356,25 @@ function generatePlots(objectOfInputs) {
 };
 
 /**
+ * Remove error plot
+ * 
+ * @params           None.
+ * @return           Nothing. Just removes the plot.
+ */
+function removeErrorPlot() {
+    if (!!document.getElementById("errorPlot")) {
+        rmPlot("errorPlot");
+    }
+}
+
+/**
  * Removes solution plots and associated element formatting
  * 
  * @params           None.
  * @return           Nothing. Just removes the solution plots.
  */
 function removePlots() {
-    document.getElementById("timePlot").innerHTML = '';
-    document.getElementById("phasePlot").innerHTML = '';
-    document.getElementById("timePlot").style = ''
-    document.getElementById("phasePlot").style = '';
-    if (!!document.getElementById("errorPlot")) {
-        document.getElementById("errorPlot").innerHTML = '';
-        document.getElementById("errorPlot").style = '';
-    }
+    removeTimePlot();
+    removePhasePlot();
+    removeErrorPlot();
 }

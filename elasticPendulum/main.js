@@ -19,16 +19,6 @@ function f(g, l0, k, m, t, x, xDot, theta, thetaDot) {
     return [xDot, xDDot, thetaDot, thetaDDot];
 }
 
-// Initialize our global variables
-var solution = {
-    t: [],
-    x: [],
-    xDot: [],
-    theta: [],
-    thetaDot: []
-};
-var epsilon;
-
 /**
  * Read inputs in the form and export them in an array.
  * 
@@ -36,6 +26,7 @@ var epsilon;
  * @return              An array of parameter values extracted from the form.
  */
 function readInputs() {
+    // Extract data from form
     var g = parseFloat(document.getElementById("g").value);
     var l0 = parseFloat(document.getElementById("l0").value);
     var k = parseFloat(document.getElementById("k").value);
@@ -49,6 +40,7 @@ function readInputs() {
     var epsilon = parseFloat(document.getElementById("epsilon").value);
     var dtInitial = parseFloat(document.getElementById("dtInitial").value);
 
+    // Populate object and return it
     var objectOfInputs = {
         g: g,
         l0: l0,
@@ -69,24 +61,12 @@ function readInputs() {
 /** 
  * Solve the problem using RK45.
  *
- * @params           None. Uses parameter values in the forum.
- * @return           Nothing. But it enters the solution values into the solution
- * object.
+ * @param objectOfInputs An object containing all the problem parameters.
+ * @return               Nothing. But it enters the solution values into the solution object.
  */
 function solveProblem(objectOfInputs) {
     // Obtain the parameters of the problem
-    var g = objectOfInputs.g;
-    var l0 = objectOfInputs.l0;
-    var k = objectOfInputs.k;
-    var m = objectOfInputs.m;
-    var t0 = objectOfInputs.t0;
-    var tf = objectOfInputs.tf;
-    var x0 = objectOfInputs.x0;
-    var xDot0 = objectOfInputs.xDot0;
-    var theta0 = objectOfInputs.theta0;
-    var thetaDot0 = objectOfInputs.thetaDot0;
-    var epsilon = objectOfInputs.epsilon;
-    var dtInitial = objectOfInputs.dtInitial;
+    var {g, l0, k, m, t0, tf, x0, xDot0, theta0, thetaDot0, epsilon, dtInitial} = objectOfInputs;
 
     // Initialize the arrays used and loop variables
     var t = [t0];
@@ -179,13 +159,14 @@ function solveProblem(objectOfInputs) {
     }
 
     // Write t, x, y and z to our solution object
-    solution = {
+    var solution = {
         t: t,
         x: x,
         xDot: xDot,
         theta: theta,
         thetaDot: thetaDot
     };
+    return solution;
 }
 
 /**
@@ -195,17 +176,11 @@ function solveProblem(objectOfInputs) {
  * @return           Nothing. Just populates the table with the solution values. 
  */
 function fillTable(objectOfInputs) {
-    // Return an error if solveProblem() hasn't been run
-    if ( solution.t.length == 0) {
-        solveProblem();
-    }
+    // Run solveProblem
+    var solution = solveProblem(objectOfInputs);
 
     // Extract coordinate arrays from the solution object
-    var t = solution.t;
-    var x = solution.x;
-    var xDot = solution.xDot;
-    var theta = solution.theta;
-    var thetaDot = solution.thetaDot;
+    var {t, x, xDot, theta, thetaDot} = solution;
     var epsilon = objectOfInputs.epsilon;
 
     // Write to table
@@ -245,22 +220,18 @@ function removeTable() {
 /**
  * Generates a 2D phase plot of x against theta
  * 
- * @params           None.
- * @return           Nothing.
+ * @param objectOfInputs An object containing all the problem parameters.
+ * @return               Nothing.
  */
-function generateXThetaPhasePlot() {
-    // Run solveProblem if unrun
-    if ( solution.t.length == 0) {
-        solveProblem();
-    }
+function generateXThetaPhasePlot(objectOfInputs) {
+    // Run solveProblem
+    var solution = solveProblem(objectOfInputs);
 
     // Extract solution data from solution object
-    var x = solution.x;
-    var theta = solution.theta;
+    var {x, theta} = solution;
 
     // Height and width of plot
-    var windowInnerHeight = window.innerHeight;
-    document.getElementById("phasePlotXTheta").style = "height: " + windowInnerHeight + "px;";
+    adjustPlotHeight("phasePlotXTheta");
 
     // Plot object and data object array
     var plotXTheta = {
@@ -288,29 +259,24 @@ function generateXThetaPhasePlot() {
  * @return           Nothing. Just removes the plot.
  */
 function removeXThetaPhasePlot() {
-    document.getElementById("phasePlotXTheta").innerHTML = '';
-    document.getElementById("phasePlotXTheta").style = '';
+    rmPlot("phasePlotXTheta");
 }
 
 /**
  * Generates a xdot against x phase plot
  * 
- * @params           None.
- * @return           Nothing.
+ * @param objectOfInputs An object containing all the problem parameters.
+ * @return               Nothing.
  */
-function generateXXDotPhasePlot() {
-    // Run solveProblem if unrun
-    if ( solution.t.length == 0) {
-        solveProblem();
-    }
+function generateXXDotPhasePlot(objectOfInputs) {
+    // Run solveProblem
+    var solution = solveProblem(objectOfInputs);
 
     // Extract solution data from solution object
-    var x = solution.x;
-    var xDot = solution.xDot;
+    var {x, xDot} = solution;
 
     // Height and width of plot
-    var windowInnerHeight = window.innerHeight;
-    document.getElementById("phasePlotXXDot").style = "height: " + windowInnerHeight + "px;";
+    adjustPlotHeight("phasePlotXXDot");
 
     // Plot object and data object array
     var plotXXDot = {
@@ -345,22 +311,18 @@ function removeXXDotPhasePlot() {
 /**
  * Generates a theta dot against theta phase plot
  * 
- * @params           None.
- * @return           Nothing.
+ * @param objectOfInputs An object containing all the problem parameters.
+ * @return               Nothing.
  */
-function generateThetaThetaDotPhasePlot() {
-    // Run solveProblem if unrun
-    if ( solution.t.length == 0) {
-        solveProblem();
-    }
+function generateThetaThetaDotPhasePlot(objectOfInputs) {
+    // Run solveProblem
+    var solution = solveProblem(objectOfInputs);
     
     // Extract solution data from solution object
-    var theta = solution.theta;
-    var thetaDot = solution.thetaDot;
+    var {theta, thetaDot} = solution;
     
     // Height and width of plot
-    var windowInnerHeight = window.innerHeight;
-    document.getElementById("phasePlotThetaThetaDot").style = "height: " + windowInnerHeight + "px;";
+    adjustPlotHeight("phasePlotThetaThetaDot");
     
     // Plot object and data object array
     var plotThetaThetaDot = {
@@ -388,32 +350,24 @@ function generateThetaThetaDotPhasePlot() {
  * @return           Nothing. Just removes the plot.
  */
 function removeThetaThetaDotPhasePlot() {
-    document.getElementById("phasePlotThetaThetaDot").innerHTML = '';
-    document.getElementById("phasePlotThetaThetaDot").style = '';
+    rmPlot("phasePlotThetaThetaDot");
 }
 
 /**
  * Generates a time plot
  * 
- * @params           None.
- * @return           Nothing.
+ * @param objectOfInputs An object containing all the problem parameters.
+ * @return               Nothing.
  */
-function generateTimePlot() {
-    // Run solveProblem if unrun
-    if ( solution.t.length == 0) {
-        solveProblem();
-    }
+function generateTimePlot(objectOfInputs) {
+    // Run solveProblem
+    var solution = solveProblem(objectOfInputs);
 
     // Extract solution data from solution object
-    var t = solution.t;
-    var x = solution.x;
-    var xDot = solution.xDot;
-    var theta = solution.theta;
-    var thetaDot = solution.thetaDot;
+    var {t, x, xDot, theta, thetaDot} = solution;
 
     // Height and width of plot
-    var windowInnerHeight = window.innerHeight;
-    document.getElementById("timePlot").style = "height: " + windowInnerHeight + "px;";
+    adjustPlotHeight("timePlot");
 
     // Plot object and data object array
     var plotTX = {
@@ -466,8 +420,7 @@ function generateTimePlot() {
  * @return           Nothing. Just removes the plot.
  */
 function removeTimePlot() {
-    document.getElementById("timePlot").innerHTML = '';
-    document.getElementById("timePlot").style = '';
+    rmPlot("timePlot");
 }
 
 /**
@@ -477,14 +430,14 @@ function removeTimePlot() {
  * - The third is a phase plot of theta dot against theta.
  * - The fourth is a plot of x, x dot, theta and theta dot against time.
  * 
- * @params           None.
- * @return           Nothing. Just generates the plots.
+ * @param objectOfInputs An object containing all the problem parameters.
+ * @return               Nothing. Just generates the plots.
  */
-function generatePlots() {
-    generateXThetaPhasePlot();
-    generateXXDotPhasePlot();
-    generateThetaThetaDotPhasePlot();
-    generateTimePlot();
+function generatePlots(objectOfInputs) {
+    generateXThetaPhasePlot(objectOfInputs);
+    generateXXDotPhasePlot(objectOfInputs);
+    generateThetaThetaDotPhasePlot(objectOfInputs);
+    generateTimePlot(objectOfInputs);
 };
 
 /**
@@ -496,12 +449,8 @@ function generatePlots() {
 function removePlots() {
     // Clear HTML and CSS of the plots
     // Time plots
-    document.getElementById("timePlot").innerHTML = '';
-    document.getElementById("timePlot").style = '';
-    document.getElementById("phasePlotThetaThetaDot").innerHTML = '';
-    document.getElementById("phasePlotThetaThetaDot").style = '';
-    document.getElementById("phasePlotXXDot").innerHTML = '';
-    document.getElementById("phasePlotXXDot").style = '';
-    document.getElementById("phasePlotXTheta").innerHTML = '';
-    document.getElementById("phasePlotXTheta").style = '';
+    removeTimePlot();
+    removeThetaThetaDotPhasePlot();
+    removeXXDotPhasePlot();
+    removeXThetaPhasePlot();
 };

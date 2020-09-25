@@ -16,6 +16,8 @@ function adjustPlotHeight(element) {
  * @return              None.
  */
 function rmPlot(element) {
-    document.getElementById(element).innerHTML = '';
-    document.getElementById(element).style = '';
+    if (!!document.getElementById(element)) {
+        document.getElementById(element).innerHTML = '';
+        document.getElementById(element).style = '';
+    }
 }

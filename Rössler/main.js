@@ -242,7 +242,7 @@ function generate3DPhasePlot(objectOfInputs) {
     var {x, y, z} = solution;
 
     // Height and width of plot
-    adjustPlotHeight("plotXYZ");
+    adjustPlotHeight("phasePlotXYZ");
 
     // Plot object and data object array
     var plotXYZ = {
