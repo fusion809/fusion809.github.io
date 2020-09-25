@@ -15,6 +15,12 @@ function f(alpha, beta, gamma, delta, t, x, y) {
     return [alpha*x -beta*x*y, delta*x*y-gamma*y];
 }
 
+/**
+ * Extract values from form and enter them into an object
+ * 
+ * @params         None.
+ * @return         An object containing all parameter values extracted from the form.
+ */
 function readInputs() {
     // Extract values from form
     alpha = parseFloat(document.getElementById("alpha").value);
@@ -51,7 +57,7 @@ function readInputs() {
  * @param beta          Problem parameter.
  * @param gamma         Problem parameter.
  * @param delta         Problem parameter.
- * @param t             An array of previous to current t values.
+ * @param t             An array of previous t values.
  * @param x             An array of x values.
  * @param y             An array of y values.
  * @param i             Counter variable.
@@ -120,9 +126,8 @@ function stepSizeChecker(dt, epsilon, t, x, y, x1, y1, x2, y2, i) {
 /** 
  * Solve the problem using RK45.
  *
- * @params           None. Uses parameter values in the forum.
- * @return           Nothing. But it enters the solution values into the solution
- * object.
+ * @param objectOfInputs An object containing all the problem parameters.
+ * @return               Nothing. But it enters the solution values into the solution object.
  */
 function solveProblem(objectOfInputs) {
     // Obtain the parameters of the problem
@@ -154,8 +159,8 @@ function solveProblem(objectOfInputs) {
 /**
  * Tabulates solution data.
  *
- * @params           None. Uses the entries of the solution object, however. 
- * @return           Nothing. Just populates the table with the solution values. 
+ * @param objectOfInputs An object containing all the problem parameters.
+ * @return               Nothing. Just populates the table with the solution values. 
  */
 function fillTable(objectOfInputs) {
     var solution = solveProblem(objectOfInputs);
@@ -196,8 +201,8 @@ function removeTable() {
 /**
  * Generate phase plot
  * 
- * @params           None.
- * @return           Nothing. Just generates the phase plot.
+ * @param objectOfInputs An object containing all the problem parameters.
+ * @return               Nothing. Just generates the phase plot.
  */
 function generatePhasePlot(objectOfInputs) {
     // Solve the problem 
@@ -244,8 +249,8 @@ function removePhasePlot() {
 /**
  * Generate a plot of x and y against time
  * 
- * @params           None.
- * @return           Nothing. Just generates a plot of x and y against time.
+ * @param objectOfInputs An object containing all the problem parameters.
+ * @return               Nothing. Just generates a plot of x and y against time.
  */
 function generateTimePlot(objectOfInputs) {
     // Solve the problem
@@ -297,8 +302,8 @@ function removeTimePlot() {
  * - one of y and x against t; and
  * - a phase plot of y against x.
  * 
- * @params           None.
- * @return           Nothing. Just generates the plots.
+ * @param objectOfInputs An object containing all the problem parameters.
+ * @return               Nothing. Just generates the plots.
  */
 function generatePlots(objectOfInputs) {
     generatePhasePlot(objectOfInputs);

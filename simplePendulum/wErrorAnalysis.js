@@ -166,8 +166,7 @@ function generateErrorPlot(objectOfInputs) {
     var {t, logErrorThetaDot} = solution;
 
     // Height and width of plots
-    var windowInnerHeight = window.innerHeight;
-    document.getElementById("errorPlot").style = "height: " + windowInnerHeight + "px;";
+    adjustPlotHeight("errorPlot");
     
     // Logarithmic plot of the error in thetaDot
     var plot = {
@@ -189,15 +188,4 @@ function generateErrorPlot(objectOfInputs) {
     
     // Generate plot
     Plotly.newPlot('errorPlot', data, layout);
-}
-
-/**
- * Remove error plot
- * 
- * @params           None.
- * @return           Nothing. Just removes the plot.
- */
-function removeErrorPlot() {
-    document.getElementById("errorPlot").innerHTML = '';
-    document.getElementById("errorPlot").style = '';
 }

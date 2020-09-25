@@ -117,37 +117,35 @@
                 </tr>
             </table>
         </form>
-        
-        <button type="button" onclick="solveProblem()">Solve the problem</button> (press this whenever you update the parameters above)<br/><br/>
-
+    
         <!--Buttons-->
         <table id="buttontable">
             <tr>
-                <td><button type="button" onclick="fillTable()">Tabulate the solution</button></td>
+                <td><button type="button" onclick="fillTable(readInputs())">Tabulate the solution</button></td>
                 <td><button type="button" onclick="removeTable()">Remove the solution table</button></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generate3DPhasePlot()">Generate 3D phase plot</button></td>
+                <td><button type="button" onclick="generate3DPhasePlot(readInputs())">Generate 3D phase plot</button></td>
                 <td><button type="button" onclick="remove3DPhasePlot()">Remove plot</button><br/></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generateXYPhasePlot()">Generate XY phase plot</button></td>
+                <td><button type="button" onclick="generateXYPhasePlot(readInputs())">Generate XY phase plot</button></td>
                 <td><button type="button" onclick="removeXYPhasePlot()">Remove plot</button><br/></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generateXZPhasePlot()">Generate XZ phase plot</button></td>
+                <td><button type="button" onclick="generateXZPhasePlot(readInputs())">Generate XZ phase plot</button></td>
                 <td><button type="button" onclick="removeXZPhasePlot()">Remove plot</button></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generateYZPhasePlot()">Generate YZ phase plot</button></td>
+                <td><button type="button" onclick="generateYZPhasePlot(readInputs())">Generate YZ phase plot</button></td>
                 <td><button type="button" onclick="removeYZPhasePlot()">Remove plot</button></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generateTimePlot()">Generate x, y and z against time plot</button></td>
+                <td><button type="button" onclick="generateTimePlot(readInputs())">Generate x, y and z against time plot</button></td>
                 <td><button type="button" onclick="removeTimePlot()">Remove plot</button></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generatePlots()">Generate all solution plots</button></td>
+                <td><button type="button" onclick="generatePlots(readInputs())">Generate all solution plots</button></td>
                 <td><button type="button" onclick="removePlots()">Remove all plots</button></td>
             </tr>
         </table>
