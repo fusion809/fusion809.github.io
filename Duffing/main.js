@@ -16,116 +16,169 @@ function f(alpha, beta, gamma, delta, omega, t, x, xDot) {
     return [xDot, - delta*xDot - alpha*x - beta*x**3 + gamma * Math.cos(omega*t)];
 }
 
-// Initialize our global variables
-var solution = {
-    t: [],
-    x: [],
-    xDot: []
-};
-var epsilon;
+/**
+ * Read inputs from the form and enter it into an object.
+ * 
+ * @params              None.
+ * @return              An object containing all the form inputs.
+ */
+function readInputs() {
+    // Obtain the parameters of the problem
+    var alpha = parseFloat(document.getElementById("alpha").value);
+    var beta = parseFloat(document.getElementById("beta").value);
+    var gamma = parseFloat(document.getElementById("gamma").value);
+    var delta = parseFloat(document.getElementById("delta").value);
+    var omega = parseFloat(document.getElementById("omega").value);
+    var t0 = parseFloat(document.getElementById("t0").value);
+    var tf = parseFloat(document.getElementById("tf").value);
+    var x0 = parseFloat(document.getElementById("x0").value);
+    var xDot0 = parseFloat(document.getElementById("xDot0").value);
+    var epsilon = parseFloat(document.getElementById("epsilon").value);
+    var dtInitial = parseFloat(document.getElementById("dtInitial").value);
+
+    // Object containing inputs
+    var objectOfInputs = {
+        alpha: alpha,
+        beta: beta,
+        gamma: gamma,
+        delta: delta,
+        omega: omega,
+        t0: t0,
+        tf: tf,
+        x0: x0,
+        xDot0: xDot0,
+        epsilon: epsilon,
+        dtInitial: dtInitial
+    }
+    return objectOfInputs;
+}
+
+/**
+ * Approximate 
+ * @param dt            Step size.
+ * @param alpha         Problem parameter.
+ * @param beta          Problem parameter.
+ * @param gamma         Problem parameter.
+ * @param delta         Problem parameter.
+ * @param omega         Problem parameter.
+ * @param t             An array of t values.
+ * @param x             An array of x values.
+ * @param xDot          An array of xDot values.
+ * @param i             Counter variable.
+ * @return              [x1, xDot1, x2, xDot2]
+ */
+function approximatorRKF45(dt, alpha, beta, gamma, delta, omega, t, x, xDot, i) {
+    // Runge-Kutta-Fehlberg approximations of the change in x and xDot over the step
+    var k1 = dt*f(alpha, beta, gamma, delta, omega, t[i], x[i], xDot[i])[0];
+    var l1 = dt*f(alpha, beta, gamma, delta, omega, t[i], x[i], xDot[i])[1];
+    var k2 = dt*f(alpha, beta, gamma, delta, omega, t[i]+dt/4, x[i]+k1/4, xDot[i]+l1/4)[0];
+    var l2 = dt*f(alpha, beta, gamma, delta, omega, t[i]+dt/4, x[i]+k1/4, xDot[i]+l1/4)[1];
+    var k3 = dt*f(alpha, beta, gamma, delta, omega, t[i]+3*dt/8, x[i]+3*k1/32+9*k2/32, xDot[i]+3*l1/32+9*l2/32)[0];
+    var l3 = dt*f(alpha, beta, gamma, delta, omega, t[i]+3*dt/8, x[i]+3*k1/32+9*k2/32, xDot[i]+3*l1/32+9*l2/32)[1];
+    var k4 = dt*f(alpha, beta, gamma, delta, omega, t[i]+12*dt/13, x[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, xDot[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197)[0];
+    var l4 = dt*f(alpha, beta, gamma, delta, omega, t[i]+12*dt/13, x[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, xDot[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197)[1];
+    var k5 = dt*f(alpha, beta, gamma, delta, omega, t[i]+dt, x[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, xDot[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104)[0];
+    var l5 = dt*f(alpha, beta, gamma, delta, omega, t[i]+dt, x[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, xDot[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104)[1];
+    var k6 = dt*f(alpha, beta, gamma, delta, omega, t[i]+dt/2, x[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, xDot[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40)[0];
+    var l6 = dt*f(alpha, beta, gamma, delta, omega, t[i]+dt/2, x[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, xDot[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40)[1];
+
+    // x1 and xDot1 are our fourth order approximations
+    var x1 = x[i] + 25*k1/216+1408*k3/2565+2197*k4/4104-k5/5;
+    var xDot1 = xDot[i] + 25*l1/216+1408*l3/2565+2197*l4/4104-l5/5;
+    // x2 and xDot2 are our fifth order approximations
+    var x2 = x[i] + 16*k1/135+6656*k3/12825+28561*k4/56430-9*k5/50+2*k6/55;
+    var xDot2 = xDot[i] + 16*l1/135+6656*l3/12825+28561*l4/56430-9*l5/50+2*l6/55;
+
+    return [x1, xDot1, x2, xDot2];
+}
+
+/**
+ * Check and correct step size
+ * 
+ * @param dt            Step size.
+ * @param epsilon       Error tolerance.
+ * @param t             An array of t values.
+ * @param x             An array of x values.
+ * @param xDot          An array of xDot values.
+ * @param x1            4th order approx to x.
+ * @param xDot1         4th order approx to xDot.
+ * @param x2            5th order approx to x.
+ * @param xDot2         5th order approx to xDot.
+ * @param i             Counter variable.
+ * @return              [dt, t, x, xDot, i]
+ */
+function stepSizeChecker(dt, epsilon, t, x, xDot, x1, xDot1, x2, xDot2, i) {
+    // The following are used to correct the step size
+    Rx = Math.abs(x1-x2)/dt;
+    RxDot = Math.abs(xDot1-xDot2)/dt;
+    sx = 0.84*Math.pow(epsilon/Rx, 1/4);                
+    sxDot = 0.84*Math.pow(epsilon/RxDot, 1/4);
+    R = Math.max(Rx, RxDot);
+    s = Math.min(sx, sxDot);
+    if ( R <= epsilon ) {
+        t.push(t[i]+dt);
+        x.push(x1);
+        xDot.push(xDot1);
+        i++;
+        dt *= s;
+    } else {
+        dt *= s;
+    }
+
+    return [dt, t, x, xDot, i];
+}
 
 /** 
- * Solve the problem using RK45.
+ * Solve the problem using RKF45.
  *
- * @params           None. Uses parameter values in the forum.
- * @return           Nothing. But it enters the solution values into the solution
- * object.
+ * @param objectOfInputs An object containing all the problem parameters.
+ * @return               Nothing. But it enters the solution values into the solution object.
  */
-function solveProblem() {
+function solveProblem(objectOfInputs) {
     // Obtain the parameters of the problem
-    alpha = parseFloat(document.getElementById("alpha").value);
-    beta = parseFloat(document.getElementById("beta").value);
-    gamma = parseFloat(document.getElementById("gamma").value);
-    delta = parseFloat(document.getElementById("delta").value);
-    omega = parseFloat(document.getElementById("omega").value);
-    t0 = parseFloat(document.getElementById("t0").value);
-    tf = parseFloat(document.getElementById("tf").value);
-    x0 = parseFloat(document.getElementById("x0").value);
-    xDot0 = parseFloat(document.getElementById("xDot0").value);
-    epsilon = parseFloat(document.getElementById("epsilon").value);
-    dtInitial = parseFloat(document.getElementById("dtInitial").value);
+    var {alpha, beta, gamma, delta, omega, t0, tf, x0, xDot0, epsilon, dtInitial} = objectOfInputs;
 
     // Initialize the arrays used and loop variables
-    t = [t0];
-    x = [x0];
-    xDot = [xDot0];
-    dt = dtInitial;
-    i = 0;
+    var t = [t0];
+    var x = [x0];
+    var xDot = [xDot0];
+    var dt = dtInitial;
+    var i = 0;
 
     // Loop over each step until we reach the endpoint
     while ( t[i] < tf ) {
         // Step size, as dictated by the method
         dt = Math.min(dt, tf-t[i]);
-
-        // Runge-Kutta-Fehlberg approximations of the change in x and xDot
-        // over the step
-        k1 = dt*f(alpha, beta, gamma, delta, omega, t[i], x[i], xDot[i])[0];
-        l1 = dt*f(alpha, beta, gamma, delta, omega, t[i], x[i], xDot[i])[1];
-        k2 = dt*f(alpha, beta, gamma, delta, omega, t[i]+dt/4, x[i]+k1/4, xDot[i]+l1/4)[0];
-        l2 = dt*f(alpha, beta, gamma, delta, omega, t[i]+dt/4, x[i]+k1/4, xDot[i]+l1/4)[1];
-        k3 = dt*f(alpha, beta, gamma, delta, omega, t[i]+3*dt/8, x[i]+3*k1/32+9*k2/32, xDot[i]+3*l1/32+9*l2/32)[0];
-        l3 = dt*f(alpha, beta, gamma, delta, omega, t[i]+3*dt/8, x[i]+3*k1/32+9*k2/32, xDot[i]+3*l1/32+9*l2/32)[1];
-        k4 = dt*f(alpha, beta, gamma, delta, omega, t[i]+12*dt/13, x[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, xDot[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197)[0];
-        l4 = dt*f(alpha, beta, gamma, delta, omega, t[i]+12*dt/13, x[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, xDot[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197)[1];
-        k5 = dt*f(alpha, beta, gamma, delta, omega, t[i]+dt, x[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, xDot[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104)[0];
-        l5 = dt*f(alpha, beta, gamma, delta, omega, t[i]+dt, x[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, xDot[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104)[1];
-        k6 = dt*f(alpha, beta, gamma, delta, omega, t[i]+dt/2, x[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, xDot[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40)[0];
-        l6 = dt*f(alpha, beta, gamma, delta, omega, t[i]+dt/2, x[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, xDot[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40)[1];
-
-        // x1 and xDot1 are our fourth order approximations
-        x1 = x[i] + 25*k1/216+1408*k3/2565+2197*k4/4104-k5/5;
-        xDot1 = xDot[i] + 25*l1/216+1408*l3/2565+2197*l4/4104-l5/5;
-        // x2 and xDot2 are our fifth order approximations
-        x2 = x[i] + 16*k1/135+6656*k3/12825+28561*k4/56430-9*k5/50+2*k6/55;
-        xDot2 = xDot[i] + 16*l1/135+6656*l3/12825+28561*l4/56430-9*l5/50+2*l6/55;
-
-        // The following are used to correct the step size
-        Rx = Math.abs(x1-x2)/dt;
-        RxDot = Math.abs(xDot1-xDot2)/dt;
-        sx = 0.84*Math.pow(epsilon/Rx, 1/4);                
-        sxDot = 0.84*Math.pow(epsilon/RxDot, 1/4);
-        R = Math.max(Rx, RxDot);
-        s = Math.min(sx, sxDot);
-        if ( R <= epsilon ) {
-            t.push(t[i]+dt);
-            x.push(x1);
-            xDot.push(xDot1);
-            i++;
-            dt *= s;
-        } else {
-            dt *= s;
-        }
+        var [x1, xDot1, x2, xDot2] = approximatorRKF45(dt, alpha, beta, gamma, delta, omega, t, x, xDot, i);
+        var [dt, t, x, xDot, i] = stepSizeChecker(dt, epsilon, t, x, xDot, x1, xDot1, x2, xDot2, i);
     }
 
     // Write t, x and xDot to our solution object
-    solution = {
+    var solution = {
         t: t,
         x: x,
         xDot: xDot,
     };
+    return solution;
 }
 
 /**
  * Tabulates solution data.
  *
- * @params           None. Uses the entries of the solution object, however. 
- * @return           Nothing. Just populates the table with the solution values. 
+ * @param objectOfInputs An object containing all the problem parameters.
+ * @return               Nothing. Just populates the table with the solution values. 
  */
-function fillTable() {
-    // Solve the problem if not already solved
-    if ( solution.t.length == 0) {
-        solveProblem();
-        return
-    }
+function fillTable(objectOfInputs) {
+    // Solve the problem
+    var solution = solveProblem(objectOfInputs);
 
-    // Extract solution values
-    t = solution.t;
-    x = solution.x;
-    xDot = solution.xDot;
+    // Extract solution/parameter values
+    var {t, x, xDot} = solution;
+    var epsilon = objectOfInputs.epsilon;
 
     // Create table
     document.getElementById('tableOutputs').innerHTML = '';
-    tableContents = '<tr>';
+    var tableContents = '<tr>';
     tableContents += '<th>Index</th>';
     tableContents += '<th>t (seconds)</th>';
     tableContents += '<th>x (radians) </th>';
@@ -155,23 +208,18 @@ function removeTable() {
 /**
  * Generate phase plot of x dot against x
  * 
- * @params           None.
- * @return           Nothing. Just generates the relevant plot.
+ * @param objectOfInputs An object containing all the problem parameters.
+ * @return               Nothing. Just generates the relevant plot.
  */
-function generatePhasePlot() {
-    // Run solveProblem() if previously unrun
-    if ( solution.t.length == 0) {
-        solveProblem();
-    };
+function generatePhasePlot(objectOfInputs) {
+    // Run solveProblem
+    var solution = solveProblem(objectOfInputs);
 
     // Extract solution data from solution object
-    x = solution.x;
-    xDot = solution.xDot;
+    var {x, xDot} = solution;
 
     // Height and width of plot
-    windowInnerWidth  = window.innerWidth;
-    windowInnerHeight = window.innerHeight;
-    document.getElementById("phasePlot").style = "height: " + windowInnerHeight + "px;";
+    adjustPlotHeight("phasePlot");
 
     // Characteristics of the phase plot
     var plot = {
@@ -189,7 +237,7 @@ function generatePhasePlot() {
             title: "x dot (metres per second)"
         }
     };
-    data = [plot];
+    var data = [plot];
 
     // Generate plot
     Plotly.newPlot('phasePlot', data, layout);
@@ -202,31 +250,24 @@ function generatePhasePlot() {
  * @return           Nothing. Just removes the plot.
  */
 function removePhasePlot() {
-    document.getElementById("phasePlot").innerHTML = '';
-    document.getElementById("phasePlot").style = '';
+    rmPlot("phasePlot");
 }
 
 /**
  * Generate plot of x and x dot against time
  * 
- * @params           None.
- * @return           Nothing. Just generates the relevant plot.
+ * @param objectOfInputs An object containing all the problem parameters.
+ * @return               Nothing. Just generates the relevant plot.
  */
-function generateTimePlot() {
+function generateTimePlot(objectOfInputs) {
     // Run solveProblem() if previously unrun
-    if ( solution.t.length == 0) {
-        solveProblem();
-    };
+    var solution = solveProblem(objectOfInputs);
 
     // Extract solution data from solution object
-    t = solution.t;
-    x = solution.x;
-    xDot = solution.xDot;
+    var {t, x, xDot} = solution;
 
     // Height and width of plots
-    windowInnerWidth  = window.innerWidth;
-    windowInnerHeight = window.innerHeight;
-    document.getElementById("timePlot").style = "height: " + windowInnerHeight + "px;";
+    adjustPlotHeight("timePlot");
 
     // Characteristics of the x and x dot against time plot
     var plotx = {
@@ -247,7 +288,7 @@ function generateTimePlot() {
             title: 'Time (seconds)'
         }
     };
-    data = [plotx, plotxDot];
+    var data = [plotx, plotxDot];
 
     // Generate plots
     Plotly.newPlot('timePlot', data, layout);
@@ -260,8 +301,7 @@ function generateTimePlot() {
  * @return           Nothing. Just removes the plot.
  */
 function removeTimePlot() {
-    document.getElementById("timePlot").innerHTML = '';
-    document.getElementById("timePlot").style = '';
+    rmPlot("timePlot");
 }
 
 /**
@@ -269,12 +309,12 @@ function removeTimePlot() {
  * - one of xDot and x against t; and
  * - a phase plot of xDot against x.
  * 
- * @params           None.
- * @return           Nothing. Just generates the plots.
+ * @param objectOfInputs An object containing all the problem parameters.
+ * @return               Nothing. Just generates the plots.
  */
-function generatePlots() {
-    generateTimePlot();
-    generatePhasePlot();
+function generatePlots(objectOfInputs) {
+    generateTimePlot(objectOfInputs);
+    generatePhasePlot(objectOfInputs);
 };
 
 /**
@@ -284,8 +324,6 @@ function generatePlots() {
  * @return           Nothing. Just removes the solution plots.
  */
 function removePlots() {
-    document.getElementById("timePlot").innerHTML = '';
-    document.getElementById("phasePlot").innerHTML = '';
-    document.getElementById("timePlot").style = '';
-    document.getElementById("phasePlot").style = '';
+    removeTimePlot();
+    removePhasePlot();
 };

@@ -59,7 +59,7 @@ function readInputs() {
 }
 
 /** 
- * Solve the problem using RK45.
+ * Solve the problem using RKF45.
  *
  * @param objectOfInputs An object containing all the problem parameters.
  * @return               Nothing. But it enters the solution values into the solution object.
