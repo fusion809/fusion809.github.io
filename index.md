@@ -10,6 +10,7 @@ Currently this website has the following pages, besides this one:
 - [Lotka-Volterra equations solver](/LotkaVolterra/)
 - [Rabinovich–Fabrikant equations](/RabinovichFabrikant/)
 - [R&ouml;ssler system solver](/Rossler/)
+- [SEIR system](/SEIR/)
 - [Simple pendulum simulator with error analysis](/simplePendulum/wErrorAnalysis/)
 - [Simple pendulum simulator without error analysis](/simplePendulum/woErrorAnalysis/)
 - [SIR system](/SIR/)
