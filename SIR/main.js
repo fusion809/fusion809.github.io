@@ -45,31 +45,8 @@ function generate3DPhasePlot(objectOfInputs) {
     var {vars} = solution;
     var [S, I, R] = vars;
 
-    // Height and width of plot
-    adjustPlotHeight("phasePlotXYZ");
-
-    // Plot object and data object array
-    var plotXYZ = {
-        x: S,
-        y: I,
-        z: R,
-        type: 'scatter3d',
-        mode: 'lines',
-        opacity: 1,
-        line: {
-            width: 6,
-            reversescale: false
-        }
-    };
-    var dataXYZ = [plotXYZ];
-
-    // layout object
-    var layoutXYZ = {
-        title: 'Phase plot of the solution to the SIR equations. x = S, y = I and z = R'
-    };
-
-    // Generate plot
-    Plotly.newPlot('phasePlotXYZ', dataXYZ, layoutXYZ);
+    // Generate 3D plot
+    gen3DPlot(S, I, R, "phasePlotXYZ", "Phase plot of the solution to the SIR equations. x = S, y = I and z = R");
 }
 
 /**
@@ -85,26 +62,8 @@ function generateXYPhasePlot(objectOfInputs) {
     var S = vars[0];
     var I = vars[1];
 
-    // Height and width of plot
-    adjustPlotHeight("phasePlotXY");
-
-    // Plot object and data object array
-    var plotXY = {
-        x: S,
-        y: I,
-        type: 'scatter',
-        mode: 'lines',
-        opacity: 1
-    };
-    var dataXY = [plotXY];
-
-    // layout object
-    var layoutXY = {
-        title: "SI phase plot, x = S and y = I"
-    };
-
-    // Generate plot
-    Plotly.newPlot('phasePlotXY', dataXY, layoutXY);
+    // Generate 2D plot
+    gen2DPlot(S, I, "phasePlotXY", "SI phase plot, x = S and y = I")
 }
 
 /**
@@ -120,26 +79,8 @@ function generateXZPhasePlot(objectOfInputs) {
     var S = vars[0];
     var R = vars[2];
     
-    // Height and width of plot
-    adjustPlotHeight("phasePlotXZ");
-    
-    // Plot object and data object array
-    var plotXZ = {
-        x: S,
-        y: R,
-        type: 'scatter',
-        mode: 'lines',
-        opacity: 1
-    };
-    var dataXZ = [plotXZ];
-    
-    // layout object
-    var layoutXZ = {
-        title: "SR phase plot, x = S and y = R"
-    };
-    
-    // Generate plot
-    Plotly.newPlot('phasePlotXZ', dataXZ, layoutXZ);
+    // Generate 2D plot
+    gen2DPlot(S, R, "phasePlotXZ", "SR phase plot, x = S and y = R");
 }
 
 /**
@@ -155,26 +96,8 @@ function generateYZPhasePlot(objectOfInputs) {
     var I = vars[1];
     var R = vars[2];
 
-    // Height and width of plot
-    adjustPlotHeight("phasePlotYZ");
-
-    // Plot object and data object array
-    var plotYZ = {
-        x: I,
-        y: R,
-        type: 'scatter',
-        mode: 'lines',
-        opacity: 1
-    };
-    var dataYZ = [plotYZ];
-
-    // layout object
-    var layoutYZ = {
-        title: "IR phase plot, x = I and y = R"
-    };
-
-    // Generate plot
-    Plotly.newPlot('phasePlotYZ', dataYZ, layoutYZ);
+    // Generate 2D plot
+    gen2DPlot(I, R, "phasePlotYZ", "IR phase plot, x = I and y = R");
 }
 
 /**
@@ -189,43 +112,8 @@ function generateTimePlot(objectOfInputs) {
     var {t, vars} = solution;
     var [S, I, R] = vars;
 
-    // Height and width of plot
-    adjustPlotHeight("timePlot");
-
-    // Plot object and data object array
-    var plotTX = {
-        x: t,
-        y: S,
-        type: 'scatter',
-        mode: 'lines',
-        opacity: 1,
-        name: 'S'
-    };
-    var plotTY = {
-        x: t,
-        y: I,
-        type: 'scatter',
-        mode: 'lines',
-        opacity: 1,
-        name: 'I'
-    };
-    var plotTZ = {
-        x: t,
-        y: R,
-        type: 'scatter',
-        mode: 'lines',
-        opacity: 1,
-        name: 'R'
-    };
-    var dataTimePlot = [plotTX, plotTY, plotTZ];
-
-    // layout object
-    var layoutTimePlot = {
-        title: "Time plots of the solution to the problem"
-    };
-
-    // Generate plot
-    Plotly.newPlot('timePlot', dataTimePlot, layoutTimePlot);
+    // Generate time plot
+    genMultPlot(solution, ["S", "I", "R"], "timePlot", "Time plots of the solution to the problem")
 }
 
 /**

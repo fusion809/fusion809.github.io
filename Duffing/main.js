@@ -42,29 +42,8 @@ function generatePhasePlot(objectOfInputs) {
     var {vars} = solution;
     var [x, xDot] = vars;
 
-    // Height and width of plot
-    adjustPlotHeight("phasePlot");
-
-    // Characteristics of the phase plot
-    var plot = {
-        x: x,
-        y: xDot,
-        type: 'scatter',
-        name: "Phase plot"
-    };
-    var layout = {
-        title: "Phase plot of x dot against x",
-        xaxis: {
-            title: "x (metres)"
-        },
-        yaxis: {
-            title: "x dot (metres per second)"
-        }
-    };
-    var data = [plot];
-
     // Generate plot
-    Plotly.newPlot('phasePlot', data, layout);
+    gen2DPlot(x, xDot, "phasePlot", "Phase plot of x dot against x");
 }
 
 /**
@@ -77,36 +56,8 @@ function generateTimePlot(objectOfInputs) {
     // Run solveProblem() if previously unrun
     var solution = solveProblem(RKF45, objectOfInputs);
 
-    // Extract solution data from solution object
-    var {t, vars} = solution;
-    var [x, xDot] = vars;
-
-    // Height and width of plots
-    adjustPlotHeight("timePlot");
-
-    // Characteristics of the x and x dot against time plot
-    var plotx = {
-        x: t,
-        y: x,
-        type: 'scatter',
-        name: "x (metres)"
-    };
-    var plotxDot = {
-        x: t,
-        y: xDot,
-        type: 'scatter',
-        name: "x dot (metres per second)"
-    };
-    var layout = {
-        title: 'x and x dot against time plots',
-        xaxis: {
-            title: 'Time (seconds)'
-        }
-    };
-    var data = [plotx, plotxDot];
-
-    // Generate plots
-    Plotly.newPlot('timePlot', data, layout);
+    // Plot
+    genMultPlot(solution, ["x", "x dot"], "timePlot", "Plot of x dot and x against time");
 }
 
 /**

@@ -43,31 +43,7 @@ function generate3DPhasePlot(objectOfInputs) {
     var vars = solution.vars;
     var [x, y, z] = vars;
 
-    // Height and width of plot
-    adjustPlotHeight("phasePlotXYZ");
-
-    // Plot object and data object array
-    var plotXYZ = {
-        x: x,
-        y: y,
-        z: z,
-        type: 'scatter3d',
-        mode: 'lines',
-        opacity: 1,
-        line: {
-            width: 6,
-            reversescale: false
-        }
-    };
-    var dataXYZ = [plotXYZ];
-
-    // layout object
-    var layoutXYZ = {
-        title: 'Phase plot of the solution to the Chen equations'
-    };
-
-    // Generate plot
-    Plotly.newPlot('phasePlotXYZ', dataXYZ, layoutXYZ);
+    gen3DPlot(x, y, z, "phasePlotXYZ", "Phase plot of the solution to the Chen equations")
 }
 
 /**
@@ -85,26 +61,8 @@ function generateXYPhasePlot(objectOfInputs) {
     var x = vars[0];
     var y = vars[1];
 
-    // Height and width of plot
-    adjustPlotHeight("phasePlotXY");
-
-    // Plot object and data object array
-    var plotXY = {
-        x: x,
-        y: y,
-        type: 'scatter',
-        mode: 'lines',
-        opacity: 1
-    };
-    var dataXY = [plotXY];
-
-    // layout object
-    var layoutXY = {
-        title: "xy phase plot"
-    };
-
     // Generate plot
-    Plotly.newPlot('phasePlotXY', dataXY, layoutXY);
+    gen2DPlot(x, y, "phasePlotXY", "y against x phase plot");
 }
 
 /**
@@ -121,27 +79,9 @@ function generateXZPhasePlot(objectOfInputs) {
     var {vars} = solution;
     var x = vars[0];
     var z = vars[2];
-    
-    // Height and width of plot
-    adjustPlotHeight("phasePlotXZ");
-    
-    // Plot object and data object array
-    var plotXZ = {
-        x: x,
-        y: z,
-        type: 'scatter',
-        mode: 'lines',
-        opacity: 1
-    };
-    var dataXZ = [plotXZ];
-    
-    // layout object
-    var layoutXZ = {
-        title: "xz phase plot"
-    };
-    
+
     // Generate plot
-    Plotly.newPlot('phasePlotXZ', dataXZ, layoutXZ);
+    gen2DPlot(x, z, "phasePlotXZ", "z against x phase plot");
 }
 
 /**
@@ -159,26 +99,8 @@ function generateYZPhasePlot(objectOfInputs) {
     var y = vars[1];
     var z = vars[2];
 
-    // Height and width of plot
-    adjustPlotHeight("phasePlotYZ");
-
-    // Plot object and data object array
-    var plotYZ = {
-        x: y,
-        y: z,
-        type: 'scatter',
-        mode: 'lines',
-        opacity: 1
-    };
-    var dataYZ = [plotYZ];
-
-    // layout object
-    var layoutYZ = {
-        title: "yz phase plot"
-    };
-
     // Generate plot
-    Plotly.newPlot('phasePlotYZ', dataYZ, layoutYZ);
+    gen2DPlot(y, z, "phasePlotYZ", "z against y phase plot");
 }
 
 /**
@@ -192,46 +114,7 @@ function generateTimePlot(objectOfInputs) {
     var solution = solveProblem(RKF45, objectOfInputs);
 
     // Extract solution data from solution object
-    var {t, vars} = solution;
-    var [x, y, z] = vars;
-
-    // Height and width of plot
-    adjustPlotHeight("timePlot");
-
-    // Plot object and data object array
-    var plotTX = {
-        x: t,
-        y: x,
-        type: 'scatter',
-        mode: 'lines',
-        opacity: 1,
-        name: 'x'
-    };
-    var plotTY = {
-        x: t,
-        y: y,
-        type: 'scatter',
-        mode: 'lines',
-        opacity: 1,
-        name: 'y'
-    };
-    var plotTZ = {
-        x: t,
-        y: z,
-        type: 'scatter',
-        mode: 'lines',
-        opacity: 1,
-        name: 'z'
-    };
-    var dataTimePlot = [plotTX, plotTY, plotTZ];
-
-    // layout object
-    var layoutTimePlot = {
-        title: "Time plots of the solution to the problem"
-    };
-
-    // Generate plot
-    Plotly.newPlot('timePlot', dataTimePlot, layoutTimePlot);
+    genMultPlot(solution, ["x", "y", "z"], "timePlot", "Time plots of the solution to the problem")
 }
 
 /**

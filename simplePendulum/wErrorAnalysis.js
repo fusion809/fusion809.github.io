@@ -163,27 +163,6 @@ function generateErrorPlot(objectOfInputs) {
     var solution = solveProblemSP(objectOfInputs);
     var {t, logErrorThetaDot} = solution;
 
-    // Height and width of plots
-    adjustPlotHeight("errorPlot");
-    
-    // Logarithmic plot of the error in thetaDot
-    var plot = {
-        x: t,
-        y: logErrorThetaDot,
-        type: 'scatter',
-        name: 'Semilog plot of error in theta dot',
-    };
-    var data = [plot];
-    var layout = {
-        title: "Semilog plot of the error in theta dot against t",
-        xaxis: {
-            title: "Time (seconds)"
-        },
-        yaxis: {
-            title: "Log of the error in theta dot"
-        }
-    };
-    
-    // Generate plot
-    Plotly.newPlot('errorPlot', data, layout);
+    // Generate 2D plot
+    gen2DPlot(t, logErrorThetaDot, "errorPlot", "Semilogarithmic plot of our error estimate for theta dot against time")
 }
