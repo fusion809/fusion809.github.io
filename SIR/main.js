@@ -109,8 +109,6 @@ function generateYZPhasePlot(objectOfInputs) {
 function generateTimePlot(objectOfInputs) {
     // Solve problem
     var solution = solveProblem(RKF45, objectOfInputs);
-    var {t, vars} = solution;
-    var [S, I, R] = vars;
 
     // Generate time plot
     genMultPlot(solution, ["S", "I", "R"], "timePlot", "Time plots of the solution to the problem")
