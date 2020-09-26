@@ -20,45 +20,6 @@ function f(g, l0, k, m, t, x, xDot, theta, thetaDot) {
 }
 
 /**
- * Read inputs in the form and export them in an array.
- * 
- * @params              None.
- * @return              An array of parameter values extracted from the form.
- */
-function readInputs() {
-    // Extract data from form
-    var g = parseFloat(document.getElementById("g").value);
-    var l0 = parseFloat(document.getElementById("l0").value);
-    var k = parseFloat(document.getElementById("k").value);
-    var m = parseFloat(document.getElementById("m").value);
-    var t0 = parseFloat(document.getElementById("t0").value);
-    var tf = parseFloat(document.getElementById("tf").value);
-    var x0 = parseFloat(document.getElementById("x0").value);
-    var xDot0 = parseFloat(document.getElementById("xDot0").value);
-    var theta0 = parseFloat(document.getElementById("theta0").value);
-    var thetaDot0 = parseFloat(document.getElementById("thetaDot0").value);
-    var epsilon = parseFloat(document.getElementById("epsilon").value);
-    var dtInitial = parseFloat(document.getElementById("dtInitial").value);
-
-    // Populate object and return it
-    var objectOfInputs = {
-        g: g,
-        l0: l0,
-        k: k,
-        m: m,
-        t0: t0,
-        tf: tf,
-        x0: x0,
-        xDot0: xDot0, 
-        theta0: theta0,
-        thetaDot0: thetaDot0,
-        epsilon: epsilon,
-        dtInitial: dtInitial
-    }
-    return objectOfInputs;
-}
-
-/**
  * Approximate 
  * @param dt            Step size.
  * @param g             Problem parameter.

@@ -17,43 +17,6 @@ function f(alpha, beta, gamma, delta, omega, t, x, xDot) {
 }
 
 /**
- * Read inputs from the form and enter it into an object.
- * 
- * @params              None.
- * @return              An object containing all the form inputs.
- */
-function readInputs() {
-    // Obtain the parameters of the problem
-    var alpha = parseFloat(document.getElementById("alpha").value);
-    var beta = parseFloat(document.getElementById("beta").value);
-    var gamma = parseFloat(document.getElementById("gamma").value);
-    var delta = parseFloat(document.getElementById("delta").value);
-    var omega = parseFloat(document.getElementById("omega").value);
-    var t0 = parseFloat(document.getElementById("t0").value);
-    var tf = parseFloat(document.getElementById("tf").value);
-    var x0 = parseFloat(document.getElementById("x0").value);
-    var xDot0 = parseFloat(document.getElementById("xDot0").value);
-    var epsilon = parseFloat(document.getElementById("epsilon").value);
-    var dtInitial = parseFloat(document.getElementById("dtInitial").value);
-
-    // Object containing inputs
-    var objectOfInputs = {
-        alpha: alpha,
-        beta: beta,
-        gamma: gamma,
-        delta: delta,
-        omega: omega,
-        t0: t0,
-        tf: tf,
-        x0: x0,
-        xDot0: xDot0,
-        epsilon: epsilon,
-        dtInitial: dtInitial
-    }
-    return objectOfInputs;
-}
-
-/**
  * Approximate 
  * @param dt            Step size.
  * @param alpha         Problem parameter.

@@ -16,41 +16,6 @@ function f(sigma, rho, beta, t, x, y, z) {
 }
 
 /**
- * Read inputs from the form and enter them into an object.
- * 
- * @params              None.
- * @return              An object containing all the form inputs.
- */
-function readInputs() {
-    // Extract data from form
-    var sigma = parseFloat(document.getElementById("sigma").value);
-    var rho = parseFloat(document.getElementById("rho").value);
-    var beta = parseFloat(document.getElementById("beta").value);
-    var t0 = parseFloat(document.getElementById("t0").value);
-    var tf = parseFloat(document.getElementById("tf").value);
-    var x0 = parseFloat(document.getElementById("x0").value);
-    var y0 = parseFloat(document.getElementById("y0").value);
-    var z0 = parseFloat(document.getElementById("z0").value);
-    var epsilon = parseFloat(document.getElementById("epsilon").value);
-    var dtInitial = parseFloat(document.getElementById("dtInitial").value);
-
-    // Enter into object and return
-    var objectOfInputs = {
-        sigma: sigma,
-        rho: rho,
-        beta: beta,
-        t0: t0,
-        tf: tf,
-        x0: x0,
-        y0: y0,
-        z0: z0,
-        epsilon: epsilon,
-        dtInitial: dtInitial
-    };
-    return objectOfInputs;
-}
-
-/**
  * Approximate the value of x, y and z at next step size to 4th and 5th order
  * 
  * @param dt            Step size.

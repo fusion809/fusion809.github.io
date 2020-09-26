@@ -166,41 +166,6 @@ function RKF45(dtInitial, epsilon, beta, gamma, delta, t0, tf, S0, I0, R0) {
     return solution;
 }
 
-/**
- * Read inputs from the form and return them in an object
- * 
- * @params              Nothing.
- * @return              An object containing all the form inputs.
- */
-function readInputs() {
-    // Take parameter values from the form
-    var beta = parseFloat(document.getElementById("beta").value);
-    var gamma = parseFloat(document.getElementById("gamma").value);
-    var delta = parseFloat(document.getElementById("delta").value);
-    var t0 = parseFloat(document.getElementById("t0").value);
-    var tf = parseFloat(document.getElementById("tf").value);
-    var S0 = parseFloat(document.getElementById("S0").value);
-    var I0 = parseFloat(document.getElementById("I0").value);
-    var R0 = parseFloat(document.getElementById("R0").value);
-    var epsilon = parseFloat(document.getElementById("epsilon").value);
-    var dtInitial = parseFloat(document.getElementById("dtInitial").value);
-
-    // Enter into objectOfInputs
-    var objectOfInputs = {
-        beta: beta,
-        gamma: gamma,
-        delta: delta,
-        t0: t0,
-        tf: tf,
-        S0: S0,
-        I0: I0,
-        R0: R0,
-        epsilon: epsilon,
-        dtInitial: dtInitial
-    };
-    return objectOfInputs;
-}
-
 /** 
  * Solve the problem using RKF45.
  *
