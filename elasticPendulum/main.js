@@ -1,226 +1,33 @@
 /**
- * Right-hand side of our second-order ODE written as a simple of first-order
- * ODEs.
+ * Right-hand side of our second-order ODE written as a simple of first-order ODEs.
  *
- * @param g          Interaction parameter.
- * @param l0         Interaction parameter.
- * @param k          Elasticity parameter.
- * @param m          Interaction parameter.
- * @param t          Time (seconds).
- * @param x          x value.
- * @param xDot       xDot value.
- * @param theta      theta value.
- * @param thetaDot   theta dot value.
- * @return           [dx/dt, d2x/dt2, dtheta/dt, d2theta/dt2]
+ * @param objectOfInputs An object containing problem parameters.
+ * @param t              Time (seconds).
+ * @param vars           An array of [x, xDot, theta, thetaDot]
+ * @return               [dx/dt, d2x/dt2, dtheta/dt, d2theta/dt2]
  */
-function f(g, l0, k, m, t, x, xDot, theta, thetaDot) {
+function f(objectOfInputs, t, vars) {
+    var {g, l0, k, m} = objectOfInputs;
+    var [x, xDot, theta, thetaDot] = vars;
     var xDDot = (l0+x)*thetaDot**2 - k*x/m + g*Math.sin(theta);
     var thetaDDot = -g*Math.cos(theta)/(l0+x)-2*xDot*thetaDot/(l0+x);
     return [xDot, xDDot, thetaDot, thetaDDot];
 }
 
-/**
- * Approximate 
- * @param dt            Step size.
- * @param g             Problem parameter.
- * @param l0            Problem parameter.
- * @param k             Problem parameter.
- * @param m             Problem parameter.
- * @param t             An array of t values.
- * @param x             An array of x values.
- * @param xDot          An array of xDot values.
- * @param theta         An array of theta values.
- * @param thetaDot      An array of thetaDot values.
- * @param i             Counter variable.
- * @return              [x1, xDot1, theta1, thetaDot1, x2, xDot2, theta2, thetaDot2]
- */
-function approximatorRKF45(dt, g, l0, k, m, t, x, xDot, theta, thetaDot, i) {
-    // Runge-Kutta-Fehlberg approximations of the change in x, xDot, theta and thetaDot over the step
-    // 1st approx
-    var k1 = dt*f(g, l0, k, m, t[i], x[i], xDot[i], theta[i], thetaDot[i])[0];
-    var l1 = dt*f(g, l0, k, m, t[i], x[i], xDot[i], theta[i], thetaDot[i])[1];
-    var m1 = dt*f(g, l0, k, m, t[i], x[i], xDot[i], theta[i], thetaDot[i])[2];
-    var n1 = dt*f(g, l0, k, m, t[i], x[i], xDot[i], theta[i], thetaDot[i])[3];
-
-    // 2nd approx
-    var k2 = dt*f(g, l0, k, m, t[i]+dt/4, x[i]+k1/4, xDot[i]+l1/4, theta[i]+m1/4, thetaDot[i]+n1/4)[0];
-    var l2 = dt*f(g, l0, k, m, t[i]+dt/4, x[i]+k1/4, xDot[i]+l1/4, theta[i]+m1/4, thetaDot[i]+n1/4)[1];
-    var m2 = dt*f(g, l0, k, m, t[i]+dt/4, x[i]+k1/4, xDot[i]+l1/4, theta[i]+m1/4, thetaDot[i]+n1/4)[2];
-    var n2 = dt*f(g, l0, k, m, t[i]+dt/4, x[i]+k1/4, xDot[i]+l1/4, theta[i]+m1/4, thetaDot[i]+n1/4)[3];
-
-    // 3rd approx
-    var k3 = dt*f(g, l0, k, m, t[i]+3*dt/8, x[i]+3*k1/32+9*k2/32, xDot[i]+3*l1/32+9*l2/32, theta[i]+3*m1/32+9*m2/32, thetaDot[i]+3*n1/32+9*n2/32)[0];
-    var l3 = dt*f(g, l0, k, m, t[i]+3*dt/8, x[i]+3*k1/32+9*k2/32, xDot[i]+3*l1/32+9*l2/32, theta[i]+3*m1/32+9*m2/32, thetaDot[i]+3*n1/32+9*n2/32)[1];
-    var m3 = dt*f(g, l0, k, m, t[i]+3*dt/8, x[i]+3*k1/32+9*k2/32, xDot[i]+3*l1/32+9*l2/32, theta[i]+3*m1/32+9*m2/32, thetaDot[i]+3*n1/32+9*n2/32)[2];
-    var n3 = dt*f(g, l0, k, m, t[i]+3*dt/8, x[i]+3*k1/32+9*k2/32, xDot[i]+3*l1/32+9*l2/32, theta[i]+3*m1/32+9*m2/32, thetaDot[i]+3*n1/32+9*n2/32)[3];
-
-    // 4th approx
-    var k4 = dt*f(g, l0, k, m, t[i]+12*dt/13, x[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, xDot[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197, theta[i]+1932*m1/2197-7200*m2/2197+7296*m3/2197, thetaDot[i]+1932*n1/2197-7200*n2/2197+7296*n3/2197)[0];
-    var l4 = dt*f(g, l0, k, m, t[i]+12*dt/13, x[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, xDot[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197, theta[i]+1932*m1/2197-7200*m2/2197+7296*m3/2197, thetaDot[i]+1932*n1/2197-7200*n2/2197+7296*n3/2197)[1];
-    var m4 = dt*f(g, l0, k, m, t[i]+12*dt/13, x[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, xDot[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197, theta[i]+1932*m1/2197-7200*m2/2197+7296*m3/2197, thetaDot[i]+1932*n1/2197-7200*n2/2197+7296*n3/2197)[2];
-    var n4 = dt*f(g, l0, k, m, t[i]+12*dt/13, x[i]+1932*k1/2197-7200*k2/2197+7296*k3/2197, xDot[i]+1932*l1/2197-7200*l2/2197+7296*l3/2197, theta[i]+1932*m1/2197-7200*m2/2197+7296*m3/2197, thetaDot[i]+1932*n1/2197-7200*n2/2197+7296*n3/2197)[3];
-
-    // 5th approx
-    var k5 = dt*f(g, l0, k, m, t[i]+dt, x[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, xDot[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104, theta[i]+439*m1/216-8*m2+3680*m3/513-845*m4/4104, thetaDot[i]+439*n1/216-8*n2+3680*n3/513-845*n4/4104)[0];
-    var l5 = dt*f(g, l0, k, m, t[i]+dt, x[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, xDot[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104, theta[i]+439*m1/216-8*m2+3680*m3/513-845*m4/4104, thetaDot[i]+439*n1/216-8*n2+3680*n3/513-845*n4/4104)[1];
-    var m5 = dt*f(g, l0, k, m, t[i]+dt, x[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, xDot[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104, theta[i]+439*m1/216-8*m2+3680*m3/513-845*m4/4104, thetaDot[i]+439*n1/216-8*n2+3680*n3/513-845*n4/4104)[2];
-    var n5 = dt*f(g, l0, k, m, t[i]+dt, x[i]+439*k1/216-8*k2+3680*k3/513-845*k4/4104, xDot[i]+439*l1/216-8*l2+3680*l3/513-845*l4/4104, theta[i]+439*m1/216-8*m2+3680*m3/513-845*m4/4104, thetaDot[i]+439*n1/216-8*n2+3680*n3/513-845*n4/4104)[3];
-
-    // 6th approx
-    var k6 = dt*f(g, l0, k, m, t[i]+dt/2, x[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, xDot[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40, theta[i]-8*m1/27+2*m2-3544*m3/2565+1859*m4/4104-11*m5/40, thetaDot[i]-8*n1/27+2*n2-3544*n3/2565+1859*n4/4104-11*n5/40)[0];
-    var l6 = dt*f(g, l0, k, m, t[i]+dt/2, x[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, xDot[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40, theta[i]-8*m1/27+2*m2-3544*m3/2565+1859*m4/4104-11*m5/40, thetaDot[i]-8*n1/27+2*n2-3544*n3/2565+1859*n4/4104-11*n5/40)[1];
-    var m6 = dt*f(g, l0, k, m, t[i]+dt/2, x[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, xDot[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40, theta[i]-8*m1/27+2*m2-3544*m3/2565+1859*m4/4104-11*m5/40, thetaDot[i]-8*n1/27+2*n2-3544*n3/2565+1859*n4/4104-11*n5/40)[2];
-    var n6 = dt*f(g, l0, k, m, t[i]+dt/2, x[i]-8*k1/27+2*k2-3544*k3/2565+1859*k4/4104-11*k5/40, xDot[i]-8*l1/27+2*l2-3544*l3/2565+1859*l4/4104-11*l5/40, theta[i]-8*m1/27+2*m2-3544*m3/2565+1859*m4/4104-11*m5/40, thetaDot[i]-8*n1/27+2*n2-3544*n3/2565+1859*n4/4104-11*n5/40)[3];
-
-    // x1, xDot1, theta1, thetaDot1 are our fourth order approximations
-    var x1 = x[i] + 25*k1/216+1408*k3/2565+2197*k4/4104-k5/5;
-    var xDot1 = xDot[i] + 25*l1/216+1408*l3/2565+2197*l4/4104-l5/5;
-    var theta1 = theta[i] + 25*m1/216+1408*m3/2565+2197*m4/4104-m5/5;
-    var thetaDot1 = thetaDot[i] + 25*n1/216+1408*n3/2565+2197*n4/4104-n5/5;
-
-    // x2, xDot2, theta2 and thetaDot2 are our fifth order approximations
-    var x2 = x[i] + 16*k1/135+6656*k3/12825+28561*k4/56430-9*k5/50+2*k6/55;
-    var xDot2 = xDot[i] + 16*l1/135+6656*l3/12825+28561*l4/56430-9*l5/50+2*l6/55;
-    var theta2 = theta[i] + 16*m1/135+6656*m3/12825+28561*m4/56430-9*m5/50+2*m6/55;
-    var thetaDot2 = thetaDot[i] + 16*n1/135+6656*n3/12825+28561*n4/56430-9*n5/50+2*n6/55;
-
-    return [x1, xDot1, theta1, thetaDot1, x2, xDot2, theta2, thetaDot2];
-}
-
-/**
- * Check and correct step size
- * 
- * @param dt            Step size.
- * @param epsilon       Error tolerance.
- * @param t             An array of t values.
- * @param x             An array of x values.
- * @param xDot          An array of xDot values.
- * @param theta         An array of theta values.
- * @param thetaDot      An array of theta dot values.
- * @param x1            4th order approx to x.
- * @param xDot1         4th order approx to xDot.
- * @param theta1        4th order approx to theta.
- * @param thetaDot1     4th order approx to theta dot.
- * @param x2            5th order approx to x.
- * @param xDot2         5th order approx to xDot.
- * @param theta2        5th order approx to theta.
- * @param thetaDot2     5th order approx to theta dot.
- * @param i             Counter variable.
- * @return              [dt, t, x, xDot, theta, thetaDot, i]
- */
-function stepSizeChecker(dt, epsilon, t, x, xDot, theta, thetaDot, x1, xDot1, theta1, thetaDot1, x2, xDot2, theta2, thetaDot2, i) {
-    // The following are used to correct the step size
-    var Rx = Math.abs(x1-x2)/dt;
-    var RxDot = Math.abs(xDot1-xDot2)/dt;
-    var Rtheta = Math.abs(theta1-theta2)/dt;
-    var RthetaDot = Math.abs(thetaDot1-thetaDot2)/dt;
-    var sx = 0.84*Math.pow(epsilon/Rx, 1/4);                
-    var sxDot = 0.84*Math.pow(epsilon/RxDot, 1/4);
-    var stheta = 0.84*Math.pow(epsilon/Rtheta, 1/4);
-    var sthetaDot = 0.84*Math.pow(epsilon/RthetaDot, 1/4);
-    var R = Math.max(Rx, RxDot, Rtheta, RthetaDot);
-    var s = Math.min(sx, sxDot, stheta, sthetaDot);
-
-    // If R is less than or equal to epsilon move onto the next step
-    if ( R <= epsilon ) {
-        t.push(t[i]+dt);
-        x.push(x1);
-        xDot.push(xDot1);
-        theta.push(theta1);
-        thetaDot.push(thetaDot1);
-        i++;
-        dt *= s;
-    } else {
-        dt *= s;
-    }
-
-    return [dt, t, x, xDot, theta, thetaDot, i];
-}
-
 /** 
- * Solve the problem using RKF45.
+ * Solve the problem using RKF45
  *
  * @param objectOfInputs An object containing all the problem parameters.
- * @return               Solution object.
+ * @return               [t, vars]
  */
-function solveProblem(objectOfInputs) {
-    // Obtain the parameters of the problem
-    var {g, l0, k, m, t0, tf, x0, xDot0, theta0, thetaDot0, epsilon, dtInitial} = objectOfInputs;
+function RKF45(objectOfInputs) {
+    // Extract data from object
+    var {x0, xDot0, theta0, thetaDot0} = objectOfInputs;
 
     // Initialize the arrays used and loop variables
-    var t = [t0];
-    var x = [x0];
-    var xDot = [xDot0];
-    var theta = [theta0];
-    var thetaDot = [thetaDot0];
-    var dt = dtInitial;
-    var i = 0;
-
-    // Loop over each step until we reach the endpoint
-    while ( t[i] < tf ) {
-        // Step size, as dictated by the method
-        dt = Math.min(dt, tf-t[i]);
-        var [x1, xDot1, theta1, thetaDot1, x2, xDot2, theta2, thetaDot2] = approximatorRKF45(dt, g, l0, k, m, t, x, xDot, theta, thetaDot, i);
-        var [dt, t, x, xDot, theta, thetaDot, i] = stepSizeChecker(dt, epsilon, t, x, xDot, theta, thetaDot, x1, xDot1, theta1, thetaDot1, x2, xDot2, theta2, thetaDot2, i);
-    }
-
-    // Write t, x, y and z to our solution object
-    var solution = {
-        t: t,
-        x: x,
-        xDot: xDot,
-        theta: theta,
-        thetaDot: thetaDot
-    };
-    return solution;
-}
-
-/**
- * Tabulates solution data.
- *
- * @param objectOfInputs An object containing all the problem parameters.
- * @return               Nothing. Just populates the table with the solution values. 
- */
-function fillTable(objectOfInputs) {
-    // Run solveProblem
-    var solution = solveProblem(objectOfInputs);
-
-    // Extract coordinate arrays from the solution object
-    var {t, x, xDot, theta, thetaDot} = solution;
-    var epsilon = objectOfInputs.epsilon;
-
-    // Write to table
-    document.getElementById('tableOutputs').innerHTML = '';
-    var tableContents = '<tr>';
-    tableContents += '<th>Index</th>';
-    tableContents += '<th>t (seconds)</th>';
-    tableContents += '<th>x</th>';
-    tableContents += '<th>x dot</th>';
-    tableContents += '<th>&theta;</th>';
-    tableContents += '<th>&theta; dot</th>';
-    tableContents += "</tr>";
-    for (let j = 0; j < x.length; j++) {
-        tableContents += '<tr>';
-        tableContents += '<td>' + j + '</td>';
-        tableContents += '<td>' + t[j].toFixed(Math.ceil(Math.log10(1/epsilon))) + '</td>';
-        tableContents += '<td>' + x[j].toFixed(Math.ceil(Math.log10(1/epsilon))) + '</td>';
-        tableContents += '<td>' + xDot[j].toFixed(Math.ceil(Math.log10(1/epsilon))) + '</td>';
-        tableContents += '<td>' + theta[j].toFixed(Math.ceil(Math.log10(1/epsilon))) + '</td>';
-        tableContents += '<td>' + thetaDot[j].toFixed(Math.ceil(Math.log10(1/epsilon))) + '</td>';
-        tableContents += '</tr>';
-    }
-    document.getElementById('tableOutputs').innerHTML = tableContents;
-}
-
-/**
- * Removes the solution table
- * 
- * @params           None.
- * @return           Nothing. Just removes the solution table.
- */
-function removeTable() {
-    // Clear table content
-    document.getElementById('tableOutputs').innerHTML = '';
+    var vars0 = [[x0, xDot0, theta0, thetaDot0]];
+    var [t, vars] = RKF45Body(objectOfInputs, vars0); 
+    return [t, vars];
 }
 
 /**
@@ -231,10 +38,12 @@ function removeTable() {
  */
 function generateXThetaPhasePlot(objectOfInputs) {
     // Run solveProblem
-    var solution = solveProblem(objectOfInputs);
+    var solution = solveProblem(RKF45, objectOfInputs);
 
     // Extract solution data from solution object
-    var {x, theta} = solution;
+    var {vars} = solution;
+    var x = vars[0];
+    var theta = vars[2];
 
     // Height and width of plot
     adjustPlotHeight("phasePlotXTheta");
@@ -259,16 +68,6 @@ function generateXThetaPhasePlot(objectOfInputs) {
 }
 
 /**
- * Remove XTheta phase plot
- * 
- * @params           None.
- * @return           Nothing. Just removes the plot.
- */
-function removeXThetaPhasePlot() {
-    rmPlot("phasePlotXTheta");
-}
-
-/**
  * Generates a xdot against x phase plot
  * 
  * @param objectOfInputs An object containing all the problem parameters.
@@ -276,10 +75,12 @@ function removeXThetaPhasePlot() {
  */
 function generateXXDotPhasePlot(objectOfInputs) {
     // Run solveProblem
-    var solution = solveProblem(objectOfInputs);
+    var solution = solveProblem(RKF45, objectOfInputs);
 
     // Extract solution data from solution object
-    var {x, xDot} = solution;
+    var {vars} = solution;
+    var x = vars[0];
+    var xDot = vars[1];
 
     // Height and width of plot
     adjustPlotHeight("phasePlotXXDot");
@@ -304,17 +105,6 @@ function generateXXDotPhasePlot(objectOfInputs) {
 }
 
 /**
- * Remove xdot against x phase plot
- * 
- * @params           None.
- * @return           Nothing. Just removes the plot.
- */
-function removeXXDotPhasePlot() {
-    document.getElementById("phasePlotXXDot").innerHTML = '';
-    document.getElementById("phasePlotXXDot").style = '';
-}
-
-/**
  * Generates a theta dot against theta phase plot
  * 
  * @param objectOfInputs An object containing all the problem parameters.
@@ -322,10 +112,12 @@ function removeXXDotPhasePlot() {
  */
 function generateThetaThetaDotPhasePlot(objectOfInputs) {
     // Run solveProblem
-    var solution = solveProblem(objectOfInputs);
+    var solution = solveProblem(RKF45, objectOfInputs);
     
     // Extract solution data from solution object
-    var {theta, thetaDot} = solution;
+    var {vars} = solution;
+    var theta = vars[2];
+    var thetaDot = vars[3];
     
     // Height and width of plot
     adjustPlotHeight("phasePlotThetaThetaDot");
@@ -350,16 +142,6 @@ function generateThetaThetaDotPhasePlot(objectOfInputs) {
 }
 
 /**
- * Remove theta dot against theta phase plot
- * 
- * @params           None.
- * @return           Nothing. Just removes the plot.
- */
-function removeThetaThetaDotPhasePlot() {
-    rmPlot("phasePlotThetaThetaDot");
-}
-
-/**
  * Generates a time plot
  * 
  * @param objectOfInputs An object containing all the problem parameters.
@@ -367,10 +149,11 @@ function removeThetaThetaDotPhasePlot() {
  */
 function generateTimePlot(objectOfInputs) {
     // Run solveProblem
-    var solution = solveProblem(objectOfInputs);
+    var solution = solveProblem(RKF45, objectOfInputs);
 
     // Extract solution data from solution object
-    var {t, x, xDot, theta, thetaDot} = solution;
+    var {t, vars} = solution;
+    var [x, xDot, theta, thetaDot] = vars;
 
     // Height and width of plot
     adjustPlotHeight("timePlot");
@@ -420,16 +203,6 @@ function generateTimePlot(objectOfInputs) {
 }
 
 /**
- * Remove time plot
- * 
- * @params           None.
- * @return           Nothing. Just removes the plot.
- */
-function removeTimePlot() {
-    rmPlot("timePlot");
-}
-
-/**
  * Generate four plots:
  * - The first is a phase plot of theta against x.
  * - The second is a phase plot of x dot against x.
@@ -444,19 +217,4 @@ function generatePlots(objectOfInputs) {
     generateXXDotPhasePlot(objectOfInputs);
     generateThetaThetaDotPhasePlot(objectOfInputs);
     generateTimePlot(objectOfInputs);
-};
-
-/**
- * Removes solution plots
- * 
- * @params           None.
- * @return           Nothing. Just removes the solution plots.
- */
-function removePlots() {
-    // Clear HTML and CSS of the plots
-    // Time plots
-    removeTimePlot();
-    removeThetaThetaDotPhasePlot();
-    removeXXDotPhasePlot();
-    removeXThetaPhasePlot();
-};
+}

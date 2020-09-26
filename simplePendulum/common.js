@@ -144,16 +144,6 @@ function periodCalc(objectOfInputs) {
 }
 
 /**
- * Removes the solution table
- * 
- * @params           None.
- * @return           Nothing. Just removes the solution table.
- */
-function removeTable() {
-    document.getElementById('tableOutputs').innerHTML = '';
-}
-
-/**
  * Generate phase plot of theta dot against theta
  * 
  * @param objectOfInputs  An object that contains all the problem parameters.
@@ -161,7 +151,7 @@ function removeTable() {
  */
 function generatePhasePlot(objectOfInputs) {
     // Solve the problem
-    var solution = solveProblem(objectOfInputs);
+    var solution = solveProblemSP(objectOfInputs);
     var {theta, thetaDot} = solution;
 
     // Height and width of plot
@@ -190,23 +180,13 @@ function generatePhasePlot(objectOfInputs) {
 }
 
 /**
- * Remove phase plot
- * 
- * @params           None.
- * @return           Nothing. Just removes the plot.
- */
-function removePhasePlot() {
-    rmPlot("phasePlot");
-}
-
-/**
  * Generate plot of theta and theta dot against time
  * 
  * @param objectOfInputs  An object that contains all the problem parameters.
  * @return               Nothing. Just generates the relevant plot.
  */
 function generateTimePlot(objectOfInputs) {
-    var solution = solveProblem(objectOfInputs);
+    var solution = solveProblemSP(objectOfInputs);
 
     // Extract solution data from solution object
     var {t, theta, thetaDot} = solution;
@@ -240,24 +220,14 @@ function generateTimePlot(objectOfInputs) {
 }
 
 /**
- * Remove time plot
- * 
- * @params           None.
- * @return           Nothing. Just removes the plot.
- */
-function removeTimePlot() {
-    rmPlot("timePlot");
-}
-
-/**
  * Tabulates solution data.
  *
  * @param objectOfInputs  An object that contains all the problem parameters.
  * @return               Nothing. Just populates the table with the solution values. 
  */
-function fillTable(objectOfInputs) {
+function fillTableSP(objectOfInputs) {
     // Define all global variables
-    var solution = solveProblem(objectOfInputs);
+    var solution = solveProblemSP(objectOfInputs);
     var epsilon = objectOfInputs.epsilon;
     var {t, theta, thetaDot} = solution;
     var j = 0;
@@ -321,27 +291,3 @@ function generatePlots(objectOfInputs) {
         generateErrorPlot(objectOfInputs);
     }
 };
-
-/**
- * Remove error plot
- * 
- * @params           None.
- * @return           Nothing. Just removes the plot.
- */
-function removeErrorPlot() {
-    if (!!document.getElementById("errorPlot")) {
-        rmPlot("errorPlot");
-    }
-}
-
-/**
- * Removes solution plots and associated element formatting
- * 
- * @params           None.
- * @return           Nothing. Just removes the solution plots.
- */
-function removePlots() {
-    removeTimePlot();
-    removePhasePlot();
-    removeErrorPlot();
-}
