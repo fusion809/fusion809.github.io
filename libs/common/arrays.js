@@ -22,7 +22,7 @@ function arrAdd(...arrs) {
  * @return       Divided array.
  */
 function arrDiv(arr, scalar) {
-    return arrMult(arr, 1/scalar);
+    return arr.map(x => x/scalar);
 }
 
 /**
@@ -32,6 +32,5 @@ function arrDiv(arr, scalar) {
  * @param scalar Scalar by which array is to be multiplied.
  */
 function arrMult(arr, scalar) {
-    arr = arr.map(x => x*scalar);
-    return arr;
+    return arr.map(x => x*scalar);
 }
