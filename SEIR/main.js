@@ -37,10 +37,8 @@ function f(objectOfInputs, t, vars) {
  * @return               [t, vars]
  */
 function RKF45(objectOfInputs) {
-    // Extract data from object
+    // Extract initial conditions from object and write to 2d array
     var {S0, E0, I0, R0} = objectOfInputs;
-
-    // Initialize the arrays used and loop variables
     var vars0 = [[S0, E0, I0, R0]];
     var [t, vars] = RKF45Body(objectOfInputs, vars0);
     return [t, vars];
