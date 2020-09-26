@@ -15,39 +15,6 @@ function f(alpha, gamma, t, x, y, z) {
 }
 
 /**
- * Read inputs from the parameter form and input it into an object
- * 
- * @params              None.
- * @return              An object containing all the parameter values.
- */
-function readInputs() {
-    // Extract inputs from the form
-    var alpha = parseFloat(document.getElementById("alpha").value);
-    var gamma = parseFloat(document.getElementById("gamma").value);
-    var t0 = parseFloat(document.getElementById("t0").value);
-    var tf = parseFloat(document.getElementById("tf").value);
-    var x0 = parseFloat(document.getElementById("x0").value);
-    var y0 = parseFloat(document.getElementById("y0").value);
-    var z0 = parseFloat(document.getElementById("z0").value);
-    var epsilon = parseFloat(document.getElementById("epsilon").value);
-    var dtInitial = parseFloat(document.getElementById("dtInitial").value);
-
-    // Add to object and return
-    var objectOfInputs = {
-        alpha: alpha, 
-        gamma: gamma, 
-        t0: t0, 
-        tf: tf, 
-        x0: x0, 
-        y0: y0, 
-        z0: z0, 
-        epsilon: epsilon, 
-        dtInitial: dtInitial
-    };
-    return objectOfInputs;
-}
-
-/**
  * Generates 4th and 5th order approximations for x, y and z at next step.
  * 
  * @param dt            Step size.

@@ -1,37 +1,4 @@
 /**
- * Reads inputs in the parameters table, adds them to an array and return
- * 
- * @params         None.
- * @return         Array of problem parameters.
- */
-function readInputs() {
-    // Read them from form
-    var g = parseFloat(document.getElementById("g").value);
-    var l = parseFloat(document.getElementById("l").value);
-    var N = parseFloat(document.getElementById("N").value);
-    var theta0 = parseFloat(document.getElementById("theta0").value);
-    var thetaDot0 = parseFloat(document.getElementById("thetaDot0").value);
-    var epsilon = parseFloat(document.getElementById("epsilon").value);
-    var dtInitial = parseFloat(document.getElementById("dtInitial").value);
-    var t0 = parseFloat(document.getElementById("t0").value);
-    var tf = parseFloat(document.getElementById("tf").value);
-
-    // Add them to array
-    var objectOfInputs = {
-        g: g,
-        l: l,
-        N: N,
-        theta0: theta0,
-        thetaDot0: thetaDot0,
-        epsilon: epsilon,
-        dtInitial: dtInitial,
-        t0: t0,
-        tf: tf
-    };
-    return objectOfInputs;
-}
-
-/**
  * Right-hand side of our second-order ODE written as a system of 
  * first-order ODEs.
  *

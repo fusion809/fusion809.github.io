@@ -16,41 +16,6 @@ function f(a, b, c, t, x, y, z) {
 }
 
 /**
- * Reads the form inputs and returns an object containing the inputs
- * 
- * @params              None.
- * @return              An object of inputs.
- */
-function readInputs() {
-    // Extract parameters from the form
-    var a = parseFloat(document.getElementById("a").value);
-    var b = parseFloat(document.getElementById("b").value);
-    var c = parseFloat(document.getElementById("c").value);
-    var t0 = parseFloat(document.getElementById("t0").value);
-    var tf = parseFloat(document.getElementById("tf").value);
-    var x0 = parseFloat(document.getElementById("x0").value);
-    var y0 = parseFloat(document.getElementById("y0").value);
-    var z0 = parseFloat(document.getElementById("z0").value);
-    var epsilon = parseFloat(document.getElementById("epsilon").value);
-    var dtInitial = parseFloat(document.getElementById("dtInitial").value);
-
-    // Write to an object and return
-    var objectOfInputs = {
-        a: a,
-        b: b,
-        c: c,
-        t0: t0,
-        tf: tf,
-        x0: x0,
-        y0: y0,
-        z0: z0,
-        epsilon: epsilon,
-        dtInitial: dtInitial
-    };
-    return objectOfInputs;
-}
-
-/**
  * Returns RKF45 approximations to next x[i+1], y[i+1], z[i+1]
  * 
  * @param dt       Step size

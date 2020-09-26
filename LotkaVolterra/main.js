@@ -16,41 +16,6 @@ function f(alpha, beta, gamma, delta, t, x, y) {
 }
 
 /**
- * Extract values from form and enter them into an object
- * 
- * @params         None.
- * @return         An object containing all parameter values extracted from the form.
- */
-function readInputs() {
-    // Extract values from form
-    alpha = parseFloat(document.getElementById("alpha").value);
-    beta = parseFloat(document.getElementById("beta").value);
-    gamma = parseFloat(document.getElementById("gamma").value);
-    delta = parseFloat(document.getElementById("delta").value);
-    t0 = parseFloat(document.getElementById("t0").value);
-    tf = parseFloat(document.getElementById("tf").value);
-    x0 = parseFloat(document.getElementById("x0").value);
-    y0 = parseFloat(document.getElementById("y0").value);
-    epsilon = parseFloat(document.getElementById("epsilon").value);
-    dtInitial = parseFloat(document.getElementById("dtInitial").value);
-
-    // Enter into object and return
-    var objectOfInputs = {
-        alpha: alpha,
-        beta: beta,
-        gamma: gamma,
-        delta: delta,
-        t0: t0,
-        tf: tf,
-        x0: x0,
-        y0: y0,
-        epsilon: epsilon,
-        dtInitial: dtInitial
-    };
-    return objectOfInputs;
-}
-
-/**
  * Approximate the value of x and y at next step size to 4th and 5th order
  * @param dt            Step size.
  * @param alpha         Problem parameter.
