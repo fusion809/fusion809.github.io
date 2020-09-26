@@ -138,7 +138,7 @@ function RKF45(dtInitial, epsilon, g, l, t0, tf, theta0, thetaDot0) {
  * @param objectOfInputs  Parameters of the problem collected from form using readInput().
  * @return                A solution object.
  */
-function solveProblem(objectOfInputs) {
+function solveProblemSP(objectOfInputs) {
     // Obtain the parameters of the problem
     var {g, l, t0, tf, theta0, thetaDot0, epsilon, dtInitial} = objectOfInputs;
 
@@ -160,7 +160,7 @@ function solveProblem(objectOfInputs) {
  */
 function generateErrorPlot(objectOfInputs) {
     // Solve the problem
-    var solution = solveProblem(objectOfInputs);
+    var solution = solveProblemSP(objectOfInputs);
     var {t, logErrorThetaDot} = solution;
 
     // Height and width of plots

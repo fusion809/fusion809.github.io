@@ -2,32 +2,19 @@
  * Right-hand side of our second-order ODE written as a simple of first-order
  * ODEs.
  *
- * @param a          Inverse of the incubation period.
- * @param beta       Infectivity parameter.
- * @param gamma      Parameter that measures the rate of recovery.
- * @param delta      Parameter that measures the effect of quarantine.
- * @param lambda     Birth rate measured in people per day.
- * @param mu         Death rate measured in people per day. 
+ * @param a          Interaction parameter.
+ * @param b          Interaction parameter.
+ * @param c          Interaction parameter.
  * @param t          Time (seconds).
- * @param S          Susceptible person count.
- * @param E          Exposed person count.
- * @param I          Infectious person count.
- * @param R          Recovered person count.
- * @return           [dS/dt, dE/dt, dI/dt, dR/dt]
+ * @param x          x value.
+ * @param y          y value.
+ * @param z          z value.
+ * @return           [dx/dt, dy/dt, dz/dt]
  */
 function f(objectOfInputs, t, vars) {
-    var {a, beta, gamma, delta, lambda, mu} = objectOfInputs;
-    var [S, E, I, R] = vars;
-    // Determine N
-    var N = S + E + I + R;
-    // Calculate derivatives
-    var exposure = (beta * S * I * (1-delta))/N;
-    var dSdt = lambda*N - mu * S - exposure;
-    var dEdt = exposure - (mu + a)*E;
-    var dIdt = a*E - (mu + gamma) * I;
-    var dRdt = gamma*I - mu*R;
-    // Put into return value
-    return [dSdt, dEdt, dIdt, dRdt];
+    var {a, b, c} = objectOfInputs;
+    var [x, y, z] = vars;
+    return [-y-z, x + a*y, b + z*(x-c)];
 }
 
 /** 
@@ -38,10 +25,10 @@ function f(objectOfInputs, t, vars) {
  */
 function RKF45(objectOfInputs) {
     // Extract data from object
-    var {S0, E0, I0, R0} = objectOfInputs;
+    var {x0, y0, z0} = objectOfInputs;
 
     // Initialize the arrays used and loop variables
-    var vars0 = [[S0, E0, I0, R0]];
+    var vars0 = [[x0, y0, z0]];
     var [t, vars] = RKF45Body(objectOfInputs, vars0);
     return [t, vars];
 }
@@ -49,25 +36,25 @@ function RKF45(objectOfInputs) {
 /**
  * Generates a 3D phase plot
  * 
- * @param objectOfInputs An object containing all the form parameters. 
+ * @param objectOfInputs An object containing all the problem parameters.
  * @return               Nothing.
  */
 function generate3DPhasePlot(objectOfInputs) {
-    // Solve problem and extract relevant solution variables
+    // Solve problem
     var solution = solveProblem(RKF45, objectOfInputs);
+
+    // Extract solution data from solution object
     var {vars} = solution;
-    var S = vars[0];
-    var I = vars[2];
-    var R = vars[3];
+    var [x, y, z] = vars;
 
     // Height and width of plot
     adjustPlotHeight("phasePlotXYZ");
 
     // Plot object and data object array
     var plotXYZ = {
-        x: S,
-        y: I,
-        z: R,
+        x: x,
+        y: y,
+        z: z,
         type: 'scatter3d',
         mode: 'lines',
         opacity: 1,
@@ -80,7 +67,7 @@ function generate3DPhasePlot(objectOfInputs) {
 
     // layout object
     var layoutXYZ = {
-        title: 'Phase plot of the solution to the SIR equations. x = S, y = I and z = R'
+        title: 'Phase plot of the solution to the Rossler equations'
     };
 
     // Generate plot
@@ -90,23 +77,25 @@ function generate3DPhasePlot(objectOfInputs) {
 /**
  * Generates a XY phase plot
  * 
- * @param objectOfInputs An object containing all the form parameters. 
+ * @param objectOfInputs An object containing all the problem parameters.
  * @return               Nothing.
  */
 function generateXYPhasePlot(objectOfInputs) {
-    // Solve problem and extract relevant solution variables
+    // Solve problem
     var solution = solveProblem(RKF45, objectOfInputs);
+
+    // Extract solution data from solution object
     var {vars} = solution;
-    var S = vars[0];
-    var I = vars[2];
+    var x = vars[0];
+    var y = vars[1];
 
     // Height and width of plot
     adjustPlotHeight("phasePlotXY");
 
     // Plot object and data object array
     var plotXY = {
-        x: S,
-        y: I,
+        x: x,
+        y: y,
         type: 'scatter',
         mode: 'lines',
         opacity: 1
@@ -115,7 +104,7 @@ function generateXYPhasePlot(objectOfInputs) {
 
     // layout object
     var layoutXY = {
-        title: "SI phase plot, x = S and y = I"
+        title: "xy phase plot"
     };
 
     // Generate plot
@@ -125,23 +114,25 @@ function generateXYPhasePlot(objectOfInputs) {
 /**
  * Generates a XZ phase plot
  * 
- * @param objectOfInputs An object containing all the form parameters. 
+ * @param objectOfInputs An object containing all the problem parameters.
  * @return               Nothing.
  */
 function generateXZPhasePlot(objectOfInputs) {
-    // Solve problem and extract relevant solution variables
+    // Solve the problem
     var solution = solveProblem(RKF45, objectOfInputs);
+    
+    // Extract solution data from solution object
     var {vars} = solution;
-    var S = vars[0];
-    var R = vars[3];
-
+    var x = vars[0];
+    var z = vars[2];
+    
     // Height and width of plot
     adjustPlotHeight("phasePlotXZ");
     
     // Plot object and data object array
     var plotXZ = {
-        x: S,
-        y: R,
+        x: x,
+        y: z,
         type: 'scatter',
         mode: 'lines',
         opacity: 1
@@ -150,7 +141,7 @@ function generateXZPhasePlot(objectOfInputs) {
     
     // layout object
     var layoutXZ = {
-        title: "SR phase plot, x = S and y = R"
+        title: "xz phase plot"
     };
     
     // Generate plot
@@ -160,23 +151,25 @@ function generateXZPhasePlot(objectOfInputs) {
 /**
  * Generates a YZ phase plot
  * 
- * @param objectOfInputs An object containing all the form parameters. 
+ * @param objectOfInputs An object containing all the problem parameters.
  * @return               Nothing.
  */
 function generateYZPhasePlot(objectOfInputs) {
-    // Solve problem and extract relevant solution variables
+    // Solve the problem
     var solution = solveProblem(RKF45, objectOfInputs);
+
+    // Extract solution data from solution object
     var {vars} = solution;
-    var I = vars[2];
-    var R = vars[3];
+    var y = vars[1];
+    var z = vars[2];
 
     // Height and width of plot
     adjustPlotHeight("phasePlotYZ");
 
     // Plot object and data object array
     var plotYZ = {
-        x: I,
-        y: R,
+        x: y,
+        y: z,
         type: 'scatter',
         mode: 'lines',
         opacity: 1
@@ -185,7 +178,7 @@ function generateYZPhasePlot(objectOfInputs) {
 
     // layout object
     var layoutYZ = {
-        title: "IR phase plot, x = I and y = R"
+        title: "yz phase plot"
     };
 
     // Generate plot
@@ -195,52 +188,46 @@ function generateYZPhasePlot(objectOfInputs) {
 /**
  * Generates a time plot
  * 
- * @param objectOfInputs An object containing all the form parameters. 
+ * @param objectOfInputs An object containing all the problem parameters.
  * @return               Nothing.
  */
 function generateTimePlot(objectOfInputs) {
-    // Solve problem and extract relevant solution variables
+    // Solve the problem
     var solution = solveProblem(RKF45, objectOfInputs);
+
+    // Extract solution data from solution object
     var {t, vars} = solution;
-    var [S, E, I, R] = vars;
+    var [x, y, z] = vars;
 
     // Height and width of plot
     adjustPlotHeight("timePlot");
 
     // Plot object and data object array
-    var plotTS = {
+    var plotTX = {
         x: t,
-        y: S,
+        y: x,
         type: 'scatter',
         mode: 'lines',
         opacity: 1,
-        name: 'S'
+        name: 'x'
     };
-    var plotTE = {
+    var plotTY = {
         x: t,
-        y: E,
+        y: y,
         type: 'scatter',
         mode: 'lines',
         opacity: 1,
-        name: 'E'
+        name: 'y'
     };
-    var plotTI = {
+    var plotTZ = {
         x: t,
-        y: I,
+        y: z,
         type: 'scatter',
         mode: 'lines',
         opacity: 1,
-        name: 'I'
+        name: 'z'
     };
-    var plotTR = {
-        x: t,
-        y: R,
-        type: 'scatter',
-        mode: 'lines',
-        opacity: 1,
-        name: 'R'
-    };
-    var dataTimePlot = [plotTS, plotTE, plotTI, plotTR];
+    var dataTimePlot = [plotTX, plotTY, plotTZ];
 
     // layout object
     var layoutTimePlot = {
@@ -253,14 +240,14 @@ function generateTimePlot(objectOfInputs) {
 
 /**
  * Generate five plots:
- * - The first is a 3D phase plot of S, I and R.
- * - The second is a 2D phase plot of I against S.
- * - The third is a 2D phase plot of R against S.
- * - The fourth is a 2D phase plot of R against I.
- * - The fifth is a plot of S, I and R.
+ * - The first is a 3D phase plot of x, y and z.
+ * - The second is a 2D phase plot of y against x.
+ * - The third is a 2D phase plot of z against x.
+ * - The fourth is a 2D phase plot of z against y.
+ * - The fifth is a plot of x, y and z against time.
  * 
- * @param objectOfInputs An object containing all the form parameters. 
- * @return               Nothing. Just generates the plots.
+ * @params           None.
+ * @return           Nothing. Just generates the plots.
  */
 function generatePlots(objectOfInputs) {
     generate3DPhasePlot(objectOfInputs);
@@ -268,4 +255,4 @@ function generatePlots(objectOfInputs) {
     generateXZPhasePlot(objectOfInputs);
     generateYZPhasePlot(objectOfInputs);
     generateTimePlot(objectOfInputs);
-};
+}
