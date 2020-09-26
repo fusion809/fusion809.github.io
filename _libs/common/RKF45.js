@@ -15,16 +15,16 @@ function approxRKF45(dt, objectOfInputs, t, vars, i) {
     var X2 = [];
     var Rarr = [];
     var sarr = [];
-    var epsilon = objectOfInputs.epsilon;
+    var {epsilon} = objectOfInputs;
 
     // K[i][j], i goes from 0 to 5 and represents k1, k2, k3, k4, k5, k6
     // j goes from 0 to the dimensionality of the problem - 1
     K[0] = arrMult(f(objectOfInputs, t[i], vars[i]), dt);
-    K[1] = arrMult(f(objectOfInputs, t[i] + dt/4, arrAdd([vars[i], arrDiv(K[0], 4)])), dt);
-    K[2] = arrMult(f(objectOfInputs, t[i] + 3*dt/8, arrAdd([vars[i], arrMult(K[0], 3/32), arrMult(K[1], 9/32)])), dt);
-    K[3] = arrMult(f(objectOfInputs, t[i] + 12*dt/13, arrAdd([vars[i], arrMult(K[0], 1932/2197), arrMult(K[1], -7200/2197), arrMult(K[2], 7296/2197)])), dt);
-    K[4] = arrMult(f(objectOfInputs, t[i]+dt, arrAdd([vars[i], arrMult(K[0], 439/216), arrMult(K[1], -8), arrMult(K[2], 3680/513), arrMult(K[3], -845/4104)])), dt);
-    K[5] = arrMult(f(objectOfInputs, t[i] + dt/2, arrAdd([vars[i], arrMult(K[0], -8/27), arrMult(K[1], 2), arrMult(K[2], -3544/2565), arrMult(K[3], 1859/4104), arrMult(K[4], -11/40)])), dt);
+    K[1] = arrMult(f(objectOfInputs, t[i] + dt/4, arrAdd(vars[i], arrDiv(K[0], 4))), dt);
+    K[2] = arrMult(f(objectOfInputs, t[i] + 3*dt/8, arrAdd(vars[i], arrMult(K[0], 3/32), arrMult(K[1], 9/32))), dt);
+    K[3] = arrMult(f(objectOfInputs, t[i] + 12*dt/13, arrAdd(vars[i], arrMult(K[0], 1932/2197), arrMult(K[1], -7200/2197), arrMult(K[2], 7296/2197))), dt);
+    K[4] = arrMult(f(objectOfInputs, t[i]+dt, arrAdd(vars[i], arrMult(K[0], 439/216), arrMult(K[1], -8), arrMult(K[2], 3680/513), arrMult(K[3], -845/4104))), dt);
+    K[5] = arrMult(f(objectOfInputs, t[i] + dt/2, arrAdd(vars[i], arrMult(K[0], -8/27), arrMult(K[1], 2), arrMult(K[2], -3544/2565), arrMult(K[3], 1859/4104), arrMult(K[4], -11/40))), dt);
 
     // X1[j] are our fourth order approxs & X2[j] are our 5th order approxs
     for (let j = 0; j < K[0].length; j++) {
@@ -34,7 +34,8 @@ function approxRKF45(dt, objectOfInputs, t, vars, i) {
         sarr[j] = Math.pow(epsilon/(2*Rarr[j]), 1/4);  
     }
 
-    // R is our error estimate and s is the factor by which our step size is to be adjusted
+    // R is our error estimate
+    // s is the factor by which our step size is to be adjusted
     var R = Math.max(...Rarr);
     var s = Math.min(...sarr);
     // If R is less than or equal to epsilon move onto the next step
@@ -88,7 +89,7 @@ function RKF45Body(objectOfInputs, vars0) {
 function solveProblem(func, objectOfInputs) {
     // Solve the problem
     var [t, vars] = func(objectOfInputs);
-    // Write t, x and xDot to our solution object
+    // Write t and vars to our solution object
     var solution = {
         t: t,
         vars: vars
