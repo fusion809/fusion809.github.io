@@ -43,26 +43,8 @@ function generateXThetaPhasePlot(objectOfInputs) {
     var x = vars[0];
     var theta = vars[2];
 
-    // Height and width of plot
-    adjustPlotHeight("phasePlotXTheta");
-
-    // Plot object and data object array
-    var plotXTheta = {
-        x: x,
-        y: theta,
-        type: 'scatter',
-        mode: 'lines',
-        opacity: 1
-    };
-    var dataXTheta = [plotXTheta];
-
-    // layout object
-    var layoutXTheta = {
-        title: 'Phase plot of theta against x'
-    };
-
-    // Generate plot
-    Plotly.newPlot('phasePlotXTheta', dataXTheta, layoutXTheta);
+    // Generate 2D plot
+    gen2DPlot(x, theta, "phasePlotXTheta", "Phase plot of theta against x");
 }
 
 /**
@@ -80,26 +62,8 @@ function generateXXDotPhasePlot(objectOfInputs) {
     var x = vars[0];
     var xDot = vars[1];
 
-    // Height and width of plot
-    adjustPlotHeight("phasePlotXXDot");
-
-    // Plot object and data object array
-    var plotXXDot = {
-        x: x,
-        y: xDot,
-        type: 'scatter',
-        mode: 'lines',
-        opacity: 1
-    };
-    var dataXXDot = [plotXXDot];
-
-    // layout object
-    var layoutXXDot = {
-        title: "xdot against x phase plot"
-    };
-
-    // Generate plot
-    Plotly.newPlot('phasePlotXXDot', dataXXDot, layoutXXDot);
+    // Generate 2D plot
+    gen2DPlot(x, xDot, "phasePlotXXDot", "Phase plot of x dot against x");
 }
 
 /**
@@ -117,26 +81,8 @@ function generateThetaThetaDotPhasePlot(objectOfInputs) {
     var theta = vars[2];
     var thetaDot = vars[3];
     
-    // Height and width of plot
-    adjustPlotHeight("phasePlotThetaThetaDot");
-    
-    // Plot object and data object array
-    var plotThetaThetaDot = {
-        x: theta,
-        y: thetaDot,
-        type: 'scatter',
-        mode: 'lines',
-        opacity: 1
-    };
-    var dataThetaThetaDot = [plotThetaThetaDot];
-    
-    // layout object
-    var layoutThetaThetaDot = {
-        title: "theta dot against theta phase plot"
-    };
-    
-    // Generate plot
-    Plotly.newPlot('phasePlotThetaThetaDot', dataThetaThetaDot, layoutThetaThetaDot);
+    // Generate 2D plot
+    gen2DPlot(theta, thetaDot, "phasePlotThetaThetaDot", "Phase plot of theta dot against theta");
 }
 
 /**
@@ -149,55 +95,8 @@ function generateTimePlot(objectOfInputs) {
     // Run solveProblem
     var solution = solveProblem(RKF45, objectOfInputs);
 
-    // Extract solution data from solution object
-    var {t, vars} = solution;
-    var [x, xDot, theta, thetaDot] = vars;
-
-    // Height and width of plot
-    adjustPlotHeight("timePlot");
-
-    // Plot object and data object array
-    var plotTX = {
-        x: t,
-        y: x,
-        type: 'scatter',
-        mode: 'lines',
-        opacity: 1,
-        name: 'x'
-    };
-    var plotTXDot = {
-        x: t,
-        y: xDot,
-        type: 'scatter',
-        mode: 'lines',
-        opacity: 1,
-        name: 'x dot'
-    };
-    var plotTTheta = {
-        x: t,
-        y: theta,
-        type: 'scatter',
-        mode: 'lines',
-        opacity: 1,
-        name: 'theta'
-    };
-    var plotTThetaDot = {
-        x: t,
-        y: thetaDot,
-        type: 'scatter',
-        mode: 'lines',
-        opacity: 1,
-        name: 'theta dot'
-    };
-    var dataTimePlot = [plotTX, plotTXDot, plotTTheta, plotTThetaDot];
-
-    // layout object
-    var layoutTimePlot = {
-        title: "Time plots of the solution to the problem"
-    };
-
-    // Generate plot
-    Plotly.newPlot('timePlot', dataTimePlot, layoutTimePlot);
+    // Generate time plot
+    genMultPlot(solution, ["x", "x dot", "theta", "theta dot"], "timePlot", "Plot of x, x dot, theta and theta dot against time");
 }
 
 /**

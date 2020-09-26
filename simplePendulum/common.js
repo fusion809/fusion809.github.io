@@ -154,29 +154,8 @@ function generatePhasePlot(objectOfInputs) {
     var solution = solveProblemSP(objectOfInputs);
     var {theta, thetaDot} = solution;
 
-    // Height and width of plot
-    adjustPlotHeight("phasePlot");
-
-    // Characteristics of the phase plot
-    var plot = {
-        x: theta,
-        y: thetaDot,
-        type: 'scatter',
-        name: "Phase plot"
-    };
-    var layout = {
-        title: "Phase plot of theta dot against theta",
-        xaxis: {
-            title: "theta (radians)"
-        },
-        yaxis: {
-            title: "theta dot (radians per second)"
-        }
-    };
-    var data = [plot];
-
-    // Generate plot
-    Plotly.newPlot('phasePlot', data, layout);
+    // Generate 2D plot
+    gen2DPlot(theta, thetaDot, "phasePlot", "Phase plot of theta dot against theta");
 }
 
 /**
@@ -190,33 +169,13 @@ function generateTimePlot(objectOfInputs) {
 
     // Extract solution data from solution object
     var {t, theta, thetaDot} = solution;
+    var sol = {
+        t: t,
+        vars: [theta, thetaDot]
+    }
 
-    // Height and width of plots
-    adjustPlotHeight("timePlot");
-
-    // Characteristics of the theta and theta dot against time plot
-    var plotTheta = {
-        x: t,
-        y: theta,
-        type: 'scatter',
-        name: "theta (radians)"
-    };
-    var plotThetaDot = {
-        x: t,
-        y: thetaDot,
-        type: 'scatter',
-        name: "theta dot (radians per second)"
-    };
-    var layout = {
-        title: 'theta and theta dot against time plots',
-        xaxis: {
-            title: 'Time (seconds)'
-        }
-    };
-    var data = [plotTheta, plotThetaDot];
-
-    // Generate plots
-    Plotly.newPlot('timePlot', data, layout);
+    // Generate time plot
+    genMultPlot(sol, ["theta", "theta dot"], "timePlot", "Plot of theta and theta dot against time");
 }
 
 /**

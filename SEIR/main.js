@@ -58,31 +58,8 @@ function generate3DPhasePlot(objectOfInputs) {
     var I = vars[2];
     var R = vars[3];
 
-    // Height and width of plot
-    adjustPlotHeight("phasePlotXYZ");
-
-    // Plot object and data object array
-    var plotXYZ = {
-        x: S,
-        y: I,
-        z: R,
-        type: 'scatter3d',
-        mode: 'lines',
-        opacity: 1,
-        line: {
-            width: 6,
-            reversescale: false
-        }
-    };
-    var dataXYZ = [plotXYZ];
-
-    // layout object
-    var layoutXYZ = {
-        title: 'Phase plot of the solution to the SIR equations. x = S, y = I and z = R'
-    };
-
-    // Generate plot
-    Plotly.newPlot('phasePlotXYZ', dataXYZ, layoutXYZ);
+    // Generate 3D phase plot
+    gen3DPlot(S, I, R, "phasePlotXYZ", "3D phase plot. x: S, y: I and z: R");
 }
 
 /**
@@ -98,26 +75,8 @@ function generateXYPhasePlot(objectOfInputs) {
     var S = vars[0];
     var I = vars[2];
 
-    // Height and width of plot
-    adjustPlotHeight("phasePlotXY");
-
-    // Plot object and data object array
-    var plotXY = {
-        x: S,
-        y: I,
-        type: 'scatter',
-        mode: 'lines',
-        opacity: 1
-    };
-    var dataXY = [plotXY];
-
-    // layout object
-    var layoutXY = {
-        title: "SI phase plot, x = S and y = I"
-    };
-
-    // Generate plot
-    Plotly.newPlot('phasePlotXY', dataXY, layoutXY);
+    // Generate 2D plot
+    gen2DPlot(S, I, "phasePlotXY", "Number of infectious persons against number of susceptible persons");
 }
 
 /**
@@ -133,26 +92,8 @@ function generateXZPhasePlot(objectOfInputs) {
     var S = vars[0];
     var R = vars[3];
 
-    // Height and width of plot
-    adjustPlotHeight("phasePlotXZ");
-    
-    // Plot object and data object array
-    var plotXZ = {
-        x: S,
-        y: R,
-        type: 'scatter',
-        mode: 'lines',
-        opacity: 1
-    };
-    var dataXZ = [plotXZ];
-    
-    // layout object
-    var layoutXZ = {
-        title: "SR phase plot, x = S and y = R"
-    };
-    
-    // Generate plot
-    Plotly.newPlot('phasePlotXZ', dataXZ, layoutXZ);
+    // Generate 2D plot
+    gen2DPlot(S, R, "phasePlotXZ", "Number of recovered persons against number of susceptible persons");
 }
 
 /**
@@ -168,26 +109,8 @@ function generateYZPhasePlot(objectOfInputs) {
     var I = vars[2];
     var R = vars[3];
 
-    // Height and width of plot
-    adjustPlotHeight("phasePlotYZ");
-
-    // Plot object and data object array
-    var plotYZ = {
-        x: I,
-        y: R,
-        type: 'scatter',
-        mode: 'lines',
-        opacity: 1
-    };
-    var dataYZ = [plotYZ];
-
-    // layout object
-    var layoutYZ = {
-        title: "IR phase plot, x = I and y = R"
-    };
-
-    // Generate plot
-    Plotly.newPlot('phasePlotYZ', dataYZ, layoutYZ);
+    // Generate 2D plot
+    gen2DPlot(I, R, "phasePlotYZ", "Number of recovered persons against number of infectious persons");
 }
 
 /**
@@ -199,54 +122,9 @@ function generateYZPhasePlot(objectOfInputs) {
 function generateTimePlot(objectOfInputs) {
     // Solve problem and extract relevant solution variables
     var solution = solveProblem(RKF45, objectOfInputs);
-    var {t, vars} = solution;
-    var [S, E, I, R] = vars;
 
-    // Height and width of plot
-    adjustPlotHeight("timePlot");
-
-    // Plot object and data object array
-    var plotTS = {
-        x: t,
-        y: S,
-        type: 'scatter',
-        mode: 'lines',
-        opacity: 1,
-        name: 'S'
-    };
-    var plotTE = {
-        x: t,
-        y: E,
-        type: 'scatter',
-        mode: 'lines',
-        opacity: 1,
-        name: 'E'
-    };
-    var plotTI = {
-        x: t,
-        y: I,
-        type: 'scatter',
-        mode: 'lines',
-        opacity: 1,
-        name: 'I'
-    };
-    var plotTR = {
-        x: t,
-        y: R,
-        type: 'scatter',
-        mode: 'lines',
-        opacity: 1,
-        name: 'R'
-    };
-    var dataTimePlot = [plotTS, plotTE, plotTI, plotTR];
-
-    // layout object
-    var layoutTimePlot = {
-        title: "Time plots of the solution to the problem"
-    };
-
-    // Generate plot
-    Plotly.newPlot('timePlot', dataTimePlot, layoutTimePlot);
+    // Generate time plot
+    genMultPlot(solution, ["S", "E", "I", "R"], "timePlot", "Plot of S, E, I and R against time");
 }
 
 /**
