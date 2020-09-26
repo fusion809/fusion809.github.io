@@ -64,8 +64,8 @@ function approximatorRKF45(g, l, theta0, thetaDot0, dt, t, theta, thetaDot, i) {
 function stepSizeChecker(theta1, theta2, thetaDot1, thetaDot2, errorThetaDot1, epsilon, i, dt, t, theta, thetaDot, errorThetaDot, logErrorThetaDot) {
     var RTheta = Math.abs(theta1-theta2)/dt;
     var RThetaDot = Math.abs(thetaDot1-thetaDot2)/dt;
-    var sTheta = 0.84*Math.pow(epsilon/RTheta, 1/4);                
-    var sThetaDot = 0.84*Math.pow(epsilon/RThetaDot, 1/4);
+    var sTheta = Math.pow(epsilon/(2*RTheta), 1/4);                
+    var sThetaDot = Math.pow(epsilon/(2*RThetaDot), 1/4);
     var R = Math.max(RTheta, RThetaDot);
     var s = Math.min(sTheta, sThetaDot);
     if ( R <= epsilon ) {
