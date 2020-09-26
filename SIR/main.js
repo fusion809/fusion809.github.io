@@ -40,7 +40,7 @@ function RKF45(objectOfInputs) {
  * @return               Nothing.
  */
 function generate3DPhasePlot(objectOfInputs) {
-    // Solve the problem
+    // Solve the problem and extract relevant data
     var solution = solveProblem(RKF45, objectOfInputs);
     var {vars} = solution;
     var [S, I, R] = vars;
@@ -56,7 +56,7 @@ function generate3DPhasePlot(objectOfInputs) {
  * @return               Nothing.
  */
 function generateXYPhasePlot(objectOfInputs) {
-    // Solve the problem
+    // Solve the problem and extract relevant data
     var solution = solveProblem(RKF45, objectOfInputs);
     var {vars} = solution;
     var S = vars[0];
@@ -73,7 +73,7 @@ function generateXYPhasePlot(objectOfInputs) {
  * @return               Nothing.
  */
 function generateXZPhasePlot(objectOfInputs) {
-    // Solve the problem
+    // Solve the problem and extract relevant data
     var solution = solveProblem(RKF45, objectOfInputs);
     var {vars} = solution;
     var S = vars[0];
@@ -90,7 +90,7 @@ function generateXZPhasePlot(objectOfInputs) {
  * @return               Nothing.
  */
 function generateYZPhasePlot(objectOfInputs) {
-    // Solve the problem
+    // Solve the problem and extract relevant data
     var solution = solveProblem(RKF45, objectOfInputs);
     var {vars} = solution;
     var I = vars[1];
