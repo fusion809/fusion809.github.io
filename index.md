@@ -3,6 +3,7 @@
 Currently this website has the following pages, besides this one:
 
 - [Chen system solver](/Chen/)
+- [Double pendulum solver](/doublePendulum/)
 - [Duffing equations solver](/Duffing/)
 - [Elastic pendulum solver](/elasticPendulum/)
 - [FunctionIntegrator.jl package description page](/FunctionIntegrator/)
