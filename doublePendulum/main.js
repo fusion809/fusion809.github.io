@@ -17,7 +17,7 @@ function f(objectOfInputs, t, vars) {
     // Derivatives
     var thetaDot1 = (l2 * ptheta1 - l1*ptheta2 * Math.cos(theta1))/((l1**2)*l2*(m1+m2*((Math.sin(theta1-theta2))**2)));
     var pthetaDot1 = -(m1+m2)*g*l1*Math.sin(theta1) - C1 + C2;
-    var thetaDot2 = (l1*(m1+m2)*ptheta2-l2*m2*ptheta1*Math.cos(theta1-theta2))/(l1*(l2**2)*m2*(m1+m2*Math.sin(theta1-theta2)**2));
+    var thetaDot2 = (l1*(m1+m2)*ptheta2-l2*m2*ptheta1*Math.cos(theta1-theta2))/(l1*(l2**2)*m2*(m1+m2*(Math.sin(theta1-theta2)**2)));
     var pthetaDot2 = -m2*g*l2*Math.sin(theta2)+C1-C2;
 
     // Return statement
@@ -96,6 +96,44 @@ function generateTheta1P1PhasePlot(objectOfInputs) {
 }
 
 /**
+ * Generates a ptheta2 against theta1 phase plot
+ * 
+ * @param objectOfInputs An object containing all the problem parameters.
+ * @return               Nothing.
+ */
+function generateTheta1P2PhasePlot(objectOfInputs) {
+    // Run solveProblem
+    var solution = solveProblem(RKF45, objectOfInputs);
+    
+    // Extract solution data from solution object
+    var {vars} = solution;
+    var theta1 = vars[0];
+    var ptheta2 = vars[2];
+    
+    // Generate 2D plot
+    gen2DPlot(theta1, ptheta2, "phasePlotTheta1P2", "Phase plot of ptheta2 against theta1");
+}
+
+/**
+ * Generates a ptheta1 against theta2 phase plot
+ * 
+ * @param objectOfInputs An object containing all the problem parameters.
+ * @return               Nothing.
+ */
+function generateTheta2P1PhasePlot(objectOfInputs) {
+    // Run solveProblem
+    var solution = solveProblem(RKF45, objectOfInputs);
+    
+    // Extract solution data from solution object
+    var {vars} = solution;
+    var theta2 = vars[2];
+    var ptheta1 = vars[1];
+    
+    // Generate 2D plot
+    gen2DPlot(theta2, ptheta1, "phasePlotTheta2P1", "Phase plot of ptheta1 against theta2");
+}
+
+/**
  * Generates a ptheta2 against theta2 phase plot
  * 
  * @param objectOfInputs An object containing all the problem parameters.
@@ -137,8 +175,10 @@ function generateTimePlot(objectOfInputs) {
 function generatePlots(objectOfInputs) {
     generateTheta1Theta2PhasePlot(objectOfInputs);
     generateTheta1P1PhasePlot(objectOfInputs);
-    generateP1P2PhasePlot(objectOfInputs);
+    generateTheta1P2PhasePlot(objectOfInputs);
+    generateTheta2P1PhasePlot(objectOfInputs);
     generateTheta2P2PhasePlot(objectOfInputs);
+    generateP1P2PhasePlot(objectOfInputs);
     generateTimePlot(objectOfInputs);
 }
 
@@ -163,6 +203,16 @@ function removeTheta1P1PhasePlot() {
 }
 
 /**
+ * Remove theta1 ptheta2 plot
+ * 
+ * @params         None.
+ * @return         Nothing.
+ */
+function removeTheta1P2PhasePlot() {
+    rmPlot("phasePlotTheta1P2");
+}
+
+/**
  * Remove ptheta1 ptheta2 plot
  * 
  * @params         None.
@@ -180,4 +230,28 @@ function removeP1P2PhasePlot() {
  */
 function removeTheta2P2PhasePlot() {
     rmPlot("phasePlotTheta2P2");
+}
+
+/**
+ * Remove theta2 ptheta1 plot
+ * 
+ * @params         None.
+ * @return         Nothing.
+ */
+function removeTheta2P1PhasePlot() {
+    rmPlot("phasePlotTheta2P1");
+}
+
+/**
+ * Remove all plots
+ * 
+ * @params         None.
+ * @return         Nothing.
+ */
+function removePlotsDP() {
+    removeTheta1Theta2PhasePlot();
+    removeTheta1P1PhasePlot();
+    removeTheta2P2PhasePlot();
+    removeP1P2PhasePlot();
+    removeTimePlot();
 }

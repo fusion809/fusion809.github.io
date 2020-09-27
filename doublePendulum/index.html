@@ -143,7 +143,7 @@
                        id="epsilon"
                        name="epsilon"
                        value="1e-10"></td>
-                    <td>Error tolerance. \(\epsilon \lt\) 1.8e-10 usually freezes the webpage up.</td>
+                    <td>Error tolerance. \(\epsilon \lt\) 2e-11 usually freezes the webpage up.</td>
                 </tr>
                 <tr>
                     <td><label for="dtInitial">dtInitial:</label></td>
@@ -171,6 +171,14 @@
                 <td><button type="button" onclick="removeTheta1P1PhasePlot()">Remove plot</button><br/></td>
             </tr>
             <tr>
+                <td><button type="button" onclick="generateTheta1P2PhasePlot(readInputs())">Generate \(p_{\theta_2}\) against \(\theta_1\) phase plot</button></td>
+                <td><button type="button" onclick="removeTheta1P2PhasePlot()">Remove plot</button><br/></td>
+            </tr>
+            <tr>
+                <td><button type="button" onclick="generateTheta2P1PhasePlot(readInputs())">Generate \(p_{\theta_1}\) against \(\theta_2\) phase plot</button></td>
+                <td><button type="button" onclick="removeTheta2P1PhasePlot()">Remove plot</button><br/></td>
+            </tr>
+            <tr>
                 <td><button type="button" onclick="generateTheta2P2PhasePlot(readInputs())">Generate \(p_{\theta_2}\) against \(\theta_2\) phase plot</button></td>
                 <td><button type="button" onclick="removeTheta2P2PhasePlot()">Remove plot</button><br/></td>
             </tr>
@@ -184,16 +192,18 @@
             </tr>
             <tr>
                 <td><button type="button" onclick="generatePlots(readInputs())">Generate all solution plots</button></td>
-                <td><button type="button" onclick="removePlots()">Remove all plots</button></td>
+                <td><button type="button" onclick="removePlotsDP()">Remove all plots</button></td>
             </tr>
         </table>
 
         <!--Where the table and plot goes-->
         <table id="tableOutputs">
         </table>
-        <div id='phasePlotTheta1P1'></div>
-        <div id='phasePlotTheta2P2'></div>
         <div id='phasePlotTheta1Theta2'></div>
+        <div id='phasePlotTheta1P1'></div>
+        <div id='phasePlotTheta1P2'></div>
+        <div id='phasePlotTheta2P1'></div>
+        <div id='phasePlotTheta2P2'></div>
         <div id='phasePlotP1P2'></div>
         <div id='timePlot'></div>
         <style>
@@ -217,7 +227,7 @@
             td {
                 padding: 2px;
             }
-            #timePlot, #phasePlotXTheta, #phasePlotXXDot, #phasePlotThetaThetaDot {
+            #timePlot, #phasePlotTheta1Theta2, #phasePlotTheta1P1, #phasePlotTheta2P2, #phasePlotP1P2 {
                 width: 100%;
             }
         </style>
