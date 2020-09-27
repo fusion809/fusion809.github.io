@@ -251,6 +251,8 @@ function removeTheta2P1PhasePlot() {
 function removePlotsDP() {
     removeTheta1Theta2PhasePlot();
     removeTheta1P1PhasePlot();
+    removeTheta1P2PhasePlot();
+    removeTheta2P1PhasePlot();
     removeTheta2P2PhasePlot();
     removeP1P2PhasePlot();
     removeTimePlot();
