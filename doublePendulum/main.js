@@ -1,5 +1,5 @@
 /**
- * Right-hand side of our second-order ODE written as a simple of first-order ODEs.
+ * Right-hand side of our ODE written as a system of first-order ODEs.
  *
  * @param objectOfInputs An object containing problem parameters.
  * @param t              Time (seconds).
@@ -180,80 +180,4 @@ function generatePlots(objectOfInputs) {
     generateTheta2P2PhasePlot(objectOfInputs);
     generateP1P2PhasePlot(objectOfInputs);
     generateTimePlot(objectOfInputs);
-}
-
-/**
- * Remove theta1 theta2 plot
- * 
- * @params         None.
- * @return         Nothing.
- */
-function removeTheta1Theta2PhasePlot() {
-    rmPlot("phasePlotTheta1Theta2");
-}
-
-/**
- * Remove theta1 ptheta1 plot
- * 
- * @params         None.
- * @return         Nothing.
- */
-function removeTheta1P1PhasePlot() {
-    rmPlot("phasePlotTheta1P1");
-}
-
-/**
- * Remove theta1 ptheta2 plot
- * 
- * @params         None.
- * @return         Nothing.
- */
-function removeTheta1P2PhasePlot() {
-    rmPlot("phasePlotTheta1P2");
-}
-
-/**
- * Remove ptheta1 ptheta2 plot
- * 
- * @params         None.
- * @return         Nothing.
- */
-function removeP1P2PhasePlot() {
-    rmPlot("phasePlotP1P2");
-}
-
-/**
- * Remove theta1 ptheta1 plot
- * 
- * @params         None.
- * @return         Nothing.
- */
-function removeTheta2P2PhasePlot() {
-    rmPlot("phasePlotTheta2P2");
-}
-
-/**
- * Remove theta2 ptheta1 plot
- * 
- * @params         None.
- * @return         Nothing.
- */
-function removeTheta2P1PhasePlot() {
-    rmPlot("phasePlotTheta2P1");
-}
-
-/**
- * Remove all plots
- * 
- * @params         None.
- * @return         Nothing.
- */
-function removePlotsDP() {
-    removeTheta1Theta2PhasePlot();
-    removeTheta1P1PhasePlot();
-    removeTheta1P2PhasePlot();
-    removeTheta2P1PhasePlot();
-    removeTheta2P2PhasePlot();
-    removeP1P2PhasePlot();
-    removeTimePlot();
 }

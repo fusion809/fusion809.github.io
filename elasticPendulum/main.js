@@ -1,5 +1,5 @@
 /**
- * Right-hand side of our second-order ODE written as a simple of first-order ODEs.
+ * Right-hand side of our ODE written as a system of first-order ODEs.
  *
  * @param objectOfInputs An object containing problem parameters.
  * @param t              Time (seconds).
