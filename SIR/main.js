@@ -111,7 +111,7 @@ function generateTimePlot(objectOfInputs) {
     var solution = solveProblem(RKF45, objectOfInputs);
 
     // Generate time plot
-    genMultPlot(solution, ["S", "I", "R"], "timePlot", "Time plots of the solution to the problem");
+    genMultPlot(solution, ["S", "I", "R"], "timePlot", "Plot of SIR against time");
 }
 
 /**
