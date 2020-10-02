@@ -74,11 +74,9 @@ function stepSizeChecker(theta1, theta2, thetaDot1, thetaDot2, errorThetaDot1, e
         thetaDot.push(thetaDot1);
         errorThetaDot.push(errorThetaDot1);
         logErrorThetaDot.push(Math.log10(errorThetaDot1));
-        dt *= s;
         i++;
-    } else {
-        dt *= s;
     }
+    dt *= s;
 
     return [i, dt, t, theta, thetaDot, errorThetaDot, logErrorThetaDot];
 }
