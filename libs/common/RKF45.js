@@ -1,6 +1,7 @@
 /**
  * Approximate solution at next step
  * 
+ * @param f              A function representing the RHS of the 1st order ODE system we're solving.
  * @param dt             Step size.
  * @param objectOfInputs An object containing all the inputs from the forms.
  * @param t              An array of t values.
@@ -52,6 +53,7 @@ function approxRKF45(f, dt, objectOfInputs, t, vars, i) {
 /**
  * Solves the problem using RKF45.
  * 
+ * @param f              A function representing the RHS of the 1st order ODE system we're solving.
  * @param objectOfInputs An object containing all the problem parameters.
  * @param vars0          Initial conditions of the problem in a 2D array (e.g. [[x0, y0]]).
  * @return               [t, vars] where vars is an array of solution values.
