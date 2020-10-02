@@ -8,7 +8,7 @@
  * @param i              Counter variable.
  * @return               Updated [dt, t, vars, i]
  */
-function approxRKF45(dt, objectOfInputs, t, vars, i) {
+function approxRKF45(f, dt, objectOfInputs, t, vars, i) {
     // Initialize variables
     var K = [[]];
     var X1 = [];
@@ -56,7 +56,7 @@ function approxRKF45(dt, objectOfInputs, t, vars, i) {
  * @param vars0          Initial conditions of the problem in a 2D array (e.g. [[x0, y0]]).
  * @return               [t, vars] where vars is an array of solution values.
  */
-function RKF45Body(objectOfInputs, vars0) {
+function RKF45Body(f, objectOfInputs, vars0) {
     // Initialize vars
     var {t0, tf, dtInitial} = objectOfInputs;
     var vars = vars0;
@@ -67,7 +67,7 @@ function RKF45Body(objectOfInputs, vars0) {
     // Loop over each step until we reach the endpoint
     while ( t[i] < tf ) {
         dt = Math.min(dt, tf-t[i]);
-        [dt, t, vars, i] = approxRKF45(dt, objectOfInputs, t, vars, i);
+        [dt, t, vars, i] = approxRKF45(f, dt, objectOfInputs, t, vars, i);
     }
 
     // Transpose vars

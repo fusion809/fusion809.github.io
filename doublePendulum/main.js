@@ -34,7 +34,7 @@ function RKF45(objectOfInputs) {
     // Extract initial from object and add to 2d array
     var {theta10, p10, theta20, p20} = objectOfInputs;
     var vars0 = [[theta10, p10, theta20, p20]];
-    var [t, vars] = RKF45Body(objectOfInputs, vars0); 
+    var [t, vars] = RKF45Body(f, objectOfInputs, vars0); 
     return [t, vars];
 }
 
