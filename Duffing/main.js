@@ -24,7 +24,7 @@ function RKF45(objectOfInputs) {
     // Extract initial conditions and enter into 2d array
     var {x0, xDot0} = objectOfInputs;
     var vars0 = [[x0, xDot0]];
-    var [t, vars] = RKF45Body(objectOfInputs, vars0);
+    var [t, vars] = RKF45Body(f, objectOfInputs, vars0);
     return [t, vars];
 }
 
