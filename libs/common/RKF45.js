@@ -43,10 +43,8 @@ function approxRKF45(dt, objectOfInputs, t, vars, i) {
         t.push(t[i]+dt);
         vars.push(X1);
         i++;
-        dt *= s;
-    } else {
-        dt *= s;
     }
+    dt *= s;
 
     return [dt, t, vars, i];
 }
