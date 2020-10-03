@@ -183,6 +183,46 @@ function removeThetaThetaDotPhasePlot() {
 }
 
 /**
+ * Remove pendulum 1 coordinates plot
+ * 
+ * @params         None.
+ * @return         Nothing.
+ */
+function removePendulum1Plot() {
+    rmPlot("pendulum1Plot");
+}
+
+/**
+ * Remove pendulum 1 coordinates against time plot
+ * 
+ * @params         None.
+ * @return         Nothing.
+ */
+function removePendulum1TimePlot() {
+    rmPlot("pendulum1TimePlot");
+}
+
+/**
+ * Remove pendulum 2 coordinates plot
+ * 
+ * @params         None.
+ * @return         Nothing.
+ */
+function removePendulum2Plot() {
+    rmPlot("pendulum2Plot");
+}
+
+/**
+ * Remove pendulum 2 coordinates against time plot
+ * 
+ * @params         None.
+ * @return         Nothing.
+ */
+function removePendulum2TimePlot() {
+    rmPlot("pendulum2TimePlot");
+}
+
+/**
  * Removes solution plots
  * 
  * @params           None.
@@ -206,6 +246,23 @@ function removePlots() {
     removeTheta2P1PhasePlot();
     removeTheta2P2PhasePlot();
     removeP1P2PhasePlot();
+    removePendulum1Plot();
+    removePendulum1TimePlot();
+    removePendulum2Plot();
+    removePendulum2TimePlot();
+}
+
+/**
+ * Remove all pendulum coordinate plots.
+ * 
+ * @params         None.
+ * @return         Nothing.
+ */
+function removePendulumPlots() {
+    removePendulum1Plot();
+    removePendulum1TimePlot();
+    removePendulum2Plot();
+    removePendulum2TimePlot();
 }
 
 /**
