@@ -191,6 +191,10 @@
                 <td><button type="button" onclick="removeTimePlot()">Remove plot</button></td>
             </tr>
             <tr>
+                <td><button type="button" onclick="generatePendulumPlots(readInputs())">Generate pendulum plots</button></td>
+                <td><button type="button" onclick="removePendulumPlots()">Remove plots</button></td>
+            </tr>
+            <tr>
                 <td><button type="button" onclick="generatePlots(readInputs())">Generate all solution plots</button></td>
                 <td><button type="button" onclick="removePlots()">Remove all plots</button></td>
             </tr>
@@ -205,6 +209,10 @@
         <div id='phasePlotTheta2P1'></div>
         <div id='phasePlotTheta2P2'></div>
         <div id='phasePlotP1P2'></div>
+        <div id='pendulum1Plot'></div>
+        <div id='pendulum1TimePlot'></div>
+        <div id='pendulum2Plot'></div>
+        <div id='pendulum2TimePlot'></div>
         <div id='timePlot'></div>
         <style>
             h1 {
