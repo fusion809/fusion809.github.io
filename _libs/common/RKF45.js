@@ -87,8 +87,15 @@ function RKF45Body(f, objectOfInputs, vars0) {
  * @return               A solution object.
  */
 function solveProblem(func, objectOfInputs) {
-    // Solve the problem
+    // Solve the problem, and time it
+    let t0 = performance.now();
     var [t, vars] = func(objectOfInputs);
+    let t1 = performance.now();
+
+    // Log execution time to console
+    let diff = t1 - t0;
+    console.log("Solving the problem took " + diff + " milliseconds.");
+    
     // Write t and vars to our solution object
     var solution = {
         t: t,
