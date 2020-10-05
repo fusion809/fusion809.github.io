@@ -6,3 +6,4 @@ node_modules/
 *.json
 octave-workspace
 .ccls-cache
+.patches

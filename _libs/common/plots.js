@@ -263,6 +263,8 @@ function removePendulumPlots() {
     removePendulum1TimePlot();
     removePendulum2Plot();
     removePendulum2TimePlot();
+    rmPlot("pendulumPlot");
+    rmPlot("pendulumTimePlot");
 }
 
 /**
