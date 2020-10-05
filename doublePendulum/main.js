@@ -167,37 +167,102 @@ function generateTimePlot(objectOfInputs) {
 }
 
 /**
- * Generates four plots pertaining to the location of the bobs
- * 
- * @param objectOfInputs An object containing all the problem parameters.
- * @return               Nothing.
+ * Generate cartesian coordinates 
+ * @param func           Function being used to integrate problem
+ * @param objectOfInputs Problem parameters.
  */
-function generatePendulumPlots(objectOfInputs) {
+function generatePendulumCoords(func, objectOfInputs) {
     // Solve problem
-    var solution = solveProblem(RKF45, objectOfInputs);
+    var solution = solveProblem(func, objectOfInputs);
 
     // Extract solution values and pendulum lengths
     var {t, vars} = solution;
     var [theta1, ptheta1, theta2, ptheta2] = vars;
     var {l1, l2} = objectOfInputs;
+    var N = theta1.length;
 
     // Initialize arrays that will store x and y coords
-    var x1 = [];
-    var x2 = [];
-    var y1 = [];
-    var y2 = [];
-    for (let i = 0; i < theta1.length; i++) {
-        x1.push(l1*Math.sin(theta1[i]));
-        y1.push(-l1*Math.cos(theta1[i]));
-        x2.push(x1[i] + l2*Math.sin(theta2[i]));
-        y2.push(y1[i] - l2*Math.cos(theta2[i]));
+    var x1 = new Array(N);
+    var x2 = new Array(N);
+    var y1 = new Array(N);
+    var y2 = new Array(N);
+    for (let i = 0; i < N; i++) {
+        x1[i] = l1*Math.sin(theta1[i]);
+        y1[i] = -l1*Math.cos(theta1[i]);
+        x2[i] = x1[i] + l2*Math.sin(theta2[i]);
+        y2[i] = y1[i] - l2*Math.cos(theta2[i]);
     }
 
-    // Generate plots
-    gen2DPlot(x1, y1, "pendulum1Plot", "Plot of the location of the first pendulum bob");
-    gen3DPlot(t, x1, y1, "pendulum1TimePlot", "Plot of the location of the first pendulum bob against time");
-    gen2DPlot(x2, y2, "pendulum2Plot", "Plot of the location of the second pendulum bob");
-    gen3DPlot(t, x2, y2, "pendulum2TimePlot", "Plot of the location of the second pendulum bob against time");
+    // Return t and Cartesian coordinates of the pendulum bobs
+    return [t, x1, y1, x2, y2];
+}
+
+/**
+ * Generates two plots pertaining to the location of the bobs
+ * 
+ * @param objectOfInputs An object containing all the problem parameters.
+ * @return               Nothing.
+ */
+function generatePendulumPlots(objectOfInputs) {
+    var [t, x1, y1, x2, y2] = generatePendulumCoords(RKF45, objectOfInputs);
+    adjustPlotHeight("pendulumPlot");
+    adjustPlotHeight("pendulumTimePlot");
+    
+    // Show two pendulum bob locations on the same plot
+    var plotPen1 = {
+        x: x1,
+        y: y1,
+        type: 'scatter',
+        mode: 'lines',
+        opacity: 1,
+        name: "Pendulum 1 plot"
+    }
+    var plotPen2 = {
+        x: x2,
+        y: y2,
+        type: 'scatter',
+        mode: 'lines',
+        opacity: 1,
+        name: "Pendulum 2 plot"
+    }
+    var dataPen = [plotPen1, plotPen2];
+    var layoutPen = {
+        title: "Pendulum coordinate plots"
+    };
+    Plotly.newPlot("pendulumPlot", dataPen, layoutPen);
+    
+    // Plot pendulum bob location against time plot
+    var plotPen1Time = {
+        x: t,
+        y: x1,
+        z: y1,
+        type: 'scatter3d',
+        mode: 'lines',
+        opacity: 1,
+        line: {
+            width: 6,
+            reversescale: false
+        },
+        name: "Pendulum 1 plot against time"
+    };
+    var plotPen2Time = {
+        x: t,
+        y: x2,
+        z: y2,
+        type: 'scatter3d',
+        mode: 'lines',
+        opacity: 1,
+        line: {
+            width: 6,
+            reversescale: false
+        },
+        name: 'Pendulum 2 plot against time'
+    };
+    var dataPen = [plotPen1Time, plotPen2Time];
+    var layoutPenTime = {
+        title: "Pendulum position against time plot"
+    };
+    Plotly.newPlot("pendulumTimePlot", dataPen, layoutPenTime);
 }
 
 /**
