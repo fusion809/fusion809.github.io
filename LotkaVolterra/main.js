@@ -20,7 +20,7 @@ function f(objectOfInputs, t, vars) {
 /** 
  * Solve the problem using RKF45
  *
- * @param objectOfInputs An object containing all the problem parameters.
+ * @param solution       An object containing solution data.
  * @return               [t, vars]
  */
 function RKF45(objectOfInputs) {
@@ -34,13 +34,10 @@ function RKF45(objectOfInputs) {
 /**
  * Generate phase plot
  * 
- * @param objectOfInputs An object containing all the problem parameters.
+ * @param solution       An object containing solution data.
  * @return               Nothing. Just generates the phase plot.
  */
-function generatePhasePlot(objectOfInputs) {
-    // Solve the problem 
-    var solution = solveProblem(RKF45, objectOfInputs);
-
+function generatePhasePlot(solution) {
     // Extract solution data from solution object
     var {vars} = solution;
     var [x, y] = vars;
@@ -52,13 +49,10 @@ function generatePhasePlot(objectOfInputs) {
 /**
  * Generate a plot of x and y against time
  * 
- * @param objectOfInputs An object containing all the problem parameters.
+ * @param solution       An object containing solution data.
  * @return               Nothing. Just generates a plot of x and y against time.
  */
-function generateTimePlot(objectOfInputs) {
-    // Solve the problem
-    var solution = solveProblem(RKF45, objectOfInputs);
-
+function generateTimePlot(solution) {
     // Generate time plot
     genMultPlot(solution, ["x", "y"], "timePlot", "Plot of x and y against time");
 }
@@ -72,6 +66,10 @@ function generateTimePlot(objectOfInputs) {
  * @return               Nothing. Just generates the plots.
  */
 function generatePlots(objectOfInputs) {
-    generatePhasePlot(objectOfInputs);
-    generateTimePlot(objectOfInputs);
+    // Solve problem
+    var solution = solveProblem(RKF45, objectOfInputs);
+
+    // Generate plots
+    generatePhasePlot(solution);
+    generateTimePlot(solution);
 }

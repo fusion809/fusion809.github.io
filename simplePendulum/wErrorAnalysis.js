@@ -156,9 +156,8 @@ function solveProblemSP(objectOfInputs) {
  * readInput().
  * @return               Nothing. Just generates the relevant plot.
  */
-function generateErrorPlot(objectOfInputs) {
-    // Solve the problem
-    var solution = solveProblemSP(objectOfInputs);
+function generateErrorPlot(solution) {
+    // Extract solution data
     var {t, logErrorThetaDot} = solution;
 
     // Generate 2D plot

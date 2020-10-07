@@ -36,12 +36,11 @@ function RKF45(objectOfInputs) {
 /**
  * Generates a 3D phase plot
  * 
- * @param objectOfInputs An object containing all the form parameters. 
+ * @param solution       An object containing solution data. 
  * @return               Nothing.
  */
-function generate3DPhasePlot(objectOfInputs) {
-    // Solve the problem and extract relevant data
-    var solution = solveProblem(RKF45, objectOfInputs);
+function generate3DPhasePlot(solution) {
+    // Extract solution data
     var {vars} = solution;
     var [S, I, R] = vars;
 
@@ -52,12 +51,11 @@ function generate3DPhasePlot(objectOfInputs) {
 /**
  * Generates a XY phase plot
  * 
- * @param objectOfInputs An object containing all the form parameters. 
+ * @param solution       An object containing solution data. 
  * @return               Nothing.
  */
-function generateXYPhasePlot(objectOfInputs) {
-    // Solve the problem and extract relevant data
-    var solution = solveProblem(RKF45, objectOfInputs);
+function generateXYPhasePlot(solution) {
+    // Extract solution data
     var {vars} = solution;
     var S = vars[0];
     var I = vars[1];
@@ -69,12 +67,11 @@ function generateXYPhasePlot(objectOfInputs) {
 /**
  * Generates a XZ phase plot
  * 
- * @param objectOfInputs An object containing all the form parameters. 
+ * @param solution       An object containing solution data.
  * @return               Nothing.
  */
-function generateXZPhasePlot(objectOfInputs) {
-    // Solve the problem and extract relevant data
-    var solution = solveProblem(RKF45, objectOfInputs);
+function generateXZPhasePlot(solution) {
+    // Extract solution data
     var {vars} = solution;
     var S = vars[0];
     var R = vars[2];
@@ -86,12 +83,11 @@ function generateXZPhasePlot(objectOfInputs) {
 /**
  * Generates a YZ phase plot
  * 
- * @param objectOfInputs An object containing all the form parameters. 
+ * @param solution       An object containing solution data. 
  * @return               Nothing.
  */
-function generateYZPhasePlot(objectOfInputs) {
-    // Solve the problem and extract relevant data
-    var solution = solveProblem(RKF45, objectOfInputs);
+function generateYZPhasePlot(solution) {
+    // Extract solution data
     var {vars} = solution;
     var I = vars[1];
     var R = vars[2];
@@ -103,13 +99,10 @@ function generateYZPhasePlot(objectOfInputs) {
 /**
  * Generates a time plot
  * 
- * @param objectOfInputs An object containing all the form parameters. 
+ * @param solution       An object containing solution data. 
  * @return               Nothing.
  */
-function generateTimePlot(objectOfInputs) {
-    // Solve problem
-    var solution = solveProblem(RKF45, objectOfInputs);
-
+function generateTimePlot(solution) {
     // Generate time plot
     genMultPlot(solution, ["S", "I", "R"], "timePlot", "Plot of SIR against time");
 }
@@ -126,9 +119,13 @@ function generateTimePlot(objectOfInputs) {
  * @return               Nothing. Just generates the plots.
  */
 function generatePlots(objectOfInputs) {
-    generate3DPhasePlot(objectOfInputs);
-    generateXYPhasePlot(objectOfInputs);
-    generateXZPhasePlot(objectOfInputs);
-    generateYZPhasePlot(objectOfInputs);
-    generateTimePlot(objectOfInputs);
+    // Solve problem
+    var solution = solveProblem(RKF45, objectOfInputs);
+
+    // Generate plots
+    generate3DPhasePlot(solution);
+    generateXYPhasePlot(solution);
+    generateXZPhasePlot(solution);
+    generateYZPhasePlot(solution);
+    generateTimePlot(solution);
 };

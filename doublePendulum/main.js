@@ -41,13 +41,10 @@ function RKF45(objectOfInputs) {
 /**
  * Generates a 2D phase plot of theta2 against theta1
  * 
- * @param objectOfInputs An object containing all the problem parameters.
+ * @param solution       An object containing solution data.
  * @return               Nothing.
  */
-function generateTheta1Theta2PhasePlot(objectOfInputs) {
-    // Run solveProblem
-    var solution = solveProblem(RKF45, objectOfInputs);
-
+function generateTheta1Theta2PhasePlot(solution) {
     // Extract solution data from solution object
     var {vars} = solution;
     var theta1 = vars[0];
@@ -60,13 +57,10 @@ function generateTheta1Theta2PhasePlot(objectOfInputs) {
 /**
  * Generates a ptheta2 against ptheta1 phase plot
  * 
- * @param objectOfInputs An object containing all the problem parameters.
+ * @param solution       An object containing solution data.
  * @return               Nothing.
  */
-function generateP1P2PhasePlot(objectOfInputs) {
-    // Run solveProblem
-    var solution = solveProblem(RKF45, objectOfInputs);
-
+function generateP1P2PhasePlot(solution) {
     // Extract solution data from solution object
     var {vars} = solution;
     var ptheta1 = vars[1];
@@ -79,13 +73,10 @@ function generateP1P2PhasePlot(objectOfInputs) {
 /**
  * Generates a ptheta1 against theta1 phase plot
  * 
- * @param objectOfInputs An object containing all the problem parameters.
+ * @param solution       An object containing solution data.
  * @return               Nothing.
  */
-function generateTheta1P1PhasePlot(objectOfInputs) {
-    // Run solveProblem
-    var solution = solveProblem(RKF45, objectOfInputs);
-    
+function generateTheta1P1PhasePlot(solution) {
     // Extract solution data from solution object
     var {vars} = solution;
     var theta1 = vars[0];
@@ -98,13 +89,10 @@ function generateTheta1P1PhasePlot(objectOfInputs) {
 /**
  * Generates a ptheta2 against theta1 phase plot
  * 
- * @param objectOfInputs An object containing all the problem parameters.
+ * @param solution       An object containing solution data.
  * @return               Nothing.
  */
-function generateTheta1P2PhasePlot(objectOfInputs) {
-    // Run solveProblem
-    var solution = solveProblem(RKF45, objectOfInputs);
-    
+function generateTheta1P2PhasePlot(solution) {
     // Extract solution data from solution object
     var {vars} = solution;
     var theta1 = vars[0];
@@ -117,13 +105,10 @@ function generateTheta1P2PhasePlot(objectOfInputs) {
 /**
  * Generates a ptheta1 against theta2 phase plot
  * 
- * @param objectOfInputs An object containing all the problem parameters.
+ * @param solution       An object containing solution data.
  * @return               Nothing.
  */
-function generateTheta2P1PhasePlot(objectOfInputs) {
-    // Run solveProblem
-    var solution = solveProblem(RKF45, objectOfInputs);
-    
+function generateTheta2P1PhasePlot(solution) {
     // Extract solution data from solution object
     var {vars} = solution;
     var theta2 = vars[2];
@@ -136,13 +121,10 @@ function generateTheta2P1PhasePlot(objectOfInputs) {
 /**
  * Generates a ptheta2 against theta2 phase plot
  * 
- * @param objectOfInputs An object containing all the problem parameters.
+ * @param solution       An object containing solution data.
  * @return               Nothing.
  */
-function generateTheta2P2PhasePlot(objectOfInputs) {
-    // Run solveProblem
-    var solution = solveProblem(RKF45, objectOfInputs);
-    
+function generateTheta2P2PhasePlot(solution) {
     // Extract solution data from solution object
     var {vars} = solution;
     var theta2 = vars[2];
@@ -155,13 +137,10 @@ function generateTheta2P2PhasePlot(objectOfInputs) {
 /**
  * Generates a time plot
  * 
- * @param objectOfInputs An object containing all the problem parameters.
+ * @param solution       An object containing solution data.
  * @return               Nothing.
  */
-function generateTimePlot(objectOfInputs) {
-    // Run solveProblem
-    var solution = solveProblem(RKF45, objectOfInputs);
-
+function generateTimePlot(solution) {
     // Generate time plot
     genMultPlot(solution, ["theta1", "ptheta1", "theta2", "ptheta2"], "timePlot", "Plot of theta1, ptheta1, theta2 and ptheta2 against time");
 }
@@ -171,10 +150,7 @@ function generateTimePlot(objectOfInputs) {
  * @param func           Function being used to integrate problem
  * @param objectOfInputs Problem parameters.
  */
-function generatePendulumCoords(func, objectOfInputs) {
-    // Solve problem
-    var solution = solveProblem(func, objectOfInputs);
-
+function generatePendulumCoords(solution) {
     // Extract solution values and pendulum lengths
     var {t, vars} = solution;
     var [theta1, ptheta1, theta2, ptheta2] = vars;
@@ -200,11 +176,11 @@ function generatePendulumCoords(func, objectOfInputs) {
 /**
  * Generates two plots pertaining to the location of the bobs
  * 
- * @param objectOfInputs An object containing all the problem parameters.
+ * @param solution       An object containing solution data.
  * @return               Nothing.
  */
-function generatePendulumPlots(objectOfInputs) {
-    var [t, x1, y1, x2, y2] = generatePendulumCoords(RKF45, objectOfInputs);
+function generatePendulumPlots(solution) {
+    var [t, x1, y1, x2, y2] = generatePendulumCoords(solution);
     adjustPlotHeight("pendulumPlot");
     adjustPlotHeight("pendulumTimePlot");
     
@@ -272,12 +248,16 @@ function generatePendulumPlots(objectOfInputs) {
  * @return               Nothing. Just generates the plots.
  */
 function generatePlots(objectOfInputs) {
-    generateTheta1Theta2PhasePlot(objectOfInputs);
-    generateTheta1P1PhasePlot(objectOfInputs);
-    generateTheta1P2PhasePlot(objectOfInputs);
-    generateTheta2P1PhasePlot(objectOfInputs);
-    generateTheta2P2PhasePlot(objectOfInputs);
-    generateP1P2PhasePlot(objectOfInputs);
-    generatePendulumPlots(objectOfInputs)
-    generateTimePlot(objectOfInputs);
+    // Solve problem
+    var solution = solveProblem(RKF45, objectOfInputs);
+
+    // Generate plots
+    generateTheta1Theta2PhasePlot(solution);
+    generateTheta1P1PhasePlot(solution);
+    generateTheta1P2PhasePlot(solution);
+    generateTheta2P1PhasePlot(solution);
+    generateTheta2P2PhasePlot(solution);
+    generateP1P2PhasePlot(solution);
+    generatePendulumPlots(solution)
+    generateTimePlot(solution);
 }
