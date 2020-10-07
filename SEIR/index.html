@@ -165,23 +165,23 @@
                 <td><button type="button" onclick="removeTable()">Remove the solution table</button></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generate3DPhasePlot(readInputs())">Generate SIR phase plot</button></td>
+                <td><button type="button" onclick="generate3DPhasePlot(solveProblem(RKF45, readInputs()))">Generate SIR phase plot</button></td>
                 <td><button type="button" onclick="remove3DPhasePlot()">Remove plot</button><br/></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generateXYPhasePlot(readInputs())">Generate SI phase plot</button></td>
+                <td><button type="button" onclick="generateXYPhasePlot(solveProblem(RKF45, readInputs()))">Generate SI phase plot</button></td>
                 <td><button type="button" onclick="removeXYPhasePlot()">Remove plot</button><br/></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generateXZPhasePlot(readInputs())">Generate SR phase plot</button></td>
+                <td><button type="button" onclick="generateXZPhasePlot(solveProblem(RKF45, readInputs()))">Generate SR phase plot</button></td>
                 <td><button type="button" onclick="removeXZPhasePlot()">Remove plot</button></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generateYZPhasePlot(readInputs())">Generate IR phase plot</button></td>
+                <td><button type="button" onclick="generateYZPhasePlot(solveProblem(RKF45, readInputs()))">Generate IR phase plot</button></td>
                 <td><button type="button" onclick="removeYZPhasePlot()">Remove plot</button></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generateTimePlot(readInputs())">Generate S, E, I and R against time plot</button></td>
+                <td><button type="button" onclick="generateTimePlot(solveProblem(RKF45, readInputs()))">Generate S, E, I and R against time plot</button></td>
                 <td><button type="button" onclick="removeTimePlot()">Remove plot</button></td>
             </tr>
             <tr>

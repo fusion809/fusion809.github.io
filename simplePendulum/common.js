@@ -103,7 +103,7 @@ function thetaBounds(objectOfInputs) {
  * Calculates the value of theta when theta dot = 0 using Newton's method
  * then uses Chebyshev-Gauss quadrature to compute the time taken to reach this period.
  * 
- * @param objectOfInputs  An object that contains all the problem parameters.
+ * @param solution        An object containing solution data.
  * @return                Nothing. Changes the element value/innerHTML of integralDisplay and tf to T and 4*T, respectively.
  */
 function periodCalc(objectOfInputs) {
@@ -146,12 +146,11 @@ function periodCalc(objectOfInputs) {
 /**
  * Generate phase plot of theta dot against theta
  * 
- * @param objectOfInputs  An object that contains all the problem parameters.
+ * @param solution       An object containing solution data.
  * @return               Nothing. Just generates the relevant plot.
  */
-function generatePhasePlot(objectOfInputs) {
-    // Solve the problem
-    var solution = solveProblemSP(objectOfInputs);
+function generatePhasePlot(solution) {
+    // Extract solution data
     var {theta, thetaDot} = solution;
 
     // Generate 2D plot
@@ -161,13 +160,11 @@ function generatePhasePlot(objectOfInputs) {
 /**
  * Generate plot of theta and theta dot against time
  * 
- * @param objectOfInputs  An object that contains all the problem parameters.
+ * @param solution       An object containing solution data.
  * @return               Nothing. Just generates the relevant plot.
  */
-function generateTimePlot(objectOfInputs) {
-    var solution = solveProblemSP(objectOfInputs);
-
-    // Extract solution data from solution object
+function generateTimePlot(solution) {
+    // Extract solution values
     var {t, theta, thetaDot} = solution;
     var sol = {
         t: t,
@@ -243,10 +240,14 @@ function fillTableSP(objectOfInputs) {
  * @return               Nothing. Just generates the plots.
  */
 function generatePlots(objectOfInputs) {
-    generateTimePlot(objectOfInputs);
-    generatePhasePlot(objectOfInputs);
+    // Solve problem
+    var solution = solveProblemSP(objectOfInputs);
+
+    // Generate solution plots
+    generateTimePlot(solution);
+    generatePhasePlot(solution);
     // The following if statement is to ensure that errorPlot is only generated if it's present in HTML
     if (!!document.getElementById("errorPlot")) {
-        generateErrorPlot(objectOfInputs);
+        generateErrorPlot(solution);
     }
 };

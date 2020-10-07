@@ -31,13 +31,10 @@ function RKF45(objectOfInputs) {
 /**
  * Generates a 2D phase plot of x against theta
  * 
- * @param objectOfInputs An object containing all the problem parameters.
+ * @param solution       An object containing solution data.
  * @return               Nothing.
  */
-function generateXThetaPhasePlot(objectOfInputs) {
-    // Run solveProblem
-    var solution = solveProblem(RKF45, objectOfInputs);
-
+function generateXThetaPhasePlot(solution) {
     // Extract solution data from solution object
     var {vars} = solution;
     var x = vars[0];
@@ -50,13 +47,10 @@ function generateXThetaPhasePlot(objectOfInputs) {
 /**
  * Generates a xdot against x phase plot
  * 
- * @param objectOfInputs An object containing all the problem parameters.
+ * @param solution       An object containing solution data.
  * @return               Nothing.
  */
-function generateXXDotPhasePlot(objectOfInputs) {
-    // Run solveProblem
-    var solution = solveProblem(RKF45, objectOfInputs);
-
+function generateXXDotPhasePlot(solution) {
     // Extract solution data from solution object
     var {vars} = solution;
     var x = vars[0];
@@ -69,13 +63,10 @@ function generateXXDotPhasePlot(objectOfInputs) {
 /**
  * Generates a theta dot against theta phase plot
  * 
- * @param objectOfInputs An object containing all the problem parameters.
+ * @param solution       An object containing solution data.
  * @return               Nothing.
  */
-function generateThetaThetaDotPhasePlot(objectOfInputs) {
-    // Run solveProblem
-    var solution = solveProblem(RKF45, objectOfInputs);
-    
+function generateThetaThetaDotPhasePlot(solution) {    
     // Extract solution data from solution object
     var {vars} = solution;
     var theta = vars[2];
@@ -88,13 +79,10 @@ function generateThetaThetaDotPhasePlot(objectOfInputs) {
 /**
  * Generates a time plot
  * 
- * @param objectOfInputs An object containing all the problem parameters.
+ * @param solution       An object containing solution data.
  * @return               Nothing.
  */
-function generateTimePlot(objectOfInputs) {
-    // Run solveProblem
-    var solution = solveProblem(RKF45, objectOfInputs);
-
+function generateTimePlot(solution) {
     // Generate time plot
     genMultPlot(solution, ["x", "x dot", "theta", "theta dot"], "timePlot", "Plot of x, x dot, theta and theta dot against time");
 }
@@ -110,8 +98,12 @@ function generateTimePlot(objectOfInputs) {
  * @return               Nothing. Just generates the plots.
  */
 function generatePlots(objectOfInputs) {
-    generateXThetaPhasePlot(objectOfInputs);
-    generateXXDotPhasePlot(objectOfInputs);
-    generateThetaThetaDotPhasePlot(objectOfInputs);
-    generateTimePlot(objectOfInputs);
+    // Solve problem
+    var solution = solveProblem(RKF45, objectOfInputs);
+
+    // Plot solution
+    generateXThetaPhasePlot(solution);
+    generateXXDotPhasePlot(solution);
+    generateThetaThetaDotPhasePlot(solution);
+    generateTimePlot(solution);
 }

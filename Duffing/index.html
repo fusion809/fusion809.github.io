@@ -134,11 +134,11 @@
                 <td><button type="button" onclick="removeTable()">Remove the solution table</button></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generatePhasePlot(readInputs())">Generate phase plot</button></td>
+                <td><button type="button" onclick="generatePhasePlot(solveProblem(RKF45, readInputs()))">Generate phase plot</button></td>
                 <td><button type="button" onclick="removePhasePlot()">Remove plot</button></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generateTimePlot(readInputs())">Generate time plot</button></td>
+                <td><button type="button" onclick="generateTimePlot(solveProblem(RKF45, readInputs()))">Generate time plot</button></td>
                 <td><button type="button" onclick="removeTimePlot()">Remove plot</button></td>
             </tr>
             <tr>

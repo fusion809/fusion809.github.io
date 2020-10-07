@@ -144,19 +144,19 @@
                 <td><button type="button" onclick="removeTable()">Remove the solution table</button></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generateXThetaPhasePlot(readInputs())">Generate \(\theta\) against \(x\) phase plot</button></td>
+                <td><button type="button" onclick="generateXThetaPhasePlot(solveProblem(RKF45, readInputs()))">Generate \(\theta\) against \(x\) phase plot</button></td>
                 <td><button type="button" onclick="removeXThetaPhasePlot()">Remove plot</button><br/></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generateXXDotPhasePlot(readInputs())">Generate \(\dot{x}\) against \(x\) phase plot</button></td>
+                <td><button type="button" onclick="generateXXDotPhasePlot(solveProblem(RKF45, readInputs()))">Generate \(\dot{x}\) against \(x\) phase plot</button></td>
                 <td><button type="button" onclick="removeXXDotPhasePlot()">Remove plot</button><br/></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generateThetaThetaDotPhasePlot(readInputs())">Generate \(\dot{\theta}\) against \(\theta\) phase plot</button></td>
+                <td><button type="button" onclick="generateThetaThetaDotPhasePlot(solveProblem(RKF45, readInputs()))">Generate \(\dot{\theta}\) against \(\theta\) phase plot</button></td>
                 <td><button type="button" onclick="removeThetaThetaDotPhasePlot()">Remove plot</button></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generateTimePlot(readInputs())">Generate \(x\), \(\dot{x}\), \(\theta\) and \(\dot{\theta}\) against time plot</button></td>
+                <td><button type="button" onclick="generateTimePlot(solveProblem(RKF45, readInputs()))">Generate \(x\), \(\dot{x}\), \(\theta\) and \(\dot{\theta}\) against time plot</button></td>
                 <td><button type="button" onclick="removeTimePlot()">Remove plot</button></td>
             </tr>
             <tr>

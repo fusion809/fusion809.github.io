@@ -163,35 +163,35 @@
                 <td><button type="button" onclick="removeTable()">Remove the solution table</button></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generateTheta1Theta2PhasePlot(readInputs())">Generate \(\theta_2\) against \(\theta_1\) phase plot</button></td>
+                <td><button type="button" onclick="generateTheta1Theta2PhasePlot(solveProblem(RKF45, readInputs()))">Generate \(\theta_2\) against \(\theta_1\) phase plot</button></td>
                 <td><button type="button" onclick="removeTheta1Theta2PhasePlot()">Remove plot</button><br/></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generateTheta1P1PhasePlot(readInputs())">Generate \(p_{\theta_1}\) against \(\theta_1\) phase plot</button></td>
+                <td><button type="button" onclick="generateTheta1P1PhasePlot(solveProblem(RKF45, readInputs()))">Generate \(p_{\theta_1}\) against \(\theta_1\) phase plot</button></td>
                 <td><button type="button" onclick="removeTheta1P1PhasePlot()">Remove plot</button><br/></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generateTheta1P2PhasePlot(readInputs())">Generate \(p_{\theta_2}\) against \(\theta_1\) phase plot</button></td>
+                <td><button type="button" onclick="generateTheta1P2PhasePlot(solveProblem(RKF45, readInputs()))">Generate \(p_{\theta_2}\) against \(\theta_1\) phase plot</button></td>
                 <td><button type="button" onclick="removeTheta1P2PhasePlot()">Remove plot</button><br/></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generateTheta2P1PhasePlot(readInputs())">Generate \(p_{\theta_1}\) against \(\theta_2\) phase plot</button></td>
+                <td><button type="button" onclick="generateTheta2P1PhasePlot(solveProblem(RKF45, readInputs()))">Generate \(p_{\theta_1}\) against \(\theta_2\) phase plot</button></td>
                 <td><button type="button" onclick="removeTheta2P1PhasePlot()">Remove plot</button><br/></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generateTheta2P2PhasePlot(readInputs())">Generate \(p_{\theta_2}\) against \(\theta_2\) phase plot</button></td>
+                <td><button type="button" onclick="generateTheta2P2PhasePlot(solveProblem(RKF45, readInputs()))">Generate \(p_{\theta_2}\) against \(\theta_2\) phase plot</button></td>
                 <td><button type="button" onclick="removeTheta2P2PhasePlot()">Remove plot</button><br/></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generateP1P2PhasePlot(readInputs())">Generate \(p_{\theta_2}\) against \(p_{\theta_1}\) phase plot</button></td>
+                <td><button type="button" onclick="generateP1P2PhasePlot(solveProblem(RKF45, readInputs()))">Generate \(p_{\theta_2}\) against \(p_{\theta_1}\) phase plot</button></td>
                 <td><button type="button" onclick="removeP1P2PhasePlot()">Remove plot</button><br/></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generateTimePlot(readInputs())">Generate \(\theta_1\), \(p_{\theta_1}\), \(\theta_2\) and \(p_{\theta_2}\) against time plot</button></td>
+                <td><button type="button" onclick="generateTimePlot(solveProblem(RKF45, readInputs()))">Generate \(\theta_1\), \(p_{\theta_1}\), \(\theta_2\) and \(p_{\theta_2}\) against time plot</button></td>
                 <td><button type="button" onclick="removeTimePlot()">Remove plot</button></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generatePendulumPlots(readInputs())">Generate pendulum plots</button></td>
+                <td><button type="button" onclick="generatePendulumPlots(solveProblem(RKF45, readInputs()))">Generate pendulum plots</button></td>
                 <td><button type="button" onclick="removePendulumPlots()">Remove plots</button></td>
             </tr>
             <tr>

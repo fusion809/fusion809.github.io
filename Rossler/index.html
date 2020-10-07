@@ -129,23 +129,23 @@
                 <td><button type="button" onclick="removeTable()">Remove the solution table</button></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generate3DPhasePlot(readInputs())">Generate 3D phase plot</button></td>
+                <td><button type="button" onclick="generate3DPhasePlot(solveProblem(RKF45, readInputs()))">Generate 3D phase plot</button></td>
                 <td><button type="button" onclick="remove3DPhasePlot()">Remove plot</button><br/></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generateXYPhasePlot(readInputs())">Generate XY phase plot</button></td>
+                <td><button type="button" onclick="generateXYPhasePlot(solveProblem(RKF45, readInputs()))">Generate XY phase plot</button></td>
                 <td><button type="button" onclick="removeXYPhasePlot()">Remove plot</button><br/></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generateXZPhasePlot(readInputs())">Generate XZ phase plot</button></td>
+                <td><button type="button" onclick="generateXZPhasePlot(solveProblem(RKF45, readInputs()))">Generate XZ phase plot</button></td>
                 <td><button type="button" onclick="removeXZPhasePlot()">Remove plot</button></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generateYZPhasePlot(readInputs())">Generate YZ phase plot</button></td>
+                <td><button type="button" onclick="generateYZPhasePlot(solveProblem(RKF45, readInputs()))">Generate YZ phase plot</button></td>
                 <td><button type="button" onclick="removeYZPhasePlot()">Remove plot</button></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generateTimePlot(readInputs())">Generate x, y and z against time plot</button></td>
+                <td><button type="button" onclick="generateTimePlot(solveProblem(RKF45, readInputs()))">Generate x, y and z against time plot</button></td>
                 <td><button type="button" onclick="removeTimePlot()">Remove plot</button></td>
             </tr>
             <tr>
