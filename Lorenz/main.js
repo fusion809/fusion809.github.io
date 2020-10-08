@@ -7,10 +7,10 @@
  * @param vars           Solution variables.
  * @return               [dx/dt, dy/dt, dz/dt]
  */
-function f(objectOfInputs, t, vars) {
+function f(objectOfInputs, t, vars, dt) {
     var {sigma, rho, beta} = objectOfInputs;
     var [x, y, z] = vars;
-    return [sigma*(y-x), x*(rho-z) - y, x*y-beta*z];
+    return [dt*sigma*(y-x), dt*(x*(rho-z) - y), dt*(x*y-beta*z)];
 }
 
 /** 

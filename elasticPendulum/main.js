@@ -6,12 +6,12 @@
  * @param vars           An array of [x, xDot, theta, thetaDot]
  * @return               [dx/dt, d2x/dt2, dtheta/dt, d2theta/dt2]
  */
-function f(objectOfInputs, t, vars) {
+function f(objectOfInputs, t, vars, dt) {
     var {g, l0, k, m} = objectOfInputs;
     var [x, xDot, theta, thetaDot] = vars;
     var xDDot = (l0+x)*thetaDot**2 - k*x/m + g*Math.sin(theta);
     var thetaDDot = -g*Math.cos(theta)/(l0+x)-2*xDot*thetaDot/(l0+x);
-    return [xDot, xDDot, thetaDot, thetaDDot];
+    return [dt*xDot, dt*xDDot, dt*thetaDot, dt*thetaDDot];
 }
 
 /** 

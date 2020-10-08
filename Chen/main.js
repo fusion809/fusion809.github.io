@@ -9,10 +9,10 @@
  * @param z              z value.
  * @return               [dx/dt, dy/dt, dz/dt]
  */
-function f(objectOfInputs, t, vars) {
+function f(objectOfInputs, t, vars, dt) {
     var {a, b, c} = objectOfInputs;
     var [x, y, z] = vars;
-    return [a*(y-x), x*(c-a-z) + c*y, x*y-b*z];
+    return [dt*a*(y-x), dt*(x*(c-a-z) + c*y), dt*(x*y-b*z)];
 }
 
 /** 
