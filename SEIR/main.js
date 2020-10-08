@@ -15,7 +15,7 @@
  * @param R          Recovered person count.
  * @return           [dS/dt, dE/dt, dI/dt, dR/dt]
  */
-function f(objectOfInputs, t, vars) {
+function f(objectOfInputs, t, vars, dt) {
     var {a, beta, gamma, delta, lambda, mu} = objectOfInputs;
     var [S, E, I, R] = vars;
     // Determine N
@@ -27,7 +27,7 @@ function f(objectOfInputs, t, vars) {
     var dIdt = a*E - (mu + gamma) * I;
     var dRdt = gamma*I - mu*R;
     // Put into return value
-    return [dSdt, dEdt, dIdt, dRdt];
+    return [dt*dSdt, dt*dEdt, dt*dIdt, dt*dRdt];
 }
 
 /** 

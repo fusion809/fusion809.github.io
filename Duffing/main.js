@@ -8,10 +8,10 @@
  * @param xDot           dx/dt
  * @return               [dx/dt, d2x/dt2]
  */
-function f(objectOfInputs, t, vars) {
+function f(objectOfInputs, t, vars, dt) {
     var {alpha, beta, gamma, delta, omega} = objectOfInputs;
     var [x, xDot] = vars;
-    return [xDot, - delta*xDot - alpha*x - beta*x**3 + gamma * Math.cos(omega*t)];
+    return [dt*xDot, dt*(- delta*xDot - alpha*x - beta*x**3 + gamma * Math.cos(omega*t))];
 }
 
 /** 

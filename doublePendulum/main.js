@@ -6,7 +6,7 @@
  * @param vars           An array of [theta1, p1, theta2, p2]
  * @return               [dtheta1/dt, dp1/dt, dtheta2/dt, dp2/dt]
  */
-function f(objectOfInputs, t, vars) {
+function f(objectOfInputs, t, vars, dt) {
     var {g, l1, l2, m1, m2} = objectOfInputs;
     var [theta1, ptheta1, theta2, ptheta2] = vars;
 
@@ -21,7 +21,7 @@ function f(objectOfInputs, t, vars) {
     var pthetaDot2 = -m2*g*l2*Math.sin(theta2)+C1-C2;
 
     // Return statement
-    return [thetaDot1, pthetaDot1, thetaDot2, pthetaDot2];
+    return [dt*thetaDot1, dt*pthetaDot1, dt*thetaDot2, dt*pthetaDot2];
 }
 
 /** 
@@ -150,7 +150,7 @@ function generateTimePlot(solution) {
  * @param func           Function being used to integrate problem
  * @param objectOfInputs Problem parameters.
  */
-function generatePendulumCoords(solution) {
+function generatePendulumCoords(objectOfInputs, solution) {
     // Extract solution values and pendulum lengths
     var {t, vars} = solution;
     var [theta1, ptheta1, theta2, ptheta2] = vars;
@@ -179,8 +179,8 @@ function generatePendulumCoords(solution) {
  * @param solution       An object containing solution data.
  * @return               Nothing.
  */
-function generatePendulumPlots(solution) {
-    var [t, x1, y1, x2, y2] = generatePendulumCoords(solution);
+function generatePendulumPlots(objectOfInputs, solution) {
+    var [t, x1, y1, x2, y2] = generatePendulumCoords(objectOfInputs, solution);
     adjustPlotHeight("pendulumPlot");
     adjustPlotHeight("pendulumTimePlot");
     
@@ -258,6 +258,6 @@ function generatePlots(objectOfInputs) {
     generateTheta2P1PhasePlot(solution);
     generateTheta2P2PhasePlot(solution);
     generateP1P2PhasePlot(solution);
-    generatePendulumPlots(solution)
+    generatePendulumPlots(objectOfInputs, solution)
     generateTimePlot(solution);
 }

@@ -6,7 +6,7 @@
  * @param vars           An array of dependent variables.
  * @return               An array of derivatives.
  */
-function f(objectOfInputs, t, vars) {
+function f(objectOfInputs, t, vars, dt) {
     var [S, I, R] = vars;
     var {beta, gamma, delta} = objectOfInputs;
     // Determine N
@@ -16,7 +16,7 @@ function f(objectOfInputs, t, vars) {
     var dIdt = beta * S * I * (1-delta)/N - gamma * I;
     var dRdt = gamma*I;
     // Put into return value
-    return [dSdt, dIdt, dRdt];
+    return [dt*dSdt, dt*dIdt, dt*dRdt];
 }
 
 /** 

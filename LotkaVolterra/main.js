@@ -11,10 +11,10 @@
  * @param y          Predator population.
  * @return           [dx/dt, dy/dt]
  */
-function f(objectOfInputs, t, vars) {
+function f(objectOfInputs, t, vars, dt) {
     var {alpha, beta, gamma, delta} = objectOfInputs;
     var [x, y] = vars;
-    return [alpha*x -beta*x*y, delta*x*y-gamma*y];
+    return [dt*(alpha*x - beta*x*y), dt*(delta*x*y-gamma*y)];
 }
 
 /** 
