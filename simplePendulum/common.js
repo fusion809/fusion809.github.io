@@ -103,8 +103,8 @@ function thetaBounds(objectOfInputs) {
  * Calculates the value of theta when theta dot = 0 using Newton's method
  * then uses Chebyshev-Gauss quadrature to compute the time taken to reach this period.
  * 
- * @param solution        An object containing solution data.
- * @return                Nothing. Changes the element value/innerHTML of integralDisplay and tf to T and 4*T, respectively.
+ * @param solution      An object containing solution data.
+ * @return              Nothing. Changes the value of integralDisplay and tf to T and 4T, respectively.
  */
 function periodCalc(objectOfInputs) {
     // Parameters of the problem that are necessary to calculate the period
