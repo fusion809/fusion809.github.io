@@ -8,8 +8,7 @@
 function fillTable(objectOfInputs, headings) {
     // Solve the problem
     var solution = solveProblem(RKF45, objectOfInputs);
-    var {t, vars} = solution;
-    if (vars.length != headings.length) {
+    if (solution.varsLen() != headings.length) {
         alert("libs/common.js#fillTable: vars length and headings length do not match!")
     }
     var epsilon = objectOfInputs.epsilon;
@@ -23,12 +22,12 @@ function fillTable(objectOfInputs, headings) {
         tableContents += '<th>' + headings[j] + '</th>';
     }
     tableContents += "</tr>";
-    for (let j = 0; j < vars[0].length; j++) {
+    for (let j = 0; j < solution.tLen(); j++) {
         tableContents += '<tr>';
         tableContents += '<td>' + j + '</td>';
-        tableContents += '<td>' + t[j].toFixed(Math.ceil(Math.log10(1/epsilon))) + '</td>';
-        for (let k = 0; k < vars.length ; k++) {
-            tableContents += '<td>' + vars[k][j].toFixed(Math.ceil(Math.log10(1/epsilon))) + '</td>';
+        tableContents += '<td>' + solution.t[j].toFixed(Math.ceil(Math.log10(1/epsilon))) + '</td>';
+        for (let k = 0; k < solution.varsLen() ; k++) {
+            tableContents += '<td>' + solution.extract(k)[j].toFixed(Math.ceil(Math.log10(1/epsilon))) + '</td>';
         }
         tableContents += '</tr>';
     }

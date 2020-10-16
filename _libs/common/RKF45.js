@@ -79,6 +79,30 @@ function RKF45Body(f, objectOfInputs, vars0) {
     return [t, vars];
 }
 
+/**
+ * Solution object constructor
+ * 
+ * @param t        An array of t values.
+ * @param vars     An array of dependent variable values.
+ * @return         Nothing. Creates an object containing t and vars, with methods to extract data. 
+ */
+function SolClass(t, vars) {
+    this.t = t;
+    this.vars = vars;
+
+    this.extract = function(i) {
+        return this.vars[i];
+    }
+
+    this.varsLen = function() {
+        return (this.vars).length;
+    }
+
+    this.tLen = function() {
+        return (this.t).length;
+    }
+}
+
 /** 
  * Solve the problem using RKF45.
  *
@@ -97,9 +121,6 @@ function solveProblem(func, objectOfInputs) {
     console.log("Solving the problem took " + diff + " milliseconds.");
     
     // Write t and vars to our solution object
-    var solution = {
-        t: t,
-        vars: vars
-    };
+    var solution = new SolClass(t, vars);
     return solution;
 }
