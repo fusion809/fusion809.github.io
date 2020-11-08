@@ -2,7 +2,7 @@
 
 Currently this website has the following pages, besides this one:
 
-- [Chen system solver](/Chen/)
+- [Chen system solver](/Chen/index)
 - [Double pendulum solver](/doublePendulum/)
 - [Duffing equations solver](/Duffing/)
 - [Elastic pendulum solver](/elasticPendulum/)
@@ -14,4 +14,5 @@ Currently this website has the following pages, besides this one:
 - [SEIR system solver](/SEIR/)
 - [Simple pendulum simulator with error analysis](/simplePendulum/wErrorAnalysis/)
 - [Simple pendulum simulator without error analysis](/simplePendulum/woErrorAnalysis/)
+- [Simplex solver](/simplex/)
 - [SIR system solver](/SIR/)
