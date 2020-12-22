@@ -15,4 +15,5 @@ Currently this website has the following pages, besides this one:
 - [Simple pendulum simulator with error analysis](/simplePendulum/wErrorAnalysis/)
 - [Simple pendulum simulator without error analysis](/simplePendulum/woErrorAnalysis/)
 - [Simplex solver](/simplex/)
+- [Single transferable vote plus](/STV+/)
 - [SIR system solver](/SIR/)
