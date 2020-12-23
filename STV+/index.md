@@ -24,6 +24,6 @@ One way around this issue is to get voters to vote for parties instead of candid
 Single transferable vote plus comprises two components:
 
 * The single transferable vote component, where voters vote for candidates running in their multi-member electorates.
-* The plus component, where voters assign preferences to parties and the proportion of the vote they get after preferences is used to decide the proportion of the seats they get. To proportion out the chamber, additional officials are elected and they are the most popular losers from their party in the electorate races. 
+* The plus component, where voters assign preferences to parties and the proportion of the vote they get after preferences is used to decide the proportion of the seats they get. To proportion out the chamber, additional officials (who fill "overhang seats") are elected and they are the most popular losers from their party in the electorate races. 
 
 The popularity of losing candidates is decided by first eliminating all winners from the race, then eliminating all the candidates from other parties and transfering all votes according to next preferences to the remaining candidates. Then eliminate the least popular excess candidates from each electorate and transfer votes according to next preferences (let $m$ be the number of overhang seats to be filled for that party, then every electorate will have at most $m$ candidates left after this step). Then whichever candidates in the electorate races have the most votes fill the party's overhang seats. 
