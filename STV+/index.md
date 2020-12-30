@@ -2,15 +2,15 @@
 @def tags=["electoral-systems"]
 @def mintoclevel=1
 
-This webpage is about an electoral system I have devised that I wanted to share. I call it single transferable vote plus (STV+), and as its name suggests it is an additional member system based on single transferable vote.
+This webpage is about an electoral system I have devised that I wanted to share. I call it single transferable vote plus (STV+), and as its name suggests it is an additional member system based on [single transferable vote](https://en.wikipedia.org/wiki/Single_transferable_vote).
 
 \toc
 
 # Single transferable vote
-**Single transferable vote** (STV) is a voting system used in relatively few countries. It is used in elections in which each electorate is set to return multiple elected officials. 
+**Single transferable vote** (STV) is a voting system used in relatively few countries (namely Australia, Republic of Ireland, Northern Ireland, and Malta). It is used in elections in which each electorate is set to return multiple elected officials and voters are expected to assign preferences to candidates that are running in their seat.
 
 ## Mechanics
-In it, a quota of votes a candidate needs to win a seat is calculated. If a candidate reaches this on first preference votes, they are immediately elected and any surplus of votes (i.e. votes that have above the required quota) they have is redistributed according to next preferences. If all the seats that need to be filled are not filled by this first step, the next step is to eliminate the least popular remaining candidate and redistribute their votes according to next preferences. If candidate(s) have reached quota, they are elected and any surplus of votes redistributed, otherwise this process repeats until all the seats that need to be filled are filled.
+In it, a quota of votes a candidate needs to win a seat is calculated (usually either the [Droop quota](https://en.wikipedia.org/wiki/Droop_quota) or [Hare quota](https://en.wikipedia.org/wiki/Hare_quota)). If a candidate reaches this on first preference votes, they are immediately elected and any surplus of votes (i.e. votes that have above the required quota) they have is redistributed according to next preferences. If all the seats that need to be filled are not filled by this first step, the next step is to eliminate the least popular remaining candidate and redistribute their votes according to next preferences. If candidate(s) have reached quota, they are elected and any surplus of votes redistributed, and this process repeats until all the seats that need to be filled are filled.
 
 ## Elected officials per electorate
 The exact number of elected officials per electorate differs, but is usually between 3 and 7 for lower houses and potentially more for upper houses (up to 22 for South Australian Legislative Council elections after a double dissolution). 
