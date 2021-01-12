@@ -9,7 +9,7 @@ The original question was essentially to evaluate the integral:
     \oint_C \dfrac{e^{2z}}{(z-2)(z-3)} dz
 \]
 
-on the circle defined by $|z| = 2$. For brevity's sake, let's call our integrand $f(z)$. This presents an obvious challenge, as a pole exists on this curve, which means that Cauchy's integral formula and the residue theorem cannot be used as is.
+on the circle defined by $|z| = 2$. This presents an obvious challenge, as a pole exists on this curve, which means that Cauchy's integral formula and the residue theorem cannot be used to evaluate this integral as is. For brevity's sake, let's call our integrand $f(z)$.
 
 The way around this problem is to modify the curve so that the pole no longer occurs on it. Below is one such modified curve:
 
