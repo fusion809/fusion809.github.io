@@ -81,7 +81,7 @@ The [test/](https://github.com/fusion809/FunctionIntegrator.jl/tree/master/test/
 ### adaptive\_simpsons\_rule
 In the following example, the following integral (henceforth called integral 1) is being computed:
 
-$$ \int_0^{\frac{\pi}{2}} \cos{x} \hspace{0.1cm} dx$$
+$$\int_0^{\frac{\pi}{2}} \cos{x} \hspace{0.1cm} dx$$
 
 and the result compared to the analytical solution of $1$.
 

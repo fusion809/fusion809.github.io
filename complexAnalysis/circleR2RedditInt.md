@@ -39,7 +39,7 @@ Along BA:
 
 $z = 2 + \epsilon e^{i\theta}$, $dz = 2i\epsilon e^{i\theta} d\theta$ and $\theta$ goes from $\dfrac{3\pi}{2}$ to $\dfrac{\pi}{2}$. 
 
-Therefore (3) becomes:
+Therefore our contour integral becomes:
 
 \[
     \int_{\delta}^{2\pi - \delta} \dfrac{e^{2 \cdot 2 e^{i\theta}}}{(2e^{i\theta}-2)(2e^{i\theta}-3)} 2i e^{i\theta} d\theta + \int_{\dfrac{3\pi}{2}}^{\dfrac{\pi}{2}} \dfrac{e^{2 \cdot (2+\epsilon e^{i\theta})}}{(2 + \epsilon e^{i\theta}-2)(2 + \epsilon e^{i\theta}-3)} i \epsilon e^{i\theta} d\theta = 0.
@@ -58,7 +58,7 @@ As $\epsilon \rightarrow 0$, the first of these integrals becomes the same as $\
     \end{aligned}
 \]
 
-(4) therefore becomes:
+Our contour integral therefore becomes:
 
 \[
     \begin{aligned}

@@ -205,10 +205,12 @@ html {
     KATEX
 ================================================================== */
 
-body { counter-reset: eqnum; }
+/*body { 
+    counter-reset: eqnum;
+}*/
 
 .katex { 
-    font-size: 16px !important; 
+    font-size: 20px !important; 
     white-space: nowrap;
 }
 
@@ -216,8 +218,8 @@ body { counter-reset: eqnum; }
     display: inline-block; } /* overwrite katex settings */
 
 .katex-display::after {
-    counter-increment: eqnum;
-    content: "(" counter(eqnum) ")";
+/*    counter-increment: eqnum;
+    content: "(" counter(eqnum) ")";*/
     position: relative;
     float: right;
     padding-right: 5px; }
