@@ -248,5 +248,5 @@ Equating real and imaginary parts:
 It is important to note, however, that because $\cos{(-mx)}=\cos{mx}$ and $(-a)^4=a^4$, the sign of $a$ and $m$ should not matter, therefore provided $a$ and $m$ are real:
 
 \[
-\int_{-\infty}^{\infty} \dfrac{x^2 \cos{mx}}{(x^4+a^4)^2} dx = \dfrac{e^{-\dfrac{|a||m|}{\sqrt{2}}}\pi}{4|a|^5\sqrt{2}}\left((|a||m|\sqrt{2}+1)\cos{\dfrac{am}{\sqrt{2}}}-\sin{\dfrac{|a||m|}{\sqrt{2}}}\right)
+\int_{-\infty}^{\infty} \dfrac{x^2 \cos{mx}}{(x^4+a^4)^2} dx = \dfrac{e^{-\dfrac{|am|}{\sqrt{2}}}\pi}{4|a|^5\sqrt{2}}\left((|am|\sqrt{2}+1)\cos{\dfrac{am}{\sqrt{2}}}-\sin{\dfrac{|am|}{\sqrt{2}}}\right)
 \]
