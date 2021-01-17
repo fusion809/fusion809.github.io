@@ -9,7 +9,7 @@ In this article, we shall evaluate the following integral using contour integrat
 
 \toc
 
-## Contour and integrand hunting
+# Contour and integrand hunting
 Our first couple of questions, which are impossible to separate from one another as they are closely connected, is which curve and which integrand should we use to determine the value of $I$? The contour and integrand should satisfy the following criteria:
 
 1. The contour must have a component whose line integral evaluates to either $I$, or $\displaystyle \int_{0}^{\infty} \dfrac{x^2\cos{mx}}{(x^4+a^4)^2} dx = \dfrac{1}{2} I$ (thanks to the symmetry of our integrand). It is also OK if $I$ or half $I$ is only stored in the real or imaginary part of the integral along this segment, and there's another value in the other part of the integral for this segment.
@@ -29,7 +29,7 @@ with this contour integral:
     \oint_C \dfrac{z^2 e^{imz}}{(z^4+a^4)^2} dz.
 \]
 
-## Evaluating the contour integral
+# Evaluating the contour integral
 The residue theorem tells us that our contour integral will equal $2\pi i \sum \mathrm{residues}$. These residues will correspond to when the denominator of our integrand equals zero, that is when:
 
 \[
@@ -185,7 +185,7 @@ Therefore our contour integral equals:
     \end{aligned}
 \]
 
-## Evaluating integral components
+# Evaluating integral components
 Breaking our contour integral into its components:
 
 \[
@@ -218,7 +218,7 @@ Taking the limit as $R\rightarrow\infty$:
 
 Within the domain of integration for the second integral, $\sin{\theta} \geq 0$ and therefore $e^{-mR\sin{\theta}} \leq 1$ (assuming $m\geq0$). As the denominator contains some positive powers of $R$, as $R\rightarrow\infty$ the denominator goes to infinity and therefore the integrand goes to zero. The integral of 0 is 0 and therefore our second integral becomes zero. 
 
-## Conclusion
+# Conclusion
 Therefore our contour integral becomes:
 
 \[
