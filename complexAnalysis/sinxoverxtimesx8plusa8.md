@@ -208,10 +208,12 @@ Replacing the left-hand side with what the residue theorem tells us this contour
     \end{aligned}
 \]
 
-Equating the imaginary part of this expression:
+Equating the imaginary part of this expression yields:
 
 \[
     \begin{aligned}
     \int_{-\infty}^{\infty} \dfrac{\sin{mx}}{x(x^8+a^8)} dx &= \dfrac{\pi}{a^8} \left(1 - \dfrac{1}{2}\left(e^{-amp}\cos{amq} + e^{-amq}\cos{amp}\right)\right).
     \end{aligned}
 \]
+
+Which is what we were required to determine.
