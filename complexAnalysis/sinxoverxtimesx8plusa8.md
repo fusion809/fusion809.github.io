@@ -213,7 +213,7 @@ Equating the imaginary part of this expression yields:
 \[
     \begin{aligned}
     \int_{-\infty}^{\infty} \dfrac{\sin{mx}}{x(x^8+a^8)} dx &= \dfrac{\pi}{a^8} \left(1 - \dfrac{1}{2}\left(e^{-amp}\cos{amq} + e^{-amq}\cos{amp}\right)\right) \\
-    &= \dfrac{\pi}{a^8} \left(1 - \dfrac{1}{2}\left(e^{-am\sin{\dfrac{\pi}{8}}}\cos{\left(am\cos{\dfrac{\pi}{8}}\right)} + e^{-am\cos{\dfrac{\pi}{8}}}\cos{\left(am\sin{\dfrac{\pi}{8}}\right)}\right)\right)
+    &= \dfrac{\pi}{a^8} \left(1 - \dfrac{1}{2}\left(e^{-am\sin{\dfrac{\pi}{8}}}\cos{\left(am\cos{\dfrac{\pi}{8}}\right)} + e^{-am\cos{\dfrac{\pi}{8}}}\cos{\left(am\sin{\dfrac{\pi}{8}}\right)}\right)\right).
     \end{aligned}
 \]
 
