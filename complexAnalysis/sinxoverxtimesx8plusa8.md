@@ -188,7 +188,7 @@ The magnitude of that denominator is:
 
 As $R\rightarrow \infty$, it is obvious therefore that $\displaystyle \int_{EA} \rightarrow 0$.
 
-# Putting together the pieces 
+# Putting the pieces together 
 Therefore the sum of our subintegrals (which is equal to our contour integral) is:
 
 \[
@@ -202,6 +202,16 @@ Replacing the left-hand side with what the residue theorem tells us this contour
 \[
     \begin{aligned}
     -\dfrac{\pi i}{2a^8} \left(e^{-amp}\cos{amq} + e^{-amq}\cos{amp}\right) &= \int_{-\infty}^{\infty} \dfrac{e^{imx}}{x(x^8+a^8)} dx -\dfrac{\pi i}{a^8} \\
-    \therefore \int_{-\infty}^{\infty} \dfrac{e^{imx}}{x(x^8+a^8)} dx &= \dfrac{\pi i}{a^8} \left(1 - \dfrac{1}{2}\left(e^{-amp}\cos{amq} + e^{-amq}\cos{amp}\right)\right).
+    \therefore \int_{-\infty}^{\infty} \dfrac{e^{imx}}{x(x^8+a^8)} dx &= \dfrac{\pi i}{a^8} \left(1 - \dfrac{1}{2}\left(e^{-amp}\cos{amq} + e^{-amq}\cos{amp}\right)\right) \\
+    \int_{-\infty}^{\infty} \dfrac{\cos{mx}+i\sin{mx}}{x(x^8+a^8)} dx &= \dfrac{\pi i}{a^8} \left(1 - \dfrac{1}{2}\left(e^{-amp}\cos{amq} + e^{-amq}\cos{amp}\right)\right) \\
+    \int_{-\infty}^{\infty} \dfrac{\cos{mx}}{x(x^8+a^8)} dx + i\int_{-\infty}^{\infty} \dfrac{\sin{mx}}{x(x^8+a^8)} dx &= \dfrac{\pi i}{a^8} \left(1 - \dfrac{1}{2}\left(e^{-amp}\cos{amq} + e^{-amq}\cos{amp}\right)\right).
+    \end{aligned}
+\]
+
+Equating the imaginary part of this expression:
+
+\[
+    \begin{aligned}
+    \int_{-\infty}^{\infty} \dfrac{\sin{mx}}{x(x^8+a^8)} dx &= \dfrac{\pi}{a^8} \left(1 - \dfrac{1}{2}\left(e^{-amp}\cos{amq} + e^{-amq}\cos{amp}\right)\right).
     \end{aligned}
 \]
