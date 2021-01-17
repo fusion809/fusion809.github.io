@@ -202,9 +202,9 @@ Replacing the left-hand side with what the residue theorem tells us this contour
 \[
     \begin{aligned}
     -\dfrac{\pi i}{2a^8} \left(e^{-amp}\cos{amq} + e^{-amq}\cos{amp}\right) &= \int_{-\infty}^{\infty} \dfrac{e^{imx}}{x(x^8+a^8)} dx -\dfrac{\pi i}{a^8} \\
-    \therefore \int_{-\infty}^{\infty} \dfrac{e^{imx}}{x(x^8+a^8)} dx &= \dfrac{\pi i}{a^8} \left(1 - \dfrac{1}{2}\left(e^{-amp}\cos{amq} + e^{-amq}\cos{amp}\right)\right) \\
-    \int_{-\infty}^{\infty} \dfrac{\cos{mx}+i\sin{mx}}{x(x^8+a^8)} dx &= \dfrac{\pi i}{a^8} \left(1 - \dfrac{1}{2}\left(e^{-amp}\cos{amq} + e^{-amq}\cos{amp}\right)\right) \\
-    \int_{-\infty}^{\infty} \dfrac{\cos{mx}}{x(x^8+a^8)} dx + i\int_{-\infty}^{\infty} \dfrac{\sin{mx}}{x(x^8+a^8)} dx &= \dfrac{\pi i}{a^8} \left(1 - \dfrac{1}{2}\left(e^{-amp}\cos{amq} + e^{-amq}\cos{amp}\right)\right).
+    \therefore \int_{-\infty}^{\infty} \dfrac{e^{imx}}{x(x^8+a^8)} dx &= \dfrac{\pi i}{2a^8} \left(2 - e^{-amp}\cos{amq} - e^{-amq}\cos{amp}\right) \\
+    \int_{-\infty}^{\infty} \dfrac{\cos{mx}+i\sin{mx}}{x(x^8+a^8)} dx &= \dfrac{\pi i}{2a^8} \left(2 - e^{-amp}\cos{amq} - e^{-amq}\cos{amp}\right) \\
+    \int_{-\infty}^{\infty} \dfrac{\cos{mx}}{x(x^8+a^8)} dx + i\int_{-\infty}^{\infty} \dfrac{\sin{mx}}{x(x^8+a^8)} dx &= \dfrac{\pi i}{2a^8} \left(2 - e^{-amp}\cos{amq} - e^{-amq}\cos{amp}\right).
     \end{aligned}
 \]
 
@@ -212,8 +212,8 @@ Equating the imaginary part of this expression yields:
 
 \[
     \begin{aligned}
-    \int_{-\infty}^{\infty} \dfrac{\sin{mx}}{x(x^8+a^8)} dx &= \dfrac{\pi}{a^8} \left(1 - \dfrac{1}{2}\left(e^{-amp}\cos{amq} + e^{-amq}\cos{amp}\right)\right) \\
-    &= \dfrac{\pi}{a^8} \left(1 - \dfrac{1}{2}\left(e^{-am\sin{\dfrac{\pi}{8}}}\cos{\left(am\cos{\dfrac{\pi}{8}}\right)} + e^{-am\cos{\dfrac{\pi}{8}}}\cos{\left(am\sin{\dfrac{\pi}{8}}\right)}\right)\right).
+    \int_{-\infty}^{\infty} \dfrac{\sin{mx}}{x(x^8+a^8)} dx &= \dfrac{\pi}{2a^8} \left(2 - e^{-amp}\cos{amq} - e^{-amq}\cos{amp}\right) \\
+    &= \dfrac{\pi}{2a^8} \left(2 - e^{-am\sin{\dfrac{\pi}{8}}}\cos{\left(am\cos{\dfrac{\pi}{8}}\right)} - e^{-am\cos{\dfrac{\pi}{8}}}\cos{\left(am\sin{\dfrac{\pi}{8}}\right)}\right).
     \end{aligned}
 \]
 
