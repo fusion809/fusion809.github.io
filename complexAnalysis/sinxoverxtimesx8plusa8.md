@@ -34,45 +34,45 @@ $n=0,1,2,3,4,5,6,7$ gives us our only unique poles (which are all first order). 
     r_n &= \lim_{z\rightarrow z_n} \dfrac{e^{imz} (z-z_0)}{z(z^8+a^8)} \\
     &= \lim_{z\rightarrow z_n} \dfrac{e^{imz}}{z\cdot 8z^7} \\
     &= \dfrac{e^{imz_n}}{8z^8_n} \\
-    r_0 &= \dfrac{e^{imz_0}}{8z^8_0}.
+    &= -\dfrac{e^{imz_n}}{8a^8}.
     \end{aligned}
 \]
 
-Let us do some working to simplify this last line. $imz_0 = ame^{\dfrac{5\pi i}{8}} = -am\sin{\dfrac{\pi}{8}}+ami\cos{\dfrac{\pi}{8}}$. Let $p=\sin{\dfrac{\pi}{8}}$ and $q=\cos{\dfrac{\pi}{8}}$. $z_0^8 = a^8 e^{\pi i} = -a^8$. Therefore:
+Let us do some working to simplify $r_0 = -\dfrac{e^{imz_0}}{8a^8}.$ $imz_0 = ame^{\dfrac{5\pi i}{8}} = -am\sin{\dfrac{\pi}{8}}+ami\cos{\dfrac{\pi}{8}}$. Let $p=\sin{\dfrac{\pi}{8}}$ and $q=\cos{\dfrac{\pi}{8}}$. Therefore:
 
 \[
     \begin{aligned}
-    r_0 &= \dfrac{e^{-amp+amiq}}{-8a^8} \\
+    r_0 &= -\dfrac{e^{-amp+amiq}}{8a^8} \\
     &= -\dfrac{e^{-amp}e^{amiq}}{8a^8}.\\
-    r_1 &= \dfrac{e^{imz_1}}{8z^8_1}.
+    r_1 &= -\dfrac{e^{imz_1}}{8a^8}.
     \end{aligned}
 \]
 
-Let us do some working to simplify this last line. $imz_1 = ame^{\dfrac{7\pi i}{8}} = -am\cos{\dfrac{\pi}{8}}+ami\sin{\dfrac{\pi}{8}} = -amq+amip$ and $z_1^8 = a^8 e^{3\pi i} = -a^8$. Therefore:
+Let us do some working to simplify this last line. $imz_1 = ame^{\dfrac{7\pi i}{8}} = -am\cos{\dfrac{\pi}{8}}+ami\sin{\dfrac{\pi}{8}} = -amq+amip$. Therefore:
 
 \[
     \begin{aligned}
-    r_1 &= \dfrac{e^{-amq+amip}}{-8a^8} \\
+    r_1 &= -\dfrac{e^{-amq+amip}}{8a^8} \\
     &= -\dfrac{e^{-amq}e^{amip}}{8a^8}.\\
-    r_2 &= \dfrac{e^{imz_2}}{8z^8_2}.
+    r_2 &= -\dfrac{e^{imz_2}}{8a^8}.
     \end{aligned}
 \]
 
-Working on this last line. $imz_2 = ame^{\dfrac{9\pi i}{8}} = -amq-amip$ and $z_2^8 = a^8 e^{5\pi i} = -a^8$. Therefore:
+Working on this last line. $imz_2 = ame^{\dfrac{9\pi i}{8}} = -amq-amip$. Therefore:
 
 \[
     \begin{aligned}
-    r_2 &= \dfrac{e^{-amq-amip}}{-8a^8} \\
+    r_2 &= -\dfrac{e^{-amq-amip}}{8a^8} \\
     &= -\dfrac{e^{-amq}e^{-amip}}{8a^8}.\\
-    r_3 &= \dfrac{e^{imz_3}}{8z^8_3}.
+    r_3 &= -\dfrac{e^{imz_3}}{8a^8}.
     \end{aligned}
 \]
 
-Working on this last line. $imz_3 = ame^{\dfrac{11\pi i}{8}} = -amp-amiq$ and $z_2^8 = a^8 e^{5\pi i} = -a^8$. Therefore:
+Working on this last line. $imz_3 = ame^{\dfrac{11\pi i}{8}} = -amp-amiq$. Therefore:
 
 \[
     \begin{aligned}
-    r_3 &= \dfrac{e^{-amp-amiq}}{-8a^8} \\
+    r_3 &= -\dfrac{e^{-amp-amiq}}{8a^8} \\
     &= -\dfrac{e^{-amp}e^{-amiq}}{8a^8}.
     \end{aligned}
 \]
