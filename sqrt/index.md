@@ -1,7 +1,9 @@
 @def title="Approximating square roots without a calculator"
 @def tags = ["maths", "numerical methods"]
 
-A popular technique for approximating the square root of a number is to use the tangent line approximation. Say we wish to find $a_s=\sqrt{a}$, and we know that the square root of a neighbouring number $b$ is $b_s$, then we would use the approximation: $\sqrt{a} \approx \sqrt{b} + \dfrac{a-b}{2\sqrt{b}}$. This approximation, while often satisfactory, can be substantially off if $b$ and $a$ are relatively quite different. In this case, you can use Newton's method to refine the approximation. To introduce this technique, let us define a function $f(x) = x^2 - a$, hence $f'(x) = 2x$. Newton's method then gives us this scheme for approximating $a_s$:
+A popular technique for approximating the square root of a number is to use the tangent line approximation. Say we wish to find $a_s=\sqrt{a}$, and we know that the square root of a neighbouring number $b$ is $b_s$, then we would use the approximation: $\sqrt{a} \approx \sqrt{b} + \dfrac{a-b}{2\sqrt{b}}$. This approximation is called the tangent line approximation because it is derived by using the tangent line for the square root function $\sqrt{x}$ to approximate its values. This approximation can also be derived by using the Taylor series of the square root function. While its approximation is often satisfactory, it can be substantially off if $b$ and $a$ differ by a number that is fairly large relative to $b$. 
+
+In this case, you can use Newton's method to refine the approximation. Newton's method is essentially using the tangent line to approximate the zeros of a function. If one of that function's roots happens to be the square root you're searching for, applying Newton's method will have the result of giving you ever improving approximations to the square root. One function that is easy to exactly compute that's root is $a_s$ is $f(x) = x^2-a$. Newton's method then gives us this scheme for approximating $a_s$:
 
 \begin{eqnarray}
 x_{n+1} &=& x_n - \dfrac{f(x_n)}{f'(x_n)} \\\\
