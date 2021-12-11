@@ -29,5 +29,6 @@ Parts of this repository that are my own, namely:
 * [SEIR/](SEIR/)
 * [simplePendulum/](simplePendulum/)
 * [SIR/](SIR/)
+- [sqrt/](sqrt/)
 
 are licensed under [GNU GPLv3](LICENCE). The rest is likely licensed under [this licence](https://github.com/tlienart/FranklinTemplates.jl/blob/master/LICENSE.md), except for files in [\_libs/katex](_libs/katex/), which are licensed under [KaTeX's MIT licence](https://github.com/KaTeX/KaTeX/blob/master/LICENSE) and a few files which clearly mention their licensing details at their top.
