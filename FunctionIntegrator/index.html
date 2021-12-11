@@ -35,7 +35,7 @@ show&#40;a&#41;</code></pre>
 <pre><code class=language-julia >using FunctionIntegrator
 a &#61; abs&#40;chebyshev_quadrature&#40;x -&gt; cos&#40;x&#41;, 1000, 1, 0, pi/2&#41; - 1&#41;;
 show&#40;a&#41;</code></pre>
-<pre><code class="plaintext code-output">3.229819229844111e-7</code></pre>
+<pre><code class="plaintext code-output">3.229819232064557e-7</code></pre>
 <p>\(k=2\):</p>
 <pre><code class=language-julia >using FunctionIntegrator
 a &#61; abs&#40;chebyshev_quadrature&#40;x -&gt; cos&#40;x&#41;, 1000, 2, 0, pi/2&#41; - 1&#41;;
@@ -45,7 +45,7 @@ show&#40;a&#41;</code></pre>
 <pre><code class=language-julia >using FunctionIntegrator
 a &#61; abs&#40;chebyshev_quadrature&#40;x -&gt; cos&#40;x&#41;, 1000, 3, 0, pi/2&#41; - 1&#41;;
 show&#40;a&#41;</code></pre>
-<pre><code class="plaintext code-output">6.453189421717909e-7</code></pre>
+<pre><code class="plaintext code-output">6.453189426158801e-7</code></pre>
 <p>\(k=4\):</p>
 <pre><code class=language-julia >using FunctionIntegrator
 a &#61; abs&#40;chebyshev_quadrature&#40;x -&gt; cos&#40;x&#41;, 1000, 4, 0, pi/2&#41; - 1&#41;;
@@ -96,7 +96,7 @@ PyPlot.savefig&#40;joinpath&#40;@OUTPUT, &quot;laguerre_plot.png&quot;&#41;, dpi
 <pre><code class=language-julia >using FunctionIntegrator
 a &#61; abs&#40;laguerre_quadrature&#40;x -&gt; x*exp&#40;-x&#41;, 100, 1&#41;-1&#41;
 show&#40;a&#41;</code></pre>
-<pre><code class="plaintext code-output">3.1086244689504383e-15</code></pre>
+<pre><code class="plaintext code-output">3.219646771412954e-15</code></pre>
 <p>\(k=2\):</p>
 <pre><code class=language-julia >using FunctionIntegrator
 a &#61; abs&#40;laguerre_quadrature&#40;x -&gt; x, 100, 2&#41;-1&#41;
@@ -119,7 +119,7 @@ show&#40;a&#41;</code></pre>
 <pre><code class=language-julia >using FunctionIntegrator
 a &#61; abs&#40;radau_quadrature&#40;x -&gt; cos&#40;x&#41;, 1000, 0, pi/2&#41;-1&#41;
 show&#40;a&#41;</code></pre>
-<pre><code class="plaintext code-output">3.3306690738754696e-16</code></pre>
+<pre><code class="plaintext code-output">0.0</code></pre>
 <h3 id=rectangleruleleft ><a href="#rectangleruleleft" class=header-anchor >rectangle&#95;rule&#95;left</a></h3>
 <p>In this section, integral 1 is being approximated and the result compared to the analytical result. </p>
 <pre><code class=language-julia >using FunctionIntegrator
@@ -143,7 +143,7 @@ show&#40;a&#41;</code></pre>
 <pre><code class=language-julia >using FunctionIntegrator
 a &#61; abs&#40;rombergs_method&#40;x -&gt; cos&#40;x&#41;, 10, 0, pi/2&#41;-1&#41;
 show&#40;a&#41;</code></pre>
-<pre><code class="plaintext code-output">4.440892098500626e-16</code></pre>
+<pre><code class="plaintext code-output">3.3306690738754696e-16</code></pre>
 <h3 id=simpsons_rule ><a href="#simpsons_rule" class=header-anchor >simpsons_rule</a></h3>
 <p>In this section, integral 1 is being approximated and the result compared to the analytical result. </p>
 <pre><code class=language-julia >using FunctionIntegrator
