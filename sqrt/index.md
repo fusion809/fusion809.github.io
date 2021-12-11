@@ -73,7 +73,7 @@ The tangent line approximation yields:
     &\approx& 8.722.
 \end{eqnarray}
 
-The actual value of $\sqrt{76}$ is $8.717797887081348$, so this approximation will not suffice. Applying Newton's method yield:
+The actual value of $\sqrt{76}$ is $8.717797887081348$, so this approximation will not suffice. Applying Newton's method yields:
 
 \begin{eqnarray}
     x_1 &=& \dfrac{x_0}{2} + \dfrac{76}{2x_0} \\\\
