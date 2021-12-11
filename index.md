@@ -29,3 +29,6 @@ Complex analysis pages:
 - [Contour integration with pole on the contour itself](/complexAnalysis/circleR2RedditInt/)
 - [Evaluating $\displaystyle \int_{-\infty}^{\infty} \dfrac{x^2\cos{mx}}{(x^4+a^4)^2} dx$ using contour integration](complexAnalysis/x2cosmxoverx4pa4sq/)
 - [Evaluating $\displaystyle \int_{-\infty}^{\infty} \dfrac{\sin{mx}}{x(x^8+a^8)} dx$ using contour integration](/complexAnalysis/sinxoverxtimesx8plusa8/)
+
+Numerical mathematics:
+- [Approximating square roots without a calculator](/sqrt/)
