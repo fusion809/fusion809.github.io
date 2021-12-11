@@ -1,5 +1,5 @@
 @def title="Contour integration with pole on the contour itself"
-@def tags="Contour integration"
+@def tags=["Contour integration"]
 
 This post is in response to [this thread on Reddit](https://www.reddit.com/r/MathHelp/comments/ioku9v/contour_integration_with_pole_on_the_contour/). 
 

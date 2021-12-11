@@ -1,5 +1,5 @@
 @def title="Evaluating the integral of sine mx over x times x to the eighth plus a to the eighth"
-@def tags="Contour integration"
+@def tags=["Contour integration"]
 
 The integral we wish to evaluate is $I = \displaystyle \int_{-\infty}^{\infty} \dfrac{\sin{mx}}{x(x^8+a^8)} dx$, where $a, m \gt 0$ and are real.
 
