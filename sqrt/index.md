@@ -1,7 +1,10 @@
 @def title="Root-finding without a calculator"
 @def tags = ["maths", "numerical methods"]
+@def mintoclevel=1
 
 In this article, I will introduce techniques for approximating square and cube roots. The methods used to derive these techniques are very general and can be used to find the roots of any continuous real-valued function.
+
+\tableofcontents
 # Square root
 A popular technique for approximating the square root of a number is to use the [tangent line approximation](https://en.wikipedia.org/wiki/Linear_approximation). Say we wish to find $a_s=\sqrt{a}$, and we know that the square root of a neighbouring number $b$ is $b_s$, then we would use the approximation: $\sqrt{a} \approx \sqrt{b} + \dfrac{a-b}{2\sqrt{b}}$. This approximation is called the tangent line approximation because it is derived by using the tangent line for the square root function $\sqrt{x}$ to approximate its values. This approximation can also be derived by using the [Taylor series](https://en.wikipedia.org/wiki/Taylor_series) of the square root function. 
 
