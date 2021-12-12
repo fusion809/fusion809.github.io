@@ -232,7 +232,7 @@ Which is accurate to seven decimal places, or eight if we round off the remainin
 # General technique
 Newton's method can be used for finding the roots of any continuous real-valued function, or even system of continuous real-valued functions, although it has some shortcomings. One is that it requires an initial guess as to the root, and that its results can depend heavily on this initial guess. Additionally, it can sometimes fail to converge, such as when the root occurs at a stationary point for the function (maxima or minima), as there the derivative is zero. For example, it fails for the polynomial $x^4 + 3x^3 + 4x^2 + 3x + 1$, as its only real root is at $x=-1$ where the function is at minima. For polynomial equations that have real roots this failure to converge is uncommon provided the initial guess is reasonably close to the true value of the root. 
 
-Newton's method belongs to a class of methods known as the [Householder's methods](https://en.wikipedia.org/wiki/Householder's_method). Newton's method is the first order Householder's method, Hailey's method is the second order Householder's method and it is possible to derive the $d$th order Householder's method using the formula:
+Newton's method belongs to a class of methods known as the [Householder's methods](https://en.wikipedia.org/wiki/Householder's_method). Newton's method is the first order Householder's method, Halley's method is the second order Householder's method and it is possible to derive the $d$th order Householder's method using the formula:
 
 \begin{eqnarray}
     x_{n+1} = x_n + d\dfrac{(1/f)^{(d-1)}(x_n)}{(1/f)^{(d)}(x_n)}
@@ -308,7 +308,7 @@ function newtons(f, h, tol, itMax, initGuess)
                 # Third order Householder's method
                 diff = (6*fn*der^2 - 3*fn^2*der2)/(6*der^3-6*fn*der*der2 + fn^2*der3)
             elseif (der ≈ 0)
-                # Second order, Hailey's method
+                # Second order, Halley's method
                 diff = 2*fn*der/(-fn*der2 + 2*der^2)
             else
                 # First order, Newton's method
