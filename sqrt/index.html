@@ -44,8 +44,8 @@ size used to approximate the derivative.
             count[j] += <span class=hljs-number >1</span>
         <span class=hljs-keyword >end</span>
         <span class=hljs-keyword >if</span> (count[j] == itMax)
-            println(<span class=hljs-string >&quot;Maximum iterations exceeded and the amount by which 
-            Newton&#x27;s last updated the solution was: &quot;</span>, diff)
+            print(<span class=hljs-string >&quot;Maximum iterations exceeded and the amount by which &quot;</span>)
+            println(<span class=hljs-string >&quot;Newton&#x27;s last updated the solution was: &quot;</span>, diff)
         <span class=hljs-keyword >end</span>
     <span class=hljs-keyword >end</span>
     <span class=hljs-keyword >return</span> sol, count
