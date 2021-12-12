@@ -232,4 +232,81 @@ Which is accurate to seven decimal places, or eight if we round off the remainin
 # General technique
 Newton's method can be used for finding the roots of any continuous real-valued function, or even system of continuous real-valued functions, although it has some shortcomings. One is that it requires an initial guess as to the root, and that its results can depend heavily on this initial guess. Additionally, it can sometimes fail to converge. For polynomial equations that have real roots this is uncommon provided the initial guess is reasonably close to the true value of the root. 
 
-Getting the initial guesses for the roots, especially of polynomials that have multiple real roots, can be a challenge. One technique is to use the [bisection method](https://en.wikipedia.org/wiki/Bisection_method). In this technique one takes an interval over which the sign of the function changes from positive to negative or vice versa (which implies that at least one root must lie within this interval) and continuously subdivides this interval and re-evaluates the function at its endpoints until we find the root. This method is very slow, so usually one would only apply it a few times, and then once our interval is acceptably small we would apply Newton's method to get the root. One can also evaluate the function at a long list of points within an interval and find where in the interval the sign changes, as that is where a root will be. If the interval is large enough and the function has multiple real roots there may be multiple sign change points and hence multiple roots we can converge to using Newton's method.
+Getting the initial guesses for the roots, especially of polynomials that have multiple real roots, can be a challenge. One technique is to use the [bisection method](https://en.wikipedia.org/wiki/Bisection_method). In this technique one takes an interval over which the sign of the function changes from positive to negative or vice versa (which implies that at least one root must lie within this interval) and continuously subdivides this interval and re-evaluates the function at its endpoints until we find the root. This method is very slow, so usually one would only apply it a few times, and then once our interval is acceptably small we would apply Newton's method to get the root. One can also evaluate the function at a long list of points within an interval and find where in the interval the sign changes, as that is where a root will be. If the interval is large enough and the function has multiple real roots there may be multiple sign change points and hence multiple roots we can converge to using Newton's method. 
+
+These methods can be done by hand, but for many problems they can be the quite tedious; as such I wrote this Julia script that implements the bisection method and Newton's method to find the roots of a given function. Here is the script:
+
+```julia
+#!/usr/bin/env julia
+"""
+    bisection(f::Function, N::Integer, a::Number, b::Number)
+
+Uses the bisection method with N subdivisions of the specified domain [a, b] to find the roots of the function f within said domain. Used to find the initial guess that Newton's method then uses to get a more precise estimate of the roots.
+"""
+function bisection(f, N, a, b)
+    x = LinRange(a, b, N+1)
+    change = zeros(size(x))
+    fval = f.(x)
+    for i=2:N+1
+        if (sign(fval[i]) + sign(fval[i-1]) == 0)
+            change[i] = 1
+        end
+    end
+
+    initGuess = x[change.==1]
+    return initGuess
+end
+
+"""
+    newtons(f::Function, h::Float, tol::Float, itMax::Integer, 
+    initGuess::Vector{Float})
+
+Uses Newton's method to refine initGuess, our initial guess of the root(s) of f, until either itMax iterations has been performed or the relative magnitude of the update Newton's provides to the estimate is below tol. h is the step size used to approximate the derivative.  
+"""
+function newtons(f, h, tol, itMax, initGuess)
+    function fd(x, h)
+        return (f(x+h)-f(x-h))/(2*h)
+    end
+    sol = initGuess
+    count = Int64.(zeros(size(initGuess)))
+    for j=1:length(initGuess)
+        diff = 1
+        while (abs(diff/sol[j]) > tol && count[j] < itMax)
+            diff = f(sol[j])/fd(sol[j], h)
+            sol[j] -= diff
+            count[j] += 1
+        end
+        if (count[j] == itMax)
+            println("Maximum iterations exceeded and the amount by which Newton's last updated the solution was: ", diff)
+        end
+    end
+    return sol, count
+end
+
+"""
+    findRoot(f::Function, h::Float, tol::Float, itMax::Integer, a::Number, b::Number, N::Integer)
+
+Uses the bisection method to get an initial guess of the root(s) of f on the domain [a, b] with N subdivisions, then uses Newton's method with a maximum of itMax iterations and a relative error tolerance of tol. h is the step size used to approximate the derivative. 
+"""
+function findRoot(f, h, tol, itMax, a, b, N)
+    initGuess = bisection(f, N, a, b)
+    sol = newtons(f, h, tol, itMax, initGuess);
+    return sol
+end
+
+# This is where you specify the function you want to
+# find the root of
+function f(x)
+    return x^4 + x^3 - 10x^2 - 4x + 16
+end
+
+h = 1e-10
+tol = 1e-15
+itMax = 1000
+a = -100
+b = 100
+N = 100000
+sol = findRoot(f, h, tol, itMax, a, b, N)
+```
+
+.
