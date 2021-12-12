@@ -11,13 +11,8 @@ the roots.
     x = <span class=hljs-built_in >LinRange</span>(a, b, N+<span class=hljs-number >1</span>)
     change = zeros(size(x))
     fval = f.(x)
-    <span class=hljs-keyword >for</span> i=<span class=hljs-number >2</span>:N+<span class=hljs-number >1</span>
-        <span class=hljs-keyword >if</span> (sign(fval[i]) + sign(fval[i-<span class=hljs-number >1</span>]) == <span class=hljs-number >0</span>)
-            change[i] = <span class=hljs-number >1</span>
-        <span class=hljs-keyword >end</span>
-    <span class=hljs-keyword >end</span>
-
-    initGuess = x[change.==<span class=hljs-number >1</span>]
+    xv = x[<span class=hljs-number >2</span>:<span class=hljs-keyword >end</span>]
+    initGuess = xv[diff(sign.(fval)).!= <span class=hljs-number >0</span>]
     <span class=hljs-keyword >return</span> initGuess
 <span class=hljs-keyword >end</span>
 
@@ -47,6 +42,17 @@ size used to approximate the derivative.
             print(<span class=hljs-string >&quot;Maximum iterations exceeded and the amount by which &quot;</span>)
             println(<span class=hljs-string >&quot;Newton&#x27;s last updated the solution was: &quot;</span>, diff)
         <span class=hljs-keyword >end</span>
+    <span class=hljs-keyword >end</span>
+    
+    <span class=hljs-comment ># Delete NaN entries from sol and corresponding count entries</span>
+    <span class=hljs-comment ># While loop is used because sol&#x27;s length will change over this loop</span>
+    j = <span class=hljs-number >1</span>;
+    <span class=hljs-keyword >while</span> j &lt; length(sol)
+        <span class=hljs-keyword >if</span> isnan(sol[j])
+            deleteat!(sol, j)
+            deleteat!(count, j)
+        <span class=hljs-keyword >end</span>
+        j += <span class=hljs-number >1</span>;
     <span class=hljs-keyword >end</span>
     <span class=hljs-keyword >return</span> sol, count
 <span class=hljs-keyword >end</span>
