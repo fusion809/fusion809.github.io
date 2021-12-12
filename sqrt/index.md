@@ -232,6 +232,14 @@ Which is accurate to seven decimal places, or eight if we round off the remainin
 # General technique
 Newton's method can be used for finding the roots of any continuous real-valued function, or even system of continuous real-valued functions, although it has some shortcomings. One is that it requires an initial guess as to the root, and that its results can depend heavily on this initial guess. Additionally, it can sometimes fail to converge, such as when the root occurs at a stationary point for the function (maxima or minima), as there the derivative is zero. For example, it fails for the polynomial $x^4 + 3x^3 + 4x^2 + 3x + 1$, as its only real root is at $x=-1$ where the function is at minima. For polynomial equations that have real roots this failure to converge is uncommon provided the initial guess is reasonably close to the true value of the root. 
 
+Newton's method belongs to a class of methods known as the Householder's methods. Newton's method is the first order Householder's method, Hailey's method is the second order Householder's method and it is possible to derive than $d$th order Householder's method using the formula:
+
+\begin{eqnarray}
+    x_{n+1} = x_n + d\dfrac{(1/f)^{(d-1)}(x_n)}{(1/f)^{(d)}(x_n)}
+\end{eqnarray}
+
+where the bracketed superscripts denotes derivatives of the superscript's order. For example $(1/f)^{(d)}$ denotes the $d$th derivative of $1/f$. The reason I mentioned this fact is that sometimes, especially when the lower order derivatives are equal to zero at the root, higher order Householder's methods may be superior. 
+
 Getting the initial guesses for the roots, especially of polynomials that have multiple real roots, can be a challenge. One technique is to use the [bisection method](https://en.wikipedia.org/wiki/Bisection_method). In this technique one takes an interval over which the sign of the function changes from positive to negative or vice versa (which implies that at least one root must lie within this interval) and continuously subdivides this interval and re-evaluates the function at its endpoints until we find the root. This method is very slow, so usually one would only apply it a few times, and then once our interval is acceptably small we would apply Newton's method to get the root. One can also evaluate the function at a long list of points within an interval and find where in the interval the sign changes, as that is where a root will be. If the interval is large enough and the function has multiple real roots there may be multiple sign change points and hence multiple roots we can converge to using Newton's method. Like Newton's method, however, it does not converge when the root is a minima or maxima. 
 
 These methods can be done by hand, but for many problems they can be the quite tedious; as such I wrote this Julia script that implements the bisection method and Newton's method to find the roots of a given function:
@@ -248,7 +256,6 @@ the roots.
 """
 function bisection(f, N, a, b)
     x = LinRange(a, b, N+1)
-    change = zeros(size(x))
     fval = f.(x)
     xv = x[2:end]
     initGuess = xv[diff(sign.(fval)).!= 0]
@@ -259,21 +266,54 @@ end
     newtons(f::Function, h::Float, tol::Float, itMax::Integer, 
     initGuess::Vector{Float})
 
-Uses Newton's method to refine initGuess, our initial guess of the root(s) of 
-f, until either itMax iterations has been performed or the relative magnitude 
-of the update Newton's provides to the estimate is below tol. h is the step 
-size used to approximate the derivative.  
+Uses Newton's method (and if needed, up to third order Householder's methods) 
+to refine initGuess, our initial guess of the root(s) of f, until either itMax 
+iterations has been performed or the relative magnitude of the update Newton's 
+provides to the estimate is below tol. h is the step size used to approximate 
+the derivative.  
 """
 function newtons(f, h, tol, itMax, initGuess)
+    # Derivatives
     function fd(x, h)
         return (f(x+h)-f(x-h))/(2*h)
     end
+    function f2d(x, h)
+        return (f(x+h)-2*f(x)+f(x-h))/(h^2)
+    end
+    function f3d(x, h)
+        return (f(x+2*h)-2*f(x+h)+f(x-h)-f(x-2*h))/(2*h^3)
+    end
+
+    # Check to see if (relative) difference in update is below tol
+    function tolCheck(diff, sol, tol)
+        if ! (sol ≈ 0)
+            check = abs(diff/sol) > tol
+        else
+            check = abs(diff) > tol
+        end
+        return check
+    end
+
+    # Initialize sol
     sol = initGuess
     count = Int64.(zeros(size(initGuess)))
     for j=1:length(initGuess)
         diff = 1
-        while (abs(diff/sol[j]) > tol && count[j] < itMax)
-            diff = f(sol[j])/fd(sol[j], h)
+        while (tolCheck(diff, sol[j], tol) && count[j] < itMax)
+            fn = f(sol[j])
+            der = fd(sol[j], h)
+            der2 = f2d(sol[j], h)
+            der3 = f3d(sol[j], h)
+            if (der ≈ 0) && (der2 ≈ 0)
+                # Third order Householder's method
+                diff = (6*fn*der^2 - 3*fn^2*der2)/(6*der^3-6*fn*der*der2 + fn^2*der3)
+            elseif (der ≈ 0)
+                # Second order, Hailey's method
+                diff = 2*fn*der/(-fn*der2 + 2*der^2)
+            else
+                # First order, Newton's method
+                diff = fn/der
+            end
             sol[j] -= diff
             count[j] += 1
         end
@@ -282,7 +322,7 @@ function newtons(f, h, tol, itMax, initGuess)
             println("Newton's last updated the solution was: ", diff)
         end
     end
-    
+
     # Delete NaN entries from sol and corresponding count entries
     # While loop is used because sol's length will change over this loop
     j = 1;
@@ -310,12 +350,28 @@ function findRoot(f, h, tol, itMax, a, b, N)
     return sol, count
 end
 
+"""
+    printSoln(sol::Vector{Float}, count::Vector{Integer})
+
+Print the solution and the number of iterations used.
+"""
+function printSoln(sol, count)
+    if (length(sol) == 1)
+        println("Root = ", sol[1], ", count = ", count[1])
+    else
+        for i=1:length(sol)
+            println("The $(i)th root = ", sol[i], ", count = ", count[i])
+        end
+    end
+end
+
 # This is where you specify the function you want to
 # find the root of
 function f(x)
     return x^4 + x^3 - 10x^2 - 4x + 16
 end
 
+# Initialize required variables
 h = 1e-10
 tol = 1e-15
 itMax = 1000
@@ -323,13 +379,7 @@ a = -100
 b = 100
 N = 100000
 sol, count = findRoot(f, h, tol, itMax, a, b, N)
-if (length(sol) == 1)
-    println("Root = ", sol[1], ", count = ", count[1])
-else
-    for i=1:length(sol)
-        println("The $(i)th root = ", sol[i], ", count = ", count[i])
-    end
-end
+printSoln(sol, count)
 ```
 
 .
