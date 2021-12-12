@@ -317,8 +317,12 @@ a = -100
 b = 100
 N = 100000
 sol, count = findRoot(f, h, tol, itMax, a, b, N)
-for i=1:length(sol)
-    println("The $(i)th root = ", sol[i], " count = ", count[i])
+if (length(sol) == 1)
+    println("Root = ", sol[1], ", count = ", count[1])
+else
+    for i=1:length(sol)
+        println("The $(i)th root = ", sol[i], ", count = ", count[i])
+    end
 end
 ```
 
