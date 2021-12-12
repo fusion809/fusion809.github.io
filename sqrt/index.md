@@ -1,8 +1,58 @@
-@def title="Approximating square roots without a calculator"
+@def title="Root-finding without a calculator"
 @def tags = ["maths", "numerical methods"]
 
-A popular technique for approximating the square root of a number is to use the [tangent line approximation](https://en.wikipedia.org/wiki/Linear_approximation). Say we wish to find $a_s=\sqrt{a}$, and we know that the square root of a neighbouring number $b$ is $b_s$, then we would use the approximation: $\sqrt{a} \approx \sqrt{b} + \dfrac{a-b}{2\sqrt{b}}$. This approximation is called the tangent line approximation because it is derived by using the tangent line for the square root function $\sqrt{x}$ to approximate its values. This approximation can also be derived by using the [Taylor series](https://en.wikipedia.org/wiki/Taylor_series) of the square root function. While its approximation is often satisfactory, it can be substantially off if $b$ and $a$ differ by a number that is fairly large relative to $b$. 
+In this article, I will introduce techniques for approximating square and cube roots. The methods used to derive these techniques are very general and can be used to find the roots of any continuous real-valued function.
+# Square root
+A popular technique for approximating the square root of a number is to use the [tangent line approximation](https://en.wikipedia.org/wiki/Linear_approximation). Say we wish to find $a_s=\sqrt{a}$, and we know that the square root of a neighbouring number $b$ is $b_s$, then we would use the approximation: $\sqrt{a} \approx \sqrt{b} + \dfrac{a-b}{2\sqrt{b}}$. This approximation is called the tangent line approximation because it is derived by using the tangent line for the square root function $\sqrt{x}$ to approximate its values. This approximation can also be derived by using the [Taylor series](https://en.wikipedia.org/wiki/Taylor_series) of the square root function. 
 
+## Derivation of the tangent line approximation formula
+If we have a function $f(x)$ that we wish to approximate using a tangent line to at $x=x_0$, then the tangent line equation must be of the form:
+
+\[y = mx + c\]
+
+as it is a straight line. At the point $x=x_0$ the following equations must be satisfied:
+
+\begin{eqnarray}
+    y &=& f(x) \\\\
+    y' &=& f'(x) \\\\
+\end{eqnarray}
+
+or in other words:
+
+\begin{eqnarray}
+    mx_0 + c &=& f(x_0) \\\\
+    m &=& f'(x_0)
+\end{eqnarray}
+
+substituting the second of these equations into the first yields:
+
+\begin{eqnarray}
+    f'(x_0)x_0 + c &=& f(x_0) \\\\
+    c &=& f(x_0) - f'(x_0) x_0 \\\\
+    \therefore y &=& f'(x_0) x + f(x_0) - f'(x_0) x_0 \\\\
+    &=& f'(x_0)(x-x_0) + f(x_0).
+\end{eqnarray}
+
+Which is the equation of the tangent line. If we let $f(x) = \sqrt{x}$ then:
+
+\begin{eqnarray}
+    f'(x) &=& \dfrac{1}{2\sqrt{x}} \\\\
+    y &=& \dfrac{1}{2\sqrt{x_0}} (x-x_0) + \sqrt{x_0} \\\\
+    &=& \sqrt{x_0} + \dfrac{x-x_0}{2\sqrt{x_0}}.
+\end{eqnarray}
+
+If we let $x_0 = b$, a neighbouring number we know the square root of, and $x=a$ then this gives us:
+
+\begin{eqnarray}
+    y &=& \sqrt{b} + \dfrac{a-b}{2\sqrt{b}}.
+\end{eqnarray}
+
+Which is our approximation for $a_s$. 
+
+## Limitations of the tangent line approximation
+While its approximation is often satisfactory, it can be substantially off if $b$ and $a$ differ by a number that is fairly large relative to $b$. 
+
+## Newton's method
 In this case, you can use [Newton's method](https://en.wikipedia.org/wiki/Newton%27s_method) to refine the approximation. Newton's method is a technique in which we essentially use the tangent line to approximate the zeros of a function. If one of that function's roots happens to be the square root you're searching for, applying Newton's method will have the result of giving you ever improving approximations to the square root. One function that is easy to exactly compute that's root is $a_s$ is $f(x) = x^2-a$. Newton's method then gives us this scheme for approximating $a_s$:
 
 \begin{eqnarray}
@@ -14,7 +64,7 @@ x_{n+1} &=& x_n - \dfrac{f(x_n)}{f'(x_n)} \\\\
 
 Where $x_{n}$ is our $n$th Newton's method approximation to $a_s$.
 
-# Example 1, finding $\sqrt{2}$ to five decimal places
+## Example 1, finding $\sqrt{2}$ to five decimal places
 A classic example where the tangent line approximation is pretty poor is when we are trying to find $\sqrt{2}$. The tangent line approximation gives:
 
 \begin{eqnarray}
@@ -62,7 +112,7 @@ This is accurate to four decimal places, the fifth is not as we would round it u
 
 Which is an accurate approximation of $\sqrt{2}$ to 11 decimal places. 
 
-# Example 2, approximating $\sqrt{76}$ to five decimal places
+## Example 2, approximating $\sqrt{76}$ to five decimal places
 The tangent line approximation yields:
 
 \begin{eqnarray}
@@ -90,7 +140,7 @@ The actual value of $\sqrt{76}$ is $8.717797887081348$, so this approximation wi
 
 Which is accurate to five decimal places. 
 
-# Example 3, approximating $\sqrt{5}$ to five decimal places
+## Example 3, approximating $\sqrt{5}$ to five decimal places
 The tangent line approximation yields:
 
 \begin{eqnarray}
@@ -124,3 +174,59 @@ So this is only accurate to three decimal places. The next iteration of Newton's
 \end{eqnarray}
 
 Which is accurate to nine decimal places, or eight if we account for the effect of rounding.
+
+# Cube root
+Similarly the cube root of a number can be approximated by a tangent line approximation and refined using Newton's method. If we let $f(x) = \sqrt[3]{x}$, then $f'(x) = \dfrac{1}{3(\sqrt[3]{x})^2}$ and:
+
+\begin{eqnarray}
+    y &=& f'(x_0)(x-x_0) + f(x_0) \\\\
+    &=& \dfrac{1}{3(\sqrt[3]{x_0})^2} (x-x_0) + \sqrt[3]{x_0} \\\\
+    &=& \sqrt[3]{x_0} + \dfrac{x-x_0}{3(\sqrt[3]{x_0})^2}.
+\end{eqnarray}
+
+Letting $x_0 = b$, some neighbouring point we know the cube root of exactly, and $x = a$, the number we want to find the cube root of we get (if $a_c = \sqrt[3]{a}$):
+
+\begin{eqnarray}
+    a_c &\approx& \sqrt[3]{b} + \dfrac{a-b}{3(\sqrt[3]{b})^2}.
+\end{eqnarray}
+
+And to refine this approximation we can use Newton's method with $f(x) = x^3 - a$ and hence $f'(x) = 3x^2$. Therefore we use the formula:
+
+\begin{eqnarray}
+    x_{n+1} &=& x_n - \dfrac{f(x_n)}{f'(x_n)} \\\\
+    &=& x_n - \dfrac{x_n^3-a}{3x_n^2} \\\\
+    &=& x_n - \dfrac{x_n}{3} + \dfrac{a}{3x_n^2} \\\\
+    &=& \dfrac{2x_n}{3} + \dfrac{a}{3x_n^2}.
+\end{eqnarray}
+
+## Example 4, approximating $\sqrt[3]{63}$ to five decimal places
+Here we use $b=64$, as $4^3 = 64$ and hence we know the cube root of 64 is 4. Therefore our tangent line approximation to the cube root is:
+
+\begin{eqnarray}
+    \sqrt[3]{63} &\approx& \sqrt[3]{64} - \dfrac{1}{3(\sqrt[3]{64})^2} \\\\
+    &=& 4 - \dfrac{1}{3\times 16} \\\\
+    &=& 4 - \dfrac{1}{48} \\\\
+    &=& \dfrac{191}{48} \\\\
+    &\approx& 3.9791\overline{6}.
+\end{eqnarray}
+
+The correct value of $\sqrt[3]{63}$ is approximately $3.9790572078963917$, so this is not accurate to five decimal places. So to improve this estimate we apply Newton's method:
+
+\begin{eqnarray}
+    x_1 &=& \dfrac{2x_0}{3} + \dfrac{63}{3x_0^2} \\\\
+    &=& \dfrac{2x_0}{3} + \dfrac{21}{x_0^2} \\\\
+    &=& \dfrac{2 \times \dfrac{191}{48}}{3} + \dfrac{21}{\left(\dfrac{191}{48}\right)^2} \\\\
+    &=& \dfrac{191}{72} + \dfrac{21 \times 48^2}{191^2} \\\\
+    &=& \dfrac{191}{72} + \dfrac{21 \times 2304}{36481} \\\\
+    &=& \dfrac{191 \times 36481 + 21 \times 2304 \times 72}{72 \times 36481} \\\\
+    &=& \dfrac{6967871 + 3483648}{2626632} \\\\
+    &=& \dfrac{10451519}{2626632} \\\\
+    &\approx& 3.97905721.
+\end{eqnarray}
+
+Which is accurate to seven decimal places, or eight if we round off the remaining digits from there.
+
+# General technique
+Newton's method can be used for finding the roots of any continuous real-valued function, or even system of continuous real-valued functions, although it has some shortcomings. One is that it requires an initial guess as to the root, and that its results can depend heavily on this initial guess. Additionally, it can sometimes fail to converge. For polynomial equations that have real roots this is uncommon provided the initial guess is reasonably close to the true value of the root. 
+
+Getting the initial guesses for the roots, especially of polynomials that have multiple real roots, can be a challenge. One technique is to use the [bisection method](https://en.wikipedia.org/wiki/Bisection_method). In this technique one takes an interval over which the sign of the function changes from positive to negative or vice versa (which implies that at least one root must lie within this interval) and continuously subdivide this interval and re-evaluate the function at its endpoints until we find the root. This method is very slow, so usually one would only apply it a few times, and then once our interval is acceptably small we would apply Newton's method to get the root. One can also evaluate the function at a long list of points within an interval and find where in the interval the sign changes, as that is where a root will be. If the interval is large enough and the function has multiple real roots there may be multiple sign change points and hence multiple roots we can converge to using Newton's method.

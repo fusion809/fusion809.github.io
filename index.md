@@ -31,4 +31,4 @@ Complex analysis pages:
 - [Evaluating $\displaystyle \int_{-\infty}^{\infty} \dfrac{\sin{mx}}{x(x^8+a^8)} dx$ using contour integration](/complexAnalysis/sinxoverxtimesx8plusa8/)
 
 Numerical mathematics:
-- [Approximating square roots without a calculator](/sqrt/)
+- [Root-finding without a calculator](/sqrt/)
