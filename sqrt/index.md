@@ -250,13 +250,8 @@ function bisection(f, N, a, b)
     x = LinRange(a, b, N+1)
     change = zeros(size(x))
     fval = f.(x)
-    for i=2:N+1
-        if (sign(fval[i]) + sign(fval[i-1]) == 0)
-            change[i] = 1
-        end
-    end
-
-    initGuess = x[change.==1]
+    xv = x[2:end]
+    initGuess = xv[diff(sign.(fval)).!= 0]
     return initGuess
 end
 
@@ -286,6 +281,17 @@ function newtons(f, h, tol, itMax, initGuess)
             print("Maximum iterations exceeded and the amount by which ")
             println("Newton's last updated the solution was: ", diff)
         end
+    end
+    
+    # Delete NaN entries from sol and corresponding count entries
+    # While loop is used because sol's length will change over this loop
+    j = 1;
+    while j < length(sol)
+        if isnan(sol[j])
+            deleteat!(sol, j)
+            deleteat!(count, j)
+        end
+        j += 1;
     end
     return sol, count
 end
