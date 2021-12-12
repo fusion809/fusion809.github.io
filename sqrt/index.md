@@ -283,8 +283,8 @@ function newtons(f, h, tol, itMax, initGuess)
             count[j] += 1
         end
         if (count[j] == itMax)
-            println("Maximum iterations exceeded and the amount by which 
-            Newton's last updated the solution was: ", diff)
+            print("Maximum iterations exceeded and the amount by which ")
+            println("Newton's last updated the solution was: ", diff)
         end
     end
     return sol, count
