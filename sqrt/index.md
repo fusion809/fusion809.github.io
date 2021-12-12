@@ -234,7 +234,7 @@ Newton's method can be used for finding the roots of any continuous real-valued 
 
 Getting the initial guesses for the roots, especially of polynomials that have multiple real roots, can be a challenge. One technique is to use the [bisection method](https://en.wikipedia.org/wiki/Bisection_method). In this technique one takes an interval over which the sign of the function changes from positive to negative or vice versa (which implies that at least one root must lie within this interval) and continuously subdivides this interval and re-evaluates the function at its endpoints until we find the root. This method is very slow, so usually one would only apply it a few times, and then once our interval is acceptably small we would apply Newton's method to get the root. One can also evaluate the function at a long list of points within an interval and find where in the interval the sign changes, as that is where a root will be. If the interval is large enough and the function has multiple real roots there may be multiple sign change points and hence multiple roots we can converge to using Newton's method. 
 
-These methods can be done by hand, but for many problems they can be the quite tedious; as such I wrote this Julia script that implements the bisection method and Newton's method to find the roots of a given function. Here is the script:
+These methods can be done by hand, but for many problems they can be the quite tedious; as such I wrote this Julia script that implements the bisection method and Newton's method to find the roots of a given function:
 
 ```julia
 #!/usr/bin/env julia
