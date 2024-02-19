@@ -32,3 +32,6 @@ Complex analysis pages:
 
 Numerical mathematics:
 - [Root-finding without a calculator](/sqrt/)
+
+Advice for people considering doing a PhD:
+- [Meeting entry requirements of Australian PhD programmes](/PhD_entry_article/)
