@@ -1,4 +1,4 @@
-@def title="Meeting entry requirements of Australian PhD programmes"
+@def title="Meeting the entry requirements of Australian PhD programmes"
 @def tag=["Education"]
 @def mintoclevel=1
 
@@ -8,7 +8,7 @@ In Australia, there are four main pathways to getting admitted into a Doctor of 
 
 The pathways to enter a PhD programme are (Macquarie University, n.d.; The University of Melbourne, n.d.; University of New South Wales, n.d.; University of Southern Queensland, n.d.):
 
-1.  Research experience outside of a degree programme. Exactly how much research experience is required here varies between universities. This could potentially be as little as just getting a single paper published in a high-quality journal. In the sciences, this would typically be a Q1 [Scimago journal](https://www.scimagojr.com/journalrank.php).
+1.  Research experience outside of a degree programme. Exactly how much research experience is required here varies between universities. This could potentially be as little as just getting a single paper published in a high-quality journal. In the sciences, this would typically be a [Scimago Q1 journal](https://www.scimagojr.com/journalrank.php).
 
 2.  Honours degree with a sufficient research component and division A second-class honours or first-class honours. The minimum size for this research component varies between universities but can be as little as the equivalent to a single semester of 20 hours/week of study. An honours degree typically consists of a year of full-time study that includes independent study, research training courses (RTCs) and research culminating in the submission of a thesis (University of Southern Queensland, 2024a, 2024b).
 
