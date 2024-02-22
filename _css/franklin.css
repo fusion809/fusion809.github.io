@@ -102,6 +102,10 @@ html {
     margin-top: 2em;
     margin-bottom: 1em; }
 
+.franklin-content h3 {
+    text-indent: 2em;
+}
+
 .franklin-content h1 a { color: inherit; }
 .franklin-content h1 a:hover {text-decoration: none;}
 .franklin-content h2 a { color: inherit; }
