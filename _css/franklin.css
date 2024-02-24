@@ -98,14 +98,17 @@ html {
 .franklin-content h2 {
     padding-bottom: 0.3em;
     border-bottom: 1px solid lightgrey;
-    text-indent: 1em;
+    text-indent: 2%;
     margin-top: 2em;
     margin-bottom: 1em; }
 
 .franklin-content h3 {
-    text-indent: 1em;
+    text-indent: 4%;
 }
 
+.franklin-content h4 {
+    text-indent: 6%;
+}
 .franklin-content h1 a { color: inherit; }
 .franklin-content h1 a:hover {text-decoration: none;}
 .franklin-content h2 a { color: inherit; }
@@ -121,7 +124,7 @@ html {
 
 .franklin-toc {
     border: 2px solid black;
-    width: 300px;
+    width: fit-content;
     font-size: 18px;
     background-color: rgb(155,255,165);
 }
