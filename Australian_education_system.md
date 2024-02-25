@@ -69,7 +69,7 @@ These qualifications typically require three to four years of full-time study (A
 All qualifications at levels eight or above require at least a bachelor's degree to gain entry into.
 
 #### Graduate certificate, graduate diploma and honours degrees
-Each of these qualifications have an entry requirement of a bachelor's degree, some also have minimum grade point average (GPA) or weighted average mark (WAM) requirements for that bachelor's degree. Honours degrees and graduate diplomas typically take one year of full-time study to complete whereas graduate certificates typically take about six months to complete. Graduate certificates and graduate diplomas are predominantly coursework qualifications, whereas honours degrees often include a research project and end in the submission of a 10,000 to 20,000 word thesis. 
+Each of these qualifications have an entry requirement of a bachelor's degree, some also have minimum grade point average (GPA) or weighted average mark (WAM) requirements for that bachelor's degree. Honours degrees and graduate diplomas typically take one year of full-time study to complete whereas graduate certificates typically take about six months to complete. Graduate certificates and graduate diplomas are predominantly coursework qualifications, whereas honours degrees often include a research project and usually end in the submission of a 15,000 to 20,000 word thesis (UNSW Sydney, n.d.). 
 
 Honours degrees can be completed as separate degrees or as the final year of a combined bachelor's honours degree programme. Honours degrees are graded as first-class honours if the student's WAM is at least 80%, division A second-class honours if the student's WAM is at least 75% and less than 80%, division B second-class honours if the student's WAM is at least 70% and less than 75% and third-class honours if the student's WAM is at least 65% and less than 70%. They are usually indicated in brackets as "honours" after the name of the bachelor's degree they were preceded by. For instance, if someone did a Bachelor of Science degree followed by an honours degree the two degrees would be indicated as "Bachelor of Science (Honours)". 
 
@@ -172,5 +172,7 @@ University of Southern Queensland. (n.d.-b). *Tertiary Preparation Pathway Progr
 University of Southern Queensland. (2022a, May 25). *Higher Degree by Research Thesis Presentation Schedule*. policy.usq.edu.au. https://policy.usq.edu.au/documents/151774PL
 
 University of Southern Queensland. (2022b, January 18). *Higher Doctorates Procedure*. policy.usq.edu.au. https://policy.usq.edu.au/documents/13336PL
+
+UNSW Sydney. (n.d.). *Honours Handbook*. UNSW Sites. Retrieved 25 February 2024, from https://www.unsw.edu.au/arts-design-architecture/our-schools/arts-media/student-life/resources-support/honours-handbook
 
 Victoria University. (n.d.). *Higher Degrees by Research Procedure 8 Thesis Requirements*. Victoria University Policy Library. Retrieved 25 February 2024, from https://policy.vu.edu.au/view.current.php?id=00242
