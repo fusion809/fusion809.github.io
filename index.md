@@ -38,3 +38,6 @@ Advice for people considering doing a PhD:
 
 My knowledge of the Australian education system:
 - [The Australian education system with a particular focus on the Queensland education system](/Australian_education_system/)
+
+Advice for undergraduate students wishing to study a PhD:
+- [Advice for undergraduate students wishing to study a PhD](/advice_for_wannabe_PhD_students/)
