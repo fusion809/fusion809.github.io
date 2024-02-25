@@ -1,9 +1,9 @@
-@def title="Australian education system, especially as it exists in Queensland"
+@def title="The Australian education system with a particular focus on the Queensland education system"
 @def tag=["Education"]
 @def maxtoclevel=5
 @def mintoclevel=1
 
-In Australia, education is split into four main categories &mdash; pre-primary, primary, secondary (also known as high school) and tertiary. Although, the Australian Government Department of Foreign Affairs and Trade instead categorizes education in Australia as primary (which includes what I categorize as pre-primary), secondary, senior secondary and tertiary (Australian Government Department of Foreign Affairs and Trade, 2017).
+In Australia, education is split into four main categories &mdash; pre-primary, primary, secondary (also known as high school) and tertiary. Although, the Australian Government Department of Foreign Affairs and Trade instead categorizes education in Australia as primary (which includes what I categorize as pre-primary), secondary, senior secondary and tertiary (Australian Government Department of Foreign Affairs and Trade, 2017). Although, I have personally decided to categorize it this way as it seems more fitting. 
 
 \toc
 

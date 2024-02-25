@@ -37,4 +37,4 @@ Advice for people considering doing a PhD:
 - [Meeting the entry requirements of Australian PhD programmes](/PhD_entry_article/)
 
 My knowledge of the Australian education system:
-- [Australian education system](/Australian_education_system/)
+- [The Australian education system with a particular focus on the Queensland education system](/Australian_education_system/)
