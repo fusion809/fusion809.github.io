@@ -33,11 +33,7 @@ Complex analysis pages:
 Numerical mathematics:
 - [Root-finding without a calculator](/sqrt/)
 
-Advice for people considering doing a PhD:
-- [Meeting the entry requirements of Australian PhD programmes](/PhD_entry_article/)
-
-My knowledge of the Australian education system:
-- [The Australian education system with a particular focus on the Queensland education system](/Australian_education_system/)
-
-Advice for undergraduate students wishing to study a PhD:
+Education:
 - [Advice for undergraduate students wishing to study a PhD](/advice_for_wannabe_PhD_students/)
+- [Meeting the entry requirements of Australian PhD programmes](/PhD_entry_article/)
+- [The Australian education system with a particular focus on the Queensland education system](/Australian_education_system/)
