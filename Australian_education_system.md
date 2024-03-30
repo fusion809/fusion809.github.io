@@ -86,7 +86,7 @@ An MDC programme is typically titled "Master of &lt;field of study&gt;", an MDR 
 
 An MDR programme is categorized as a higher degree by research (HDR), which is a category of degrees that share similar scholarship opportunities and similar structures. MPhil programmes are typically treated differently to other MDR programmes in that they typically require demonstrated previous research experience in order to gain entry (for which an honours degree will typically suffice) and they typically provide students the option to articulate into a Doctor of Philosophy (PhD) programme. Other MDR programmes typically allow entry without previous research experience and do not provide the option to articulate into a PhD programme unless the student has the previous research experience required by a MPhil. Although, this can vary between institutions. 
 
-The rest of these qualifications typically have a bachelor's degree as at least part of their entry requirement. I have seen some master's degrees in nursing that require a graduate diploma though and relevant work experience. 
+The rest of these qualifications typically have a bachelor's degree as at least part of their entry requirement. I have seen some MDCs in nursing that require a graduate diploma though and relevant work experience. 
 
 #### Doctoral degree
 The AQF recognizes three separate categories of doctoral degree &mdash; professional, research and higher. A defining characteristic of a doctoral degree is research. Each category of doctoral degree has a substantial research component.
