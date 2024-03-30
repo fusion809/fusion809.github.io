@@ -64,7 +64,7 @@ Bachelor's degrees are the minimum entry-level qualifications for most professio
 * Optometry.
 * Physiotherapy.
 * Engineering (typically these degrees are classified as bachelor's honours degrees).
-These qualifications typically require three to four years of full-time study (Australian Qualifications Framework Council, 2013) and are the highest qualification that students are eligible to enter straight after high school. Accelerated bachelor's degree programmes do exist that can be completed in as little as two years (Bond University, n.d.). Some bachelor's degree programmes (sometimes considered bachelor's honours degree programmes) can take up to six years, such as James Cook University (JCU)'s Bachelor of Medicine, Bachelor of Surgery (MBBS) degree programme (James Cook University, n.d.).
+These qualifications typically require three to four years of full-time study (Australian Qualifications Framework Council, 2013) and are the highest qualification that students are eligible to enter straight after high school. Accelerated bachelor's degree programmes do exist that can be completed in as little as two years (Bond University, n.d.). Some bachelor's degree programmes (sometimes considered bachelor's honours degree programmes) can take up to six years to study full-time, such as James Cook University (JCU)'s Bachelor of Medicine, Bachelor of Surgery (MBBS) degree programme (James Cook University, n.d.).
 
 All qualifications at levels eight or above require at least a bachelor's degree to gain entry into.
 
