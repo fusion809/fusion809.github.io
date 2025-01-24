@@ -93,14 +93,20 @@ html {
     padding-top: 0.5em;
     border-bottom: 4px solid rgb(100, 100, 100);
     margin-top: 1.5em;
-    margin-bottom: 1em; }
+    margin-bottom: 1em; 
+    overflow: auto;
+    clear: both;
+}
 
 .franklin-content h2 {
     padding-bottom: 0.3em;
     border-bottom: 1px solid lightgrey;
     text-indent: 2%;
     margin-top: 2em;
-    margin-bottom: 1em; }
+    margin-bottom: 1em; 
+    overflow: auto;
+    clear: both;
+}
 
 .franklin-content h3 {
     text-indent: 4%;
@@ -109,7 +115,7 @@ html {
 .franklin-content h4 {
     text-indent: 6%;
 }
-.franklin-content h1 a { color: inherit; }
+.franklin-content h1 a { color: inherit;}
 .franklin-content h1 a:hover {text-decoration: none;}
 .franklin-content h2 a { color: inherit; }
 .franklin-content h2 a:hover {text-decoration: none;}
