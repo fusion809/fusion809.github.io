@@ -8,10 +8,11 @@ In the infoboxes I include in each distribution's section, I typically omit deve
 
 \tableofcontents 
 
+~~~
 <h1 style="clear: both;">Alpine Linux</h1>
 <table style="width: 380px; float: right; border-collapse: collapse;">
     <tr>
-        <td colspan="2"><image src="Alpine_Linux_3.21.2.png"/></td>
+        <td colspan="2"><image src="./Alpine_Linux_3.21.2.png"/></td>
     </tr>
     <tr>
         <td style="padding: 5px;">Initial release</td>
@@ -74,9 +75,11 @@ In the infoboxes I include in each distribution's section, I typically omit deve
         <td style="padding: 5px;">Detailed</td>
     </tr>
 </table>
+~~~
 
 **Alpine Linux** is a security-focused distribution primarily intended for servers, routers, VPNs, and alike. A base Alpine Linux install can be as small as 144 MB in size and does not include Bash, sudo, Vim or nano.
 
+~~~
 <h1 style="clear: both;">Arch Linux</h1>
 <table style="width: 380px; float: right; border-collapse: collapse;">
     <tr>
@@ -143,6 +146,7 @@ In the infoboxes I include in each distribution's section, I typically omit deve
         <td style="padding: 5px;">Comprehensive</td>
     </tr>
 </table>
+~~~
 No conversation about Linux distributions geared towards advanced users would be complete without **Arch Linux**. It follows a Keep it Simple, Stupid (KISS) design philosophy. I may be biased in its favour as it is my go-to Linux distribution. A base install comes without a graphical user interface and has a pretty minimal array of packages, although the total size of a base install is about 1.7GB. It also has perhaps the most comprehensive documentation and vast repositories of any distribution.
 
 It is ideal for users that:
