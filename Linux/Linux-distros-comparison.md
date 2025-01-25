@@ -99,7 +99,7 @@ In the infoboxes I include in each distribution's section, I typically omit deve
         <td style="padding: 5px;">Bleeding edge</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Installer</td>
+        <td style="padding: 5px;">Installer<exj/td>
         <td style="padding: 5px;"><a href="https://wiki.archlinux.org/title/Archinstall">archinstall</a>&mdash;textual installer.</td>
     </tr>
     <tr>
