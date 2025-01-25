@@ -37,3 +37,6 @@ Education:
 - [Advice for undergraduate students wishing to study a PhD](/advice_for_wannabe_PhD_students/)
 - [Meeting the entry requirements of Australian PhD programmes](/PhD_entry_article/)
 - [The Australian education system with a particular focus on the Queensland education system](/Australian_education_system/)
+
+Linux:
+- [Linux distributions for experienced users: identifying the ideal use cases.](/Linux/experienced-user-distros/)
