@@ -44,6 +44,12 @@
     <priority>0.5</priority>
 </url>
 <url>
+    <loc>https://fusion809.github.io/Linux/Linux-distros-comparison/index.html</loc>
+    <lastmod>2025-01-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
     <loc>https://fusion809.github.io/PhD_entry_article/index.html</loc>
     <lastmod>2025-01-25</lastmod>
     <changefreq>monthly</changefreq>
@@ -63,12 +69,6 @@
 </url>
 <url>
     <loc>https://fusion809.github.io/index.html</loc>
-    <lastmod>2025-01-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
-    <loc>https://fusion809.github.io/Linux/.experienced-user-distros/index.html</loc>
     <lastmod>2025-01-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
