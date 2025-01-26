@@ -6,7 +6,43 @@ My name is Brenton Horne and I have been using Linux on and off since 2012, incl
 
 In the infoboxes I include in each distribution's section, I typically omit developmental releases when it comes to the release model and modernity sections. I do typically consider developmental releases when it comes to the initial release section, however.
 
-\toc 
+~~~
+<table style="float: left; border-collapse: collapse;">
+<tr>
+    <td style="font-size: 30px; padding: 30px;"><b>Table of contents</b></td>
+</tr>
+<tr>
+    <td style="padding-left: 30px; font-size: 20px; padding-right: 30px; padding-bottom: 10px; padding-top: 10px;">
+    <ol>
+        <li><a href="#alpine_linux">Alpine Linux</a></li>
+        <li><a href="#arch_linux">Arch Linux</a></li>
+        <li><a href="#chimera_linux">Chimera Linux</a></li>
+        <li><a href="#crux">CRUX</a></li>
+        <li><a href="#debian">Debian</a></li>
+        <li><a href="#exherbo">Exherbo</a></li>
+        <li><a href="#fedora">Fedora</a></li>
+        <li><a href="#gentoo_linux">Gentoo Linux</a></li>
+        <li><a href="#guix_system">Guix System</a></li>
+        <li><a href="#linux_from_scratch">Linux From Scratch</a></li>
+        <li><a href="#mageia">Mageia</a></li>
+        <li><a href="#nixos">NixOS</a></li>
+        <li><a href="#nutyx">NuTyX</a></li>
+        <li><a href="#openmamba_gnulinux">openmamba GNU/Linux</a></li>
+        <li><a href="#openmandriva_lx">OpenMandriva Lx</a></li>
+        <li><a href="#opensuse">openSUSE</a></li>
+        <li><a href="#pclinuxos">PCLinuxOS</a></li>
+        <li><a href="#rhino_linux">Rhino Linux</a></li>
+        <li><a href="#slackware_linux">Slackware Linux</a></li>
+        <li><a href="#solus">Solus</a></li>
+        <li><a href="#ubuntu">Ubuntu</a></li>
+        <li><a href="#vanilla_os">Vanilla OS</a></li>
+        <li><a href="#void">Void</a></li>
+        <li><a href="#footnotes">Footnotes</a></li>
+    </ol>
+    </td>
+</tr>
+</table>
+~~~
 
 # Alpine Linux
 ~~~
@@ -832,7 +868,7 @@ As users can choose a minimal install from its installer, and there are three ma
     </tr>
     <tr>
         <td style="padding: 5px;">Package manager (type)</td>
-        <td style="padding: 5px;">Nix (binary)</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Nix_(package_manager)">Nix</a> (binary)</td>
     </tr>
     <tr>
         <td style="padding: 5px;">Packaging file(s)</td>
@@ -873,7 +909,9 @@ As users can choose a minimal install from its installer, and there are three ma
 </table>
 ~~~
 
-**NixOS** is a reproducible Linux distribution that is configured using files written in a special-made purely functional programming language called Nix. It also uses a package manager called Nix; Nix installs each package to its own unique directory within `/nix/store`. 
+**NixOS** is a reproducible Linux distribution that is configured using files written in a special-made purely functional programming language called Nix. While it is purely functional, it does incorporate a few syntactic elements from shell script. It also uses a package manager called Nix; Nix installs each package to its own unique directory within `/nix/store`. Nix packages are also specified using files written in the Nix language. Nix and NixOS started out as a research project by Dutch software engineering student Eelco Dolsta. 
+
+Its chief configuration files are `/etc/nixos/configuration.nix` and `/etc/nixos/hardware-configuration.nix` and these files uniquely determine the root file system of the distribution. This is why the system is reproducible, as the root file system of two NixOS systems built with these same configuration files will be largely the same. This is with the exception that if additional packages are installed using user configuration files they will be installed under `/nix/store`. Whenever one wants changes to these configuration files to come into effect, one runs `nixos-rebuild switch` (as root) and the new configuration is built. The old configuration is also kept and when users boot the system they can boot the new configuration (which is the default), or the old configuration. NixOS also keeps even older configurations, if they exist, although naturally this uses disk space so there is a command to remove older configurations (`nix-collect-garbage -d`) to free up disk space. 
 
 # NuTyX
 ~~~
@@ -1157,7 +1195,7 @@ As users can choose a minimal install from its installer, and there are three ma
 </table>
 ~~~
 
-**openSUSE** is a continuation of the SUSE Linux distribution developed by a group of German computer science students and first released in March 1994. Like OpenMandriva Lx, it comes into separate editions &mdash; one, Leap, that features a fixed release model and another, Tumbleweed, that features a rolling release model. openSUSE adopted its two editions in 2014,~~~<sup><a href="#footnote-13">13</a></sup>~~~ whereas OpenMandriva Lx adopted this two edition approach around 2023.~~~<sup><a href="#footnote-12">12</a></sup>~~~
+**openSUSE** is a continuation of the SUSE Linux distribution developed by a group of German computer science students and first released in March 1994. Like OpenMandriva Lx, it comes into separate editions &mdash; one, Leap, that features a fixed release model and another, Tumbleweed, that features a rolling release model. openSUSE adopted its two editions in 2014,~~~<sup><a href="#footnote-13">13</a></sup>~~~ whereas OpenMandriva Lx adopted this two edition approach around 2023.~~~<sup><a href="#footnote-12">12</a></sup>~~~ One notable feature of openSUSE is that, by default, it uses [Btrfs](https://en.wikipedia.org/wiki/Btrfs) as its root file system. It is used as it allows for easier snapshots to backup the root file system. It also uses [XFS](https://en.wikipedia.org/wiki/XFS) as its default home file system. 
 
 # PCLinuxOS
 ~~~
@@ -1228,7 +1266,7 @@ As users can choose a minimal install from its installer, and there are three ma
 </table>
 ~~~
 
-**PCLinuxOS** is a beginner-friendly Linux distribution that was originally forked from Mandrake Linux 9.2 in 2003. It is rather conservative in some ways, for instance it still uses SysV as its init system, APT-RPM as its command-line package manager and Synaptic as its graphical package manager. APT-RPM had its last release in 2008, Synaptic has an outdated look although it is still maintained and SysV has been superseded on most distributions (not all, of course) by systemd, which was first released in 2010. Despite using a rolling release model, it also usually uses pretty old software. 
+**PCLinuxOS** is a beginner-friendly Linux distribution that was originally forked by Bill Reynolds (Texstar) from Mandrake Linux 9.2 in 2003. It is rather conservative in some ways, for instance it still uses SysV as its init system, APT-RPM as its command-line package manager and Synaptic as its graphical package manager. APT-RPM had its last release in 2008, Synaptic has an outdated look although it is still maintained and SysV has been superseded on most distributions (not all, of course) by systemd, which was first released in 2010. Despite using a rolling release model, it also usually uses pretty old software. 
 
 PCLinuxOS is perhaps best suited to beginners that do not need exotic software, like a no thrills and 2000s-esque desktop experience and favour a rolling release model. If somehow, despite being beginners, they have an opinion on init systems and dislike systemd, they may also like PCLinuxOS. 
 
@@ -1301,7 +1339,7 @@ PCLinuxOS is perhaps best suited to beginners that do not need exotic software, 
 </table>
 ~~~
 
-**Rhino Linux** is a Ubuntu derivative that gets its core packages from the Ubuntu developmental branch. Rhino Linux is the only Ubuntu-based distribution that I am aware of that follows a rolling release model. It is specifically designed with developers in mind and comes with VSCodium pre-installed. It also comes with pacstall &mdash; a package manager that provides access to a repository designed to be the Ubuntu counterpart to the Arch User Repository &mdash; pre-installed. It also has a setup wizard that offers users four different distribution-agnostic package formats that the wizard can add support for onto their system &mdash; namely Snap, Flatpak, Nix and AppImages. Its default desktop environment is a customized Xfce desktop featuring a dock on the left of the screen that the distribution calls "Unicorn". 
+**Rhino Linux** is a Ubuntu derivative that gets its core packages from the Ubuntu developmental branch. Rhino Linux is the only Ubuntu-based distribution that I am aware of that follows a rolling release model. It is specifically designed with developers in mind and comes with VSCodium pre-installed. It also comes with pacstall &mdash; a package manager that provides access to a repository designed to be the Ubuntu counterpart to the Arch User Repository &mdash; pre-installed. Rhino also has a setup wizard that offers users four different distribution-agnostic package formats that the wizard can add support for onto their system &mdash; namely Snap, Flatpak, Nix and AppImages (with the AppImage manager AM). Its default desktop environment is a customized Xfce desktop featuring a dock on the left of the screen that the distribution calls "Unicorn". It has a wrapper for each of its package managers that is called rhino-pkg.
 
 # Slackware Linux
 ~~~
@@ -1449,6 +1487,77 @@ Like PCLinuxOS, **Solus** is a Linux distribution aimed towards beginners, despi
 
 Its ideal use case is probably a beginner that does not need exotic software, appreciates a beautiful and simple desktop like Budgie and does not want to have to upgrade their system between releases of a fixed release distribution like Linux Mint for fear of system breakage.
 
+# Ubuntu
+~~~
+<table style="width: 380px; float: right; border-collapse: collapse;">
+    <tr>
+        <td colspan="2"><img width="500px;" src="/Linux/Ubuntu_24.10.png"/></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Initial release</td>
+        <td style="padding: 5px;">20 October 2004</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px; width: 190px;">Website</td>
+        <td style="padding: 5px;"><a href="https://ubuntu.com/">ubuntu.com</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Release model</td>
+        <td style="padding: 5px;">Fixed</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 5px;">Stable</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Installer</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Ubiquity_(software)">Ubiquity</a>&mdash;graphical.</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Package manager (type)</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Advanced_Packaging_Tool">APT</a> (binary) and <a href="https://en.wikipedia.org/wiki/Snap_(software)">Snap</a> (binary).</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Packaging file(s)</td>
+        <td style="padding: 5px;">Per Debian.</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Compiler</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Init system</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">C standard library</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a><td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Userland</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Shell</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
+        <td style="padding: 5px;">Very large</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
+        <td style="padding: 5px;">Complete</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
+        <td style="padding: 5px;">Medium</td>
+    </tr>
+</table>
+~~~
+
+**Ubuntu** is a Linux distribution based on Debian (testing) and has been the go-to beginner-friendly distribution since its first release in 2004. It was created by South African enterpeneur Mark Shuttleworth and is maintained by his company [Canonical Ltd](https://en.wikipedia.org/wiki/Canonical_(company)). 
+
 # Vanilla OS
 ~~~
 <table style="width: 380px; float: right; border-collapse: collapse;">
@@ -1477,7 +1586,7 @@ Its ideal use case is probably a beginner that does not need exotic software, ap
     </tr>
     <tr>
         <td style="padding: 5px;">Package manager (type)</td>
-        <td style="padding: 5px;">ostree (read-only root), distro-agnostic package managers<sup><a href="#footnote-16">16</a></sup> and <a href="https://github.com/Vanilla-OS/apx">Apx</a> (applications).</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/OSTree">OSTree</a> (read-only root), distro-agnostic package managers<sup><a href="#footnote-16">16</a></sup> and <a href="https://github.com/Vanilla-OS/apx">Apx</a> (applications).</td>
     </tr>
     <tr>
         <td style="padding: 5px;">Packaging file(s)</td>
