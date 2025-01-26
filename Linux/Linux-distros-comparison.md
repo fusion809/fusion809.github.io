@@ -4,15 +4,17 @@
 
 My name is Brenton Horne and I have been using Linux on and off since 2012, including several years in which I used various distributions as my daily driver. These distributions include, among others: Arch Linux, Debian, Fedora, Funtoo Linux, Gentoo Linux, Linux Mint, Mageia, Manjaro Linux, NixOS, OpenMandriva Lx, openSUSE, Sabayon and Ubuntu. Consequently, I would classify myself as an experienced user, and I wanted to give my opinion about the ideal use case of several Linux distributions, especially independent and innovative distributions. 
 
-In the infoboxes I include in each distribution's section, I typically omit developmental releases when it comes to the release model and modernity sections. I do typically consider developmental releases when it comes to the initial release section, however.
+In the infoboxes I include in each distribution's section, I typically omit developmental releases when it comes to the release model and modernity sections. I do typically consider developmental releases when it comes to the initial release section, however. The images I show are largely hyfetch, neofetch or fastfetch output. For Linux From Scratch, I just used the official logo.
+
+When I mention "exotic" or "obscure" software I mean software that is fairly unpopular and used for niche purposes. For instance, the Marvin Suite of ChemAxon is a piece of software for sketching skeletal formulas, among other things, and I would class it as exotic or obscure. 
 
 ~~~
 <table style="float: left; border-collapse: collapse;">
 <tr>
-    <td style="font-size: 30px; padding: 30px;"><b>Table of contents</b></td>
+    <td style="font-size: 30px; padding: 10px;"><b>Table of contents</b></td>
 </tr>
 <tr>
-    <td style="padding-left: 30px; font-size: 20px; padding-right: 30px; padding-bottom: 10px; padding-top: 10px;">
+    <td style="font-size: 20px; padding: 5px;">
     <ol>
         <li><a href="#alpine_linux">Alpine Linux</a></li>
         <li><a href="#arch_linux">Arch Linux</a></li>
@@ -24,6 +26,7 @@ In the infoboxes I include in each distribution's section, I typically omit deve
         <li><a href="#gentoo_linux">Gentoo Linux</a></li>
         <li><a href="#guix_system">Guix System</a></li>
         <li><a href="#linux_from_scratch">Linux From Scratch</a></li>
+        <li><a href="#linux_mint">Linux Mint</a></li>
         <li><a href="#mageia">Mageia</a></li>
         <li><a href="#nixos">NixOS</a></li>
         <li><a href="#nutyx">NuTyX</a></li>
@@ -768,6 +771,79 @@ As users can choose a minimal install from its installer, and there are three ma
 ~~~
 
 **Linux From Scratch** (LFS) is a source-based distribution wherein each software package is manually compiled and installed from source.
+
+# Linux Mint
+~~~
+<table style="width: 380px; float: right; border-collapse: collapse;">
+    <tr>
+        <td colspan="2"><img width="500px;" src="/Linux/Linux_Mint_22.1.png"/></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Initial release</td>
+        <td style="padding: 5px;">27 August 2006</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px; width: 190px;">Website</td>
+        <td style="padding: 5px;"><a href="https://linuxmint.com/">linuxmint.com</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Release model</td>
+        <td style="padding: 5px;">Fixed</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 5px;">Stable</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Installer</td>
+        <td style="padding: 5px;">Ubiquity&mdash;graphical.</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Package manager (type)</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Advanced_Packaging_Tool">APT</a> (binary)</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Packaging file(s)</td>
+        <td style="padding: 5px;">Per <a href="#debian">Debian</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Compiler</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Init system</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">C standard library</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Userland</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Shell</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
+        <td style="padding: 5px;">Very large</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
+        <td style="padding: 5px;">Complete</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
+        <td style="padding: 5px;">Medium</td>
+    </tr>
+</table>
+~~~
+
+**Linux Mint** is a beginner-friendly distribution based on Ubuntu's long-term support (LTS) releases. Its team forked GNOME 3 to create Cinnamon in an attempt to provide users a more classic desktop experience. It has three official editions that all feature a classic desktop experience that includes a Windows-like layout. The distribution includes many of its own tools for common tasks like package management and configuration. There is also a Debian-based edition of Mint. 
+
+It is ideal for beginners that are used to the Windows layout, especially if they do not want the latest software and do not have especially exotic software needs. 
 
 # Mageia
 ~~~
@@ -1519,7 +1595,7 @@ Its ideal use case is probably a beginner that does not need exotic software, ap
     </tr>
     <tr>
         <td style="padding: 5px;">Packaging file(s)</td>
-        <td style="padding: 5px;">Per Debian.</td>
+        <td style="padding: 5px;">Per <a href="#debian">Debian</a>.</td>
     </tr>
     <tr>
         <td style="padding: 5px;">Compiler</td>
