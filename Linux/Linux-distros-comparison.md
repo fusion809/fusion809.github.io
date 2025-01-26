@@ -522,7 +522,7 @@ Deepin has also produced its own artificial intelligence (AI) assistant and many
     </tr>
     <tr>
         <td style="padding: 5px;">Installer</td>
-        <td style="padding: 5px;">Elementary Installer&mdash;graphical.</td>
+        <td style="padding: 5px;"><a href="https://github.com/elementary/installer">elementary Installer</a>&mdash;graphical.</td>
     </tr>
     <tr>
         <td style="padding: 5px;">Package manager (type)</td>
@@ -1072,7 +1072,7 @@ It is ideal for beginners that are used to the Windows layout, especially if the
 ~~~
 <table style="width: 380px; float: right; border-collapse: collapse;">
     <tr>
-        <td colspan="2"><image width="500px;" src="/Linux/Debian_12.png"/></td>
+        <td colspan="2"><image width="500px;" src="/Linux/MX_Linux_23.5.png"/></td>
     </tr> 
     <tr>
         <td style="padding: 5px;">Initial release</td>
@@ -1568,6 +1568,77 @@ Its chief configuration files are `/etc/nixos/configuration.nix` and `/etc/nixos
 
 PCLinuxOS is perhaps best suited to beginners that do not need exotic software, like a no thrills and 2000s-esque desktop experience and favour a rolling release model. If somehow, despite being beginners, they have an opinion on init systems and dislike systemd, they may also like PCLinuxOS. 
 
+# Pop!_OS
+~~~
+<table style="width: 380px; float: right; border-collapse: collapse;">
+    <tr>
+        <td colspan="2"><image width="500px;" src="/Linux/Pop!_OS_22.04.png"/></td>
+    </tr> 
+    <tr>
+        <td style="padding: 5px;">Initial release</td>
+        <td style="padding: 5px;">27 October 2017</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px; width: 190px;">Website</td>
+        <td style="padding: 5px;"><a href="https://pop.system76.com/">pop.system76.com</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Release model</td>
+        <td style="padding: 5px;">Fixed</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 5px;">Old stable<sup><a href="#footnote-14">14</a></sup></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Installer</td>
+        <td style="padding: 5px;"><a href="https://github.com/elementary/installer">elementary Installer</a>&mdash;graphical.</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Package manager (type)</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Advanced_Packaging_Tool">APT</a> (binary)</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Packaging file(s)</td>
+        <td style="padding: 5px;">Per Debian</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Compiler</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Init system</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">C standard library</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Userland</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Shell</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
+        <td style="padding: 5px;">Large</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
+        <td style="padding: 5px;">Compete</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
+        <td style="padding: 5px;">None<sup><a href="#footnote-15">15</a></sup></td>
+    </tr>
+</table>
+~~~
+
+**Pop!_OS** originally used a customized GNOME desktop but its team has been developing a desktop environment written in Rust called COSMIC. It is beautiful by default. Pop!_OS is developed by the computer manufacturer called System76. According to its website, it is aimed at STEM and creative professionals. It does seem fairly beginner friendly from my experience with it, but it does use pretty old software due to it, at the time of writing (26 January 2025), being based on the previous long-term support (LTS) release of Ubuntu.
+
 # Rhino Linux
 ~~~
 <table style="width: 380px; float: right; border-collapse: collapse;">
@@ -1596,7 +1667,7 @@ PCLinuxOS is perhaps best suited to beginners that do not need exotic software, 
     </tr>
     <tr>
         <td style="padding: 5px;">Package manager (type)</td>
-        <td style="padding: 5px;"><a href="https://github.com/volitank/nala">Nala</a> (binary), <a href="https://github.com/pacstall/pacstall">Pacstall</a> (source) and distro-agnostic package managers (binary).<sup><a href="#footnote-14">14</a></sup></td>
+        <td style="padding: 5px;"><a href="https://github.com/volitank/nala">Nala</a> (binary), <a href="https://github.com/pacstall/pacstall">Pacstall</a> (source) and distro-agnostic package managers (binary).<sup><a href="#footnote-16">16</a></sup></td>
     </tr>
     <tr>
         <td style="padding: 5px;">Packaging file(s)</td>
@@ -1864,8 +1935,6 @@ Ubuntu is a very popular base for other distributions. I am not going to cover a
 
 KDE neon is sort of a semi-rolling release distribution as its core system software is based on Ubuntu LTS releases but its KDE software is bleeding edge. It is not especially beginner friendly and its ideal users are KDE fans that want to try out the latest KDE software as soon as it is published.
 
-Pop!_OS originally used a customized GNOME desktop but its team has been developing a desktop environment written in Rust called COSMIC. It is developed by the computer manufacturer called System76. According to its website, it is aimed for STEM and creative professionals.
-
 Zorin OS uses a Windows-like layout and is aimed at beginners as well. 
 
 # Vanilla OS
@@ -1876,7 +1945,7 @@ Zorin OS uses a Windows-like layout and is aimed at beginners as well.
     </tr>
     <tr>
         <td style="padding: 5px;">Initial release</td>
-        <td style="padding: 5px;">29 December 2022<sup><a href="#footnote-15">15</a></sup></td>
+        <td style="padding: 5px;">29 December 2022<sup><a href="#footnote-17">17</a></sup></td>
     </tr>
     <tr>
         <td style="padding: 5px; width: 190px;">Website</td>
@@ -1896,7 +1965,7 @@ Zorin OS uses a Windows-like layout and is aimed at beginners as well.
     </tr>
     <tr>
         <td style="padding: 5px;">Package manager (type)</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/OSTree">OSTree</a> (read-only root), distro-agnostic package managers<sup><a href="#footnote-16">16</a></sup> and <a href="https://github.com/Vanilla-OS/apx">Apx</a> (applications).</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/OSTree">OSTree</a> (read-only root), distro-agnostic package managers<sup><a href="#footnote-18">18</a></sup> and <a href="https://github.com/Vanilla-OS/apx">Apx</a> (applications).</td>
     </tr>
     <tr>
         <td style="padding: 5px;">Packaging file(s)</td>
@@ -2026,8 +2095,10 @@ I would like to start this section by mentioning that I have not been able to in
     <li id="footnote-11">Earliest release in DistroWatch's database is the 1.1 release which was <a href="https://distrowatch.com/?newsid=05607">released on 4 August 2009</a>. This was meant to be an update to the earlier release of openmamba GNu/Linux 1.0.</li>
     <li id="footnote-12">This I say based on <a href="https://distrowatch.com/?newsid=11735">this news release from DistroWatch</a>.</li>
     <li id="footnote-13">Source: <a href="https://en.opensuse.org/Portal%3ATumbleweed?">Portal:Tumbleweed at openSUSE Wiki</a>.</li> <!-- openSUSE-->
-    <li id="footnote-14">I mention these, even though I omit them in most distro's infoboxes, because Rhino Linux has options to enable cross-distro package managers/formats in its setup wizard. Specifically, it allows users to enable Flatpak, Nix, Snap or AppImages.</li> 
-    <li id="footnote-15"><a href="https://vanillaos.org/blog/article/2022-12-29/vanilla-os-2210-kinetic-is-out">Vanilla OS 22.10</a> was this release and it was the first release mentioned in the <a href="https://vanillaos.org/blog">Vanilla OS</a> blog.</li>
-    <li id="footnote-16">I say this because <a ref="https://docs.vanillaos.org/handbook/en/install-flatpaks">Flatpak installation instructions</a> and <a href="https://docs.vanillaos.org/handbook/en/install-homebrew">Homebrew installation instructions</a> are given in Vanilla OS's documentation.</li>
+    <li id="footnote-14">This is based on the fact that the latest release as of 26 January 2025 is based on Ubuntu 22.04.</li>
+    <li id="footnote-15">I checked the Pop!_OS website and could not find documentation on it.</li>
+    <li id="footnote-16">I mention these, even though I omit them in most distro's infoboxes, because Rhino Linux has options to enable cross-distro package managers/formats in its setup wizard. Specifically, it allows users to enable Flatpak, Nix, Snap or AppImages.</li> 
+    <li id="footnote-17"><a href="https://vanillaos.org/blog/article/2022-12-29/vanilla-os-2210-kinetic-is-out">Vanilla OS 22.10</a> was this release and it was the first release mentioned in the <a href="https://vanillaos.org/blog">Vanilla OS</a> blog.</li>
+    <li id="footnote-18">I say this because <a ref="https://docs.vanillaos.org/handbook/en/install-flatpaks">Flatpak installation instructions</a> and <a href="https://docs.vanillaos.org/handbook/en/install-homebrew">Homebrew installation instructions</a> are given in Vanilla OS's documentation.</li>
 </ol>
 ~~~
