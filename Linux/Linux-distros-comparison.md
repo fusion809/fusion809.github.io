@@ -21,6 +21,8 @@ When I mention "exotic" or "obscure" software I mean software that is fairly unp
         <li><a href="#chimera_linux">Chimera Linux</a></li>
         <li><a href="#crux">CRUX</a></li>
         <li><a href="#debian">Debian</a></li>
+        <li><a href="#deepin">deepin</a></li>
+        <li><a href="#elementary_os">elementary OS</a></li>
         <li><a href="#exherbo">Exherbo</a></li>
         <li><a href="#fedora">Fedora</a></li>
         <li><a href="#gentoo_linux">Gentoo Linux</a></li>
@@ -28,6 +30,7 @@ When I mention "exotic" or "obscure" software I mean software that is fairly unp
         <li><a href="#linux_from_scratch">Linux From Scratch</a></li>
         <li><a href="#linux_mint">Linux Mint</a></li>
         <li><a href="#mageia">Mageia</a></li>
+        <li><a href="#mx_linux">MX Linux</a></li>
         <li><a href="#nixos">NixOS</a></li>
         <li><a href="#nutyx">NuTyX</a></li>
         <li><a href="#openmamba_gnulinux">openmamba GNU/Linux</a></li>
@@ -417,13 +420,154 @@ It has three and sometimes four branches. In ascending order of modernity, they 
 
 As users can choose a minimal install from its installer, and there are three main branches users can choose from, Debian can be a good choice for users that want to customize their system as much as one can without installing packages from source. Especially those that do not mind using systemd, like having very large repositories and do not mind having to use Makefiles to build packages, should one need to. Users needing more a beginner-friendly distribution should ideally use the Debian derivatives elementary OS, Linux Mint, MX Linux, Ubuntu or Zorin OS. 
 
-Popular Debian derivatives include [antiX](https://antixlinux.com/), [deepin](https://www.deepin.org/index/en), [Devuan GNU+Linux](https://www.devuan.org/), [MX Linux](https://mxlinux.org/) and [Ubuntu](https://ubuntu.com/) (and its derivatives). I cover Ubuntu and some of its derivatives in separate sections, the rest I will cover here. 
+Popular Debian derivatives include [antiX](https://antixlinux.com/), [deepin](https://www.deepin.org/index/en) (although, I have heard it is [becoming independent](https://distrowatch.com/dwres.php?resource=showheadline&story=14870)), [Devuan GNU+Linux](https://www.devuan.org/), [MX Linux](https://mxlinux.org/) and [Ubuntu](https://ubuntu.com/) (and its derivatives). I cover deepin and Ubuntu and some Ubuntu derivatives in separate sections, the rest I will cover here. 
 
-antiX is designed to be lightweight and fast distribution with runit or SysV init as its init system. It uses JWM as its default user interface. MX Linux is based on antiX but uses customized and prettified Xfce, KDE Plasma or Fluxbox as its user interface. It is ideal for users that want or need a lightweight distribution such as due to using old hardware. 
-
-deepin uses its own desktop environment called Deepin Desktop Environment (DDE). It is developed by a Chinese company and has editions in both Chinese and English. The English edition does have some untranslated Chinese text in it, however. Many consider it one of the most beautiful Linux distributions out there, at least in terms of its default aesthetics. Its packages can get outdated and it has tried to develop its own package manager called [Linglong](https://www.deepin.org/en/deepin-linglong/) as a way of providing more up to date versions of application software. Deepin has also produced its own AI assistant and many of its own applications. 
+antiX is designed to be lightweight and fast distribution with runit or SysV init as its init system. It uses JWM as its default user interface. It is ideal for users that want or need a lightweight distribution such as due to using old hardware. 
 
 Devuan is essentially just Debian without systemd. It offers SysV init, runit and OpenRC editions.
+
+# deepin
+~~~
+<table style="width: 380px; float: right; border-collapse: collapse;">
+    <tr>
+        <td colspan="2"><image width="500px;" src="/Linux/deepin_25Preview.png"/></td>
+    </tr> 
+    <tr>
+        <td style="padding: 5px;">Initial release</td>
+        <td style="padding: 5px;">28 February 2004</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px; width: 190px;">Website</td>
+        <td style="padding: 5px;"><a href="https://www.deepin.org/index/en">www.deepin.org</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Release model</td>
+        <td style="padding: 5px;">Fixed</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 5px;">Stable</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Installer</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Debian-Installer">deepin-Installer</a>&mdash;graphical.</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Package manager (type)</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Advanced_Packaging_Tool">APT</a> (binary) and <a href="https://www.deepin.org/en/deepin-linglong/">LingLong</a> (binary)</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Packaging file(s)</td>
+        <td style="padding: 5px;">Per Debian</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Compiler</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Init system</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">C standard library</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Userland</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Shell</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
+        <td style="padding: 5px;">Very large</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
+        <td style="padding: 5px;">Compete</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
+        <td style="padding: 5px;">Detailed</td>
+    </tr>
+</table>
+~~~
+deepin uses its own desktop environment called Deepin Desktop Environment (DDE). It is developed by a Chinese company and has editions in both Mandarin Chinese and English. The English edition does have some untranslated Mandarin Chinese text in it, however. It is not enough to make the system unusable for people that do not understand this text. Many consider it one of the most beautiful Linux distributions out there, at least in terms of its default aesthetics. Its packages can get outdated and it has tried to develop its own package manager called [Linglong](https://www.deepin.org/en/deepin-linglong/) as a way of providing more up to date versions of application software. 
+
+Deepin has also produced its own artificial intelligence (AI) assistant and many of its own applications. It is ideal for users that want a beautiful desktop, have a large amount of free disk space (its 25 preview release requires about 45GB of free disk space), favour fixed release and appreciate distributions that try to innovate for their users. Especially users that are native Mandarin Chinese speakers. It also seems fairly beginner friendly to me.
+
+# elementary OS
+~~~
+<table style="width: 380px; float: right; border-collapse: collapse;">
+    <tr>
+        <td colspan="2"><image width="500px;" src="/Linux/elementary_OS_8.0.png"/></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Initial release</td>
+        <td style="padding: 5px;">31 March 2011</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px; width: 190px;">Website</td>
+        <td style="padding: 5px;"><a href="https://elementary.io/">elementary.io</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Release model</td>
+        <td style="padding: 5px;">Fixed</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 5px;">Stable</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Installer</td>
+        <td style="padding: 5px;">Elementary Installer&mdash;graphical.</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Package manager (type)</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Advanced_Packaging_Tool">APT</a> (binary)</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Packaging file(s)</td>
+        <td style="padding: 5px;">Per Debian.</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Compiler</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Init system</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">C standard library</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Userland</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Shell</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
+        <td style="padding: 5px;">Very large</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
+        <td style="padding: 5px;">Complete</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
+        <td style="padding: 5px;">Medium</td>
+    </tr>
+</table>
+~~~
+
+**elementary OS** has its own desktop environment called Pantheon which is built on GTK+3 and Vala and is rather aesthetically pleasing and has a macOS-like look with a dock. elementary OS is designed to be beginner-friendly and is based on Ubuntu LTS releases. macOS users that want to start try out Linux may prefer using elementary OS. 
 
 # Exherbo
 ~~~
@@ -923,6 +1067,76 @@ It is ideal for beginners that are used to the Windows layout, especially if the
 ~~~
 
 **Mageia** is a Linux distribution that started out in 2011 as a fork of Mandriva Linux created by some former employees of the company that had developed Mandriva. Originally, it used the same tools as Mandriva like the package manager urpmi, but it has modernized in some ways and now uses DNF as its package manager. My experience with it is that it is rock solid stable, but many packages that I use are missing from their repositories. Consequently, I would recommend Mageia to users that want a rock solid stable system and do not have obscure software needs. Especially if they used Mandriva Linux and were fond of it.  
+
+# MX Linux
+~~~
+<table style="width: 380px; float: right; border-collapse: collapse;">
+    <tr>
+        <td colspan="2"><image width="500px;" src="/Linux/Debian_12.png"/></td>
+    </tr> 
+    <tr>
+        <td style="padding: 5px;">Initial release</td>
+        <td style="padding: 5px;">24 March 2014</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px; width: 190px;">Website</td>
+        <td style="padding: 5px;"><a href="https://mxlinux.org/">mxlinux.org</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Release model</td>
+        <td style="padding: 5px;">Fixed</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 5px;">Stable</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Installer</td>
+        <td style="padding: 5px;">MX Installer&mdash;graphical.</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Package manager (type)</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Advanced_Packaging_Tool">Advanced Packaging Tool</a> (APT; binary)</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Packaging file(s)</td>
+        <td style="padding: 5px;">Per Debian</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Compiler</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Init system</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Init#SysV-style">SysV</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">C standard library</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Userland</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Shell</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
+        <td style="padding: 5px;">Very large</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
+        <td style="padding: 5px;">Compete</td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
+        <td style="padding: 5px;">Medium</td>
+    </tr>
+</table>
+~~~
+**MX Linux** is based on antiX but uses customized and prettified Xfce, KDE Plasma or Fluxbox as its user interface. It has several tools specifically developed for the distribution, including configuration tools and graphical package management tools. It is ideal for users that dislike systemd, like aesthetically pleasing desktops, and prefer a fairly beginner-friendly experience. 
 
 # NixOS
 ~~~
@@ -1646,9 +1860,7 @@ New Ubuntu releases come out every six months, usually in April and October of e
 
 Ubuntu is ideal for beginners that favour a fixed release cycle. Given its two types of editions one with long support periods, it gives users a lot of choice for when they will need to upgrade their system.
 
-Ubuntu is a very popular base for other distributions. I am not going to cover all Ubuntu derivatives, some that I will not cover separately that are of note include [elementary OS](https://elementary.io/), [KDE neon](https://neon.kde.org/), [Pop!_OS](https://pop.system76.com/) and [Zorin OS](https://zorin.com/os/). 
-
-elementary OS has its own desktop environment called Pantheon which is built on GTK+3 and Vala and is rather aesthetically pleasing and has a macOS-like look. elementary OS is designed to be beginner-friendly and is based on Ubuntu LTS releases. 
+Ubuntu is a very popular base for other distributions. I am not going to cover all Ubuntu derivatives, some that I will not cover separately that are of note include [KDE neon](https://neon.kde.org/), [Pop!_OS](https://pop.system76.com/) and [Zorin OS](https://zorin.com/os/). 
 
 KDE neon is sort of a semi-rolling release distribution as its core system software is based on Ubuntu LTS releases but its KDE software is bleeding edge. It is not especially beginner friendly and its ideal users are KDE fans that want to try out the latest KDE software as soon as it is published.
 
