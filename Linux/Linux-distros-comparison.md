@@ -415,7 +415,15 @@ The ideal use case of Chimera Linux would be on security-critical systems, with 
 
 It has three and sometimes four branches. In ascending order of modernity, they are (fourth branch in brackets): (old stable), stable, testing and unstable. Old stable corresponds to the previous stable release of the distribution. The stable branch corresponds to the current stable release of the distribution; each stable release comes with three years of support. In the lead up to a new stable release, the testing branch is forked and frozen and the packages undergo further testing and potentially patching until they are ready to be incorporated in the next stable release. Unstable is where Debian's very latest packages start out, until after sufficient testing they make their way into testing. Testing and unstable branches follow a rolling release model and are cutting edge and bleeding edge, respectively. 
 
-As users can choose a minimal install from its installer, and there are three main branches users can choose from, Debian can be a good choice for users that want to customize their system as much as one can without installing packages from source. Especially those that do not mind using systemd, like having very large repositories and do not mind having to use Makefiles to build packages, should one need to. Users needing more a beginner-friendly distribution should ideally use elementary OS, Linux Mint, MX Linux, Ubuntu and Zorin OS. 
+As users can choose a minimal install from its installer, and there are three main branches users can choose from, Debian can be a good choice for users that want to customize their system as much as one can without installing packages from source. Especially those that do not mind using systemd, like having very large repositories and do not mind having to use Makefiles to build packages, should one need to. Users needing more a beginner-friendly distribution should ideally use the Debian derivatives elementary OS, Linux Mint, MX Linux, Ubuntu or Zorin OS. 
+
+Popular Debian derivatives include [antiX](https://antixlinux.com/), [deepin](https://www.deepin.org/index/en), [Devuan GNU+Linux](https://www.devuan.org/), [MX Linux](https://mxlinux.org/) and [Ubuntu](https://ubuntu.com/) (and its derivatives). I cover Ubuntu and some of its derivatives here, the rest I will cover here. 
+
+antiX is designed to be lightweight and fast distribution with runit or SysV init as its init system. It uses JWM as its default user interface. MX Linux is based on antiX but uses customized and prettified Xfce, KDE Plasma or Fluxbox as its user interface. 
+
+deepin uses its own desktop environment called Deepin Desktop Environment (DDE). It is developed by a Chinese company and has editions in both Chinese and English. The English edition does have some untranslated Chinese text in it, however. Many consider it one of the most beautiful Linux distributions out there, at least in terms of its default aesthetics. Its packages can get outdated and it has tried to develop its own package manager called [Linglong](https://www.deepin.org/en/deepin-linglong/) as a way of providing more up to date versions of application software.
+
+Devuan is essentially just Debian without systemd. It offers SysV init, runit and OpenRC editions.
 
 # Exherbo
 ~~~
@@ -843,7 +851,7 @@ As users can choose a minimal install from its installer, and there are three ma
 
 **Linux Mint** is a beginner-friendly distribution based on Ubuntu's long-term support (LTS) releases. Its team forked GNOME 3 to create Cinnamon in an attempt to provide users a more classic desktop experience. It has three official editions that all feature a classic desktop experience that includes a Windows-like layout. The distribution includes many of its own tools for common tasks like package management and configuration. There is also a Debian-based edition of Mint. 
 
-It is ideal for beginners that are used to the Windows layout, especially if they do not want the latest software and do not have especially exotic software needs. 
+It is ideal for beginners that are used to the Windows layout, especially if they do not want the latest software, would rather have system upgrades every two years or so, and do not have especially exotic software needs. 
 
 # Mageia
 ~~~
@@ -1632,7 +1640,21 @@ Its ideal use case is probably a beginner that does not need exotic software, ap
 </table>
 ~~~
 
-**Ubuntu** is a Linux distribution based on Debian (testing) and has been the go-to beginner-friendly distribution since its first release in 2004. It was created by South African enterpeneur Mark Shuttleworth and is maintained by his company [Canonical Ltd](https://en.wikipedia.org/wiki/Canonical_(company)). 
+**Ubuntu** is a Linux distribution based on Debian (testing) and has been the go-to beginner-friendly distribution since its first release in 2004. It was created by South African enterpeneur Mark Shuttleworth and is maintained by his company [Canonical](https://en.wikipedia.org/wiki/Canonical_(company)). Many consider Ubuntu responsible for a lot of the changes in the Linux world that have made Linux distributions more accessible to novice users. Canonical has also been an innovator in other ways, such as by developing the Ubiquity system installer, [Upstart init system](https://en.wikipedia.org/wiki/Upstart_(software)), the Snap distribution-agnostic package manager, [Mir display server](https://en.wikipedia.org/wiki/Mir_(software)) and [Unity graphical shell](https://en.wikipedia.org/wiki/Unity_(user_interface)). Although, Upstart is no longer developed and Unity is no longer under development by Canonical. Ubuntu was an early adopter of each of these technologies.
+
+New Ubuntu releases come out every six months, usually in April and October of every year since its initial release in October 2004. In April of even-numbered years, there are long-term support (LTS) of the distribution that receive about five years of support. Other releases receive nine months of support. The nine monthly releases usually come with the latest desktop environment releases or near to it, and a fairly modern kernel. 
+
+Ubuntu is ideal for beginners that favour a fixed release cycle. Given its two types of editions one with long support periods, it gives users a lot of choice for when they will need to upgrade their system.
+
+Ubuntu is a very popular base for other distributions. I am not going to cover all Ubuntu derivatives, some that I will not cover separately that are of note include [elementary OS](https://elementary.io/), [KDE neon](https://neon.kde.org/), [Pop!_OS](https://pop.system76.com/) and [Zorin OS](https://zorin.com/os/). 
+
+elementary OS has its own desktop environment called Pantheon which is built on GTK+3 and Vala and is rather aesthetically pleasing and has a macOS-like look. elementary OS is designed to be beginner-friendly and is based on Ubuntu LTS releases. 
+
+KDE neon is sort of a semi-rolling release distribution as its core system software is based on Ubuntu LTS releases but its KDE software is bleeding edge. It is not especially beginner friendly and its ideal users are KDE fans that want to try out the latest KDE software as soon as it is published.
+
+Pop!_OS originally used a customized GNOME desktop but its team has been developing a desktop environment written in Rust called COSMIC. It is developed by the computer manufacturer called System76. According to its website, it is aimed for STEM and creative professionals.
+
+Zorin OS uses a Windows-like layout and is aimed at beginners as well. 
 
 # Vanilla OS
 ~~~
