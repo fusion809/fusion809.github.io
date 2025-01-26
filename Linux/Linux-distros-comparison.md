@@ -1710,6 +1710,16 @@ PCLinuxOS is perhaps best suited to beginners that do not need exotic software, 
 
 **Rhino Linux** is a Ubuntu derivative that gets its core packages from the Ubuntu developmental branch. Rhino Linux is the only Ubuntu-based distribution that I am aware of that follows a rolling release model. It is specifically designed with developers in mind and comes with VSCodium pre-installed. It also comes with pacstall &mdash; a package manager that provides access to a repository designed to be the Ubuntu counterpart to the Arch User Repository &mdash; pre-installed. Rhino also has a setup wizard that offers users four different distribution-agnostic package formats that the wizard can add support for onto their system &mdash; namely Snap, Flatpak, Nix and AppImages (with the AppImage manager AM). Its default desktop environment is a customized Xfce desktop featuring a dock on the left of the screen that the distribution calls "Unicorn". It has a wrapper for each of its package managers that is called rhino-pkg.
 
+I would say that Rhino Linux is probably ideal for developers. Especially those that:
+
+* Prefer a rolling release model.
+* Prefer graphical approaches to installation and package management.
+* Have obscure software needs.
+* Like eye candy distributions.
+* Prefer the Xfce desktop.
+* Like Ubuntu-based distributions.
+* Want the very latest software. 
+
 # Slackware Linux
 ~~~
 <table style="width: 380px; float: right; border-collapse: collapse;">
@@ -1852,7 +1862,7 @@ I have tried Slackware many times and I have found its approach to package manag
 </table>
 ~~~
 
-Like PCLinuxOS, **Solus** is a Linux distribution aimed towards beginners, despite following a rolling release model. As its package manager, it uses eopkg&mdash;which is based on <a href="https://en.wikipedia.org/wiki/Pardus_(operating_system)">Pardus</a>' abandoned package manager of PiSi. It is the original distribution that the Budgie desktop was developed for, and is noted for its relatively good default aesthetics. 
+Like PCLinuxOS, **Solus** is a Linux distribution aimed towards beginners, despite following a rolling release model. As its package manager, it uses eopkg&mdash;which is based on [Pardus](https://en.wikipedia.org/wiki/Pardus_(operating_system))' abandoned package manager of PiSi. It is the original distribution that the Budgie desktop was developed for, and is noted for its relatively good default aesthetics. 
 
 Its ideal use case is probably a beginner that does not need exotic software, appreciates a beautiful and simple desktop like Budgie and does not want to have to upgrade their system between releases of a fixed release distribution like Linux Mint for fear of system breakage.
 
@@ -1931,9 +1941,13 @@ New Ubuntu releases come out every six months, usually in April and October of e
 
 Ubuntu is ideal for beginners that favour a fixed release cycle. Given its two types of editions one with long support periods, it gives users a lot of choice for when they will need to upgrade their system.
 
-Ubuntu is a very popular base for other distributions. I am not going to cover all Ubuntu derivatives, some that I will not cover separately that are of note include [KDE neon](https://neon.kde.org/), [Pop!_OS](https://pop.system76.com/) and [Zorin OS](https://zorin.com/os/). 
+Ubuntu is a very popular base for other distributions. I am not going to cover all Ubuntu derivatives, some that I will not cover separately that are of note are [KDE neon](https://neon.kde.org/), [Linux Lite](https://www.linuxliteos.com/), [TUXEDO OS](https://www.tuxedocomputers.com/os) and [Zorin OS](https://zorin.com/os/). I am not covering these distributions separately as I do not see them as innovative enough to warrant it. This is not to insult the developers, they are perfectly acceptable distributions to use and I can definitely see work that went into them, but I do not have enough to mention about them to warrant a separate section. 
 
-KDE neon is sort of a semi-rolling release distribution as its core system software is based on Ubuntu LTS releases but its KDE software is bleeding edge. It is not especially beginner friendly and its ideal users are KDE fans that want to try out the latest KDE software as soon as it is published.
+KDE neon is a semi-rolling release distribution as its core system software is based on Ubuntu LTS releases but its KDE software is bleeding edge. It is not especially beginner friendly and its ideal users are KDE fans that want to try out the latest KDE software as soon as it is published.
+
+Linux Lite is a beginner-friendly and fairly light Ubuntu LTS-based distribution. It has a beautiful default look that resembles Windows. 
+
+TUXEDO OS is a beginner-friendly Ubuntu LTS-based distribution developed by TUXEDO Computers in Germany. It has its own control centre.
 
 Zorin OS uses a Windows-like layout and is aimed at beginners as well. 
 
@@ -2008,6 +2022,8 @@ Zorin OS uses a Windows-like layout and is aimed at beginners as well.
 
 I would like to start this section by mentioning that I have not been able to install **Vanilla OS**, as the installer repeatedly fails for me. That being said, Vanilla OS uses a Debian (unstable) base (although, it previously used a Ubuntu base) and an immutable root file system. Actually, it has two root file systems. One is booted by the user, the other is the one to which updates are applied. This is so that users can boot this updated system at their next reboot but have their other root file system as a backup should the update break their system. Vanilla OS uses Apx (pronounced "apex") which uses containerized Linux distributions to provide access to software packaged for that distribution. 
 
+Vanilla OS sounds ideal for at least intermediately experienced users that have plenty of available disk space, want a rock solid Debian-based immutable system and access to packages that Debian does not provide.
+
 # Void
 ~~~
 <table style="width: 380px; float: right; border-collapse: collapse;">
@@ -2077,7 +2093,9 @@ I would like to start this section by mentioning that I have not been able to in
 </table>
 ~~~
 
-**Void** is a Linux distribution that is similar to Arch Linux in that it follows a rolling release model and uses a fast, lightweight package manager written in C that uses shell script packaging files for building its packages. A base install without a GUI is about 3GB in size.
+**Void** is a Linux distribution that is similar to Arch Linux in that it follows a rolling release model and uses a fast, lightweight package manager written in C that uses shell script packaging files for building its packages. A base install without a GUI is about 3GB in size. It has a fairly small development team, but I find it an interesting system. It boots rather fast by default and it has a nice air of Arch Linux-style simplicity. 
+
+Void is ideal for experienced users that are content with the software in Void's relatively small repositories, prefer shell script for packaging, want a fast package manager, do not mind a command-line installation process, prefer runit to systemd, and would prefer the option to use musl instead of glibc. 
 
 # Footnotes
 ~~~
