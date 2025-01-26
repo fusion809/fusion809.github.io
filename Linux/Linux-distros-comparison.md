@@ -922,7 +922,9 @@ Deepin has also produced its own artificial intelligence (AI) assistant and many
 </table>
 ~~~
 
-**Linux From Scratch** (LFS) is a source-based distribution wherein each software package is manually compiled and installed from source. As such LFS, does not have a piece of software to manage package management for the user, instead the user is the package manager. This does give users complete ability to build their system from the ground up and customize it to their liking. Many people find installing LFS a frustrating experience as it is tedious and small errors can cause big problems. Despite these frustratons, installing a LFS system is a very effective way to learn about the inner workings of a Linux operating system. It is also an invaluable option, as far as Linux distributions go, for Linux users that want to customize their system down to the compile options from the ground up. 
+**Linux From Scratch** (LFS) is a source-based distribution wherein each software package is manually compiled and installed from source. Users achieve this by following the instructions in a book provided by the LFS project. LFS itself only provides users with a base Linux system, there is a sister project called Beyond Linux From Scratch (BLFS) that provides users with the additional software (e.g. graphical user interface software) required for a more complete and functional system. LFS does not have a piece of software to manage package management for the user, instead the user is the package manager. This does give users complete ability to build their system from the ground up and customize it to their liking. 
+
+Many people find installing LFS a frustrating experience as it is tedious and small errors can cause big problems. Despite these frustratons, installing a LFS system is a very effective way to learn about the inner workings of a Linux operating system. It is also an invaluable option, as far as Linux distributions go, for Linux users that want to customize their system down to the compile options from the ground up. 
 
 # Linux Mint
 ~~~
@@ -1207,9 +1209,16 @@ It is ideal for beginners that are used to the Windows layout, especially if the
 </table>
 ~~~
 
-**NixOS** is a reproducible Linux distribution that is configured using files written in a special-made purely functional programming language called Nix. While it is purely functional, it does incorporate a few syntactic elements from shell script. It also uses a package manager called Nix; Nix installs each package to its own unique directory within `/nix/store`. Nix packages are also specified using files written in the Nix language. Nix and NixOS started out as a research project by Dutch software engineering student Eelco Dolsta. 
+**NixOS** is a reproducible Linux distribution that is configured using files written in a special-made purely functional programming language called Nix. While it is purely functional, it does incorporate a few syntactic elements from shell script. It also uses a package manager called Nix; Nix installs each package to its own unique directory within `/nix/store`. It then sets up symlinks and environment variables to ensure that each piece of software is able to find all libraries, binaries and alike that it depends on. Nix packages are also specified using files written in the Nix language. Nix and NixOS started out as a research project by Dutch software engineering student Eelco Dolsta. 
 
-Its chief configuration files are `/etc/nixos/configuration.nix` and `/etc/nixos/hardware-configuration.nix` and these files uniquely determine the root file system of the distribution. This is why the system is reproducible, as the root file system of two NixOS systems built with these same configuration files will be largely the same. This is with the exception that if additional packages are installed using user configuration files they will be installed under `/nix/store`. Whenever one wants changes to these configuration files to come into effect, one runs `nixos-rebuild switch` (as root) and the new configuration is built. The old configuration is also kept and when users boot the system they can boot the new configuration (which is the default), or the old configuration. NixOS also keeps even older configurations, if they exist, although naturally this uses disk space so there is a command to remove older configurations (`nix-collect-garbage -d`) to free up disk space. 
+Its chief system configuration file is `/etc/nixos/configuration.nix` and this file largely uniquely determines the root file system of the distribution. This is why the system is reproducible, as the root file system of two NixOS systems built with the same configuration file will be largely the same. This is with the exception that if additional packages are installed using user configuration files or running `nix-env -i <package>` they will be installed under `/nix/store`. Whenever one wants changes to the aforementioned system configuration file to come into effect, one runs `nixos-rebuild switch` (as root) and the new configuration is built. The old configuration is also kept and when users boot the system they can boot the new configuration (which is the default), or the old configuration. NixOS also keeps even older configurations, if they exist, although naturally this uses disk space so there is a command to remove older configurations (`nix-collect-garbage -d`) to free up disk space. 
+
+NixOS is ideal for Linux users that:
+
+* Want a reproducible system.
+* Do not mind using systemd.
+* Like the idea of configuring their system using a file written in a functional programming language.
+* Would like to create packages for their system using files written in that language.
 
 # NuTyX
 ~~~
@@ -1280,7 +1289,7 @@ Its chief configuration files are `/etc/nixos/configuration.nix` and `/etc/nixos
 </table>
 ~~~
 
-**NuTyX** is based on LFS but has its own hybrid binary and source package manager called cards. 
+**NuTyX** is based on LFS and BLFS but has its own package manager called cards. It allows users to install software from binary packages and from source via a ports system. This makes it remind me a little of FreeBSD's approach to package management, as it has a binary package manager called pkg and a ports system that users can use to install software from source. NuTyX is aimed at intermediate to advanced users. I think NuTyX is ideal for intermediate to advanced users that do not need obscure software, and want a distribution with a hybrid approach to package management. 
 
 # openmamba GNU/Linux
 ~~~
@@ -1351,7 +1360,7 @@ Its chief configuration files are `/etc/nixos/configuration.nix` and `/etc/nixos
 </table>
 ~~~
 
-**openmamba GNU/Linux** is a Linux distribution that uses the DNF package manager. 
+**openmamba GNU/Linux** is a Linux distribution that uses the DNF package manager. It offers out-of-the-box support for hardware with proprietary drivers. I personally found it ran fine in a virtual machine, but I have seen some reviews of it online that have mentioned significant bugs in previous installation medium releases. I am inclined to suggest it as an option for users fond of RPM packaging and rolling release models that do would be content with the distribution's relatively small repositories and need out-of-the-box support for devices that require proprietary drivers.
 
 # OpenMandriva Lx
 ~~~
@@ -1422,7 +1431,7 @@ Its chief configuration files are `/etc/nixos/configuration.nix` and `/etc/nixos
 </table>
 ~~~
 
-**OpenMandriva Lx** is a continuation of Mandriva Linux developed by a community project. Like Mageia, it uses the DNF package manager. Unlike Mageia, it comes in two editions&mdash;a fixed release and rolling release edition. It first started to offer a rolling release edition in 2023.~~~<sup><a href="#footnote-12">12</a></sup> ~~~
+**OpenMandriva Lx** is a continuation of Mandriva Linux developed by a community project. Like Mageia, it uses the DNF package manager. Unlike Mageia, it comes in two editions&mdash;a fixed release and rolling release edition. It first started to offer a rolling release edition in 2023.~~~<sup><a href="#footnote-12">12</a></sup>~~~ One major difference with Mageia is that it uses Clang as its compiler. It seems most suitable to users that favour RPM packaging, want to use a distribution with Clang-compiled packages, do not mind its relatively small repositories and have a fondness for the old Mandriva Linux distribution.
 
 # openSUSE
 ~~~
@@ -1493,7 +1502,11 @@ Its chief configuration files are `/etc/nixos/configuration.nix` and `/etc/nixos
 </table>
 ~~~
 
-**openSUSE** is a continuation of the SUSE Linux distribution developed by a group of German computer science students and first released in March 1994. Like OpenMandriva Lx, it comes into separate editions &mdash; one, Leap, that features a fixed release model and another, Tumbleweed, that features a rolling release model. openSUSE adopted its two editions in 2014,~~~<sup><a href="#footnote-13">13</a></sup>~~~ whereas OpenMandriva Lx adopted this two edition approach around 2023.~~~<sup><a href="#footnote-12">12</a></sup>~~~ One notable feature of openSUSE is that, by default, it uses [Btrfs](https://en.wikipedia.org/wiki/Btrfs) as its root file system. It is used as it allows for easier snapshots to backup the root file system. It also uses [XFS](https://en.wikipedia.org/wiki/XFS) as its default home file system. 
+**openSUSE** is a continuation of the SUSE Linux distribution developed by a group of German computer science students and first released in March 1994. Like OpenMandriva Lx, it comes into separate editions &mdash; one, Leap, that features a fixed release model and another, Tumbleweed, that features a rolling release model. openSUSE adopted its two editions in 2014,~~~<sup><a href="#footnote-13">13</a></sup>~~~ whereas OpenMandriva Lx adopted this two edition approach around 2023.~~~<sup><a href="#footnote-12">12</a></sup>~~~ 
+
+One notable feature of openSUSE is that, by default, it uses [Btrfs](https://en.wikipedia.org/wiki/Btrfs) as its root file system. It is used as it allows for easier snapshots to backup the root file system. In my experience, this is more of a curse than a blessing, as I tend to find that openSUSE with a Btrfs root file system becomes unbootable within about a fortnight for me, at least. This is even when I keep on top of the snapshots, delete the old ones and keep an eye on my disk usage using Btrfs' own tools (as the Linux command-line tool `df` is not accurate in measuring file system usage when it is a Btrfs file system). It also uses [XFS](https://en.wikipedia.org/wiki/XFS) as its default home file system. 
+
+I would recommend openSUSE to intermediate to advanced users that like RPM packaging and may need obscure pieces of software. In theory, it could be used by a beginner, but I personally think that a beginner would likely really struggle with Btrfs. This is obviously a problem for openSUSE given it is the default root file system of the distribution. Either they would struggle to keep on top of the snapshots and preventing them from using up their entire root file system, or they may experience an issue like that one I previously mentioned. 
 
 # PCLinuxOS
 ~~~
@@ -1637,7 +1650,7 @@ PCLinuxOS is perhaps best suited to beginners that do not need exotic software, 
 </table>
 ~~~
 
-**Pop!_OS** originally used a customized GNOME desktop but its team has been developing a desktop environment written in Rust called COSMIC. It is beautiful by default. Pop!_OS is developed by the computer manufacturer called System76. According to its website, it is aimed at STEM and creative professionals. It does seem fairly beginner friendly from my experience with it, but it does use pretty old software due to it, at the time of writing (26 January 2025), being based on the previous long-term support (LTS) release of Ubuntu.
+**Pop!_OS** originally used a customized GNOME desktop but its team has been developing a desktop environment written in Rust called COSMIC. It is beautiful by default. Pop!_OS is developed by the computer manufacturer called System76. According to its website, it is aimed at STEM and creative professionals. It does seem fairly beginner friendly from my experience with it, but it does use pretty old software due to it, at the time of writing (26 January 2025), being based on the previous long-term support (LTS) release of Ubuntu. I would recommend Pop!_OS to users that want an eye candy desktop by default, do not mind older packages and prefer a fixed release distribution.
 
 # Rhino Linux
 ~~~
