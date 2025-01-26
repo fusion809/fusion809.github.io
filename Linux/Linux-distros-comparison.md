@@ -922,7 +922,7 @@ Deepin has also produced its own artificial intelligence (AI) assistant and many
 </table>
 ~~~
 
-**Linux From Scratch** (LFS) is a source-based distribution wherein each software package is manually compiled and installed from source.
+**Linux From Scratch** (LFS) is a source-based distribution wherein each software package is manually compiled and installed from source. As such LFS, does not have a piece of software to manage package management for the user, instead the user is the package manager. This does give users complete ability to build their system from the ground up and customize it to their liking. Many people find installing LFS a frustrating experience as it is tedious and small errors can cause big problems. Despite these frustratons, installing a LFS system is a very effective way to learn about the inner workings of a Linux operating system. It is also an invaluable option, as far as Linux distributions go, for Linux users that want to customize their system down to the compile options from the ground up. 
 
 # Linux Mint
 ~~~
