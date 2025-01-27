@@ -1362,7 +1362,7 @@ Nix has also been ported to several other operating systems, including BSD deriv
 </table>
 ~~~
 
-**openmamba GNU/Linux** is a Linux distribution that uses the DNF package manager. It offers out-of-the-box support for hardware with proprietary drivers. I personally found it ran fine in a virtual machine, but I have seen some reviews of it online that have mentioned significant bugs in previous installation medium releases. I am inclined to suggest it as an option for users fond of RPM packaging and rolling release models that do would be content with the distribution's relatively small repositories and need out-of-the-box support for devices that require proprietary drivers.
+**openmamba GNU/Linux** is a Linux distribution that offers out-of-the-box support for hardware with proprietary drivers. I personally found it ran fine in a virtual machine, but I have seen some reviews of it online that have mentioned significant bugs in previous installation medium releases. I am inclined to suggest it as an option for users fond of RPM packaging and rolling release models that do would be content with the distribution's relatively small repositories and need out-of-the-box support for devices that require proprietary drivers.
 
 # OpenMandriva Lx
 ~~~
