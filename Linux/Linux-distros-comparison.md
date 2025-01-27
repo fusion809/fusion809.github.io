@@ -6,7 +6,7 @@ My name is Brenton Horne and I have been using Linux on and off since 2012, incl
 
 In the infoboxes I include in each distribution's section, I typically omit developmental releases when it comes to the release model and modernity sections. I do typically consider developmental releases when it comes to the initial release section, however. The images I show are largely hyfetch, neofetch or fastfetch output. For Linux From Scratch, I just used the official logo.
 
-When I mention "exotic" or "obscure" software I mean software that is fairly unpopular and used for niche purposes. For instance, the Marvin Suite of ChemAxon is a piece of software for sketching skeletal formulas, among other things, and I would class it as exotic or obscure. 
+When I mention "exotic" or "obscure" software I mean software that is fairly unpopular and used for niche purposes. For instance, the Marvin Suite of ChemAxon is a piece of software for sketching skeletal formulas, among other things, and I would class it as exotic or obscure as it is only used for a fairly niche purpose and not many people are aware of it.
 
 ~~~
 <table style="float: left; border-collapse: collapse;">
@@ -272,7 +272,7 @@ It is ideal for users that:
 
 **Chimera Linux** (not to be confused with ChimeraOS) is a truly unique Linux distribution and uses a very unusual combination of system software components. One interesting characteristic of the distribution that I did not mention in the infobox to the right is that Chimera Linux does not come with `sudo` pre-installed and it does not seem to be in Chimera's repositories ([source](https://pkgs.chimera-linux.org/packages?name=sudo&origin=)). Given the distribution's security focus, as evidenced by its use of musl, I would imagine this omission is a deliberate security feature. 
 
-The ideal use case of Chimera Linux would be on security-critical systems, with users that favour FreeBSD's command line, do not need vast repositories and prefer rolling release models. Especially those that prefer to write packages using Python scripts, prefer fast package managers and dislike systemd.
+The ideal use case of Chimera Linux would be on security-critical systems, with users that favour FreeBSD's command line, do not need vast repositories and prefer rolling release models. Especially those that prefer to write their own packages using Python scripts, prefer fast package managers and dislike systemd.
 
 # CRUX
 ~~~
@@ -343,7 +343,7 @@ The ideal use case of Chimera Linux would be on security-critical systems, with 
 </table>
 ~~~
 
-**CRUX** aims to keep it simple as it uses tar.gz-based packages, BSD-style init scripts, and has fairly small repositories. It otherwise uses standard Linux system software. CRUX follows a fixed release model with new releases every year or two. It uses source-based package management and is best suited to advanced users that appreciate its idea of simplicity. A base install of CRUX 3.7, with GRUB installed to serve as the bootloader, uses about 2.6GB disk space. 
+**CRUX** aims to keep it simple as it uses tar.gz-based packages, BSD-style init scripts, and has fairly small repositories. It otherwise uses standard Linux system software. CRUX follows a fixed release model with new releases every year or two. It uses source-based package management and is best suited to advanced users that appreciate its idea of simplicity and want to compile their software from source. A base install of CRUX 3.7, with GRUB installed to serve as the bootloader, uses about 2.6GB disk space. 
 
 # Debian
 ~~~
@@ -496,7 +496,7 @@ Devuan is essentially just Debian without systemd. It offers SysV init, runit an
 ~~~
 deepin uses its own desktop environment called Deepin Desktop Environment (DDE). It is developed by a Chinese company and has editions in both Mandarin Chinese and English. The English edition does have some untranslated Mandarin Chinese text in it, however. It is not enough to make the system unusable for people that do not understand this text. Many consider it one of the most beautiful Linux distributions out there, at least in terms of its default aesthetics. Its packages can get outdated and it has tried to develop its own package manager called [Linglong](https://www.deepin.org/en/deepin-linglong/) as a way of providing more up to date versions of application software. 
 
-Deepin has also produced its own artificial intelligence (AI) assistant and many of its own applications. It is ideal for users that want a beautiful desktop, have a large amount of free disk space (its 25 preview release requires about 45GB of free disk space), favour fixed release and appreciate distributions that try to innovate for their users. Especially users that are native Mandarin Chinese speakers. It also seems fairly beginner friendly to me.
+deepin has also produced its own artificial intelligence (AI) assistant and many of its own applications. It is ideal for users that want a beautiful desktop, have a large amount of free disk space (its 25 preview release requires about 45GB of free disk space), favour fixed release and appreciate distributions that try to innovate for their users. Especially users that are native Mandarin Chinese speakers. It also seems fairly beginner friendly to me.
 
 # elementary OS
 ~~~
