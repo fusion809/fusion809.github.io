@@ -54,7 +54,7 @@ When I mention "exotic" or "obscure" software I mean software that is fairly unp
 ~~~
 <table style="width: 380px; float: right; border-collapse: collapse;">
     <tr>
-        <td colspan="2"><image width="500px" src="/Linux/Alpine_Linux_3.21.2.png"/></td>
+        <td colspan="2"><image width="380px" src="/Linux/Alpine_Linux_3.21.2.png"/></td>
     </tr>
     <tr>
         <td style="padding: 5px;">Initial release</td>
@@ -125,7 +125,7 @@ When I mention "exotic" or "obscure" software I mean software that is fairly unp
 ~~~
 <table style="width: 380px; float: right; border-collapse: collapse;">
     <tr>
-        <td colspan="2"><image width="500px;" src="/Linux/Arch_Linux.png"/></td>
+        <td colspan="2"><image width="380px;" src="/Linux/Arch_Linux.png"/></td>
     </tr>
     <tr>
         <td style="padding: 5px;">Initial release</td>
@@ -205,7 +205,7 @@ It is ideal for users that:
 ~~~
 <table style="width: 380px; float: right; border-collapse: collapse;">
     <tr>
-        <td colspan="2"><image width="500px;" src="/Linux/Chimera_Linux.png"/></td>
+        <td colspan="2"><image width="380px;" src="/Linux/Chimera_Linux.png"/></td>
     </tr>
     <tr>
         <td style="padding: 5px;">Initial release</td>
@@ -278,7 +278,7 @@ The ideal use case of Chimera Linux would be on security-critical systems, with 
 ~~~
 <table style="width: 380px; float: right; border-collapse: collapse;">
     <tr>
-        <td colspan="2"><image width="500px;" src="/Linux/CRUX_3.7.png"/></td>
+        <td colspan="2"><image width="380px;" src="/Linux/CRUX_3.7.png"/></td>
     </tr>
     <tr>
         <td style="padding: 5px;">Initial release</td>
@@ -349,7 +349,7 @@ The ideal use case of Chimera Linux would be on security-critical systems, with 
 ~~~
 <table style="width: 380px; float: right; border-collapse: collapse;">
     <tr>
-        <td colspan="2"><image width="500px;" src="/Linux/Debian_12.png"/></td>
+        <td colspan="2"><image width="380px;" src="/Linux/Debian_12.png"/></td>
     </tr> 
     <tr>
         <td style="padding: 5px;">Initial release</td>
@@ -430,7 +430,7 @@ Devuan is essentially just Debian without systemd. It offers SysV init, runit an
 ~~~
 <table style="width: 380px; float: right; border-collapse: collapse;">
     <tr>
-        <td colspan="2"><image width="500px;" src="/Linux/deepin_25Preview.png"/></td>
+        <td colspan="2"><image width="380px;" src="/Linux/deepin_25Preview.png"/></td>
     </tr> 
     <tr>
         <td style="padding: 5px;">Initial release</td>
@@ -502,7 +502,7 @@ deepin has also produced its own artificial intelligence (AI) assistant and many
 ~~~
 <table style="width: 380px; float: right; border-collapse: collapse;">
     <tr>
-        <td colspan="2"><image width="500px;" src="/Linux/elementary_OS_8.0.png"/></td>
+        <td colspan="2"><image width="380px;" src="/Linux/elementary_OS_8.0.png"/></td>
     </tr>
     <tr>
         <td style="padding: 5px;">Initial release</td>
@@ -573,7 +573,7 @@ deepin has also produced its own artificial intelligence (AI) assistant and many
 ~~~
 <table style="width: 380px; float: right; border-collapse: collapse;">
     <tr>
-        <td colspan="2"><image width="500px;" src="/Linux/Exherbo.png"/></td>
+        <td colspan="2"><image width="380px;" src="/Linux/Exherbo.png"/></td>
     </tr>
     <tr>
         <td style="padding: 5px;">Initial release</td>
@@ -644,7 +644,7 @@ deepin has also produced its own artificial intelligence (AI) assistant and many
 ~~~
 <table style="width: 380px; float: right; border-collapse: collapse;">
     <tr>
-        <td colspan="2"><image width="500px;" src="/Linux/Fedora_41.png"/></td>
+        <td colspan="2"><image width="380px;" src="/Linux/Fedora_41.png"/></td>
     </tr> 
     <tr>
         <td style="padding: 5px;">Initial release</td>
@@ -715,7 +715,7 @@ deepin has also produced its own artificial intelligence (AI) assistant and many
 ~~~
 <table style="width: 380px; float: right; border-collapse: collapse;">
     <tr>
-        <td colspan="2"><image width="500px;" src="/Linux/Gentoo_Linux.png"/></td>
+        <td colspan="2"><image width="380px;" src="/Linux/Gentoo_Linux.png"/></td>
     </tr> 
     <tr>
         <td style="padding: 5px;">Initial release</td>
@@ -786,7 +786,7 @@ deepin has also produced its own artificial intelligence (AI) assistant and many
 ~~~
 <table style="width: 380px; float: right; border-collapse: collapse;">
     <tr>
-        <td colspan="2"><image width="500px;" src="/Linux/Guix_System.png"/></td>
+        <td colspan="2"><image width="380px;" src="/Linux/Guix_System.png"/></td>
     </tr> 
     <tr>
         <td style="padding: 5px;">Initial release</td>
@@ -857,7 +857,7 @@ deepin has also produced its own artificial intelligence (AI) assistant and many
 ~~~
 <table style="width: 380px; float: right; border-collapse: collapse;">
     <tr>
-        <td colspan="2"><img width="500px;" src="/Linux/Linux_From_Scratch.png"/><caption style="text-align:left">The Linux From Scratch logo.</caption></td>
+        <td colspan="2"><img width="380px;" src="/Linux/Linux_From_Scratch.png"/><caption style="text-align:left">The Linux From Scratch logo.</caption></td>
     </tr>
     <tr>
         <td style="padding: 5px;">Initial release</td>
@@ -930,7 +930,7 @@ Many people find installing LFS a frustrating experience as it is tedious and sm
 ~~~
 <table style="width: 380px; float: right; border-collapse: collapse;">
     <tr>
-        <td colspan="2"><img width="500px;" src="/Linux/Linux_Mint_22.1.png"/></td>
+        <td colspan="2"><img width="380px;" src="/Linux/Linux_Mint_22.1.png"/></td>
     </tr>
     <tr>
         <td style="padding: 5px;">Initial release</td>
@@ -1003,7 +1003,7 @@ It is ideal for beginners that are used to the Windows layout, especially if the
 ~~~
 <table style="width: 380px; float: right; border-collapse: collapse;">
     <tr>
-        <td colspan="2"><img width="500px;" src="/Linux/Mageia_9.png"/></td>
+        <td colspan="2"><img width="380px;" src="/Linux/Mageia_9.png"/></td>
     </tr>
     <tr>
         <td style="padding: 5px;">Initial release</td>
@@ -1074,7 +1074,7 @@ It is ideal for beginners that are used to the Windows layout, especially if the
 ~~~
 <table style="width: 380px; float: right; border-collapse: collapse;">
     <tr>
-        <td colspan="2"><image width="500px;" src="/Linux/MX_Linux_23.5.png"/></td>
+        <td colspan="2"><image width="380px;" src="/Linux/MX_Linux_23.5.png"/></td>
     </tr> 
     <tr>
         <td style="padding: 5px;">Initial release</td>
@@ -1144,7 +1144,7 @@ It is ideal for beginners that are used to the Windows layout, especially if the
 ~~~
 <table style="width: 380px; float: right; border-collapse: collapse;">
     <tr>
-        <td colspan="2"><img width="500px;" src="/Linux/NixOS_24.11.png"/></td>
+        <td colspan="2"><img width="380px;" src="/Linux/NixOS_24.11.png"/></td>
     </tr>
     <tr>
         <td style="padding: 5px;">Initial release</td>
@@ -1209,7 +1209,7 @@ It is ideal for beginners that are used to the Windows layout, especially if the
 </table>
 ~~~
 
-**NixOS** is a reproducible Linux distribution that is configured using files written in a special-made purely functional programming language called Nix. While it is purely functional, it does incorporate a few syntactic elements from shell script. It also uses a package manager called Nix; Nix installs each package to its own unique directory within `/nix/store`. It then sets up symlinks and environment variables to ensure that each piece of software is able to find all libraries, binaries and alike that it depends on. Nix packages are also specified using files written in the Nix language. Nix and NixOS started out as a research project by Dutch software engineering student Eelco Dolsta. 
+**NixOS** is a reproducible Linux distribution that is configured using files written in a special-made purely functional programming language called Nix. While it is purely functional, it does incorporate a few syntactic elements from shell script. It also uses a package manager called Nix; Nix installs each package to its own unique directory within `/nix/store`. It then sets up symlinks and environment variables to ensure that each piece of software is able to find all libraries, binaries and alike that it depends on. Nix packages are also specified using files written in the Nix language. Nix and NixOS started out in the early 2000s as a research project by then software engineering student Eelco Dolsta. 
 
 Its chief system configuration file is `/etc/nixos/configuration.nix` and this file largely uniquely determines the root file system of the distribution. This is why the system is reproducible, as the root file system of two NixOS systems built with the same configuration file will be largely the same. This is with the exception that if additional packages are installed using user configuration files or running `nix-env -i <package>` they will be installed under `/nix/store`. Whenever one wants changes to the aforementioned system configuration file to come into effect, one runs `nixos-rebuild switch` (as root) and the new configuration is built. The old configuration is also kept and when users boot the system they can boot the new configuration (which is the default), or the old configuration. NixOS also keeps even older configurations, if they exist, although naturally this uses disk space so there is a command to remove older configurations (`nix-collect-garbage -d`) to free up disk space. 
 
@@ -1220,11 +1220,13 @@ NixOS is ideal for Linux users that:
 * Like the idea of configuring their system using a file written in a functional programming language.
 * Would like to create packages for their system using files written in that language.
 
+Nix has also been ported to several other operating systems, including BSD derivatives and macOS. There is even a [NixBSD project](https://github.com/nixos-bsd/nixbsd) that aims to create an operating system that uses the Nix package manager and the FreeBSD kernel. 
+
 # NuTyX
 ~~~
 <table style="width: 380px; float: right; border-collapse: collapse;">
     <tr>
-        <td colspan="2"><img width="500px;" src="/Linux/NuTyX_24.10.png"/></td>
+        <td colspan="2"><img width="380px;" src="/Linux/NuTyX_24.10.png"/></td>
     </tr>
     <tr>
         <td style="padding: 5px;">Initial release</td>
@@ -1295,7 +1297,7 @@ NixOS is ideal for Linux users that:
 ~~~
 <table style="width: 380px; float: right; border-collapse: collapse;">
     <tr>
-        <td colspan="2"><img width="500px;" src="/Linux/openmamba_GNU_Linux.png"/></td>
+        <td colspan="2"><img width="380px;" src="/Linux/openmamba_GNU_Linux.png"/></td>
     </tr>
     <tr>
         <td style="padding: 5px;">Initial release</td>
@@ -1366,7 +1368,7 @@ NixOS is ideal for Linux users that:
 ~~~
 <table style="width: 380px; float: right; border-collapse: collapse;">
     <tr>
-        <td colspan="2"><img width="500px;" src="/Linux/OpenMandriva_Lx_Rolling.png"/></td>
+        <td colspan="2"><img width="380px;" src="/Linux/OpenMandriva_Lx_Rolling.png"/></td>
     </tr>
     <tr>
         <td style="padding: 5px;">Initial release</td>
@@ -1437,7 +1439,7 @@ NixOS is ideal for Linux users that:
 ~~~
 <table style="width: 380px; float: right; border-collapse: collapse;">
     <tr>
-        <td colspan="2"><img width="500px;" src="/Linux/openSUSE_Tumbleweed.png"/></td>
+        <td colspan="2"><img width="380px;" src="/Linux/openSUSE_Tumbleweed.png"/></td>
     </tr>
     <tr>
         <td style="padding: 5px;">Initial release</td>
@@ -1512,7 +1514,7 @@ I would recommend openSUSE to intermediate to advanced users that like RPM packa
 ~~~
 <table style="width: 380px; float: right; border-collapse: collapse;">
     <tr>
-        <td colspan="2"><img width="500px;" src="/Linux/PCLinuxOS.png"/></td>
+        <td colspan="2"><img width="380px;" src="/Linux/PCLinuxOS.png"/></td>
     </tr>
     <tr>
         <td style="padding: 5px;">Initial release</td>
@@ -1585,7 +1587,7 @@ PCLinuxOS is perhaps best suited to beginners that do not need exotic software, 
 ~~~
 <table style="width: 380px; float: right; border-collapse: collapse;">
     <tr>
-        <td colspan="2"><image width="500px;" src="/Linux/Pop!_OS_22.04.png"/></td>
+        <td colspan="2"><image width="380px;" src="/Linux/Pop!_OS_22.04.png"/></td>
     </tr> 
     <tr>
         <td style="padding: 5px;">Initial release</td>
@@ -1656,7 +1658,7 @@ PCLinuxOS is perhaps best suited to beginners that do not need exotic software, 
 ~~~
 <table style="width: 380px; float: right; border-collapse: collapse;">
     <tr>
-        <td colspan="2"><img width="500px;" src="/Linux/Rhino_Linux.png"/></td>
+        <td colspan="2"><img width="380px;" src="/Linux/Rhino_Linux.png"/></td>
     </tr>
     <tr>
         <td style="padding: 5px;">Initial release</td>
@@ -1737,7 +1739,7 @@ I would say that Rhino Linux is probably ideal for developers. Especially those 
 ~~~
 <table style="width: 380px; float: right; border-collapse: collapse;">
     <tr>
-        <td colspan="2"><img width="500px;" src="/Linux/Slackware_Linux_15.0.png"/></td>
+        <td colspan="2"><img width="380px;" src="/Linux/Slackware_Linux_15.0.png"/></td>
     </tr>
     <tr>
         <td style="padding: 5px;">Initial release</td>
@@ -1810,7 +1812,7 @@ I have tried Slackware many times and I have found its approach to package manag
 ~~~
 <table style="width: 380px; float: right; border-collapse: collapse;">
     <tr>
-        <td colspan="2"><img width="500px;" src="/Linux/Solus.png"/></td>
+        <td colspan="2"><img width="380px;" src="/Linux/Solus.png"/></td>
     </tr>
     <tr>
         <td style="padding: 5px;">Initial release</td>
@@ -1883,7 +1885,7 @@ Its ideal use case is probably a beginner that does not need exotic software, ap
 ~~~
 <table style="width: 380px; float: right; border-collapse: collapse;">
     <tr>
-        <td colspan="2"><img width="500px;" src="/Linux/Ubuntu_24.10.png"/></td>
+        <td colspan="2"><img width="380px;" src="/Linux/Ubuntu_24.10.png"/></td>
     </tr>
     <tr>
         <td style="padding: 5px;">Initial release</td>
@@ -1968,7 +1970,7 @@ Zorin OS uses a Windows-like layout and is aimed at beginners as well.
 ~~~
 <table style="width: 380px; float: right; border-collapse: collapse;">
     <tr>
-        <td colspan="2"><img width="500px;" src="/Linux/Vanilla_OS_2.png"/></td>
+        <td colspan="2"><img width="380px;" src="/Linux/Vanilla_OS_2.png"/></td>
     </tr>
     <tr>
         <td style="padding: 5px;">Initial release</td>
@@ -2041,7 +2043,7 @@ Vanilla OS sounds ideal for at least intermediately experienced users that have 
 ~~~
 <table style="width: 380px; float: right; border-collapse: collapse;">
     <tr>
-        <td colspan="2"><img width="500px;" src="/Linux/Void.png"/></td>
+        <td colspan="2"><img width="380px;" src="/Linux/Void.png"/></td>
     </tr>
     <tr>
         <td style="padding: 5px;">Initial release</td>
