@@ -500,9 +500,9 @@ Devuan is essentially just Debian without systemd. It offers SysV init, runit an
     </tr>
 </table>
 ~~~
-**deepin** uses its own desktop environment called Deepin Desktop Environment (DDE). It is developed by a Chinese company and has editions in both Mandarin Chinese and English. The English edition does have some untranslated Mandarin Chinese text in it, however. It is not enough to make the system unusable for people that do not understand this text. Many consider it one of the most beautiful Linux distributions out there, at least in terms of its default aesthetics. Its packages can get outdated and it has tried to develop its own package manager called [Linglong](https://www.deepin.org/en/deepin-linglong/) as a way of providing more up to date versions of application software. 
+**deepin** uses its own desktop environment called [Deepin Desktop Environment](https://en.wikipedia.org/wiki/Deepin#Deepin_Desktop_Environment) (DDE) and has its own custom applications, including its own artificial intelligence (AI) assistant. It is developed by a Chinese company and has editions in both Mandarin Chinese and English (it seems to have support for other languages too, though). The English edition does have some untranslated Mandarin Chinese text in it, however. It is not enough to make the system unusable for people that do not understand this text, but may cause problems at times. Many consider it one of the most beautiful Linux distributions out there, at least in terms of its default aesthetics. Its packages can get outdated and it has tried to develop its own package manager called [Linglong](https://www.deepin.org/en/deepin-linglong/) as a way of providing more up to date versions of application software. 
 
-deepin has also produced its own artificial intelligence (AI) assistant and many of its own applications. It is ideal for users that want a beautiful desktop, have a large amount of free disk space (its 25 preview release requires about 45GB of free disk space), favour fixed release and appreciate distributions that try to innovate for their users. Especially users that are native Mandarin Chinese speakers. It also seems fairly beginner friendly to me.
+It is ideal for users that want a beautiful desktop, have a large amount of free disk space (its 25 preview release requires about 45GB of free disk space), favour fixed release and appreciate distributions that try to innovate for their users. Especially users that are native Mandarin Chinese speakers. It also seems fairly beginner friendly to me.
 
 # elementary OS
 ~~~
@@ -573,7 +573,7 @@ deepin has also produced its own artificial intelligence (AI) assistant and many
 </table>
 ~~~
 
-**elementary OS** has its own desktop environment called Pantheon which is built on GTK+3 and Vala and is rather aesthetically pleasing and has a macOS-like look with a dock. elementary OS is designed to be beginner-friendly and is based on Ubuntu LTS releases. macOS users that want to start try out Linux may prefer using elementary OS. It has a software centre that provides users the option to donate to their favourite projects. elementary OS itself can be downloaded for free, but its website does encourage users to pay what they want for the distribution.
+**elementary OS** has its own desktop environment called [Pantheon](https://en.wikipedia.org/wiki/Elementary_OS#Pantheon_desktop_environment) which is built on [GTK 3](https://en.wikipedia.org/wiki/GTK) and [Vala](https://en.wikipedia.org/wiki/Vala_(programming_language)) and is rather aesthetically pleasing and has a macOS-like look with a dock. elementary OS is designed to be beginner-friendly and is based on Ubuntu LTS releases. macOS users that want to start try out Linux may prefer using elementary OS. It has a software centre that provides users the option to donate to their favourite projects. elementary OS itself can be downloaded for free, but its website does encourage users to pay what they want for the distribution.
 
 # Exherbo
 ~~~
@@ -644,7 +644,7 @@ deepin has also produced its own artificial intelligence (AI) assistant and many
 </table>
 ~~~
 
-**Exherbo** is a source-based distribution that originally was forked from Gentoo Linux. Like Gentoo, it uses ebuilds as its packaging files. Its package manager, Paludis, is written in C++ unlike Gentoo's Portage, which is written in Python. Paludis is specifically meant to be a better alternative to Portage. Given Exherbo has smaller repositories and less comprehensive documentation, but is practically the same as Gentoo except without Gentoo's binary repositories, I would be inclined to think that Exherbo is best suited to Gentoo fans that are disgruntled with Portage. 
+**Exherbo** is a source-based distribution that originally was forked from Gentoo Linux. Like Gentoo, it uses ebuilds as its packaging files. Its package manager, Paludis, is written in [C++](https://en.wikipedia.org/wiki/C%2B%2B) unlike Gentoo's Portage, which is written in Python. Paludis is specifically meant to be a better alternative to Portage. Given Exherbo has smaller repositories and less comprehensive documentation, but is practically the same as Gentoo except without Gentoo's binary repositories, I would be inclined to think that Exherbo is best suited to Gentoo fans that are disgruntled with Portage. 
 
 # Fedora
 ~~~
