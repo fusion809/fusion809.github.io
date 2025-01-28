@@ -494,7 +494,7 @@ Devuan is essentially just Debian without systemd. It offers SysV init, runit an
     </tr>
 </table>
 ~~~
-deepin uses its own desktop environment called Deepin Desktop Environment (DDE). It is developed by a Chinese company and has editions in both Mandarin Chinese and English. The English edition does have some untranslated Mandarin Chinese text in it, however. It is not enough to make the system unusable for people that do not understand this text. Many consider it one of the most beautiful Linux distributions out there, at least in terms of its default aesthetics. Its packages can get outdated and it has tried to develop its own package manager called [Linglong](https://www.deepin.org/en/deepin-linglong/) as a way of providing more up to date versions of application software. 
+**deepin** uses its own desktop environment called Deepin Desktop Environment (DDE). It is developed by a Chinese company and has editions in both Mandarin Chinese and English. The English edition does have some untranslated Mandarin Chinese text in it, however. It is not enough to make the system unusable for people that do not understand this text. Many consider it one of the most beautiful Linux distributions out there, at least in terms of its default aesthetics. Its packages can get outdated and it has tried to develop its own package manager called [Linglong](https://www.deepin.org/en/deepin-linglong/) as a way of providing more up to date versions of application software. 
 
 deepin has also produced its own artificial intelligence (AI) assistant and many of its own applications. It is ideal for users that want a beautiful desktop, have a large amount of free disk space (its 25 preview release requires about 45GB of free disk space), favour fixed release and appreciate distributions that try to innovate for their users. Especially users that are native Mandarin Chinese speakers. It also seems fairly beginner friendly to me.
 
@@ -1652,7 +1652,7 @@ PCLinuxOS is perhaps best suited to beginners that do not need exotic software, 
 </table>
 ~~~
 
-**Pop!_OS** originally used a customized GNOME desktop but its team has been developing a desktop environment written in Rust called COSMIC. It is beautiful by default. Pop!_OS is developed by the computer manufacturer called System76. According to its website, it is aimed at STEM and creative professionals. It does seem fairly beginner friendly from my experience with it, but it does use pretty old software due to it, at the time of writing (26 January 2025), being based on the previous long-term support (LTS) release of Ubuntu. I would recommend Pop!_OS to users that want an eye candy desktop by default, do not mind older packages and prefer a fixed release distribution.
+**Pop!_OS** originally used a customized GNOME desktop but its team has been developing a desktop environment written in Rust called COSMIC. It is beautiful by default. Pop!\_OS is developed by the computer manufacturer called System76. According to its website, it is aimed at STEM and creative professionals. It does seem fairly beginner friendly from my experience with it, but it does use pretty old software due to it, at the time of writing (26 January 2025), being based on the previous long-term support (LTS) release of Ubuntu. I would recommend Pop!\_OS to users that want an eye candy desktop by default, do not mind older packages and prefer a fixed release distribution.
 
 # Rhino Linux
 ~~~
