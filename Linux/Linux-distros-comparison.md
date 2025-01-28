@@ -420,7 +420,13 @@ Debian packages are built using a directory of packaging files. Among these is a
 
 As users can choose a minimal install from its installer, and there are three main branches users can choose from, Debian can be a good choice for users that want to customize their system as much as one can without installing packages from source. Especially those that do not mind using systemd, like having very large repositories and do not mind having to use Makefiles to build packages, should one need to. Users needing more a beginner-friendly distribution should ideally use the Debian derivatives elementary OS, Linux Mint, MX Linux, Ubuntu or Zorin OS. 
 
-Popular Debian derivatives include [antiX](https://antixlinux.com/), [deepin](https://www.deepin.org/index/en) (although, I have heard it is [becoming independent](https://distrowatch.com/dwres.php?resource=showheadline&story=14870)), [Devuan GNU+Linux](https://www.devuan.org/), [MX Linux](https://mxlinux.org/) and [Ubuntu](https://ubuntu.com/) (and its derivatives). I cover deepin and Ubuntu and some Ubuntu derivatives in separate sections, the rest I will cover here. 
+Popular Debian derivatives include:
+* [antiX](https://antixlinux.com/).
+* [deepin](https://www.deepin.org/index/en) &mdash; although, in 2022 [they announced they were becoming independent](https://distrowatch.com/dwres.php?resource=showheadline&story=14870), but it seems to still be using Debian packages.
+* [Devuan GNU+Linux](https://www.devuan.org/)
+* [MX Linux](https://mxlinux.org/)
+* [Ubuntu](https://ubuntu.com/) and its derivatives. 
+I cover deepin and Ubuntu and some Ubuntu derivatives in separate sections, the rest I will cover here. 
 
 antiX is designed to be lightweight and fast distribution with runit or SysV init as its init system. It uses JWM as its default user interface. It is ideal for users that want or need a lightweight distribution such as due to using old hardware. 
 
