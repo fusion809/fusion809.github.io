@@ -573,7 +573,7 @@ deepin has also produced its own artificial intelligence (AI) assistant and many
 </table>
 ~~~
 
-**elementary OS** has its own desktop environment called Pantheon which is built on GTK+3 and Vala and is rather aesthetically pleasing and has a macOS-like look with a dock. elementary OS is designed to be beginner-friendly and is based on Ubuntu LTS releases. macOS users that want to start try out Linux may prefer using elementary OS. 
+**elementary OS** has its own desktop environment called Pantheon which is built on GTK+3 and Vala and is rather aesthetically pleasing and has a macOS-like look with a dock. elementary OS is designed to be beginner-friendly and is based on Ubuntu LTS releases. macOS users that want to start try out Linux may prefer using elementary OS. It has a software centre that provides users the option to donate to their favourite projects. elementary OS itself can be downloaded for free, but its website does encourage users to pay what they want for the distribution.
 
 # Exherbo
 ~~~
