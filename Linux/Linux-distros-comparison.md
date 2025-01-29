@@ -790,7 +790,11 @@ Its AI assistant answered my system memory when I asked how I could update my sy
 </table>
 ~~~
 
-**Gentoo Linux** is, in many ways, the prototypical source-based Linux distribution. It uses its own package manager called Portage which is meant to be a true ports system in the spirit of BSD ports. Although, in recent years it has become feasible to install most package as pre-compiled binaries. Interestingly, there have even been projects to port Portage to other operating systems like the BSD derivatives FreeBSD and NetBSD. It is ideal for Linux users that want complete freedom to customize their system all the way down to the configure/compile options used to build each package. Users can even fork packages and apply custom patches to them, should they choose.  
+**Gentoo Linux** is, in many ways, the prototypical source-based Linux distribution. It uses its own package manager called Portage which is meant to be a true ports system in the spirit of BSD ports. Although, in recent years it has become feasible to install most package as pre-compiled binaries. 
+
+Previously, [Sabayon Linux](https://en.wikipedia.org/wiki/Sabayon_Linux) occupied this niche by offering binary packages on a Gentoo base while still allowing users to install software from source via Portage. Although, Sabayon provided binary packages via its own package manager called Entropy. Sabayon Linux was discontinued around 2020. [Calculate Linux](https://en.wikipedia.org/wiki/Calculate_Linux), which is still actively maintained, can also be argued to occupy this niche as it provides binary packages too while still giving users the option to install from source via Portage. Unlike Sabayon, which provided its own binary package manager, Calculate just uses Portage to install binary packages. Now it seems like Gentoo itself is trying to occupy this niche as well. As a casual user that likes to try it out in virtual machines from time to time, is an attractive feature in my opinion.
+
+Interestingly, there have even been projects to port Portage to other operating systems like the BSD derivatives FreeBSD and NetBSD. Gentoo is ideal for Linux users that want complete freedom to customize their system all the way down to the configure/compile options used to build each package. Users can even fork packages and apply custom patches to them, should they choose. 
 
 # Guix System
 ~~~
