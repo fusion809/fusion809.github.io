@@ -721,6 +721,8 @@ Its AI assistant answered my system memory when I asked how I could update my sy
 
 **Fedora** is a distribution that can be argued to be beginner friendly, although I am inclined to not put it in that category because it does not have out-of-the-box support for proprietary drivers, including WiFi drivers. Fedora is one of the most up-to-date fixed release distributions I am aware of, although each release usually keeps to the same release (except for bug and security fix releases) of desktop environment software and with six months between releases, this makes it not truly bleeding edge. Fedora releasers come with 13 months of support, so users only need to upgrade to every second release, should they choose. Fedora also has an immutable root file system edition called Silverblue. Fedora is best suited to users that favour a fixed release model, like cutting edge software, need large repositories and prefer to package with spec files, when this is necessary. 
 
+Fedora is the basis of [CentOS Stream](https://en.wikipedia.org/wiki/CentOS_Stream), which in turn is the basis of [Red Hat Enterprise Linux](https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux) (RHEL) and derivatives thereof like [AlmaLinux](https://en.wikipedia.org/wiki/AlmaLinux) and [Rocky Linux](https://en.wikipedia.org/wiki/Rocky_Linux). RHEL and its derivatives are popular server distributions; they come with about a decade of support. RHEL itself comes with an additional two years of extended lifecycle support. 
+
 # Gentoo Linux
 ~~~
 <table style="width: 380px; float: right; border-collapse: collapse;">
@@ -1523,6 +1525,8 @@ Nix has also been ported to several other operating systems, including BSD deriv
 One notable feature of openSUSE is that, by default, it uses [Btrfs](https://en.wikipedia.org/wiki/Btrfs) as its root file system. It is used as it allows for easier snapshots to backup the root file system. In my experience, this is more of a curse than a blessing, as I tend to find that openSUSE with a Btrfs root file system becomes unbootable within about a fortnight for me, at least. This is even when I keep on top of the snapshots, delete the old ones and keep an eye on my disk usage using Btrfs' own tools (as the Linux command-line tool `df` is not accurate in measuring file system usage when it is a Btrfs file system). It also uses [XFS](https://en.wikipedia.org/wiki/XFS) as its default home file system. 
 
 I would recommend openSUSE to intermediate to advanced users that like RPM packaging and may need obscure pieces of software. In theory, it could be used by a beginner, but I personally think that a beginner would likely really struggle with Btrfs. This is obviously a problem for openSUSE given it is the default root file system of the distribution. Either they would struggle to keep on top of the snapshots and preventing them from using up their entire root file system, or they may experience an issue like that one I previously mentioned. 
+
+SUSE Linux Enterprise (SLE) is based on openSUSE Leap and is a commercial product. It comes with about thirteen years of general support, an additional three years of long term service pack support (total sixteen years) and an additional three years of long term service pack core support (total nineteen years). It comes in two editions, SLE Server for servers and mainframes and a desktop/workframe edition called SLE Desktop. 
 
 # PCLinuxOS
 ~~~
