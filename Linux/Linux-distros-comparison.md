@@ -1904,7 +1904,7 @@ I have tried Slackware many times and I have found its approach to package manag
 
 Like PCLinuxOS, **Solus** is a Linux distribution aimed towards beginners, despite following a rolling release model. As its package manager, it uses eopkg&mdash;which is based on [Pardus](https://en.wikipedia.org/wiki/Pardus_(operating_system))' abandoned package manager of PiSi. It is the original distribution that the Budgie desktop was developed for, and is noted for its relatively good default aesthetics. 
 
-Its ideal use case is probably a beginner that does not need exotic software, appreciates a beautiful and simple desktop like Budgie and does not want to have to upgrade their system between releases of a fixed release distribution like Linux Mint for fear of system breakage.
+Its ideal use case is probably a beginner that does not need exotic software, appreciates a beautiful and simple desktop like Budgie and does not want to have to upgrade their system between releases of a fixed release distribution like Linux Mint for fear of system breakage. Granted, system updates on a rolling release system can break things too, so this should be factored in when considering PCLinuxOS. 
 
 # Ubuntu
 ~~~
@@ -2062,7 +2062,7 @@ Zorin OS uses a Windows-like layout and is aimed at beginners as well.
 
 I would like to start this section by mentioning that I have not been able to install **Vanilla OS**, as the installer repeatedly fails for me. That being said, Vanilla OS uses a Debian (unstable) base (although, it previously used a Ubuntu base) and an immutable root file system. Actually, it has two root file systems. One is booted by the user, the other is the one to which updates are applied. This is so that users can boot this updated system at their next reboot but have their other root file system as a backup should the update break their system. Vanilla OS uses Apx (pronounced "apex") which uses containerized Linux distributions to provide access to software packaged for that distribution. 
 
-Vanilla OS sounds ideal for at least intermediately experienced users that have plenty of available disk space, want a rock solid Debian-based immutable system and access to packages that Debian does not provide. The requirement for a lot of disk space is due to the two root file systems and containerized Linux distributions to provide additional packages, both of which substantially more space than most distributions would need.
+Vanilla OS sounds ideal for at least intermediately experienced users that have plenty of available disk space, want a Debian-based immutable system and access to packages that Debian does not provide. The requirement for a lot of disk space is due to the two root file systems and containerized Linux distributions to provide additional packages, both of which substantially more space than most distributions would need.
 
 # Void
 ~~~
