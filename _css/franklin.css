@@ -163,6 +163,10 @@ html {
 .franklin-content li p {
         margin: 10px 0; }
 
+ol>ol>li:before {
+    content: counters(item, ".") ". "; counter-increment: item
+}
+
 .franklin-content a {
     color: #004de6;
     text-decoration: none; }

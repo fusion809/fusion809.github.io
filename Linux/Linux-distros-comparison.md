@@ -6,7 +6,7 @@ My name is Brenton Horne and I have been using Linux on and off since 2012, incl
 
 In the infoboxes I include in each distribution's section, I typically omit developmental releases when it comes to the release model and modernity sections. I do typically consider developmental releases when it comes to the initial release section, however. The images I show are largely hyfetch, neofetch or fastfetch output. For Linux From Scratch, I just used the official logo.
 
-When I mention "exotic" or "obscure" software I mean software that is fairly unpopular and used for niche purposes. For instance, the Marvin Suite of ChemAxon is a piece of software for sketching skeletal formulas, among other things, and I would class it as exotic or obscure as it is only used for a fairly niche purpose and not many people are aware of it.
+When I mention "exotic" or "obscure" software, I mean software that is fairly unpopular and used for niche purposes. For instance, the Marvin Suite of ChemAxon is a piece of software for sketching skeletal formulas, among other things, and I would class it as exotic or obscure as it is only used for a fairly niche purpose and not many people are aware of it.
 
 ~~~
 <table style="float: left; border-collapse: collapse;">
@@ -16,6 +16,13 @@ When I mention "exotic" or "obscure" software I mean software that is fairly unp
 <tr>
     <td style="font-size: 20px; padding: 5px;">
     <ol>
+        <li><a href="#preliminaries">Preliminaries</a></li>
+        <ul>
+        <li><a href="#what_is_linux">What is Linux?</li>
+        <li><a href="#core_components_of_a_Linux_distribution">Core components of a Linux distribution</a></li>
+        <li><a href="#linux_graphical_user_interface">Linux graphical user interface</a></li>
+        <li><a href="#release_model">Release model</a></li>
+        </ul>
         <li><a href="#alpine_linux">Alpine Linux</a></li>
         <li><a href="#arch_linux">Arch Linux</a></li>
         <li><a href="#chimera_linux">Chimera Linux</a></li>
@@ -49,6 +56,46 @@ When I mention "exotic" or "obscure" software I mean software that is fairly unp
 </tr>
 </table>
 ~~~
+
+# Preliminaries
+## What is Linux?
+A Linux distribution is defined by its use of the [Linux kernel](https://en.wikipedia.org/wiki/Linux_kernel). The kernel is the component of an operating system that manages all communication between hardware and software. [File system](https://en.wikipedia.org/wiki/File_system) (a system wherein files are stored) support is also within the kernel, although some tools for managing file systems (e.g. `mkfs` command) are provided by other core system software. Popular file systems with Linux kernel support include [Btrfs](https://en.wikipedia.org/wiki/Btrfs), [ext4](https://en.wikipedia.org/wiki/Ext4), [FAT32](https://en.wikipedia.org/wiki/File_Allocation_Table#FAT32) (popular for [EFI system partitions](https://en.wikipedia.org/wiki/EFI_system_partition)) and [XFS](https://en.wikipedia.org/wiki/Xfs). [ZFS](https://en.wikipedia.org/wiki/ZFS) also has support on Linux via a third-party kernel module. This is because ZFS' licence is incompatible with the kernel's [GNU General Public Licence](https://en.wikipedia.org/wiki/GNU_General_Public_License) (GPL) and hence cannot be included in the kernel's source code.
+
+Linux distributions are almost always [Unix-like](https://en.wikipedia.org/wiki/Unix-like) too, although there are exceptions like [Android](https://en.wikipedia.org/wiki/Android_(operating_system)). This means, among other things, that most Linux distributions share similar commands to Unix systems and roughly follow the design philosophy of Unix with each command doing just one thing and doing it well. 
+
+## Core components of a Linux distribution
+What other software a Linux distribution uses varies markedly between distributions and even between different installs of the same distribution. Other core components of a Linux operating system include, but are not limited to:
+* [Init system and service manager](https://en.wikipedia.org/wiki/Init). The init is the first process that the kernel starts after the system is booted. It starts, either directly or indirectly, all other processes. Service managers manage [daemons](https://en.wikipedia.org/wiki/Daemon_(computing)), which are background processes. These processes can be important and manage things like the internet connection (e.g. dhcpcd) and graphical login manager. The most popular Linux init systems, many of which also function as service managers, are in approximately descending order of popularity: [systemd](https://en.wikipedia.org/wiki/Systemd), [SysV init](https://en.wikipedia.org/wiki/Init#SysV-style), [OpenRC](https://en.wikipedia.org/wiki/OpenRC), [runit](https://en.wikipedia.org/wiki/Runit), [Dinit](https://davmac.org/projects/dinit/), [BusyBox-init](https://en.wikipedia.org/wiki/BusyBox), [GNU Shepherd](https://en.wikipedia.org/wiki/GNU_Guix#GNU_Shepherd_init_system) and [s6](https://skarnet.org/software/s6/). systemd is disliked by some Linux users, one reason they often cite for this is that it violates the Unix philosophy in that it does so many different things (including providing its own replacements for some daemons). 
+* [C standard library](https://en.wikipedia.org/wiki/C_standard_library). This provides functions, macros and type definitions that programs written in C&mdash;which many core components of any Linux system are&mdash;can call. The vast majority of Linux distributions used [glibc](https://en.wikipedia.org/wiki/Glibc) (from the [GNU Project](https://en.wikipedia.org/wiki/GNU_Project)) to provide this. [Musl](https://en.wikipedia.org/wiki/Musl) is a less commonly used alternative that has a security focus. [uClibc](https://en.wikipedia.org/wiki/UClibc) is another possible alternative for Linux distributions.
+* [Toolchain, including a compiler](https://en.wikipedia.org/wiki/Toolchain). This is basically what it used to build most components of the system, converting source code into binaries that can be executed. [GNU Toolchain](https://en.wikipedia.org/wiki/GNU_toolchain), including the [GNU Compiler Collection](https://en.wikipedia.org/wiki/GNU_Compiler_Collection) (GCC), is the most common toolchain on Linux. [LLVM](https://en.wikipedia.org/wiki/LLVM) and [Clang](https://en.wikipedia.org/wiki/Clang) are popular alternatives.
+* [The Unix shell](https://en.wikipedia.org/wiki/Unix_shell). This serves as a crucial part of the systems command-line interface. [Bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell)) is the most common Unix shell on Linux and is developed as part of the GNU Project. [Zsh](https://en.wikipedia.org/wiki/Z_shell) is a popular alternative, although it is not a popular default for Linux distributions. [tcsh](https://en.wikipedia.org/wiki/Tcsh) and [sh](https://en.wikipedia.org/wiki/Almquist_shell) are less popular Unix shells for Linux. 
+* [Unix commands, or userland utilities](https://en.wikipedia.org/wiki/List_of_POSIX_commands). These are used to perform common command-line tasks such as copying files, moving files, manipulating strings, producing checksums, determining the current directory, etc. Most Linux distributions use the [GNU coreutils](https://en.wikipedia.org/wiki/GNU_Core_Utilities) package to provide these commands. [BusyBox](https://en.wikipedia.org/wiki/BusyBox) also provides many of these commands. Other Unix and Unix-like systems such as [FreeBSD](https://en.wikipedia.org/wiki/FreeBSD), [NetBSD](https://en.wikipedia.org/wiki/NetBSD), [OpenBSD](https://en.wikipedia.org/wiki/OpenBSD) and [OpenIndiana](https://en.wikipedia.org/wiki/OpenIndiana) provide their own versions of these commands. I know that at least FreeBSD's Unix commands have been ported to Linux.
+* [util-linux](https://en.wikipedia.org/wiki/Util-linux). It is provided by the Linux Kernel Organization, like the kernel itself. util-linux provides some more commands on most Linux distributions such as `chsh` for changing the default Unix shell, `dmesg` for checking the status of kernel modules and `fsck` for checking and fixing file systems. 
+* [Package manager](https://en.wikipedia.org/wiki/Package_manager). This provides a means of installing, removing and updating software on one's system. There are several different package managers, including, but not limited to:
+    - [dpkg](https://en.wikipedia.org/wiki/Dpkg) and its frontend [Advanced Packaging Tool](https://en.wikipedia.org/wiki/APT_(software)) (APT).
+    - [RPM](https://en.wikipedia.org/wiki/RPM_Package_Manager) and its frontends [APT-RPM](https://en.wikipedia.org/wiki/APT-RPM), [Dandified YUM](https://en.wikipedia.org/wiki/Dandified_YUM) (DNF), [urpmi](https://en.wikipedia.org/wiki/Urpmi), [YUM](https://en.wikipedia.org/wiki/Yum_(software)) and [ZYpp](https://en.wikipedia.org/wiki/ZYpp).
+    - [pacman](https://en.wikipedia.org/wiki/Arch_Linux#Pacman).
+    - [Portage](https://en.wikipedia.org/wiki/Portage_(software)).
+
+## Linux graphical user interface
+Most desktop Linux installations have a [graphical user interface](https://en.wikipedia.org/wiki/Graphical_user_interface) (GUI) too. A sufficiently complete Linux GUI that implements the desktop metaphor is often called a [desktop environment](https://en.wikipedia.org/wiki/Desktop_environment). Components of Linux GUIs include:
+* [Graphics libraries](https://en.wikipedia.org/wiki/Graphics_library), such as [Mesa](https://en.wikipedia.org/wiki/Mesa_(computer_graphics)). 
+* [Display server communication protocol](https://en.wikipedia.org/wiki/Windowing_system#Display_server_communications_protocols), such as [X.Org Server](https://en.wikipedia.org/wiki/X.Org_Server), [Wayland](https://en.wikipedia.org/wiki/Wayland_(protocol)) and [Mir](https://en.wikipedia.org/wiki/Mir_(software)). X.Org Server has been the dominant protocol on Linux and other Unix/Unix-like systems since the 1980s, but is in the process of being replaced by Wayland. Mir was originally developed with the intention of it replacing X.Org Server on the desktop, but it now seems to be largely developed for use in the Internet of Things. 
+* [Widget toolkit](https://en.wikipedia.org/wiki/Widget_toolkit) to build GUIs for programs. Examples include [Enlightenment Foundation Libraries](https://en.wikipedia.org/wiki/Enlightenment_Foundation_Libraries) (EFL), [GTK](https://en.wikipedia.org/wiki/GTK), [Qt](https://en.wikipedia.org/wiki/Qt_(software)), [Tk](https://en.wikipedia.org/wiki/Tk_(software)), etc.
+* [X window manager](https://en.wikipedia.org/wiki/Window_manager) (for X.Org Server)/[Wayland compositor](https://en.wikipedia.org/wiki/Wayland_compositor). This manages the windows for the GUI. Examples include [Mutter](https://en.wikipedia.org/wiki/Mutter_(software)), [KWin](https://en.wikipedia.org/wiki/KWin), [Enlightenment](https://en.wikipedia.org/wiki/Enlightenment_(window_manager)), [i3](https://en.wikipedia.org/wiki/I3_(window_manager)), [Sway](https://en.wikipedia.org/wiki/Sway_(window_manager)) and [Muffin](https://en.wikipedia.org/wiki/Muffin_(software)).
+* [Graphical shell](https://en.wikipedia.org/wiki/Shell_(computing)#Graphical_shells), which provides menus, panels, docks, taskbars, system notifications, desktop icons, wallpaper management, application launchers, etc. Examples include the [GNOME Shell](https://en.wikipedia.org/wiki/GNOME_Shell), [Unity](https://en.wikipedia.org/wiki/Unity_(user_interface)) and that of [KDE Plasma](https://en.wikipedia.org/wiki/KDE_Plasma).
+* [Graphical login manager](https://en.wikipedia.org/wiki/X_display_manager) (also known as a display manager), such as [GNOME Display Manager](https://en.wikipedia.org/wiki/GNOME_Display_Manager) (GDM), [LightDM](https://en.wikipedia.org/wiki/LightDM) and [Simple Desktop Display Manager](https://en.wikipedia.org/wiki/Simple_Desktop_Display_Manager) (SDDM).
+
+Complete desktop environments include [GNOME](https://en.wikipedia.org/wiki/GNOME) (originally part of the GNU Project), KDE Plasma (versions [4](https://en.wikipedia.org/wiki/KDE_Plasma_4), [5](https://en.wikipedia.org/wiki/KDE_Plasma_5) and [6](https://en.wikipedia.org/wiki/KDE_Plasma_6)), [Deepin Desktop Environment](https://en.wikipedia.org/wiki/Deepin#Deepin_Desktop_Environment), [Cinnamon](https://en.wikipedia.org/wiki/Cinnamon_(desktop_environment)), [Budgie](https://en.wikipedia.org/wiki/Budgie_(desktop_environment)), [LXDE](https://en.wikipedia.org/wiki/LXDE), [MATE](https://en.wikipedia.org/wiki/MATE_(desktop_environment)), [LXQt](https://en.wikipedia.org/wiki/LXQt), [Trinity](https://en.wikipedia.org/wiki/Trinity_Desktop_Environment), [UKUI](https://en.wikipedia.org/wiki/UKUI), [Lumina](https://en.wikipedia.org/wiki/Lumina_(desktop_environment)) and [COSMIC](https://en.wikipedia.org/wiki/COSMIC_(desktop_environment)). 
+
+## Release model
+Another difference between Linux distributions is their release model. Release models come in three different categories: fixed, rolling and semi-rolling. 
+
+Most Linux distributions follow a fixed release model with new releases of the distribution every so often. Typically, these releases differ in the versions of system software and GUI software included in the system. These pieces of system software do often receive security and bug fixes over the lifetime of a given release, but they usually do not undergo major updates during that time. Most distributions following a fixed release have a mechanism to upgrade from one release to the next. Although, these upgrades can cause system breakage. 
+
+Some distributions follow a [rolling release model](https://en.wikipedia.org/wiki/Rolling_release) in which there are no fixed releases of the system. Rather updates to each system and GUI component are just provided whenever they are ready, instead of major updates being held back for the next release of the distribution. As these updates can bring major changes to one's system, it is possible for regular system updates to break a rolling release system.
+
+The final category is semi-rolling. It is when some major components are allowed to roll, with major updates whenever they are ready, and other components stay at largely the same versions until the next fixed release of the distribution. This approach comes with the pros and the cons of both fixed and rolling release distributions, with upgrades between fixed releases able to cause system breakage and so can regular updates at times. Although, regular updates, when they break things, usually are limited in the components they can break. 
 
 # Alpine Linux
 ~~~
@@ -241,7 +288,7 @@ It is ideal for users that:
     </tr>
     <tr>
         <td style="padding: 5px;">Init system</td>
-        <td style="padding: 5px;"><a href="https://github.com/davmac314/dinit">Dinit</a></td>
+        <td style="padding: 5px;"><a href="https://davmac.org/projects/dinit/">Dinit</a></td>
     </tr>
     <tr>
         <td style="padding: 5px;">C standard library</td>
@@ -877,7 +924,7 @@ Gentoo is ideal for Linux users that want complete freedom to customize their sy
 ~~~
 <table style="width: 380px; float: right; border-collapse: collapse;">
     <tr>
-        <td colspan="2"><img width="380px;" src="/Linux/Linux_From_Scratch.png"/><caption style="text-align:left">The Linux From Scratch logo.</caption></td>
+        <td colspan="2"><img width="380px;" src="/Linux/Linux_From_Scratch.png"/></td>
     </tr>
     <tr>
         <td style="padding: 5px;">Initial release</td>
