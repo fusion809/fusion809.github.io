@@ -1265,7 +1265,7 @@ It is ideal for beginners that are used to the Windows layout, especially if the
     </tr>
     <tr>
         <td style="padding: 5px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
-        <td style="padding: 5px;">Large</td>
+        <td style="padding: 5px;">Vast</td>
     </tr>
     <tr>
         <td style="padding: 5px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
