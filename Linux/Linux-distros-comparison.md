@@ -77,6 +77,8 @@ What other software a Linux distribution uses varies markedly between distributi
     - [pacman](https://en.wikipedia.org/wiki/Arch_Linux#Pacman).
     - [Portage](https://en.wikipedia.org/wiki/Portage_(software)).
 
+As many core components of most Linux distributions are created as part of the GNU Project, many argue that most Linux distributions should be called GNU/Linux distributions to give appropriate credit to the GNU Project.
+
 ## Linux graphical user interface
 Most desktop Linux installations have a [graphical user interface](https://en.wikipedia.org/wiki/Graphical_user_interface) (GUI) too. A sufficiently complete Linux GUI that implements the desktop metaphor is often called a [desktop environment](https://en.wikipedia.org/wiki/Desktop_environment). Components of Linux GUIs include:
 * [Graphics libraries](https://en.wikipedia.org/wiki/Graphics_library), such as [Mesa](https://en.wikipedia.org/wiki/Mesa_(computer_graphics)). 
