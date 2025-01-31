@@ -830,7 +830,7 @@ Gentoo is ideal for Linux users that want complete freedom to customize their sy
     </tr>
     <tr>
         <td style="padding: 5px;">Packaging file(s)</td>
-        <td style="padding: 5px;">GNU Guile scripts.</td>
+        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU_Guile">GNU Guile</a> scripts.</td>
     </tr>
     <tr>
         <td style="padding: 5px;">Compiler</td>
@@ -1229,7 +1229,7 @@ It is ideal for beginners that are used to the Windows layout, especially if the
 
 Its chief system configuration file is `/etc/nixos/configuration.nix` and this file largely uniquely determines the root file system of the distribution. This is why the system is reproducible, as the root file system of two NixOS systems built with the same configuration file will be largely the same. This is with the exception that if additional packages are installed using user configuration files or running `nix-env -i <package>` they will be installed under `/nix/store`. Whenever one wants changes to the aforementioned system configuration file to come into effect, one runs `nixos-rebuild switch` (as root) and the new configuration is built. The old configuration is also kept and when users boot the system they can boot the new configuration (which is the default), or the old configuration. NixOS also keeps even older configurations, if they exist, although naturally this uses disk space so there is a command to remove older configurations (`nix-collect-garbage -d`) to free up disk space. 
 
-NixOS is ideal for Linux users that:
+NixOS is ideal for intermediate to advanced Linux users that:
 
 * Want a reproducible system.
 * Do not mind using systemd.
@@ -1307,7 +1307,9 @@ Nix has also been ported to several other operating systems, including BSD deriv
 </table>
 ~~~
 
-**NuTyX** is based on LFS and BLFS but has its own package manager called cards. It allows users to install software from binary packages and from source via a ports system. This makes it remind me a little of FreeBSD's approach to package management, as it has a binary package manager called pkg and a ports system that users can use to install software from source. NuTyX is aimed at intermediate to advanced users. I think NuTyX is ideal for intermediate to advanced users that do not need obscure software, and want a distribution with a hybrid approach to package management. 
+**NuTyX** is based on LFS and BLFS but has its own package manager called cards. It allows users to install software from binary packages and from source via a ports system. This makes it remind me a little of FreeBSD's approach to package management, as it has a binary package manager called pkg and a ports system that users can use to install software from source. NuTyX is aimed at intermediate to advanced users. I think NuTyX is ideal for intermediate to advanced users that do not need obscure software, and want a distribution with a hybrid approach to package management.
+
+Something interesting about NuTyX that I noticed in one of my virtual machines that runs NuTyX 24.10 was that installing VirtualBox guest additions seems to cause a few errors to appear in the boot screen, although the system still successfully boots and loads a graphical user interface. 
 
 # openmamba GNU/Linux
 ~~~
