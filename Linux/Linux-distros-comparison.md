@@ -2062,7 +2062,7 @@ Zorin OS uses a Windows-like layout and is aimed at beginners as well.
 
 I would like to start this section by mentioning that I have not been able to install **Vanilla OS**, as the installer repeatedly fails for me. That being said, Vanilla OS uses a Debian (unstable) base (although, it previously used a Ubuntu base) and an immutable root file system. Actually, it has two root file systems. One is booted by the user, the other is the one to which updates are applied. This is so that users can boot this updated system at their next reboot but have their other root file system as a backup should the update break their system. Vanilla OS uses Apx (pronounced "apex") which uses containerized Linux distributions to provide access to software packaged for that distribution. 
 
-Vanilla OS sounds ideal for at least intermediately experienced users that have plenty of available disk space, want a rock solid Debian-based immutable system and access to packages that Debian does not provide.
+Vanilla OS sounds ideal for at least intermediately experienced users that have plenty of available disk space, want a rock solid Debian-based immutable system and access to packages that Debian does not provide. The requirement for a lot of disk space is due to the two root file systems and containerized Linux distributions to provide additional packages, both of which substantially more space than most distributions would need.
 
 # Void
 ~~~
@@ -2140,7 +2140,7 @@ Void is ideal for experienced users that are content with the software in Void's
 # Footnotes
 ~~~
 <ol>
-    <li id="footnote-1">The possible categories are, in ascending order of modernity, old stable, stable, cutting edge and bleeding edge.</li>
+    <li id="footnote-1">The possible categories are, in ascending order of modernity: old stable, stable, cutting edge and bleeding edge.</li>
     <li id="footnote-2">It is difficult to rate this in a completely non-subjective way. As while you can list the number of packages in their repositories, some distributions package split a single piece of software into multiple packages and hence raw numbers are not as fair a measure as they seem. Plus some distributions have multiple variants on more or less the same package in their repositories. To simplify things, I will categorize repository size as: vast, very large, large, medium, medium-small, small and tiny.</li>
     <li id="footnote-3">A distribution will have "minimal" in this category if the base installation comes without a graphical user interface (GUI). If a GUI is a required part of a base install, I will say "complete".</li>
     <li id="footnote-4">The categories, in ascending order of documentation sufficiency, are: minimal, medium, detailed and comprehensive. Minimal documentation would typically just cover installation, package management and basic configuration. Medium would cover more configuration options than just basic. Detailed would cover some additional topics. Comprehensive would cover almost every conceivable topic for the distribution.</li>
