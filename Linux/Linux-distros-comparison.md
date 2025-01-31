@@ -97,7 +97,7 @@ Most Linux distributions follow a fixed release model with new releases of the d
 
 Some distributions follow a [rolling release model](https://en.wikipedia.org/wiki/Rolling_release) in which there are no fixed releases of the system. Rather updates to each system and GUI component are just provided whenever they are ready, instead of major updates being held back for the next release of the distribution. As these updates can bring major changes to one's system, it is possible for regular system updates to break a rolling release system.
 
-The final category is semi-rolling. It is when some major components are allowed to roll, with major updates whenever they are ready, and other components stay at largely the same versions until the next fixed release of the distribution. This approach comes with the pros and the cons of both fixed and rolling release distributions, with upgrades between fixed releases able to cause system breakage and so can regular updates at times. Although, regular updates, when they break things, usually are limited in the components they can break. 
+The final category is semi-rolling. It is when some major components are allowed to roll, with major updates whenever they are ready, and other components stay at largely the same version (aside from security and bug fixes) until the next fixed release of the distribution. This approach comes with the pros and the cons of both fixed and rolling release distributions, with upgrades between fixed releases able to cause system breakage and so can regular updates at times. Although, regular updates, when they break things, usually are limited in the components they can break. 
 
 # Alpine Linux
 ~~~
