@@ -1526,7 +1526,7 @@ One notable feature of openSUSE is that, by default, it uses [Btrfs](https://en.
 
 I would recommend openSUSE to intermediate to advanced users that like RPM packaging and may need obscure pieces of software. In theory, it could be used by a beginner, but I personally think that a beginner would likely really struggle with Btrfs. This is obviously a problem for openSUSE given it is the default root file system of the distribution. Either they would struggle to keep on top of the snapshots and preventing them from using up their entire root file system, or they may experience an issue like that one I previously mentioned. 
 
-SUSE Linux Enterprise (SLE) is based on openSUSE Leap and is a commercial product. It comes with about thirteen years of general support, an additional three years of long term service pack support (total sixteen years) and an additional three years of long term service pack core support (total nineteen years). It comes in two editions, SLE Server for servers and mainframes and a desktop/workframe edition called SLE Desktop. 
+[SUSE Linux Enterprise](https://en.wikipedia.org/wiki/SUSE_Linux_Enterprise) (SLE) is based on openSUSE Leap and is a commercial product. It comes with about thirteen years of general support, an additional three years of long term service pack support (total sixteen years) and an additional three years of long term service pack core support (total nineteen years). It comes in two editions, SLE Server for servers and mainframes and a desktop/workframe edition called SLE Desktop.
 
 # PCLinuxOS
 ~~~
@@ -1741,7 +1741,11 @@ PCLinuxOS is perhaps best suited to beginners that do not need exotic software, 
 </table>
 ~~~
 
-**Rhino Linux** is a Ubuntu derivative that gets its core packages from the Ubuntu developmental branch. Rhino Linux is the only Ubuntu-based distribution that I am aware of that follows a rolling release model. It is specifically designed with developers in mind and comes with VSCodium pre-installed. It also comes with pacstall &mdash; a package manager that provides access to a repository designed to be the Ubuntu counterpart to the Arch User Repository &mdash; pre-installed. Rhino also has a setup wizard that offers users four different distribution-agnostic package formats that the wizard can add support for onto their system &mdash; namely Snap, Flatpak, Nix and AppImages (with the AppImage manager [AM](https://github.com/ivan-hc/AM)). Its default desktop environment is a customized Xfce desktop featuring a dock on the left of the screen that the distribution calls "Unicorn". It has a wrapper for each of its package managers that is called rhino-pkg.
+**Rhino Linux** is a Ubuntu derivative that gets its core packages from the Ubuntu developmental branch. Rhino Linux is the only Ubuntu-based distribution that I am aware of that follows a rolling release model. It is specifically designed with developers in mind and comes with VSCodium pre-installed. 
+
+It also comes with pacstall &mdash; a package manager that provides access to a repository designed to be the Ubuntu counterpart to the Arch User Repository &mdash; pre-installed. Rhino also has a setup wizard that offers users four different distribution-agnostic package formats that the wizard can add support for onto their system &mdash; namely Snap, Flatpak, Nix and AppImages (with the AppImage manager [AM](https://github.com/ivan-hc/AM)). Rhino has a wrapper for each of its package managers (including the distribution-agnostic package managers) that is called rhino-pkg. 
+
+Its default desktop environment is a customized Xfce desktop featuring a dock on the left of the screen along with a global menu. This customized desktop they call "Unicorn". Unicorn has a default look that features a lot of purple, black and white that appeals to my eye, at least. 
 
 I would say that Rhino Linux is probably ideal for developers. Especially those that:
 
@@ -1751,7 +1755,10 @@ I would say that Rhino Linux is probably ideal for developers. Especially those 
 * Like eye candy distributions.
 * Prefer the Xfce desktop.
 * Like Ubuntu-based distributions.
+* Prefer using shell script to package for their system.
 * Want the very latest software. 
+
+I personally rather like this distribution as it addresses many of the problems I had with Ubuntu when I stopped using it as my daily driver around 2015. 
 
 # Slackware Linux
 ~~~
