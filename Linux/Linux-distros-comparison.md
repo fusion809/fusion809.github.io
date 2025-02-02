@@ -994,7 +994,7 @@ Gentoo is ideal for Linux users that want complete freedom to customize their sy
 
 **Linux From Scratch** (LFS) is a source-based distribution wherein each software package is manually compiled and installed from source. Users achieve this by following the instructions in a book provided by the LFS project. LFS itself only provides users with a base Linux system, there is a sister project called [Beyond Linux From Scratch](https://www.linuxfromscratch.org/blfs/) (BLFS) that provides users with the additional software (e.g. graphical user interface software) required for a more complete and functional system. LFS does not have a piece of software to manage package management for the user, instead the user is the package manager. This does give users complete ability to build their system from the ground up and customize it to their liking. 
 
-Many people find installing LFS a frustrating experience as it is tedious and small errors can cause big problems. Despite these frustratons, installing a LFS system is a very effective way to learn about the inner workings of a Linux operating system. It is also an invaluable option, as far as Linux distributions go, for Linux users that want to customize their system down to the compile options used to build packages. 
+Many people find installing LFS a frustrating experience as it is tedious and small mistakes can cause big problems. Despite these frustratons, installing a LFS system is a very effective way to learn about the inner workings of a Linux operating system. It is also an invaluable option, as far as Linux distributions go, for Linux users that want to customize their system down to the compile options used to build packages. 
 
 # Linux Mint
 ~~~
