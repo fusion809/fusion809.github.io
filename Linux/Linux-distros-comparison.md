@@ -14,7 +14,7 @@ When I mention "exotic" or "obscure" software, I mean software that is fairly un
     <td style="font-size: 30px; padding: 10px;"><b>Table of contents</b></td>
 </tr>
 <tr>
-    <td style="font-size: 20px; padding: 5px;">
+    <td style="font-size: 20px; padding: 10px;">
     <ol>
         <li><a href="#preliminaries">Preliminaries</a></li>
         <ul>
@@ -106,64 +106,64 @@ The final category is semi-rolling. It is when some major components are allowed
         <td colspan="2"><image width="380px" src="/Linux/Alpine_Linux_3.21.2.png"/></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Initial release</td>
-        <td style="padding: 5px;">August 2005</td>
+        <td style="padding: 10px;">Initial release</td>
+        <td style="padding: 10px;">August 2005</td>
     </tr>
     <tr>
-        <td style="padding: 5px; width: 190px;">Website</td>
-        <td style="padding: 5px;"><a href="https://alpinelinux.org/">alpinelinux.org</a></td>
+        <td style="padding: 10px; width: 190px;">Website</td>
+        <td style="padding: 10px;"><a href="https://alpinelinux.org/">alpinelinux.org</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Release model</td>
-        <td style="padding: 5px;">Fixed</td>
+        <td style="padding: 10px;">Release model</td>
+        <td style="padding: 10px;">Fixed</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
-        <td style="padding: 5px;">Bleeding edge</td>
+        <td style="padding: 10px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 10px;">Bleeding edge</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Installer</td>
-        <td style="padding: 5px;">setup-alpine&mdash;text-based.</td>
+        <td style="padding: 10px;">Installer</td>
+        <td style="padding: 10px;">setup-alpine&mdash;text-based.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Package manager (type)</td>
-        <td style="padding: 5px;"><a href="https://wiki.alpinelinux.org/wiki/Alpine_Package_Keeper">Alpine Package Keeper</a> (APK; binary)</td>
+        <td style="padding: 10px;">Package manager (type)</td>
+        <td style="padding: 10px;"><a href="https://wiki.alpinelinux.org/wiki/Alpine_Package_Keeper">Alpine Package Keeper</a> (APK; binary)</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Packaging file(s)</td>
-        <td style="padding: 5px;"><a href="https://wiki.alpinelinux.org/wiki/APKBUILD_Reference">APKBUILD</a>&mdash;shell script.</td>
+        <td style="padding: 10px;">Packaging file(s)</td>
+        <td style="padding: 10px;"><a href="https://wiki.alpinelinux.org/wiki/APKBUILD_Reference">APKBUILD</a>&mdash;shell script.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Compiler</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GNU Compiler Collection</a> (GCC)</td>
+        <td style="padding: 10px;">Compiler</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GNU Compiler Collection</a> (GCC)</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Init system</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/OpenRC">OpenRC</a></td>
+        <td style="padding: 10px;">Init system</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/OpenRC">OpenRC</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">C standard library</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Musl">musl</a></td>
+        <td style="padding: 10px;">C standard library</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Musl">musl</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Userland</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/BusyBox">BusyBox</a></td>
+        <td style="padding: 10px;">Userland</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/BusyBox">BusyBox</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Shell</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Almquist_shell">sh</a></td>
+        <td style="padding: 10px;">Shell</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Almquist_shell">sh</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Repository size<sup><a href="#footnote-1">1</a></sup></td>
-        <td style="padding: 5px;">Large</td>
+        <td style="padding: 10px;">Repository size<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 10px;">Large</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Base install<sup><a href="#footnote-2">2</a></sup></td>
-        <td style="padding: 5px;">Minimal</td>
+        <td style="padding: 10px;">Base install<sup><a href="#footnote-2">2</a></sup></td>
+        <td style="padding: 10px;">Minimal</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Documentation<sup><a href="#footnote-3">3</a></sup></td>
-        <td style="padding: 5px;">Detailed</td>
+        <td style="padding: 10px;">Documentation<sup><a href="#footnote-3">3</a></sup></td>
+        <td style="padding: 10px;">Detailed</td>
     </tr>
 </table>
 ~~~
@@ -177,64 +177,64 @@ The final category is semi-rolling. It is when some major components are allowed
         <td colspan="2"><image width="380px;" src="/Linux/Arch_Linux.png"/></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Initial release</td>
-        <td style="padding: 5px;">11 March 2002</td>
+        <td style="padding: 10px;">Initial release</td>
+        <td style="padding: 10px;">11 March 2002</td>
     </tr>
     <tr>
-        <td style="padding: 5px; width: 190px;">Website</td>
-        <td style="padding: 5px;"><a href="http://www.archlinux.org/">www.archlinux.org</a></td>
+        <td style="padding: 10px; width: 190px;">Website</td>
+        <td style="padding: 10px;"><a href="http://www.archlinux.org/">www.archlinux.org</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Release model</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Rolling_release">Rolling</a></td>
+        <td style="padding: 10px;">Release model</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Rolling_release">Rolling</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
-        <td style="padding: 5px;">Bleeding edge</td>
+        <td style="padding: 10px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 10px;">Bleeding edge</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Installer<exj/td>
-        <td style="padding: 5px;"><a href="https://wiki.archlinux.org/title/Archinstall">archinstall</a>&mdash;textual installer.</td>
+        <td style="padding: 10px;">Installer<exj/td>
+        <td style="padding: 10px;"><a href="https://wiki.archlinux.org/title/Archinstall">archinstall</a>&mdash;textual installer.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Package manager (type)</td>
-        <td style="padding: 5px;"><a href="https://wiki.archlinux.org/title/Pacman">pacman</a> (binary)</td>
+        <td style="padding: 10px;">Package manager (type)</td>
+        <td style="padding: 10px;"><a href="https://wiki.archlinux.org/title/Pacman">pacman</a> (binary)</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Packaging file(s)</td>
-        <td style="padding: 5px;"><a href="https://wiki.archlinux.org/title/PKGBUILD">PKGBUILD</a>&mdash;shell script.</td>
+        <td style="padding: 10px;">Packaging file(s)</td>
+        <td style="padding: 10px;"><a href="https://wiki.archlinux.org/title/PKGBUILD">PKGBUILD</a>&mdash;shell script.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Compiler</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
+        <td style="padding: 10px;">Compiler</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Init system</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a></td>
+        <td style="padding: 10px;">Init system</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">C standard library</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
+        <td style="padding: 10px;">C standard library</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Userland</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
+        <td style="padding: 10px;">Userland</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Shell</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a> (install), <a href="https://en.wikipedia.org/wiki/Z_shell">Zsh</a> (live).</td>
+        <td style="padding: 10px;">Shell</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a> (install), <a href="https://en.wikipedia.org/wiki/Z_shell">Zsh</a> (live).</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Repository size<sup><a href="#footnote-1">1</a></sup></td>
-        <td style="padding: 5px;">Vast, if the <a href="https://wiki.archlinux.org/title/Arch_User_Repository">Arch User Repository</a> (AUR) is included.</td>
+        <td style="padding: 10px;">Repository size<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 10px;">Vast, if the <a href="https://wiki.archlinux.org/title/Arch_User_Repository">Arch User Repository</a> (AUR) is included.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Base install<sup><a href="#footnote-2">2</a></sup></td>
-        <td style="padding: 5px;">Minimal</td>
+        <td style="padding: 10px;">Base install<sup><a href="#footnote-2">2</a></sup></td>
+        <td style="padding: 10px;">Minimal</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Documentation<sup><a href="#footnote-3">3</a></sup></td>
-        <td style="padding: 5px;">Comprehensive</td>
+        <td style="padding: 10px;">Documentation<sup><a href="#footnote-3">3</a></sup></td>
+        <td style="padding: 10px;">Comprehensive</td>
     </tr>
 </table>
 ~~~
@@ -257,64 +257,64 @@ It is ideal for users that:
         <td colspan="2"><image width="380px;" src="/Linux/Chimera_Linux.png"/></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Initial release</td>
-        <td style="padding: 5px;">2021</td>
+        <td style="padding: 10px;">Initial release</td>
+        <td style="padding: 10px;">2021</td>
     </tr>
     <tr>
-        <td style="padding: 5px; width: 190px;">Website</td>
-        <td style="padding: 5px;"><a href="https://chimera-linux.org/">chimera-linux.org</a></td>
+        <td style="padding: 10px; width: 190px;">Website</td>
+        <td style="padding: 10px;"><a href="https://chimera-linux.org/">chimera-linux.org</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Release model</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Rolling_release">Rolling</a></td>
+        <td style="padding: 10px;">Release model</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Rolling_release">Rolling</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
-        <td style="padding: 5px;">Bleeding edge</td>
+        <td style="padding: 10px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 10px;">Bleeding edge</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Installer</td>
-        <td style="padding: 5px;">Manual&mdash;bootstrapping.</td>
+        <td style="padding: 10px;">Installer</td>
+        <td style="padding: 10px;">Manual&mdash;bootstrapping.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Package manager (type)</td>
-        <td style="padding: 5px;"><a href="https://wiki.alpinelinux.org/wiki/Alpine_Package_Keeper">APK</a> (binary), <a href='https://github.com/chimera-linux/cports'>cports</a> (source)</td>
+        <td style="padding: 10px;">Package manager (type)</td>
+        <td style="padding: 10px;"><a href="https://wiki.alpinelinux.org/wiki/Alpine_Package_Keeper">APK</a> (binary), <a href='https://github.com/chimera-linux/cports'>cports</a> (source)</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Packaging file(s)</td>
-        <td style="padding: 5px;"><a href="https://github.com/chimera-linux/cports">template.py</a>&mdash;Python script.</td>
+        <td style="padding: 10px;">Packaging file(s)</td>
+        <td style="padding: 10px;"><a href="https://github.com/chimera-linux/cports">template.py</a>&mdash;Python script.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Compiler</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Clang">Clang</a></td>
+        <td style="padding: 10px;">Compiler</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Clang">Clang</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Init system</td>
-        <td style="padding: 5px;"><a href="https://davmac.org/projects/dinit/">Dinit</a></td>
+        <td style="padding: 10px;">Init system</td>
+        <td style="padding: 10px;"><a href="https://davmac.org/projects/dinit/">Dinit</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">C standard library</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Musl">musl</a></td>
+        <td style="padding: 10px;">C standard library</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Musl">musl</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Userland</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/FreeBSD">FreeBSD</a></td>
+        <td style="padding: 10px;">Userland</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/FreeBSD">FreeBSD</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Shell</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Almquist_shell">sh</a></td>
+        <td style="padding: 10px;">Shell</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Almquist_shell">sh</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Repository size<sup><a href="#footnote-1">1</a></sup></td>
-        <td style="padding: 5px;">Medium-small</td>
+        <td style="padding: 10px;">Repository size<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 10px;">Medium-small</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Base install<sup><a href="#footnote-2">2</a></sup></td>
-        <td style="padding: 5px;">Minimal</td>
+        <td style="padding: 10px;">Base install<sup><a href="#footnote-2">2</a></sup></td>
+        <td style="padding: 10px;">Minimal</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Documentation<sup><a href="#footnote-3">3</a></sup></td>
-        <td style="padding: 5px;">Minimal</td>
+        <td style="padding: 10px;">Documentation<sup><a href="#footnote-3">3</a></sup></td>
+        <td style="padding: 10px;">Minimal</td>
     </tr>
 </table>
 ~~~
@@ -330,64 +330,64 @@ The ideal use case of Chimera Linux would be on security-critical systems, with 
         <td colspan="2"><image width="380px;" src="/Linux/CRUX_3.7.png"/></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Initial release</td>
-        <td style="padding: 5px;">December 2002</td>
+        <td style="padding: 10px;">Initial release</td>
+        <td style="padding: 10px;">December 2002</td>
     </tr>
     <tr>
-        <td style="padding: 5px; width: 190px;">Website</td>
-        <td style="padding: 5px;"><a href="https://crux.nu/">crux.nu</a></td>
+        <td style="padding: 10px; width: 190px;">Website</td>
+        <td style="padding: 10px;"><a href="https://crux.nu/">crux.nu</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Release model</td>
-        <td style="padding: 5px;">Fixed</td>
+        <td style="padding: 10px;">Release model</td>
+        <td style="padding: 10px;">Fixed</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
-        <td style="padding: 5px;">Stable</td>
+        <td style="padding: 10px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 10px;">Stable</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Installer</td>
-        <td style="padding: 5px;">Manual, with setup script.</td>
+        <td style="padding: 10px;">Installer</td>
+        <td style="padding: 10px;">Manual, with setup script.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Package manager (type)</td>
-        <td style="padding: 5px;">Ports with prt-get (source).</td>
+        <td style="padding: 10px;">Package manager (type)</td>
+        <td style="padding: 10px;">Ports with prt-get (source).</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Packaging file(s)</td>
-        <td style="padding: 5px;"><a href="https://crux.nu/Main/Handbook3-7-Package">Pkgfile</a></td>
+        <td style="padding: 10px;">Packaging file(s)</td>
+        <td style="padding: 10px;"><a href="https://crux.nu/Main/Handbook3-7-Package">Pkgfile</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Compiler</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
+        <td style="padding: 10px;">Compiler</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Init system</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Init#SysV-style">SysV</a></td>
+        <td style="padding: 10px;">Init system</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Init#SysV-style">SysV</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">C standard library</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
+        <td style="padding: 10px;">C standard library</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Userland</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
+        <td style="padding: 10px;">Userland</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Shell</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Bash">Bash</a></td>
+        <td style="padding: 10px;">Shell</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Bash">Bash</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Repository size<sup><a href="#footnote-1">1</a></sup></td>
-        <td style="padding: 5px;">Small</td>
+        <td style="padding: 10px;">Repository size<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 10px;">Small</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Base install<sup><a href="#footnote-2">2</a></sup></td>
-        <td style="padding: 5px;">Minimal</td>
+        <td style="padding: 10px;">Base install<sup><a href="#footnote-2">2</a></sup></td>
+        <td style="padding: 10px;">Minimal</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Documentation<sup><a href="#footnote-3">3</a></sup></td>
-        <td style="padding: 5px;">Minimal</td>
+        <td style="padding: 10px;">Documentation<sup><a href="#footnote-3">3</a></sup></td>
+        <td style="padding: 10px;">Minimal</td>
     </tr>
 </table>
 ~~~
@@ -401,64 +401,64 @@ The ideal use case of Chimera Linux would be on security-critical systems, with 
         <td colspan="2"><image width="380px;" src="/Linux/Debian_12.png"/></td>
     </tr> 
     <tr>
-        <td style="padding: 5px;">Initial release</td>
-        <td style="padding: 5px;">August 1993</td>
+        <td style="padding: 10px;">Initial release</td>
+        <td style="padding: 10px;">August 1993</td>
     </tr>
     <tr>
-        <td style="padding: 5px; width: 190px;">Website</td>
-        <td style="padding: 5px;"><a href="https://www.debian.org/">www.debian.org</a></td>
+        <td style="padding: 10px; width: 190px;">Website</td>
+        <td style="padding: 10px;"><a href="https://www.debian.org/">www.debian.org</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Release model</td>
-        <td style="padding: 5px;">Fixed</td>
+        <td style="padding: 10px;">Release model</td>
+        <td style="padding: 10px;">Fixed</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
-        <td style="padding: 5px;">Stable<sup><a href="#footnote-5">5</a></sup></td>
+        <td style="padding: 10px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 10px;">Stable<sup><a href="#footnote-5">5</a></sup></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Installer</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Debian-Installer">Debian-Installer</a>&mdash;graphical.</td>
+        <td style="padding: 10px;">Installer</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Debian-Installer">Debian-Installer</a>&mdash;graphical.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Package manager (type)</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Advanced_Packaging_Tool">Advanced Packaging Tool</a> (APT; binary)</td>
+        <td style="padding: 10px;">Package manager (type)</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Advanced_Packaging_Tool">Advanced Packaging Tool</a> (APT; binary)</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Packaging file(s)</td>
-        <td style="padding: 5px;"><a href="https://wiki.debian.org/Packaging/Intro">Rules (Makefile), control, copyright and changelog files</a></td>
+        <td style="padding: 10px;">Packaging file(s)</td>
+        <td style="padding: 10px;"><a href="https://wiki.debian.org/Packaging/Intro">Rules (Makefile), control, copyright and changelog files</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Compiler</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
+        <td style="padding: 10px;">Compiler</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Init system</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a></td>
+        <td style="padding: 10px;">Init system</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">C standard library</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
+        <td style="padding: 10px;">C standard library</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Userland</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
+        <td style="padding: 10px;">Userland</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Shell</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
+        <td style="padding: 10px;">Shell</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
-        <td style="padding: 5px;">Very large</td>
+        <td style="padding: 10px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
+        <td style="padding: 10px;">Very large</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
-        <td style="padding: 5px;">Minimal or compete</td>
+        <td style="padding: 10px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
+        <td style="padding: 10px;">Minimal or compete</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
-        <td style="padding: 5px;">Detailed</td>
+        <td style="padding: 10px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
+        <td style="padding: 10px;">Detailed</td>
     </tr>
 </table>
 ~~~
@@ -488,64 +488,64 @@ Devuan is essentially just Debian without systemd. It offers SysV init, runit an
         <td colspan="2"><image width="380px;" src="/Linux/deepin_25Preview.png"/></td>
     </tr> 
     <tr>
-        <td style="padding: 5px;">Initial release</td>
-        <td style="padding: 5px;">28 February 2004</td>
+        <td style="padding: 10px;">Initial release</td>
+        <td style="padding: 10px;">28 February 2004</td>
     </tr>
     <tr>
-        <td style="padding: 5px; width: 190px;">Website</td>
-        <td style="padding: 5px;"><a href="https://www.deepin.org/index/en">www.deepin.org</a></td>
+        <td style="padding: 10px; width: 190px;">Website</td>
+        <td style="padding: 10px;"><a href="https://www.deepin.org/index/en">www.deepin.org</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Release model</td>
-        <td style="padding: 5px;">Fixed</td>
+        <td style="padding: 10px;">Release model</td>
+        <td style="padding: 10px;">Fixed</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
-        <td style="padding: 5px;">Stable</td>
+        <td style="padding: 10px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 10px;">Stable</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Installer</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Debian-Installer">deepin-Installer</a>&mdash;graphical.</td>
+        <td style="padding: 10px;">Installer</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Debian-Installer">deepin-Installer</a>&mdash;graphical.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Package manager (type)</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Advanced_Packaging_Tool">APT</a> (binary) and <a href="https://www.deepin.org/en/deepin-linglong/">LingLong</a> (binary)</td>
+        <td style="padding: 10px;">Package manager (type)</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Advanced_Packaging_Tool">APT</a> (binary) and <a href="https://www.deepin.org/en/deepin-linglong/">LingLong</a> (binary)</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Packaging file(s)</td>
-        <td style="padding: 5px;">Per Debian</td>
+        <td style="padding: 10px;">Packaging file(s)</td>
+        <td style="padding: 10px;">Per Debian</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Compiler</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
+        <td style="padding: 10px;">Compiler</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Init system</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a></td>
+        <td style="padding: 10px;">Init system</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">C standard library</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
+        <td style="padding: 10px;">C standard library</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Userland</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
+        <td style="padding: 10px;">Userland</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Shell</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
+        <td style="padding: 10px;">Shell</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
-        <td style="padding: 5px;">Very large</td>
+        <td style="padding: 10px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
+        <td style="padding: 10px;">Very large</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
-        <td style="padding: 5px;">Compete</td>
+        <td style="padding: 10px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
+        <td style="padding: 10px;">Compete</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
-        <td style="padding: 5px;">Detailed</td>
+        <td style="padding: 10px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
+        <td style="padding: 10px;">Detailed</td>
     </tr>
 </table>
 ~~~
@@ -564,64 +564,64 @@ Its AI assistant answered my system memory when I asked how I could update my sy
         <td colspan="2"><image width="380px;" src="/Linux/elementary_OS_8.0.png"/></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Initial release</td>
-        <td style="padding: 5px;">31 March 2011</td>
+        <td style="padding: 10px;">Initial release</td>
+        <td style="padding: 10px;">31 March 2011</td>
     </tr>
     <tr>
-        <td style="padding: 5px; width: 190px;">Website</td>
-        <td style="padding: 5px;"><a href="https://elementary.io/">elementary.io</a></td>
+        <td style="padding: 10px; width: 190px;">Website</td>
+        <td style="padding: 10px;"><a href="https://elementary.io/">elementary.io</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Release model</td>
-        <td style="padding: 5px;">Fixed</td>
+        <td style="padding: 10px;">Release model</td>
+        <td style="padding: 10px;">Fixed</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
-        <td style="padding: 5px;">Stable</td>
+        <td style="padding: 10px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 10px;">Stable</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Installer</td>
-        <td style="padding: 5px;"><a href="https://github.com/elementary/installer">elementary Installer</a>&mdash;graphical.</td>
+        <td style="padding: 10px;">Installer</td>
+        <td style="padding: 10px;"><a href="https://github.com/elementary/installer">elementary Installer</a>&mdash;graphical.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Package manager (type)</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Advanced_Packaging_Tool">APT</a> (binary)</td>
+        <td style="padding: 10px;">Package manager (type)</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Advanced_Packaging_Tool">APT</a> (binary)</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Packaging file(s)</td>
-        <td style="padding: 5px;">Per Debian.</td>
+        <td style="padding: 10px;">Packaging file(s)</td>
+        <td style="padding: 10px;">Per Debian.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Compiler</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
+        <td style="padding: 10px;">Compiler</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Init system</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a></td>
+        <td style="padding: 10px;">Init system</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">C standard library</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
+        <td style="padding: 10px;">C standard library</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Userland</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
+        <td style="padding: 10px;">Userland</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Shell</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
+        <td style="padding: 10px;">Shell</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
-        <td style="padding: 5px;">Very large</td>
+        <td style="padding: 10px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
+        <td style="padding: 10px;">Very large</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
-        <td style="padding: 5px;">Complete</td>
+        <td style="padding: 10px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
+        <td style="padding: 10px;">Complete</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
-        <td style="padding: 5px;">Medium</td>
+        <td style="padding: 10px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
+        <td style="padding: 10px;">Medium</td>
     </tr>
 </table>
 ~~~
@@ -635,64 +635,64 @@ Its AI assistant answered my system memory when I asked how I could update my sy
         <td colspan="2"><image width="380px;" src="/Linux/Exherbo.png"/></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Initial release</td>
-        <td style="padding: 5px;">17 January 2006?<sup><a href="#footnote-6">6</a></sup></td>
+        <td style="padding: 10px;">Initial release</td>
+        <td style="padding: 10px;">17 January 2006?<sup><a href="#footnote-6">6</a></sup></td>
     </tr>
     <tr>
-        <td style="padding: 5px; width: 190px;">Website</td>
-        <td style="padding: 5px;"><a href="https://exherbolinux.org/">exherbolinux.org</a></td>
+        <td style="padding: 10px; width: 190px;">Website</td>
+        <td style="padding: 10px;"><a href="https://exherbolinux.org/">exherbolinux.org</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Release model</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Rolling_release">Rolling</a></td>
+        <td style="padding: 10px;">Release model</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Rolling_release">Rolling</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
-        <td style="padding: 5px;">Bleeding edge</td>
+        <td style="padding: 10px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 10px;">Bleeding edge</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Installer</td>
-        <td style="padding: 5px;">Manual&mdash;bootstrapping and compiling.</td>
+        <td style="padding: 10px;">Installer</td>
+        <td style="padding: 10px;">Manual&mdash;bootstrapping and compiling.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Package manager (type)</td>
-        <td style="padding: 5px;"><a href="https://paludis.exherbolinux.org/">Paludis</a> (source)</td>
+        <td style="padding: 10px;">Package manager (type)</td>
+        <td style="padding: 10px;"><a href="https://paludis.exherbolinux.org/">Paludis</a> (source)</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Packaging file(s)</td>
-        <td style="padding: 5px;">ebuild&mdash;shell script with custom commands.</td>
+        <td style="padding: 10px;">Packaging file(s)</td>
+        <td style="padding: 10px;">ebuild&mdash;shell script with custom commands.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Compiler</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
+        <td style="padding: 10px;">Compiler</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Init system</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a><sup><a href="#footnote-7">7</a></sup></td>
+        <td style="padding: 10px;">Init system</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a><sup><a href="#footnote-7">7</a></sup></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">C standard library</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
+        <td style="padding: 10px;">C standard library</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Userland</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
+        <td style="padding: 10px;">Userland</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Shell</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
+        <td style="padding: 10px;">Shell</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
-        <td style="padding: 5px;">Medium-small</td>
+        <td style="padding: 10px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
+        <td style="padding: 10px;">Medium-small</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
-        <td style="padding: 5px;">Minimal</td>
+        <td style="padding: 10px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
+        <td style="padding: 10px;">Minimal</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
-        <td style="padding: 5px;">Medium</td>
+        <td style="padding: 10px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
+        <td style="padding: 10px;">Medium</td>
     </tr>
 </table>
 ~~~
@@ -706,64 +706,64 @@ Its AI assistant answered my system memory when I asked how I could update my sy
         <td colspan="2"><image width="380px;" src="/Linux/Fedora_41.png"/></td>
     </tr> 
     <tr>
-        <td style="padding: 5px;">Initial release</td>
-        <td style="padding: 5px;">4 November 2003</td>
+        <td style="padding: 10px;">Initial release</td>
+        <td style="padding: 10px;">4 November 2003</td>
     </tr>
     <tr>
-        <td style="padding: 5px; width: 190px;">Website</td>
-        <td style="padding: 5px;"><a href="https://fedoraproject.org/">fedoraproject.org</a></td>
+        <td style="padding: 10px; width: 190px;">Website</td>
+        <td style="padding: 10px;"><a href="https://fedoraproject.org/">fedoraproject.org</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Release model</td>
-        <td style="padding: 5px;">Fixed</td>
+        <td style="padding: 10px;">Release model</td>
+        <td style="padding: 10px;">Fixed</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
-        <td style="padding: 5px;">Cutting edge</td>
+        <td style="padding: 10px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 10px;">Cutting edge</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Installer</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Anaconda_(installer)">Anaconda</a>&mdash;graphical.</td>
+        <td style="padding: 10px;">Installer</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Anaconda_(installer)">Anaconda</a>&mdash;graphical.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Package manager (type)</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/DNF_(software)">Dandified YUM</a> (DNF; binary)</td>
+        <td style="padding: 10px;">Package manager (type)</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/DNF_(software)">Dandified YUM</a> (DNF; binary)</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Packaging file(s)</td>
-        <td style="padding: 5px;">Spec file</td>
+        <td style="padding: 10px;">Packaging file(s)</td>
+        <td style="padding: 10px;">Spec file</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Compiler</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
+        <td style="padding: 10px;">Compiler</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Init system</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a></td>
+        <td style="padding: 10px;">Init system</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">C standard library</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
+        <td style="padding: 10px;">C standard library</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Userland</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
+        <td style="padding: 10px;">Userland</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Shell</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
+        <td style="padding: 10px;">Shell</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
-        <td style="padding: 5px;">Large</td>
+        <td style="padding: 10px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
+        <td style="padding: 10px;">Large</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
-        <td style="padding: 5px;">Complete</td>
+        <td style="padding: 10px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
+        <td style="padding: 10px;">Complete</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
-        <td style="padding: 5px;">Medium</td>
+        <td style="padding: 10px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
+        <td style="padding: 10px;">Medium</td>
     </tr>
 </table>
 ~~~
@@ -779,64 +779,64 @@ Fedora is the basis of [CentOS Stream](https://en.wikipedia.org/wiki/CentOS_Stre
         <td colspan="2"><image width="380px;" src="/Linux/Gentoo_Linux.png"/></td>
     </tr> 
     <tr>
-        <td style="padding: 5px;">Initial release</td>
-        <td style="padding: 5px;">31 March 2002</td>
+        <td style="padding: 10px;">Initial release</td>
+        <td style="padding: 10px;">31 March 2002</td>
     </tr>
     <tr>
-        <td style="padding: 5px; width: 190px;">Website</td>
-        <td style="padding: 5px;"><a href="https://www.gentoo.org/">www.gentoo.org</a></td>
+        <td style="padding: 10px; width: 190px;">Website</td>
+        <td style="padding: 10px;"><a href="https://www.gentoo.org/">www.gentoo.org</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Release model</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Rolling_release">Rolling</a></td>
+        <td style="padding: 10px;">Release model</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Rolling_release">Rolling</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
-        <td style="padding: 5px;">Cutting edge<sup><a href="#footnote-8">8</a></sup></td>
+        <td style="padding: 10px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 10px;">Cutting edge<sup><a href="#footnote-8">8</a></sup></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Installer</td>
-        <td style="padding: 5px;">Manual&mdash;bootstrapping and compiling.</td>
+        <td style="padding: 10px;">Installer</td>
+        <td style="padding: 10px;">Manual&mdash;bootstrapping and compiling.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Package manager (type)</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Portage_(software)">Portage</a> (source)</td>
+        <td style="padding: 10px;">Package manager (type)</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Portage_(software)">Portage</a> (source)</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Packaging file(s)</td>
-        <td style="padding: 5px;">ebuild&mdash;shell script.</td>
+        <td style="padding: 10px;">Packaging file(s)</td>
+        <td style="padding: 10px;">ebuild&mdash;shell script.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Compiler</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
+        <td style="padding: 10px;">Compiler</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Init system</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/OpenRC">OpenRC</a>/<a href="https://en.wikipedia.org/wiki/Systemd">systemd</a><sup><a href="#footnote-7">7</a></sup></td>
+        <td style="padding: 10px;">Init system</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/OpenRC">OpenRC</a>/<a href="https://en.wikipedia.org/wiki/Systemd">systemd</a><sup><a href="#footnote-7">7</a></sup></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">C standard library</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
+        <td style="padding: 10px;">C standard library</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Userland</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
+        <td style="padding: 10px;">Userland</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Shell</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
+        <td style="padding: 10px;">Shell</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
-        <td style="padding: 5px;">Large</td>
+        <td style="padding: 10px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
+        <td style="padding: 10px;">Large</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
-        <td style="padding: 5px;">Minimal</td>
+        <td style="padding: 10px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
+        <td style="padding: 10px;">Minimal</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
-        <td style="padding: 5px;">Detailed</td>
+        <td style="padding: 10px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
+        <td style="padding: 10px;">Detailed</td>
     </tr>
 </table>
 ~~~
@@ -858,64 +858,64 @@ Gentoo is ideal for Linux users that want complete freedom to customize their sy
         <td colspan="2"><image width="380px;" src="/Linux/Guix_System.png"/></td>
     </tr> 
     <tr>
-        <td style="padding: 5px;">Initial release</td>
-        <td style="padding: 5px;">29 March 2016<sup><a href="#footnote-9">9</a></sup></td>
+        <td style="padding: 10px;">Initial release</td>
+        <td style="padding: 10px;">29 March 2016<sup><a href="#footnote-9">9</a></sup></td>
     </tr>
     <tr>
-        <td style="padding: 5px; width: 190px;">Website</td>
-        <td style="padding: 5px;"><a href="https://guix.gnu.org/">guix.gnu.org</a></td>
+        <td style="padding: 10px; width: 190px;">Website</td>
+        <td style="padding: 10px;"><a href="https://guix.gnu.org/">guix.gnu.org</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Release model</td>
-        <td style="padding: 5px;">Fixed</td>
+        <td style="padding: 10px;">Release model</td>
+        <td style="padding: 10px;">Fixed</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
-        <td style="padding: 5px;">Stable</td>
+        <td style="padding: 10px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 10px;">Stable</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Installer</td>
-        <td style="padding: 5px;">Text-based installer.</td>
+        <td style="padding: 10px;">Installer</td>
+        <td style="padding: 10px;">Text-based installer.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Package manager (type)</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU_Guix">GNU Guix</a> (binary)</td>
+        <td style="padding: 10px;">Package manager (type)</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU_Guix">GNU Guix</a> (binary)</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Packaging file(s)</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU_Guile">GNU Guile</a> scripts.</td>
+        <td style="padding: 10px;">Packaging file(s)</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU_Guile">GNU Guile</a> scripts.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Compiler</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
+        <td style="padding: 10px;">Compiler</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Init system</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU_Guix#GNU_Shepherd_init_system">GNU Shepherd</a></td>
+        <td style="padding: 10px;">Init system</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU_Guix#GNU_Shepherd_init_system">GNU Shepherd</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">C standard library</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
+        <td style="padding: 10px;">C standard library</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Userland</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
+        <td style="padding: 10px;">Userland</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Shell</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
+        <td style="padding: 10px;">Shell</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
-        <td style="padding: 5px;">Medium</td>
+        <td style="padding: 10px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
+        <td style="padding: 10px;">Medium</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
-        <td style="padding: 5px;">Minimal or complete</td>
+        <td style="padding: 10px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
+        <td style="padding: 10px;">Minimal or complete</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
-        <td style="padding: 5px;">Detailed</td>
+        <td style="padding: 10px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
+        <td style="padding: 10px;">Detailed</td>
     </tr>
 </table>
 ~~~
@@ -929,64 +929,64 @@ Gentoo is ideal for Linux users that want complete freedom to customize their sy
         <td colspan="2"><img width="380px;" src="/Linux/Linux_From_Scratch.png"/></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Initial release</td>
-        <td style="padding: 5px;">3 December 1999</td>
+        <td style="padding: 10px;">Initial release</td>
+        <td style="padding: 10px;">3 December 1999</td>
     </tr>
     <tr>
-        <td style="padding: 5px; width: 190px;">Website</td>
-        <td style="padding: 5px;"><a href="http://www.linuxfromscratch.org/">www.linuxfromscratch.org</a></td>
+        <td style="padding: 10px; width: 190px;">Website</td>
+        <td style="padding: 10px;"><a href="http://www.linuxfromscratch.org/">www.linuxfromscratch.org</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Release model</td>
-        <td style="padding: 5px;">Fixed</td>
+        <td style="padding: 10px;">Release model</td>
+        <td style="padding: 10px;">Fixed</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
-        <td style="padding: 5px;">Stable</td>
+        <td style="padding: 10px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 10px;">Stable</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Installer</td>
-        <td style="padding: 5px;">Manual compilation of each component.</td>
+        <td style="padding: 10px;">Installer</td>
+        <td style="padding: 10px;">Manual compilation of each component.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Package manager (type)</td>
-        <td style="padding: 5px;">None, software manually compiled from source.</td>
+        <td style="padding: 10px;">Package manager (type)</td>
+        <td style="padding: 10px;">None, software manually compiled from source.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Packaging file(s)</td>
-        <td style="padding: 5px;">None</td>
+        <td style="padding: 10px;">Packaging file(s)</td>
+        <td style="padding: 10px;">None</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Compiler</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
+        <td style="padding: 10px;">Compiler</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Init system</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a>/<a href="https://en.wikipedia.org/wiki/Init#SysV-style">SysV</a></td>
+        <td style="padding: 10px;">Init system</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a>/<a href="https://en.wikipedia.org/wiki/Init#SysV-style">SysV</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">C standard library</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
+        <td style="padding: 10px;">C standard library</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Userland</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
+        <td style="padding: 10px;">Userland</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Shell</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
+        <td style="padding: 10px;">Shell</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
-        <td style="padding: 5px;">Small</td>
+        <td style="padding: 10px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
+        <td style="padding: 10px;">Small</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
-        <td style="padding: 5px;">Minimal</td>
+        <td style="padding: 10px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
+        <td style="padding: 10px;">Minimal</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
-        <td style="padding: 5px;">Detailed</td>
+        <td style="padding: 10px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
+        <td style="padding: 10px;">Detailed</td>
     </tr>
 </table>
 ~~~
@@ -1002,64 +1002,64 @@ Many people find installing LFS a frustrating experience as it is tedious and sm
         <td colspan="2"><img width="380px;" src="/Linux/Linux_Mint_22.1.png"/></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Initial release</td>
-        <td style="padding: 5px;">27 August 2006</td>
+        <td style="padding: 10px;">Initial release</td>
+        <td style="padding: 10px;">27 August 2006</td>
     </tr>
     <tr>
-        <td style="padding: 5px; width: 190px;">Website</td>
-        <td style="padding: 5px;"><a href="https://linuxmint.com/">linuxmint.com</a></td>
+        <td style="padding: 10px; width: 190px;">Website</td>
+        <td style="padding: 10px;"><a href="https://linuxmint.com/">linuxmint.com</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Release model</td>
-        <td style="padding: 5px;">Fixed</td>
+        <td style="padding: 10px;">Release model</td>
+        <td style="padding: 10px;">Fixed</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
-        <td style="padding: 5px;">Stable</td>
+        <td style="padding: 10px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 10px;">Stable</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Installer</td>
-        <td style="padding: 5px;">Ubiquity&mdash;graphical.</td>
+        <td style="padding: 10px;">Installer</td>
+        <td style="padding: 10px;">Ubiquity&mdash;graphical.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Package manager (type)</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Advanced_Packaging_Tool">APT</a> (binary)</td>
+        <td style="padding: 10px;">Package manager (type)</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Advanced_Packaging_Tool">APT</a> (binary)</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Packaging file(s)</td>
-        <td style="padding: 5px;">Per <a href="#debian">Debian</a></td>
+        <td style="padding: 10px;">Packaging file(s)</td>
+        <td style="padding: 10px;">Per <a href="#debian">Debian</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Compiler</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
+        <td style="padding: 10px;">Compiler</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Init system</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a></td>
+        <td style="padding: 10px;">Init system</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">C standard library</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
+        <td style="padding: 10px;">C standard library</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Userland</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
+        <td style="padding: 10px;">Userland</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Shell</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
+        <td style="padding: 10px;">Shell</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
-        <td style="padding: 5px;">Very large</td>
+        <td style="padding: 10px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
+        <td style="padding: 10px;">Very large</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
-        <td style="padding: 5px;">Complete</td>
+        <td style="padding: 10px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
+        <td style="padding: 10px;">Complete</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
-        <td style="padding: 5px;">Medium</td>
+        <td style="padding: 10px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
+        <td style="padding: 10px;">Medium</td>
     </tr>
 </table>
 ~~~
@@ -1075,64 +1075,64 @@ It is ideal for beginners that are used to the Windows layout, especially if the
         <td colspan="2"><img width="380px;" src="/Linux/Mageia_9.png"/></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Initial release</td>
-        <td style="padding: 5px;">1 July 2011</td>
+        <td style="padding: 10px;">Initial release</td>
+        <td style="padding: 10px;">1 July 2011</td>
     </tr>
     <tr>
-        <td style="padding: 5px; width: 190px;">Website</td>
-        <td style="padding: 5px;"><a href="https://www.mageia.org/en">www.mageia.org</a></td>
+        <td style="padding: 10px; width: 190px;">Website</td>
+        <td style="padding: 10px;"><a href="https://www.mageia.org/en">www.mageia.org</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Release model</td>
-        <td style="padding: 5px;">Fixed</td>
+        <td style="padding: 10px;">Release model</td>
+        <td style="padding: 10px;">Fixed</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
-        <td style="padding: 5px;">Stable</td>
+        <td style="padding: 10px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 10px;">Stable</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Installer</td>
-        <td style="padding: 5px;">DrakX&mdash;graphical.</td>
+        <td style="padding: 10px;">Installer</td>
+        <td style="padding: 10px;">DrakX&mdash;graphical.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Package manager (type)</td>
-        <td style="padding: 5px;">DNF (current) and urpmi (legacy)&mdash;both binary.</td>
+        <td style="padding: 10px;">Package manager (type)</td>
+        <td style="padding: 10px;">DNF (current) and urpmi (legacy)&mdash;both binary.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Packaging file(s)</td>
-        <td style="padding: 5px;">Spec file.</td>
+        <td style="padding: 10px;">Packaging file(s)</td>
+        <td style="padding: 10px;">Spec file.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Compiler</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
+        <td style="padding: 10px;">Compiler</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Init system</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a></td>
+        <td style="padding: 10px;">Init system</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">C standard library</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
+        <td style="padding: 10px;">C standard library</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Userland</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
+        <td style="padding: 10px;">Userland</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Shell</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
+        <td style="padding: 10px;">Shell</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
-        <td style="padding: 5px;">Medium</td>
+        <td style="padding: 10px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
+        <td style="padding: 10px;">Medium</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
-        <td style="padding: 5px;">Complete</td>
+        <td style="padding: 10px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
+        <td style="padding: 10px;">Complete</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
-        <td style="padding: 5px;">Medium</td>
+        <td style="padding: 10px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
+        <td style="padding: 10px;">Medium</td>
     </tr>
 </table>
 ~~~
@@ -1146,64 +1146,64 @@ It is ideal for beginners that are used to the Windows layout, especially if the
         <td colspan="2"><image width="380px;" src="/Linux/MX_Linux_23.5.png"/></td>
     </tr> 
     <tr>
-        <td style="padding: 5px;">Initial release</td>
-        <td style="padding: 5px;">24 March 2014</td>
+        <td style="padding: 10px;">Initial release</td>
+        <td style="padding: 10px;">24 March 2014</td>
     </tr>
     <tr>
-        <td style="padding: 5px; width: 190px;">Website</td>
-        <td style="padding: 5px;"><a href="https://mxlinux.org/">mxlinux.org</a></td>
+        <td style="padding: 10px; width: 190px;">Website</td>
+        <td style="padding: 10px;"><a href="https://mxlinux.org/">mxlinux.org</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Release model</td>
-        <td style="padding: 5px;">Fixed</td>
+        <td style="padding: 10px;">Release model</td>
+        <td style="padding: 10px;">Fixed</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
-        <td style="padding: 5px;">Stable</td>
+        <td style="padding: 10px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 10px;">Stable</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Installer</td>
-        <td style="padding: 5px;">MX Installer&mdash;graphical.</td>
+        <td style="padding: 10px;">Installer</td>
+        <td style="padding: 10px;">MX Installer&mdash;graphical.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Package manager (type)</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Advanced_Packaging_Tool">Advanced Packaging Tool</a> (APT; binary)</td>
+        <td style="padding: 10px;">Package manager (type)</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Advanced_Packaging_Tool">Advanced Packaging Tool</a> (APT; binary)</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Packaging file(s)</td>
-        <td style="padding: 5px;">Per Debian</td>
+        <td style="padding: 10px;">Packaging file(s)</td>
+        <td style="padding: 10px;">Per Debian</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Compiler</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
+        <td style="padding: 10px;">Compiler</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Init system</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Init#SysV-style">SysV</a></td>
+        <td style="padding: 10px;">Init system</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Init#SysV-style">SysV</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">C standard library</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
+        <td style="padding: 10px;">C standard library</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Userland</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
+        <td style="padding: 10px;">Userland</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Shell</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
+        <td style="padding: 10px;">Shell</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
-        <td style="padding: 5px;">Very large</td>
+        <td style="padding: 10px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
+        <td style="padding: 10px;">Very large</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
-        <td style="padding: 5px;">Compete</td>
+        <td style="padding: 10px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
+        <td style="padding: 10px;">Compete</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
-        <td style="padding: 5px;">Medium</td>
+        <td style="padding: 10px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
+        <td style="padding: 10px;">Medium</td>
     </tr>
 </table>
 ~~~
@@ -1216,64 +1216,64 @@ It is ideal for beginners that are used to the Windows layout, especially if the
         <td colspan="2"><img width="380px;" src="/Linux/NixOS_24.11.png"/></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Initial release</td>
-        <td style="padding: 5px;">3 June 2003</td>
+        <td style="padding: 10px;">Initial release</td>
+        <td style="padding: 10px;">3 June 2003</td>
     </tr>
     <tr>
-        <td style="padding: 5px; width: 190px;">Website</td>
-        <td style="padding: 5px;"><a href="https://nixos.org/">nixos.org</a></td>
+        <td style="padding: 10px; width: 190px;">Website</td>
+        <td style="padding: 10px;"><a href="https://nixos.org/">nixos.org</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Release model</td>
-        <td style="padding: 5px;">Fixed</td>
+        <td style="padding: 10px;">Release model</td>
+        <td style="padding: 10px;">Fixed</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
-        <td style="padding: 5px;">Stable</td>
+        <td style="padding: 10px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 10px;">Stable</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Installer</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Calamares_(software)">Calamares</a>&mdash;graphical.</td>
+        <td style="padding: 10px;">Installer</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Calamares_(software)">Calamares</a>&mdash;graphical.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Package manager (type)</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Nix_(package_manager)">Nix</a> (binary)</td>
+        <td style="padding: 10px;">Package manager (type)</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Nix_(package_manager)">Nix</a> (binary)</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Packaging file(s)</td>
-        <td style="padding: 5px;">Nix file</td>
+        <td style="padding: 10px;">Packaging file(s)</td>
+        <td style="padding: 10px;">Nix file</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Compiler</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
+        <td style="padding: 10px;">Compiler</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Init system</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a></td>
+        <td style="padding: 10px;">Init system</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">C standard library</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
+        <td style="padding: 10px;">C standard library</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Userland</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
+        <td style="padding: 10px;">Userland</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Shell</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
+        <td style="padding: 10px;">Shell</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
-        <td style="padding: 5px;">Vast</td>
+        <td style="padding: 10px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
+        <td style="padding: 10px;">Vast</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
-        <td style="padding: 5px;">Minimal or complete</td>
+        <td style="padding: 10px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
+        <td style="padding: 10px;">Minimal or complete</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
-        <td style="padding: 5px;">Comprehensive</td>
+        <td style="padding: 10px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
+        <td style="padding: 10px;">Comprehensive</td>
     </tr>
 </table>
 ~~~
@@ -1301,64 +1301,64 @@ Nix has also been ported to several other operating systems, including BSD deriv
         <td colspan="2"><img width="380px;" src="/Linux/NuTyX_24.10.png"/></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Initial release</td>
-        <td style="padding: 5px;">14 September 2009<sup><a href="#footnote-10">10</a></sup></td>
+        <td style="padding: 10px;">Initial release</td>
+        <td style="padding: 10px;">14 September 2009<sup><a href="#footnote-10">10</a></sup></td>
     </tr>
     <tr>
-        <td style="padding: 5px; width: 190px;">Website</td>
-        <td style="padding: 5px;"><a href="https://nutyx.org/en/">nutyx.org</a></td>
+        <td style="padding: 10px; width: 190px;">Website</td>
+        <td style="padding: 10px;"><a href="https://nutyx.org/en/">nutyx.org</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Release model</td>
-        <td style="padding: 5px;">Fixed</td>
+        <td style="padding: 10px;">Release model</td>
+        <td style="padding: 10px;">Fixed</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
-        <td style="padding: 5px;">Stable</td>
+        <td style="padding: 10px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 10px;">Stable</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Installer</td>
-        <td style="padding: 5px;">NuTyX Installer&mdash;text-based.</td>
+        <td style="padding: 10px;">Installer</td>
+        <td style="padding: 10px;">NuTyX Installer&mdash;text-based.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Package manager (type)</td>
-        <td style="padding: 5px;">Cards (binary and source)</td>
+        <td style="padding: 10px;">Package manager (type)</td>
+        <td style="padding: 10px;">Cards (binary and source)</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Packaging file(s)</td>
-        <td style="padding: 5px;">Pkgfile&mdash;shell script</td>
+        <td style="padding: 10px;">Packaging file(s)</td>
+        <td style="padding: 10px;">Pkgfile&mdash;shell script</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Compiler</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
+        <td style="padding: 10px;">Compiler</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Init system</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Init#SysV-style">SysV</a></td>
+        <td style="padding: 10px;">Init system</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Init#SysV-style">SysV</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">C standard library</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
+        <td style="padding: 10px;">C standard library</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Userland</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
+        <td style="padding: 10px;">Userland</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Shell</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
+        <td style="padding: 10px;">Shell</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
-        <td style="padding: 5px;">Medium</td>
+        <td style="padding: 10px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
+        <td style="padding: 10px;">Medium</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
-        <td style="padding: 5px;">Minimal or complete</td>
+        <td style="padding: 10px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
+        <td style="padding: 10px;">Minimal or complete</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
-        <td style="padding: 5px;">Minimal</td>
+        <td style="padding: 10px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
+        <td style="padding: 10px;">Minimal</td>
     </tr>
 </table>
 ~~~
@@ -1374,64 +1374,64 @@ Something interesting about NuTyX that I noticed in one of my virtual machines t
         <td colspan="2"><img width="380px;" src="/Linux/openmamba_GNU_Linux.png"/></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Initial release</td>
-        <td style="padding: 5px;">Before 4 August 2009<sup><a href="#footnote-11">11</a></sup></td>
+        <td style="padding: 10px;">Initial release</td>
+        <td style="padding: 10px;">Before 4 August 2009<sup><a href="#footnote-11">11</a></sup></td>
     </tr>
     <tr>
-        <td style="padding: 5px; width: 190px;">Website</td>
-        <td style="padding: 5px;"><a href="https://openmamba.org/">openmamba.org</a></td>
+        <td style="padding: 10px; width: 190px;">Website</td>
+        <td style="padding: 10px;"><a href="https://openmamba.org/">openmamba.org</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Release model</td>
-        <td style="padding: 5px;">Fixed</td>
+        <td style="padding: 10px;">Release model</td>
+        <td style="padding: 10px;">Fixed</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
-        <td style="padding: 5px;">Cutting edge</td>
+        <td style="padding: 10px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 10px;">Cutting edge</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Installer</td>
-        <td style="padding: 5px;">Mamba Installer&mdash;graphical.</td>
+        <td style="padding: 10px;">Installer</td>
+        <td style="padding: 10px;">Mamba Installer&mdash;graphical.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Package manager (type)</td>
-        <td style="padding: 5px;">DNF (binary)</td>
+        <td style="padding: 10px;">Package manager (type)</td>
+        <td style="padding: 10px;">DNF (binary)</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Packaging file(s)</td>
-        <td style="padding: 5px;">Spec file</td>
+        <td style="padding: 10px;">Packaging file(s)</td>
+        <td style="padding: 10px;">Spec file</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Compiler</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
+        <td style="padding: 10px;">Compiler</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Init system</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a></td>
+        <td style="padding: 10px;">Init system</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">C standard library</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
+        <td style="padding: 10px;">C standard library</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Userland</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
+        <td style="padding: 10px;">Userland</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Shell</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
+        <td style="padding: 10px;">Shell</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
-        <td style="padding: 5px;">Medium-small</td>
+        <td style="padding: 10px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
+        <td style="padding: 10px;">Medium-small</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
-        <td style="padding: 5px;">Complete</td>
+        <td style="padding: 10px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
+        <td style="padding: 10px;">Complete</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
-        <td style="padding: 5px;">Minimal</td>
+        <td style="padding: 10px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
+        <td style="padding: 10px;">Minimal</td>
     </tr>
 </table>
 ~~~
@@ -1445,64 +1445,64 @@ Something interesting about NuTyX that I noticed in one of my virtual machines t
         <td colspan="2"><img width="380px;" src="/Linux/OpenMandriva_Lx_Rolling.png"/></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Initial release</td>
-        <td style="padding: 5px;">18 June 2013</td>
+        <td style="padding: 10px;">Initial release</td>
+        <td style="padding: 10px;">18 June 2013</td>
     </tr>
     <tr>
-        <td style="padding: 5px; width: 190px;">Website</td>
-        <td style="padding: 5px;"><a href="https://www.openmandriva.org/">www.openmandriva.org</a></td>
+        <td style="padding: 10px; width: 190px;">Website</td>
+        <td style="padding: 10px;"><a href="https://www.openmandriva.org/">www.openmandriva.org</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Release model</td>
-        <td style="padding: 5px;">Fixed and rolling</td>
+        <td style="padding: 10px;">Release model</td>
+        <td style="padding: 10px;">Fixed and rolling</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
-        <td style="padding: 5px;">Stable (fixed), bleeding edge (rolling)</td>
+        <td style="padding: 10px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 10px;">Stable (fixed), bleeding edge (rolling)</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Installer</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Calamares_(software)">Calamares</a>&mdash;graphical.</td>
+        <td style="padding: 10px;">Installer</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Calamares_(software)">Calamares</a>&mdash;graphical.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Package manager (type)</td>
-        <td style="padding: 5px;">urpmi (legacy) and DNF (current)&mdash;both binary.</td>
+        <td style="padding: 10px;">Package manager (type)</td>
+        <td style="padding: 10px;">urpmi (legacy) and DNF (current)&mdash;both binary.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Packaging file(s)</td>
-        <td style="padding: 5px;">Spec file</td>
+        <td style="padding: 10px;">Packaging file(s)</td>
+        <td style="padding: 10px;">Spec file</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Compiler</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Clang">Clang</a></td>
+        <td style="padding: 10px;">Compiler</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Clang">Clang</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Init system</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a></td>
+        <td style="padding: 10px;">Init system</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">C standard library</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
+        <td style="padding: 10px;">C standard library</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Userland</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
+        <td style="padding: 10px;">Userland</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Shell</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
+        <td style="padding: 10px;">Shell</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
-        <td style="padding: 5px;">Medium-small</td>
+        <td style="padding: 10px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
+        <td style="padding: 10px;">Medium-small</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
-        <td style="padding: 5px;">Complete</td>
+        <td style="padding: 10px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
+        <td style="padding: 10px;">Complete</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
-        <td style="padding: 5px;">Medium</td>
+        <td style="padding: 10px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
+        <td style="padding: 10px;">Medium</td>
     </tr>
 </table>
 ~~~
@@ -1516,64 +1516,64 @@ Something interesting about NuTyX that I noticed in one of my virtual machines t
         <td colspan="2"><img width="380px;" src="/Linux/openSUSE_Tumbleweed.png"/></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Initial release</td>
-        <td style="padding: 5px;">7 December 2006</td>
+        <td style="padding: 10px;">Initial release</td>
+        <td style="padding: 10px;">7 December 2006</td>
     </tr>
     <tr>
-        <td style="padding: 5px; width: 190px;">Website</td>
-        <td style="padding: 5px;"><a href="https://www.opensuse.org/">www.opensuse.org</a></td>
+        <td style="padding: 10px; width: 190px;">Website</td>
+        <td style="padding: 10px;"><a href="https://www.opensuse.org/">www.opensuse.org</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Release model</td>
-        <td style="padding: 5px;">Fixed (Leap) and rolling (Tumbleweed)</td>
+        <td style="padding: 10px;">Release model</td>
+        <td style="padding: 10px;">Fixed (Leap) and rolling (Tumbleweed)</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
-        <td style="padding: 5px;">Stable (Leap), bleeding edge (Tumbleweed)</td>
+        <td style="padding: 10px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 10px;">Stable (Leap), bleeding edge (Tumbleweed)</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Installer</td>
-        <td style="padding: 5px;">YaST&mdash;graphical.</td>
+        <td style="padding: 10px;">Installer</td>
+        <td style="padding: 10px;">YaST&mdash;graphical.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Package manager (type)</td>
-        <td style="padding: 5px;">ZYpp (binary)</td>
+        <td style="padding: 10px;">Package manager (type)</td>
+        <td style="padding: 10px;">ZYpp (binary)</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Packaging file(s)</td>
-        <td style="padding: 5px;">Spec file</td>
+        <td style="padding: 10px;">Packaging file(s)</td>
+        <td style="padding: 10px;">Spec file</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Compiler</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
+        <td style="padding: 10px;">Compiler</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Init system</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a></td>
+        <td style="padding: 10px;">Init system</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">C standard library</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
+        <td style="padding: 10px;">C standard library</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Userland</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
+        <td style="padding: 10px;">Userland</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Shell</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
+        <td style="padding: 10px;">Shell</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
-        <td style="padding: 5px;">Large</td>
+        <td style="padding: 10px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
+        <td style="padding: 10px;">Large</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
-        <td style="padding: 5px;">Complete</td>
+        <td style="padding: 10px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
+        <td style="padding: 10px;">Complete</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
-        <td style="padding: 5px;">Medium</td>
+        <td style="padding: 10px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
+        <td style="padding: 10px;">Medium</td>
     </tr>
 </table>
 ~~~
@@ -1593,64 +1593,64 @@ I would recommend openSUSE to intermediate to advanced users that like RPM packa
         <td colspan="2"><img width="380px;" src="/Linux/PCLinuxOS.png"/></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Initial release</td>
-        <td style="padding: 5px;">October 2003</td>
+        <td style="padding: 10px;">Initial release</td>
+        <td style="padding: 10px;">October 2003</td>
     </tr>
     <tr>
-        <td style="padding: 5px; width: 190px;">Website</td>
-        <td style="padding: 5px;"><a href="https://pclinuxos.com/">pclinuxos.com</a></td>
+        <td style="padding: 10px; width: 190px;">Website</td>
+        <td style="padding: 10px;"><a href="https://pclinuxos.com/">pclinuxos.com</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Release model</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Rolling_release">Rolling</a></td>
+        <td style="padding: 10px;">Release model</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Rolling_release">Rolling</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
-        <td style="padding: 5px;">Stable</td>
+        <td style="padding: 10px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 10px;">Stable</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Installer</td>
-        <td style="padding: 5px;">PCLinuxOS Installer&mdash;graphical.</td>
+        <td style="padding: 10px;">Installer</td>
+        <td style="padding: 10px;">PCLinuxOS Installer&mdash;graphical.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Package manager (type)</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/APT-RPM">APT-RPM</a> (binary)</td>
+        <td style="padding: 10px;">Package manager (type)</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/APT-RPM">APT-RPM</a> (binary)</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Packaging file(s)</td>
-        <td style="padding: 5px;">Spec file</td>
+        <td style="padding: 10px;">Packaging file(s)</td>
+        <td style="padding: 10px;">Spec file</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Compiler</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
+        <td style="padding: 10px;">Compiler</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Init system</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Init#SysV-style">SysV</a></td>
+        <td style="padding: 10px;">Init system</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Init#SysV-style">SysV</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">C standard library</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
+        <td style="padding: 10px;">C standard library</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Userland</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
+        <td style="padding: 10px;">Userland</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Shell</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
+        <td style="padding: 10px;">Shell</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
-        <td style="padding: 5px;">Medium</td>
+        <td style="padding: 10px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
+        <td style="padding: 10px;">Medium</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
-        <td style="padding: 5px;">Complete</td>
+        <td style="padding: 10px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
+        <td style="padding: 10px;">Complete</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
-        <td style="padding: 5px;">Medium</td>
+        <td style="padding: 10px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
+        <td style="padding: 10px;">Medium</td>
     </tr>
 </table>
 ~~~
@@ -1666,64 +1666,64 @@ PCLinuxOS is perhaps best suited to beginners that do not need exotic software, 
         <td colspan="2"><image width="380px;" src="/Linux/Pop!_OS_22.04.png"/></td>
     </tr> 
     <tr>
-        <td style="padding: 5px;">Initial release</td>
-        <td style="padding: 5px;">27 October 2017</td>
+        <td style="padding: 10px;">Initial release</td>
+        <td style="padding: 10px;">27 October 2017</td>
     </tr>
     <tr>
-        <td style="padding: 5px; width: 190px;">Website</td>
-        <td style="padding: 5px;"><a href="https://pop.system76.com/">pop.system76.com</a></td>
+        <td style="padding: 10px; width: 190px;">Website</td>
+        <td style="padding: 10px;"><a href="https://pop.system76.com/">pop.system76.com</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Release model</td>
-        <td style="padding: 5px;">Fixed</td>
+        <td style="padding: 10px;">Release model</td>
+        <td style="padding: 10px;">Fixed</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
-        <td style="padding: 5px;">Old stable<sup><a href="#footnote-14">14</a></sup></td>
+        <td style="padding: 10px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 10px;">Old stable<sup><a href="#footnote-14">14</a></sup></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Installer</td>
-        <td style="padding: 5px;"><a href="https://github.com/elementary/installer">elementary Installer</a>&mdash;graphical.</td>
+        <td style="padding: 10px;">Installer</td>
+        <td style="padding: 10px;"><a href="https://github.com/elementary/installer">elementary Installer</a>&mdash;graphical.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Package manager (type)</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Advanced_Packaging_Tool">APT</a> (binary)</td>
+        <td style="padding: 10px;">Package manager (type)</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Advanced_Packaging_Tool">APT</a> (binary)</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Packaging file(s)</td>
-        <td style="padding: 5px;">Per Debian</td>
+        <td style="padding: 10px;">Packaging file(s)</td>
+        <td style="padding: 10px;">Per Debian</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Compiler</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
+        <td style="padding: 10px;">Compiler</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Init system</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a></td>
+        <td style="padding: 10px;">Init system</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">C standard library</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
+        <td style="padding: 10px;">C standard library</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Userland</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
+        <td style="padding: 10px;">Userland</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Shell</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
+        <td style="padding: 10px;">Shell</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
-        <td style="padding: 5px;">Large</td>
+        <td style="padding: 10px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
+        <td style="padding: 10px;">Large</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
-        <td style="padding: 5px;">Compete</td>
+        <td style="padding: 10px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
+        <td style="padding: 10px;">Compete</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
-        <td style="padding: 5px;">None<sup><a href="#footnote-15">15</a></sup></td>
+        <td style="padding: 10px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
+        <td style="padding: 10px;">None<sup><a href="#footnote-15">15</a></sup></td>
     </tr>
 </table>
 ~~~
@@ -1737,64 +1737,64 @@ PCLinuxOS is perhaps best suited to beginners that do not need exotic software, 
         <td colspan="2"><img width="380px;" src="/Linux/Rhino_Linux.png"/></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Initial release</td>
-        <td style="padding: 5px;">8 August 2023</td>
+        <td style="padding: 10px;">Initial release</td>
+        <td style="padding: 10px;">8 August 2023</td>
     </tr>
     <tr>
-        <td style="padding: 5px; width: 190px;">Website</td>
-        <td style="padding: 5px;"><a href="https://rhinolinux.org/">rhinolinux.org</a></td>
+        <td style="padding: 10px; width: 190px;">Website</td>
+        <td style="padding: 10px;"><a href="https://rhinolinux.org/">rhinolinux.org</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Release model</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Rolling_release">Rolling</a></td>
+        <td style="padding: 10px;">Release model</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Rolling_release">Rolling</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
-        <td style="padding: 5px;">Bleeding edge</td>
+        <td style="padding: 10px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 10px;">Bleeding edge</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Installer</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Calamares_(software)">Calamares</a>&mdash;graphical.</td>
+        <td style="padding: 10px;">Installer</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Calamares_(software)">Calamares</a>&mdash;graphical.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Package manager (type)</td>
-        <td style="padding: 5px;"><a href="https://github.com/volitank/nala">Nala</a> (binary), <a href="https://github.com/pacstall/pacstall">Pacstall</a> (source) and distro-agnostic package managers (binary).<sup><a href="#footnote-16">16</a></sup></td>
+        <td style="padding: 10px;">Package manager (type)</td>
+        <td style="padding: 10px;"><a href="https://github.com/volitank/nala">Nala</a> (binary), <a href="https://github.com/pacstall/pacstall">Pacstall</a> (source) and distro-agnostic package managers (binary).<sup><a href="#footnote-16">16</a></sup></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Packaging file(s)</td>
-        <td style="padding: 5px;">Per Debian, plus Pacscript (shell script).</td>
+        <td style="padding: 10px;">Packaging file(s)</td>
+        <td style="padding: 10px;">Per Debian, plus Pacscript (shell script).</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Compiler</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
+        <td style="padding: 10px;">Compiler</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Init system</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a></td>
+        <td style="padding: 10px;">Init system</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">C standard library</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
+        <td style="padding: 10px;">C standard library</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Userland</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
+        <td style="padding: 10px;">Userland</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Shell</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
+        <td style="padding: 10px;">Shell</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
-        <td style="padding: 5px;">Vast</td>
+        <td style="padding: 10px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
+        <td style="padding: 10px;">Vast</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
-        <td style="padding: 5px;">Complete</td>
+        <td style="padding: 10px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
+        <td style="padding: 10px;">Complete</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
-        <td style="padding: 5px;">Medium</td>
+        <td style="padding: 10px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
+        <td style="padding: 10px;">Medium</td>
     </tr>
 </table>
 ~~~
@@ -1825,64 +1825,64 @@ I personally rather like this distribution as it addresses many of the problems 
         <td colspan="2"><img width="380px;" src="/Linux/Slackware_Linux_15.0.png"/></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Initial release</td>
-        <td style="padding: 5px;">17 July 1993</td>
+        <td style="padding: 10px;">Initial release</td>
+        <td style="padding: 10px;">17 July 1993</td>
     </tr>
     <tr>
-        <td style="padding: 5px; width: 190px;">Website</td>
-        <td style="padding: 5px;"><a href="http://www.slackware.com/">www.slackware.com</a></td>
+        <td style="padding: 10px; width: 190px;">Website</td>
+        <td style="padding: 10px;"><a href="http://www.slackware.com/">www.slackware.com</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Release model</td>
-        <td style="padding: 5px;">Fixed</td>
+        <td style="padding: 10px;">Release model</td>
+        <td style="padding: 10px;">Fixed</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
-        <td style="padding: 5px;">Stable</td>
+        <td style="padding: 10px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 10px;">Stable</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Installer</td>
-        <td style="padding: 5px;">Slackware Installer&mdash;Textual.</td>
+        <td style="padding: 10px;">Installer</td>
+        <td style="padding: 10px;">Slackware Installer&mdash;Textual.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Package manager (type)</td>
-        <td style="padding: 5px;">pkgtools</td>
+        <td style="padding: 10px;">Package manager (type)</td>
+        <td style="padding: 10px;">pkgtools</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Packaging file(s)</td>
-        <td style="padding: 5px;"><a href="https://docs.slackware.com/slackware:slackbuild_scripts">SlackBuilds</a>&mdash;shell script</td>
+        <td style="padding: 10px;">Packaging file(s)</td>
+        <td style="padding: 10px;"><a href="https://docs.slackware.com/slackware:slackbuild_scripts">SlackBuilds</a>&mdash;shell script</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Compiler</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
+        <td style="padding: 10px;">Compiler</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Init system</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Init#SysV-style">SysV</a></td>
+        <td style="padding: 10px;">Init system</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Init#SysV-style">SysV</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">C standard library</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
+        <td style="padding: 10px;">C standard library</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Userland</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
+        <td style="padding: 10px;">Userland</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Shell</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
+        <td style="padding: 10px;">Shell</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
-        <td style="padding: 5px;">Medium-small</td>
+        <td style="padding: 10px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
+        <td style="padding: 10px;">Medium-small</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
-        <td style="padding: 5px;">Minimal or complete</td>
+        <td style="padding: 10px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
+        <td style="padding: 10px;">Minimal or complete</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
-        <td style="padding: 5px;">Medium</td>
+        <td style="padding: 10px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
+        <td style="padding: 10px;">Medium</td>
     </tr>
 </table>
 ~~~
@@ -1900,64 +1900,64 @@ I have tried Slackware many times and I have found its approach to package manag
         <td colspan="2"><img width="380px;" src="/Linux/Solus.png"/></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Initial release</td>
-        <td style="padding: 5px;">27 December 2016</td>
+        <td style="padding: 10px;">Initial release</td>
+        <td style="padding: 10px;">27 December 2016</td>
     </tr>
     <tr>
-        <td style="padding: 5px; width: 190px;">Website</td>
-        <td style="padding: 5px;"><a href="https://getsol.us/">getsol.us</a></td>
+        <td style="padding: 10px; width: 190px;">Website</td>
+        <td style="padding: 10px;"><a href="https://getsol.us/">getsol.us</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Release model</td>
-        <td style="padding: 5px;">Fixed</td>
+        <td style="padding: 10px;">Release model</td>
+        <td style="padding: 10px;">Fixed</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
-        <td style="padding: 5px;">Stable</td>
+        <td style="padding: 10px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 10px;">Stable</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Installer</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Calamares_(software)">Calamares</a>&mdash;Textual.</td>
+        <td style="padding: 10px;">Installer</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Calamares_(software)">Calamares</a>&mdash;Textual.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Package manager (type)</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Pardus_(operating_system)#PiSi_package_management">eopkg</a></td>
+        <td style="padding: 10px;">Package manager (type)</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Pardus_(operating_system)#PiSi_package_management">eopkg</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Packaging file(s)</td>
-        <td style="padding: 5px;"><a href="https://help.getsol.us/docs/packaging/package.yml/">package.yml</a>&mdash;YAML file.</td>
+        <td style="padding: 10px;">Packaging file(s)</td>
+        <td style="padding: 10px;"><a href="https://help.getsol.us/docs/packaging/package.yml/">package.yml</a>&mdash;YAML file.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Compiler</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
+        <td style="padding: 10px;">Compiler</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Init system</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Init#SysV-style">SysV</a></td>
+        <td style="padding: 10px;">Init system</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Init#SysV-style">SysV</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">C standard library</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
+        <td style="padding: 10px;">C standard library</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Userland</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
+        <td style="padding: 10px;">Userland</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Shell</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
+        <td style="padding: 10px;">Shell</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
-        <td style="padding: 5px;">Medium-small</td>
+        <td style="padding: 10px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
+        <td style="padding: 10px;">Medium-small</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
-        <td style="padding: 5px;">Minimal or complete</td>
+        <td style="padding: 10px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
+        <td style="padding: 10px;">Minimal or complete</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
-        <td style="padding: 5px;">Medium</td>
+        <td style="padding: 10px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
+        <td style="padding: 10px;">Medium</td>
     </tr>
 </table>
 ~~~
@@ -1973,64 +1973,64 @@ Its ideal use case is probably a beginner that does not need exotic software, ap
         <td colspan="2"><img width="380px;" src="/Linux/Ubuntu_24.10.png"/></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Initial release</td>
-        <td style="padding: 5px;">20 October 2004</td>
+        <td style="padding: 10px;">Initial release</td>
+        <td style="padding: 10px;">20 October 2004</td>
     </tr>
     <tr>
-        <td style="padding: 5px; width: 190px;">Website</td>
-        <td style="padding: 5px;"><a href="https://ubuntu.com/">ubuntu.com</a></td>
+        <td style="padding: 10px; width: 190px;">Website</td>
+        <td style="padding: 10px;"><a href="https://ubuntu.com/">ubuntu.com</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Release model</td>
-        <td style="padding: 5px;">Fixed</td>
+        <td style="padding: 10px;">Release model</td>
+        <td style="padding: 10px;">Fixed</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
-        <td style="padding: 5px;">Stable</td>
+        <td style="padding: 10px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 10px;">Stable</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Installer</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Ubiquity_(software)">Ubiquity</a>&mdash;graphical.</td>
+        <td style="padding: 10px;">Installer</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Ubiquity_(software)">Ubiquity</a>&mdash;graphical.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Package manager (type)</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Advanced_Packaging_Tool">APT</a> (binary) and <a href="https://en.wikipedia.org/wiki/Snap_(software)">Snap</a> (binary).</td>
+        <td style="padding: 10px;">Package manager (type)</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Advanced_Packaging_Tool">APT</a> (binary) and <a href="https://en.wikipedia.org/wiki/Snap_(software)">Snap</a> (binary).</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Packaging file(s)</td>
-        <td style="padding: 5px;">Per <a href="#debian">Debian</a>.</td>
+        <td style="padding: 10px;">Packaging file(s)</td>
+        <td style="padding: 10px;">Per <a href="#debian">Debian</a>.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Compiler</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
+        <td style="padding: 10px;">Compiler</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Init system</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a></td>
+        <td style="padding: 10px;">Init system</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">C standard library</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a><td>
+        <td style="padding: 10px;">C standard library</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a><td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Userland</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
+        <td style="padding: 10px;">Userland</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Shell</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
+        <td style="padding: 10px;">Shell</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
-        <td style="padding: 5px;">Very large</td>
+        <td style="padding: 10px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
+        <td style="padding: 10px;">Very large</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
-        <td style="padding: 5px;">Complete</td>
+        <td style="padding: 10px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
+        <td style="padding: 10px;">Complete</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
-        <td style="padding: 5px;">Medium</td>
+        <td style="padding: 10px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
+        <td style="padding: 10px;">Medium</td>
     </tr>
 </table>
 ~~~
@@ -2058,64 +2058,64 @@ Zorin OS uses a Windows-like layout and is aimed at beginners as well.
         <td colspan="2"><img width="380px;" src="/Linux/Vanilla_OS_2.png"/></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Initial release</td>
-        <td style="padding: 5px;">29 December 2022<sup><a href="#footnote-17">17</a></sup></td>
+        <td style="padding: 10px;">Initial release</td>
+        <td style="padding: 10px;">29 December 2022<sup><a href="#footnote-17">17</a></sup></td>
     </tr>
     <tr>
-        <td style="padding: 5px; width: 190px;">Website</td>
-        <td style="padding: 5px;"><a href="https://vanillaos.org/">vanillaos.org</a></td>
+        <td style="padding: 10px; width: 190px;">Website</td>
+        <td style="padding: 10px;"><a href="https://vanillaos.org/">vanillaos.org</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Release model</td>
-        <td style="padding: 5px;">Fixed</td>
+        <td style="padding: 10px;">Release model</td>
+        <td style="padding: 10px;">Fixed</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
-        <td style="padding: 5px;">Stable</td>
+        <td style="padding: 10px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 10px;">Stable</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Installer</td>
-        <td style="padding: 5px;">Vanilla Installer&mdash;graphical.</td>
+        <td style="padding: 10px;">Installer</td>
+        <td style="padding: 10px;">Vanilla Installer&mdash;graphical.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Package manager (type)</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/OSTree">OSTree</a> (read-only root), distro-agnostic package managers<sup><a href="#footnote-18">18</a></sup> and <a href="https://github.com/Vanilla-OS/apx">Apx</a> (applications).</td>
+        <td style="padding: 10px;">Package manager (type)</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/OSTree">OSTree</a> (read-only root), distro-agnostic package managers<sup><a href="#footnote-18">18</a></sup> and <a href="https://github.com/Vanilla-OS/apx">Apx</a> (applications).</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Packaging file(s)</td>
-        <td style="padding: 5px;">Any, due to Apx.</td>
+        <td style="padding: 10px;">Packaging file(s)</td>
+        <td style="padding: 10px;">Any, due to Apx.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Compiler</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
+        <td style="padding: 10px;">Compiler</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Init system</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a></td>
+        <td style="padding: 10px;">Init system</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">C standard library</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a><td>
+        <td style="padding: 10px;">C standard library</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a><td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Userland</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
+        <td style="padding: 10px;">Userland</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Shell</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
+        <td style="padding: 10px;">Shell</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
-        <td style="padding: 5px;">Vast</td>
+        <td style="padding: 10px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
+        <td style="padding: 10px;">Vast</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
-        <td style="padding: 5px;">Complete</td>
+        <td style="padding: 10px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
+        <td style="padding: 10px;">Complete</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
-        <td style="padding: 5px;">Medium</td>
+        <td style="padding: 10px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
+        <td style="padding: 10px;">Medium</td>
     </tr>
 </table>
 ~~~
@@ -2131,64 +2131,64 @@ Vanilla OS sounds ideal for at least intermediately experienced users that have 
         <td colspan="2"><img width="380px;" src="/Linux/Void.png"/></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Initial release</td>
-        <td style="padding: 5px;">2008</td>
+        <td style="padding: 10px;">Initial release</td>
+        <td style="padding: 10px;">2008</td>
     </tr>
     <tr>
-        <td style="padding: 5px; width: 190px;">Website</td>
-        <td style="padding: 5px;"><a href="https://voidlinux.org/">voidlinux.org</a></td>
+        <td style="padding: 10px; width: 190px;">Website</td>
+        <td style="padding: 10px;"><a href="https://voidlinux.org/">voidlinux.org</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Release model</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Rolling_release">Rolling</a></td>
+        <td style="padding: 10px;">Release model</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Rolling_release">Rolling</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
-        <td style="padding: 5px;">Bleeding edge</td>
+        <td style="padding: 10px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 10px;">Bleeding edge</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Installer</td>
-        <td style="padding: 5px;">Void Installer&mdash;textual.</td>
+        <td style="padding: 10px;">Installer</td>
+        <td style="padding: 10px;">Void Installer&mdash;textual.</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Package manager (type)</td>
-        <td style="padding: 5px;"><a href="https://github.com/void-linux/xbps">X Binary Package System</a> (XBPS; binary)</td>
+        <td style="padding: 10px;">Package manager (type)</td>
+        <td style="padding: 10px;"><a href="https://github.com/void-linux/xbps">X Binary Package System</a> (XBPS; binary)</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Packaging file(s)</td>
-        <td style="padding: 5px;"><a href="https://xbps-src-tutorials.github.io/">template</a>&mdash;shell script</td>
+        <td style="padding: 10px;">Packaging file(s)</td>
+        <td style="padding: 10px;"><a href="https://xbps-src-tutorials.github.io/">template</a>&mdash;shell script</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Compiler</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
+        <td style="padding: 10px;">Compiler</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Init system</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Runit">runit</a></td>
+        <td style="padding: 10px;">Init system</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Runit">runit</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">C standard library</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a>/<a href="https://en.wikipedia.org/wiki/Musl">musl</a></td>
+        <td style="padding: 10px;">C standard library</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a>/<a href="https://en.wikipedia.org/wiki/Musl">musl</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Userland</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
+        <td style="padding: 10px;">Userland</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Shell</td>
-        <td style="padding: 5px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
+        <td style="padding: 10px;">Shell</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
-        <td style="padding: 5px;">Medium-small</td>
+        <td style="padding: 10px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
+        <td style="padding: 10px;">Medium-small</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
-        <td style="padding: 5px;">Minimal</td>
+        <td style="padding: 10px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
+        <td style="padding: 10px;">Minimal</td>
     </tr>
     <tr>
-        <td style="padding: 5px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
-        <td style="padding: 5px;">Minimal</td>
+        <td style="padding: 10px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
+        <td style="padding: 10px;">Minimal</td>
     </tr>
 </table>
 ~~~
