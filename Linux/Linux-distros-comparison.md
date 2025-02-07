@@ -74,7 +74,7 @@ Btrfs and ZFS are the most advanced of these file systems, they can both span mu
 
 ext4 is a more basic file system without the advanced data integrity safeguards, snapshotting features and ability to span multiple disks of Btrfs and ZFS. It also has journalling, which is used to log all changes to the file system. This is used as a check on data integrity and can also help recover the file system in the event of damage, but it also has performance costs such as during write operations. It can be disabled, but this should not be done lightly as it can cause issues with file system recovery. 
 
-XFS is designed to have superior performance to ext4 in some circumstances and its maximum file system and file sizes are larger too, although these limits are $\geq$16TB, so not relevant to most desktop users. 
+XFS is a journalling file system designed to have superior performance to ext4 in some circumstances and its maximum file system and file sizes are larger too, although these limits are $\geq$16TB, so not relevant to most desktop users. 
 
 ## Unix
 Linux distributions are almost always [Unix-like](https://en.wikipedia.org/wiki/Unix-like) too, although there are exceptions like [Android](https://en.wikipedia.org/wiki/Android_(operating_system)). This means, among other things, that most Linux distributions share similar commands to [Unix](https://en.wikipedia.org/wiki/Unix) systems and roughly follow the [design philosophy](https://en.wikipedia.org/wiki/Unix_philosophy) of Unix with each command doing just one thing and doing it well. 
