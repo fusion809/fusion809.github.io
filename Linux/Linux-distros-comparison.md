@@ -1681,7 +1681,7 @@ I would recommend openSUSE to intermediate to advanced users that like RPM packa
 
 **PCLinuxOS** is a beginner-friendly Linux distribution that was originally forked by Bill Reynolds (Texstar) from Mandrake Linux 9.2 in 2003. It is rather conservative in some ways, for instance it still uses SysV as its init system, APT-RPM as its command-line package manager and Synaptic as its graphical package manager. APT-RPM had its last release in 2008, Synaptic has an outdated look although it is still maintained and SysV has been superseded on most distributions (not all, of course) by systemd, which was first released in 2010. Despite using a rolling release model, it also usually uses pretty old software. 
 
-PCLinuxOS is perhaps best suited to beginners that do not need exotic software, like a no thrills and 2000s-esque desktop experience and favour a rolling release model. If somehow, despite being beginners, they have an opinion on init systems and dislike systemd, they may also like PCLinuxOS. 
+PCLinuxOS is perhaps best suited to beginners that do not need exotic software, like a no thrills and 2000s-esque desktop experience and favour a rolling release model. If somehow, despite being beginners, they have an opinion on init systems and dislike systemd, they may also like PCLinuxOS. Another advantage of PCLinuxOS over other distros is that its installation media comes with Broadcom WiFi drivers pre-installed, which would be useful for users installing to a PC with a Broadcom WiFi chip. I cannot even name another Linux distribution that falls into this category. 
 
 # Pop!_OS
 ~~~
