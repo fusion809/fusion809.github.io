@@ -4,6 +4,7 @@ Currently this website has the following pages, besides this one:
 
 Mathematical simulation pages:
 - [Chen system solver](/Chen/)
+- [Double elastic pendulum equations of motion derivation and solver](/doubleElasticPendulum/)
 - [Double pendulum solver](/doublePendulum/)
 - [Duffing equations solver](/Duffing/)
 - [Elastic pendulum solver](/elasticPendulum/)

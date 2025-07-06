@@ -32,6 +32,10 @@ function removeXYPhasePlot() {
     rmPlot("phasePlotXY");
 }
 
+function removeR1TPlot() {
+    rmPlot("R1TPlot");
+}
+
 /**
  * Remove XZ phase plot
  * 
@@ -275,7 +279,7 @@ function removePendulumPlots() {
  * @param title    Title of the plot.
  * @return         Nothing.
  */
-function gen2DPlot(x, y, element, title) {
+function gen2DPlot(x, y, element, title, xtitle, ytitle) {
     // Height and width of the plot
     adjustPlotHeight(element);
 
@@ -290,13 +294,44 @@ function gen2DPlot(x, y, element, title) {
 
     // layout object
     var layoutXY = {
-        title: title
+        title: title,
     };
 
     // Generate plot
     Plotly.newPlot(element, dataXY, layoutXY);
 }
 
+function gen2DPlotXYLabs(x, y, element, title, xtitle, ytitle) {
+    // Height and width of the plot
+    adjustPlotHeight(element);
+
+    var plotXY = {
+        x: x,
+        y: y,
+        type: 'scatter',
+        mode: 'lines',
+        opacity: 1
+    }
+    var dataXY = [plotXY];
+
+    // layout object
+    var layoutXY = {
+        title: title,
+        xaxis: {
+            title: {
+                text: xtitle
+            }
+        },
+        yaxis: {
+            title: {
+                text: ytitle
+            }
+        }
+    };
+
+    // Generate plot
+    Plotly.newPlot(element, dataXY, layoutXY);
+}
 /**
  * Generate 3D plot
  * 
