@@ -9,7 +9,15 @@
         <script>
   window.MathJax = {
     tex: {
-      tags: 'ams'  // Enables \label and \ref support
+      tags: "ams", // or "all"
+      macros: {
+        eqref: "\\href{#eqref-\\1}{(\\1)}"
+      }
+    },
+    options: {
+      renderActions: {
+        addMenu: []
+      }
     }
   };
 </script>
