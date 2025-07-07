@@ -178,6 +178,12 @@ function generateR1R2PhasePlot(solution) {
     gen2DPlotXYLabs(r1, r2, "R2R1Plot", "Phase plot of r<sub>2</sub> vs r<sub>1</sub>", "r<sub>1</sub>", "r<sub>2</sub>");
 }
 
+
+function removePendulumPlots() {
+    rmPlot("pendulumPlot");
+    rmPlot("pendulumTimePlot");
+}
+
 function removeDr1TPlot() {
     rmPlot("Dr1TPlot");
 }
@@ -227,6 +233,7 @@ function removeR1R2PhasePlot() {
 }
 
 function removePlots() {
+    removePendulumPlots();
     removeTheta1Theta2PhasePlot();
     removeDr1TPlot();
     removeDr1R1Plot()
@@ -348,6 +355,7 @@ function generatePlots(objectOfInputs) {
     var solution = solveProblem(RKF45, objectOfInputs);
 
     // Generate plots
+    generatePendulumPlots(solution);
     generateTheta1Theta2PhasePlot(solution);
     generateR1R2PhasePlot(solution);
     generateR1TPlot(solution);
