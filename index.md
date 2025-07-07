@@ -4,8 +4,8 @@ Currently this website has the following pages, besides this one:
 
 Mathematical simulation pages:
 - [Chen system solver](/Chen/)
-- [Double elastic pendulum equations of motion derivation and solver](/doubleElasticPendulum/)
-- [Double pendulum equations of motion derivation and solver](/doublePendulum/)
+- [Double elastic pendulum solver](/doubleElasticPendulum/)
+- [Double pendulum solver](/doublePendulum/)
 - [Duffing equations solver](/Duffing/)
 - [Elastic pendulum solver](/elasticPendulum/)
 - [Lorenz equations solver](/Lorenz/)
@@ -30,6 +30,10 @@ Complex analysis pages:
 - [Contour integration with pole on the contour itself](/complexAnalysis/circleR2RedditInt/)
 - [Evaluating $\displaystyle \int_{-\infty}^{\infty} \dfrac{x^2\cos{mx}}{(x^4+a^4)^2} dx$ using contour integration](complexAnalysis/x2cosmxoverx4pa4sq/)
 - [Evaluating $\displaystyle \int_{-\infty}^{\infty} \dfrac{\sin{mx}}{x(x^8+a^8)} dx$ using contour integration](/complexAnalysis/sinxoverxtimesx8plusa8/)
+
+Lagrangian mechanics pages:
+- [Double elastic pendulum](/doubleElasticPendulum/derivation/)
+- [Double pendulum](/doublePendulum/derivation/)
 
 Numerical mathematics:
 - [Root-finding without a calculator](/sqrt/)
