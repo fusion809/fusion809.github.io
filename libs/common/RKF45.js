@@ -53,8 +53,12 @@ function approxRKF45(f, dt, objectOfInputs, t, vars, i) {
 function testRKF45(i, tf, dt, t, objectOfInputs) {
     test = t[i] < tf;
     if (Object.hasOwn(objectOfInputs, 'dtMin')) {
-        test = test && dt >= objectOfInputs.dtMin; 
+        dtMin = objectOfInputs.dtMin;
+    } else {
+        dtMin = (tf-t[0])/1e8;
     }
+    test = test && dt >= dtMin; 
+    
     return test;
 }
 
