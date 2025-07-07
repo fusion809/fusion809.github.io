@@ -370,13 +370,15 @@ function func2Vecs(f, vec1, vec2) {
         val = f(...vec1.map((v,i) => f(v, vec2[i])));
     } catch (e) {
         if (e instanceof RangeError) {
-            val = vec1.concat(vec2).reduce((a, b) => f(a, b), Infinity);
+            val = vec1.concat(vec2).reduce((a, b) => f(a, b), 0);
         } else {
             throw e; // rethrow if it's not the expected error
         }
     }
     return val;
 }
+
+
 function animatePendulum(solution) {
   const t = solution.t;
   const vars = solution.vars;
@@ -401,6 +403,30 @@ function animatePendulum(solution) {
   };
   const data = [trace1, trace2];
   const padding = 1;
+  if (isFinite(xmin)) {
+    xmin = xmin - padding;
+  } else {
+    xmin = -10 - padding;
+  }
+  if (isFinite(xmax)) {
+    xmax = xmax + padding;
+  } else {
+    xmax = 10 + padding;
+  }
+
+  if (isFinite(ymin)) {
+    ymin = ymin - padding;
+  } else {
+    ymin = -40 - padding;
+  }
+
+  if (isFinite(ymax)) {
+    ymax = ymax + padding;
+  } else {
+    ymax = 10 + padding;
+  }
+
+  
   const layout = {
     title: "Double Elastic Pendulum",
     xaxis: { range: [xmin-padding, xmax+padding], title: "x" },
