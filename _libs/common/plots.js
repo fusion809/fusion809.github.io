@@ -245,15 +245,16 @@ function removePlots() {
     removeXThetaPhasePlot();
     removeThetaThetaDotPhasePlot();
     removeTheta1Theta2PhasePlot();
-    removeTheta1P1PhasePlot();
-    removeTheta1P2PhasePlot();
-    removeTheta2P1PhasePlot();
-    removeTheta2P2PhasePlot();
-    removeP1P2PhasePlot();
+    removeTheta1Dtheta1PhasePlot();
+    removeTheta1Dtheta2PhasePlot();
+    removeTheta2Dtheta1PhasePlot();
+    removeTheta2Dtheta2PhasePlot();
+    removeDtheta1Dtheta2PhasePlot();
     removePendulum1Plot();
     removePendulum1TimePlot();
     removePendulum2Plot();
     removePendulum2TimePlot();
+    removePendulumPlots();
 }
 
 /**
