@@ -361,6 +361,7 @@ function generatePlots(objectOfInputs) {
 
     // Generate plots
     generatePendulumPlots(solution);
+    generateTimePlot(solution);
     generateTheta1Theta2PhasePlot(solution);
     generateR1R2PhasePlot(solution);
     generateR1TPlot(solution);
