@@ -50,6 +50,14 @@ function approxRKF45(f, dt, objectOfInputs, t, vars, i) {
     return [dt, t, vars, i];
 }
 
+function testRKF45(i, tf, dt, t, objectOfInputs) {
+    test = t[i] < tf;
+    if (Object.hasOwn(objectOfInputs, 'dtMin')) {
+        test = test && dt >= objectOfInputs.dtMin; 
+    }
+    return test;
+}
+
 /**
  * Solves the problem using RKF45.
  * 
@@ -67,7 +75,7 @@ function RKF45Body(f, objectOfInputs, vars0) {
     var i = 0;
 
     // Loop over each step until we reach the endpoint
-    while ( t[i] < tf ) {
+    while ( testRKF45(i, tf, dt, t, objectOfInputs) ) {
         dt = Math.min(dt, tf-t[i]);
         [dt, t, vars, i] = approxRKF45(f, dt, objectOfInputs, t, vars, i);
     }

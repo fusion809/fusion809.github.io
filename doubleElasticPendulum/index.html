@@ -38,7 +38,7 @@
         <script src="/libs/common/table.js"></script>
         <script src="/libs/common/plots.js"></script>
         <script type="text/javascript"
-    src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js">
+    src="//ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js">
 </script>
         <script>
             $(document).ready(function() {                                                                          
@@ -542,7 +542,7 @@ So the solution is
                         id="g"
                         name="g"
                         value="9.81"></td>
-                    <td>Problem parameter.</td>
+                    <td>Acceleration due to gravity in \(m\cdot s^{-2}\).</td>
                 </tr>
                 <tr>
                     <td><label for="l1">\(l_1\):</label></td>
@@ -550,7 +550,7 @@ So the solution is
                         id="l1"
                         name="l1"
                         value="1"></td>
-                    <td>Problem parameter.</td>
+                    <td>Rest length of pendulum 1.</td>
                 </tr>
                 <tr>
                     <td><label for="l2">\(l_2\):</label></td>
@@ -558,7 +558,7 @@ So the solution is
                         id="l2"
                         name="l2"
                         value="1"></td>
-                    <td>Problem parameter.</td>
+                    <td>Rest length of pendulum 2.</td>
                 </tr>
                 <tr>
                     <td><label for="m1">\(m_1\):</label></td>
@@ -566,7 +566,7 @@ So the solution is
                         id="m1"
                         name="m1"
                         value="1"></td>
-                    <td>Problem parameter.</td>
+                    <td>Mass of pendulum bob 1.</td>
                 </tr>
                 <tr>
                     <td><label for="m2">\(m_2\):</label></td>
@@ -574,7 +574,7 @@ So the solution is
                         id="m2"
                         name="m2"
                         value="1"></td>
-                    <td>Problem parameter.</td>
+                    <td>Mass of pendulum bob 2.</td>
                 </tr>
                 <tr>
                     <td><label for="k1">\(k_1\):</label></td>
@@ -582,7 +582,7 @@ So the solution is
                         id="k1"
                         name="k1"
                         value="1"></td>
-                    <td>Problem parameter.</td>
+                    <td>Coefficient for first pendulum spring.</td>
                 </tr>
                 <tr>
                     <td><label for="k2">\(k_2\):</label></td>
@@ -590,7 +590,7 @@ So the solution is
                         id="k2"
                         name="k2"
                         value="1"></td>
-                    <td>Problem parameter.</td>
+                    <td>Coefficient for second pendulum spring.</td>
                 </tr>
                 <tr>
                     <td><label for="b1">\(b_1\):</label></td>
@@ -598,7 +598,7 @@ So the solution is
                         id="b1"
                         name="b1"
                         value="0"></td>
-                    <td>Problem parameter.</td>
+                    <td>Linear dissipation coefficient for pendulum 1.</td>
                 </tr>
                 <tr>
                     <td><label for="b2">\(b_2\):</label></td>
@@ -606,7 +606,7 @@ So the solution is
                         id="b2"
                         name="b2"
                         value="0"></td>
-                    <td>Problem parameter.</td>
+                    <td>Linear dissipation coefficient for pendulum 2.</td>
                 </tr>
                 <tr>
                     <td><label for="c1">\(c_1\):</label></td>
@@ -614,7 +614,7 @@ So the solution is
                         id="c1"
                         name="c1"
                         value="0"></td>
-                    <td>Problem parameter.</td>
+                    <td>Quadratic dissipation coefficient for pendulum 1.</td>
                 </tr>
                 <tr>
                     <td><label for="c2">\(c_2\):</label></td>
@@ -622,7 +622,7 @@ So the solution is
                         id="c2"
                         name="c2"
                         value="0"></td>
-                    <td>Problem parameter.</td>
+                    <td>Quadratic dissipation coefficient for pendulum 2.</td>
                 </tr>
                 <tr>
                     <td><label for="t0">\(t_0\):</label></td>
@@ -637,7 +637,7 @@ So the solution is
                     <td><input type="Number"
                         id="tf"
                         name="tf"
-                        value="60"></td>
+                        value="120"></td>
                     <td>End time for the simulation in seconds.</td>
                 </tr>
                 <tr>
@@ -710,7 +710,7 @@ So the solution is
                        id="epsilon"
                        name="epsilon"
                        value="1e-9"></td>
-                    <td>Error tolerance. \(\epsilon \lt\) 1e-9 usually freezes the webpage up.</td>
+                    <td>Absolute error tolerance. \(\epsilon \lt\) 1e-9 usually freezes the webpage up.</td>
                 </tr>
                 <tr>
                     <td><label for="dtInitial">dtInitial:</label></td>
@@ -720,6 +720,14 @@ So the solution is
                         value="0.1"></td>
                     <td>Initial guess for step size.</td>
                 </tr>
+                <tr>
+                    <td><label for="dtMin">dtMin:</label></td>
+                    <td><input type="Number"
+                        id="dtMin"
+                        name="dtMin"
+                        value="1e-6"></td>
+                    <td>Minimum step size.</td>
+                </tr>
             </table>
         </form>
 
@@ -728,10 +736,6 @@ So the solution is
             <tr>
                 <td><button type="button" onclick="fillTable(readInputs(), ['r<sub>1</sub>', 'dr<sub>1</sub>/dt', 'r<sub>2</sub>', 'dr<sub>2</sub>/dt', '&theta;<sub>1</sub>', 'd&theta;<sub>1</sub>/dt', '&theta;<sub>2</sub>', 'd&theta;<sub>2</sub>/dt'])">Tabulate the solution</button></td>
                 <td><button type="button" onclick="removeTable()">Remove the solution table</button></td>
-            </tr>
-            <tr>
-                <td><button type="button" onclick="generateTheta1Theta2PhasePlot(solveProblem(RKF45, readInputs()))">Generate \(\theta_2\) against \(\theta_1\) phase plot</button></td>
-                <td><button type="button" onclick="removeTheta1Theta2PhasePlot()">Remove plot</button><br/></td>
             </tr>
             <tr>
                 <td><button type="button" onclick="generateR1TPlot(solveProblem(RKF45, readInputs()))">Generate \(r_1\) against time plot.</button></td>
@@ -757,7 +761,11 @@ So the solution is
                 <td><button type="button" onclick="generateDr2R2Plot(solveProblem(RKF45, readInputs()))">Generate phase plot of \(\dot{r}_2\) vs \(r_2\).</button></td>
                 <td><button type="buton" onclick="removeDr2R2Plot()">Remove plot</button></td>
             </tr>
-<tr>
+            <tr>
+                <td><button type="button" onclick="generateR1R2PhasePlot(solveProblem(RKF45, readInputs()))">Generate \(r_2\) against \(r_1\) phase plot</button></td>
+                <td><button type="button" onclick="removeR1R2PhasePlot()">Remove plot</button><br/></td>
+            </tr>
+            <tr>
                 <td><button type="button" onclick="generateTheta1TPlot(solveProblem(RKF45, readInputs()))">Generate \(\theta_1\) against time plot.</button></td>
                 <td><button type="buton" onclick="removeTheta1TPlot()">Remove plot</button></td>
             </tr>
@@ -782,6 +790,10 @@ So the solution is
                 <td><button type="buton" onclick="removeDtheta2Theta2Plot()">Remove plot</button></td>
             </tr>
             <tr>
+                <td><button type="button" onclick="generateTheta1Theta2PhasePlot(solveProblem(RKF45, readInputs()))">Generate \(\theta_2\) against \(\theta_1\) phase plot</button></td>
+                <td><button type="button" onclick="removeTheta1Theta2PhasePlot()">Remove plot</button><br/></td>
+            </tr>
+            <tr>
                 <td><button type="button" onclick="generatePlots(readInputs())">Generate all solution plots</button></td>
                 <td><button type="button" onclick="removePlots()">Remove all plots</button></td>
             </tr>
@@ -794,7 +806,6 @@ So the solution is
         <!--Where the table and plot goes-->
         <table id="tableOutputs">
         </table>
-        <div id='phasePlotTheta1Theta2'></div>
         <div id='pendulumPlot'></div>
         <div id='R1TPlot'></div>
         <div id='Dr1TPlot'></div>
@@ -802,12 +813,14 @@ So the solution is
         <div id='R2TPlot'></div>
         <div id='Dr2TPlot'></div>
         <div id='Dr2R2Plot'></div>
+        <div id="R2R1Plot"></div>
         <div id='Theta1TPlot'></div>
         <div id='Dtheta1TPlot'></div>
         <div id='Dtheta1Theta1Plot'></div>
         <div id='Theta2TPlot'></div>
         <div id='Dtheta2TPlot'></div>
         <div id='Dtheta2Theta2Plot'></div>
+        <div id='phasePlotTheta1Theta2'></div>
         <div id="pendulumCanvas"></div>
         <div id='pendulumTimePlot'></div>
         <div id='timePlot'></div>
