@@ -236,10 +236,11 @@ function removeTimePlot() {
     rmPlot("timePlot");
 }
 
-function removePlots() {
+function rmPlots() {
     removePendulumPlots();
     removeTimePlot();
     removeTheta1Theta2PhasePlot();
+    removeR1TPlot();
     removeDr1TPlot();
     removeDr1R1Plot()
     removeR2TPlot()

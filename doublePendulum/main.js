@@ -409,3 +409,23 @@ function animatePendulum(objectOfInputs, solution) {
 function removeAnimation() {
     rmPlot("animation");
 }
+
+function removeTheta1Dtheta1PhasePlot() {
+  rmPlot("phasePlotTheta1Dtheta1");
+}
+
+function removeTheta1Dtheta2PhasePlot() {
+  rmPlot("phasePlotTheta1Dtheta2");
+}
+
+function removeTheta2Dtheta1PhasePlot() {
+  rmPlot("phasePlotTheta2Dtheta1");
+}
+
+function removeTheta2Dtheta2PhasePlot() {
+  rmPlot("phasePlotTheta2Dtheta2");
+}
+
+function removeDtheta1Dtheta2PhasePlot() {
+  rmPlot("phasePlotDtheta1Dtheta2");
+}
