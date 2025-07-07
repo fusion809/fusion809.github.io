@@ -132,7 +132,7 @@ The relevant partial and standard derivatives are:
 	\dfrac{d}{dt} \dfrac{\partial |\vec{v}_1|^2}{\partial \dot{r}_1} &= 2\ddot{r}_1 & \dfrac{d}{dt}\dfrac{\partial |\vec{v}_1|^2}{\partial \dot{r}_2} &= 0 & \dfrac{d}{dt}\dfrac{\partial |\vec{v}_1|^2}{\partial \dot{\theta}_1} &= 2r_1^2 \ddot{\theta}_1 + 4r_1\dot{r}_1\dot{\theta}_1 & \dfrac{d}{dt}\dfrac{\partial |\vec{v}_1|^2}{\partial \dot{\theta}_2} &= 0
 \end{align*}
 
-Hence the functional derivatives are
+Hence the negative functional derivatives are
 
 \begin{align*}
 	\dfrac{\delta' |\vec{v}_1|^2}{\delta' r_1} &= \dfrac{d}{dt}\dfrac{\partial |\vec{v}_1|^2}{\partial \dot{r}_1} - \dfrac{\partial |\vec{v}_1|^2}{\partial r_1} & \dfrac{\delta' |\vec{v}_1|^2}{\delta' r_2} &= \dfrac{d}{dt}\dfrac{\partial |\vec{v}_1|^2}{\partial \dot{r}_2} - \dfrac{\partial |\vec{v}_1|^2}{\partial r_2} & \dfrac{\delta' |\vec{v}_1|^2}{\delta' \theta_1} &= \dfrac{d}{dt}\dfrac{\partial |\vec{v}_1|^2}{\partial \dot{\theta}_1} - \dfrac{\partial |\vec{v}_1|^2}{\partial \theta_1} & \dfrac{\delta' |\vec{v}_1|^2}{\delta' \theta_2} &= \dfrac{d}{dt}\dfrac{\partial |\vec{v}_1|^2}{\partial \dot{\theta}_2} - \dfrac{\partial |\vec{v}_1|^2}{\partial \theta_2}\\
@@ -168,7 +168,7 @@ Let us define $\dot{\Delta}_1 = 2\dot{\theta}_1 - \dot{\theta}_2$ and $\dot{\Del
 	&=4r_2\dot{r}_2\dot{\theta}_2 + 2r_2^2\ddot{\theta}_2 +2\cos{\Delta}(\dot{r}_1r_2\dot{\Delta}_1+r_1\dot{r}_2\dot{\theta}_1+r_1r_2\ddot{\theta}_1)-2\sin{\Delta}(r_1r_2\dot{\theta}_1\dot{\Delta} + \ddot{r}_1r_2 + \dot{r}_1\dot{r}_2).
 \end{align*}
 
-Hence functional derivative for $r_1$ is
+Hence the negative functional derivative for $r_1$ is
 \begin{align*}
 	\dfrac{\delta' |\Delta \vec{v}_{21}|^2}{\delta' r_1} &= \dfrac{d}{dt}\dfrac{\partial |\Delta \vec{v}_{21}|^2}{\partial \dot{r}_1} - \dfrac{\partial |\Delta \vec{v}_{21}|^2}{\partial r_1} \\
 	&= 2\cos{\Delta}(\ddot{r}_2-r_2\dot{\theta}_2\dot{\Delta}) - 2\sin{\Delta}(\dot{r}_2\dot{\Delta}_2+r_2\ddot{\theta}_2) - \left(2r_2\dot{\theta}_1\dot{\theta}_2\cos{\Delta} + 2\dot{r}_2\dot{\theta}_1\sin{\Delta}\right) \\
