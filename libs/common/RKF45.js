@@ -59,7 +59,9 @@ function testRKF45(i, tf, dt, t, objectOfInputs) {
     }
     test2 = dt >= dtMin;
     if (!test2) {
-        console.log("Exiting RKF45 at t = " + t[i] + " because dt = " + dt + " is <" + dtMin)
+        var msg = "Exiting RKF45 at t = " + t[i] + " because dt = " + dt + " is <" + dtMin;
+        alert(msg);
+        console.log(msg);
     }
     test = test1 && test2; 
     
