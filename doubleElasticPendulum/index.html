@@ -73,7 +73,7 @@
         <link rel="icon" href="/assets/favicon.png">
     </head>
     <body>
-        <h1>Double pendulum problem solver</h1>
+        <h1>Double elastic pendulum problem solver</h1>
         <div>
             This webpage uses the <a href='https://en.wikipedia.org/wiki/Runge-Kutta-Fehlberg_method' link='_blank'>Runge-Kutta-Fehlberg</a> fourth-order method with fifth-order error checking (RKF45) to approximate the solution to the problem of the double elastic pendulum. Below is a diagram of the system being analysed.<br/>
 
@@ -81,6 +81,8 @@
             <img src="/doubleElasticPendulum/Double elastic pendulum.svg" width="500px"></img>
             <figcaption style="font-weight: bold; font-size: 18px;">Figure 1: Diagram of the double elastic pendulum.</b></figcaption>
             </figure>
+            Before proceeding further, I would like to apologize for the fact that MathJax does not seem capable of rendering equation numbers properly on GitHub Pages. And the JavaScript code I use to render my table of contents below also fails on GitHub Pages, despite running fine locally. 
+            
             We will derive our own equations of motion based on the Euler-Lagrange equation with dissipative forces
             
             \[
@@ -103,6 +105,8 @@
                 <li>The left-hand side of Equation Equation \eqref{ELD} can also be represented as \(\dfrac{\delta \mathcal{L}}{\delta q_i}\), the functional derivative of the Lagrangian with respect to \(q_i\).</li> 
                 <li>The right-hand side of Equation Equation \eqref{ELD} is also called the generalized dissipative force and can be represented as \(Q_i\).</li>
             </ul>
+
+            The masses of the pendulum rods (or springs) are ignored as including them into the calculation for <a href="/doublePendulum/">rigid double pendulums</a> does not make things more interesting. 
         <div style="border: 1px solid"><div style="font-weight: bold; font-size: 24px;">Table of contents</div>
         <div id="tocDiv">
 <ul id="tocList">
