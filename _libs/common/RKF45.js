@@ -51,13 +51,18 @@ function approxRKF45(f, dt, objectOfInputs, t, vars, i) {
 }
 
 function testRKF45(i, tf, dt, t, objectOfInputs) {
-    test = t[i] < tf;
+    test1 = t[i] < tf;
     if (Object.hasOwn(objectOfInputs, 'dtMin')) {
         dtMin = objectOfInputs.dtMin;
     } else {
         dtMin = (tf-t[0])/1e8;
     }
-    test = test && dt >= dtMin; 
+    test2 = dt >= dtMin;
+    if (!test2) {
+        console.log("Exiting RKF45 at t = " + t[i] + " because dt = " + dt + " is <" + dtMin)
+    }
+    test = test1 && test2; 
+    
     
     return test;
 }

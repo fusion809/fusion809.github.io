@@ -525,6 +525,7 @@ So the solution is
         \end{bmatrix}.
     \end{align*}
 
+    Ordinarily, I would use a symplectic method to integrate a classical mechanical system, as it minimizes cumulative errors in the Hamiltonian over long-term integration. That being said, symplectic methods typically are either implicit (which significantly increases their computational complexity) or require a separable Hamiltonian. The Hamiltonian of this system would not separable as the kinetic energy cannot be written entirely in terms of momenta. Additionally, rewriting the kinetic energy in terms of the momenta would be tedious and error-prone.
         </div>
 
         <h2>Solution form</h2>
@@ -550,7 +551,7 @@ So the solution is
                         id="l1"
                         name="l1"
                         value="1"></td>
-                    <td>Rest length of pendulum 1.</td>
+                    <td>Rest length of pendulum 1 in metres.</td>
                 </tr>
                 <tr>
                     <td><label for="l2">\(l_2\):</label></td>
@@ -558,7 +559,7 @@ So the solution is
                         id="l2"
                         name="l2"
                         value="1"></td>
-                    <td>Rest length of pendulum 2.</td>
+                    <td>Rest length of pendulum 2 in metres.</td>
                 </tr>
                 <tr>
                     <td><label for="m1">\(m_1\):</label></td>
@@ -566,7 +567,7 @@ So the solution is
                         id="m1"
                         name="m1"
                         value="1"></td>
-                    <td>Mass of pendulum bob 1.</td>
+                    <td>Mass of pendulum bob 1 in kilograms.</td>
                 </tr>
                 <tr>
                     <td><label for="m2">\(m_2\):</label></td>
@@ -574,7 +575,7 @@ So the solution is
                         id="m2"
                         name="m2"
                         value="1"></td>
-                    <td>Mass of pendulum bob 2.</td>
+                    <td>Mass of pendulum bob 2 in kilograms.</td>
                 </tr>
                 <tr>
                     <td><label for="k1">\(k_1\):</label></td>
@@ -646,7 +647,7 @@ So the solution is
                         id="r10"
                         name="r10"
                         value="1"></td>
-                    <td>Value of \(r_1\) at \(t_0\).</td>
+                    <td>Value of \(r_1\) at \(t_0\) in metres.</td>
                 </tr>
                 <tr>
                     <td><label for="dr10">\(\dot{r}_{1,0}\):</label></td>
@@ -654,7 +655,7 @@ So the solution is
                         id="dr10"
                         name="dr10"
                         value="0"></td>
-                    <td>Value of \(\dot{r}_1\) at \(t_0\).</td>
+                    <td>Value of \(\dot{r}_1\) at \(t_0\) in \(m\cdot s^{-1}\).</td>
                 </tr>
                 <tr>
                     <td><label for="r20">\(r_{2,0}\):</label></td>
@@ -662,7 +663,7 @@ So the solution is
                         id="r20"
                         name="r20"
                         value="1"></td>
-                    <td>Value of \(r_2\) at \(t_0\).</td>
+                    <td>Value of \(r_2\) at \(t_0\) in metres.</td>
                 </tr>
                 <tr>
                     <td><label for="dr20">\(\dot{r}_{2,0}\):</label></td>
@@ -670,7 +671,7 @@ So the solution is
                         id="dr20"
                         name="dr20"
                         value="0"></td>
-                    <td>Value of \(\dot{r}_2\) at \(t_0\).</td>
+                    <td>Value of \(\dot{r}_2\) at \(t_0\) in \(m\cdot s^{-1}\).</td>
                 </tr>
                 <tr>
                     <td><label for="theta10">\(\theta_{1,0}\):</label></td>
@@ -678,15 +679,7 @@ So the solution is
                         id="theta10"
                         name="theta10"
                         value="0"></td>
-                    <td>Value of \(\theta_1\) at \(t_0\).</td>
-                </tr>
-                <tr>
-                    <td><label for="theta20">\(\theta_{2,0}\):</label></td>
-                    <td><input type="Number"
-                        id="theta20"
-                        name="theta20"
-                        value="0"></td>
-                    <td>Value of \(\theta_2\) at \(t_0\).</td>
+                    <td>Value of \(\theta_1\) at \(t_0\) in radians.</td>
                 </tr>
                 <tr>
                     <td><label for="dtheta10">\(\dot{\theta}_{1,0}\):</label></td>
@@ -694,7 +687,15 @@ So the solution is
                         id="dtheta10"
                         name="dtheta10"
                         value="0"></td>
-                    <td>Value of \(\dot{\theta}_1\) at \(t_0\).</td>
+                    <td>Value of \(\dot{\theta}_1\) at \(t_0\) in radians per second.</td>
+                </tr>
+                <tr>
+                    <td><label for="theta20">\(\theta_{2,0}\):</label></td>
+                    <td><input type="Number"
+                        id="theta20"
+                        name="theta20"
+                        value="0"></td>
+                    <td>Value of \(\theta_2\) at \(t_0\) in radians.</td>
                 </tr>
                 <tr>
                     <td><label for="dtheta20">\(\dot{\theta}_{2,0}\):</label></td>
@@ -702,7 +703,7 @@ So the solution is
                         id="dtheta20"
                         name="dtheta20"
                         value="0"></td>
-                    <td>Value of \(\dot{\theta}_2\) at \(t_0\).</td>
+                    <td>Value of \(\dot{\theta}_2\) at \(t_0\) in radians per second.</td>
                 </tr>
                 <tr>
                     <td><label for="epsilon">\(\epsilon\):</label></td>
@@ -725,7 +726,7 @@ So the solution is
                     <td><input type="Number"
                         id="dtMin"
                         name="dtMin"
-                        value="1e-6"></td>
+                        value="1e-7"></td>
                     <td>Minimum limit for step size.</td>
                 </tr>
             </table>

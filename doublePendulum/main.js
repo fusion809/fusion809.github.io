@@ -174,10 +174,10 @@ function generatePendulumCoords(objectOfInputs, solution) {
     var y1 = new Array(N);
     var y2 = new Array(N);
     for (let i = 0; i < N; i++) {
-        x1[i] = l1*Math.sin(theta1[i]);
-        y1[i] = -l1*Math.cos(theta1[i]);
-        x2[i] = x1[i] + l2*Math.sin(theta2[i]);
-        y2[i] = y1[i] - l2*Math.cos(theta2[i]);
+        x1[i] = l1*Math.cos(theta1[i]);
+        y1[i] = l1*Math.sin(theta1[i]);
+        x2[i] = x1[i] + l2*Math.cos(theta2[i]);
+        y2[i] = y1[i] + l2*Math.sin(theta2[i]);
     }
 
     // Return t and Cartesian coordinates of the pendulum bobs
@@ -294,6 +294,7 @@ function animatePendulum(objectOfInputs, solution) {
   var ymin = func2Vecs(Math.min, y1, y2);
   var xmax = func2Vecs(Math.max, x1, x2);
   var ymax = func2Vecs(Math.max, y1, y2);
+  
   const trace1 = {
     x: [], y: [],
     mode: "lines+markers",
@@ -310,6 +311,29 @@ function animatePendulum(objectOfInputs, solution) {
   };
   const data = [trace1, trace2];
   const padding = 1;
+  const totalLen = objectOfInputs.l1 + objectOfInputs.l2;
+    if (isFinite(xmin)) {
+    xmin = xmin - padding;
+  } else {
+    xmin = -totalLen - padding;
+  }
+  if (isFinite(xmax)) {
+    xmax = xmax + padding;
+  } else {
+    xmax = totalLen + padding;
+  }
+
+  if (isFinite(ymin)) {
+    ymin = ymin - padding;
+  } else {
+    ymin = -totalLen - padding;
+  }
+
+  if (isFinite(ymax)) {
+    ymax = ymax + padding;
+  } else {
+    ymax = totalLen + padding;
+  }
   const layout = {
     title: "Double Pendulum",
     xaxis: { range: [xmin-padding, xmax+padding], title: "x" },
