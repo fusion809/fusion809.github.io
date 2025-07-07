@@ -460,17 +460,23 @@ function animatePendulum(solution) {
 
   let startTime = null;
   let frame = 0;
+  let cycle = 0;
 
   function animateFrame(timestamp) {
-    if (!startTime) startTime = timestamp;
-
+    if (frame == t.length - 1 || !startTime) {
+        frame = 0;
+        startTime = timestamp; 
+    }
     const elapsedSec = (timestamp - startTime) / 1000;
 
     // Advance to the frame corresponding to elapsed time
     while (frame < t.length -1 && t[frame] < elapsedSec) {
       frame++;
     }
-    if (frame >= t.length) frame = t.length - 1;
+    if (frame >= t.length) {
+        frame = t.length - 1;
+        cycle++;
+    }
 
     const r1 = vars[0][frame];
     const r2 = vars[2][frame];
@@ -493,8 +499,14 @@ function animatePendulum(solution) {
     });
     layout.annotations[0].text = `Time: ${t[frame].toFixed(2)} s`;
     Plotly.relayout('animation', layout);
-
-    requestAnimationFrame(animateFrame);
+    if (frame == t.length - 1) {
+        layout.annotations[0].text = `Animation finished. 3s delay before animation is repeated.`;
+        setTimeout(() => {
+            requestAnimationFrame(animateFrame);  // resume animation
+        }, 3000);
+    } else {
+        requestAnimationFrame(animateFrame);
+    }
   }
 
   requestAnimationFrame(animateFrame);
