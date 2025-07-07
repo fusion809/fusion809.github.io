@@ -404,9 +404,9 @@ There are three ways we could solve this problem; each of which involves numeric
 
 Essentially, we will write our differential equation system as
 \begin{align*}
-	\mathbf{A}\mathbf{\ddot{s}} &= \mathbf{b}.
+	\mathbf{A}\mathbf{\ddot{q}} &= \mathbf{b}.
 \end{align*}
-where $\mathbf{\ddot{s}}$ is a vector containing the second time derivatives of our degrees of freedom. Hence $\mathbf{\ddot{s}}=\mathbf{A}^{-1} \mathbf{b}$. Or, in full form, this above equation is
+where $\mathbf{\ddot{q}}$ is a vector containing the second time derivatives of our generalized coordinates. Hence $\mathbf{\ddot{q}}=\mathbf{A}^{-1} \mathbf{b}$. Or, in full form, this above equation is
 
 \begin{align*}
 	\begin{bmatrix}
