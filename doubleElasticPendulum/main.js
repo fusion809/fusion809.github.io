@@ -364,28 +364,27 @@ function generatePlots(objectOfInputs) {
     generateDtheta2Theta2Plot(solution);
 }
 
-function getXY(vars, i) {
-  const r1 = vars[0];
-  const r2 = vars[2];
-  const theta1 = vars[4];
-  const theta2 = vars[6];
-
-  const x1 = r1[i] * Math.cos(theta1[i]);
-  const y1 = r1[i] * Math.sin(theta1[i]);
-  const x2 = x1[i] + r2[i] * Math.cos(theta2[i]);
-  const y2 = y1[i] + r2[i] * Math.sin(theta2[i]);
-
-  return { x: [0, x1, x2], y: [0, y1, y2] };
+function func2Vecs(f, vec1, vec2) {
+    var val;
+    try {
+        val = f(...vec1.map((v,i) => f(v, vec2[i])));
+    } catch (e) {
+        if (e instanceof RangeError) {
+            val = vec1.concat(vec2).reduce((a, b) => f(a, b), Infinity);
+        } else {
+            throw e; // rethrow if it's not the expected error
+        }
+    }
+    return val;
 }
-
 function animatePendulum(solution) {
   const t = solution.t;
   const vars = solution.vars;
   var [t1, x1, y1, x2, y2] = generatePendulumCoords(solution);
-  var xmin = Math.min(...x1.concat(x2));
-  var ymin = Math.min(...y1.concat(y2));
-  var xmax = Math.max(...x1.concat(x2));
-  var ymax = Math.max(...y1.concat(y2));
+  var xmin = func2Vecs(Math.min, x1, x2);
+  var ymin = func2Vecs(Math.min, y1, y2);
+  var xmax = func2Vecs(Math.max, x1, x2);
+  var ymax = func2Vecs(Math.max, y1, y2);
   const trace1 = {
     x: [], y: [],
     mode: "lines+markers",
@@ -428,10 +427,10 @@ function animatePendulum(solution) {
     const elapsedSec = (timestamp - startTime) / 1000;
 
     // Advance to the frame corresponding to elapsed time
-    while (frame < t.length - 1 && t[frame] < elapsedSec) {
+    while (frame < t.length -1 && t[frame] < elapsedSec) {
       frame++;
     }
-    if (frame >= t.length - 1) return;
+    if (frame >= t.length) frame = t.length - 1;
 
     const r1 = vars[0][frame];
     const r2 = vars[2][frame];

@@ -273,22 +273,18 @@ function generatePlots(objectOfInputs) {
     generateTimePlot(solution);
 }
 
-function getXY(objectOfInputs, vars, i) {
-  const r1 = objectOfInputs.l1;
-  const r2 = objectOfInputs.l2;
-  const theta1 = vars[0];
-  const theta2 = vars[2];
-
-  const x1 = r1 * Math.cos(theta1[i]);
-  const y1 = r1 * Math.sin(theta1[i]);
-  const x2 = x1[i] + r2 * Math.cos(theta2[i]);
-  const y2 = y1[i] + r2 * Math.sin(theta2[i]);
-
-  return { x: [0, x1, x2], y: [0, y1, y2] };
-}
-
 function func2Vecs(f, vec1, vec2) {
-    return f(...vec1.map((v,i) => f(v, vec2[i])));
+    var val;
+    try {
+        val = f(...vec1.map((v,i) => f(v, vec2[i])));
+    } catch (e) {
+        if (e instanceof RangeError) {
+            val = vec1.concat(vec2).reduce((a, b) => f(a, b), Infinity);
+        } else {
+            throw e; // rethrow if it's not the expected error
+        }
+    }
+    return val;
 }
 function animatePendulum(objectOfInputs, solution) {
   const t = solution.t;
@@ -340,10 +336,10 @@ function animatePendulum(objectOfInputs, solution) {
     const elapsedSec = (timestamp - startTime) / 1000;
 
     // Advance to the frame corresponding to elapsed time
-    while (frame < t.length - 1 && t[frame] < elapsedSec) {
+    while (frame < t.length -1 && t[frame] < elapsedSec) {
       frame++;
     }
-    if (frame >= t.length - 1) return;
+    if (frame >= t.length) frame = t.length - 1;
 
     const r1 = objectOfInputs.l1;
     const r2 = objectOfInputs.l2;
