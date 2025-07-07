@@ -232,8 +232,13 @@ function removeR1R2PhasePlot() {
     rmPlot("R2R1Plot");
 }
 
+function removeTimePlot() {
+    rmPlot("timePlot");
+}
+
 function removePlots() {
     removePendulumPlots();
+    removeTimePlot();
     removeTheta1Theta2PhasePlot();
     removeDr1TPlot();
     removeDr1R1Plot()
