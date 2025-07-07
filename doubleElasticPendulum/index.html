@@ -107,12 +107,15 @@
             </ul>
 
             The masses of the pendulum rods (or springs) are ignored as including them into the calculation for <a href="/doublePendulum/">rigid double pendulums</a> does not make things more interesting. 
-        <div style="border: 1px solid"><div style="font-weight: bold; font-size: 24px;">Table of contents</div>
+        <!-- <div style="border: 1px solid"><div style="font-weight: bold; font-size: 24px;">Table of contents</div>
         <div id="tocDiv">
 <ul id="tocList">
 
 </ul>
 </div>
+</div> -->
+<div id="tocDiv">
+<ul id="tocList"><li><a href="#0">Dissipative forces</a><ul></ul></li><li><a href="#1">Kinetic energy</a><ul></ul></li><li><a href="#2">Potential energy</a><ul></ul></li><li><a href="#3">Lagrangian</a><ul></ul></li><li><a href="#4">Derivative of components of the Lagrangian</a><ul><li><a href="#5">Square of the velocity of the first pendulum's bob</a></li><li><a href="#6">Difference in the square of each bob's velocity</a></li></ul></li><li><a href="#7">Euler-Lagrange equations with dissipation</a><ul><li><a href="#8">r1</a></li><li><a href="#9">r2</a></li><li><a href="#10">θ1</a></li><li><a href="#11">θ2</a></li></ul></li><li><a href="#12">Analysis</a><ul></ul></li><li><a href="#13">Solution form</a><ul></ul></li></ul>
 </div>
 As can be seen, we have four degrees of freedom in this system. The angles the two pendulums make with the positive \(x\)-axis &mdash; \(\theta_1\) and \(\theta_2\), respectively &mdash; are among our degrees of freedom. We will also need degrees of freedom corresponding to the lengths of the pendulum rods. These degrees of freedom could either be the extent to which they are extended beyond their rest length or their total length. For the sake of simplicity, we will opt to use their total lengths &mdash; \(r_1\) and \(r_2\), respectively. Hence
 
@@ -168,7 +171,7 @@ Let us define \(|\Delta \vec{v}_{21}|^2 = |\vec{v}_2|^2 - |\vec{v}_1|^2\), as th
 	|\Delta \vec{v}_{21}|^2 &= \dot{r}_2^2 + r_2^2\dot{\theta}_2^2 + 2\cos{\Delta}(\dot{r}_1\dot{r}_2 + r_1r_2\dot{\theta}_1\dot{\theta}_2) + 2\sin{\Delta}(r_1\dot{r}_2\dot{\theta}_1-\dot{r}_1r_2\dot{\theta}_2).
 \end{align*}
 
-<h2>Dissipative forces</h2>
+<h2 id="#0">Dissipative forces</h2>
 We will assume that the dissipative forces are proportion to the velocity and velocity squared of the pendulum bobs. Meaning they will have the form
 
 \begin{align*}
@@ -176,7 +179,7 @@ We will assume that the dissipative forces are proportion to the velocity and ve
 \end{align*}
 
 Where \(j\) is the pendulum bob of interest, \(b_j\) and \(c_j\) are constants. 
-<h2>Kinetic energy</h2>
+<h2 id="#1">Kinetic energy</h2>
 The kinetic energy of the system is given by
 
 \begin{align*}
