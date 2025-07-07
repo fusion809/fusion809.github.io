@@ -25,7 +25,7 @@ Where
 * $F_i = \dfrac{\partial \mathcal{L}}{\partial q_i}$ is the generalized force canonical to $q_i$.
 * $\vec{F}_{D,j}$ is the dissipative force vector for component $j$.
 * $\hat{e}_{j,i} = \dfrac{\partial \vec{r}_j}{\partial q_i}$ is the generalized basis vector canonical to $q_i$ for component $j$ of the system.
-* The left-hand side of Equation Equation \eqref{ELD} can also be represented as $\dfrac{\delta \mathcal{L}}{\delta q_i}$, the functional derivative of the Lagrangian with respect to $q_i$. 
+* The left-hand side of Equation Equation \eqref{ELD} can also be represented as $-\dfrac{\delta \mathcal{L}}{\delta q_i}$, where $\dfrac{\delta \mathcal{L}}{\delta q_i}$ is the functional derivative of the Lagrangian with respect to $q_i$. To simplify things, we will call $-\dfrac{\delta \mathcal{L}}{\delta q_i} = \dfrac{\delta' \mathcal{L}}{\delta' q_i}$
 * The right-hand side of Equation Equation \eqref{ELD} is also called the generalized dissipative force and can be represented as $Q_i$.
 
 The masses of the pendulum rods (or springs) are ignored as including them into the calculation for [rigid double pendulums](/doublePendulum/) does not make things more interesting. 
@@ -135,7 +135,7 @@ The relevant partial and standard derivatives are:
 Hence the functional derivatives are
 
 \begin{align*}
-	\dfrac{\delta |\vec{v}_1|^2}{\delta r_1} &= \dfrac{d}{dt}\dfrac{\partial |\vec{v}_1|^2}{\partial \dot{r}_1} - \dfrac{\partial |\vec{v}_1|^2}{\partial r_1} & \dfrac{\delta |\vec{v}_1|^2}{\delta r_2} &= \dfrac{d}{dt}\dfrac{\partial |\vec{v}_1|^2}{\partial \dot{r}_2} - \dfrac{\partial |\vec{v}_1|^2}{\partial r_2} & \dfrac{\delta |\vec{v}_1|^2}{\delta \theta_1} &= \dfrac{d}{dt}\dfrac{\partial |\vec{v}_1|^2}{\partial \dot{\theta}_1} - \dfrac{\partial |\vec{v}_1|^2}{\partial \theta_1} & \dfrac{\delta |\vec{v}_1|^2}{\delta \theta_2} &= \dfrac{d}{dt}\dfrac{\partial |\vec{v}_1|^2}{\partial \dot{\theta}_2} - \dfrac{\partial |\vec{v}_1|^2}{\partial \theta_2}\\
+	\dfrac{\delta' |\vec{v}_1|^2}{\delta' r_1} &= \dfrac{d}{dt}\dfrac{\partial |\vec{v}_1|^2}{\partial \dot{r}_1} - \dfrac{\partial |\vec{v}_1|^2}{\partial r_1} & \dfrac{\delta' |\vec{v}_1|^2}{\delta' r_2} &= \dfrac{d}{dt}\dfrac{\partial |\vec{v}_1|^2}{\partial \dot{r}_2} - \dfrac{\partial |\vec{v}_1|^2}{\partial r_2} & \dfrac{\delta' |\vec{v}_1|^2}{\delta' \theta_1} &= \dfrac{d}{dt}\dfrac{\partial |\vec{v}_1|^2}{\partial \dot{\theta}_1} - \dfrac{\partial |\vec{v}_1|^2}{\partial \theta_1} & \dfrac{\delta' |\vec{v}_1|^2}{\delta' \theta_2} &= \dfrac{d}{dt}\dfrac{\partial |\vec{v}_1|^2}{\partial \dot{\theta}_2} - \dfrac{\partial |\vec{v}_1|^2}{\partial \theta_2}\\
 	&= 2\ddot{r}_1 - 2r_1\dot{\theta}_1^2 & &= 0 & &=2r_1^2\ddot{\theta}_1 + 4r_1\dot{r}_1\dot{\theta}_1 & &= 0.	
 \end{align*}
 
@@ -170,7 +170,7 @@ Let us define $\dot{\Delta}_1 = 2\dot{\theta}_1 - \dot{\theta}_2$ and $\dot{\Del
 
 Hence functional derivative for $r_1$ is
 \begin{align*}
-	\dfrac{\delta |\Delta \vec{v}_{21}|^2}{\delta r_1} &= \dfrac{d}{dt}\dfrac{\partial |\Delta \vec{v}_{21}|^2}{\partial \dot{r}_1} - \dfrac{\partial |\Delta \vec{v}_{21}|^2}{\partial r_1} \\
+	\dfrac{\delta' |\Delta \vec{v}_{21}|^2}{\delta' r_1} &= \dfrac{d}{dt}\dfrac{\partial |\Delta \vec{v}_{21}|^2}{\partial \dot{r}_1} - \dfrac{\partial |\Delta \vec{v}_{21}|^2}{\partial r_1} \\
 	&= 2\cos{\Delta}(\ddot{r}_2-r_2\dot{\theta}_2\dot{\Delta}) - 2\sin{\Delta}(\dot{r}_2\dot{\Delta}_2+r_2\ddot{\theta}_2) - \left(2r_2\dot{\theta}_1\dot{\theta}_2\cos{\Delta} + 2\dot{r}_2\dot{\theta}_1\sin{\Delta}\right) \\
 	&= 2\cos{\Delta}(\ddot{r}_2-r_2\dot{\theta}_2(\dot{\Delta}+\dot{\theta}_1)) - 2\sin{\Delta} (\dot{r}_2(\dot{\Delta}_2+\dot{\theta}_1)+r_2\ddot{\theta}_2).
 \end{align*}
@@ -178,13 +178,13 @@ Hence functional derivative for $r_1$ is
 Where $\dot{\Delta} + \dot{\theta}_1 = \dot{\theta}_2 - \dot{\theta}_1 + \dot{\theta}_1 = \dot{\theta}_2$ and $\dot{\Delta}_2 + \dot{\theta}_1 = 2\dot{\theta}_2 - \dot{\theta}_1 + \dot{\theta}_1 = 2\dot{\theta}_2$.
 
 \begin{align*}
-	\dfrac{\delta |\Delta \vec{v}_{21}|^2}{\delta r_1} &= 2\cos{\Delta}(\ddot{r}_2-r_2\dot{\theta}_2^2) - 2\sin{\Delta} (2\dot{r}_2\dot{\theta}_2+r_2\ddot{\theta}_2).
+	\dfrac{\delta' |\Delta \vec{v}_{21}|^2}{\delta' r_1} &= 2\cos{\Delta}(\ddot{r}_2-r_2\dot{\theta}_2^2) - 2\sin{\Delta} (2\dot{r}_2\dot{\theta}_2+r_2\ddot{\theta}_2).
 \end{align*}
 
 As for $r_2$
 
 \begin{align*}
-	\dfrac{\delta |\Delta \vec{v}_{21}|^2}{\delta r_2} &= \dfrac{d}{dt}\dfrac{\partial |\Delta \vec{v}_{21}|^2}{\partial \dot{r}_2} - \dfrac{\partial |\Delta \vec{v}_{21}|^2}{\partial r_2} \\
+	\dfrac{\delta' |\Delta \vec{v}_{21}|^2}{\delta' r_2} &= \dfrac{d}{dt}\dfrac{\partial |\Delta \vec{v}_{21}|^2}{\partial \dot{r}_2} - \dfrac{\partial |\Delta \vec{v}_{21}|^2}{\partial r_2} \\
 	&= 2\ddot{r}_2 + 2\cos{\Delta}(\ddot{r}_1 + r_1\dot{\theta}_1 \dot{\Delta}) + 2\sin{\Delta}(r_1\ddot{\theta}_1 + \dot{r}_1\dot{\Delta}_1) - \left[2r_2\dot{\theta}_2^2+2r_1\dot{\theta}_1\dot{\theta}_2\cos{\Delta}-2\dot{r}_1\dot{\theta}_2\sin{\Delta}\right]\\
 	&= 2\ddot{r}_2 -2r_2\dot{\theta}_2^2 + 2\cos{\Delta}(\ddot{r}_1 + r_1\dot{\theta}_1( \dot{\Delta}-\dot{\theta}_2))+2\sin{\Delta}(r_1\ddot{\theta}_1 + \dot{r}_1(\dot{\Delta}_1+\dot{\theta}_2)).
 \end{align*}
@@ -192,13 +192,13 @@ As for $r_2$
 Hence $\dot{\Delta}-\dot{\theta}_2 = \dot{\theta}_2-\dot{\theta}_1-\dot{\theta}_2 = -\dot{\theta}_1$ and $\dot{\Delta}_1 + \dot{\theta}_2 = 2\dot{\theta}_1 - \dot{\theta}_2 + \dot{\theta}_2 = 2\dot{\theta}_1$. 
 
 \begin{align*}
-	\dfrac{\delta |\Delta \vec{v}_{21}|^2}{\delta r_2} &= 2\ddot{r}_2 -2r_2\dot{\theta}_2^2 + 2\cos{\Delta}(\ddot{r}_1 - r_1\dot{\theta}_1^2)+2\sin{\Delta}(r_1\ddot{\theta}_1 + 2\dot{r}_1\dot{\theta}_1).
+	\dfrac{\delta' |\Delta \vec{v}_{21}|^2}{\delta' r_2} &= 2\ddot{r}_2 -2r_2\dot{\theta}_2^2 + 2\cos{\Delta}(\ddot{r}_1 - r_1\dot{\theta}_1^2)+2\sin{\Delta}(r_1\ddot{\theta}_1 + 2\dot{r}_1\dot{\theta}_1).
 \end{align*}
 
 As for $\theta_1$
 
 \begin{align*}
-	\dfrac{\delta |\Delta \vec{v}_{21}|^2}{\delta \theta_1} &= \dfrac{d}{dt}\dfrac{\partial |\Delta \vec{v}_{21}|^2}{\partial \dot{\theta}_1} - \dfrac{\partial |\Delta \vec{v}_{21}|^2}{\partial \theta_1} \\
+	\dfrac{\delta' |\Delta \vec{v}_{21}|^2}{\delta' \theta_1} &= \dfrac{d}{dt}\dfrac{\partial |\Delta \vec{v}_{21}|^2}{\partial \dot{\theta}_1} - \dfrac{\partial |\Delta \vec{v}_{21}|^2}{\partial \theta_1} \\
 	&= 2\cos{\Delta}(\dot{r}_1r_2\dot{\theta}_2 + r_1\dot{r}_2 \dot{\Delta}_2+r_1r_2\ddot{\theta}_2) +2\sin{\Delta}(\dot{r}_1\dot{r}_2+r_1\ddot{r}_2-r_1r_2\dot{\theta}_2\dot{\Delta}) - \left[2\sin{\Delta}(\dot{r}_1\dot{r}_2 + r_1r_2\dot{\theta}_1\dot{\theta}_2) - 2\cos{\Delta}(r_1\dot{r}_2\dot{\theta}_1-\dot{r}_1r_2\dot{\theta}_2)\right] \\
 	&= 2\cos{\Delta}(\dot{r}_1r_2(\dot{\theta}_2 - \dot{\theta}_2)+ r_1\dot{r}_2 (\dot{\Delta}_2+\dot{\theta}_1)+r_1r_2\ddot{\theta}_2) +2\sin{\Delta}(\dot{r}_1\dot{r}_2-\dot{r}_1\dot{r}_2+r_1\ddot{r}_2-r_1r_2\dot{\theta}_2(\dot{\Delta}+\dot{\theta}_1)) \\
 	&= 2\cos{\Delta}(2r_1\dot{r}_2\dot{\theta}_2+r_1r_2\ddot{\theta}_2) +2\sin{\Delta}(r_1\ddot{r}_2-r_1r_2\dot{\theta}_2^2).
@@ -207,7 +207,7 @@ As for $\theta_1$
 As for $\theta_2$
 
 \begin{align*}
-	\dfrac{\delta |\Delta \vec{v}_{21}|^2}{\delta \theta_2} &= \dfrac{d}{dt}\dfrac{\partial |\Delta \vec{v}_{21}|^2}{\partial \dot{\theta}_2} - \dfrac{\partial |\Delta \vec{v}_{21}|^2}{\partial \theta_2} \\
+	\dfrac{\delta' |\Delta \vec{v}_{21}|^2}{\delta' \theta_2} &= \dfrac{d}{dt}\dfrac{\partial |\Delta \vec{v}_{21}|^2}{\partial \dot{\theta}_2} - \dfrac{\partial |\Delta \vec{v}_{21}|^2}{\partial \theta_2} \\
 	&= 4r_2\dot{r}_2\dot{\theta}_2 + 2r_2^2\ddot{\theta}_2 +2\cos{\Delta}(\dot{r}_1r_2\dot{\Delta}_1+r_1\dot{r}_2\dot{\theta}_1+r_1r_2\ddot{\theta}_1)-2\sin{\Delta}(r_1r_2\dot{\theta}_1\dot{\Delta} + \ddot{r}_1r_2 + \dot{r}_1\dot{r}_2) - \left[-2\sin{\Delta}(\dot{r}_1\dot{r}_2 + r_1r_2\dot{\theta}_1\dot{\theta}_2) + 2\cos{\Delta}(r_1\dot{r}_2\dot{\theta}_1-\dot{r}_1r_2\dot{\theta}_2)\right] \\
 	&= 4r_2\dot{r}_2\dot{\theta}_2 + 2r_2^2\ddot{\theta}_2 +2\cos{\Delta}(\dot{r}_1r_2(\dot{\Delta}_1+\dot{\theta}_2)+r_1\dot{r}_2(\dot{\theta}_1-\dot{\theta}_1)+r_1r_2\ddot{\theta}_1)+2\sin{\Delta}(r_1r_2\dot{\theta}_1(\dot{\theta}_2-\dot{\Delta}) - \ddot{r}_1r_2 + \dot{r}_1\dot{r}_2-\dot{r}_1\dot{r}_2) \\
 	&= 4r_2\dot{r}_2\dot{\theta}_2 + 2r_2^2\ddot{\theta}_2 +2\cos{\Delta}(2\dot{r}_1r_2\dot{\theta}_1+r_1r_2\ddot{\theta}_1)+2\sin{\Delta}(r_1r_2\dot{\theta}_1(\dot{\theta}_2-(\dot{\theta}_2-\dot{\theta}_1))-\ddot{r}_1r_2) \\
@@ -216,14 +216,14 @@ As for $\theta_2$
 
 ## Euler-Lagrange equations with dissipation
 ### $r_1$
-It is important to note that $\dfrac{\delta f(q_i)}{\delta q_i} = -\dfrac{\partial f}{\partial q_i}$ and of course if a term does not depend on $q_i$ or $\dot{q}_i$ its functional derivative with respect to $q_i$ is zero. Hence
+It is important to note that $\dfrac{\delta' f(q_i)}{\delta' q_i} = -\dfrac{\partial f}{\partial q_i}$ and of course if a term does not depend on $q_i$ or $\dot{q}_i$ its functional derivative with respect to $q_i$ is zero. Hence
 
 \begin{align*}
-	\dfrac{\delta \mathcal{L}}{\delta r_1} &= (m_1+m_2)\left[\dfrac{\dfrac{\delta |\vec{v}_1|^2}{\delta r_1}}{2} -g\sin{\theta_1}\dfrac{\delta r_1}{\delta r_1}\right] + m_2\left[\dfrac{\dfrac{\delta |\Delta \vec{v}_{21}|^2}{\delta r_1}}{2}\right] - \dfrac{k_1}{2} \dfrac{\delta (r_1-l_1)^2}{\delta r_1}.
+	\dfrac{\delta' \mathcal{L}}{\delta' r_1} &= (m_1+m_2)\left[\dfrac{\dfrac{\delta' |\vec{v}_1|^2}{\delta' r_1}}{2} -g\sin{\theta_1}\dfrac{\delta' r_1}{\delta' r_1}\right] + m_2\left[\dfrac{\dfrac{\delta' |\Delta \vec{v}_{21}|^2}{\delta' r_1}}{2}\right] - \dfrac{k_1}{2} \dfrac{\delta' (r_1-l_1)^2}{\delta' r_1}.
 \end{align*}
 We have deliberately ignored the $m_2gr_2\sin{\theta_2}$ and $-\dfrac{k_2(r_2-l_2)^2}{2}$ as they are independent of $r_1$.
 \begin{align*}
-	\dfrac{\delta \mathcal{L}}{\delta r_1} &= (m_1+m_2)\left[\dfrac{2\ddot{r}_1-2r_1\dot{\theta}_1^2}{2} + g\sin{\theta_1}\right] + m_2\left[\dfrac{2\cos{\Delta}(\ddot{r}_2-r_2\dot{\theta}_2^2) - 2\sin{\Delta} (2\dot{r}_2\dot{\theta}_2+r_2\ddot{\theta}_2)}{2}\right] + k_1(r_1-l_1)\\
+	\dfrac{\delta' \mathcal{L}}{\delta' r_1} &= (m_1+m_2)\left[\dfrac{2\ddot{r}_1-2r_1\dot{\theta}_1^2}{2} + g\sin{\theta_1}\right] + m_2\left[\dfrac{2\cos{\Delta}(\ddot{r}_2-r_2\dot{\theta}_2^2) - 2\sin{\Delta} (2\dot{r}_2\dot{\theta}_2+r_2\ddot{\theta}_2)}{2}\right] + k_1(r_1-l_1)\\
 	&= (m_1+m_2)\left[\ddot{r}_1-r_1\dot{\theta}_1^2 + g\sin{\theta_1}\right] + m_2\left[\cos{\Delta}(\ddot{r}_2-r_2\dot{\theta}_2^2) - \sin{\Delta} (2\dot{r}_2\dot{\theta}_2+r_2\ddot{\theta}_2)\right] + k_1(r_1-l_1).
 \end{align*}
 	
@@ -278,7 +278,7 @@ Moving all terms that do not involve second derivatives to the right-hand side y
 As for $r_2$
 
 \begin{align*}
-	\dfrac{\delta \mathcal{L}}{\delta r_2} &= (m_1+m_2)\left[\dfrac{\dfrac{\delta |\vec{v}_1|^2}{\delta r_2}}{2}\right] + m_2\left[\dfrac{\dfrac{\delta |\Delta \vec{v}_{21}|^2}{\delta r_2}}{2} - g\sin{\theta}_2\dfrac{\delta r_2}{\delta r_2}\right] - \dfrac{k_2}{2} \dfrac{\delta (r_2-l_2)^2}{\delta r_2} \\
+	\dfrac{\delta' \mathcal{L}}{\delta' r_2} &= (m_1+m_2)\left[\dfrac{\dfrac{\delta' |\vec{v}_1|^2}{\delta' r_2}}{2}\right] + m_2\left[\dfrac{\dfrac{\delta' |\Delta \vec{v}_{21}|^2}{\delta' r_2}}{2} - g\sin{\theta}_2\dfrac{\delta' r_2}{\delta' r_2}\right] - \dfrac{k_2}{2} \dfrac{\delta' (r_2-l_2)^2}{\delta' r_2} \\
 	&= (m_1+m_2)\left[\dfrac{0}{2}\right] + m_2\left[\dfrac{2\ddot{r}_2 -2r_2\dot{\theta}_2^2 + 2\cos{\Delta}(\ddot{r}_1 - r_1\dot{\theta}_1^2)+2\sin{\Delta}(r_1\ddot{\theta}_1 + 2\dot{r}_1\dot{\theta}_1)}{2} + g\sin{\theta_2}\right] + k_2(r_2-l_2) \\
 	&= m_2\left[\ddot{r}_2 - r_2\dot{\theta}_2^2 + \cos{\Delta}(\ddot{r}_1 - r_1\dot{\theta}_1^2)+\sin{\Delta}(r_1\ddot{\theta}_1 + 2\dot{r}_1\dot{\theta}_1) + g\sin{\theta_2}\right] + k_2(r_2-l_2)\\
 	Q_{r_2} &= -(b_1+c_1|\vec{v}_1|)\vec{v}_1 \cdot \dfrac{\partial \vec{r}_1}{\partial r_2} - (b_2+c_2|\vec{v}_2|)\vec{v}_2 \cdot \dfrac{\partial \vec{r}_2}{\partial r_2} \\
@@ -319,7 +319,7 @@ Next we will expand out second time derivatives and moving everything else to th
 As for $\theta_1$
 
 \begin{align*}
-	\dfrac{\delta \mathcal{L}}{\delta \theta_1} &= (m_1+m_2)\left[\dfrac{\dfrac{\delta |\vec{v}_1|^2}{\delta \theta_1}}{2} - gr_1\dfrac{\delta \sin{\theta_1}}{\delta \theta_1}\right] + m_2\left[\dfrac{\dfrac{\delta |\Delta \vec{v}_{21}|^2}{\delta \theta_1}}{2}\right] \\
+	\dfrac{\delta' \mathcal{L}}{\delta' \theta_1} &= (m_1+m_2)\left[\dfrac{\dfrac{\delta' |\vec{v}_1|^2}{\delta' \theta_1}}{2} - gr_1\dfrac{\delta' \sin{\theta_1}}{\delta' \theta_1}\right] + m_2\left[\dfrac{\dfrac{\delta' |\Delta \vec{v}_{21}|^2}{\delta' \theta_1}}{2}\right] \\
 	&= (m_1+m_2)\left[\dfrac{2r_1^2\ddot{\theta}_1 + 4r_1\dot{r}_1\dot{\theta}_1}{2} + gr_1\cos{\theta}_1\right] + m_2\left[\dfrac{2\cos{\Delta}(2r_1\dot{r}_2\dot{\theta}_2+r_1r_2\ddot{\theta}_2) +2\sin{\Delta}(r_1\ddot{r}_2-r_1r_2\dot{\theta}_2^2)}{2}\right]\\
 	&= (m_1+m_2)\left[r_1^2\ddot{\theta}_1 + 2r_1\dot{r}_1\dot{\theta}_1 + gr_1\cos{\theta}_1\right] + m_2\left[\cos{\Delta}(2r_1\dot{r}_2\dot{\theta}_2+r_1r_2\ddot{\theta}_2) +\sin{\Delta}(r_1\ddot{r}_2-r_1r_2\dot{\theta}_2^2)\right]\\
 	Q_{\theta_1} &= -(b_1+c_1|\vec{v}_1|)\vec{v}_1 \cdot \dfrac{\partial \vec{r}_1}{\partial \theta_1} - (b_2+c_2|\vec{v}_2|)\vec{v}_2 \cdot \dfrac{\partial \vec{r}_2}{\partial \theta_1} \\
@@ -365,7 +365,7 @@ Expanding out all second time derivatives and moving all other terms to the righ
 As for $\theta_2$
 
 \begin{align*}
-	\dfrac{\delta \mathcal{L}}{\delta \theta_2} &= (m_1+m_2)\left[\dfrac{\dfrac{\delta |\vec{v}_1|^2}{\delta \theta_2}}{2}\right] + m_2\left[\dfrac{\dfrac{\delta |\Delta \vec{v}_{21}|^2}{\delta \theta_2}}{2} - gr_2\dfrac{\delta \sin{\theta_2}}{\delta \theta_2}\right] \\
+	\dfrac{\delta' \mathcal{L}}{\delta' \theta_2} &= (m_1+m_2)\left[\dfrac{\dfrac{\delta' |\vec{v}_1|^2}{\delta' \theta_2}}{2}\right] + m_2\left[\dfrac{\dfrac{\delta' |\Delta \vec{v}_{21}|^2}{\delta' \theta_2}}{2} - gr_2\dfrac{\delta' \sin{\theta_2}}{\delta' \theta_2}\right] \\
 	&= (m_1+m_2)\left[\dfrac{0}{2}\right]+m_2\left[\dfrac{4r_2\dot{r}_2\dot{\theta}_2 + 2r_2^2\ddot{\theta}_2 +2\cos{\Delta}(2\dot{r}_1r_2\dot{\theta}_1+r_1r_2\ddot{\theta}_1)+2\sin{\Delta}(r_1r_2\dot{\theta}_1^2-\ddot{r}_1r_2)}{2} + gr_2\cos{\theta_2}\right]\\
 	&= m_2\left[2r_2\dot{r}_2\dot{\theta}_2 + r_2^2\ddot{\theta}_2 +\cos{\Delta}(2\dot{r}_1r_2\dot{\theta}_1+r_1r_2\ddot{\theta}_1)+\sin{\Delta}(r_1r_2\dot{\theta}_1^2-\ddot{r}_1r_2) + gr_2\cos{\theta_2}\right]\\
 	Q_{\theta_2} &= -(b_1+c_1|\vec{v}_1|)\vec{v}_1 \cdot \dfrac{\partial \vec{r}_1}{\partial \theta_2} - (b_2+c_2|\vec{v}_2|)\vec{v}_2\cdot \dfrac{\partial \vec{r}_2}{\partial \theta_2} \\
