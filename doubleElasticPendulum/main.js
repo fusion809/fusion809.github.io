@@ -92,7 +92,7 @@ function generateTheta1Theta2PhasePlot(solution) {
  */
 function generateTimePlot(solution) {
     // Generate time plot
-    genMultPlot(solution, ["r1", "dr1", "r2", "dr2", "theta1", "dtheta1", "theta2", "dtheta2"], "timePlot", "Plot of r1, dr1, r2, dr2, theta1, dtheta1, theta2 and dtheta2 against time");
+    genMultPlot(solution, ["r<sub>1</sub>", "dr<sub>1</sub>/dt", "r<sub>2</sub>", "dr<sub>2</sub>/dt", "θ<sub>1</sub>", "dθ<sub>1</sub>/dt", "θ<sub>2</sub>", "dθ<sub>2</sub>/dt"], "timePlot", "Plot of r<sub>1</sub>, dr<sub>1</sub>/dt, r<sub>2</sub>, dr<sub>2</sub>/dt, θ<sub>1</sub>, dθ<sub>1</sub>/dt, θ<sub>2</sub> and dθ<sub>2</sub>/dt against time");
 }
 
 function generateR1TPlot(solution) {

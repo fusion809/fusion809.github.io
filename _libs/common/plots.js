@@ -470,6 +470,20 @@ function genMultPlot(solution, varnames, element, title) {
             name: varnames[3]
         };
         var dataTimePlot = [plotTS, plotTE, plotTI, plotTR];
+    } else {
+        var N = vars.length;
+        var dataTimePlot = new Array(N);
+        for (let i = 0; i < N; i++) {
+            var plot = {
+                x: t,
+                y: vars[i],
+                type: 'scatter',
+                mode: 'lines',
+                opacity: 1,
+                name: varnames[i]
+            };
+            dataTimePlot[i] = plot;
+        }
     }
     
     // layout object
