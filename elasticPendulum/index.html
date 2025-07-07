@@ -124,7 +124,7 @@
                        id="epsilon"
                        name="epsilon"
                        value="1e-9"></td>
-                    <td>Error tolerance. \(\epsilon \lt\) 1.8e-10 usually freezes the webpage up.</td>
+                    <td>Absolute error tolerance. \(\epsilon \lt\) 1.8e-10 usually freezes the webpage up.</td>
                 </tr>
                 <tr>
                     <td><label for="dtInitial">dtInitial:</label></td>
@@ -133,6 +133,14 @@
                         name="dtInitial"
                         value="0.1"></td>
                     <td>Initial guess for step size.</td>
+                </tr>
+                <tr>
+                    <td><label for="dtMin">dtMin:</label></td>
+                    <td><input type="Number"
+                        id="dtMin"
+                        name="dtMin"
+                        value="1e-8"></td>
+                    <td>Minimum limit for step size.</td>
                 </tr>
             </table>
         </form>
