@@ -7,21 +7,32 @@
  * @return               [dtheta1/dt, dp1/dt, dtheta2/dt, dp2/dt]
  */
 function f(objectOfInputs, t, vars, dt) {
-    var {g, l1, l2, m1, m2} = objectOfInputs;
-    var [theta1, ptheta1, theta2, ptheta2] = vars;
+    var {g, l1, l2, m1b, m1r, m2b, m2r, b1b, b1r, c1b, c1r, b2b, b2r, c2b, c2r} = objectOfInputs;
+    var [theta1, dtheta1, theta2, dtheta2] = vars;
+    outercoef = 1/((m2r/12+m2b)*l2 - (m2b**2*l2*Math.cos(theta1-theta2)**2)/(m1r/12 + m1b+m2b));
+    mass = m1r/2 + m2r + m1b + m2b; 
+    v1b = l1*dtheta1;
+    v1r = v1b/2;
+    v2b = Math.sqrt(l1**2*dtheta1**2+l2**2*dtheta2**2+2*l1*l2*dtheta1*dtheta2*Math.cos(theta1-theta2));
+    v2r = Math.sqrt(l1**2*dtheta1**2+(l2**2*dtheta2**2)/4 + l2*dtheta1*dtheta2*Math.cos(theta1-theta2));
+    drag1b = (b1b + c1b*v1b)*v1b;
+    drag1r = (b1r + c1r*v1r)*v1r/2;
+    drag2b = (b2b + c2b*v2b)*(l1*dtheta1 + l2*dtheta2*Math.cos(theta1-theta2));
+    drag2b2 = (b2b + c2b*v2b)*(l1*dtheta1*Math.cos(theta1-theta2) + l2*dtheta2);
+    drag2r = (b2r + c2r*v2r)*(l1*dtheta1 + l2*dtheta2*Math.cos(theta1-theta2)/2);
+    drag2l2 = 1/4*(b2r + c2r*v2r)*(2*l1*dtheta1*Math.cos(theta1-theta2) + l2*dtheta2);
+    innercoef = -m2b*Math.cos(theta1-theta2)/(m1r/12+m1b+m2b);
+    inner = innercoef*(-m2b*l2*dtheta2**2*Math.sin(theta1-theta2) - g*Math.cos(theta1)*(m1r/2+m2r+m1b+m2b)-drag1b-drag2b-drag1r-drag2r);
+    extra = m2b*(l1*dtheta1**2*Math.sin(theta1-theta2)-g*Math.cos(theta2))-drag2l2-drag2b2;
+    d2theta2 = outercoef*(inner+extra);
+    outercoef1 = 1/((m1r/12+m1b+m2b)*l1);
+    innel11 = -m2b*l2*(d2theta2*Math.cos(theta1-theta2)+dtheta2**2*Math.sin(theta1-theta2));
+    innel12 = -g*Math.cos(theta1)*mass - drag1b - drag2b - drag1r - drag2r;
+    d2theta1 = outercoef1*(innel11 + innel12);
 
-    // Simplifying terms
-    var C1 = ptheta1*ptheta2*Math.sin(theta1-theta2)/(l1*l2*(m1+m2*(Math.sin(theta1-theta2)**2)));
-    var C2 = ((l2**2)*m2*ptheta1**2 + (l1**2)*(m1+m2)*ptheta2**2 - l1*l2*m2*ptheta1*ptheta2*Math.cos(theta1-theta2))/(2*(l1**2)*(l2**2)*(m1+m2*Math.sin(theta1-theta2)**2))*Math.sin(2*(theta1-theta2));
     
-    // Derivatives
-    var thetaDot1 = (l2 * ptheta1 - l1*ptheta2 * Math.cos(theta1))/((l1**2)*l2*(m1+m2*((Math.sin(theta1-theta2))**2)));
-    var pthetaDot1 = -(m1+m2)*g*l1*Math.sin(theta1) - C1 + C2;
-    var thetaDot2 = (l1*(m1+m2)*ptheta2-l2*m2*ptheta1*Math.cos(theta1-theta2))/(l1*(l2**2)*m2*(m1+m2*(Math.sin(theta1-theta2)**2)));
-    var pthetaDot2 = -m2*g*l2*Math.sin(theta2)+C1-C2;
-
     // Return statement
-    return [dt*thetaDot1, dt*pthetaDot1, dt*thetaDot2, dt*pthetaDot2];
+    return [dt*dtheta1, dt*d2theta1, dt*dtheta2, dt*d2theta2];
 }
 
 /** 
@@ -32,8 +43,8 @@ function f(objectOfInputs, t, vars, dt) {
  */
 function RKF45(objectOfInputs) {
     // Extract initial from object and add to 2d array
-    var {theta10, p10, theta20, p20} = objectOfInputs;
-    var vars0 = [[theta10, p10, theta20, p20]];
+    var {theta10, dtheta10, theta20, dtheta20} = objectOfInputs;
+    var vars0 = [[theta10, dtheta10, theta20, dtheta20]];
     var [t, vars] = RKF45Body(f, objectOfInputs, vars0); 
     return [t, vars];
 }
@@ -51,87 +62,87 @@ function generateTheta1Theta2PhasePlot(solution) {
     var theta2 = vars[2];
 
     // Generate 2D plot
-    gen2DPlot(theta1, theta2, "phasePlotTheta1Theta2", "Phase plot of theta2 against theta1");
+    gen2DPlot(theta1, theta2, "phasePlotTheta1Theta2", "Phase plot of θ2 against θ1");
 }
 
 /**
- * Generates a ptheta2 against ptheta1 phase plot
+ * Generates a dtheta2 against dtheta1 phase plot
  * 
  * @param solution       An object containing solution data.
  * @return               Nothing.
  */
-function generateP1P2PhasePlot(solution) {
+function generateDtheta1Dtheta2PhasePlot(solution) {
     // Extract solution data from solution object
     var {vars} = solution;
-    var ptheta1 = vars[1];
-    var ptheta2 = vars[3];
+    var dtheta1 = vars[1];
+    var dtheta2 = vars[3];
 
     // Generate 2D plot
-    gen2DPlot(ptheta1, ptheta2, "phasePlotP1P2", "Phase plot of ptheta2 against ptheta1");
+    gen2DPlot(dtheta1, dtheta2, "phasePlotDtheta1Dtheta2", "Phase plot of dθ2/dt against dθ1/dt");
 }
 
 /**
- * Generates a ptheta1 against theta1 phase plot
+ * Generates a dtheta1 against theta1 phase plot
  * 
  * @param solution       An object containing solution data.
  * @return               Nothing.
  */
-function generateTheta1P1PhasePlot(solution) {
-    // Extract solution data from solution object
-    var {vars} = solution;
-    var theta1 = vars[0];
-    var ptheta1 = vars[1];
-    
-    // Generate 2D plot
-    gen2DPlot(theta1, ptheta1, "phasePlotTheta1P1", "Phase plot of ptheta1 against theta1");
-}
-
-/**
- * Generates a ptheta2 against theta1 phase plot
- * 
- * @param solution       An object containing solution data.
- * @return               Nothing.
- */
-function generateTheta1P2PhasePlot(solution) {
+function generateTheta1Dtheta1PhasePlot(solution) {
     // Extract solution data from solution object
     var {vars} = solution;
     var theta1 = vars[0];
-    var ptheta2 = vars[2];
+    var dtheta1 = vars[1];
     
     // Generate 2D plot
-    gen2DPlot(theta1, ptheta2, "phasePlotTheta1P2", "Phase plot of ptheta2 against theta1");
+    gen2DPlot(theta1, dtheta1, "phasePlotTheta1Dtheta1", "Phase plot of dθ1/dt against θ1");
 }
 
 /**
- * Generates a ptheta1 against theta2 phase plot
+ * Generates a dtheta2 against theta1 phase plot
  * 
  * @param solution       An object containing solution data.
  * @return               Nothing.
  */
-function generateTheta2P1PhasePlot(solution) {
+function generateTheta1Dtheta2PhasePlot(solution) {
     // Extract solution data from solution object
     var {vars} = solution;
-    var theta2 = vars[2];
-    var ptheta1 = vars[1];
+    var theta1 = vars[0];
+    var dtheta2 = vars[2];
     
     // Generate 2D plot
-    gen2DPlot(theta2, ptheta1, "phasePlotTheta2P1", "Phase plot of ptheta1 against theta2");
+    gen2DPlot(theta1, dtheta2, "phasePlotTheta1Dtheta2", "Phase plot of dθ2 against θ1");
 }
 
 /**
- * Generates a ptheta2 against theta2 phase plot
+ * Generates a dtheta1 against theta2 phase plot
  * 
  * @param solution       An object containing solution data.
  * @return               Nothing.
  */
-function generateTheta2P2PhasePlot(solution) {
+function generateTheta2Dtheta1PhasePlot(solution) {
     // Extract solution data from solution object
     var {vars} = solution;
     var theta2 = vars[2];
-    var ptheta2 = vars[3];
+    var dtheta1 = vars[1];
     
     // Generate 2D plot
-    gen2DPlot(theta2, ptheta2, "phasePlotTheta2P2", "Phase plot of ptheta2 against theta2");
+    gen2DPlot(theta2, dtheta1, "phasePlotTheta2Dtheta1", "Phase plot of dθ1 against θ2");
+}
+
+/**
+ * Generates a dtheta2 against theta2 phase plot
+ * 
+ * @param solution       An object containing solution data.
+ * @return               Nothing.
+ */
+function generateTheta2Dtheta2PhasePlot(solution) {
+    // Extract solution data from solution object
+    var {vars} = solution;
+    var theta2 = vars[2];
+    var dtheta2 = vars[3];
+    
+    // Generate 2D plot
+    gen2DPlot(theta2, dtheta2, "phasePlotTheta2Dtheta2", "Phase plot of dθ2 against θ2");
 }
 
 /**
@@ -142,7 +153,7 @@ function generateTheta2P2PhasePlot(solution) {
  */
 function generateTimePlot(solution) {
     // Generate time plot
-    genMultPlot(solution, ["theta1", "ptheta1", "theta2", "ptheta2"], "timePlot", "Plot of theta1, ptheta1, theta2 and ptheta2 against time");
+    genMultPlot(solution, ["theta1", "dtheta1", "theta2", "dtheta2"], "timePlot", "Plot of theta1, dtheta1, θ2 and θ2 against time");
 }
 
 /**
@@ -153,7 +164,7 @@ function generateTimePlot(solution) {
 function generatePendulumCoords(objectOfInputs, solution) {
     // Extract solution values and pendulum lengths
     var {t, vars} = solution;
-    var [theta1, ptheta1, theta2, ptheta2] = vars;
+    var [theta1, dtheta1, theta2, dtheta2] = vars;
     var {l1, l2} = objectOfInputs;
     var N = theta1.length;
 
@@ -253,11 +264,115 @@ function generatePlots(objectOfInputs) {
 
     // Generate plots
     generateTheta1Theta2PhasePlot(solution);
-    generateTheta1P1PhasePlot(solution);
-    generateTheta1P2PhasePlot(solution);
-    generateTheta2P1PhasePlot(solution);
-    generateTheta2P2PhasePlot(solution);
-    generateP1P2PhasePlot(solution);
+    generateTheta1Dtheta1PhasePlot(solution);
+    generateTheta1Dtheta2PhasePlot(solution);
+    generateTheta2Dtheta1PhasePlot(solution);
+    generateTheta2Dtheta2PhasePlot(solution);
+    generateDtheta1Dtheta2PhasePlot(solution);
     generatePendulumPlots(objectOfInputs, solution)
     generateTimePlot(solution);
+}
+
+function getXY(objectOfInputs, vars, i) {
+  const r1 = objectOfInputs.l1;
+  const r2 = objectOfInputs.l2;
+  const theta1 = vars[0];
+  const theta2 = vars[2];
+
+  const x1 = r1 * Math.cos(theta1[i]);
+  const y1 = r1 * Math.sin(theta1[i]);
+  const x2 = x1[i] + r2 * Math.cos(theta2[i]);
+  const y2 = y1[i] + r2 * Math.sin(theta2[i]);
+
+  return { x: [0, x1, x2], y: [0, y1, y2] };
+}
+
+function func2Vecs(f, vec1, vec2) {
+    return f(...vec1.map((v,i) => f(v, vec2[i])));
+}
+function animatePendulum(objectOfInputs, solution) {
+  const t = solution.t;
+  const vars = solution.vars;
+  var [t1, x1, y1, x2, y2] = generatePendulumCoords(objectOfInputs, solution);
+  var xmin = func2Vecs(Math.min, x1, x2);
+  var ymin = func2Vecs(Math.min, y1, y2);
+  var xmax = func2Vecs(Math.max, x1, x2);
+  var ymax = func2Vecs(Math.max, y1, y2);
+  const trace1 = {
+    x: [], y: [],
+    mode: "lines+markers",
+    marker: { size: 8 },
+    line: { color: "blue" },
+    name: "Rod 1"
+  };
+  const trace2 = {
+    x: [], y: [],
+    mode: "lines+markers",
+    marker: { size: 8 },
+    line: { color: "red" },
+    name: "Rod 2"
+  };
+  const data = [trace1, trace2];
+  const padding = 1;
+  const layout = {
+    title: "Double Pendulum",
+    xaxis: { range: [xmin-padding, xmax+padding], title: "x" },
+    yaxis: { range: [ymin-padding, ymax+padding], title: "y", scaleanchor: "x" },
+    showlegend: false,
+    annotations: [{
+    x: 0,
+    y: 1.1,  // slightly above plot
+    xref: 'paper',
+    yref: 'paper',
+    text: 'Time: 0.00 s',
+    showarrow: false,
+    font: { size: 16 }
+  }]
+  };
+  Plotly.newPlot("animation", data, layout);
+
+  let startTime = null;
+  let frame = 0;
+
+  function animateFrame(timestamp) {
+    if (!startTime) startTime = timestamp;
+
+    const elapsedSec = (timestamp - startTime) / 1000;
+
+    // Advance to the frame corresponding to elapsed time
+    while (frame < t.length - 1 && t[frame] < elapsedSec) {
+      frame++;
+    }
+    if (frame >= t.length - 1) return;
+
+    const r1 = objectOfInputs.l1;
+    const r2 = objectOfInputs.l2;
+    const th1 = vars[0][frame];
+    const th2 = vars[2][frame];
+
+    const x1 = r1 * Math.cos(th1);
+    const y1 = r1 * Math.sin(th1);
+    const x2 = x1 + r2 * Math.cos(th2);
+    const y2 = y1 + r2 * Math.sin(th2);
+
+    Plotly.animate("animation", {
+      data: [
+        { x: [0, x1], y: [0, y1] },
+        { x: [x1, x2], y: [y1, y2] }
+      ]
+    }, {
+      transition: { duration: 0 },
+      frame: { duration: 0, redraw: true }
+    });
+    layout.annotations[0].text = `Time: ${t[frame].toFixed(2)} s`;
+    Plotly.relayout('animation', layout);
+
+    requestAnimationFrame(animateFrame);
+  }
+
+  requestAnimationFrame(animateFrame);
+}
+
+function removeAnimation() {
+    rmPlot("animation");
 }

@@ -171,6 +171,13 @@ function generateDtheta2Theta2Plot(solution) {
     gen2DPlotXYLabs(theta2, dtheta2, "Dtheta2Theta2Plot", "Phase plot of dθ<sub>2</sub>/dt vs θ<sub>2</sub>", "θ<sub>2</sub>", "dθ<sub>2</sub>/dt");
 }
 
+function generateR1R2PhasePlot(solution) {
+    var {vars} = solution;
+    var r1 = vars[0];
+    var r2 = vars[2];
+    gen2DPlotXYLabs(r1, r2, "R2R1Plot", "Phase plot of r<sub>2</sub> vs r<sub>1</sub>", "r<sub>1</sub>", "r<sub>2</sub>");
+}
+
 function removeDr1TPlot() {
     rmPlot("Dr1TPlot");
 }
@@ -215,6 +222,10 @@ function removeDtheta2Theta2Plot() {
     rmPlot("Dtheta2Theta2Plot");
 }
 
+function removeR1R2PhasePlot() {
+    rmPlot("R2R1Plot");
+}
+
 function removePlots() {
     removeTheta1Theta2PhasePlot();
     removeDr1TPlot();
@@ -228,6 +239,7 @@ function removePlots() {
     removeTheta2TPlot()
     removeDtheta2TPlot()
     removeDtheta2Theta2Plot()
+    removeR1R2PhasePlot();
 }
 
 /**
@@ -337,6 +349,7 @@ function generatePlots(objectOfInputs) {
 
     // Generate plots
     generateTheta1Theta2PhasePlot(solution);
+    generateR1R2PhasePlot(solution);
     generateR1TPlot(solution);
     generateDr1TPlot(solution);
     generateDr1R1Plot(solution);

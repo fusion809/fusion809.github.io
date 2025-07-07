@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="349.7684mm"
+   height="229.32419mm"
+   viewBox="0 0 349.76841 229.32419"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   sodipodi:docname="Double pendulum.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.35355339"
+     inkscape:cx="1449.5689"
+     inkscape:cy="486.48946"
+     inkscape:window-width="1150"
+     inkscape:window-height="1000"
+     inkscape:window-x="754"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     showgrid="false" />
+  <defs
+     id="defs1">
+    <marker
+       style="overflow:visible"
+       id="Triangle"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Triangle arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.5)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         id="path135" />
+    </marker>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-64.418791,3.5510748)">
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-dasharray:none;marker-end:url(#Triangle)"
+       d="M 64.420058,171.44912 H 349.80156"
+       id="path1"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-dasharray:none;marker-start:url(#Triangle)"
+       d="M 175.00069,0 V 225.77312"
+       id="path1-5"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-size:21.8722px;font-family:'Cambria Math';-inkscape-font-specification:'Cambria Math';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-dasharray:none"
+       x="342.12259"
+       y="187.60359"
+       id="text1"><tspan
+         sodipodi:role="line"
+         id="tspan1"
+         style="fill:#000000;fill-opacity:1;stroke-width:1"
+         x="342.12259"
+         y="187.60359">x</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:21.8722px;font-family:'Cambria Math';-inkscape-font-specification:'Cambria Math';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-dasharray:none"
+       x="180.24159"
+       y="9.3291683"
+       id="text2"><tspan
+         sodipodi:role="line"
+         id="tspan2"
+         style="fill:#000000;fill-opacity:1;stroke-width:1"
+         x="180.24159"
+         y="9.3291683">y</tspan></text>
+    <path
+       style="fill:#000000;stroke:#000000;stroke-width:1.02317"
+       d="m 175.25579,171.00632 89.04537,-51.41036 -0.56132,-0.97224"
+       id="path2" />
+    <circle
+       style="fill:#000000;stroke:#000000;stroke-width:1.05634"
+       id="path3"
+       cx="265"
+       cy="118.36793"
+       r="4.4718308" />
+    <path
+       style="fill:#000000;stroke:#000000;stroke-width:1.02317"
+       d="M 265.44313,118.11249 316.8535,29.067125 315.88127,28.5058"
+       id="path2-8" />
+    <circle
+       style="fill:#000000;stroke:#000000;stroke-width:1.05634"
+       id="path3-8"
+       cx="260.56848"
+       cy="182.3716"
+       r="4.4718308"
+       transform="rotate(-30)" />
+    <text
+       xml:space="preserve"
+       style="font-size:21.8722px;font-family:'Cambria Math';-inkscape-font-specification:'Cambria Math';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;stroke:#000000;stroke-width:1"
+       x="299.38651"
+       y="71.898705"
+       id="text3-5"><tspan
+         sodipodi:role="line"
+         id="tspan3-1"
+         style="stroke-width:1"
+         x="299.38651"
+         y="71.898705">r<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan4-7">2</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:21.8722px;font-family:'Cambria Math';-inkscape-font-specification:'Cambria Math';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;stroke:#000000;stroke-width:1"
+       x="202.81358"
+       y="138.04453"
+       id="text3-5-2"><tspan
+         sodipodi:role="line"
+         id="tspan3-1-7"
+         style="stroke-width:1"
+         x="202.81358"
+         y="138.04453">r<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan4-7-6">1</tspan></tspan></text>
+    <path
+       style="fill:#000000;stroke:#000000;stroke-width:1;marker-start:url(#Triangle)"
+       d="m 241.16771,136.14892 v 42.06875 14.08906"
+       id="path4"
+       sodipodi:nodetypes="ccc" />
+    <text
+       xml:space="preserve"
+       style="font-size:21.8722px;font-family:'Cambria Math';-inkscape-font-specification:'Cambria Math';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;stroke:#000000;stroke-width:1"
+       x="175.35454"
+       y="209.86908"
+       id="text5"><tspan
+         sodipodi:role="line"
+         style="font-size:21.8722px;stroke-width:1"
+         x="175.35454"
+         y="209.86908"
+         id="tspan8">Rod 1 has mass m<tspan
+   style="font-size:21.8722px;baseline-shift:sub"
+   id="tspan9">1r</tspan>.</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:21.8722px;stroke-width:1"
+         x="175.35454"
+         y="237.20934"
+         id="tspan10" /></text>
+    <text
+       xml:space="preserve"
+       style="font-size:19.7556px;font-family:'Cambria Math';-inkscape-font-specification:'Cambria Math';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;stroke:#000000;stroke-width:1"
+       x="63.626537"
+       y="74.517342"
+       id="text5-3"><tspan
+         sodipodi:role="line"
+         style="font-size:21.8722px;stroke-width:1"
+         x="63.626537"
+         y="74.517342"
+         id="tspan8-2">Rod 2 has mass m<tspan
+   style="font-size:21.8722px;baseline-shift:sub"
+   id="tspan18">2r</tspan>.</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:19.7556px;stroke-width:1"
+         x="63.626537"
+         y="99.946655"
+         id="tspan10-1" /></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1"
+       d="m 208.49166,151.49476 c 9.16875,11.49275 3.56286,16.18953 0,19.99736"
+       id="path11"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-size:21.8722px;font-family:'Cambria Math';-inkscape-font-specification:'Cambria Math';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:none;stroke:#000000;stroke-width:1"
+       x="214.06017"
+       y="164.97318"
+       id="text11"><tspan
+         sodipodi:role="line"
+         id="tspan11"
+         style="font-size:21.8722px;fill:#000000;fill-opacity:1;stroke-width:1"
+         x="214.06017"
+         y="164.97318">θ<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan23">1</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:21.8722px;font-family:'Cambria Math';-inkscape-font-specification:'Cambria Math';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1"
+       x="256.89713"
+       y="138.46599"
+       id="text13"><tspan
+         sodipodi:role="line"
+         style="font-size:21.8722px;stroke-width:1"
+         x="256.89713"
+         y="138.46599"
+         id="tspan14">Bob 1 has mass </tspan><tspan
+         sodipodi:role="line"
+         style="font-size:21.8722px;stroke-width:1"
+         x="256.89713"
+         y="165.80624"
+         id="tspan22">m<tspan
+   style="font-size:21.8722px;baseline-shift:sub"
+   id="tspan15">1b</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:21.8722px;font-family:'Cambria Math';-inkscape-font-specification:'Cambria Math';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1"
+       x="224.36665"
+       y="16.028091"
+       id="text16"><tspan
+         sodipodi:role="line"
+         id="tspan16"
+         style="font-size:21.8722px;stroke-width:1"
+         x="224.36665"
+         y="16.028091">Bob 2 has mass m<tspan
+   style="font-size:21.8722px;baseline-shift:sub"
+   id="tspan17">2b</tspan></tspan></text>
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1;marker-end:url(#Triangle)"
+       d="m 255.5875,73.310383 h 31.6177"
+       id="path18"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-dasharray:1, 1;stroke-dashoffset:0"
+       d="m 264.8479,118.42184 c 79.375,0 79.375,0 79.375,0"
+       id="path19" />
+    <path
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 280.45832,91.963507 c 9.84988,4.774463 18.77346,11.328343 11.90625,26.722913"
+       id="path20"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-size:21.8722px;font-family:'Cambria Math';-inkscape-font-specification:'Cambria Math';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:none;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-dasharray:none;stroke-dashoffset:0"
+       x="296.06873"
+       y="111.80725"
+       id="text20"><tspan
+         sodipodi:role="line"
+         id="tspan20"
+         style="font-size:21.8722px;fill:#000000;fill-opacity:1;stroke-width:1"
+         x="296.06873"
+         y="111.80725">θ<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan24">2</tspan></tspan></text>
+  </g>
+</svg>
