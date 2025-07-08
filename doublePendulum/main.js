@@ -371,20 +371,10 @@ function animatePendulum(objectOfInputs, solution) {
         cycle++;
     }
 
-    const r1 = objectOfInputs.l1;
-    const r2 = objectOfInputs.l2;
-    const th1 = vars[0][frame];
-    const th2 = vars[2][frame];
-
-    const x1 = r1 * Math.cos(th1);
-    const y1 = r1 * Math.sin(th1);
-    const x2 = x1 + r2 * Math.cos(th2);
-    const y2 = y1 + r2 * Math.sin(th2);
-
     Plotly.animate("animation", {
       data: [
-        { x: [0, x1], y: [0, y1] },
-        { x: [x1, x2], y: [y1, y2] }
+        { x: [0, x1[frame]], y: [0, y1[frame]] },
+        { x: [x1[frame], x2[frame]], y: [y1[frame], y2[frame]] }
       ]
     }, {
       transition: { duration: 0 },
