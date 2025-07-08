@@ -500,14 +500,14 @@ function animatePendulum(solution) {
     });
     layout.annotations[0].text = `Time: ${t[frame].toFixed(2)} s`;
     Plotly.relayout('animation', layout);
-    if (frame == t.length - 1) {
-        layout.annotations[0].text = `Animation finished. 3s delay before animation is repeated.`;
-        setTimeout(() => {
-            requestAnimationFrame(animateFrame);  // resume animation
-        }, 3000);
-    } else {
+    // if (frame == t.length - 1) {
+    //     layout.annotations[0].text = `Animation finished. 3s delay before animation is repeated.`;
+    //     setTimeout(() => {
+    //         requestAnimationFrame(animateFrame);  // resume animation
+    //     }, 3000);
+    // } else {
         requestAnimationFrame(animateFrame);
-    }
+    // }
   }
 
   requestAnimationFrame(animateFrame);
