@@ -3,6 +3,8 @@
     <head>
         <title>Double pendulum problem solver</title>
         <!--We need a few external JS libraries to provide LaTeX and plot rendering. -->
+        <link rel="stylesheet" href="/css/franklin.css">
+        <link rel="stylesheet" href="/css/pure.css">
         <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
         <script src="./main.js"></script>
         <script src="/libs/common/form.js"></script>
@@ -231,7 +233,7 @@
         <!--Buttons-->
         <table id="buttontable">
             <tr>
-                <td><button type="button" onclick="fillTable(readInputs(), ['&theta;<sub>1</sub>', 'd&theta;<sub>1</sub>/dt', '&theta;<sub>2</sub>', 'd&theta;<sub>2</sub>/dt'])">Tabulate the solution</button></td>
+                <td><a href="#tableOutputs"><button type="button" onclick="fillTable(readInputs(), ['&theta;<sub>1</sub>', 'd&theta;<sub>1</sub>/dt', '&theta;<sub>2</sub>', 'd&theta;<sub>2</sub>/dt'])">Tabulate the solution</button></a></td>
                 <td><button type="button" onclick="removeTable()">Remove the solution table</button></td>
             </tr>
             <tr>
@@ -314,5 +316,11 @@
                 width: 100%;
             }
         </style>
+        <div class="page-foot">
+            <div class="copyright">
+                &copy; Brenton Horne. I do not claim to be infallible, so feel free to send corrections to <a href="mailto:brentonhorne77@gmail.com">brentonhorne77@gmail.com</a>. 
+                <br/>I favour Oxford spelling, so if you notice I generally use different spelling to Australian spelling, that is probably why. 
+            </div>
+        </div>
     </body>
 </html>
