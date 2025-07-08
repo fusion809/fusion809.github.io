@@ -202,7 +202,7 @@ function generatePendulumPlots(objectOfInputs, solution) {
         type: 'scatter',
         mode: 'lines',
         opacity: 1,
-        name: "Pendulum 1 plot"
+        name: "Pendulum 1 bob position"
     }
     var plotPen2 = {
         x: x2,
@@ -210,7 +210,7 @@ function generatePendulumPlots(objectOfInputs, solution) {
         type: 'scatter',
         mode: 'lines',
         opacity: 1,
-        name: "Pendulum 2 plot"
+        name: "Pendulum 2 bob position"
     }
     var dataPen = [plotPen1, plotPen2];
     var layoutPen = {
@@ -230,7 +230,7 @@ function generatePendulumPlots(objectOfInputs, solution) {
             width: 6,
             reversescale: false
         },
-        name: "Pendulum 1 plot against time"
+        name: "Pendulum 1 bob position against time"
     };
     var plotPen2Time = {
         x: t,
@@ -243,11 +243,11 @@ function generatePendulumPlots(objectOfInputs, solution) {
             width: 6,
             reversescale: false
         },
-        name: 'Pendulum 2 plot against time'
+        name: 'Pendulum 2 bob position against time'
     };
     var dataPen = [plotPen1Time, plotPen2Time];
     var layoutPenTime = {
-        title: "Pendulum position against time plot"
+        title: "Pendulum bob position against time plot"
     };
     Plotly.newPlot("pendulumTimePlot", dataPen, layoutPenTime);
 }
