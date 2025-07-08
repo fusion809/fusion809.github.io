@@ -201,6 +201,10 @@
                 <td><a href="#phasePlot"><button type="button" onclick="generatePlots(readInputs())">Generate all solution plots</button></a></td>
                 <td><button type="button" onclick="removePlots()">Remove all solution plots</button></td>
             </tr>
+            <tr>
+                <td><a href="#animation"><button type="button" onclick="animatePendulum(readInputs(), solveProblemSP( readInputs()))">Generate an animation</button></a></td>
+                <td><button type="button" onclick="removeAnimation()">Remove animation</button></td>
+            </tr>
         </table>
 
         <!--Where the table and plot goes-->
@@ -209,6 +213,7 @@
         <div id='timePlot'></div>
         <div id='errorPlot'></div>
         <div id='phasePlot'></div>
+        <div id='animation'></div>
         <style>
             h1 {
                 font-size: 30px;

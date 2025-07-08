@@ -251,3 +251,120 @@ function generatePlots(objectOfInputs) {
         generateErrorPlot(solution);
     }
 };
+
+function generatePendulumCoords(l, th) {
+    var N = th.length;
+    var x = new Array(N);
+    var y = new Array(N);
+    for (let i = 0; i < N; i++) {
+        x[i] = l*Math.cos(th[i]);
+        y[i] = l*Math.sin(th[i]);
+    }
+    return [x, y];
+}
+
+function animatePendulum(objectOfInputs, solution) {
+  const t = solution.t;
+  const th = solution.theta;
+  var [x, y] = generatePendulumCoords(objectOfInputs.l, th);
+  var xmin = Math.min(...x);
+  var ymin = Math.min(...y);
+  var xmax = Math.max(...x);
+  var ymax = Math.max(...y);
+  
+  const trace1 = {
+    x: [], y: [],
+    mode: "lines+markers",
+    marker: { size: 8 },
+    line: { color: "blue" },
+    name: "Rod 1"
+  };
+  const trace2 = {
+    x: [], y: [],
+    mode: "lines+markers",
+    marker: { size: 8 },
+    line: { color: "red" },
+    name: "Rod 2"
+  };
+  const data = [trace1, trace2];
+  const padding = 1;
+  const totalLen = objectOfInputs.l;
+    if (isFinite(xmin)) {
+    xmin = xmin - padding;
+  } else {
+    xmin = -totalLen - padding;
+  }
+  if (isFinite(xmax)) {
+    xmax = xmax + padding;
+  } else {
+    xmax = totalLen + padding;
+  }
+
+  if (isFinite(ymin)) {
+    ymin = ymin - padding;
+  } else {
+    ymin = -totalLen - padding;
+  }
+
+  if (isFinite(ymax)) {
+    ymax = ymax + padding;
+  } else {
+    ymax = totalLen + padding;
+  }
+  const layout = {
+    title: "Simple pendulum",
+    xaxis: { range: [xmin-padding, xmax+padding], title: "x" },
+    yaxis: { range: [ymin-padding, ymax+padding], title: "y", scaleanchor: "x" },
+    showlegend: false,
+    annotations: [{
+    x: 0,
+    y: 1.1,  // slightly above plot
+    xref: 'paper',
+    yref: 'paper',
+    text: 'Time: 0.00 s',
+    showarrow: false,
+    font: { size: 16 }
+  }]
+  };
+  Plotly.newPlot("animation", data, layout);
+
+  let startTime = null;
+  let frame = 0;
+  let cycle;
+  function animateFrame(timestamp) {
+    if (frame == t.length - 1 || !startTime) {
+        frame = 0;
+        startTime = timestamp; 
+    }
+
+    const elapsedSec = (timestamp - startTime) / 1000;
+
+    // Advance to the frame corresponding to elapsed time
+    while (frame < t.length -1 && t[frame] < elapsedSec) {
+      frame++;
+    }
+    if (frame >= t.length) {
+        frame = t.length - 1;
+        cycle++;
+    }
+
+    Plotly.animate("animation", {
+      data: [
+        { x: [0, x[frame]], y: [0, y[frame]] }
+      ]
+    }, {
+      transition: { duration: 0 },
+      frame: { duration: 0, redraw: true }
+    });
+    layout.annotations[0].text = `Time: ${t[frame].toFixed(2)} s`;
+    Plotly.relayout('animation', layout);
+
+    requestAnimationFrame(animateFrame);
+  }
+
+  requestAnimationFrame(animateFrame);
+}
+
+function removeAnimation() {
+    rmPlot("animation");
+}
