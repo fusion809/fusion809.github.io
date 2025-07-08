@@ -300,7 +300,7 @@ function generatePendulumPlots(solution) {
         type: 'scatter',
         mode: 'lines',
         opacity: 1,
-        name: "Pendulum 1 bob position"
+        name: "Pendulum 1 bob"
     }
     var plotPen2 = {
         x: x2,
@@ -308,7 +308,7 @@ function generatePendulumPlots(solution) {
         type: 'scatter',
         mode: 'lines',
         opacity: 1,
-        name: "Pendulum 2 bob position"
+        name: "Pendulum 2 bob"
     }
     var dataPen = [plotPen1, plotPen2];
     var layoutPen = {
@@ -328,7 +328,7 @@ function generatePendulumPlots(solution) {
             width: 6,
             reversescale: false
         },
-        name: "Pendulum 1 bob position against time"
+        name: "Pendulum 1 bob"
     };
     var plotPen2Time = {
         x: t,
@@ -341,7 +341,7 @@ function generatePendulumPlots(solution) {
             width: 6,
             reversescale: false
         },
-        name: 'Pendulum 2 bob position against time'
+        name: 'Pendulum 2 bob'
     };
     var dataPen = [plotPen1Time, plotPen2Time];
     var layoutPenTime = {
@@ -443,7 +443,7 @@ function animatePendulum(solution) {
 
   
   const layout = {
-    title: "Double Elastic Pendulum",
+    title: "Double elastic pendulum",
     xaxis: { range: [xmin-padding, xmax+padding], title: "x" },
     yaxis: { range: [ymin-padding, ymax+padding], title: "y", scaleanchor: "x" },
     showlegend: false,

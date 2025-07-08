@@ -202,7 +202,7 @@ function generatePendulumPlots(objectOfInputs, solution) {
         type: 'scatter',
         mode: 'lines',
         opacity: 1,
-        name: "Pendulum 1 bob position"
+        name: "Pendulum 1 bob"
     }
     var plotPen2 = {
         x: x2,
@@ -210,7 +210,7 @@ function generatePendulumPlots(objectOfInputs, solution) {
         type: 'scatter',
         mode: 'lines',
         opacity: 1,
-        name: "Pendulum 2 bob position"
+        name: "Pendulum 2 bob"
     }
     var dataPen = [plotPen1, plotPen2];
     var layoutPen = {
@@ -230,7 +230,7 @@ function generatePendulumPlots(objectOfInputs, solution) {
             width: 6,
             reversescale: false
         },
-        name: "Pendulum 1 bob position against time"
+        name: "Pendulum 1 bob"
     };
     var plotPen2Time = {
         x: t,
@@ -243,7 +243,7 @@ function generatePendulumPlots(objectOfInputs, solution) {
             width: 6,
             reversescale: false
         },
-        name: 'Pendulum 2 bob position against time'
+        name: 'Pendulum 2 bob'
     };
     var dataPen = [plotPen1Time, plotPen2Time];
     var layoutPenTime = {
