@@ -171,31 +171,31 @@
         <!--Buttons-->
         <table id="buttontable">
             <tr>
-                <td><button type="button" onclick="fillTable(readInputs(), ['S', 'E', 'I', 'R'])">Tabulate the solution</button></td>
+                <td><a href="#tableOutputs"><button type="button" onclick="fillTable(readInputs(), ['S', 'E', 'I', 'R'])">Tabulate the solution</button></a></td>
                 <td><button type="button" onclick="removeTable()">Remove the solution table</button></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generate3DPhasePlot(solveProblem(RKF45, readInputs()))">Generate SIR phase plot</button></td>
+                <td><a href="phasePlotXYZ"><button type="button" onclick="generate3DPhasePlot(solveProblem(RKF45, readInputs()))">Generate SIR phase plot</button></a></td>
                 <td><button type="button" onclick="remove3DPhasePlot()">Remove plot</button><br/></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generateXYPhasePlot(solveProblem(RKF45, readInputs()))">Generate SI phase plot</button></td>
+                <td><a href="#phasePlotXY"><button type="button" onclick="generateXYPhasePlot(solveProblem(RKF45, readInputs()))">Generate SI phase plot</button></a></td>
                 <td><button type="button" onclick="removeXYPhasePlot()">Remove plot</button><br/></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generateXZPhasePlot(solveProblem(RKF45, readInputs()))">Generate SR phase plot</button></td>
+                <td><a href="#phasePlotXZ"><button type="button" onclick="generateXZPhasePlot(solveProblem(RKF45, readInputs()))">Generate SR phase plot</button></a></td>
                 <td><button type="button" onclick="removeXZPhasePlot()">Remove plot</button></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generateYZPhasePlot(solveProblem(RKF45, readInputs()))">Generate IR phase plot</button></td>
+                <td><a href="#phasePlotYZ"><button type="button" onclick="generateYZPhasePlot(solveProblem(RKF45, readInputs()))">Generate IR phase plot</button></a></td>
                 <td><button type="button" onclick="removeYZPhasePlot()">Remove plot</button></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generateTimePlot(solveProblem(RKF45, readInputs()))">Generate S, E, I and R against time plot</button></td>
+                <td><a href="#timePlot"><button type="button" onclick="generateTimePlot(solveProblem(RKF45, readInputs()))">Generate S, E, I and R against time plot</button></a></td>
                 <td><button type="button" onclick="removeTimePlot()">Remove plot</button></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generatePlots(readInputs())">Generate all solution plots</button></td>
+                <td><a href="#phasePlotXYZ"><button type="button" onclick="generatePlots(readInputs())">Generate all solution plots</button></a></td>
                 <td><button type="button" onclick="removePlots()">Remove all plots</button></td>
             </tr>
         </table>

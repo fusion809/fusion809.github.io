@@ -176,19 +176,19 @@
         <!--Buttons-->
         <table id="buttontable">
             <tr>
-                <td><button type="button" onclick="fillTableSP(readInputs())">Tabulate the solution</button></td>
+                <td><a href="#tableOutputs"><button type="button" onclick="fillTableSP(readInputs())">Tabulate the solution</button></a></td>
                 <td><button type="button" onclick="removeTable()">Remove the solution table</button></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generatePhasePlot(solveProblemSP(readInputs()))">Generate phase plot</button></td>
+                <td><a href="#phasePlot"><button type="button" onclick="generatePhasePlot(solveProblemSP(readInputs()))">Generate phase plot</button></a></td>
                 <td><button type="button" onclick="removePhasePlot()">Remove plot</button></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generateTimePlot(solveProblemSP(readInputs()))">Generate time plot</button></td>
+                <td><a href="#timePlot"><button type="button" onclick="generateTimePlot(solveProblemSP(readInputs()))">Generate time plot</button></a></td>
                 <td><button type="button" onclick="removeTimePlot()">Remove plot</button></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generatePlots(readInputs())">Generate all solution plots</button></td>
+                <td><a href="#phasePlot"><button type="button" onclick="generatePlots(readInputs())">Generate all solution plots</button></a></td>
                 <td><button type="button" onclick="removePlots()">Remove all solution plots</button></td>
             </tr>
         </table>

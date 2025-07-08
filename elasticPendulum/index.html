@@ -150,27 +150,27 @@
         <!--Buttons-->
         <table id="buttontable">
             <tr>
-                <td><button type="button" onclick="fillTable(readInputs(), ['x', 'x dot', '&theta;', '&theta; dot'])">Tabulate the solution</button></td>
+                <td><a href="#tableOutputs"><button type="button" onclick="fillTable(readInputs(), ['x', 'x dot', '&theta;', '&theta; dot'])">Tabulate the solution</button></a></td>
                 <td><button type="button" onclick="removeTable()">Remove the solution table</button></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generateXThetaPhasePlot(solveProblem(RKF45, readInputs()))">Generate \(\theta\) against \(x\) phase plot</button></td>
+                <td><a href="#phasePlotXTheta"><button type="button" onclick="generateXThetaPhasePlot(solveProblem(RKF45, readInputs()))">Generate \(\theta\) against \(x\) phase plot</button></a></td>
                 <td><button type="button" onclick="removeXThetaPhasePlot()">Remove plot</button><br/></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generateXXDotPhasePlot(solveProblem(RKF45, readInputs()))">Generate \(\dot{x}\) against \(x\) phase plot</button></td>
+                <td><a href="#phasePlotXXDot"><button type="button" onclick="generateXXDotPhasePlot(solveProblem(RKF45, readInputs()))">Generate \(\dot{x}\) against \(x\) phase plot</button></a></td>
                 <td><button type="button" onclick="removeXXDotPhasePlot()">Remove plot</button><br/></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generateThetaThetaDotPhasePlot(solveProblem(RKF45, readInputs()))">Generate \(\dot{\theta}\) against \(\theta\) phase plot</button></td>
+                <td><a href="#phaseThetaThetaDot"><button type="button" onclick="generateThetaThetaDotPhasePlot(solveProblem(RKF45, readInputs()))">Generate \(\dot{\theta}\) against \(\theta\) phase plot</button></a></td>
                 <td><button type="button" onclick="removeThetaThetaDotPhasePlot()">Remove plot</button></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generateTimePlot(solveProblem(RKF45, readInputs()))">Generate \(x\), \(\dot{x}\), \(\theta\) and \(\dot{\theta}\) against time plot</button></td>
+                <td><a href="#timePlot"><button type="button" onclick="generateTimePlot(solveProblem(RKF45, readInputs()))">Generate \(x\), \(\dot{x}\), \(\theta\) and \(\dot{\theta}\) against time plot</button></a></td>
                 <td><button type="button" onclick="removeTimePlot()">Remove plot</button></td>
             </tr>
             <tr>
-                <td><button type="button" onclick="generatePlots(readInputs())">Generate all solution plots</button></td>
+                <td><a href="#phasePlotXXDot"><button type="button" onclick="generatePlots(readInputs())">Generate all solution plots</button></a></td>
                 <td><button type="button" onclick="removePlots()">Remove all plots</button></td>
             </tr>
         </table>
