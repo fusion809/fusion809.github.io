@@ -108,6 +108,12 @@ function generatePlots(objectOfInputs) {
     generateTimePlot(solution);
 }
 
+/**
+ * Generate pendulum Cartesian coordinates.
+ * @param objectOfInputs An object that contains all parameters and initial conditions.
+ * @param solution       [x, y]
+ * @returns 
+ */
 function generatePendulumCoords(objectOfInputs, solution) {
     var vars = solution.vars;
     var r = vars[0].map(item => item + objectOfInputs.l0);
@@ -122,11 +128,19 @@ function generatePendulumCoords(objectOfInputs, solution) {
     return [x, y];
 }
 
+/**
+ * Remove animation
+ * @return nothing. 
+ */
 function removeAnimation() {
     rmPlot("animation");
 }
 
-function animSim() {
+/**
+ * Generate animation
+ * @return nothing.
+ */
+function generateAnimation() {
     var objectOfInputs = readInputs();
     var solution = solveProblem(RKF45, objectOfInputs);
     animatePendulum(objectOfInputs, solution, "Elastic pendulum");

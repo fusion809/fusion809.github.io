@@ -71,7 +71,19 @@ function generatePlots(objectOfInputs) {
     generatePhasePlot(solution);
 }
 
-function animSim() {
+/**
+ * Generate animation
+ * @return nothing
+ */
+function generateAnimation() {
     var solution = solveProblem(RKF45, readInputs());
     animate2D(solution, ["x", "dx/dt"]);
+}
+
+/**
+ * Remove animation
+ * @return nothing
+ */
+function removeAnimation() {
+  rmPlots("animation");
 }

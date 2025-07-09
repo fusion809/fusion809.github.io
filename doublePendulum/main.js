@@ -273,45 +273,59 @@ function generatePlots(objectOfInputs) {
     generateTimePlot(solution);
 }
 
-function func2Vecs(f, vec1, vec2) {
-    var val;
-    try {
-        val = f(...vec1.map((v,i) => f(v, vec2[i])));
-    } catch (e) {
-        if (e instanceof RangeError) {
-            val = vec1.concat(vec2).reduce((a, b) => f(a, b), Infinity);
-        } else {
-            throw e; // rethrow if it's not the expected error
-        }
-    }
-    return val;
-}
-
+/**
+ * Remove animation
+ * @return nothing
+ */
 function removeAnimation() {
     rmPlot("animation");
 }
 
+/**
+ * Remove Theta1 Dtheta1 phase plot
+ * @return nothing
+ */
 function removeTheta1Dtheta1PhasePlot() {
   rmPlot("phasePlotTheta1Dtheta1");
 }
 
+/**
+ * Remove Theta1 Dtheta2 phase plot
+ * @return nothing
+ */
 function removeTheta1Dtheta2PhasePlot() {
   rmPlot("phasePlotTheta1Dtheta2");
 }
 
+/**
+ * Remove Theta2 Dtheta1 phase plot
+ * @return nothing
+ */
 function removeTheta2Dtheta1PhasePlot() {
   rmPlot("phasePlotTheta2Dtheta1");
 }
 
+/**
+ * Remove Theta2 Dtheta2 phase plot
+ * @return nothing
+ */
 function removeTheta2Dtheta2PhasePlot() {
   rmPlot("phasePlotTheta2Dtheta2");
 }
 
+/**
+ * Remove Dtheta1 Dtheta2 phase plot
+ * @return nothing
+ */
 function removeDtheta1Dtheta2PhasePlot() {
   rmPlot("phasePlotDtheta1Dtheta2");
 }
 
-function animSim() {
+/**
+ * Generate animation
+ * @return nothing
+ */
+function generateAnimation() {
   var objectOfInputs = readInputs();
   var solution = solveProblem(RKF45, objectOfInputs);
   animatePendulum(objectOfInputs, solution, "Double pendulum");

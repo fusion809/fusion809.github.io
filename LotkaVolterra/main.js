@@ -74,11 +74,19 @@ function generatePlots(objectOfInputs) {
     generateTimePlot(solution);
 }
 
+/**
+ * Remove animation
+ * @return nothing.
+ */
 function removeAnimation() {
     rmPlot("animation");
 }
 
-function animSim() {
+/**
+ * Generate animation
+ * @return nothing.
+ */
+function generateAnimation() {
     var solution = solveProblem(RKF45, readInputs());
     animate2D(solution);
 }

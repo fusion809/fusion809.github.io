@@ -236,7 +236,7 @@ function fillTableSP(objectOfInputs) {
  * - one of thetaDot and theta against t;
  * - a phase plot of thetaDot against theta.
  * 
- * @param objectOfInputs  An object that contains all the problem parameters.
+ * @param objectOfInputs An object that contains all the problem parameters.
  * @return               Nothing. Just generates the plots.
  */
 function generatePlots(objectOfInputs) {
@@ -252,6 +252,13 @@ function generatePlots(objectOfInputs) {
     }
 };
 
+/**
+ * Generate x and y coordinates of pendulum.
+ * @param objectOfInputs An object that contains all the problem parameters.
+ * @param solution       solution object; solution.t is a vector of time
+ *                       values, solution.vars contains theta and theta dot. 
+ * @returns              [x, y] coordinates.
+ */
 function generatePendulumCoords(objectOfInputs, solution) {
     var theta = solution.theta;
     var l = objectOfInputs.l;
@@ -265,11 +272,19 @@ function generatePendulumCoords(objectOfInputs, solution) {
     return [x, y];
 }
 
+/**
+ * Removes animation.
+ * @returns nothing, just removes the animation.
+ */
 function removeAnimation() {
     rmPlot("animation");
 }
 
-function animSim() {
+/**
+ * Generates animation.
+ * @return nothing. 
+ */
+function generateAnimation() {
     var objectOfInputs = readInputs();
     var solution = solveProblemSP(objectOfInputs);
     animatePendulum(objectOfInputs, solution, "Simple pendulum");
