@@ -379,6 +379,7 @@ function removeAnimation() {
 }
 
 function animSim() {
-    var solution = solveProblemSP(readInputs());
-    animatePendulum(solution);
+    var objectOfInputs = readInputs();
+    var solution = solveProblemSP(objectOfInputs);
+    animatePendulum(objectOfInputs, solution);
 }
