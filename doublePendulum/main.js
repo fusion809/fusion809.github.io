@@ -440,5 +440,5 @@ function removeDtheta1Dtheta2PhasePlot() {
 
 function animSim() {
     var solution = solveProblem(RKF45, readInputs());
-    animate(solution);
+    animatePendulum(solution);
 }

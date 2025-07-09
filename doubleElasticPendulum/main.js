@@ -524,7 +524,7 @@ let paused = false;
 
 function animSim() {
     var solution = solveProblem(RKF45, readInputs());
-    animate(solution);
+    animatePendulum(solution);
 }
 
 function removeAnimation() {
