@@ -121,3 +121,141 @@ function generatePlots(objectOfInputs) {
     generateYZPhasePlot(solution);
     generateTimePlot(solution);
 }
+
+function animate(solution) {
+  const x = solution.vars[0];
+  const y = solution.vars[1];
+  const z = solution.vars[2];
+  const t = solution.t;
+
+  const tracePath = {
+    x: x,
+    y: y,
+    z: z,
+    mode: 'lines',
+    type: 'scatter3d',
+    line: { color: 'blue', width: 4 },
+    name: 'Path',
+  };
+
+  const traceMarker = {
+    x: [x[0]],
+    y: [y[0]],
+    z: [z[0]],
+    mode: 'markers',
+    type: 'scatter3d',
+    marker: { color: 'red', size: 5 },
+    name: 'Object'
+  };
+
+  const layout = {
+    margin: { l: 0, r: 0, b: 0, t: 0 },
+    scene: {
+      xaxis: { title: 'X' },
+      yaxis: { title: 'Y' },
+      zaxis: { title: 'Z' }
+    },
+    annotations: [{
+      text: `Time: 0.00 s`,
+      xref: 'paper',
+      yref: 'paper',
+      x: 0.05,
+      y: 0.95,
+      showarrow: false,
+      font: { size: 16 }
+    }],
+    showlegend: true
+  };
+
+  Plotly.newPlot('animation', [tracePath, traceMarker], layout).then(() => {
+    let frame = 0;
+    let startTime = null;
+    let paused = false;
+    let pauseStart = 0;
+    let totalPausedTime = 0;
+
+    const button = document.getElementById("toggleButton");
+    button.addEventListener("click", () => {
+      paused = !paused;
+      button.textContent = paused ? "Play" : "Pause";
+      if (paused) {
+        pauseStart = Date.now();
+      } else {
+        totalPausedTime += Date.now() - pauseStart;
+        if (!paused) requestAnimationFrame(animateFrame);
+      }
+    });
+
+    let cycle = 0;
+    function animateFrame(timestamp) {
+      if (frame == t.length - 1 || !startTime) {
+        frame = 0;
+        startTime = timestamp; 
+      }
+      if (paused) return;
+
+      const elapsedSec = (timestamp - startTime - totalPausedTime) / 1000;
+
+      while (frame < t.length - 1 && t[frame] < elapsedSec) {
+        frame++;
+      }
+      if (frame >= t.length) {
+        frame = t.length - 1;
+        cycle++;
+      }
+      Plotly.animate('animation', {
+        data: [
+          tracePath,
+          {
+            x: [x[frame]],
+            y: [y[frame]],
+            z: [z[frame]],
+            mode: 'markers',
+            type: 'scatter3d',
+            marker: { color: 'red', size: 5 },
+            name: 'Object'
+          }
+        ],
+        layout: {
+          annotations: [{
+            text: `Time: ${t[frame].toFixed(2)} s`,
+            xref: 'paper',
+            yref: 'paper',
+            x: 0.05,
+            y: 0.95,
+            showarrow: false,
+            font: { size: 16 }
+          }],
+          scene: {
+            xaxis: { title: 'X' },
+            yaxis: { title: 'Y' },
+            zaxis: { title: 'Z' },
+            camera: {
+                eye: {
+                x: 2,   // Set to 0 to align the camera with the YZ plane
+                y: 0,
+                z: 0
+                }
+            }
+        }
+        }
+      }, {
+        transition: { duration: 0 },
+        frame: { duration: 0, redraw: true }
+      });
+
+      requestAnimationFrame(animateFrame);
+    }
+
+    requestAnimationFrame(animateFrame);
+  });
+}
+
+function removeAnimation() {
+    rmPlot("animation");
+}
+
+function animSim() {
+    var solution = solveProblem(RKF45, readInputs());
+    animate(solution);
+}

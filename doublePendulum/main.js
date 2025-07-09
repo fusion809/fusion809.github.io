@@ -336,8 +336,8 @@ function animatePendulum(objectOfInputs, solution) {
   }
   const layout = {
     title: "Double Pendulum",
-    xaxis: { range: [xmin-padding, xmax+padding], title: "x" },
-    yaxis: { range: [ymin-padding, ymax+padding], title: "y", scaleanchor: "x" },
+    xaxis: { range: [xmin, xmax], title: "x" },
+    yaxis: { range: [ymin, ymax], title: "y", scaleanchor: "x" },
     showlegend: false,
     annotations: [{
     x: 0,
@@ -349,18 +349,35 @@ function animatePendulum(objectOfInputs, solution) {
     font: { size: 16 }
   }]
   };
-  Plotly.newPlot("animation", data, layout);
+  Plotly.newPlot("animation", data, layout).then(() => {
 
   let startTime = null;
   let frame = 0;
-  let cycle;
-  function animateFrame(timestamp) {
-    if (frame == t.length - 1 || !startTime) {
+let paused = false;
+    let pauseStart = 0;
+    let totalPausedTime = 0;
+
+    const button = document.getElementById("toggleButton");
+    button.addEventListener("click", () => {
+      paused = !paused;
+      button.textContent = paused ? "Play" : "Pause";
+      if (paused) {
+        pauseStart = Date.now();
+      } else {
+        totalPausedTime += Date.now() - pauseStart;
+        if (!paused) requestAnimationFrame(animateFrame);
+      }
+    });
+
+    let cycle = 0;
+    function animateFrame(timestamp) {
+      if (frame == t.length - 1 || !startTime) {
         frame = 0;
         startTime = timestamp; 
-    }
+      }
+      if (paused) return;
 
-    const elapsedSec = (timestamp - startTime) / 1000;
+      const elapsedSec = (timestamp - startTime - totalPausedTime) / 1000;
 
     // Advance to the frame corresponding to elapsed time
     while (frame < t.length -1 && t[frame] < elapsedSec) {
@@ -394,6 +411,7 @@ function animatePendulum(objectOfInputs, solution) {
   }
 
   requestAnimationFrame(animateFrame);
+});
 }
 
 function removeAnimation() {
@@ -418,4 +436,9 @@ function removeTheta2Dtheta2PhasePlot() {
 
 function removeDtheta1Dtheta2PhasePlot() {
   rmPlot("phasePlotDtheta1Dtheta2");
+}
+
+function animSim() {
+    var solution = solveProblem(RKF45, readInputs());
+    animate(solution);
 }

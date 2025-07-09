@@ -332,7 +332,7 @@
                 <td><button type="button" onclick="rmPlots()">Remove all plots</button></td>
             </tr>
             <tr>
-                <td><a href="#animation"><button type="button" onclick="animatePendulum(solveProblem(RKF45, readInputs()))">Generate an animation</button></a></td>
+                <td><a href="#animation"><button type="button" onclick="animSim()">Generate an animation</button></a></td>
                 <td><button type="button" onclick="removeAnimation()">Remove animation</button></td>
             </tr>
         </table>
@@ -357,6 +357,7 @@
         <div id='Dtheta2TPlot'></div>
         <div id='Dtheta2Theta2Plot'></div>
         <div id='phasePlotTheta1Theta2'></div>
+        <button id="toggleButton">Pause</button>
         <div id="animation"></div>
         <style>
             h1 {

@@ -192,7 +192,7 @@
                 <td><button type="button" onclick="removePlots()">Remove all solution plots</button></td>
             </tr>
             <tr>
-                <td><a href="#animation"><button type="button" onclick="animatePendulum(readInputs(), solveProblemSP(readInputs()))">Generate an animation</button></a></td>
+                <td><a href="#animation"><button type="button" onclick="animSim()">Generate an animation</button></a></td>
                 <td><button type="button" onclick="removeAnimation()">Remove animation</button></td>
             </tr>
         </table>
@@ -202,6 +202,7 @@
         </table>
         <div id='timePlot'></div>
         <div id='phasePlot'></div>
+        <button id="toggleButton">Pause</button>
         <div id="animation"></div>
         <style>
             h1 {

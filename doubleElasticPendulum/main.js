@@ -444,8 +444,8 @@ function animatePendulum(solution) {
   
   const layout = {
     title: "Double elastic pendulum",
-    xaxis: { range: [xmin-padding, xmax+padding], title: "x" },
-    yaxis: { range: [ymin-padding, ymax+padding], title: "y", scaleanchor: "x" },
+    xaxis: { range: [xmin, xmax], title: "x" },
+    yaxis: { range: [ymin, ymax], title: "y", scaleanchor: "x" },
     showlegend: false,
     annotations: [{
     x: 0,
@@ -457,18 +457,36 @@ function animatePendulum(solution) {
     font: { size: 16 }
   }]
   };
-  Plotly.newPlot("animation", data, layout);
+  Plotly.newPlot("animation", data, layout).then(() => {
 
   let startTime = null;
   let frame = 0;
-  let cycle = 0;
+let paused = false;
+    let pauseStart = 0;
+    let totalPausedTime = 0;
 
-  function animateFrame(timestamp) {
-    if (frame == t.length - 1 || !startTime) {
+    const button = document.getElementById("toggleButton");
+    button.addEventListener("click", () => {
+      paused = !paused;
+      button.textContent = paused ? "Play" : "Pause";
+      if (paused) {
+        pauseStart = Date.now();
+      } else {
+        totalPausedTime += Date.now() - pauseStart;
+        if (!paused) requestAnimationFrame(animateFrame);
+      }
+    });
+
+    let cycle = 0;
+    function animateFrame(timestamp) {
+      if (frame == t.length - 1 || !startTime) {
         frame = 0;
         startTime = timestamp; 
-    }
-    const elapsedSec = (timestamp - startTime) / 1000;
+      }
+      if (paused) return;
+
+      const elapsedSec = (timestamp - startTime - totalPausedTime) / 1000;
+
 
     // Advance to the frame corresponding to elapsed time
     while (frame < t.length -1 && t[frame] < elapsedSec) {
@@ -501,6 +519,12 @@ function animatePendulum(solution) {
   }
 
   requestAnimationFrame(animateFrame);
+});
+}
+
+function animSim() {
+    var solution = solveProblem(RKF45, readInputs());
+    animate(solution);
 }
 
 function removeAnimation() {

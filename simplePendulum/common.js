@@ -277,16 +277,9 @@ function animatePendulum(objectOfInputs, solution) {
     mode: "lines+markers",
     marker: { size: 8 },
     line: { color: "blue" },
-    name: "Rod 1"
+    name: "Rod"
   };
-  const trace2 = {
-    x: [], y: [],
-    mode: "lines+markers",
-    marker: { size: 8 },
-    line: { color: "red" },
-    name: "Rod 2"
-  };
-  const data = [trace1, trace2];
+  const data = [trace1];
   const padding = 1;
   const totalLen = objectOfInputs.l;
     if (isFinite(xmin)) {
@@ -313,8 +306,8 @@ function animatePendulum(objectOfInputs, solution) {
   }
   const layout = {
     title: "Simple pendulum",
-    xaxis: { range: [xmin-padding, xmax+padding], title: "x" },
-    yaxis: { range: [ymin-padding, ymax+padding], title: "y", scaleanchor: "x" },
+    xaxis: { range: [xmin, xmax], title: "x" },
+    yaxis: { range: [ymin, ymax], title: "y", scaleanchor: "x" },
     showlegend: false,
     annotations: [{
     x: 0,
@@ -326,27 +319,42 @@ function animatePendulum(objectOfInputs, solution) {
     font: { size: 16 }
   }]
   };
-  Plotly.newPlot("animation", data, layout);
+  Plotly.newPlot("animation", data, layout).then(() => {
+let frame = 0;
+    let startTime = null;
+    let paused = false;
+    let pauseStart = 0;
+    let totalPausedTime = 0;
 
-  let startTime = null;
-  let frame = 0;
-  let cycle;
-  function animateFrame(timestamp) {
-    if (frame == t.length - 1 || !startTime) {
+    const button = document.getElementById("toggleButton");
+    button.addEventListener("click", () => {
+      paused = !paused;
+      button.textContent = paused ? "Play" : "Pause";
+      if (paused) {
+        pauseStart = Date.now();
+      } else {
+        totalPausedTime += Date.now() - pauseStart;
+        if (!paused) requestAnimationFrame(animateFrame);
+      }
+    });
+
+    let cycle = 0;
+    function animateFrame(timestamp) {
+      if (frame == t.length - 1 || !startTime) {
         frame = 0;
         startTime = timestamp; 
-    }
+      }
+      if (paused) return;
 
-    const elapsedSec = (timestamp - startTime) / 1000;
+      const elapsedSec = (timestamp - startTime - totalPausedTime) / 1000;
 
-    // Advance to the frame corresponding to elapsed time
-    while (frame < t.length -1 && t[frame] < elapsedSec) {
-      frame++;
-    }
-    if (frame >= t.length) {
+      while (frame < t.length - 1 && t[frame] < elapsedSec) {
+        frame++;
+      }
+      if (frame >= t.length) {
         frame = t.length - 1;
         cycle++;
-    }
+      }
 
     Plotly.animate("animation", {
       data: [
@@ -363,8 +371,14 @@ function animatePendulum(objectOfInputs, solution) {
   }
 
   requestAnimationFrame(animateFrame);
+});
 }
 
 function removeAnimation() {
     rmPlot("animation");
+}
+
+function animSim() {
+    var solution = solveProblemSP(readInputs());
+    animate(solution);
 }
