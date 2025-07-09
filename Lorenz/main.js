@@ -136,5 +136,5 @@ function removeAnimation() {
  */
 function generateAnimation() {
     var solution = solveProblem(RKF45, readInputs());
-    animate3D(solution, ["x", "y", "z"], [0, 1, 2], "animation", "toggleButton");
+    animate3D(solution, [2, 0, 0], ["x", "y", "z"], [0, 1, 2]);
 }

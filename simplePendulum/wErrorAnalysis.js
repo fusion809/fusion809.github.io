@@ -30,15 +30,15 @@ function approximatorRKF45(g, l, theta0, thetaDot0, dt, t, theta, thetaDot, i) {
 
     // 4th order approx
     var theta1 = theta[i] + 25*k1/216+1408*k3/2565+2197*k4/4104-k5/5;
-    var thetaDot1 = thetaDot[i] + 25*l1/216+1408*l3/2565+2197*l4/4104-l5/5;
+    var thetaDoDeltat = thetaDot[i] + 25*l1/216+1408*l3/2565+2197*l4/4104-l5/5;
     // theta2 and thetaDot2 are our fifth order approximations
     var theta2 = theta[i] + 16*k1/135+6656*k3/12825+28561*k4/56430-9*k5/50+2*k6/55;
     var thetaDot2 = thetaDot[i] + 16*l1/135+6656*l3/12825+28561*l4/56430-9*l5/50+2*l6/55;
 
     // Error calculation
-    var errorThetaDot1 = Math.abs(thetaDot1 - Math.sign(thetaDot1)*Math.sqrt(Math.abs(thetaDotSq(g, l, theta0, thetaDot0, theta1))));
+    var errorThetaDoDeltat = Math.abs(thetaDoDeltat - Math.sign(thetaDoDeltat)*Math.sqrt(Math.abs(thetaDotSq(g, l, theta0, thetaDot0, theta1))));
 
-    return [theta1, thetaDot1, theta2, thetaDot2, errorThetaDot1];
+    return [theta1, thetaDoDeltat, theta2, thetaDot2, errorThetaDoDeltat];
 }
 
 /**
@@ -48,9 +48,9 @@ function approximatorRKF45(g, l, theta0, thetaDot0, dt, t, theta, thetaDot, i) {
  * 
  * @param theta1           4th order approximation for theta
  * @param theta2           5th order approximation for theta
- * @param thetaDot1        4th order approximation for theta dot
+ * @param thetaDoDeltat        4th order approximation for theta dot
  * @param thetaDot2        5th order approximation for theta dot
- * @param errorThetaDot1   Error in theta dot approximated from theta1.
+ * @param errorThetaDoDeltat   Error in theta dot approximated from theta1.
  * @param epsilon          Error tolerance.
  * @param i                Counter variable value.
  * @param dt               dt value.
@@ -61,9 +61,9 @@ function approximatorRKF45(g, l, theta0, thetaDot0, dt, t, theta, thetaDot, i) {
  * @param logErrorThetaDot Array of the error in theta dot to log10.
  * @return                 i, dt, and updated t, theta and thetaDot arrays.
  */
-function stepSizeChecker(theta1, theta2, thetaDot1, thetaDot2, errorThetaDot1, epsilon, i, dt, t, theta, thetaDot, errorThetaDot, logErrorThetaDot) {
+function stepSizeChecker(theta1, theta2, thetaDoDeltat, thetaDot2, errorThetaDoDeltat, epsilon, i, dt, t, theta, thetaDot, errorThetaDot, logErrorThetaDot) {
     var RTheta = Math.abs(theta1-theta2)/dt;
-    var RThetaDot = Math.abs(thetaDot1-thetaDot2)/dt;
+    var RThetaDot = Math.abs(thetaDoDeltat-thetaDot2)/dt;
     var sTheta = Math.pow(epsilon/(2*RTheta), 1/4);                
     var sThetaDot = Math.pow(epsilon/(2*RThetaDot), 1/4);
     var R = Math.max(RTheta, RThetaDot);
@@ -71,9 +71,9 @@ function stepSizeChecker(theta1, theta2, thetaDot1, thetaDot2, errorThetaDot1, e
     if ( R <= epsilon ) {
         t.push(t[i]+dt);
         theta.push(theta1);
-        thetaDot.push(thetaDot1);
-        errorThetaDot.push(errorThetaDot1);
-        logErrorThetaDot.push(Math.log10(errorThetaDot1));
+        thetaDot.push(thetaDoDeltat);
+        errorThetaDot.push(errorThetaDoDeltat);
+        logErrorThetaDot.push(Math.log10(errorThetaDoDeltat));
         i++;
     }
     dt *= s;
@@ -104,7 +104,7 @@ function RKF45(dtInitial, epsilon, g, l, t0, tf, theta0, thetaDot0) {
     var logErrorThetaDot = [-Infinity];
     var i = 0;
     var dt = dtInitial;
-    var theta1, theta2, thetaDot1, thetaDot2;
+    var theta1, theta2, thetaDoDeltat, thetaDot2;
 
     // Loop over each step until we reach the endpoint
     while ( t[i] < tf ) {
@@ -112,10 +112,10 @@ function RKF45(dtInitial, epsilon, g, l, t0, tf, theta0, thetaDot0) {
         dt = Math.min(dt, tf-t[i]);
     
         // Use approximatorRKF45 to make approximations
-        [theta1, thetaDot1, theta2, thetaDot2, errorThetaDot1] = approximatorRKF45(g, l, theta0, thetaDot0, dt, t, theta, thetaDot, i);
+        [theta1, thetaDoDeltat, theta2, thetaDot2, errorThetaDoDeltat] = approximatorRKF45(g, l, theta0, thetaDot0, dt, t, theta, thetaDot, i);
     
         // The following are used to correct the step size
-        [i, dt, t, theta, thetaDot, errorThetaDot, logErrorThetaDot] = stepSizeChecker(theta1, theta2, thetaDot1, thetaDot2, errorThetaDot1, epsilon, i, dt, t, theta, thetaDot, errorThetaDot, logErrorThetaDot);
+        [i, dt, t, theta, thetaDot, errorThetaDot, logErrorThetaDot] = stepSizeChecker(theta1, theta2, thetaDoDeltat, thetaDot2, errorThetaDoDeltat, epsilon, i, dt, t, theta, thetaDot, errorThetaDot, logErrorThetaDot);
     }
 
     // Create and return a solution object, essentially used in

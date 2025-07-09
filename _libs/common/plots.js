@@ -496,12 +496,12 @@ function genMultPlot(solution, varnames, element, title) {
     Plotly.newPlot(element, dataTimePlot, layoutTimePlot);
 }
 
-function animatePendulum(objectOfInputs, solution, label) {
+function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
   const t = solution.t;
   if (label=="Double pendulum") {
-    var [t1, x1, y1, x2, y2] = generatePendulumCoords(objectOfInputs, solution);
+    var [Deltat, x1, y1, x2, y2] = generatePendulumCoords(objectOfInputs, solution);
   } else if (label == "Double elastic pendulum") {
-    var [t1, x1, y1, x2, y2] = generatePendulumCoords(solution);
+    var [Deltat, x1, y1, x2, y2] = generatePendulumCoords(solution);
   } else if (label == "Simple pendulum" || label == "Single pendulum" || label == "Elastic pendulum") {
     var [x, y] = generatePendulumCoords(objectOfInputs, solution);
   }
@@ -580,7 +580,7 @@ function animatePendulum(objectOfInputs, solution, label) {
     font: { size: 16 }
   }]
   };
-  Plotly.newPlot("animation", data, layout).then(() => {
+  Plotly.newPlot("animation" + IdSuffix, data, layout).then(() => {
 
     let startTime = null;
     let frame = 0;
@@ -588,7 +588,7 @@ function animatePendulum(objectOfInputs, solution, label) {
     let pauseStart = 0;
     let totalPausedTime = 0;
 
-    const pauseButton = document.getElementById("toggleButton");
+    const pauseButton = document.getElementById("toggleButton" + IdSuffix);
     pauseButton.addEventListener("click", () => {
       paused = !paused;
       pauseButton.textContent = paused ? "Play" : "Pause";
@@ -600,19 +600,19 @@ function animatePendulum(objectOfInputs, solution, label) {
       }
     });
 
-    const restartButton = document.getElementById("restartButton");
+    const restartButton = document.getElementById("restartButton" + IdSuffix);
     restartButton.addEventListener("click", () => {
       startTime = null;
     });
-    const addTimeButton = document.getElementById("addTimeButton");
+    const addTimeButton = document.getElementById("addTimeButton" + IdSuffix);
     addTimeButton.addEventListener("click", () => {
       //startTime += objectOfInputs.Time - t[frame];'
-      var t1 = readInputs().t1;
-      if (t[frame] + t1 > t[t.length-1]) {
+      var Deltat = readInputs().Deltat;
+      if (t[frame] + Deltat > t[t.length-1]) {
         startTime = null;
       } else {
-        startTime += t[frame] - t1*1000
-        frame = t.findIndex(x => x >= t[frame] + t1);
+        startTime += t[frame] - Deltat*1000
+        frame = t.findIndex(x => x >= t[frame] + Deltat);
       }
     });
 
@@ -636,7 +636,7 @@ function animatePendulum(objectOfInputs, solution, label) {
         cycle++;
     }
     if (label == "Double elastic pendulum" || label=="Double pendulum") {
-        Plotly.animate("animation", {
+        Plotly.animate("animation" + IdSuffix, {
         data: [
             { x: [0, x1[frame]], y: [0, y1[frame]] },
             { x: [x1[frame], x2[frame]], y: [y1[frame], y2[frame]] }
@@ -646,7 +646,7 @@ function animatePendulum(objectOfInputs, solution, label) {
         frame: { duration: 0, redraw: true }
         });
     } else {
-        Plotly.animate("animation", {
+        Plotly.animate("animation" + IdSuffix, {
             data: [
                 { x: [0, x[frame]], y: [0, y[frame]] }
             ]
@@ -656,7 +656,7 @@ function animatePendulum(objectOfInputs, solution, label) {
         });
     }
     layout.annotations[0].text = `Time: ${t[frame].toFixed(2)} s`;
-    Plotly.relayout('animation', layout);
+    Plotly.relayout('animation' + IdSuffix, layout);
     requestAnimationFrame(animateFrame);
   }
 
@@ -664,7 +664,7 @@ function animatePendulum(objectOfInputs, solution, label) {
 });
 }
 
-function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], elID="animation", toggleButton="toggleButton", restartButtonId="restartButton", nos=[0, 1]) {
+function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], IdSuffix="", nos=[0, 1]) {
   const x = solution.vars[nos[0]];
   const y = solution.vars[nos[1]];
   const t = solution.t;
@@ -716,14 +716,14 @@ function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], elID="animati
     showlegend: true
   };
 
-  Plotly.newPlot(elID, [tracePath, traceMarker], layout).then(() => {
+  Plotly.newPlot("animation" + IdSuffix, [tracePath, traceMarker], layout).then(() => {
     let frame = 0;
     let startTime = null;
     let paused = false;
     let pauseStart = 0;
     let totalPausedTime = 0;
 
-    const button = document.getElementById(toggleButton);
+    const button = document.getElementById("toggleButton" + IdSuffix);
     button.addEventListener("click", () => {
       paused = !paused;
       button.textContent = paused ? "Play" : "Pause";
@@ -735,9 +735,21 @@ function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], elID="animati
       }
     });
 
-    const restartButton = document.getElementById(restartButtonId);
+    const restartButton = document.getElementById("restartButton" + IdSuffix);
     restartButton.addEventListener("click", () => {
       startTime = null;
+    });
+
+    const addTimeButton = document.getElementById("addTimeButton" + IdSuffix);
+    addTimeButton.addEventListener("click", () => {
+      //startTime += objectOfInputs.Time - t[frame];'
+      var Deltat = readInputs().Deltat;
+      if (t[frame] + Deltat > t[t.length-1]) {
+        startTime = null;
+      } else {
+        startTime += t[frame] - Deltat*1000
+        frame = t.findIndex(x => x >= t[frame] + Deltat);
+      }
     });
 
     let cycle = 0;
@@ -757,7 +769,7 @@ function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], elID="animati
         frame = t.length - 1;
         cycle++;
       }
-      Plotly.animate(elID, {
+      Plotly.animate("animation" + IdSuffix, {
         data: [
           tracePath,
           {
@@ -805,7 +817,7 @@ function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], elID="animati
   });
 }
 
-function animate3D(solution, varnames=["x", "y", "z"], nos=[0, 1, 2], elID="animate", toggleButton="toggleButton", restartButtonId="restartButton") {
+function animate3D(solution, view=[0.5, -2, 0.5], varnames=["x", "y", "z"], nos=[0, 1, 2], IdSuffix="") {
   const x = solution.vars[nos[0]];
   const y = solution.vars[nos[1]];
   const z = solution.vars[nos[2]];
@@ -850,14 +862,14 @@ function animate3D(solution, varnames=["x", "y", "z"], nos=[0, 1, 2], elID="anim
     showlegend: true
   };
 
-  Plotly.newPlot(elID, [tracePath, traceMarker], layout).then(() => {
+  Plotly.newPlot("animation" + IdSuffix, [tracePath, traceMarker], layout).then(() => {
     let frame = 0;
     let startTime = null;
     let paused = false;
     let pauseStart = 0;
     let totalPausedTime = 0;
 
-    const button = document.getElementById(toggleButton);
+    const button = document.getElementById("toggleButton" + IdSuffix);
     button.addEventListener("click", () => {
       paused = !paused;
       button.textContent = paused ? "Play" : "Pause";
@@ -869,9 +881,21 @@ function animate3D(solution, varnames=["x", "y", "z"], nos=[0, 1, 2], elID="anim
       }
     });
 
-    const restartButton = document.getElementById(restartButtonId);
+    const restartButton = document.getElementById("restartButton" + IdSuffix);
     restartButton.addEventListener("click", () => {
       startTime = null;
+    });
+
+    const addTimeButton = document.getElementById("addTimeButton" + IdSuffix);
+    addTimeButton.addEventListener("click", () => {
+      //startTime += objectOfInputs.Time - t[frame];'
+      var Deltat = readInputs().Deltat;
+      if (t[frame] + Deltat > t[t.length-1]) {
+        startTime = null;
+      } else {
+        startTime += t[frame] - Deltat*1000
+        frame = t.findIndex(x => x >= t[frame] + Deltat);
+      }
     });
 
     let cycle = 0;
@@ -891,7 +915,7 @@ function animate3D(solution, varnames=["x", "y", "z"], nos=[0, 1, 2], elID="anim
         frame = t.length - 1;
         cycle++;
       }
-      Plotly.animate(elID, {
+      Plotly.animate("animation" + IdSuffix, {
         data: [
           tracePath,
           {
@@ -913,7 +937,19 @@ function animate3D(solution, varnames=["x", "y", "z"], nos=[0, 1, 2], elID="anim
             y: 0.95,
             showarrow: false,
             font: { size: 16 }
-          }]
+          }],
+          scene: {
+            xaxis: { title: 'X' },
+            yaxis: { title: 'Y' },
+            zaxis: { title: 'Z' },
+            camera: {
+                eye: {
+                x: view[0],   // Set to 0 to align the camera with the YZ plane
+                y: view[1],
+                z: view[2]
+                }
+            }
+        }
         }
       }, {
         transition: { duration: 0 },

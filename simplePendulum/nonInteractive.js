@@ -83,7 +83,7 @@ for (let j = 0; j < theta.length; j++) {
 document.write("</table>");
 
 // Create our plot using Plotly
-var plot1 = {
+var ploDeltat = {
     x: t,
     y: theta,
     type: 'scatter',
@@ -97,14 +97,14 @@ var plot2 = {
     name: "dtheta"
 };
 
-var layout1 = {
+var layouDeltat = {
     title: 'dtheta and theta against time plots',
     xaxis: {
         title: 'Time'
     }
 }
 
-data1 = [plot1, plot2];
+data1 = [ploDeltat, plot2];
 
 var plot3 = {
     x: theta,
@@ -126,6 +126,6 @@ var layout2 = {
 data2 = [plot3];
 
 document.write("<div id='myDiv' style='width:1000px; height:700px;'></div>");
-Plotly.newPlot('myDiv', data1, layout1);
+Plotly.newPlot('myDiv', data1, layouDeltat);
 document.write("<div id='phasePlot' style='width:1000px; height:700px;'></div>");
 Plotly.newPlot('phasePlot', data2, layout2);
