@@ -502,7 +502,7 @@ function animatePendulum(objectOfInputs, solution, label) {
     var [t1, x1, y1, x2, y2] = generatePendulumCoords(objectOfInputs, solution);
   } else if (label == "Double elastic pendulum") {
     var [t1, x1, y1, x2, y2] = generatePendulumCoords(solution);
-  } else if (label == "Simple pendulum" || label == "Elastic pendulum") {
+  } else if (label == "Simple pendulum" || label == "Single pendulum" || label == "Elastic pendulum") {
     var [x, y] = generatePendulumCoords(objectOfInputs, solution);
   }
   const padding = 1;
@@ -603,6 +603,12 @@ function animatePendulum(objectOfInputs, solution, label) {
     const restartButton = document.getElementById("restartButton");
     restartButton.addEventListener("click", () => {
       startTime = null;
+    });
+    const addTimeButton = document.getElementById("addTimeButton");
+    addTimeButton.addEventListener("click", () => {
+      //startTime += objectOfInputs.Time - t[frame];
+      startTime += t[frame] - readInputs().t1*1000
+      frame = t.findIndex(x => x >= t[frame] + readInputs().t1);
     });
 
     let cycle = 0;

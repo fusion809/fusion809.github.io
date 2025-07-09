@@ -172,7 +172,7 @@ function generateTimePlot(solution) {
     }
 
     // Generate time plot
-    genMultPlot(sol, ["theta", "theta dot"], "timePlot", "Plot of theta and theta dot against time");
+    genMultPlot(sol, ["θ", "dθ/dt"], "timePlot", "Plot of θ and dθ/dt against time");
 }
 
 /**

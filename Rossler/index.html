@@ -129,6 +129,15 @@
                         value="1e-8"></td>
                     <td>Minimum limit for step size.</td>
                 </tr>
+                <tr>
+                    <td><label for="t1">\(\Delta t\)</label></td>
+                    <td><input type="Number"
+                        id="t1"
+                        name="t1"
+                        value="20"></td>
+                    <td>Time for skipping ahead in animation.</td>
+                </tr>
+				
             </table>
         </form>
         
@@ -178,6 +187,7 @@
         <div id='timePlot'></div>
         <button id="toggleButton">Pause</button>
         <button id="restartButton">Restart</button>
+        <button id="addTimeButton">Add time \(\Delta t\) to animation.</button>
         <div id="animation"></div>
         <style>
             h1 {
