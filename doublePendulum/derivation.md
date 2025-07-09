@@ -285,19 +285,19 @@ Hence the Lagrangian is
 	\end{align*}
 	
 ### Right-hand side
-	As for the generalized dissipation force
+As for the generalized dissipation force
 	
 	\begin{align*}
 		Q_{\theta_1} &= \vec{F}_{D, 1r} \cdot \dfrac{\partial \vec{r}_{1r}}{\partial \theta_1} + \vec{F}_{D, 1b} \cdot \dfrac{\partial \vec{r}_{1b}}{\partial \theta_1}+ \vec{F}_{D, 2r} \cdot \dfrac{\partial \vec{r}_{rod, 2}}{\partial \theta_1} + \vec{F}_{D, 2b} \cdot \dfrac{\partial \vec{r}_{2b}}{\partial \theta_1}
 	\end{align*}
 	
-<b>Bob 1</b><br/>
-	The dissipation force applied to the first bob is
+#### Bob 1
+The dissipation force applied to the first bob is
 	\begin{align*}
 		\vec{F}_{D,1b} &= -b_{1b}\vec{v}_{1b} - c_{1b}|\vec{v}_{1b}|\vec{v}_{1b}.
 	\end{align*}
 	
-	Hence the generalized dissipation force, canonical to $\theta_1$, applied to the first bob is
+Hence the generalized dissipation force, canonical to $\theta_1$, applied to the first bob is
 	\begin{align*}
 		\vec{F}_{D, 1b} \cdot \dfrac{\partial \vec{r}_{1b}}{\partial \theta_1}&= (-b_{1b} - c_{1b}l_1\dot{\theta}_1)\begin{bmatrix}
 			-l_1\dot{\theta}_1 \sin{\theta_1} \\
@@ -310,9 +310,8 @@ Hence the Lagrangian is
 		&= -(b_{1b} + c_{1b} l_1 \dot{\theta}_1)l_1^2 \dot{\theta}_1.
 	\end{align*}
 	
-<b>Rod 1</b><br/>
-	
-	Next we will calculate the dissipation force on the first rod. We will use a centre of mass approximation (as otherwise we would likely have to integrate over the rod, which would drastically complicate the calculation)
+#### Rod 1
+Next we will calculate the dissipation force on the first rod. We will use a centre of mass approximation (as otherwise we would likely have to integrate over the rod, which would drastically complicate the calculation)
 	
 	\begin{align*}
 		\vec{F}_{D,1r} &= -\left(b_{1r} + c_{1r}|\vec{v}_{1r}|\right)\vec{v}_{1r} \\
@@ -334,8 +333,8 @@ Hence the Lagrangian is
 		&= -\left(b_{1r} + \dfrac{c_{1r}l_1 \dot{\theta}_1}{2}\right) \dfrac{l_1^2 \dot{\theta}_1}{4}.
 	\end{align*}
 
-<b>Bob 2</b><br/>
-	The dissipation force on the second bob would be
+#### Bob 2
+The dissipation force on the second bob would be
 	
 	\begin{align*}
 		\vec{F}_{D,2b} &= -b_{2b}\vec{v}_{2b} - c_{2b}|\vec{v}_{2b}|\vec{v}_{2b} \\
@@ -358,8 +357,8 @@ Hence the Lagrangian is
 		&= -\left(b_{2b}+c_{2b}\sqrt{l_1^2 \dot{\theta}_1^2 + l_2^2 \dot{\theta}_2^2 +2l_1 l_2\dot{\theta}_1 \dot{\theta}_2 \cos{(\theta_1-\theta_2)}}\right)\left(l_1^2 \dot{\theta}_1 + l_1l_2 \dot{\theta}_2 \cos{(\theta_1-\theta_2)}\right).
 	\end{align*}
 	
-<b>Rod 2</b><br/>
-	The friction force applied to the second rod would be
+#### Rod 2
+The friction force applied to the second rod would be
 	\begin{align*}
 		\vec{F}_{D,2r} &= -\left(b_{2r} + c_{2r}|\vec{v}_{2r}|\right)\vec{v}_{2r} \\
 		\vec{F}_{D,2r} &= -\left(b_{2r} + c_{2r}\sqrt{l_1^2 \dot{\theta}_1^2 + \dfrac{l_2^2 \dot{\theta}_2^2}{4} + l_1 l_2 \dot{\theta}_1 \dot{\theta}_2 \cos{(\theta_1 -\theta_2)}}\right)\begin{bmatrix}
@@ -374,15 +373,15 @@ Hence the Lagrangian is
 		&= -\left(b_{2r} + c_{2r}\sqrt{l_1^2 \dot{\theta}_1^2 + \dfrac{l_2^2 \dot{\theta}_2^2}{4} + l_1 l_2 \dot{\theta}_1 \dot{\theta}_2 \cos{(\theta_1 -\theta_2)}}\right)\left(l_1^2 \dot{\theta}_1^2 + \dfrac{l_1 l_2\dot{\theta}_2 \cos{\left(\theta_1 - \theta_2\right)}}{2}\right).
 	\end{align*}
 
-<b>Final answer</b>
-	Hence $Q_{\theta_1}$ is
+#### Final answer
+Hence $Q_{\theta_1}$ is
 	\begin{align*}
 		Q_{\theta_1} &= -\left(b_{1b} + c_{1b} l_1 \dot{\theta}_1\right)l_1^2 \dot{\theta}_1 -\left(b_{2b}+c_{2b}\sqrt{l_1^2 \dot{\theta}_1^2 + l_2^2 \dot{\theta}_2^2 +2l_1 l_2\dot{\theta}_1 \dot{\theta}_2 \cos{(\theta_1-\theta_2)}}\right)\left(l_1^2 \dot{\theta}_1 + l_1l_2 \dot{\theta}_2 \cos{(\theta_1-\theta_2)}\right) -\left(b_{1r} + \dfrac{c_{1r}l_1 \dot{\theta}_1}{2}\right) \dfrac{l_1^2 \dot{\theta}_1}{4} \\
 		&-\left(b_{2r} + c_{2r}\sqrt{l_1^2 \dot{\theta}_1^2 + \dfrac{l_2^2 \dot{\theta}_2^2}{4} + l_1 l_2 \dot{\theta}_1 \dot{\theta}_2 \cos{(\theta_1 -\theta_2)}}\right)\left(l_1^2 \dot{\theta}_1^2 + \dfrac{l_1 l_2\dot{\theta}_2 \cos{\left(\theta_1 - \theta_2\right)}}{2}\right).
 	\end{align*}
 	
- ### Final equation for $\ddot{\theta}_1$
-	The equation of motion for $\theta_1$ is therefore
+### Final equation for $\ddot{\theta}_1$
+The equation of motion for $\theta_1$ is therefore
 	
 	\begin{align*}
 		\dot{p}_{\theta_1} - F_{\theta_1} &= Q_{\theta_1}
@@ -436,7 +435,7 @@ The LHS of our equation will be
 	
 The terms corresponding to the first rod and first bob will be zero as their position and velocities are independent of $\theta_2$. The remaining terms are below.
 	
-<b>Rod 2</b><br/>
+#### Rod 2
 The dissipation force applied to the second rod is
 	\begin{align*}
 		\vec{F}_{D,2r} &= -\left(b_{2r} + c_{2r}\sqrt{l_1^2 \dot{\theta}_1^2 + \dfrac{l_2^2 \dot{\theta}_2^2}{4} + l_1 l_2 \dot{\theta}_1 \dot{\theta}_2 \cos{(\theta_1 -\theta_2)}}\right)\begin{bmatrix}
@@ -457,8 +456,8 @@ The dissipation force applied to the second rod is
 		&= -\dfrac{1}{4}\left(b_{2r} + c_{2r}\sqrt{l_1^2 \dot{\theta}_1^2 + \dfrac{l_2^2 \dot{\theta}_2^2}{4} + l_1 l_2 \dot{\theta}_1 \dot{\theta}_2 \cos{(\theta_1 -\theta_2)}}\right)(2l_1l_2 \dot{\theta}_1 \cos{(\theta_1-\theta_2)} + l_2^2 \dot{\theta}_2).
 	\end{align*}
 
-<b>Bob 2</b><br/>
-	The dissipation force applied to the second bob is
+#### Bob 2
+The dissipation force applied to the second bob is
 	\begin{align*}
 		\vec{F}_{D,2b} &= -\left(b_{2b}+c_{2b}\sqrt{l_1^2 \dot{\theta}_1^2 + l_2^2 \dot{\theta}_2^2 +2l_1 l_2\dot{\theta}_1 \dot{\theta}_2 \cos{(\theta_1-\theta_2)}}\right) \begin{bmatrix}
 			-l_1\dot{\theta}_1 \sin{\theta_1}-l_2\dot{\theta}_2 \sin{\theta_2} \\
