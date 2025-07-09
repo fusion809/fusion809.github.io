@@ -11,7 +11,7 @@
  */
 function approxRKF45(f, dt, objectOfInputs, t, vars, i) {
     // Initialize variables
-    var K = [[]];
+    var K = new Array(6);
     var X1 = [];
     var X2 = [];
     var Rarr = [];
@@ -64,7 +64,7 @@ function testRKF45(i, tf, dt, t, objectOfInputs) {
         console.log(msg);
     }
     test = test1 && test2; 
-    
+
     
     return test;
 }
