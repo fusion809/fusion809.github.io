@@ -198,6 +198,22 @@
                 <td><a href="#phasePlotXYZ"><button type="button" onclick="generatePlots(readInputs())">Generate all solution plots</button></a></td>
                 <td><button type="button" onclick="removePlots()">Remove all plots</button></td>
             </tr>
+            <tr>
+                <td><a href="#animationSIR"><button type="button" onclick="animSimSIR()">Generate SIR phase plot animation</button></a></td>
+                <td><button type="button" onclick="removeAnimationSIR()">Remove animation</button></td>
+            </tr>
+            <tr>
+                <td><a href="#animationSEI"><button type="button" onclick="animSimSEI()">Generate SEI phase plot animation</button></a></td>
+                <td><button type="button" onclick="removeAnimationSEI()">Remove animation</button></td>
+            </tr>
+            <tr>
+                <td><a href="#animationSER"><button type="button" onclick="animSimSER()">Generate SER phase plot animation</button></a></td>
+                <td><button type="button" onclick="removeAnimationSER()">Remove animation</button></td>
+            </tr>
+            <tr>
+                <td><a href="#animationEIR"><button type="button" onclick="animSimEIR()">Generate EIR phase plot animation</button></a></td>
+                <td><button type="button" onclick="removeAnimationEIR()">Remove animation</button></td>
+            </tr>
         </table>
 
         <!--Where the table and plot goes-->
@@ -208,6 +224,14 @@
         <div id='phasePlotXZ'></div>
         <div id='phasePlotYZ'></div>
         <div id='timePlot'></div>
+        <button type="button" id="toggleButtonSIR">Pause</button>
+        <div id="animationSIR"></div>
+        <button type="button" id="toggleButtonSEI">Pause</button>
+        <div id="animationSEI"></div>
+        <button type="button" id="toggleButtonSER">Pause</button>
+        <div id="animationSER"></div>
+        <button type="button" id="toggleButtonEIR">Pause</button>
+        <div id="animationEIR"></div>
         <style>
             h1 {
                 font-size: 30px;
