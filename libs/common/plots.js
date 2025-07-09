@@ -495,3 +495,408 @@ function genMultPlot(solution, varnames, element, title) {
     // Generate plot
     Plotly.newPlot(element, dataTimePlot, layoutTimePlot);
 }
+
+function animatePendulum(objectOfInputs, solution, label) {
+  const t = solution.t;
+  if (label=="Double pendulum") {
+    var [t1, x1, y1, x2, y2] = generatePendulumCoords(objectOfInputs, solution);
+  } else if (label == "Double elastic pendulum") {
+    var [t1, x1, y1, x2, y2] = generatePendulumCoords(solution);
+  } else if (label == "Simple pendulum" || label == "Elastic pendulum") {
+    var [x, y] = generatePendulumCoords(objectOfInputs, solution);
+  }
+  const padding = 1;
+  var data;
+  if (label == "Double pendulum" || label == "Double elastic pendulum") {
+    var xmin = func2Vecs(Math.min, x1, x2);
+    var ymin = func2Vecs(Math.min, y1, y2);
+    var xmax = func2Vecs(Math.max, x1, x2);
+    var ymax = func2Vecs(Math.max, y1, y2);
+    const trace1 = {
+        x: [], y: [],
+        mode: "lines+markers",
+        marker: { size: 8 },
+        line: { color: "blue" },
+        name: "Rod 1"
+    };
+    const trace2 = {
+        x: [], y: [],
+        mode: "lines+markers",
+        marker: { size: 8 },
+        line: { color: "red" },
+        name: "Rod 2"
+    };
+    data = [trace1, trace2];
+    if (isFinite(xmin)) {
+        xmin = xmin - padding;
+    } else {
+        xmin = -10 - padding;
+    }
+    if (isFinite(xmax)) {
+        xmax = xmax + padding;
+    } else {
+        xmax = 10 + padding;
+    }
+
+    if (isFinite(ymin)) {
+        ymin = ymin - padding;
+    } else {
+        ymin = -40 - padding;
+    }
+
+    if (isFinite(ymax)) {
+        ymax = ymax + padding;
+    } else {
+        ymax = 10 + padding;
+    }
+  } else {
+    var xmin = Math.min(...x) - padding;
+    var ymin = Math.min(...y) - padding;
+    var xmax = Math.max(...x) + padding;
+    var ymax = Math.max(...y) + padding;
+    const trace1 = {
+        x: [], y: [],
+        mode: "lines+markers",
+        marker: { size: 8 },
+        line: { color: "blue" },
+        name: "Rod"
+    };
+    data = [trace1];
+  }
+
+  
+  const layout = {
+    title: label,
+    xaxis: { range: [xmin, xmax], title: "x" },
+    yaxis: { range: [ymin, ymax], title: "y", scaleanchor: "x" },
+    showlegend: false,
+    annotations: [{
+    x: 0,
+    y: 1.1,  // slightly above plot
+    xref: 'paper',
+    yref: 'paper',
+    text: 'Time: 0.00 s',
+    showarrow: false,
+    font: { size: 16 }
+  }]
+  };
+  Plotly.newPlot("animation", data, layout).then(() => {
+
+    let startTime = null;
+    let frame = 0;
+    let paused = false;
+    let pauseStart = 0;
+    let totalPausedTime = 0;
+
+    const button = document.getElementById("toggleButton");
+    button.addEventListener("click", () => {
+      paused = !paused;
+      button.textContent = paused ? "Play" : "Pause";
+      if (paused) {
+        pauseStart = Date.now();
+      } else {
+        totalPausedTime += Date.now() - pauseStart;
+        if (!paused) requestAnimationFrame(animateFrame);
+      }
+    });
+
+    let cycle = 0;
+    function animateFrame(timestamp) {
+      if (frame == t.length - 1 || !startTime) {
+        frame = 0;
+        startTime = timestamp; 
+      }
+      if (paused) return;
+
+      const elapsedSec = (timestamp - startTime - totalPausedTime) / 1000;
+
+
+    // Advance to the frame corresponding to elapsed time
+    while (frame < t.length -1 && t[frame] < elapsedSec) {
+      frame++;
+    }
+    if (frame >= t.length) {
+        frame = t.length - 1;
+        cycle++;
+    }
+    if (label == "Double elastic pendulum" || label=="Double pendulum") {
+        Plotly.animate("animation", {
+        data: [
+            { x: [0, x1[frame]], y: [0, y1[frame]] },
+            { x: [x1[frame], x2[frame]], y: [y1[frame], y2[frame]] }
+        ]
+        }, {
+        transition: { duration: 0 },
+        frame: { duration: 0, redraw: true }
+        });
+    } else {
+        Plotly.animate("animation", {
+            data: [
+                { x: [0, x[frame]], y: [0, y[frame]] }
+            ]
+            }, {
+            transition: { duration: 0 },
+            frame: { duration: 0, redraw: true }
+        });
+    }
+    layout.annotations[0].text = `Time: ${t[frame].toFixed(2)} s`;
+    Plotly.relayout('animation', layout);
+    requestAnimationFrame(animateFrame);
+  }
+
+  requestAnimationFrame(animateFrame);
+});
+}
+
+function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], elID="animation", toggleButton="toggleButton", nos=[0, 1]) {
+  const x = solution.vars[nos[0]];
+  const y = solution.vars[nos[1]];
+  const t = solution.t;
+  const padding = 1;
+  const tracePath = {
+    x: x,
+    y: y,
+    mode: 'lines',
+    type: 'scatter',
+    line: { color: 'blue', width: 4 },
+    name: 'Path',
+  };
+
+  const traceMarker = {
+    x: [x[0]],
+    y: [y[0]],
+    mode: 'markers',
+    type: 'scatter',
+    marker: { color: 'red', size: 5 },
+    name: 'Object'
+  };
+
+  const layout = {
+    margin: { l: 0, r: 0, b: 0, t: 0 },
+    xaxis: {
+        title: varnames[0],
+        range: [Math.min(x) - padding, Math.max(x) + padding],
+        showticklabels: true,   // Ensure tick labels are shown
+        ticks: 'outside',       // Optional: put ticks outside the plot
+        tickfont: { size: 12 }  // Optional: control label font size
+    },
+    yaxis: {
+        title: varnames[1],
+        range: [Math.min(y) - padding, Math.max(y) + padding],
+        showticklabels: true,
+        ticks: 'outside',
+        tickfont: { size: 12 },
+        scaleanchor: "x"
+    },
+    annotations: [{
+      text: `Time: 0.00 s`,
+      xref: 'paper',
+      yref: 'paper',
+      x: 0.05,
+      y: 0.95,
+      showarrow: false,
+      font: { size: 16 }
+    }],
+    showlegend: true
+  };
+
+  Plotly.newPlot(elID, [tracePath, traceMarker], layout).then(() => {
+    let frame = 0;
+    let startTime = null;
+    let paused = false;
+    let pauseStart = 0;
+    let totalPausedTime = 0;
+
+    const button = document.getElementById(toggleButton);
+    button.addEventListener("click", () => {
+      paused = !paused;
+      button.textContent = paused ? "Play" : "Pause";
+      if (paused) {
+        pauseStart = Date.now();
+      } else {
+        totalPausedTime += Date.now() - pauseStart;
+        if (!paused) requestAnimationFrame(animateFrame);
+      }
+    });
+
+    let cycle = 0;
+    function animateFrame(timestamp) {
+      if (frame == t.length - 1 || !startTime) {
+        frame = 0;
+        startTime = timestamp; 
+      }
+      if (paused) return;
+
+      const elapsedSec = (timestamp - startTime - totalPausedTime) / 1000;
+
+      while (frame < t.length - 1 && t[frame] < elapsedSec) {
+        frame++;
+      }
+      if (frame >= t.length) {
+        frame = t.length - 1;
+        cycle++;
+      }
+      Plotly.animate(elID, {
+        data: [
+          tracePath,
+          {
+            x: [x[frame]],
+            y: [y[frame]],
+            mode: 'markers',
+            type: 'scatter',
+            marker: { color: 'red', size: 5 },
+            name: 'Object'
+          }
+        ],
+        layout: {
+            annotations: [{
+                text: `Time: ${t[frame].toFixed(2)} s`,
+                xref: 'paper',
+                yref: 'paper',
+                x: timer[0],
+                y: timer[1],
+                showarrow: false,
+                font: { size: 16 }
+            }],
+            xaxis: {
+                title: varnames[0],
+                showticklabels: true,
+                ticks: 'outside',
+                tickfont: { size: 12 }
+            },
+            yaxis: {
+                title: varnames[1],
+                showticklabels: true,
+                ticks: 'outside',
+                tickfont: { size: 12 },
+                scaleanchor: "x"
+            }
+        }
+      }, {
+        transition: { duration: 0 },
+        frame: { duration: 0, redraw: true }
+      });
+
+      requestAnimationFrame(animateFrame);
+    }
+
+    requestAnimationFrame(animateFrame);
+  });
+}
+
+function animate3D(solution, varnames=["x", "y", "z"], nos=[0, 1, 2], elID="animate", toggleButton="toggleButton") {
+  const x = solution.vars[nos[0]];
+  const y = solution.vars[nos[1]];
+  const z = solution.vars[nos[2]];
+  const t = solution.t;
+
+  const tracePath = {
+    x: x,
+    y: y,
+    z: z,
+    mode: 'lines',
+    type: 'scatter3d',
+    line: { color: 'blue', width: 4 },
+    name: 'Path',
+  };
+
+  const traceMarker = {
+    x: [x[0]],
+    y: [y[0]],
+    z: [z[0]],
+    mode: 'markers',
+    type: 'scatter3d',
+    marker: { color: 'red', size: 5 },
+    name: 'Object'
+  };
+
+  const layout = {
+    margin: { l: 0, r: 0, b: 0, t: 0 },
+    scene: {
+      xaxis: { title: varnames[0] },
+      yaxis: { title: varnames[1] },
+      zaxis: { title: varnames[2] }
+    },
+    annotations: [{
+      text: `Time: 0.00 s`,
+      xref: 'paper',
+      yref: 'paper',
+      x: 0.05,
+      y: 0.95,
+      showarrow: false,
+      font: { size: 16 }
+    }],
+    showlegend: true
+  };
+
+  Plotly.newPlot(elID, [tracePath, traceMarker], layout).then(() => {
+    let frame = 0;
+    let startTime = null;
+    let paused = false;
+    let pauseStart = 0;
+    let totalPausedTime = 0;
+
+    const button = document.getElementById(toggleButton);
+    button.addEventListener("click", () => {
+      paused = !paused;
+      button.textContent = paused ? "Play" : "Pause";
+      if (paused) {
+        pauseStart = Date.now();
+      } else {
+        totalPausedTime += Date.now() - pauseStart;
+        if (!paused) requestAnimationFrame(animateFrame);
+      }
+    });
+
+    let cycle = 0;
+    function animateFrame(timestamp) {
+      if (frame == t.length - 1 || !startTime) {
+        frame = 0;
+        startTime = timestamp; 
+      }
+      if (paused) return;
+
+      const elapsedSec = (timestamp - startTime - totalPausedTime) / 1000;
+
+      while (frame < t.length - 1 && t[frame] < elapsedSec) {
+        frame++;
+      }
+      if (frame >= t.length) {
+        frame = t.length - 1;
+        cycle++;
+      }
+      Plotly.animate(elID, {
+        data: [
+          tracePath,
+          {
+            x: [x[frame]],
+            y: [y[frame]],
+            z: [z[frame]],
+            mode: 'markers',
+            type: 'scatter3d',
+            marker: { color: 'red', size: 5 },
+            name: 'Object'
+          }
+        ],
+        layout: {
+          annotations: [{
+            text: `Time: ${t[frame].toFixed(2)} s`,
+            xref: 'paper',
+            yref: 'paper',
+            x: 0.05,
+            y: 0.95,
+            showarrow: false,
+            font: { size: 16 }
+          }]
+        }
+      }, {
+        transition: { duration: 0 },
+        frame: { duration: 0, redraw: true }
+      });
+
+      requestAnimationFrame(animateFrame);
+    }
+
+    requestAnimationFrame(animateFrame);
+  });
+}
