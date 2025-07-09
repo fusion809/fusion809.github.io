@@ -41,7 +41,7 @@ function generateXThetaPhasePlot(solution) {
     var theta = vars[2];
 
     // Generate 2D plot
-    gen2DPlot(x, theta, "phasePlotXTheta", "Phase plot of theta against x");
+    gen2DPlot(x, theta, "phasePlotXTheta", "Phase plot of θ against x");
 }
 
 /**
@@ -57,7 +57,7 @@ function generateXXDotPhasePlot(solution) {
     var xDot = vars[1];
 
     // Generate 2D plot
-    gen2DPlot(x, xDot, "phasePlotXXDot", "Phase plot of x dot against x");
+    gen2DPlot(x, xDot, "phasePlotXXDot", "Phase plot of dx/dt against x");
 }
 
 /**
@@ -73,7 +73,7 @@ function generateThetaThetaDotPhasePlot(solution) {
     var thetaDot = vars[3];
     
     // Generate 2D plot
-    gen2DPlot(theta, thetaDot, "phasePlotThetaThetaDot", "Phase plot of theta dot against theta");
+    gen2DPlot(theta, thetaDot, "phasePlotThetaThetaDot", "Phase plot of dθ/dt against theta");
 }
 
 /**
@@ -84,7 +84,7 @@ function generateThetaThetaDotPhasePlot(solution) {
  */
 function generateTimePlot(solution) {
     // Generate time plot
-    genMultPlot(solution, ["x", "x dot", "theta", "theta dot"], "timePlot", "Plot of x, x dot, theta and theta dot against time");
+    genMultPlot(solution, ["x", "dx/dt", "θ", "dθ/dt"], "timePlot", "Plot of x, dx/dt, θ and dθ/dt against time");
 }
 
 /**
@@ -108,7 +108,10 @@ function generatePlots(objectOfInputs) {
     generateTimePlot(solution);
 }
 
-function generatePendulumCoords(r, th) {
+function generatePendulumCoords(objectOfInputs, solution) {
+    var vars = solution.vars;
+    var r = vars[0].map(item => item + objectOfInputs.l0);
+    var th = vars[2];
     var N = th.length;
     var x = new Array(N);
     var y = new Array(N);
@@ -119,116 +122,12 @@ function generatePendulumCoords(r, th) {
     return [x, y];
 }
 
-function animatePendulum(solution) {
-  const t = solution.t;
-  const vars = solution.vars;
-  const th = vars[2];
-  const z = vars[0];
-  var [x, y] = generatePendulumCoords(z, th);
-  var xmin = Math.min(...x);
-  var ymin = Math.min(...y);
-  var xmax = Math.max(...x);
-  var ymax = Math.max(...y);
-  
-  const trace1 = {
-    x: [], y: [],
-    mode: "lines+markers",
-    marker: { size: 8 },
-    line: { color: "blue" },
-    name: "Rod"
-  };
-  const data = [trace1];
-  const padding = 1;
-    if (isFinite(xmin)) {
-    xmin = xmin - padding;
-  }
-  if (isFinite(xmax)) {
-    xmax = xmax + padding;
-  }
-
-  if (isFinite(ymin)) {
-    ymin = ymin - padding;
-  }
-
-  if (isFinite(ymax)) {
-    ymax = ymax + padding;
-  }
-
-  const layout = {
-    title: "Elastic pendulum",
-    xaxis: { range: [xmin, xmax], title: "x" },
-    yaxis: { range: [ymin, ymax], title: "y", scaleanchor: "x" },
-    showlegend: false,
-    annotations: [{
-    x: 0,
-    y: 1.1,  // slightly above plot
-    xref: 'paper',
-    yref: 'paper',
-    text: 'Time: 0.00 s',
-    showarrow: false,
-    font: { size: 16 }
-  }]
-  };
-  Plotly.newPlot("animation", data, layout).then(() => {
-    let frame = 0;
-    let startTime = null;
-    let paused = false;
-    let pauseStart = 0;
-    let totalPausedTime = 0;
-
-    const button = document.getElementById("toggleButton");
-    button.addEventListener("click", () => {
-      paused = !paused;
-      button.textContent = paused ? "Play" : "Pause";
-      if (paused) {
-        pauseStart = Date.now();
-      } else {
-        totalPausedTime += Date.now() - pauseStart;
-        if (!paused) requestAnimationFrame(animateFrame);
-      }
-    });
-
-    let cycle = 0;
-    function animateFrame(timestamp) {
-      if (frame == t.length - 1 || !startTime) {
-        frame = 0;
-        startTime = timestamp; 
-      }
-      if (paused) return;
-
-      const elapsedSec = (timestamp - startTime - totalPausedTime) / 1000;
-
-      while (frame < t.length - 1 && t[frame] < elapsedSec) {
-        frame++;
-      }
-      if (frame >= t.length) {
-        frame = t.length - 1;
-        cycle++;
-      }
-
-    Plotly.animate("animation", {
-      data: [
-        { x: [0, x[frame]], y: [0, y[frame]] }
-      ]
-    }, {
-      transition: { duration: 0 },
-      frame: { duration: 0, redraw: true }
-    });
-    layout.annotations[0].text = `Time: ${t[frame].toFixed(2)} s`;
-    Plotly.relayout('animation', layout);
-
-    requestAnimationFrame(animateFrame);
-  }
-
-  requestAnimationFrame(animateFrame);
-});
-}
-
 function removeAnimation() {
     rmPlot("animation");
 }
 
 function animSim() {
-    var solution = solveProblem(RKF45, readInputs());
-    animatePendulum(solution);
+    var objectOfInputs = readInputs();
+    var solution = solveProblem(RKF45, objectOfInputs);
+    animatePendulum(objectOfInputs, solution, "Elastic pendulum");
 }

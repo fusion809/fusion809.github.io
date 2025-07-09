@@ -143,130 +143,13 @@ function generatePlots(objectOfInputs) {
     generateTimePlot(solution);
 };
 
-function animate(solution, nos, varnames, elID) {
-  const x = solution.vars[nos[0]];
-  const y = solution.vars[nos[1]];
-  const z = solution.vars[nos[2]];
-  const t = solution.t;
-
-  const tracePath = {
-    x: x,
-    y: y,
-    z: z,
-    mode: 'lines',
-    type: 'scatter3d',
-    line: { color: 'blue', width: 4 },
-    name: 'Path',
-  };
-
-  const traceMarker = {
-    x: [x[0]],
-    y: [y[0]],
-    z: [z[0]],
-    mode: 'markers',
-    type: 'scatter3d',
-    marker: { color: 'red', size: 5 },
-    name: 'Object'
-  };
-
-  const layout = {
-    margin: { l: 0, r: 0, b: 0, t: 0 },
-    scene: {
-      xaxis: { title: varnames[0] },
-      yaxis: { title: varnames[1] },
-      zaxis: { title: varnames[2] }
-    },
-    annotations: [{
-      text: `Time: 0.00 s`,
-      xref: 'paper',
-      yref: 'paper',
-      x: 0.05,
-      y: 0.95,
-      showarrow: false,
-      font: { size: 16 }
-    }],
-    showlegend: true
-  };
-
-  Plotly.newPlot(elID, [tracePath, traceMarker], layout).then(() => {
-    let frame = 0;
-    let startTime = null;
-    let paused = false;
-    let pauseStart = 0;
-    let totalPausedTime = 0;
-
-    const button = document.getElementById("toggleButtonSIR");
-    button.addEventListener("click", () => {
-      paused = !paused;
-      button.textContent = paused ? "Play" : "Pause";
-      if (paused) {
-        pauseStart = Date.now();
-      } else {
-        totalPausedTime += Date.now() - pauseStart;
-        if (!paused) requestAnimationFrame(animateFrame);
-      }
-    });
-
-    let cycle = 0;
-    function animateFrame(timestamp) {
-      if (frame == t.length - 1 || !startTime) {
-        frame = 0;
-        startTime = timestamp; 
-      }
-      if (paused) return;
-
-      const elapsedSec = (timestamp - startTime - totalPausedTime) / 1000;
-
-      while (frame < t.length - 1 && t[frame] < elapsedSec) {
-        frame++;
-      }
-      if (frame >= t.length) {
-        frame = t.length - 1;
-        cycle++;
-      }
-      Plotly.animate(elID, {
-        data: [
-          tracePath,
-          {
-            x: [x[frame]],
-            y: [y[frame]],
-            z: [z[frame]],
-            mode: 'markers',
-            type: 'scatter3d',
-            marker: { color: 'red', size: 5 },
-            name: 'Object'
-          }
-        ],
-        layout: {
-          annotations: [{
-            text: `Time: ${t[frame].toFixed(2)} s`,
-            xref: 'paper',
-            yref: 'paper',
-            x: 0.05,
-            y: 0.95,
-            showarrow: false,
-            font: { size: 16 }
-          }]
-        }
-      }, {
-        transition: { duration: 0 },
-        frame: { duration: 0, redraw: true }
-      });
-
-      requestAnimationFrame(animateFrame);
-    }
-
-    requestAnimationFrame(animateFrame);
-  });
-}
-
 function removeAnimationSIR() {
     rmPlot("animationSIR");
 }
 
 function animSimSIR() {
     var solution = solveProblem(RKF45, readInputs());
-    animate(solution, [0, 2, 3], ["S", "I", "R"], "animationSIR");
+    animate3D(solution, ["S", "I", "R"], [0, 2, 3], "animationSIR", "toggleButtonSIR");
 }
 
 function removeAnimationSEI() {
@@ -275,7 +158,7 @@ function removeAnimationSEI() {
 
 function animSimSEI() {
     var solution = solveProblem(RKF45, readInputs());
-    animate(solution, [0, 1, 2], ["S", "E", "I"], "animationSEI");
+    animate3D(solution, ["S", "E", "I"], [0, 1, 2], "animationSEI", "toggleButtonSEI");
 }
 
 function removeAnimationSER() {
@@ -284,7 +167,7 @@ function removeAnimationSER() {
 
 function animSimSER() {
     var solution = solveProblem(RKF45, readInputs());
-    animate(solution, [0, 1, 3], ["S", "E", "R"], "animationSER");
+    animate3D(solution, ["S", "E", "R"], [0, 1, 3], "animationSER", "toggleButtonSER");
 }
 
 function removeAnimationEIR() {
@@ -293,5 +176,5 @@ function removeAnimationEIR() {
 
 function animSimEIR() {
     var solution = solveProblem(RKF45, readInputs());
-    animate(solution, [1, 2, 3], ["E", "I", "R"], "animationEIR");
+    animate3D(solution, ["E", "I", "R"], [1, 2, 3], "animationEIR", "toggleButtonEIR");
 }

@@ -252,126 +252,17 @@ function generatePlots(objectOfInputs) {
     }
 };
 
-function generatePendulumCoords(l, th) {
-    var N = th.length;
+function generatePendulumCoords(objectOfInputs, solution) {
+    var theta = solution.theta;
+    var l = objectOfInputs.l;
+    var N = theta.length;
     var x = new Array(N);
     var y = new Array(N);
     for (let i = 0; i < N; i++) {
-        x[i] = l*Math.cos(th[i]);
-        y[i] = l*Math.sin(th[i]);
+        x[i] = l*Math.cos(theta[i]);
+        y[i] = l*Math.sin(theta[i]);
     }
     return [x, y];
-}
-
-function animatePendulum(objectOfInputs, solution) {
-  const t = solution.t;
-  const th = solution.theta;
-  var [x, y] = generatePendulumCoords(objectOfInputs.l, th);
-  var xmin = Math.min(...x);
-  var ymin = Math.min(...y);
-  var xmax = Math.max(...x);
-  var ymax = Math.max(...y);
-  
-  const trace1 = {
-    x: [], y: [],
-    mode: "lines+markers",
-    marker: { size: 8 },
-    line: { color: "blue" },
-    name: "Rod"
-  };
-  const data = [trace1];
-  const padding = 1;
-  const totalLen = objectOfInputs.l;
-    if (isFinite(xmin)) {
-    xmin = xmin - padding;
-  } else {
-    xmin = -totalLen - padding;
-  }
-  if (isFinite(xmax)) {
-    xmax = xmax + padding;
-  } else {
-    xmax = totalLen + padding;
-  }
-
-  if (isFinite(ymin)) {
-    ymin = ymin - padding;
-  } else {
-    ymin = -totalLen - padding;
-  }
-
-  if (isFinite(ymax)) {
-    ymax = ymax + padding;
-  } else {
-    ymax = totalLen + padding;
-  }
-  const layout = {
-    title: "Simple pendulum",
-    xaxis: { range: [xmin, xmax], title: "x" },
-    yaxis: { range: [ymin, ymax], title: "y", scaleanchor: "x" },
-    showlegend: false,
-    annotations: [{
-    x: 0,
-    y: 1.1,  // slightly above plot
-    xref: 'paper',
-    yref: 'paper',
-    text: 'Time: 0.00 s',
-    showarrow: false,
-    font: { size: 16 }
-  }]
-  };
-  Plotly.newPlot("animation", data, layout).then(() => {
-let frame = 0;
-    let startTime = null;
-    let paused = false;
-    let pauseStart = 0;
-    let totalPausedTime = 0;
-
-    const button = document.getElementById("toggleButton");
-    button.addEventListener("click", () => {
-      paused = !paused;
-      button.textContent = paused ? "Play" : "Pause";
-      if (paused) {
-        pauseStart = Date.now();
-      } else {
-        totalPausedTime += Date.now() - pauseStart;
-        if (!paused) requestAnimationFrame(animateFrame);
-      }
-    });
-
-    let cycle = 0;
-    function animateFrame(timestamp) {
-      if (frame == t.length - 1 || !startTime) {
-        frame = 0;
-        startTime = timestamp; 
-      }
-      if (paused) return;
-
-      const elapsedSec = (timestamp - startTime - totalPausedTime) / 1000;
-
-      while (frame < t.length - 1 && t[frame] < elapsedSec) {
-        frame++;
-      }
-      if (frame >= t.length) {
-        frame = t.length - 1;
-        cycle++;
-      }
-
-    Plotly.animate("animation", {
-      data: [
-        { x: [0, x[frame]], y: [0, y[frame]] }
-      ]
-    }, {
-      transition: { duration: 0 },
-      frame: { duration: 0, redraw: true }
-    });
-    layout.annotations[0].text = `Time: ${t[frame].toFixed(2)} s`;
-    Plotly.relayout('animation', layout);
-
-    requestAnimationFrame(animateFrame);
-  }
-
-  requestAnimationFrame(animateFrame);
-});
 }
 
 function removeAnimation() {
@@ -381,5 +272,5 @@ function removeAnimation() {
 function animSim() {
     var objectOfInputs = readInputs();
     var solution = solveProblemSP(objectOfInputs);
-    animatePendulum(objectOfInputs, solution);
+    animatePendulum(objectOfInputs, solution, "Simple pendulum");
 }
