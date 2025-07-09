@@ -588,16 +588,21 @@ function animatePendulum(objectOfInputs, solution, label) {
     let pauseStart = 0;
     let totalPausedTime = 0;
 
-    const button = document.getElementById("toggleButton");
-    button.addEventListener("click", () => {
+    const pauseButton = document.getElementById("toggleButton");
+    pauseButton.addEventListener("click", () => {
       paused = !paused;
-      button.textContent = paused ? "Play" : "Pause";
+      pauseButton.textContent = paused ? "Play" : "Pause";
       if (paused) {
         pauseStart = Date.now();
       } else {
         totalPausedTime += Date.now() - pauseStart;
         if (!paused) requestAnimationFrame(animateFrame);
       }
+    });
+
+    const restartButton = document.getElementById("restartButton");
+    restartButton.addEventListener("click", () => {
+      startTime = null;
     });
 
     let cycle = 0;
@@ -648,7 +653,7 @@ function animatePendulum(objectOfInputs, solution, label) {
 });
 }
 
-function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], elID="animation", toggleButton="toggleButton", nos=[0, 1]) {
+function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], elID="animation", toggleButton="toggleButton", restartButtonId="restartButton", nos=[0, 1]) {
   const x = solution.vars[nos[0]];
   const y = solution.vars[nos[1]];
   const t = solution.t;
@@ -719,6 +724,11 @@ function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], elID="animati
       }
     });
 
+    const restartButton = document.getElementById(restartButtonId);
+    restartButton.addEventListener("click", () => {
+      startTime = null;
+    });
+
     let cycle = 0;
     function animateFrame(timestamp) {
       if (frame == t.length - 1 || !startTime) {
@@ -784,7 +794,7 @@ function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], elID="animati
   });
 }
 
-function animate3D(solution, varnames=["x", "y", "z"], nos=[0, 1, 2], elID="animate", toggleButton="toggleButton") {
+function animate3D(solution, varnames=["x", "y", "z"], nos=[0, 1, 2], elID="animate", toggleButton="toggleButton", restartButtonId="restartButton") {
   const x = solution.vars[nos[0]];
   const y = solution.vars[nos[1]];
   const z = solution.vars[nos[2]];
@@ -846,6 +856,11 @@ function animate3D(solution, varnames=["x", "y", "z"], nos=[0, 1, 2], elID="anim
         totalPausedTime += Date.now() - pauseStart;
         if (!paused) requestAnimationFrame(animateFrame);
       }
+    });
+
+    const restartButton = document.getElementById(restartButtonId);
+    restartButton.addEventListener("click", () => {
+      startTime = null;
     });
 
     let cycle = 0;

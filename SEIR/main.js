@@ -157,7 +157,7 @@ function removeAnimationSIR() {
  */
 function generateAnimationSIR() {
     var solution = solveProblem(RKF45, readInputs());
-    animate3D(solution, ["S", "I", "R"], [0, 2, 3], "animationSIR", "toggleButtonSIR");
+    animate3D(solution, ["S", "I", "R"], [0, 2, 3], "animationSIR", "toggleButtonSIR", "restartButtonSIR");
 }
 
 /**
@@ -174,7 +174,7 @@ function removeAnimationSEI() {
  */
 function generateAnimationSEI() {
     var solution = solveProblem(RKF45, readInputs());
-    animate3D(solution, ["S", "E", "I"], [0, 1, 2], "animationSEI", "toggleButtonSEI");
+    animate3D(solution, ["S", "E", "I"], [0, 1, 2], "animationSEI", "toggleButtonSEI", "restartButtonSEI");
 }
 
 /**
@@ -191,7 +191,7 @@ function removeAnimationSER() {
  */
 function generateAnimationSER() {
     var solution = solveProblem(RKF45, readInputs());
-    animate3D(solution, ["S", "E", "R"], [0, 1, 3], "animationSER", "toggleButtonSER");
+    animate3D(solution, ["S", "E", "R"], [0, 1, 3], "animationSER", "toggleButtonSER", "restartButtonSER");
 }
 
 /**
@@ -208,5 +208,5 @@ function removeAnimationEIR() {
  */
 function generateAnimationEIR() {
     var solution = solveProblem(RKF45, readInputs());
-    animate3D(solution, ["E", "I", "R"], [1, 2, 3], "animationEIR", "toggleButtonEIR");
+    animate3D(solution, ["E", "I", "R"], [1, 2, 3], "animationEIR", "toggleButtonEIR", "restartButtonEIR");
 }
