@@ -144,5 +144,5 @@ function removeAnimation() {
  */
 function generateAnimation() {
     var solution = solveProblem(RKF45, readInputs());
-    animate3D(solution, ["S", "I", "R"]);
+    animate3D(solution, [0, 0, 0], ["S", "I", "R"]);
 }
