@@ -107,3 +107,128 @@ function generatePlots(objectOfInputs) {
     generateThetaThetaDotPhasePlot(solution);
     generateTimePlot(solution);
 }
+
+function generatePendulumCoords(r, th) {
+    var N = th.length;
+    var x = new Array(N);
+    var y = new Array(N);
+    for (let i = 0; i < N; i++) {
+        x[i] = r[i]*Math.cos(th[i]);
+        y[i] = r[i]*Math.sin(th[i]);
+    }
+    return [x, y];
+}
+
+function animatePendulum(solution) {
+  const t = solution.t;
+  const vars = solution.vars;
+  const th = vars[2];
+  const z = vars[0];
+  var [x, y] = generatePendulumCoords(z, th);
+  var xmin = Math.min(...x);
+  var ymin = Math.min(...y);
+  var xmax = Math.max(...x);
+  var ymax = Math.max(...y);
+  
+  const trace1 = {
+    x: [], y: [],
+    mode: "lines+markers",
+    marker: { size: 8 },
+    line: { color: "blue" },
+    name: "Rod"
+  };
+  const data = [trace1];
+  const padding = 1;
+    if (isFinite(xmin)) {
+    xmin = xmin - padding;
+  }
+  if (isFinite(xmax)) {
+    xmax = xmax + padding;
+  }
+
+  if (isFinite(ymin)) {
+    ymin = ymin - padding;
+  }
+
+  if (isFinite(ymax)) {
+    ymax = ymax + padding;
+  }
+
+  const layout = {
+    title: "Elastic pendulum",
+    xaxis: { range: [xmin, xmax], title: "x" },
+    yaxis: { range: [ymin, ymax], title: "y", scaleanchor: "x" },
+    showlegend: false,
+    annotations: [{
+    x: 0,
+    y: 1.1,  // slightly above plot
+    xref: 'paper',
+    yref: 'paper',
+    text: 'Time: 0.00 s',
+    showarrow: false,
+    font: { size: 16 }
+  }]
+  };
+  Plotly.newPlot("animation", data, layout).then(() => {
+    let frame = 0;
+    let startTime = null;
+    let paused = false;
+    let pauseStart = 0;
+    let totalPausedTime = 0;
+
+    const button = document.getElementById("toggleButton");
+    button.addEventListener("click", () => {
+      paused = !paused;
+      button.textContent = paused ? "Play" : "Pause";
+      if (paused) {
+        pauseStart = Date.now();
+      } else {
+        totalPausedTime += Date.now() - pauseStart;
+        if (!paused) requestAnimationFrame(animateFrame);
+      }
+    });
+
+    let cycle = 0;
+    function animateFrame(timestamp) {
+      if (frame == t.length - 1 || !startTime) {
+        frame = 0;
+        startTime = timestamp; 
+      }
+      if (paused) return;
+
+      const elapsedSec = (timestamp - startTime - totalPausedTime) / 1000;
+
+      while (frame < t.length - 1 && t[frame] < elapsedSec) {
+        frame++;
+      }
+      if (frame >= t.length) {
+        frame = t.length - 1;
+        cycle++;
+      }
+
+    Plotly.animate("animation", {
+      data: [
+        { x: [0, x[frame]], y: [0, y[frame]] }
+      ]
+    }, {
+      transition: { duration: 0 },
+      frame: { duration: 0, redraw: true }
+    });
+    layout.annotations[0].text = `Time: ${t[frame].toFixed(2)} s`;
+    Plotly.relayout('animation', layout);
+
+    requestAnimationFrame(animateFrame);
+  }
+
+  requestAnimationFrame(animateFrame);
+});
+}
+
+function removeAnimation() {
+    rmPlot("animation");
+}
+
+function animSim() {
+    var solution = solveProblem(RKF45, readInputs());
+    animate(solution);
+}
