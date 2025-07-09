@@ -34,3 +34,24 @@ function arrDiv(arr, scalar) {
 function arrMult(arr, scalar) {
     return arr.map(x => x*scalar);
 }
+
+/**
+ * Run a function on two vectors
+ * @param f    Function to be run.
+ * @param vec1 First vector argument.
+ * @param vec2 Second vector argument.
+ * @returns    Result from running function on both arguments. 
+ */
+function func2Vecs(f, vec1, vec2) {
+    var val;
+    try {
+        val = f(...vec1.map((v,i) => f(v, vec2[i])));
+    } catch (e) {
+        if (e instanceof RangeError) {
+            val = vec1.concat(vec2).reduce((a, b) => f(a, b), 0);
+        } else {
+            throw e; // rethrow if it's not the expected error
+        }
+    }
+    return val;
+}

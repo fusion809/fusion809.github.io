@@ -143,38 +143,70 @@ function generatePlots(objectOfInputs) {
     generateTimePlot(solution);
 };
 
+/**
+ * Remove SIR animation
+ * @return nothing
+ */
 function removeAnimationSIR() {
     rmPlot("animationSIR");
 }
 
-function animSimSIR() {
+/**
+ * Generate SIR animation
+ * @return nothing
+ */
+function generateAnimationSIR() {
     var solution = solveProblem(RKF45, readInputs());
     animate3D(solution, ["S", "I", "R"], [0, 2, 3], "animationSIR", "toggleButtonSIR");
 }
 
+/**
+ * Remove SEI animation
+ * @return nothing
+ */
 function removeAnimationSEI() {
     rmPlot("animationSEI");
 }
 
-function animSimSEI() {
+/**
+ * Generate SEI animation
+ * @return nothing
+ */
+function generateAnimationSEI() {
     var solution = solveProblem(RKF45, readInputs());
     animate3D(solution, ["S", "E", "I"], [0, 1, 2], "animationSEI", "toggleButtonSEI");
 }
 
+/**
+ * Remove SER animation
+ * @return nothing
+ */
 function removeAnimationSER() {
     rmPlot("animationSER");
 }
 
-function animSimSER() {
+/**
+ * Generate SER animation
+ * @return nothing
+ */
+function generateAnimationSER() {
     var solution = solveProblem(RKF45, readInputs());
     animate3D(solution, ["S", "E", "R"], [0, 1, 3], "animationSER", "toggleButtonSER");
 }
 
+/**
+ * Remove EIR animation
+ * @return nothing
+ */
 function removeAnimationEIR() {
     rmPlot("animationEIR");
 }
 
-function animSimEIR() {
+/**
+ * Generate EIR animation
+ * @return nothing
+ */
+function generateAnimationEIR() {
     var solution = solveProblem(RKF45, readInputs());
     animate3D(solution, ["E", "I", "R"], [1, 2, 3], "animationEIR", "toggleButtonEIR");
 }
