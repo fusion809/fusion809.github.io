@@ -606,14 +606,19 @@ function animatePendulum(objectOfInputs, solution, label) {
     });
     const addTimeButton = document.getElementById("addTimeButton");
     addTimeButton.addEventListener("click", () => {
-      //startTime += objectOfInputs.Time - t[frame];
-      startTime += t[frame] - readInputs().t1*1000
-      frame = t.findIndex(x => x >= t[frame] + readInputs().t1);
+      //startTime += objectOfInputs.Time - t[frame];'
+      var t1 = readInputs().t1;
+      if (t[frame] + t1 > t[t.length-1]) {
+        startTime = null;
+      } else {
+        startTime += t[frame] - t1*1000
+        frame = t.findIndex(x => x >= t[frame] + t1);
+      }
     });
 
     let cycle = 0;
     function animateFrame(timestamp) {
-      if (frame == t.length - 1 || !startTime) {
+      if (!startTime || frame == t.length - 1) {
         frame = 0;
         startTime = timestamp; 
       }
