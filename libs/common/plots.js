@@ -815,16 +815,17 @@ function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], IdSuffix="", 
             }],
             xaxis: {
                 title: varnames[0],
+                range: range(x, padding),
                 showticklabels: true,
                 ticks: 'outside',
                 tickfont: { size: 12 }
             },
             yaxis: {
                 title: varnames[1],
+                range: range(y, padding),
                 showticklabels: true,
                 ticks: 'outside',
-                tickfont: { size: 12 },
-                scaleanchor: "x"
+                tickfont: { size: 12 }
             }
         }
       }, {
