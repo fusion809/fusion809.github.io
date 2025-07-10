@@ -7,18 +7,41 @@
     <body>
         <h1>Simple pendulum problem solver with error analysis</h1>
         <div>
-            This webpage uses the <a href='https://en.wikipedia.org/wiki/Runge-Kutta-Fehlberg_method' link='_blank'>Runge-Kutta-Fehlberg</a> fourth-order method with fifth-order error checking (RKF45) to approximate the solution to the problem of a single pendulum. 
+            This webpage uses the <a href='https://en.wikipedia.org/wiki/Runge-Kutta-Fehlberg_method' link='_blank'>Runge-Kutta-Fehlberg</a> fourth-order method with fifth-order error checking (RKF45) to approximate the solution to the problem of a single pendulum. To calculate the equations of motion, we must first determine the Lagrangian which is defined as the kinetic energy minus the potential energy. The kinetic energy of the bob is simply its mass times its velocity squared over two. The kinetic energy of the rod has a term like this, too, (although the velocity we will focus on will be the velocity of its centre of mass) but we must also consider its rotational velocity. As for the potential energy of the bob and rod, it will simply be the mass of them times by the \(y\)-coordinate of its centre of mass.  
 
             \[
             \begin{aligned}
-            \mathcal{L} &= \dfrac{m_b}{2} |\vec{v}_b|^2 + \dfrac{1}{2} I_{\mathrm{cm}}\omega^2 + \dfrac{m_r}{2} |\vec{v}_r|^2 - m_bgr\sin{\theta} -\dfrac{m_r gr\sin{\theta}}{2}\\
-            &= \dfrac{m_b}{2} l^2\dot{\theta}^2 + \dfrac{m_r}{24}l^2\dot{\theta}^2 + \dfrac{m_r}{8}l^2\dot{\theta}^2 - \left(m_b+\dfrac{m_r}{2}\right)gr\sin{\theta} \\
-            &= \left[\dfrac{m_b}{2} + \dfrac{m_r}{6}\right]l^2\dot{\theta}^2 - \left(m_b+\dfrac{m_r}{2}\right)gr\sin{\theta}\\
+            \mathcal{L} &= \dfrac{m_b}{2} |\vec{v}_b|^2 + \dfrac{1}{2} I_{\mathrm{cm}}\omega^2 + \dfrac{m_r}{2} |\vec{v}_r|^2 - m_bg l\sin{\theta} -\dfrac{m_r gl\sin{\theta}}{2}\\
+            &= \dfrac{m_b}{2} l^2\dot{\theta}^2 + \dfrac{m_r}{24}l^2\dot{\theta}^2 + \dfrac{m_r}{8}l^2\dot{\theta}^2 - \left(m_b+\dfrac{m_r}{2}\right)gl\sin{\theta} \\
+            &= \left[\dfrac{m_b}{2} + \dfrac{m_r}{6}\right]l^2\dot{\theta}^2 - \left(m_b+\dfrac{m_r}{2}\right)gl\sin{\theta}.
+            \end{aligned}
+            \]
+
+            Where \(g\) is the acceleration due to gravity in metres per second squared, \(l\) is the length of the pendulum in metres, \(\theta\) is the angle from the positive \(x\) axis (in radians), \(m_b\) is the mass of the bob, \(m_r\) is the mass of the rod and \(t\) is the time in seconds. 
+            
+            Hence its generalized momentum, momentum's time derivative and force are:
+            
+            \[
+            \begin{aligned}
             \dfrac{\partial \mathcal{L}}{\partial \dot{\theta}} &= \left[m_b + \dfrac{m_r}{3}\right]l^2\dot{\theta}\\
             \dfrac{d}{dt}\dfrac{\partial \mathcal{L}}{\partial \dot{\theta}} &= \left[m_b + \dfrac{m_r}{3}\right]l^2\ddot{\theta} \\
-            \dfrac{\partial \mathcal{L}}{\partial \theta} &= - \left(m_b+\dfrac{m_r}{2}\right)gr\cos{\theta} \\
-            \therefore \dfrac{\delta' \mathcal{L}}{\delta' \theta} &= \dfrac{d}{dt}\dfrac{\partial \mathcal{L}}{\partial \dot{\theta}} - \dfrac{\partial \mathcal{L}}{\partial \theta} \\
-            &= \left[m_b + \dfrac{m_r}{3}\right]l^2\ddot{\theta} + \left(m_b+\dfrac{m_r}{2}\right)gr\cos{\theta}\\
+            \dfrac{\partial \mathcal{L}}{\partial \theta} &= - \left(m_b+\dfrac{m_r}{2}\right)gl\cos{\theta}.
+            \end{aligned}
+            \]
+
+            Next we will define \(\dfrac{\delta' f}{\delta' x}\) as the negative functional derivative of \(f(x, \dot{x}, t)\) with respect to \(x\).
+
+            \[
+            \begin{aligned}
+            \dfrac{\delta' \mathcal{L}}{\delta' \theta} &= \dfrac{d}{dt}\dfrac{\partial \mathcal{L}}{\partial \dot{\theta}} - \dfrac{\partial \mathcal{L}}{\partial \theta} \\
+            &= \left[m_b + \dfrac{m_r}{3}\right]l^2\ddot{\theta} + \left(m_b+\dfrac{m_r}{2}\right)gl\cos{\theta}.
+            \end{aligned}
+            \]
+
+            Next we will calculate the generalized dissipation force \(Q_i\) which is defined as being the dot product of the dissipation force vector with generalized basis vector for each component of a physical system. Here there are two components of the system: the rod and the bob. The dissipation force vector will be assumed to be \(\vec{F}_{D,j} = -(b_j + c_j|\vec{v}_j|)\vec{v}_j\).
+
+            \[
+            \begin{aligned}
             Q_{\theta} &= -(b_r+c_r|\vec{v}_r|)\vec{v}_r \cdot \dfrac{\partial \vec{r}_r}{\partial \theta} -(b_b+c_b|\vec{v}_b|)\vec{v}_b \cdot \dfrac{\partial \vec{r}_b}{\partial \theta}\\
             &= -\left(b_r+c_r\dfrac{l|\dot{\theta}|}{2}\right)\dfrac{l\dot{\theta}}{2}\begin{bmatrix}
             -\sin{\theta} \\
@@ -33,11 +56,35 @@
             -\sin{\theta} \\
             \cos{\theta}
             \end{bmatrix} \\
-            &= -\left(b_r+c_r \dfrac{l|\dot{\theta}|}{2}\right)\dfrac{l^2\dot{\theta}}{4} -(b_b+c_b l|\dot{\theta}|)l^2\dot{\theta}
+            &= -\left(b_r+c_r \dfrac{l|\dot{\theta}|}{2}\right)\dfrac{l^2\dot{\theta}}{4} -(b_b+c_b l|\dot{\theta}|)l^2\dot{\theta}.
             \end{aligned}
             \]
 
-            where \(g\) is the acceleration due to gravity in metres per second squared, \(l\) is the length of the pendulum in metres, \(\theta\) is the angle from the positive \(x\) axis (in radians), \(m_b\) is the mass of the bob, \(m_r\) is the mass of the rod and \(t\) is the time in seconds. 
+            Hence the Euler-Lagrange equation with dissipative forces is
+
+            \[
+            \begin{aligned}
+            \dfrac{\delta' \mathcal{L}}{\delta' \theta} &= Q_{\theta} \\
+            \left[m_b + \dfrac{m_r}{3}\right]l^2\ddot{\theta} + \left(m_b+\dfrac{m_r}{2}\right)gl\cos{\theta} &= -\left(b_r+c_r \dfrac{l|\dot{\theta}|}{2}\right)\dfrac{l^2\dot{\theta}}{4} -(b_b+c_b l|\dot{\theta}|)l^2\dot{\theta}.
+            \end{aligned}
+            \]
+
+            Dividing by the coefficient of \(\ddot{\theta}\), namely \(\left[m_b + \dfrac{m_r}{3}\right]l^2\) yields
+
+            \[
+            \begin{aligned}
+            \ddot{\theta} + \dfrac{m_b+\dfrac{m_r}{2}}{\left[m_b + \dfrac{m_r}{3}\right]l}g\cos{\theta} &= -\dfrac{\left(b_r+c_r \dfrac{l|\dot{\theta}|}{2}\right)\dfrac{\dot{\theta}}{4} +(b_b+c_b l|\dot{\theta}|)\dot{\theta}}{m_b + \dfrac{m_r}{3}}.
+            \end{aligned}
+            \]
+
+            Isolating \(\ddot{\theta}\) yields
+
+            \[
+            \begin{aligned}
+            \ddot{\theta} &= -\dfrac{m_b+\dfrac{m_r}{2}}{\left[m_b + \dfrac{m_r}{3}\right]l}g\cos{\theta} -\dfrac{\left(b_r+c_r \dfrac{l|\dot{\theta}|}{2}\right)\dfrac{\dot{\theta}}{4} +(b_b+c_b l|\dot{\theta}|)\dot{\theta}}{m_b + \dfrac{m_r}{3}} \\
+            &= -\dfrac{6m_b+3m_r}{\left[6m_b + 2m_r\right]l}g\cos{\theta} -\dfrac{(6b_r+24b_b)\dot{\theta}+(3c_r+24c_b)l|\dot{\theta}|\dot{\theta}}{24m_b + 8m_r}.
+            \end{aligned}
+            \]
             
             Below you can specify the various parameters for the problem we will solve. 
             
