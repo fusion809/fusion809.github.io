@@ -272,6 +272,12 @@ function removePendulumPlots() {
     rmPlot("pendulumTimePlot");
 }
 
+/**
+ * Range of values for a plot. 
+ * @param x Either an array or array of arrays.
+ * @returns Vector of values corresponding to minimum of x - 1% padding, 
+ * maximum of x + 1% padding.
+ */
 function range(x) {
   if (x[0].length == undefined) {
     var xmin = Math.min(...x);
@@ -331,6 +337,15 @@ function gen2DPlot(x, y, element, title, xtitle, ytitle) {
     Plotly.newPlot(element, dataXY, layoutXY);
 }
 
+/**
+ * Generate a 2D plot with X and Y labels
+ * @param x       Vector of x values.
+ * @param y       Vector of y values.
+ * @param element Element ID you want the plot to be in.
+ * @param title   Title of plot.
+ * @param xtitle  X axis label of the plot.
+ * @param ytitle  Y axis label of the plot.
+ */
 function gen2DPlotXYLabs(x, y, element, title, xtitle, ytitle) {
     // Height and width of the plot
     adjustPlotHeight(element);
@@ -560,7 +575,6 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
   } else if (label == "Simple pendulum" || label == "Single pendulum" || label == "Elastic pendulum") {
     var [x, y] = generatePendulumCoords(objectOfInputs, solution);
   }
-  const padding = 1;
   var data;
   if (label == "Double pendulum" || label == "Double elastic pendulum") {
     const trace1 = {
@@ -702,7 +716,6 @@ function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], IdSuffix="", 
   const x = solution.vars[nos[0]];
   const y = solution.vars[nos[1]];
   const t = solution.t;
-  const padding = 1;
   const tracePath = {
     x: x,
     y: y,
