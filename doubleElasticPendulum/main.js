@@ -400,7 +400,7 @@ function removeAnimation() {
 function generateR1PhaseAnimation() {
   var objectOfInputs = readInputs();
   var solution = solveProblem(RKF45, objectOfInputs);
-  animate2D(solution, ["r<sub>1</sub>", "dr<sub>1</sub>/dt"], [0.9, 0.98], "R1Phase", [0, 1]);
+  animate2D(solution, ["r<sub>1</sub>", "dr<sub>1</sub>/dt"], [0.05, 0.98], "R1Phase", [0, 1]);
 }
 
 function removeR1PhaseAnimation() {
@@ -410,7 +410,7 @@ function removeR1PhaseAnimation() {
 function generateR2PhaseAnimation() {
   var objectOfInputs = readInputs();
   var solution = solveProblem(RKF45, objectOfInputs);
-  animate2D(solution, ["r<sub>2</sub>", "dr<sub>2</sub>/dt"], [0.95, 0.98], "R2Phase", [2, 3]);
+  animate2D(solution, ["r<sub>2</sub>", "dr<sub>2</sub>/dt"], [0.05, 0.98], "R2Phase", [2, 3]);
 }
 
 function removeR2PhaseAnimation() {
@@ -420,7 +420,7 @@ function removeR2PhaseAnimation() {
 function generateTheta1PhaseAnimation() {
   var objectOfInputs = readInputs();
   var solution = solveProblem(RKF45, objectOfInputs);
-  animate2D(solution, ["θ<sub>1</sub>", "dθ<sub>1</sub>/dt"], [0.9, 0.98], "Theta1Phase", [4, 5]);
+  animate2D(solution, ["θ<sub>1</sub>", "dθ<sub>1</sub>/dt"], [0.05, 0.98], "Theta1Phase", [4, 5]);
 }
 
 function removeTheta1PhaseAnimation() {
@@ -430,7 +430,7 @@ function removeTheta1PhaseAnimation() {
 function generateTheta2PhaseAnimation() {
   var objectOfInputs = readInputs();
   var solution = solveProblem(RKF45, objectOfInputs);
-  animate2D(solution, ["θ<sub>2</sub>", "dθ<sub>2</sub>/dt"], [0.95, 0.98], "Theta2Phase", [6, 7]);
+  animate2D(solution, ["θ<sub>2</sub>", "dθ<sub>2</sub>/dt"], [0.05, 0.98], "Theta2Phase", [6, 7]);
 }
 
 function removeTheta2PhaseAnimation() {
