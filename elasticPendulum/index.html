@@ -8,15 +8,23 @@
     <body>
         <h1>Elastic pendulum problem solver</h1>
         <div>
-            This webpage uses the <a href='https://en.wikipedia.org/wiki/Runge-Kutta-Fehlberg_method' link='_blank'>Runge-Kutta-Fehlberg</a> fourth-order method with fifth-order error checking (RKF45) to approximate the solution to the problem of the <a href='https://en.wikipedia.org/wiki/Elastic_pendulum' link='_blank'>elastic pendulum</a>:
+            This webpage uses the <a href='https://en.wikipedia.org/wiki/Runge-Kutta-Fehlberg_method' link='_blank'>Runge-Kutta-Fehlberg</a> fourth-order method with fifth-order error checking (RKF45) to approximate the solution to the problem of the <a href='https://en.wikipedia.org/wiki/Elastic_pendulum' link='_blank'>elastic pendulum</a>
 
             \[
             \begin{aligned}
-            \dfrac{d^{2}x}{dt^2} &= (l_0 + x) \dot{\theta}^2 - \dfrac{kx}{m} + g \sin{\theta} \\
-            \dfrac{d^{2} \theta}{dt^2} &= -\dfrac{g}{l_0 + x} \cos{\theta} - \dfrac{2\dot{x}\dot{\theta}}{l_0 + x}
+            \dfrac{d^{2}z}{dt^2} &= (l_0 + z) \dot{\theta}^2 - \dfrac{kz}{m} + g \sin{\theta} \\
+            \dfrac{d^{2} \theta}{dt^2} &= -\dfrac{g}{l_0 + z} \cos{\theta} - \dfrac{2\dot{z}\dot{\theta}}{l_0 + z}.
             \end{aligned}
             \]
 
+            Where:
+            
+            <ul>
+                <li>\(z\) is the extension of the pendulum beyond its rest length (in metres).</li>
+                <li>\(\theta\) is the angle of the pendulum relative to the positive \(x\)-axis.</li>
+                <li>\(g\) is the acceleration due to gravity (in metres per second squared).</li>
+                <li>\(l_0\) is the rest length of the pendulum.</li>
+            </ul>
         </div>
 
         <!--A form for users to enter in all the parameters of the problem-->
@@ -76,20 +84,20 @@
                     <td>End time for the simulation in seconds.</td>
                 </tr>
                 <tr>
-                    <td><label for="x0">\(x_0\):</label></td>
+                    <td><label for="z0">\(z_0\):</label></td>
                     <td><input type="Number"
-                        id="x0"
-                        name="x0"
+                        id="z0"
+                        name="z0"
                         value="1"></td>
-                    <td>Value of \(x\) at \(t_0\).</td>
+                    <td>Value of \(z\) at \(t_0\).</td>
                 </tr>
                 <tr>
-                    <td><label for="xDot0">\(\dot{x}_0\):</label></td>
+                    <td><label for="zDot0">\(\dot{z}_0\):</label></td>
                     <td><input type="Number"
-                        id="xDot0"
-                        name="xDot0"
+                        id="zDot0"
+                        name="zDot0"
                         value="1"></td>
-                    <td>Value of \(\dot{x}\) at \(t_0\).</td>
+                    <td>Value of \(\dot{z}\) at \(t_0\).</td>
                 </tr>
                 <tr>
                     <td><label for="theta0">\(\theta_0\):</label></td>
@@ -118,23 +126,23 @@
                 <td><button type="button" onclick="removeTable()">Remove the solution table</button></td>
             </tr>
             <tr>
-                <td><a href="#phasePlotXTheta"><button type="button" onclick="generateXThetaPhasePlot(solveProblem(RKF45, readInputs()))">Generate a \(\theta\) against \(x\) phase plot</button></a></td>
-                <td><button type="button" onclick="removeXThetaPhasePlot()">Remove plot</button><br/></td>
+                <td><a href="#phasePlotZTheta"><button type="button" onclick="generateZThetaPhasePlot(solveProblem(RKF45, readInputs()))">Generate a \(\theta\) against \(z\) phase plot</button></a></td>
+                <td><button type="button" onclick="removeZThetaPhasePlot()">Remove plot</button><br/></td>
             </tr>
             <tr>
-                <td><a href="#phasePlotXXDot"><button type="button" onclick="generateXXDotPhasePlot(solveProblem(RKF45, readInputs()))">Generate a \(\dot{x}\) against \(x\) phase plot</button></a></td>
-                <td><button type="button" onclick="removeXXDotPhasePlot()">Remove plot</button><br/></td>
+                <td><a href="#phasePlotZZDot"><button type="button" onclick="generateZZDotPhasePlot(solveProblem(RKF45, readInputs()))">Generate a \(\dot{z}\) against \(z\) phase plot</button></a></td>
+                <td><button type="button" onclick="removeZZDotPhasePlot()">Remove plot</button><br/></td>
             </tr>
             <tr>
                 <td><a href="#phaseThetaThetaDot"><button type="button" onclick="generateThetaThetaDotPhasePlot(solveProblem(RKF45, readInputs()))">Generate a \(\dot{\theta}\) against \(\theta\) phase plot</button></a></td>
                 <td><button type="button" onclick="removeThetaThetaDotPhasePlot()">Remove plot</button></td>
             </tr>
             <tr>
-                <td><a href="#timePlot"><button type="button" onclick="generateTimePlot(solveProblem(RKF45, readInputs()))">Generate a \(x\), \(\dot{x}\), \(\theta\) and \(\dot{\theta}\) against time plot</button></a></td>
+                <td><a href="#timePlot"><button type="button" onclick="generateTimePlot(solveProblem(RKF45, readInputs()))">Generate a \(z\), \(\dot{z}\), \(\theta\) and \(\dot{\theta}\) against time plot</button></a></td>
                 <td><button type="button" onclick="removeTimePlot()">Remove plot</button></td>
             </tr>
             <tr>
-                <td><a href="#phasePlotXXDot"><button type="button" onclick="generatePlots(readInputs())">Generate all solution plots</button></a></td>
+                <td><a href="#phasePlotZZDot"><button type="button" onclick="generatePlots(readInputs())">Generate all solution plots</button></a></td>
                 <td><button type="button" onclick="removePlots()">Remove all plots</button></td>
             </tr>
             <tr>
@@ -146,16 +154,16 @@
                 <td><button type="button" onclick="removeThetaPhaseAnimation()">Remove \(\theta\) phase plot animation</button></td>
             </tr>
 			<tr>
-                <td><a href="#animationXPhase"><button type="button" onclick="generateXPhaseAnimation()">Generate a \(x\) phase plot animation</button></a></td>
-                <td><button type="button" onclick="removeXPhaseAnimation()">Remove \(x\) phase plot animation</button></td>
+                <td><a href="#animationZPhase"><button type="button" onclick="generateZPhaseAnimation()">Generate a \(z\) phase plot animation</button></a></td>
+                <td><button type="button" onclick="removeZPhaseAnimation()">Remove \(z\) phase plot animation</button></td>
             </tr>
         </table>
 
         <!--Where the table and plot goes-->
         <table id="tableOutputs">
         </table>
-        <div id='phasePlotXTheta'></div>
-        <div id='phasePlotXXDot'></div>
+        <div id='phasePlotZTheta'></div>
+        <div id='phasePlotZZDot'></div>
         <div id='phasePlotThetaThetaDot'></div>
         <div id='timePlot'></div>
         <button id="toggleButton">Pause</button>
@@ -166,10 +174,10 @@
         <button id="restartButtonThetaPhase">Restart</button>
         <button id="addTimeButtonThetaPhase">Add time \(\Delta t\) to animation.</button>
         <div id='animationThetaPhase'></div>
-		<button id="toggleButtonXPhase">Pause</button>
-        <button id="restartButtonXPhase">Restart</button>
-        <button id="addTimeButtonXPhase">Add time \(\Delta t\) to animation.</button>
-        <div id='animationXPhase'></div>
+		<button id="toggleButtonZPhase">Pause</button>
+        <button id="restartButtonZPhase">Restart</button>
+        <button id="addTimeButtonZPhase">Add time \(\Delta t\) to animation.</button>
+        <div id='animationZPhase'></div>
         {{ insert page_foot_general.html }}
     </body>
 </html>
