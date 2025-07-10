@@ -146,3 +146,7 @@ function generateAnimation() {
     var solution = solveProblem(RKF45, readInputs());
     animate3D(solution, [0, 0, 0], ["S", "I", "R"]);
 }
+
+function generateTable() {
+    fillTable(readInputs(), ['S', 'I', 'R'])
+}

@@ -92,99 +92,16 @@
                         value="10"></td>
                     <td>Predator population.</td>
                 </tr>
-                <tr>
-                    <td><label for="epsilon">\(\epsilon\):</label></td>
-                    <td><input type="Number"
-                       id="epsilon"
-                       name="epsilon"
-                       value="1e-9"></td>
-                    <td>Absolute error tolerance in both \(x\) and \(y\). \(\epsilon \lt \)1e-7 often freezes the webpage with \(t_f \geq 100\).</td>
-                </tr>
-                <tr>
-                    <td><label for="dtInitial">dtInitial:</label></td>
-                    <td><input type="Number"
-                        id="dtInitial"
-                        name="dtInitial"
-                        value="0.1"></td>
-                    <td>Initial guess for step size.</td>
-                </tr>
-                <tr>
-                    <td><label for="dtMin">dtMin:</label></td>
-                    <td><input type="Number"
-                        id="dtMin"
-                        name="dtMin"
-                        value="1e-8"></td>
-                    <td>Minimum limit for step size.</td>
-                </tr>
-                <tr>
-                    <td><label for="Deltat">\(\Delta t\)</label></td>
-                    <td><input type="Number"
-                        id="Deltat"
-                        name="Deltat"
-                        value="20"></td>
-                    <td>Time for skipping ahead in animation.</td>
-                </tr>
+                {{ include solver_data.html }}
             </table>
         </form><br/>
         
         <!--Buttons-->
-        <table id="buttontable">
-            <tr>
-                <td><a href="#tableOutputs"><button type="button" onclick="fillTable(readInputs(), ['x', 'dx/dt'])">Tabulate the solution</button></a></td>
-                <td><button type="button" onclick="removeTable()">Remove the solution table</button></td>
-            </tr>
-            <tr>
-                <td><a href="#phasePlot"><button type="button" onclick="generatePhasePlot(solveProblem(RKF45, readInputs()))">Generate a phase plot</button></a></td>
-                <td><button type="button" onclick="removePhasePlot()">Remove plot</button></td>
-            </tr>
-            <tr>
-                <td><a href="#timePlot"><button type="button" onclick="generateTimePlot(solveProblem(RKF45, readInputs()))">Generate a time plot</button></a></td>
-                <td><button type="button" onclick="removeTimePlot()">Remove plot</button></td>
-            </tr>
-            <tr>
-                <td><a href="#phasePlot"><button type="button" onclick="generatePlots(readInputs())">Generate all solution plots</button></a></td>
-                <td><button type="button" onclick="removePlots()">Remove all solution plots</button></td>
-            </tr>
-            <tr>
-                <td><a href="#animation"><button type="button" onclick="generateAnimation()">Generate an animation</button></a></td>
-                <td><button type="button" onclick="removeAnimation()">Remove animation</button></td>
-            </tr>
-        </table>
+
+            {{ insert 2D_buttons.html }}
 
         <!--Where the table and plot goes-->
-        <table id="tableOutputs">
-        </table>
-        <div id='timePlot'></div>
-        <div id='phasePlot'></div>
-        <button id="toggleButton">Pause</button>
-        <button id="restartButton">Restart</button>
-        <button id="addTimeButton">Add time \(\Delta t\) to animation.</button>
-        <div id="animation"></div>
-        <style>
-            h1 {
-                font-size: 30px;
-                max-width: 100%;
-            }
-            div {
-                margin: 1px;
-                max-width: 100%;
-            }
-            table, tr, th, td {
-                border: 1px solid black;
-                border-collapse: collapse;
-                max-width: 100%;
-            }
-            td {
-                padding: 2px;
-            }
-            #buttontable, #buttontable tr, #buttontable td {
-                border: none;
-                max-width: 100%;
-            }
-            #timePlot, #phasePlot {
-                width: 100%;
-            }
-        </style>
+        {{ insert 2D_output.html }}
         {{ insert page_foot_general.html }}
     </body>
 </html>
