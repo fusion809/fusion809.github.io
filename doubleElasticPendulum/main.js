@@ -410,7 +410,7 @@ function removeR1PhaseAnimation() {
 function generateR2PhaseAnimation() {
   var objectOfInputs = readInputs();
   var solution = solveProblem(RKF45, objectOfInputs);
-  animate2D(solution, ["r<sub>2</sub>", "dr<sub>2</sub>/dt"], [0.05, 0.98], "R2Phase", [2, 3]);
+  animate2D(solution, ["r<sub>2</sub>", "dr<sub>2</sub>/dt"], [0.98, 0.02], "R2Phase", [2, 3]);
 }
 
 function removeR2PhaseAnimation() {
