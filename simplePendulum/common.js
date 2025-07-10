@@ -289,3 +289,14 @@ function generateAnimation() {
     var solution = solveProblemSP(objectOfInputs);
     animatePendulum(objectOfInputs, solution, "Simple pendulum");
 }
+
+function generatePhaseAnimation() {
+    var objectOfInputs = readInputs();
+    var solution = solveProblemSP(objectOfInputs);
+    solution.vars = [solution.theta, solution.thetaDot];
+    animate2D(solution, ["θ", "dθ/dt"], [0, 0.98], "Phase");
+}
+
+function removePhaseAnimation() {
+    rmPlot("animationPhase");
+}

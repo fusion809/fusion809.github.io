@@ -673,6 +673,9 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
 });
 }
 
+function range(x, padding) {
+  return [Math.min(...x)-padding, Math.max(...x)+padding]
+}
 /**
  * Create 2D plot animation.
  * @param solution Solution object containing t and vars.
@@ -706,21 +709,22 @@ function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], IdSuffix="", 
   };
 
   const layout = {
-    margin: { l: 0, r: 0, b: 0, t: 0 },
+  margin: { l: 0, r: 0, b: 0, t: 0 },  // make space for labels
     xaxis: {
-        title: varnames[0],
-        range: [Math.min(x) - padding, Math.max(x) + padding],
-        showticklabels: true,   // Ensure tick labels are shown
-        ticks: 'outside',       // Optional: put ticks outside the plot
-        tickfont: { size: 12 }  // Optional: control label font size
+      title: varnames[0],
+      range: range(x, padding),
+      showticklabels: true,
+      automargin: true,
+      ticks: 'outside',
+      tickfont: { size: 12 }
     },
     yaxis: {
-        title: varnames[1],
-        range: [Math.min(y) - padding, Math.max(y) + padding],
-        showticklabels: true,
-        ticks: 'outside',
-        tickfont: { size: 12 },
-        scaleanchor: "x"
+      title: varnames[1],
+      range: range(y, padding),
+      showticklabels: true,
+      automargin: true,
+      ticks: 'outside',
+      tickfont: { size: 12 }
     },
     annotations: [{
       text: `Time: 0.00 s`,

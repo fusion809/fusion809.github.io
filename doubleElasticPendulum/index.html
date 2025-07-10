@@ -261,7 +261,7 @@
                         name="Deltat"
                         value="20"></td>
                     <td>Time for skipping ahead in animation.</td>
-                </tr> 
+                </tr>
             </table>
         </form>
 
@@ -343,6 +343,22 @@
                 <td><a href="#animation"><button type="button" onclick="generateAnimation()">Generate an animation</button></a></td>
                 <td><button type="button" onclick="removeAnimation()">Remove animation</button></td>
             </tr>
+            <tr>
+                <td><a href="#animationR1Phase"><button type="button" onclick="generateR1PhaseAnimation()">Generate a \(r_1\) phase plot animation</button></a></td>
+                <td><button type="button" onclick="removeR1PhaseAnimation()">Remove \(r_1\) phase plot animation</button></td>
+            </tr>
+			<tr>
+                <td><a href="#animationR2Phase"><button type="button" onclick="generateR2PhaseAnimation()">Generate a \(r_2\) phase plot animation</button></a></td>
+                <td><button type="button" onclick="removeR2PhaseAnimation()">Remove \(r_2\) phase plot animation</button></td>
+            </tr>
+			<tr>
+                <td><a href="#animationTheta1Phase"><button type="button" onclick="generateTheta1PhaseAnimation()">Generate a \(\theta_1\) phase plot animation</button></a></td>
+                <td><button type="button" onclick="removeTheta1PhaseAnimation()">Remove \(\theta_1\) phase plot animation</button></td>
+            </tr>
+			<tr>
+                <td><a href="#animationTheta2Phase"><button type="button" onclick="generateTheta2PhaseAnimation()">Generate a \(\theta_2\) phase plot animation</button></a></td>
+                <td><button type="button" onclick="removeTheta2PhaseAnimation()">Remove \(\theta_2\) phase plot animation</button></td>
+            </tr>
         </table>
 
         <!--Where the table and plot goes-->
@@ -369,6 +385,22 @@
         <button id="restartButton">Restart</button>
         <button id="addTimeButton">Add time \(\Delta t\) to animation.</button>
         <div id="animation"></div>
+        <button id="toggleButtonR1Phase">Pause</button>
+        <button id="restartButtonR1Phase">Restart</button>
+        <button id="addTimeButtonR1Phase">Add time \(\Delta t\) to animation.</button>
+        <div id='animationR1Phase'></div>
+		<button id="toggleButtonR2Phase">Pause</button>
+        <button id="restartButtonR2Phase">Restart</button>
+        <button id="addTimeButtonR2Phase">Add time \(\Delta t\) to animation.</button>
+        <div id='animationR2Phase'></div>
+		<button id="toggleButtonTheta1Phase">Pause</button>
+        <button id="restartButtonTheta1Phase">Restart</button>
+        <button id="addTimeButtonTheta1Phase">Add time \(\Delta t\) to animation.</button>
+        <div id='animationTheta1Phase'></div>
+		<button id="toggleButtonTheta2Phase">Pause</button>
+        <button id="restartButtonTheta2Phase">Restart</button>
+        <button id="addTimeButtonTheta2Phase">Add time \(\Delta t\) to animation.</button>
+        <div id='animationTheta2Phase'></div>
         <style>
             h1 {
                 font-size: 30px;

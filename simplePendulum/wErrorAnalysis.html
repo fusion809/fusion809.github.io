@@ -213,6 +213,10 @@
                 <td><a href="#animation"><button type="button" onclick="generateAnimation()">Generate an animation</button></a></td>
                 <td><button type="button" onclick="removeAnimation()">Remove animation</button></td>
             </tr>
+            <tr>
+                <td><a href="#animationPhase"><button type="button" onclick="generatePhaseAnimation()">Generate a phase plot animation</button></a></td>
+                <td><button type="button" onclick="removePhaseAnimation()">Remove phase plot animation</button></td>
+            </tr>
         </table>
 
         <!--Where the table and plot goes-->
@@ -225,6 +229,10 @@
         <button id="restartButton">Restart</button>
         <button id="addTimeButton">Add time \(\Delta t\) to animation.</button>
         <div id='animation'></div>
+        <button id="toggleButtonPhase">Pause</button>
+        <button id="restartButtonPhase">Restart</button>
+        <button id="addTimeButtonPhase">Add time \(\Delta t\) to animation.</button>
+        <div id='animationPhase'></div>
         <style>
             h1 {
                 font-size: 30px;

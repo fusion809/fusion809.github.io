@@ -185,6 +185,14 @@
                 <td><a href="#animation"><button type="button" onclick="generateAnimation()">Generate an animation</button></a></td>
                 <td><button type="button" onclick="removeAnimation()">Remove animation</button></td>
             </tr>
+            <tr>
+                <td><a href="#animationThetaPhase"><button type="button" onclick="generateThetaPhaseAnimation()">Generate a \(\theta\) phase plot animation</button></a></td>
+                <td><button type="button" onclick="removeThetaPhaseAnimation()">Remove \(\theta\) phase plot animation</button></td>
+            </tr>
+			<tr>
+                <td><a href="#animationXPhase"><button type="button" onclick="generateXPhaseAnimation()">Generate a \(x\) phase plot animation</button></a></td>
+                <td><button type="button" onclick="removeXPhaseAnimation()">Remove \(x\) phase plot animation</button></td>
+            </tr>
         </table>
 
         <!--Where the table and plot goes-->
@@ -198,6 +206,14 @@
         <button id="restartButton">Restart</button>
         <button id="addTimeButton">Add time \(\Delta t\) to animation.</button>
         <div id="animation"></div>
+        <button id="toggleButtonThetaPhase">Pause</button>
+        <button id="restartButtonThetaPhase">Restart</button>
+        <button id="addTimeButtonThetaPhase">Add time \(\Delta t\) to animation.</button>
+        <div id='animationThetaPhase'></div>
+		<button id="toggleButtonXPhase">Pause</button>
+        <button id="restartButtonXPhase">Restart</button>
+        <button id="addTimeButtonXPhase">Add time \(\Delta t\) to animation.</button>
+        <div id='animationXPhase'></div>
         <style>
             h1 {
                 font-size: 30px;
