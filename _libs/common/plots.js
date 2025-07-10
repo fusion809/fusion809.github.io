@@ -704,7 +704,7 @@ function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], IdSuffix="", 
     y: [y[0]],
     mode: 'markers',
     type: 'scatter',
-    marker: { color: 'red', size: 5 },
+    marker: { color: 'red', size: 10 },
     name: 'Object'
   };
 
@@ -799,7 +799,7 @@ function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], IdSuffix="", 
             y: [y[frame]],
             mode: 'markers',
             type: 'scatter',
-            marker: { color: 'red', size: 5 },
+            marker: { color: 'red', size: 10 },
             name: 'Object'
           }
         ],
@@ -870,7 +870,7 @@ function animate3D(solution, view=[0.5, -2, 0.5], varnames=["x", "y", "z"], nos=
     z: [z[0]],
     mode: 'markers',
     type: 'scatter3d',
-    marker: { color: 'red', size: 5 },
+    marker: { color: 'red', size: 7 },
     name: 'Object'
   };
 
@@ -954,7 +954,7 @@ function animate3D(solution, view=[0.5, -2, 0.5], varnames=["x", "y", "z"], nos=
             z: [z[frame]],
             mode: 'markers',
             type: 'scatter3d',
-            marker: { color: 'red', size: 5 },
+            marker: { color: 'red', size: 7 },
             name: 'Object'
           }
         ],
