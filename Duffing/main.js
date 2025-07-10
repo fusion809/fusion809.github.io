@@ -87,3 +87,7 @@ function generateAnimation() {
 function removeAnimation() {
   rmPlots("animation");
 }
+
+function generateTable() {
+    fillTable(readInputs(), ['x', 'dx/dt'])
+}

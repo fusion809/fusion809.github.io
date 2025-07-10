@@ -90,3 +90,7 @@ function generateAnimation() {
     var solution = solveProblem(RKF45, readInputs());
     animate2D(solution);
 }
+
+function generatetable() {
+    fillTable(readInputs(), ['x', 'dx/dt'])
+}

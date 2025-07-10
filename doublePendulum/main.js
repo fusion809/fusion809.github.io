@@ -353,3 +353,7 @@ function generateTheta2PhaseAnimation() {
 function removeTheta2PhaseAnimation() {
     rmPlot("animationTheta2Phase");
 }
+
+function generateTable() {
+    fillTable(readInputs(), ['&theta;<sub>1</sub>', 'd&theta;<sub>1</sub>/dt', '&theta;<sub>2</sub>', 'd&theta;<sub>2</sub>/dt'])
+}
