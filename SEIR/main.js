@@ -191,7 +191,7 @@ function removeAnimationSER() {
     rmPlot("animationSER");
 }
 
-function generateAnimationBaseSER() {
+function generateAnimationBaseSER(solution) {
     animate3D(solution, [0, 0, 0], ["S", "E", "R"], [0, 1, 3], "SER");
 }
 /**
