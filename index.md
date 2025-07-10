@@ -15,7 +15,7 @@ Mathematical simulation pages:
 - [SEIR system solver](/SEIR/)
 - [Simple pendulum simulator with error analysis](/simplePendulum/wErrorAnalysis/)
 - [Simple pendulum simulator without error analysis](/simplePendulum/woErrorAnalysis/)
-- [Single pendulum](/singlePendulum/)
+- [Single pendulum solver and equation of motion derivation](/singlePendulum/)
 - [SIR system solver](/SIR/)
 
 Package description page:

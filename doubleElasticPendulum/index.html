@@ -3,45 +3,7 @@
     <head>
         <title>Double elastic pendulum problem solver</title>
         <!--We need a few external JS libraries to provide LaTeX and plot rendering. -->
-        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/mathjs@13.0.1/lib/browser/math.js"></script>
-        <link rel="stylesheet" href="/css/franklin.css">
-        <link rel="stylesheet" href="/css/pure.css">
-        <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-        <script>
-            MathJax = {
-    tex: {
-      inlineMath: [['$', '$']]
-    }
-  };
-  window.MathJax = {
-    tex: {
-      tags: "all", // or "all"
-    //   macros: {
-    //     eqref: "\\href{#eqref-\\1}{(\\1)}"
-    //   }
-    },
-    options: {
-      renderActions: {
-        addMenu: []
-      }
-    }
-  };
-</script>
-
-        <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
-        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
-        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/contrib/auto-render.min.js" 
-        onload="renderMathInElement(document.body);"></script>-->
-        <script src="./main.js"></script>
-        <script src="/libs/common/form.js"></script>
-        <script src="/libs/common/arrays.js"></script>
-        <script src="/libs/common/RKF45.js"></script>
-        <script src="/libs/common/table.js"></script>
-        <script src="/libs/common/plots.js"></script>
-        <script type="text/javascript"
-    src="//ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        <link rel="icon" href="/assets/favicon.png">
+        {{ insert head_solver.html }}
     </head>
     <body>
         <h1>Double elastic pendulum problem solver</h1>
@@ -426,12 +388,6 @@
                 width: 100%;
             }
         </style>
-        <div class="page-foot">
-            <div class="copyright">
-                &copy; Brenton Horne. I do not claim to be infallible, so feel free to send corrections to <a href="mailto:brentonhorne77@gmail.com">brentonhorne77@gmail.com</a>. 
-                <br/>I favour Oxford spelling, so if you notice I generally use different spelling to Australian spelling, that is probably why. <br/>
-                Source code: <a href="https://github.com/fusion809/fusion809.github.io">https://github.com/fusion809/fusion809.github.io</a>.
-            </div>
-        </div>
+        {{ insert page_foot.html }}
     </body>
 </html>
