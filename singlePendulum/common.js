@@ -126,3 +126,13 @@ function generateAnimation() {
     var solution = solveProblem(RKF45, objectOfInputs);
     animatePendulum(objectOfInputs, solution, "Single pendulum");
 }
+
+function generatePhaseAnimation() {
+    var objectOfInputs = readInputs();
+    var solution = solveProblem(RKF45, objectOfInputs);
+    animate2D(solution, ["θ", "dθ/dt"], [0, 0.98], "Phase");
+}
+
+function removePhaseAnimation() {
+    rmPlot("animationPhase");
+}

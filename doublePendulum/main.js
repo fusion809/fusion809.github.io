@@ -330,3 +330,26 @@ function generateAnimation() {
   var solution = solveProblem(RKF45, objectOfInputs);
   animatePendulum(objectOfInputs, solution, "Double pendulum");
 }
+
+function removeAnimation() {
+    rmPlot("animation");
+}
+
+function generateTheta1PhaseAnimation() {
+  var objectOfInputs = readInputs();
+  var solution = solveProblem(RKF45, objectOfInputs);
+  animate2D(solution, ["θ<sub>1</sub>", "dθ<sub>1</sub>/dt"], [0.9, 0.98], "Theta1Phase");
+}
+
+function removeTheta1PhaseAnimation() {
+    rmPlot("animationTheta1Phase");
+}
+function generateTheta2PhaseAnimation() {
+  var objectOfInputs = readInputs();
+  var solution = solveProblem(RKF45, objectOfInputs);
+  animate2D(solution, ["θ<sub>2</sub>", "dθ<sub>2</sub>/dt"], [0.95, 0.98], "Theta2Phase", [2, 3]);
+}
+
+function removeTheta2PhaseAnimation() {
+    rmPlot("animationTheta2Phase");
+}

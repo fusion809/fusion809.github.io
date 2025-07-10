@@ -145,3 +145,23 @@ function generateAnimation() {
     var solution = solveProblem(RKF45, objectOfInputs);
     animatePendulum(objectOfInputs, solution, "Elastic pendulum");
 }
+
+function generateThetaPhaseAnimation() {
+    var objectOfInputs = readInputs();
+    var solution = solveProblem(RKF45, objectOfInputs);
+    animate2D(solution, ["θ", "dθ/dt"], [0.9, 0.98], "ThetaPhase", [2, 3]);
+}
+
+function removeThetaPhaseAnimation() {
+    rmPlot("animationThetaPhase");
+}
+
+function generateXPhaseAnimation() {
+    var objectOfInputs = readInputs();
+    var solution = solveProblem(RKF45, objectOfInputs);
+    animate2D(solution, ["x", "dx/dt"], [0.9, 0.98], "XPhase");
+}
+
+function removeXPhaseAnimation() {
+    rmPlot("animationXPhase");
+}
