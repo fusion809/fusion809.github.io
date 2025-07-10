@@ -15,6 +15,29 @@
                 <img src="/doubleElasticPendulum/Double elastic pendulum.svg" width="500px"></img>
                 <figcaption style="font-weight: bold; font-size: 18px;">Figure 1: Diagram of the double elastic pendulum.</b></figcaption>
             </figure>
+
+            The ordinary differential equation system being solved is
+
+            \[
+            \begin{aligned}
+        \begin{bmatrix}
+\ddot{r}_1 \\
+\ddot{r}_2 \\
+\ddot{\theta}_1 \\
+\ddot{\theta}_2
+        \end{bmatrix} &= \begin{bmatrix}
+        1 & \dfrac{m_2\cos{\Delta}}{m_1+m_2} & 0 & -\dfrac{m_2r_2\sin{\Delta}}{m_1+m_2} \\
+        \cos{\Delta} & 1 & r_1\sin{\Delta} & 0 \\
+        0 & \dfrac{m_2\sin{\Delta}}{(m_1+m_2)r_1} & 1 & \dfrac{m_2r_2\cos{\Delta}}{(m_1+m_2)r_1} \\
+        -\dfrac{\sin{\Delta}}{r_2} & 0 & \dfrac{r_1\cos{\Delta}}{r_2} & 1
+        \end{bmatrix}^{-1} \begin{bmatrix}
+        r_1\dot{\theta}_1^2-g\sin{\theta_1} + \dfrac{m_2}{m_1+m_2}\left(r_2\dot{\theta}_2^2\cos{\Delta} + 2\dot{r}_2\dot{\theta}_2\sin{\Delta}\right)  + \dfrac{Q_{r_1}-k_1(r_1-l_1)}{m_1+m_2}\\
+        r_2\dot{\theta}_2^2-g\sin{\theta_2} + r_1\dot{\theta}_1^2\cos{\Delta} - 2\dot{r}_1\dot{\theta}_1\sin{\Delta} + \dfrac{Q_{r_2}-k_2(r_2-l_2)}{m_2} \\
+        -\dfrac{2\dot{r}_1\dot{\theta}_1}{r_1} - \dfrac{g\cos{\theta_1}}{r_1} - \dfrac{m_2}{(m_1+m_2)r_1}\left[2\dot{r}_2\dot{\theta}_2\cos{\Delta} -r_2\dot{\theta}_2^2\sin{\Delta}\right] + \dfrac{Q_{\theta_1}}{(m_1+m_2)r_1^2} \\
+        -\dfrac{2\dot{r}_2\dot{\theta}_2}{r_2}- \dfrac{g\cos{\theta_2}}{r_2} - \dfrac{2\dot{r}_1\dot{\theta}_1\cos{\Delta}}{r_2} - \dfrac{r_1\dot{\theta}_1^2\sin{\Delta}}{r_2} + \dfrac{Q_{\theta_2}}{m_2r_2^2}
+        \end{bmatrix}.
+            \end{aligned}
+            \]
         <h2>Simulation inputs</h2>
         <!--A form for users to enter in all the parameters of the problem-->
         <form name="requiredData">

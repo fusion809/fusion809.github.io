@@ -24,6 +24,21 @@
                 <img src="/doublePendulum/Double pendulum.svg" width="500px"></img>
                 <figcaption style="font-weight: bold; font-size: 18px;">Figure 1: Diagram of the double pendulum.</b></figcaption>
             </figure>
+
+            The equations being solved in this webpage are
+
+            \[
+            \begin{aligned}
+            &\ddot{\theta}_1 = \dfrac{-1}{\left(\dfrac{m_{1r}}{12} + m_{1b}+m_{2b}\right)l_1} \left[m_{2b}l_2 ( \ddot{\theta}_2\cos{(\theta_1-\theta_2)} +\dot{\theta}_2^2\sin{(\theta_1-\theta_2)}) 
+		+ g \cos{\theta_1}\left(\dfrac{m_{1r}}{2} +m_{2r} +m_{1b} + m_{2b}\right) -(b_{1b} + c_{1b} l_1 \dot{\theta}_1)l_1 \dot{\theta}_1 \right.\\
+		&\left.+\left(b_{2b}+c_{2b}\sqrt{l_1^2 \dot{\theta}_1^2 + l_2^2 \dot{\theta}_2^2 +2l_1 l_2\dot{\theta}_1 \dot{\theta}_2 \cos{(\theta_1-\theta_2)}}\right)(l_1 \dot{\theta}_1 + l_2 \dot{\theta}_2 \cos{(\theta_1-\theta_2)}) +\left(b_{1r} + \dfrac{c_{1r}l_1 \dot{\theta}_1}{2}\right) \dfrac{l_1 \dot{\theta}_1}{4} \right.\\
+		&\left.+\left(b_{2r} + c_{2r}\sqrt{l_1^2 \dot{\theta}_1^2 + \dfrac{l_2^2 \dot{\theta}_2^2}{4} + l_2 \dot{\theta}_1 \dot{\theta}_2 \cos{(\theta_1 -\theta_2)}}\right)\left(l_1 \dot{\theta}_1 + \dfrac{l_2\dot{\theta}_2 \cos{\left(\theta_1 - \theta_2\right)}}{2}\right)\right]\\
+            &\ddot{\theta}_2 = \dfrac{1}{\left(\dfrac{m_{2r}}{12} + m_{2b}\right)l_2 - \dfrac{m_{2b}^2l_2\cos^2{(\theta_1-\theta_2)}}{\left(\dfrac{m_{1r}}{12} + m_{1b}+m_{2b}\right)}}\left[\dfrac{m_{2b}\cos{(\theta_1-\theta_2)}}{\left(\dfrac{m_{1r}}{12} + m_{1b}+m_{2b}\right)}\left[m_{2b}l_2\dot{\theta}_2^2\sin{(\theta_1-\theta_2)} + g \cos{\theta_1}\left(\dfrac{m_{1r}}{2} +m_{2r} +m_{1b} + m_{2b}\right) -(b_{1b} + c_{1b} l_1 \dot{\theta}_1)l_1 \dot{\theta}_1 \right.\right.\\
+		&\quad\left.\left.+\left(b_{2b}+c_{2b}\sqrt{l_1^2 \dot{\theta}_1^2 + l_2^2 \dot{\theta}_2^2 +2l_1 l_2\dot{\theta}_1 \dot{\theta}_2 \cos{(\theta_1-\theta_2)}}\right)(l_1 \dot{\theta}_1 + l_2 \dot{\theta}_2 \cos{(\theta_1-\theta_2)})+\left(b_{1r} + \dfrac{c_{1r}l_1 \dot{\theta}_1}{2}\right) \dfrac{l_1 \dot{\theta}_1}{4} +\left(b_{2r} + c_{2r}\sqrt{l_1^2 \dot{\theta}_1^2 + \dfrac{l_2^2 \dot{\theta}_2^2}{4} + l_2 \dot{\theta}_1 \dot{\theta}_2 \cos{(\theta_1 -\theta_2)}}\right)\left(l_1 \dot{\theta}_1 \right.\right.\right. \\
+		&\quad\left.\left.\left.+ \dfrac{l_2\dot{\theta}_2 \cos{\left(\theta_1 - \theta_2\right)}}{2}\right)\right] + m_{2b}(l_1\dot{\theta}_1^2\sin{(\theta_1-\theta_2)}-g\cos{\theta_2}) -\dfrac{1}{4}\left(b_{2r} + c_{2r}\sqrt{l_1^2 \dot{\theta}_1^2 + \dfrac{l_2^2 \dot{\theta}_2^2}{4} + l_1 l_2 \dot{\theta}_1 \dot{\theta}_2 \cos{(\theta_1 -\theta_2)}}\right)(2l_1 \dot{\theta}_1 \cos{(\theta_1-\theta_2)}+ l_2 \dot{\theta}_2)\right.\\
+		&\quad\left.-\left(b_{2b}+c_{2b}\sqrt{l_1^2 \dot{\theta}_1^2 + l_2^2 \dot{\theta}_2^2 +2l_1l_2\dot{\theta}_1 \dot{\theta}_2 \cos{(\theta_1-\theta_2)}}\right)(l_1 \dot{\theta}_1 \cos{(\theta_1-\theta_2)} + l_2 \dot{\theta}_2)\right].
+            \end{aligned}
+            \]
         </div>
 
         <h2>Simulation inputs</h2>
