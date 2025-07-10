@@ -321,6 +321,10 @@ function removeDtheta1Dtheta2PhasePlot() {
   rmPlot("phasePlotDtheta1Dtheta2");
 }
 
+function generateAnimationBase(objectOfInputs, solution) {
+    animatePendulum(objectOfInputs, solution, "Double pendulum");
+}
+
 /**
  * Generate animation
  * @return nothing
@@ -328,26 +332,35 @@ function removeDtheta1Dtheta2PhasePlot() {
 function generateAnimation() {
   var objectOfInputs = readInputs();
   var solution = solveProblem(RKF45, objectOfInputs);
-  animatePendulum(objectOfInputs, solution, "Double pendulum");
+  generateAnimationBase(solution);
 }
 
 function removeAnimation() {
     rmPlot("animation");
 }
 
+function generateTheta1PhaseAnimationBase(solution) {
+    animate2D(solution, ["θ<sub>1</sub>", "dθ<sub>1</sub>/dt"], [0.05, 0.98], "Theta1Phase");
+}
+
 function generateTheta1PhaseAnimation() {
   var objectOfInputs = readInputs();
   var solution = solveProblem(RKF45, objectOfInputs);
-  animate2D(solution, ["θ<sub>1</sub>", "dθ<sub>1</sub>/dt"], [0.05, 0.98], "Theta1Phase");
+  generateTheta1PhaseAnimationBase(solution);
 }
 
 function removeTheta1PhaseAnimation() {
     rmPlot("animationTheta1Phase");
 }
+
+function generateTheta2PhaseAnimationBase(solution) {
+    animate2D(solution, ["θ<sub>2</sub>", "dθ<sub>2</sub>/dt"], [0.05, 0.98], "Theta2Phase", [2, 3]);
+}
+
 function generateTheta2PhaseAnimation() {
   var objectOfInputs = readInputs();
   var solution = solveProblem(RKF45, objectOfInputs);
-  animate2D(solution, ["θ<sub>2</sub>", "dθ<sub>2</sub>/dt"], [0.05, 0.98], "Theta2Phase", [2, 3]);
+  generateTheta2PhaseAnimationBase(solution);
 }
 
 function removeTheta2PhaseAnimation() {
@@ -356,4 +369,18 @@ function removeTheta2PhaseAnimation() {
 
 function generateTable() {
     fillTable(readInputs(), ['&theta;<sub>1</sub>', 'd&theta;<sub>1</sub>/dt', '&theta;<sub>2</sub>', 'd&theta;<sub>2</sub>/dt'])
+}
+
+function generateAnimations() {
+    var objectOfInputs = readInputs();
+    var solution = solveProblem(RKF45, objectOfInputs);
+    generateAnimationBase(objectOfInputs, solution)
+    generateTheta1PhaseAnimationBase(solution);
+    generateTheta2PhaseAnimationBase(solution);
+}
+
+function removeAnimations() {
+    removeAnimation();
+    removeTheta1PhaseAnimation();
+    removeTheta2PhaseAnimation();
 }

@@ -151,13 +151,16 @@ function removeAnimationSIR() {
     rmPlot("animationSIR");
 }
 
+function generateAnimationBaseSIR(solution) {
+    animate3D(solution, [0, 0, 0], ["S", "I", "R"], [0, 2, 3], "SIR");
+}
 /**
  * Generate SIR animation
  * @return nothing
  */
 function generateAnimationSIR() {
     var solution = solveProblem(RKF45, readInputs());
-    animate3D(solution, [0, 0, 0], ["S", "I", "R"], [0, 2, 3], "SIR");
+    generateAnimationBaseSIR(solution);
 }
 
 /**
@@ -168,13 +171,16 @@ function removeAnimationSEI() {
     rmPlot("animationSEI");
 }
 
+function generateAnimationBaseSEI(solution) {
+    animate3D(solution, [0, 0, 0], ["S", "E", "I"], [0, 1, 2], "SEI");
+}
 /**
  * Generate SEI animation
  * @return nothing
  */
 function generateAnimationSEI() {
     var solution = solveProblem(RKF45, readInputs());
-    animate3D(solution, [0, 0, 0], ["S", "E", "I"], [0, 1, 2], "SEI");
+    generateAnimationBaseSEI(solution);
 }
 
 /**
@@ -185,13 +191,16 @@ function removeAnimationSER() {
     rmPlot("animationSER");
 }
 
+function generateAnimationBaseSER() {
+    animate3D(solution, [0, 0, 0], ["S", "E", "R"], [0, 1, 3], "SER");
+}
 /**
  * Generate SER animation
  * @return nothing
  */
 function generateAnimationSER() {
     var solution = solveProblem(RKF45, readInputs());
-    animate3D(solution, [0, 0, 0], ["S", "E", "R"], [0, 1, 3], "SER");
+    generateAnimationBaseSER(solution);
 }
 
 /**
@@ -202,11 +211,24 @@ function removeAnimationEIR() {
     rmPlot("animationEIR");
 }
 
+function generateAnimationBaseEIR(solution) {
+    animate3D(solution, [0, 0, 0], ["E", "I", "R"], [1, 2, 3], "EIR");
+}
+
 /**
  * Generate EIR animation
  * @return nothing
  */
 function generateAnimationEIR() {
     var solution = solveProblem(RKF45, readInputs());
-    animate3D(solution, [0, 0, 0], ["E", "I", "R"], [1, 2, 3], "EIR");
+    generateAnimationBaseEIR(solution);
+}
+
+function generateAnimations() {
+    var objectOfInputs = readInputs();
+    var solution = solveProblem(RKF45, objectOfInputs);
+    generateAnimationBaseSIR(solution);
+    generateAnimationBaseSEI(solution);
+    generateAnimationBaseSER(solution);
+    generateAnimationBaseEIR(solution);
 }

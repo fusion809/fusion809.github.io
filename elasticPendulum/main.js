@@ -136,6 +136,10 @@ function removeAnimation() {
     rmPlot("animation");
 }
 
+function generateAnimationBase(objectOfInputs, solution) {
+    animatePendulum(objectOfInputs, solution, "Elastic pendulum");
+}
+
 /**
  * Generate animation
  * @return nothing.
@@ -143,23 +147,39 @@ function removeAnimation() {
 function generateAnimation() {
     var objectOfInputs = readInputs();
     var solution = solveProblem(RKF45, objectOfInputs);
-    animatePendulum(objectOfInputs, solution, "Elastic pendulum");
+    generateAnimationBase(objectOfInputs, solution);
+}
+
+function generateThetaPhaseAnimationBase(solution) {
+    animate2D(solution, ["θ", "dθ/dt"], [0.9, 0.98], "ThetaPhase", [2, 3]);
 }
 
 function generateThetaPhaseAnimation() {
     var objectOfInputs = readInputs();
     var solution = solveProblem(RKF45, objectOfInputs);
-    animate2D(solution, ["θ", "dθ/dt"], [0.9, 0.98], "ThetaPhase", [2, 3]);
+    generateThetaPhaseAnimationBase(solution);
 }
 
 function removeThetaPhaseAnimation() {
     rmPlot("animationThetaPhase");
 }
 
+function generateZPhaseAnimationBase(solution) {
+    animate2D(solution, ["z", "dz/dt"], [0.9, 0.98], "ZPhase");
+}
+
 function generateZPhaseAnimation() {
     var objectOfInputs = readInputs();
     var solution = solveProblem(RKF45, objectOfInputs);
-    animate2D(solution, ["z", "dz/dt"], [0.9, 0.98], "ZPhase");
+    generateZPhaseAnimationBase(solution);    
+}
+
+function generateAnimations() {
+    var objectOfInputs = readInputs();
+    var solution = solveProblem(RKF45, objectOfInputs);
+    generateAnimationBase(objectOfInputs, solution);
+    generateThetaPhaseAnimationBase(solution);
+    generateZPhaseAnimationBase(solution); 
 }
 
 function removeZPhaseAnimation() {
@@ -176,4 +196,14 @@ function removeZThetaPhasePlot() {
 
 function removeZZDotPhasePlot() {
     rmPlot("phasePlotZZDot");
+}
+
+function removeThetaPhaseAnimation() {
+    rmPlot("animationThetaPhase");
+}
+
+function removeAnimations() {
+    removeAnimation();
+    removeThetaPhaseAnimation();
+    removeZPhaseAnimation();
 }
