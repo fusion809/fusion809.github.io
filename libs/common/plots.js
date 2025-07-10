@@ -570,8 +570,12 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
   const t = solution.t;
   if (label=="Double pendulum") {
     var [t1, x1, y1, x2, y2] = generatePendulumCoords(objectOfInputs, solution);
+    var x=[x1, x2];
+    var y=[y1, y2];
   } else if (label == "Double elastic pendulum") {
     var [t1, x1, y1, x2, y2] = generatePendulumCoords(solution);
+    var x=[x1, x2];
+    var y=[y1, y2];
   } else if (label == "Simple pendulum" || label == "Single pendulum" || label == "Elastic pendulum") {
     var [x, y] = generatePendulumCoords(objectOfInputs, solution);
   }
@@ -603,11 +607,10 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
     data = [trace1];
   }
 
-  
   const layout = {
     title: label,
-    xaxis: { range: range([x1, x2]), title: "x" },
-    yaxis: { range: range([y1, y2]), title: "y", scaleanchor: "x" },
+    xaxis: { range: range(x), title: "x" },
+    yaxis: { range: range(y), title: "y", scaleanchor: "x" },
     showlegend: false,
     annotations: [{
     x: 0,
