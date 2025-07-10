@@ -18,6 +18,7 @@ Parts of this repository that are my own, namely:
 * [Chebyshev-GaussQuadrature/](Chebyshev-GaussQuadrature/)
 * [Chen/](Chen/)
 * [doublePendulum/](doublePendulum/)
+* [doubleElasticPendulum/](/doubleElasticPendulum/)
 * [Duffing/](Duffing/)
 * [elasticPendulum/](/elasticPendulum/)
 * [FunctionIntegrator.md](FunctionIntegrator.md)
@@ -28,6 +29,7 @@ Parts of this repository that are my own, namely:
 * [Rossler/](Rossler/)
 * [SEIR/](SEIR/)
 * [simplePendulum/](simplePendulum/)
+* [singlePendulum/](/singlePendulum/)
 * [SIR/](SIR/)
 - [sqrt/](sqrt/)
 
