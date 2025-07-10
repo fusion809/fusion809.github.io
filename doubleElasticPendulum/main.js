@@ -430,7 +430,7 @@ function removeTheta1PhaseAnimation() {
 function generateTheta2PhaseAnimation() {
   var objectOfInputs = readInputs();
   var solution = solveProblem(RKF45, objectOfInputs);
-  animate2D(solution, ["θ<sub>2</sub>", "dθ<sub>2</sub>/dt"], [0.05, 0.98], "Theta2Phase", [6, 7]);
+  animate2D(solution, ["θ<sub>2</sub>", "dθ<sub>2</sub>/dt"], [0.98, 0.02], "Theta2Phase", [6, 7]);
 }
 
 function removeTheta2PhaseAnimation() {
