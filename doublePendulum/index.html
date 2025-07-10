@@ -333,37 +333,6 @@
         <button id="restartButtonTheta2Phase">Restart</button>
         <button id="addTimeButtonTheta2Phase">Add time \(\Delta t\) to animation.</button>
         <div id='animationTheta2Phase'></div>
-        <style>
-            h1 {
-                font-size: 30px;
-                max-width: 100%;
-            }
-            div {
-                margin: 1px;
-                max-width: 100%;
-            }
-            table, tr, th, td {
-                border: 1px solid black;
-                border-collapse: collapse;
-                max-width: 100%;
-            }
-            #buttontable, #buttontable tr, #buttontable td {
-                border: none;
-                max-width: 100%;
-            }
-            td {
-                padding: 2px;
-            }
-            #timePlot, #phasePlotTheta1Theta2, #phasePlotTheta1P1, #phasePlotTheta2P2, #phasePlotP1P2 {
-                width: 100%;
-            }
-        </style>
-        <div class="page-foot">
-            <div class="copyright">
-                &copy; Brenton Horne. I do not claim to be infallible, so feel free to send corrections to <a href="mailto:brentonhorne77@gmail.com">brentonhorne77@gmail.com</a>. 
-                <br/>I favour Oxford spelling, so if you notice I generally use different spelling to Australian spelling, that is probably why. <br/>
-                Source code: <a href="https://github.com/fusion809/fusion809.github.io">https://github.com/fusion809/fusion809.github.io</a>.
-            </div>
-        </div>
+        {{ insert page_foot_general.html }}
     </body>
 </html>
