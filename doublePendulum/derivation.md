@@ -19,7 +19,7 @@ Figure 1 depicts the double pendulum system being analysed. Most physicists trea
 	
 # Euler-Lagrange equations with generalized dissipation force
 
-To obtain our equations of motion, we must apply the Euler-Lagrange equations with generalized dissipation force ($Q_i$ which is on the right-hand side of the following equation)
+To obtain our equations of motion, we must apply the Euler-Lagrange equations with generalized dissipation force ($Q_i$ which is on the right-hand side of the following equation)[^1]
 	
 \begin{align}
 	\dfrac{d}{dt}\dfrac{\partial \mathcal{L}}{\partial \dot{q_i}} - \dfrac{\partial \mathcal{L}}{\partial q_i} &=  Q_i. \label{ELD}
@@ -167,7 +167,7 @@ First, we will calculate the kinetic energy of the first pendulum bob.
 	\begin{align*}
 		T_{1r} &= \dfrac{1}{2} I_{\mathrm{cm}} \omega_{\mathrm{cm}}^2.
 	\end{align*}
-	Where $I_{\mathrm{cm}}$ is the moment of inertia around the centre of mass and $\omega_{\mathrm{cm}}$ is the angular velocity around the centre of mass. As we have a rod, $I_{\mathrm{cm}} = \dfrac{m_{1r}l_1^2}{12}$ and $\omega_{\mathrm{cm}} = \dot{\theta}_1$. This yields the following kinetic energy
+	Where $I_{\mathrm{cm}}$ is the moment of inertia around the centre of mass and $\omega_{\mathrm{cm}}$ is the angular velocity around the centre of mass. As we have a rod, $I_{\mathrm{cm}} = \dfrac{m_{1r}l_1^2}{12}$[^2] and $\omega_{\mathrm{cm}} = \dot{\theta}_1$. This yields the following kinetic energy
 	\begin{align*}
 		T_{1r} &= \dfrac{1}{2}\dfrac{m_{1r} l_1^2}{12}\dot{\theta}_1^2 \\
 		&= \dfrac{m_{1r} l_1^2\dot{\theta}_1^2}{24}.
@@ -544,3 +544,7 @@ The dissipation force applied to the second bob is
 	\end{align}
 	
 	At this point, we could rewrite one of our $\ddot{\theta}_1$ equations with $\ddot{\theta}_2$ replaced with the right-hand side of Equation \eqref{d2theta2}. We will not do this as this will add even more potential for errors to creep in, and Equations \eqref{d2theta11} and \eqref{d2theta2} are already suitable for numerical integration. 
+
+# References
+[^1]: Cline, D (2021). [10.4: Rayleigh's Dissipation Function](https://phys.libretexts.org/Bookshelves/Classical_Mechanics/Variational_Principles_in_Classical_Mechanics_(Cline)/10%3A_Nonconservative_Systems/10.04%3A_Rayleighs_Dissipation_Function) in [Variational Principles in Classical Mechanics (Cline)](https://commons.libretexts.org/book/phys-9557). University of Rochester.
+[^2]: Dourmashkin, P (2022). [16.3 Rotational Kinetic Energy and Moment of Inertia](https://phys.libretexts.org/Bookshelves/Classical_Mechanics/Classical_Mechanics_(Dourmashkin)/16%3A_Two_Dimensional_Rotational_Kinematics/16.03%3A_Rotational_Kinetic_Energy_and_Moment_of_Inertia) in *[Classical Mechanics (Dourmashkin)](https://commons.libretexts.org/book/phys-24413)*. Massachusetts Institute of Technology.
