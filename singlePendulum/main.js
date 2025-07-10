@@ -83,10 +83,6 @@ function generatePlots(objectOfInputs) {
     // Generate solution plots
     generateTimePlot(solution);
     generatePhasePlot(solution);
-    // The following if statement is to ensure that errorPlot is only generated if it's present in HTML
-    if (!!document.getElementById("errorPlot")) {
-        generateErrorPlot(solution);
-    }
 };
 
 /**

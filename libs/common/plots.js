@@ -272,6 +272,29 @@ function removePendulumPlots() {
     rmPlot("pendulumTimePlot");
 }
 
+function range(x) {
+  if (x[0].length == undefined) {
+    var xmin = Math.min(...x);
+    var xmax = Math.max(...x);
+  } else {
+    var xmin = Math.max(...x[0]);
+    var xmax = Math.min(...x[0]);
+    for (let i = 0; i < x.length; i++) {
+      let xmini = Math.min(...x[i]);
+      let xmaxi = Math.max(...x[i]);
+      if (xmin > xmini) {
+        xmin = xmini;
+      } 
+      if (xmax < xmaxi) {
+        xmax = xmaxi;
+      }
+    }
+  }
+  let range = xmax - xmin;
+  let padding = range * 0.05;
+  return [xmin - padding, xmax+padding]
+}
+
 /**
  * Generate 2D plot
  * @param x        Array of x-axis values.
@@ -296,6 +319,12 @@ function gen2DPlot(x, y, element, title, xtitle, ytitle) {
     // layout object
     var layoutXY = {
         title: title,
+        xaxis: {
+          range: range(x)
+        },
+        yaxis: {
+          range: range(y)
+        }
     };
 
     // Generate plot
@@ -321,12 +350,14 @@ function gen2DPlotXYLabs(x, y, element, title, xtitle, ytitle) {
         xaxis: {
             title: {
                 text: xtitle
-            }
+            },
+            range: range(x)
         },
         yaxis: {
             title: {
                 text: ytitle
-            }
+            },
+            range: range(y)
         }
     };
 
@@ -363,7 +394,16 @@ function gen3DPlot(x, y, z, element, title) {
    
     // layout object
     var layoutXYZ = {
-       title: title
+       title: title,
+       xaxis: {
+        range: range(x)
+       },
+       yaxis: {
+        range: range(y)
+       },
+       zaxis: {
+        range: range(z)
+       }
     };
    
     // Generate plot
@@ -489,7 +529,13 @@ function genMultPlot(solution, varnames, element, title) {
     
     // layout object
     var layoutTimePlot = {
-        title: title
+        title: title,
+        xaxis: {
+          range: range(t)
+        },
+        yaxis: {
+          range: range(vars)
+        }
     };
     
     // Generate plot
@@ -517,10 +563,6 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
   const padding = 1;
   var data;
   if (label == "Double pendulum" || label == "Double elastic pendulum") {
-    var xmin = func2Vecs(Math.min, x1, x2);
-    var ymin = func2Vecs(Math.min, y1, y2);
-    var xmax = func2Vecs(Math.max, x1, x2);
-    var ymax = func2Vecs(Math.max, y1, y2);
     const trace1 = {
         x: [], y: [],
         mode: "lines+markers",
@@ -536,33 +578,7 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
         name: "Rod 2"
     };
     data = [trace1, trace2];
-    if (isFinite(xmin)) {
-        xmin = xmin - padding;
-    } else {
-        xmin = -10 - padding;
-    }
-    if (isFinite(xmax)) {
-        xmax = xmax + padding;
-    } else {
-        xmax = 10 + padding;
-    }
-
-    if (isFinite(ymin)) {
-        ymin = ymin - padding;
-    } else {
-        ymin = -40 - padding;
-    }
-
-    if (isFinite(ymax)) {
-        ymax = ymax + padding;
-    } else {
-        ymax = 10 + padding;
-    }
   } else {
-    var xmin = Math.min(...x) - padding;
-    var ymin = Math.min(...y) - padding;
-    var xmax = Math.max(...x) + padding;
-    var ymax = Math.max(...y) + padding;
     const trace1 = {
         x: [], y: [],
         mode: "lines+markers",
@@ -576,8 +592,8 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
   
   const layout = {
     title: label,
-    xaxis: { range: [xmin, xmax], title: "x" },
-    yaxis: { range: [ymin, ymax], title: "y", scaleanchor: "x" },
+    xaxis: { range: range([x1, x2]), title: "x" },
+    yaxis: { range: range([y1, y2]), title: "y", scaleanchor: "x" },
     showlegend: false,
     annotations: [{
     x: 0,
@@ -673,9 +689,6 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
 });
 }
 
-function range(x, padding) {
-  return [Math.min(...x)-padding, Math.max(...x)+padding]
-}
 /**
  * Create 2D plot animation.
  * @param solution Solution object containing t and vars.
@@ -712,7 +725,7 @@ function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], IdSuffix="", 
   margin: { l: 0, r: 0, b: 0, t: 0 },  // make space for labels
     xaxis: {
       title: varnames[0],
-      range: range(x, padding),
+      range: range(x),
       showticklabels: true,
       automargin: true,
       ticks: 'outside',
@@ -720,7 +733,7 @@ function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], IdSuffix="", 
     },
     yaxis: {
       title: varnames[1],
-      range: range(y, padding),
+      range: range(y),
       showticklabels: true,
       automargin: true,
       ticks: 'outside',
@@ -815,14 +828,14 @@ function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], IdSuffix="", 
             }],
             xaxis: {
                 title: varnames[0],
-                range: range(x, padding),
+                range: range(x),
                 showticklabels: true,
                 ticks: 'outside',
                 tickfont: { size: 12 }
             },
             yaxis: {
                 title: varnames[1],
-                range: range(y, padding),
+                range: range(y),
                 showticklabels: true,
                 ticks: 'outside',
                 tickfont: { size: 12 }
