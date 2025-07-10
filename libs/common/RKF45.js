@@ -50,6 +50,15 @@ function approxRKF45(f, dt, objectOfInputs, t, vars, i) {
     return [dt, t, vars, i];
 }
 
+/**
+ * Test function to determine whether RKF45 should exit
+ * @param i              Dummy variable indicating where in loop we are.
+ * @param tf             Maximum time value.
+ * @param dt             Step size for time.
+ * @param t              Time vector for simulation.
+ * @param objectOfInputs Object of page inputs.
+ * @returns              Boolean.
+ */
 function testRKF45(i, tf, dt, t, objectOfInputs) {
     test1 = t[i] < tf;
     if (Object.hasOwn(objectOfInputs, 'dtMin')) {

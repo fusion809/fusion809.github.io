@@ -496,12 +496,21 @@ function genMultPlot(solution, varnames, element, title) {
     Plotly.newPlot(element, dataTimePlot, layoutTimePlot);
 }
 
+/**
+ * Create pendulum animation.
+ * @param objectOfInputs Object of page inputs.
+ * @param solution       Solution object containing t and vars. 
+ * @param label          Label of system, can be "Double pendulum", 
+ *                       "Double elastic pendulum", "Elastic pendulum", 
+ *                       "Simple pendulum" and "Single pendulum".
+ * @param IdSuffix       Suffix for HTML IDs used by animation.
+ */
 function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
   const t = solution.t;
   if (label=="Double pendulum") {
-    var [Deltat, x1, y1, x2, y2] = generatePendulumCoords(objectOfInputs, solution);
+    var [t1, x1, y1, x2, y2] = generatePendulumCoords(objectOfInputs, solution);
   } else if (label == "Double elastic pendulum") {
-    var [Deltat, x1, y1, x2, y2] = generatePendulumCoords(solution);
+    var [t1, x1, y1, x2, y2] = generatePendulumCoords(solution);
   } else if (label == "Simple pendulum" || label == "Single pendulum" || label == "Elastic pendulum") {
     var [x, y] = generatePendulumCoords(objectOfInputs, solution);
   }
@@ -664,6 +673,15 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
 });
 }
 
+/**
+ * Create 2D plot animation.
+ * @param solution Solution object containing t and vars.
+ * @param varnames Names of the variables to be animated.
+ * @param timer    Position of timer.
+ * @param IdSuffix The suffix of HTML element IDs for buttons and animation.
+ * @param nos      The index of variables to be plotted within vars.
+ * @return         Nothing.
+ */
 function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], IdSuffix="", nos=[0, 1]) {
   const x = solution.vars[nos[0]];
   const y = solution.vars[nos[1]];
@@ -817,6 +835,15 @@ function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], IdSuffix="", 
   });
 }
 
+/**
+ * Create a 3D plot animation.
+ * @param solution Solution object containing t and vars (within which solution variables are).
+ * @param view     Initial view of animation.
+ * @param varnames Labels for variables within vars that you wish to plot.
+ * @param nos      The index, within vars, of the variables to be plotted.
+ * @param IdSuffix Suffix for animation and button HTML IDs. 
+ * @return         None
+ */
 function animate3D(solution, view=[0.5, -2, 0.5], varnames=["x", "y", "z"], nos=[0, 1, 2], IdSuffix="") {
   const x = solution.vars[nos[0]];
   const y = solution.vars[nos[1]];
@@ -869,10 +896,10 @@ function animate3D(solution, view=[0.5, -2, 0.5], varnames=["x", "y", "z"], nos=
     let pauseStart = 0;
     let totalPausedTime = 0;
 
-    const button = document.getElementById("toggleButton" + IdSuffix);
-    button.addEventListener("click", () => {
+    const toggleButton = document.getElementById("toggleButton" + IdSuffix);
+    toggleButton.addEventListener("click", () => {
       paused = !paused;
-      button.textContent = paused ? "Play" : "Pause";
+      toggleButton.textContent = paused ? "Play" : "Pause";
       if (paused) {
         pauseStart = Date.now();
       } else {
@@ -888,7 +915,6 @@ function animate3D(solution, view=[0.5, -2, 0.5], varnames=["x", "y", "z"], nos=
 
     const addTimeButton = document.getElementById("addTimeButton" + IdSuffix);
     addTimeButton.addEventListener("click", () => {
-      //startTime += objectOfInputs.Time - t[frame];'
       var Deltat = readInputs().Deltat;
       if (t[frame] + Deltat > t[t.length-1]) {
         startTime = null;
