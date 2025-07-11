@@ -38,6 +38,12 @@
     <priority>0.5</priority>
 </url>
 <url>
+    <loc>https://fusion809.github.io/Chen/index.html</loc>
+    <lastmod>2025-07-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
     <loc>https://fusion809.github.io/Overview/index.html</loc>
     <lastmod>2025-07-11</lastmod>
     <changefreq>monthly</changefreq>
@@ -80,12 +86,6 @@
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>https://fusion809.github.io/simplePendulum/initialConditionsBounds/index.html</loc>
-    <lastmod>2025-07-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
     <loc>https://fusion809.github.io/advice_for_wannabe_PhD_students/index.html</loc>
     <lastmod>2025-07-11</lastmod>
     <changefreq>monthly</changefreq>
@@ -111,12 +111,6 @@
 </url>
 <url>
     <loc>https://fusion809.github.io/doubleElasticPendulum/index/</loc>
-    <lastmod>2025-07-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
-    <loc>https://fusion809.github.io/Chen/index/</loc>
     <lastmod>2025-07-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -153,6 +147,12 @@
 </url>
 <url>
     <loc>https://fusion809.github.io/elasticPendulum/index/</loc>
+    <lastmod>2025-07-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://fusion809.github.io/Chen/_index/</loc>
     <lastmod>2025-07-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
