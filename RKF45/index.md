@@ -17,7 +17,7 @@ To numerically integrate this system, we discretize our domain of $t$ values. We
 \mathbf{k}_{6,i} &= h_if\left(\mathbf{x}_i - \dfrac{8\mathbf{k}_{1,i}}{27}  + 2\mathbf{k}_{2,i} - \dfrac{3544\mathbf{k}_{3,i}}{2565} + \dfrac{1859\mathbf{k}_{4,i}}{4104} - \dfrac{11\mathbf{k}_{4,i}}{40}, t_i + \dfrac{h_i}{2}\right) \\
 \mathbf{X}_{1, i} &= \mathbf{x}_i + \dfrac{25\mathbf{k}_{1,i}}{216} + \dfrac{1408\mathbf{k}_{3,i}}{2565} + \dfrac{2197\mathbf{k}_{4,i}}{4104} - \dfrac{\mathbf{k}_{5,i}}{5} \\
 \mathbf{X}_{2, i} &= \mathbf{x}_i + \dfrac{16\mathbf{k}_{1,i}}{135} + \dfrac{6656\mathbf{k}_{3,i}}{12825} + \dfrac{28561\mathbf{k}_{4,i}}{56430} - \dfrac{9\mathbf{k}_{5,i}}{50}+\dfrac{2\mathbf{k}_{6,i}}{55} \\
-\mathbf{R}_i &= \dfrac{|\mathbf{X}_{1,i} - \mathbf{X}_{2,i}|}{h} \\
+\mathbf{R}_i &= \dfrac{|\mathbf{X}_{1,i} - \mathbf{X}_{2,i}|}{h_i} \\
 \mathbf{S}_i &= \left[\dfrac{\epsilon}{2\mathbf{R}_i}\right]^{1/4}\\
 r_i &= \max{\mathbf{R}_i} \\
 s_i &= \min{\mathbf{S}_i} \\
