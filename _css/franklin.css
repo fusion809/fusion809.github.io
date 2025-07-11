@@ -292,6 +292,11 @@ code {
     float:left;
 }
 
+.liCol50 {
+    width: 50%;
+    float: left;
+}
 .clearfix {
   overflow: auto;
+  clear: both;
 }
