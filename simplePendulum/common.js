@@ -280,6 +280,9 @@ function removeAnimation() {
     rmPlot("animation");
 }
 
+function generateAnimationBase(objectOfInputs, solution) {
+    animatePendulum(objectOfInputs, solution, "Simple pendulum");
+}
 /**
  * Generates animation.
  * @return nothing. 
@@ -287,16 +290,33 @@ function removeAnimation() {
 function generateAnimation() {
     var objectOfInputs = readInputs();
     var solution = solveProblemSP(objectOfInputs);
-    animatePendulum(objectOfInputs, solution, "Simple pendulum");
+    generateAnimationBase(objectOfInputs, solution);
+}
+
+function generatePhaseAnimationBase(solution) {
+    animate2D(solution, ["θ", "dθ/dt"], [0, 0.98], "Phase");
 }
 
 function generatePhaseAnimation() {
     var objectOfInputs = readInputs();
     var solution = solveProblemSP(objectOfInputs);
     solution.vars = [solution.theta, solution.thetaDot];
-    animate2D(solution, ["θ", "dθ/dt"], [0, 0.98], "Phase");
+    generatePhaseAnimationBase(solution);
 }
 
 function removePhaseAnimation() {
     rmPlot("animationPhase");
+}
+
+function generateAnimations() {
+    var objectOfInputs = readInputs();
+    var solution = solveProblemSP(objectOfInputs);
+    generateAnimationBase(objectOfInputs, solution);
+    solution.vars = [solution.theta, solution.thetaDot];
+    generatePhaseAnimationBase(solution);
+} 
+
+function removeAnimations() {
+    removePhaseAnimation();
+    removeAnimation();
 }

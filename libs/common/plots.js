@@ -297,7 +297,7 @@ function range(x) {
     }
   }
   let range = xmax - xmin;
-  let padding = range * 0.01;
+  let padding = range * 0.02;
   return [xmin - padding, xmax+padding]
 }
 
