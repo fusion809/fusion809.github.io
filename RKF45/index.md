@@ -24,6 +24,6 @@ s_i &= \min{\mathbf{S}_i} \\
 h_i &= s_ih_i.
 \end{align*}
 
-If $r \leq \epsilon $, we let $\mathbf{X}_{1,i}$ be our value of $\mathbf{x}_{i+1}$, $h_{i+1}$ be $h_i$, increment $i$ by 1, and proceed to the next step. Otherwise, we repeat the calculation with our updated step size. In the $\mathbf{R}_i$ calculation, $|\mathbf{v}|$ denotes a vector whose elements are the absolute value of the elements of $\mathbf{v}$, not its vector magnitude. Here $r$ is the maximum error estimate we have for step $i$.
+If $r_i \leq \epsilon $, we let $\mathbf{X}_{1,i}$ be our value of $\mathbf{x}_{i+1}$, $h_{i+1}$ be $h_i$, increment $i$ by 1, and proceed to the next step. Otherwise, we repeat the calculation with our updated step size. In the $\mathbf{R}_i$ calculation, $|\mathbf{v}|$ denotes a vector whose elements are the absolute value of the elements of $\mathbf{v}$, not its vector magnitude. Here $r_i$ is the maximum error estimate we have for step $i$.
 
 $h$ can become unmanageably small if the problem one is solving is too numerically unstable. This can be seen in the [double elastic pendulum solver](/doubleElasticPendulum/) webpage if you reduce $\epsilon$ to too small a value or increase $t_f$ too much. 
