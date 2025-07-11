@@ -1,4 +1,4 @@
-@def title="Root-finding without a calculator"
+@def title="Root finding without a calculator"
 @def tags = ["maths", "numerical methods"]
 @def mintoclevel=1
 
