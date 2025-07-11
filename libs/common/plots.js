@@ -572,6 +572,67 @@ function updateTimeLabel(layout, t, frame, IdSuffix) {
   Plotly.relayout('animation' + IdSuffix, layout);
 }
 
+function pause(state, IdSuffix, animateFrame) {
+  const pauseButton = document.getElementById("toggleButton" + IdSuffix);
+  pauseButton.addEventListener("click", () => {
+    state.paused = !state.paused;
+    pauseButton.textContent = state.paused ? "Play" : "Pause";
+    if (state.paused) {
+      state.pauseStart = Date.now();
+    } else {
+      state.totalPausedTime += Date.now() - state.pauseStart;
+      requestAnimationFrame(animateFrame);
+    }
+  });
+}
+
+function restart(state, layout, t, IdSuffix) {
+  const restartButton = document.getElementById("restartButton" + IdSuffix);
+  restartButton.addEventListener("click", () => {
+    state.startTime =  null;
+    state.frame =  0;  // Reset state.frame
+    updateTimeLabel(layout, t, state.frame, IdSuffix);
+  });
+}
+function addTime(state, layout, t, IdSuffix) {
+  const addTimeButton = document.getElementById("addTimeButton" + IdSuffix);
+  addTimeButton.addEventListener("click", () => {
+    //startTime += objectOfInputs.Time - t[state.frame];'
+    var Deltat = readInputs().Deltat;
+    if (t[state.frame] + Deltat > t[t.length-1]) {
+      state.startTime =  null;
+    } else {
+      state.startTime += t[state.frame] - Deltat*1000
+      let targetTime = t[state.frame] + Deltat;
+      state.frame = t.reduce((prevIndex, currValue, currIndex, array) => {
+        return Math.abs(currValue - targetTime) < Math.abs(array[prevIndex] - targetTime)
+          ? currIndex
+          : prevIndex;
+      });
+    }
+    updateTimeLabel(layout, t, state.frame, IdSuffix);
+  });
+}
+
+function skipTo(state, layout, t, IdSuffix) {
+  const skipToButton = document.getElementById("skipToButton" + IdSuffix);
+  skipToButton.addEventListener("click", () => {
+    var skipTime = readInputs().skipTime;
+    if (skipTime > t[t.length-1]) {
+      state.startTime =  null;
+      state.frame =  0;
+      alert("skipTime > tf, so restarting!");
+    } else {
+      state.startTime += (t[state.frame]-skipTime) * 1000;
+      state.frame = t.reduce((prevIndex, currValue, currIndex, array) => {
+        return Math.abs(currValue - skipTime) < Math.abs(array[prevIndex] - skipTime)
+          ? currIndex
+          : prevIndex;
+      });
+    }
+    updateTimeLabel(layout, t, state.frame, IdSuffix);
+  });
+}
 /**
  * Create pendulum animation.
  * @param objectOfInputs Object of page inputs.
@@ -628,114 +689,80 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
     yaxis: { range: range(y), title: "y", scaleanchor: "x" },
     showlegend: false,
     annotations: [{
-    x: 0,
-    y: 1.1,  // slightly above plot
-    xref: 'paper',
-    yref: 'paper',
-    text: 'Time: 0.00 s',
-    showarrow: false,
-    font: { size: 16 }
-  }]
+      x: 0,
+      y: 1.1,  // slightly above plot
+      xref: 'paper',
+      yref: 'paper',
+      text: 'Time: 0.00 s',
+      showarrow: false,
+      font: { size: 16 }
+    }]
   };
   Plotly.newPlot("animation" + IdSuffix, data, layout).then(() => {
 
-    let startTime = null;
-    let frame = 0;
-    let paused = false;
-    let pauseStart = 0;
-    let totalPausedTime = 0;
-
-    const pauseButton = document.getElementById("toggleButton" + IdSuffix);
-    pauseButton.addEventListener("click", () => {
-      paused = !paused;
-      pauseButton.textContent = paused ? "Play" : "Pause";
-      if (paused) {
-        pauseStart = Date.now();
-      } else {
-        totalPausedTime += Date.now() - pauseStart;
-        if (!paused) requestAnimationFrame(animateFrame);
-      }
-    });
-
-    const restartButton = document.getElementById("restartButton" + IdSuffix);
-    restartButton.addEventListener("click", () => {
-      startTime = null;
-      frame = 0;  // Reset frame
-      updateTimeLabel(layout, t, frame, IdSuffix);
-    });
-    const addTimeButton = document.getElementById("addTimeButton" + IdSuffix);
-    addTimeButton.addEventListener("click", () => {
-      //startTime += objectOfInputs.Time - t[frame];'
-      var Deltat = readInputs().Deltat;
-      if (t[frame] + Deltat > t[t.length-1]) {
-        startTime = null;
-        frame = 0;
-      } else {
-        startTime += t[frame] - Deltat*1000
-        frame = t.findIndex(x => x >= t[frame] + Deltat);
-      }
-      updateTimeLabel(layout, t, frame, IdSuffix);
-    });
-    const skipToButton = document.getElementById("skipToButton" + IdSuffix);
-    skipToButton.addEventListener("click", () => {
-      var skipTime = readInputs().skipTime;
-      if (skipTime > t[t.length-1]) {
-        startTime = null;
-        frame = 0;
-        alert("skipTime > tf, so restarting!");
-      } else {
-        startTime += (t[frame]-skipTime) * 1000;
-        frame = t.findIndex(x => x >= skipTime);
-      }
-      updateTimeLabel(layout, t, frame, IdSuffix);
-    });
-
+    let state = {
+      startTime: null,
+      frame: 0,
+      paused: false,
+      pauseStart: 0,
+      totalPausedTime: 0,
+      animating: false
+    };
     let cycle = 0;
     function animateFrame(timestamp) {
-      if (!startTime || frame == t.length - 1) {
-        frame = 0;
-        startTime = timestamp; 
+      if (!state.startTime || state.frame == t.length - 1) {
+        state.frame = 0;
+        state.startTime = timestamp; 
       }
-      if (paused) return;
 
-      const elapsedSec = (timestamp - startTime - totalPausedTime) / 1000;
+      if (state.paused) {
+        state.animating = false; // Mark animation as stopped
+        return;
+      }
+
+      const elapsedSec = (timestamp - state.startTime - state.totalPausedTime) / 1000;
 
 
-    // Advance to the frame corresponding to elapsed time
-    while (frame < t.length -1 && t[frame] < elapsedSec) {
-      frame++;
+      // Advance to the state.frame corresponding to elapsed time
+      while (state.frame < t.length -1 && t[state.frame] < elapsedSec) {
+        state.frame++;
+      }
+      if (state.frame >= t.length) {
+          state.frame =  t.length - 1;
+          cycle++;
+      }
+      if (label == "Double elastic pendulum" || label=="Double pendulum") {
+          Plotly.animate("animation" + IdSuffix, {
+          data: [
+              { x: [0, x1[state.frame]], y: [0, y1[state.frame]] },
+              { x: [x1[state.frame], x2[state.frame]], y: [y1[state.frame], y2[state.frame]] }
+          ]
+          }, {
+          transition: { duration: 0 },
+          frame: { duration: 0, redraw: true }
+          });
+      } else {
+          Plotly.animate("animation" + IdSuffix, {
+              data: [
+                  { x: [0, x[state.frame]], y: [0, y[state.frame]] }
+              ]
+              }, {
+              transition: { duration: 0 },
+              frame: { duration: 0, redraw: true }
+          });
+      }
+      layout.annotations[0].text = `Time: ${t[state.frame].toFixed(2)} s`;
+      Plotly.relayout('animation' + IdSuffix, layout);
+      requestAnimationFrame(animateFrame);
     }
-    if (frame >= t.length) {
-        frame = t.length - 1;
-        cycle++;
-    }
-    if (label == "Double elastic pendulum" || label=="Double pendulum") {
-        Plotly.animate("animation" + IdSuffix, {
-        data: [
-            { x: [0, x1[frame]], y: [0, y1[frame]] },
-            { x: [x1[frame], x2[frame]], y: [y1[frame], y2[frame]] }
-        ]
-        }, {
-        transition: { duration: 0 },
-        frame: { duration: 0, redraw: true }
-        });
-    } else {
-        Plotly.animate("animation" + IdSuffix, {
-            data: [
-                { x: [0, x[frame]], y: [0, y[frame]] }
-            ]
-            }, {
-            transition: { duration: 0 },
-            frame: { duration: 0, redraw: true }
-        });
-    }
-    layout.annotations[0].text = `Time: ${t[frame].toFixed(2)} s`;
-    Plotly.relayout('animation' + IdSuffix, layout);
+
+    pause(state, IdSuffix, animateFrame);
+    restart(state, layout, t, IdSuffix);
+    addTime(state, layout, t, IdSuffix);
+    skipTo(state, layout, t, IdSuffix);
+
     requestAnimationFrame(animateFrame);
-  }
-
-  requestAnimationFrame(animateFrame);
-});
+  });
 }
 
 /**
@@ -800,82 +827,37 @@ function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], IdSuffix="", 
   };
 
   Plotly.newPlot("animation" + IdSuffix, [tracePath, traceMarker], layout).then(() => {
-    let frame = 0;
-    let startTime = null;
-    let paused = false;
-    let pauseStart = 0;
-    let totalPausedTime = 0;
-
-    const button = document.getElementById("toggleButton" + IdSuffix);
-    button.addEventListener("click", () => {
-      paused = !paused;
-      button.textContent = paused ? "Play" : "Pause";
-      if (paused) {
-        pauseStart = Date.now();
-      } else {
-        totalPausedTime += Date.now() - pauseStart;
-        if (!paused) requestAnimationFrame(animateFrame);
-      }
-    });
-
-    const restartButton = document.getElementById("restartButton" + IdSuffix);
-    restartButton.addEventListener("click", () => {
-      startTime = null;
-      frame = 0;
-      updateTimeLabel(layout, t, frame, IdSuffix);
-    });
-
-    const addTimeButton = document.getElementById("addTimeButton" + IdSuffix);
-    addTimeButton.addEventListener("click", () => {
-      //startTime += objectOfInputs.Time - t[frame];'
-      var Deltat = readInputs().Deltat;
-      if (t[frame] + Deltat > t[t.length-1]) {
-        startTime = null;
-        frame = 0;
-      } else {
-        startTime += t[frame] - Deltat*1000
-        frame = t.findIndex(x => x >= t[frame] + Deltat);
-      }
-      updateTimeLabel(layout, t, frame, IdSuffix);
-    });
-
-    const skipToButton = document.getElementById("skipToButton" + IdSuffix);
-    skipToButton.addEventListener("click", () => {
-      var skipTime = readInputs().skipTime;
-      if (skipTime > t[t.length-1]) {
-        startTime = null;
-        frame = 0;
-        alert("skipTime > tf, so restarting!");
-      } else {
-        startTime += (t[frame]-skipTime) * 1000;
-        frame = t.findIndex(x => x >= skipTime);
-      }
-      updateTimeLabel(layout, t, frame, IdSuffix);
-    });
+    let state = {
+      frame: 0,
+      startTime: null,
+      paused: false,
+      pauseStart: 0,
+      totalPausedTime: 0
+    };
 
     let cycle = 0;
     function animateFrame(timestamp) {
-      if (frame == t.length - 1 || !startTime) {
-        frame = 0;
-        startTime = timestamp; 
+      if (state.frame == t.length - 1 || !state.startTime) {
+        state.frame =  0;
+        state.startTime =  timestamp; 
       }
-      if (paused) return;
+      if (state.paused) return;
 
-      const elapsedSec = (timestamp - startTime - totalPausedTime) / 1000;
+      const elapsedSec = (timestamp - state.startTime - state.totalPausedTime) / 1000;
 
-      while (frame < t.length - 1 && t[frame] < elapsedSec) {
-        frame++;
+      while (state.frame < t.length - 1 && t[state.frame] < elapsedSec) {
+        state.frame++;
       }
-      if (frame >= t.length) {
-        frame = t.length - 1;
+      if (state.frame >= t.length) {
+        state.frame =  t.length - 1;
         cycle++;
       }
       Plotly.animate("animation" + IdSuffix, {
         data: [
           tracePath,
           {
-            x: [x[frame]],
-            y: [y[frame]],
+            x: [x[state.frame]],
+            y: [y[state.frame]],
             mode: 'markers',
             type: 'scatter',
             marker: { color: 'red', size: 10 },
@@ -884,7 +866,7 @@ function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], IdSuffix="", 
         ],
         layout: {
             annotations: [{
-                text: `Time: ${t[frame].toFixed(2)} s`,
+                text: `Time: ${t[state.frame].toFixed(2)} s`,
                 xref: 'paper',
                 yref: 'paper',
                 x: timer[0],
@@ -914,6 +896,10 @@ function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], IdSuffix="", 
 
       requestAnimationFrame(animateFrame);
     }
+    pause(state, IdSuffix, animateFrame);
+    restart(state, layout, t, IdSuffix);
+    addTime(state, layout, t, IdSuffix);
+    skipTo(state, layout, t, IdSuffix);
 
     requestAnimationFrame(animateFrame);
   });
@@ -974,82 +960,38 @@ function animate3D(solution, view=[0.5, -2, 0.5], varnames=["x", "y", "z"], nos=
   };
 
   Plotly.newPlot("animation" + IdSuffix, [tracePath, traceMarker], layout).then(() => {
-    let frame = 0;
-    let startTime = null;
-    let paused = false;
-    let pauseStart = 0;
-    let totalPausedTime = 0;
-
-    const toggleButton = document.getElementById("toggleButton" + IdSuffix);
-    toggleButton.addEventListener("click", () => {
-      paused = !paused;
-      toggleButton.textContent = paused ? "Play" : "Pause";
-      if (paused) {
-        pauseStart = Date.now();
-      } else {
-        totalPausedTime += Date.now() - pauseStart;
-        if (!paused) requestAnimationFrame(animateFrame);
-      }
-    });
-
-    const restartButton = document.getElementById("restartButton" + IdSuffix);
-    restartButton.addEventListener("click", () => {
-      startTime = null;
-      frame = 0;
-      updateTimeLabel(layout, t, frame, IdSuffix);
-    });
-
-    const addTimeButton = document.getElementById("addTimeButton" + IdSuffix);
-    addTimeButton.addEventListener("click", () => {
-      var Deltat = readInputs().Deltat;
-      if (t[frame] + Deltat > t[t.length-1]) {
-        startTime = null;
-        frame = 0;
-      } else {
-        startTime += t[frame] - Deltat*1000
-        frame = t.findIndex(x => x >= t[frame] + Deltat);
-      }
-      updateTimeLabel(layout, t, frame, IdSuffix);
-    });
-
-    const skipToButton = document.getElementById("skipToButton" + IdSuffix);
-    skipToButton.addEventListener("click", () => {
-      var skipTime = readInputs().skipTime;
-      if (skipTime > t[t.length-1]) {
-        startTime = null;
-        frame = 0;
-        alert("skipTime > tf!");
-      } else {
-        startTime += (t[frame]-skipTime) * 1000;
-        frame = t.findIndex(x => x >= skipTime);
-      }
-      updateTimeLabel(layout, t, frame, IdSuffix);
-    });
+    let state = {
+      frame: 0,
+      startTime:  null,
+      paused: false,
+      pauseStart: 0,
+      totalPausedTime: 0
+    };
 
     let cycle = 0;
     function animateFrame(timestamp) {
-      if (frame == t.length - 1 || !startTime) {
-        frame = 0;
-        startTime = timestamp; 
+      if (state.frame == t.length - 1 || !state.startTime) {
+        state.frame =  0;
+        state.startTime =  timestamp; 
       }
-      if (paused) return;
+      if (state.paused) return;
 
-      const elapsedSec = (timestamp - startTime - totalPausedTime) / 1000;
+      const elapsedSec = (timestamp - state.startTime - state.totalPausedTime) / 1000;
 
-      while (frame < t.length - 1 && t[frame] < elapsedSec) {
-        frame++;
+      while (state.frame < t.length - 1 && t[state.frame] < elapsedSec) {
+        state.frame++;
       }
-      if (frame >= t.length) {
-        frame = t.length - 1;
+      if (state.frame >= t.length) {
+        state.frame =  t.length - 1;
         cycle++;
       }
       Plotly.animate("animation" + IdSuffix, {
         data: [
           tracePath,
           {
-            x: [x[frame]],
-            y: [y[frame]],
-            z: [z[frame]],
+            x: [x[state.frame]],
+            y: [y[state.frame]],
+            z: [z[state.frame]],
             mode: 'markers',
             type: 'scatter3d',
             marker: { color: 'red', size: 7 },
@@ -1058,7 +1000,7 @@ function animate3D(solution, view=[0.5, -2, 0.5], varnames=["x", "y", "z"], nos=
         ],
         layout: {
           annotations: [{
-            text: `Time: ${t[frame].toFixed(2)} s`,
+            text: `Time: ${t[state.frame].toFixed(2)} s`,
             xref: 'paper',
             yref: 'paper',
             x: 0.05,
@@ -1077,16 +1019,19 @@ function animate3D(solution, view=[0.5, -2, 0.5], varnames=["x", "y", "z"], nos=
                 z: view[2]
                 }
             }
-        }
-        }
-      }, {
-        transition: { duration: 0 },
-        frame: { duration: 0, redraw: true }
-      });
+          }
+          }
+        }, {
+          transition: { duration: 0 },
+          frame: { duration: 0, redraw: true }
+        });
 
-      requestAnimationFrame(animateFrame);
-    }
-
+        requestAnimationFrame(animateFrame);
+      }
+    pause(state, IdSuffix, animateFrame);
+    restart(state, layout, t, IdSuffix);
+    addTime(state, layout, t, IdSuffix);
+    skipTo(state, layout, t, IdSuffix);
     requestAnimationFrame(animateFrame);
   });
 }
