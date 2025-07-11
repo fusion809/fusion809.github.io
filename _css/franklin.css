@@ -46,10 +46,10 @@ html {
 .page-foot {
     font-size: 80%;
     font-family: Arial, serif;
-    color: #a6a2a0;
+    color: black;
     text-align: left;
     margin-top: 6em;
-    border-top: 1px solid lightgrey;
+    border-top: 1px solid black;
     padding-top: 2em;
     margin-bottom: 4em; }
 
