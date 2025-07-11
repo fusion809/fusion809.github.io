@@ -32,7 +32,7 @@ Where
 \tableofcontents
 
 # Caveats
-The masses of the pendulum rods (or springs) and the friction they experience are ignored as including them into the calculation for [rigid double pendulums](/doublePendulum/) does not make things more interesting and merely complicates the calculation. I did try deriving the equations of motion while including the rods using SymPy, specifically with the code:
+The masses of the pendulum rods (or springs) and the friction they experience are ignored as including them into the calculation for [rigid double pendulums](/doublePendulum/) does not make things more interesting and merely complicates the calculation. I did try deriving the equations of motion while including the rods using SymPy, specifically with the code
 
 ```python
 from sympy import symbols, Function, diff, cos, sin, simplify, sqrt, Abs, Eq, solve, latex
