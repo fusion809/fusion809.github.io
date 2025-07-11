@@ -36,10 +36,10 @@
         <!--A form for users to enter in all the parameters of the problem-->
         <form name="requiredData">
             <table>
-                <tr style="border: 1px solid black">
-                    <th style="border: 1px solid black">Parameter</th>
-                    <th style="border: 1px solid black">Value</th>
-                    <th style="border: 1px solid black">Explanation</th>
+                <tr style="border: 0px solid black; padding: 0px;">
+                    <th style="border: 1px solid black; padding: 0px;">Parameter</th>
+                    <th style="border: 1px solid black; padding: 0px;">Value</th>
+                    <th style="border: 1px solid black; padding: 0px;">Explanation</th>
                 </tr>
                 <tr>
                     <td><label for="a">\(a\):</label></td>
