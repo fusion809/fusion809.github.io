@@ -245,7 +245,15 @@
                         id="Deltat"
                         name="Deltat"
                         value="20"></td>
-                    <td>Time for skipping ahead in animation.</td>
+                    <td>Time you want to add to animation.</td>
+                </tr>
+                <tr>
+                    <td><label for="skipTime">\(t_1\)</label></td>
+                    <td><input type="Number"
+                        id="skipTime"
+                        name="skipTime"
+                        value="110"></td>
+                    <td>Time you want to skip ahead to in the animation.</td>
                 </tr>
             </table>
         </form>
@@ -374,49 +382,29 @@
         <div id='phasePlotTheta1Theta2'></div>
         <button id="toggleButton">Pause</button>
         <button id="restartButton">Restart</button>
-        <button id="addTimeButton">Add time \(\Delta t\) to animation.</button>
+        <button id="addTimeButton">Add time \(\Delta t\) to animation</button>
+        <button id="skipToButton">Skip to \(t_1\)</button>
         <div id="animation"></div>
         <button id="toggleButtonR1Phase">Pause</button>
         <button id="restartButtonR1Phase">Restart</button>
-        <button id="addTimeButtonR1Phase">Add time \(\Delta t\) to animation.</button>
+        <button id="addTimeButtonR1Phase">Add time \(\Delta t\) to animation</button>
+        <button id="skipToButtonR1Phase">Skip to \(t_1\)</button>
         <div id='animationR1Phase'></div>
 		<button id="toggleButtonR2Phase">Pause</button>
         <button id="restartButtonR2Phase">Restart</button>
-        <button id="addTimeButtonR2Phase">Add time \(\Delta t\) to animation.</button>
+        <button id="addTimeButtonR2Phase">Add time \(\Delta t\) to animation</button>
+        <button id="skipToButtonR2Phase">Skip to \(t_1\)</button>
         <div id='animationR2Phase'></div>
 		<button id="toggleButtonTheta1Phase">Pause</button>
         <button id="restartButtonTheta1Phase">Restart</button>
-        <button id="addTimeButtonTheta1Phase">Add time \(\Delta t\) to animation.</button>
+        <button id="addTimeButtonTheta1Phase">Add time \(\Delta t\) to animation</button>
+        <button id="skipToButtonTheta1Phase">Skip to \(t_1\)</button>
         <div id='animationTheta1Phase'></div>
 		<button id="toggleButtonTheta2Phase">Pause</button>
         <button id="restartButtonTheta2Phase">Restart</button>
-        <button id="addTimeButtonTheta2Phase">Add time \(\Delta t\) to animation.</button>
+        <button id="addTimeButtonTheta2Phase">Add time \(\Delta t\) to animation</button>
+        <button id="skipToButtonTheta2Phase">Skip to \(t_1\)</button>
         <div id='animationTheta2Phase'></div>
-        <style>
-            h1 {
-                font-size: 30px;
-                max-width: 100%;
-            }
-            div {
-                margin: 1px;
-                max-width: 100%;
-            }
-            table, tr, th, td {
-                border: 1px solid black;
-                border-collapse: collapse;
-                max-width: 100%;
-            }
-            #buttontable, #buttontable tr, #buttontable td {
-                border: none;
-                max-width: 100%;
-            }
-            td {
-                padding: 2px;
-            }
-            #timePlot, #phasePlotTheta1Theta2, #phasePlotTheta1P1, #phasePlotTheta2P2, #phasePlotP1P2 {
-                width: 100%;
-            }
-        </style>
         {{ insert page_foot_general.html }}
     </body>
 </html>

@@ -657,6 +657,17 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
         frame = t.findIndex(x => x >= t[frame] + Deltat);
       }
     });
+    const skipToButton = document.getElementById("skipToButton" + IdSuffix);
+    skipToButton.addEventListener("click", () => {
+      var skipTime = readInputs().skipTime;
+      if (skipTime > t[t.length-1]) {
+        startTime = null;
+        alert("skipTime > tf!");
+      } else {
+        startTime += (t[frame]-skipTime) * 1000;
+        frame = t.findIndex(x => x >= skipTime);
+      }
+    });
 
     let cycle = 0;
     function animateFrame(timestamp) {
@@ -800,6 +811,18 @@ function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], IdSuffix="", 
       } else {
         startTime += t[frame] - Deltat*1000
         frame = t.findIndex(x => x >= t[frame] + Deltat);
+      }
+    });
+
+    const skipToButton = document.getElementById("skipToButton" + IdSuffix);
+    skipToButton.addEventListener("click", () => {
+      var skipTime = readInputs().skipTime;
+      if (skipTime > t[t.length-1]) {
+        startTime = null;
+        alert("skipTime > tf!");
+      } else {
+        startTime += (t[frame]-skipTime) * 1000;
+        frame = t.findIndex(x => x >= skipTime);
       }
     });
 
@@ -955,6 +978,18 @@ function animate3D(solution, view=[0.5, -2, 0.5], varnames=["x", "y", "z"], nos=
       } else {
         startTime += t[frame] - Deltat*1000
         frame = t.findIndex(x => x >= t[frame] + Deltat);
+      }
+    });
+
+    const skipToButton = document.getElementById("skipToButton" + IdSuffix);
+    skipToButton.addEventListener("click", () => {
+      var skipTime = readInputs().skipTime;
+      if (skipTime > t[t.length-1]) {
+        startTime = null;
+        alert("skipTime > tf!");
+      } else {
+        startTime += (t[frame]-skipTime) * 1000;
+        frame = t.findIndex(x => x >= skipTime);
       }
     });
 

@@ -250,6 +250,14 @@
                         value="20"></td>
                     <td>Time for skipping ahead in animation.</td>
                 </tr>
+                <tr>
+                    <td><label for="skipTime">\(t_1\)</label></td>
+                    <td><input type="Number"
+                        id="skipTime"
+                        name="skipTime"
+                        value="50"></td>
+                    <td>Time you want to skip ahead to in the animation.</td>
+                </tr>
             </table>
         </form>
 
@@ -328,15 +336,18 @@
         <div id='timePlot'></div>
         <button id="toggleButton">Pause</button>
         <button id="restartButton">Restart</button>
-        <button id="addTimeButton">Add time \(\Delta t\) to animation.</button>
+        <button id="addTimeButton">Add time \(\Delta t\) to animation</button>
+        <button id="skipToButton">Skip to \(t_1\)</button>        
         <div id="animation"></div>
         <button id="toggleButtonTheta1Phase">Pause</button>
         <button id="restartButtonTheta1Phase">Restart</button>
-        <button id="addTimeButtonTheta1Phase">Add time \(\Delta t\) to animation.</button>
+        <button id="addTimeButtonTheta1Phase">Add time \(\Delta t\) to animation</button>
+        <button id="skipToButtonTheta1Phase">Skip to \(t_1\)</button>
         <div id='animationTheta1Phase'></div>
 		<button id="toggleButtonTheta2Phase">Pause</button>
         <button id="restartButtonTheta2Phase">Restart</button>
-        <button id="addTimeButtonTheta2Phase">Add time \(\Delta t\) to animation.</button>
+        <button id="addTimeButtonTheta2Phase">Add time \(\Delta t\) to animation</button>
+        <button id="skipToButtonTheta2Phase">Skip to \(t_1\)</button>
         <div id='animationTheta2Phase'></div>
         {{ insert page_foot_general.html }}
     </body>

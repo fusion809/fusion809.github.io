@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Simple pendulum Runge-Kutta-Fehlberg solver without error analysis</title>
+        <title>Single pendulum</title>
         {{ insert head_solver.html }}
     </head>
     <body>
-        <h1>Simple pendulum problem solver with error analysis</h1>
+        <h1>Single pendulum</h1>
         <div>
             This webpage uses the <a href='/RKF45/' link='_blank'>Runge-Kutta-Fehlberg fourth-order method with fifth-order error checking (RKF45)</a> to approximate the solution to the problem of a single pendulum. To calculate the equations of motion, we must first determine the Lagrangian which is defined as the kinetic energy minus the potential energy. The kinetic energy of the bob is simply its mass times its velocity squared over two. The kinetic energy of the rod has a term like this, too, (although the velocity we will focus on will be the velocity of its centre of mass) but we must also consider its rotational velocity. As for the potential energy of the bob and rod, it will simply be the mass of them times by the \(y\)-coordinate of its centre of mass.  
 
@@ -234,6 +234,14 @@
                         name="Deltat"
                         value="20"></td>
                     <td>Time for skipping ahead in animation.</td>
+                </tr>
+                <tr>
+                    <td><label for="skipTime">\(t_1\)</label></td>
+                    <td><input type="Number"
+                        id="skipTime"
+                        name="skipTime"
+                        value="90"></td>
+                    <td>Time you want to skip ahead to in the animation.</td>
                 </tr>
             </table>
         </form>
