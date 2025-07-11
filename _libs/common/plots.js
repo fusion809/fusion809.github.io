@@ -567,6 +567,11 @@ function genMultPlot(solution, varnames, element, title) {
     Plotly.newPlot(element, dataTimePlot, layoutTimePlot);
 }
 
+function updateTimeLabel(layout, t, frame, IdSuffix) {
+  layout.annotations[0].text = `Time: ${t[frame].toFixed(2)} s`;
+  Plotly.relayout('animation' + IdSuffix, layout);
+}
+
 /**
  * Create pendulum animation.
  * @param objectOfInputs Object of page inputs.
@@ -655,6 +660,8 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
     const restartButton = document.getElementById("restartButton" + IdSuffix);
     restartButton.addEventListener("click", () => {
       startTime = null;
+      frame = 0;  // Reset frame
+      updateTimeLabel(layout, t, frame, IdSuffix);
     });
     const addTimeButton = document.getElementById("addTimeButton" + IdSuffix);
     addTimeButton.addEventListener("click", () => {
@@ -662,21 +669,25 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
       var Deltat = readInputs().Deltat;
       if (t[frame] + Deltat > t[t.length-1]) {
         startTime = null;
+        frame = 0;
       } else {
         startTime += t[frame] - Deltat*1000
         frame = t.findIndex(x => x >= t[frame] + Deltat);
       }
+      updateTimeLabel(layout, t, frame, IdSuffix);
     });
     const skipToButton = document.getElementById("skipToButton" + IdSuffix);
     skipToButton.addEventListener("click", () => {
       var skipTime = readInputs().skipTime;
       if (skipTime > t[t.length-1]) {
         startTime = null;
-        alert("skipTime > tf!");
+        frame = 0;
+        alert("skipTime > tf, so restarting!");
       } else {
         startTime += (t[frame]-skipTime) * 1000;
         frame = t.findIndex(x => x >= skipTime);
       }
+      updateTimeLabel(layout, t, frame, IdSuffix);
     });
 
     let cycle = 0;
@@ -810,6 +821,8 @@ function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], IdSuffix="", 
     const restartButton = document.getElementById("restartButton" + IdSuffix);
     restartButton.addEventListener("click", () => {
       startTime = null;
+      frame = 0;
+      updateTimeLabel(layout, t, frame, IdSuffix);
     });
 
     const addTimeButton = document.getElementById("addTimeButton" + IdSuffix);
@@ -818,10 +831,12 @@ function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], IdSuffix="", 
       var Deltat = readInputs().Deltat;
       if (t[frame] + Deltat > t[t.length-1]) {
         startTime = null;
+        frame = 0;
       } else {
         startTime += t[frame] - Deltat*1000
         frame = t.findIndex(x => x >= t[frame] + Deltat);
       }
+      updateTimeLabel(layout, t, frame, IdSuffix);
     });
 
     const skipToButton = document.getElementById("skipToButton" + IdSuffix);
@@ -829,11 +844,13 @@ function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], IdSuffix="", 
       var skipTime = readInputs().skipTime;
       if (skipTime > t[t.length-1]) {
         startTime = null;
-        alert("skipTime > tf!");
+        frame = 0;
+        alert("skipTime > tf, so restarting!");
       } else {
         startTime += (t[frame]-skipTime) * 1000;
         frame = t.findIndex(x => x >= skipTime);
       }
+      updateTimeLabel(layout, t, frame, IdSuffix);
     });
 
     let cycle = 0;
@@ -978,6 +995,8 @@ function animate3D(solution, view=[0.5, -2, 0.5], varnames=["x", "y", "z"], nos=
     const restartButton = document.getElementById("restartButton" + IdSuffix);
     restartButton.addEventListener("click", () => {
       startTime = null;
+      frame = 0;
+      updateTimeLabel(layout, t, frame, IdSuffix);
     });
 
     const addTimeButton = document.getElementById("addTimeButton" + IdSuffix);
@@ -985,10 +1004,12 @@ function animate3D(solution, view=[0.5, -2, 0.5], varnames=["x", "y", "z"], nos=
       var Deltat = readInputs().Deltat;
       if (t[frame] + Deltat > t[t.length-1]) {
         startTime = null;
+        frame = 0;
       } else {
         startTime += t[frame] - Deltat*1000
         frame = t.findIndex(x => x >= t[frame] + Deltat);
       }
+      updateTimeLabel(layout, t, frame, IdSuffix);
     });
 
     const skipToButton = document.getElementById("skipToButton" + IdSuffix);
@@ -996,11 +1017,13 @@ function animate3D(solution, view=[0.5, -2, 0.5], varnames=["x", "y", "z"], nos=
       var skipTime = readInputs().skipTime;
       if (skipTime > t[t.length-1]) {
         startTime = null;
+        frame = 0;
         alert("skipTime > tf!");
       } else {
         startTime += (t[frame]-skipTime) * 1000;
         frame = t.findIndex(x => x >= skipTime);
       }
+      updateTimeLabel(layout, t, frame, IdSuffix);
     });
 
     let cycle = 0;
