@@ -2,7 +2,7 @@
 @def mintoclevel=1
 @def maxtoclevel=2
 
-This webpage derives the equations of motion for the double pendulum. To see their solution, obtained via the  [Runge-Kutta-Fehlberg](https://en.wikipedia.org/wiki/Runge-Kutta-Fehlberg_method) fourth-order method with fifth-order error checking (RKF45), go to [this page](/doublePendulum/).
+This webpage derives the equations of motion for the double pendulum. To see their solution, obtained via the  [Runge-Kutta-Fehlberg fourth-order method with fifth-order error checking (RKF45)](/RKF45/), go to [this page](/doublePendulum/).
 
 The problem of the double pendulum has been widely analysed in the mechanics literature. Its most simplified version involves two pendulums, with the second attached to the first at the bob, the rods being massless and there being no friction and air resistance. Even this simplified version is subject to chaos and has equations of motion far more complicated than that of the simple pendulum. In this webpage, we will be deriving the equations of motion with dissipative forces and rods with mass. 
 

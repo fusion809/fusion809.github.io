@@ -55,3 +55,11 @@ function func2Vecs(f, vec1, vec2) {
     }
     return val;
 }
+
+function vecMag(vec) {
+    var sum = 0;
+    for (let i = 0; i < vec.length; i++) {
+        sum += vec[i]^2;
+    }
+    return Math.sqrt(sum);
+}
