@@ -258,67 +258,67 @@
             </tr>
             <tr>
                 <td><a href="#pendulumPlot"><button type="button" onclick="generatePendulumPlots(solveProblem(RKF45, readInputs()))">Generate pendulum position plots</button></a></td>
-                <td><button type="button" onclick="removePendulumPlots()">Remove plots</button></td>
+                <td><button type="button" onclick="removePendulumPlots()">Remove pendulum position plots</button></td>
             </tr>
             <tr>
                 <td><a href="#timePlot"><button type="button" onclick="generateTimePlot(solveProblem(RKF45, readInputs()))">Generate a plot against time of \(r_1\), \(\dot{r}_1\), \(r_2\), \(\dot{r}_2\), \(\theta_1\), \(\dot{\theta}_1\), \(\theta_1\) and \(\dot{\theta}_2\)</button></a></td>
-                <td><button type="button" onclick="removeTimePlot()">Remove plot</button></td>
+                <td><button type="button" onclick="removeTimePlot()">Remove plot against time of \(r_1\), \(\dot{r}_1\), \(r_2\), \(\dot{r}_2\), \(\theta_1\), \(\dot{\theta}_1\), \(\theta_1\) and \(\dot{\theta}_2\)</button></td>
             </tr>
             <tr>
                 <td><a href="#R1TPlot"><button type="button" onclick="generateR1TPlot(solveProblem(RKF45, readInputs()))">Generate a \(r_1\) against time plot</button></a></td>
-                <td><button type="button" onclick="removeR1TPlot()">Remove plot</button></td>
+                <td><button type="button" onclick="removeR1TPlot()">Remove \(r_1\) against time plot</button></td>
             </tr>
             <tr>
                 <td><a href="#Dr1TPlot"><button type="button" onclick="generateDr1TPlot(solveProblem(RKF45, readInputs()))">Generate a \(\dot{r}_1\) against time plot</button></a></td>
-                <td><button type="button" onclick="removeDr1TPlot()">Remove plot</button></td>
+                <td><button type="button" onclick="removeDr1TPlot()">Remove \(\dot{r}_1\) against time plot</button></td>
             </tr>
             <tr>
                 <td><a href="#Dr1R1Plot"><button type="button" onclick="generateDr1R1Plot(solveProblem(RKF45, readInputs()))">Generate a phase plot of \(\dot{r}_1\) vs \(r_1\)</button></a></td>
-                <td><button type="button" onclick="removeDr1R1Plot()">Remove plot</button></td>
+                <td><button type="button" onclick="removeDr1R1Plot()">Remove phase plot of \(\dot{r}_1\) vs \(r_1\)</button></td>
             </tr>
 <tr>
                 <td><a href="#R2TPlot"><button type="button" onclick="generateR2TPlot(solveProblem(RKF45, readInputs()))">Generate a \(r_2\) against time plot</button></a></td>
-                <td><button type="button" onclick="removeR2TPlot()">Remove plot</button></td>
+                <td><button type="button" onclick="removeR2TPlot()">Remove \(r_2\) against time plot</button></td>
             </tr>
             <tr>
                 <td><a href="#DR2TPlot"><button type="button" onclick="generateDr2TPlot(solveProblem(RKF45, readInputs()))">Generate a \(\dot{r}_2\) against time plot</button></a></td>
-                <td><button type="button" onclick="removeDr2TPlot()">Remove plot</button></td>
+                <td><button type="button" onclick="removeDr2TPlot()">Remove \(\dot{r}_2\) against time plot</button></td>
             </tr>
             <tr>
                 <td><a href="#Dr2R2Plot"><button type="button" onclick="generateDr2R2Plot(solveProblem(RKF45, readInputs()))">Generate a phase plot of \(\dot{r}_2\) vs \(r_2\)</button></a></td>
-                <td><button type="button" onclick="removeDr2R2Plot()">Remove plot</button></td>
+                <td><button type="button" onclick="removeDr2R2Plot()">Remove phase plot of \(\dot{r}_2\) vs \(r_2\)</button></td>
             </tr>
             <tr>
                 <td><a href="#R2R1Plot"><button type="button" onclick="generateR1R2PhasePlot(solveProblem(RKF45, readInputs()))">Generate a \(r_2\) against \(r_1\) phase plot</button></a></td>
-                <td><button type="button" onclick="removeR1R2PhasePlot()">Remove plot</button><br/></td>
+                <td><button type="button" onclick="removeR1R2PhasePlot()">Remove \(r_2\) against \(r_1\) phase plot</button><br/></td>
             </tr>
             <tr>
                 <td><a href="#Theta1TPlot"><button type="button" onclick="generateTheta1TPlot(solveProblem(RKF45, readInputs()))">Generate a \(\theta_1\) against time plot</button></a></td>
-                <td><button type="button" onclick="removeTheta1TPlot()">Remove plot</button></td>
+                <td><button type="button" onclick="removeTheta1TPlot()">Remove \(\theta_1\) against time plot</button></td>
             </tr>
             <tr>
                 <td><a href="#Dtheta1TPlot"><button type="button" onclick="generateDtheta1TPlot(solveProblem(RKF45, readInputs()))">Generate a \(\dot{\theta}_1\) against time plot</button></a></td>
-                <td><button type="button" onclick="removeDtheta1TPlot()">Remove plot</button></td>
+                <td><button type="button" onclick="removeDtheta1TPlot()">Remove \(\dot{\theta}_1\) against time plot</button></td>
             </tr>
             <tr>
                 <td><a href="#Dtheta1Theta1Plot"><button type="button" onclick="generateDtheta1Theta1Plot(solveProblem(RKF45, readInputs()))">Generate a phase plot of \(\dot{\theta}_1\) vs \(\theta_1\)</button></a></td>
-                <td><button type="button" onclick="removeDtheta1Theta1Plot()">Remove plot</button></td>
+                <td><button type="button" onclick="removeDtheta1Theta1Plot()">Remove phase plot of \(\dot{\theta}_1\) vs \(\theta_1\)</button></td>
             </tr>
 <tr>
                 <td><a href="#Theta2TPlot"><button type="button" onclick="generateTheta2TPlot(solveProblem(RKF45, readInputs()))">Generate a \(\theta_2\) against time plot</button></a></td>
-                <td><button type="button" onclick="removeTheta2TPlot()">Remove plot</button></td>
+                <td><button type="button" onclick="removeTheta2TPlot()">Remove \(\theta_2\) against time plot</button></td>
             </tr>
             <tr>
                 <td><a href="#Dtheta2TPlot"><button type="button" onclick="generateDtheta2TPlot(solveProblem(RKF45, readInputs()))">Generate a \(\dot{\theta}_2\) against time plot</button></a></td>
-                <td><button type="button" onclick="removeDtheta2TPlot()">Remove plot</button></td>
+                <td><button type="button" onclick="removeDtheta2TPlot()">Remove \(\dot{\theta}_2\) against time plot</button></td>
             </tr>
             <tr>
                 <td><a href="#Dtheta2Theta2Plot"><button type="button" onclick="generateDtheta2Theta2Plot(solveProblem(RKF45, readInputs()))">Generate a phase plot of \(\dot{\theta}_2\) vs \(\theta_2\)</button></a></td>
-                <td><button type="button" onclick="removeDtheta2Theta2Plot()">Remove plot</button></td>
+                <td><button type="button" onclick="removeDtheta2Theta2Plot()">Remove phase plot of \(\dot{\theta}_2\) vs \(\theta_2\)</button></td>
             </tr>
             <tr>
                 <td><a href="#phasePlotTheta1Theta2"><button type="button" onclick="generateTheta1Theta2PhasePlot(solveProblem(RKF45, readInputs()))">Generate a \(\theta_2\) against \(\theta_1\) phase plot</button></a></td>
-                <td><button type="button" onclick="removeTheta1Theta2PhasePlot()">Remove plot</button><br/></td>
+                <td><button type="button" onclick="removeTheta1Theta2PhasePlot()">Remove \(\theta_2\) against \(\theta_1\) phase plot</button><br/></td>
             </tr>
             <tr>
                 <td><a href="#pendulumPlot"><button type="button" onclick="generatePlots(readInputs())">Generate all solution plots</button></a></td>
@@ -326,7 +326,7 @@
             </tr>
             <tr>
                 <td><a href="#animation"><button type="button" onclick="generateAnimation()">Generate an animation of the system</button></a></td>
-                <td><button type="button" onclick="removeAnimation()">Remove animation</button></td>
+                <td><button type="button" onclick="removeAnimation()">Remove system animation</button></td>
             </tr>
             <tr>
                 <td><a href="#animationR1Phase"><button type="button" onclick="generateR1PhaseAnimation()">Generate a \(r_1\) phase plot animation</button></a></td>

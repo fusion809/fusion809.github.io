@@ -181,15 +181,15 @@
             </tr>
             <tr>
                 <td><a href="#phasePlot"><button type="button" onclick="generatePhasePlot(solveProblemSP(readInputs()))">Generate a phase plot</button></a></td>
-                <td><button type="button" onclick="removePhasePlot()">Remove plot</button></td>
+                <td><button type="button" onclick="removePhasePlot()">Remove phase plot</button></td>
             </tr>
             <tr>
                 <td><a href="#timePlot"><button type="button" onclick="generateTimePlot(solveProblemSP(readInputs()))">Generate a time plot</button></a></td>
-                <td><button type="button" onclick="removeTimePlot()">Remove plot</button></td>
+                <td><button type="button" onclick="removeTimePlot()">Remove time plot</button></td>
             </tr>
             <tr>
                 <td><a href="#errorPlot"><button type="button" onclick="generateErrorPlot(solveProblemSP(readInputs()))">Generate a semilog plot of the error in \(\dot{\theta}\) against time</button></a></td>
-                <td><button type="button" onclick="removeErrorPlot()">Remove plot</button></td>
+                <td><button type="button" onclick="removeErrorPlot()">Remove semilog plot of the error in \(\dot{\theta}\) against time</button></td>
             </tr>
             <tr>
                 <td><a href="#phasePlot"><button type="button" onclick="generatePlots(readInputs())">Generate all solution plots</button></a></td>
@@ -203,22 +203,16 @@
                 <td><a href="#animationPhase"><button type="button" onclick="generatePhaseAnimation()">Generate a phase plot animation</button></a></td>
                 <td><button type="button" onclick="removePhaseAnimation()">Remove phase plot animation</button></td>
             </tr>
+            <tr>
+                <td><a href="#animationPhase"><button type="button" onclick="generatePhaseAnimation()">Generate a phase plot animation</button></a></td>
+                <td><button type="button" onclick="removePhaseAnimation()">Remove phase plot animation</button></td>
+            </tr>
+            <tr>
+                <td><a href="#animation"><button type="button" onclick="generateAnimations()">Generate all animations</button></a></td>
+                <td><button type="button" onclick="removeAnimations()">Remove all animations</button></td>
+            </tr>
         </table>
-
-        <!--Where the table and plot goes-->
-        <table id="tableOutputs">
-        </table>
-        <div id='timePlot'></div>
-        <div id='errorPlot'></div>
-        <div id='phasePlot'></div>
-        <button id="toggleButton">Pause</button>
-        <button id="restartButton">Restart</button>
-        <button id="addTimeButton">Add time \(\Delta t\) to animation.</button>
-        <div id='animation'></div>
-        <button id="toggleButtonPhase">Pause</button>
-        <button id="restartButtonPhase">Restart</button>
-        <button id="addTimeButtonPhase">Add time \(\Delta t\) to animation.</button>
-        <div id='animationPhase'></div>
+        {{ insert simple_pendulum_output.html }}
         {{ insert page_foot_general.html }}
     </body>
 </html>
