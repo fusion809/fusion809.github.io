@@ -13,7 +13,7 @@ The problem of the double pendulum has been widely analysed in the mechanics lit
 </figure>
 ~~~
 
-Figure 1 depicts the double pendulum system being analysed. Most physicists treat $\theta_1$ and $\theta_2$ as being relative to the negative y-axis instead of the positive x-axis. I, as primarily a mathematician, prefer the positive x-axis as the point of reference for angles as I find it more intuitive. 
+Figure 1 depicts the double pendulum system being analysed. Most physicists treat $\theta_1$ and $\theta_2$ as being relative to the negative y-axis instead of the positive x-axis. I, as primarily a mathematician, prefer the positive \(x\)-axis as the point of reference for angles as I find it more intuitive. 
 
 \tableofcontents
 	
