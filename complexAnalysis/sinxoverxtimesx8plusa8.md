@@ -1,3 +1,4 @@
+@def hassim=false;
 @def title="Evaluating the integral of sine mx over x times x to the eighth plus a to the eighth"
 @def tags=["Contour integration"]
 

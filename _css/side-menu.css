@@ -50,12 +50,13 @@ The content `<div>` is where all your content goes.
     max-width: 800px;
     margin-bottom: 50px;
     line-height: 1.6em;
+    text-align: left;
 }
 
 .header {
      margin: 0;
      color: #333;
-     text-align: center;
+     text-align: left;
      padding: 2.5em 2em 0;
      border-bottom: 1px solid #eee;
  }

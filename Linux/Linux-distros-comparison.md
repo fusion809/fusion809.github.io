@@ -1,3 +1,4 @@
+@def hassim=false;
 @def title="Linux distributions: identifying the ideal use cases."
 @def date=2026-01-01
 @def tag=["Linux"]

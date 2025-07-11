@@ -1,3 +1,4 @@
+@def hassim=false
 @def title="An overview of my coding projects"
 
 I have several GitHub repositories, and they can be broadly classified into the following categories:

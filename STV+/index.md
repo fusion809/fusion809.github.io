@@ -1,3 +1,4 @@
+@def hassim=false;
 @def title="Single transferable vote plus (STV+)"
 @def tags=["electoral-systems"]
 @def mintoclevel=1

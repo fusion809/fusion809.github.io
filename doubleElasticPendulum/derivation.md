@@ -1,3 +1,4 @@
+@def hassim=false;
 @def title="Deriving the equations of motion for the double elastic pendulum"
 @def maxtoclevel = 5
 @def mintoclevel = 1

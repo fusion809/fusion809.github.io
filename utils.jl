@@ -14,3 +14,8 @@ function lx_baz(com, _)
   # do whatever you want here
   return uppercase(brace_content)
 end
+
+ function render_form(params::Vector{String})
+     inputs = join(["<tr><td><label for=\"$p\">\\($p\\):</label></td>\n<td><input name=\"$p\" id=\"$p\" name=\"$p\" value=\"{{$p}}\"/></td>\n<td>{{ {$p}_explanation }} </td>\n</tr>" for p in params], "\n")
+     return "<form>\n$inputs\n</form>"
+end

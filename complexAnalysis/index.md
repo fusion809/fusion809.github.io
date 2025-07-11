@@ -1,3 +1,4 @@
+@def hassim=false;
 Complex analysis articles on this website include:
 * [Reddit question answer](/complexAnalysis/circleR2RedditInt/)
 * [Solution to $\displaystyle \int_{-\infty}^{\infty} \dfrac{\sin{mx}}{x(x^8+a^8)} dx$](/complexAnalysis/sinxoverxtimesx8plusa8/)

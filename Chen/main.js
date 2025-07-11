@@ -40,7 +40,7 @@ function generate3DPhasePlot(solution) {
     var vars = solution.vars;
     var [x, y, z] = vars;
 
-    gen3DPlot(x, y, z, "phasePlotXYZ", "Phase plot of the solution to the Chen equations")
+    gen3DPlot(x, y, z, "phasePlotXYZ", "Phase plot of the solution to the Chen equations", [0, 2, 0])
 }
 
 /**

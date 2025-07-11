@@ -17,7 +17,7 @@ these files might be copied and, if markdown, processed by Franklin which
 you might not want. Indicate directories by ending the name with a `/`.
 -->
 @def ignore = ["node_modules/", "franklin", "franklin.pub"]
-
+<!--@def utils = utils.jl
 <!--
 Add here global latex commands to use throughout your
 pages. It can be math commands but does not need to be.

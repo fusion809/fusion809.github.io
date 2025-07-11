@@ -1,3 +1,4 @@
+@def hassim=false;
 @def title="Contour integration with pole on the contour itself"
 @def tags=["Contour integration"]
 

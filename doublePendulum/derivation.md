@@ -1,4 +1,5 @@
-@def title = "Derivation of the equations of motion of the double pendulum"
+@def hassim=false;
+@def title="Derivation of the equations of motion of the double pendulum"
 @def mintoclevel=1
 @def maxtoclevel=2
 

@@ -1,3 +1,4 @@
+@def hassim=false
 @def title = "FunctionIntegrator.jl"
 @def tags = ["packages", "julia"]
 

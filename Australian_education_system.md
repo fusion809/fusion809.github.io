@@ -1,3 +1,4 @@
+@def hassim=false;
 @def title="The Australian education system with a particular focus on the Queensland education system"
 @def tag=["Education"]
 @def maxtoclevel=5

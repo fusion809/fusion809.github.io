@@ -42,7 +42,7 @@ function generate3DPhasePlot(solution) {
     var [x, y, z] = vars;
 
     // Generate 3D phase plot
-    gen3DPlot(x, y, z, "phasePlotXYZ", "3D phase plot");
+    gen3DPlot(x, y, z, "phasePlotXYZ", "3D phase plot", [2, 0, 0]);
 }
 
 /**

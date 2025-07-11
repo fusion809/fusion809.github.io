@@ -388,7 +388,7 @@ function gen2DPlotXYLabs(x, y, element, title, xtitle, ytitle) {
  * @param element  HTML element the plot will go in.
  * @param title    Title for the plot.
  */
-function gen3DPlot(x, y, z, element, title) {
+function gen3DPlot(x, y, z, element, title, view) {
     // Height and width of plot
     adjustPlotHeight(element);
 
@@ -420,7 +420,17 @@ function gen3DPlot(x, y, z, element, title) {
         range: range(z)
        }
     };
-   
+    if (typeof view !== "undefined") {
+      layoutXYZ.scene = {
+            camera: {
+                    eye: {
+                    x: view[0],   // Set to 0 to align the camera with the YZ plane
+                    y: view[1],
+                    z: view[2]
+                    }
+                }
+          }
+        }
     // Generate plot
     Plotly.newPlot(element, dataXYZ, layoutXYZ);
 }
