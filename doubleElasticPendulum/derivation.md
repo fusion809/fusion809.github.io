@@ -1,5 +1,6 @@
 @def title="Deriving the equations of motion for the double elastic pendulum"
-
+@def maxtoclevel = 5
+@def mintoclevel = 1
 ~~~
 <figure>
     <img src="/doubleElasticPendulum/Double elastic pendulum.svg" width="500px"></img>
@@ -28,10 +29,147 @@ Where
 * The left-hand side of Equation Equation \eqref{ELD} can also be represented as $-\dfrac{\delta \mathcal{L}}{\delta q_i}$, where $\dfrac{\delta \mathcal{L}}{\delta q_i}$ is the functional derivative of the Lagrangian with respect to $q_i$. To simplify things, we will call $-\dfrac{\delta \mathcal{L}}{\delta q_i} = \dfrac{\delta' \mathcal{L}}{\delta' q_i}$
 * The right-hand side of Equation Equation \eqref{ELD} is also called the generalized dissipative force and can be represented as $Q_i$.
 
-The masses of the pendulum rods (or springs) are ignored as including them into the calculation for [rigid double pendulums](/doublePendulum/) does not make things more interesting. 
- 
 \tableofcontents
 
+# Caveats
+The masses of the pendulum rods (or springs) and the friction they experience are ignored as including them into the calculation for [rigid double pendulums](/doublePendulum/) does not make things more interesting and merely complicates the calculation. I did try deriving the equations of motion while including the rods using SymPy, specifically with the code:
+
+```python
+from sympy import symbols, Function, diff, cos, sin, simplify, sqrt, Abs, Eq, solve, latex
+from sympy.vector import CoordSys3D
+from multiprocessing import Pool, cpu_count
+N = CoordSys3D('N');
+# Set up symbols
+t = symbols('t')
+m1b = symbols('m1b'); 
+m2b = symbols('m2b'); 
+m1r = symbols('m1r'); 
+m2r = symbols('m2r'); 
+l1 = symbols('11');
+l2 = symbols('l2');
+k1 = symbols('k1'); 
+k2 = symbols('k2'); 
+g = symbols('g'); 
+b1r = symbols('b1r'); 
+b2r = symbols('b2r'); 
+b1b = symbols('b1b'); 
+b2b = symbols('b2b'); 
+c1r = symbols("c1r"); 
+c1b = symbols("c1b"); 
+c2r = symbols("c2r"); 
+c2b = symbols("c2b");
+# Functions
+r1 = Function('r1')(t); 
+theta1=Function('theta1')(t); 
+r2 = Function('r2')(t); 
+theta2=Function('theta2')(t);
+
+# Bob 1
+x1b = r1*cos(theta1);
+y1b = r1*sin(theta1);
+x1bdot = diff(x1b, t);
+y1bdot = diff(y1b, t);
+v1b_mag = simplify(sqrt(x1bdot**2 + y1bdot**2));
+v1b_sq = simplify(x1bdot**2 + y1bdot**2);
+r1b = x1b * N.i + y1b * N.j;
+v1b = x1bdot * N.i + y1bdot * N.j;
+e1b_r1 = diff(r1b, r1);
+e1b_r2 = diff(r1b, r2);
+e1b_th1 = diff(r1b, theta1);
+e1b_th2 = diff(r1b, theta2);
+
+# Bob 2
+x2b = x1b+r2*cos(theta2);
+y2b = y1b + r2*sin(theta2);
+x2bdot = diff(x2b, t);
+y2bdot = diff(y2b, t);
+v2b_mag = simplify(sqrt(x2bdot**2 + y2bdot**2));
+v2b_sq = simplify(x2bdot**2 + y2bdot**2);
+r2b = x2b * N.i + y2b * N.j;
+v2b = x2bdot * N.i + y2bdot * N.j;
+e2b_r1 = diff(r2b, r1);
+e2b_r2 = diff(r2b, r2);
+e2b_th1 = diff(r2b, theta1);
+e2b_th2 = diff(r2b, theta2);
+
+
+# Rod 1
+x1r = x1b/2;
+x1rdot = diff(x1r, t);
+y1r = y1b/2;
+y1rdot = diff(y1r, t);
+v1r_mag = simplify(sqrt(x1rdot**2 + y1rdot**2));
+v1r_sq = simplify(x1rdot**2 + y1rdot**2);
+v1r = x1rdot * N.i + y1rdot * N.j;
+r1r = x1r * N.i + y1r * N.j;
+v1r = x1rdot * N.i + y1rdot * N.j;
+e1r_r1 = diff(r1r, r1);
+e1r_r2 = diff(r1r, r2);
+e1r_th1 = diff(r1r, theta1);
+e1r_th2 = diff(r1r, theta2);
+
+# Rod 2
+x2r = x1b +r2*cos(theta2)/2;
+x2rdot = diff(x2r, t);
+y2r = y1b + r2*sin(theta2)/2;
+y2rdot = diff(y2r, t);
+v2r_mag = simplify(sqrt(x2rdot**2 + y2rdot**2));
+v2r_sq = simplify(x2rdot**2 + y2rdot**2);
+v2r = x2rdot * N.i + y2rdot * N.j;
+r2r = x2r * N.i + y2r * N.j;
+v2r = x2rdot * N.i + y2rdot * N.j;
+e2r_r1 = diff(r2r, r1);
+e2r_r2 = diff(r2r, r2);
+e2r_th1 = diff(r2r, theta1);
+e2r_th2 = diff(r2r, theta2);
+
+Frod1 = -(b1r+c1r*Abs(v1r_mag))*v1r;
+Frod2 = -(b2r+c2r*Abs(v2r_mag))*v2r;
+Fbob1 = -(b1b+c1b*Abs(v1b_mag))*v1b;
+Fbob2 = -(b2b+c2b*Abs(v2b_mag))*v2b;
+Qr1 = Frod1.dot(e1r_r1) + Frod2.dot(e2r_r1) + Fbob1.dot(e1b_r1) + Fbob2.dot(e2b_r1);
+Qr1 = simplify(Qr1);
+Qr2 = Frod1.dot(e1r_r2) + Frod2.dot(e2r_r2) + Fbob1.dot(e1b_r2) + Fbob2.dot(e2b_r2);
+Qr2 = simplify(Qr2);
+Qth1 = Frod1.dot(e1r_th1) + Frod2.dot(e2r_th1) + Fbob1.dot(e1b_th1) + Fbob2.dot(e2b_th1);
+Qth1 = simplify(Qth1);
+Qth2 = Frod1.dot(e1r_th2) + Frod2.dot(e2r_th2) + Fbob1.dot(e1b_th2) + Fbob2.dot(e2b_th2);
+Qth2 = simplify(Qth2);
+T = m1b/2 * v1b_sq + m2b/2 * v2b_sq + m1r/2 * v1r_sq + m2r/2 * v2r_sq + m1r/24*r1**2*diff(theta1, t)**2 + m2r/24 * r2**2*diff(theta2,t)**2
+V = m1b * g * y1b + m1r * g * r1 * y1r + m2b * g * y2b + m2r * g * y2r + k1*(r1-l1)**2/2 + k2*(r2-l2)**2/2;
+L = T - V; 
+def compute_eq_of_motion(args):
+    L, Q, coord = args
+    t = symbols('t')
+    lhs = diff(diff(L, diff(coord, t)), t) - diff(L, coord)
+    return Eq(lhs, Q)
+	
+# Below line was commented out because it caused individual equations to be 
+# incredibly long, so I decided to treat generalized dissipation forces as 
+# variables. 
+#Qs = [Qr1, Qr2, Qth1, Qth2];
+Qs = [symbols("Qr1"), symbols("Qr2"), symbols("Qtheta1"), symbols("Qtheta2")]
+coords = [r1, r2, theta1, theta2]
+d2r1 = diff(r1, t, 2);
+d2r2 = diff(r2, t, 2);
+d2th1 = diff(theta1, t, 2);
+d2th2 = diff(theta2, t, 2);
+
+with Pool(cpu_count()) as pool:
+    equations = pool.map(compute_eq_of_motion, [(L, Qs[i], coords[i]) for i in range(4)])
+
+d2 = [d2r1, d2r2, d2th1, d2th2];
+# Solve the system
+sols = solve(equations, d2, simplify=True)
+
+secdernames = ["d2r1", "d2r2", "d2theta1", "d2theta2"]
+for i in range(4):
+	print(secdernames[i] + " = \n" + latex(sols[d2[i]]))
+```
+
+And it caused IPython to crash. 
+
+# Coordinates, velocities and generalized basis vectors
 As can be seen, we have four degrees of freedom in this system. The angles the two pendulums make with the positive $x$-axis &mdash; $\theta_1$ and $\theta_2$, respectively &mdash; are among our degrees of freedom. We will also need degrees of freedom corresponding to the lengths of the pendulum rods. These degrees of freedom could either be the extent to which they are extended beyond their rest length or their total length. For the sake of simplicity, we will opt to use their total lengths &mdash; $r_1$ and $r_2$, respectively. Hence
 
 \begin{align*}
@@ -86,7 +224,7 @@ Let us define $|\Delta \vec{v}_{21}|^2 = |\vec{v}_2|^2 - |\vec{v}_1|^2$, as this
 	|\Delta \vec{v}_{21}|^2 &= \dot{r}_2^2 + r_2^2\dot{\theta}_2^2 + 2\cos{\Delta}(\dot{r}_1\dot{r}_2 + r_1r_2\dot{\theta}_1\dot{\theta}_2) + 2\sin{\Delta}(r_1\dot{r}_2\dot{\theta}_1-\dot{r}_1r_2\dot{\theta}_2).
 \end{align*}
 
-## Dissipative forces
+# Dissipative forces
 We will assume that the dissipative forces are proportion to the velocity and velocity squared of the pendulum bobs. Meaning they will have the form
 
 \begin{align*}
@@ -95,7 +233,7 @@ We will assume that the dissipative forces are proportion to the velocity and ve
 
 Where $j$ is the pendulum bob of interest, $b_j$ and $c_j$ are constants. 
 
-## Kinetic energy
+# Kinetic energy
 The kinetic energy of the system is given by
 
 \begin{align*}
@@ -103,7 +241,7 @@ The kinetic energy of the system is given by
 	&= \dfrac{m_1+m_2}{2}|\vec{v}_1|^2 + \dfrac{m_2}{2}|\Delta \vec{v}_{21}|^2.
 \end{align*}
 
-## Potential energy
+# Potential energy
 The potential energy of the system is given by
 
 \begin{align*}
@@ -112,7 +250,7 @@ The potential energy of the system is given by
 	&= (m_1+m_2)gr_1\sin{\theta_1} + m_2gr_2\sin{\theta_2} + \dfrac{k_1(r_1-l_1)^2+k_2(r_2-l_2)^2}{2}.
 \end{align*}
 
-## Lagrangian
+# Lagrangian
 Hence the Lagrangian of the system is
 
 \begin{align*}
@@ -123,8 +261,8 @@ Hence the Lagrangian of the system is
 
 We will not expand this Lagrangian, as doing so just adds to its complexity. Instead, we will calculate the derivatives of each of its components. 
 
-## Derivative of components of the Lagrangian
-### Square of the velocity of the first pendulum's bob
+# Derivative of components of the Lagrangian
+## Square of the velocity of the first pendulum's bob
 The relevant partial and standard derivatives are:
 \begin{align*}
 	\dfrac{\partial |\vec{v}_1|^2}{\partial r_1} &= 2r_1\dot{\theta}_1^2 & \dfrac{\partial |\vec{v}_1|^2}{\partial r_2} &= 0 & \dfrac{\partial |\vec{v}_1|^2}{\partial \theta_1} &= 0 & \dfrac{\partial |\vec{v}_1|^2}{\partial \theta_2} &= 0\\
@@ -139,7 +277,7 @@ Hence the negative functional derivatives are
 	&= 2\ddot{r}_1 - 2r_1\dot{\theta}_1^2 & &= 0 & &=2r_1^2\ddot{\theta}_1 + 4r_1\dot{r}_1\dot{\theta}_1 & &= 0.	
 \end{align*}
 
-### Difference in the square of each bob's velocity
+## Difference in the square of each bob's velocity
 Hence the partial and standard derivatives of the difference in the square of each bob's velocity is
 \begin{align*}
 	\dfrac{\partial |\Delta \vec{v}_{21}|^2}{\partial r_1} &= 2r_2\dot{\theta}_1\dot{\theta}_2\cos{\Delta} + 2\dot{r}_2\dot{\theta}_1\sin{\Delta} & \dfrac{\partial |\Delta \vec{v}_{21}|^2}{\partial r_2} &= 2r_2\dot{\theta}_2^2+2r_1\dot{\theta}_1\dot{\theta}_2\cos{\Delta}-2\dot{r}_1\dot{\theta}_2\sin{\Delta} \\
@@ -214,8 +352,8 @@ As for $\theta_2$
 	&= 4r_2\dot{r}_2\dot{\theta}_2 + 2r_2^2\ddot{\theta}_2 +2\cos{\Delta}(2\dot{r}_1r_2\dot{\theta}_1+r_1r_2\ddot{\theta}_1)+2\sin{\Delta}(r_1r_2\dot{\theta}_1^2-\ddot{r}_1r_2).
 \end{align*}
 
-## Euler-Lagrange equations with dissipation
-### $r_1$
+# Euler-Lagrange equations with dissipation
+## $r_1$
 It is important to note that $\dfrac{\delta' f(q_i)}{\delta' q_i} = -\dfrac{\partial f}{\partial q_i}$ and of course if a term does not depend on $q_i$ or $\dot{q}_i$ its functional derivative with respect to $q_i$ is zero. Hence
 
 \begin{align*}
@@ -274,7 +412,7 @@ Moving all terms that do not involve second derivatives to the right-hand side y
 	\ddot{r}_1 + \dfrac{m_2\cos{\Delta}}{m_1+m_2}\ddot{r}_2 + 0\ddot{\theta}_1 - \dfrac{m_2r_2\sin{\Delta}}{m_1+m_2}\ddot{\theta}_2 &= r_1\dot{\theta}_1^2 - g\sin{\theta_1} + \dfrac{m_2}{m_1+m_2}\left[r_2\dot{\theta}_2^2\cos{\Delta} + 2\dot{r}_2\dot{\theta}_2\sin{\Delta}\right] + \dfrac{Q_{r_1}-k_1(r_1-l_1)}{m_1+m_2}.
 \end{align*}
 
-### $r_2$
+## $r_2$
 As for $r_2$
 
 \begin{align*}
@@ -315,7 +453,7 @@ Next we will expand out second time derivatives and moving everything else to th
 	\cos{\Delta}\ddot{r}_1 + \ddot{r}_2 + r_1\sin{\Delta}\ddot{\theta}_1 + 0\ddot{\theta}_2 &= r_2\dot{\theta}_2^2  - g\sin{\theta_2} + r_1\dot{\theta}_1^2\cos{\Delta} - 2\dot{r}_1\dot{\theta}_1\sin{\Delta} + \dfrac{Q_{r_2}-k_2(r_2-l_2)}{m_2}.
 \end{align*}
 
-### $\theta_1$
+## $\theta_1$
 As for $\theta_1$
 
 \begin{align*}
@@ -361,7 +499,7 @@ Expanding out all second time derivatives and moving all other terms to the righ
 	0\ddot{r}_1 + \dfrac{m_2\sin{\Delta}}{(m_1+m_2)r_1}\ddot{r}_2 + \ddot{\theta}_1 + \dfrac{m_2r_2\cos{\Delta}}{(m_1+m_2)r_1}\ddot{\theta}_2 &= -\dfrac{2\dot{r}_1\dot{\theta}_1}{r_1} - \dfrac{g\cos{\theta_1}}{r_1} - \dfrac{m_2}{(m_1+m_2)r_1}\left[2\dot{r}_2\dot{\theta}_2\cos{\Delta} -r_2\dot{\theta}_2^2\sin{\Delta}\right] + \dfrac{Q_{\theta_1}}{(m_1+m_2)r_1^2}.
 \end{align*}
 
-### $\theta_2$
+## $\theta_2$
 As for $\theta_2$
 
 \begin{align*}
@@ -399,7 +537,7 @@ Next we will expand out second time derivatives and moving everything else to th
 	-\dfrac{\sin{\Delta}}{r_2}\ddot{r}_1 + 0\ddot{r}_2 + \dfrac{r_1\cos{\Delta}}{r_2}\ddot{\theta}_1 + \ddot{\theta}_2 &= -\dfrac{2\dot{r}_2\dot{\theta}_2}{r_2} - \dfrac{g\cos{\theta_2}}{r_2} - \dfrac{2\dot{r}_1\dot{\theta}_1\cos{\Delta}}{r_2}-\dfrac{r_1\dot{\theta}_1^2\sin{\Delta}}{r_2} + \dfrac{Q_{\theta_2}}{m_2r_2^2}.
 \end{align*}
 
-## Analysis
+# Analysis
 There are three ways we could solve this problem; each of which involves numerical integration to obtain the final solution. Firstly, we could algebraically manipulate this ordinary differential equation (ODE) system until only one second time derivative appears in each equation. The final ODE system after this manipulation could, in turn, be numerically integrated using any standard scheme (e.g. the Runge-Kutta-Fehlberg method). Secondly, we could numerically integrate it as is using a differential-algebraic equation (DAE) solver, but these tend to be more prone to give convergence errors in my experience. Finally, we could convert the system to matrix form and invert it to obtain numerical approximations of each of our second time derivatives and use these to numerically integrate the system with a standard ODE solver. We will opt for this last method, as the first approach is almost guaranteed to introduce errors and the second gives convergence errors, at least in Julia. 
 
 Essentially, we will write our differential equation system as
