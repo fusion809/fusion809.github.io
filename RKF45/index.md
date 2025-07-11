@@ -1,6 +1,6 @@
 @def title="Runge-Kutta-Fehlberg 4/5th-order method"
 
-The **Runge-Kutta-Fehlberg 4th-order method with 5th-order error checking** (RKF45) is a numerical integration technique for ordinary differential equations (ODEs) that utilizes an adaptive step size to achieve a prescribed error tolerance. It is used by each page in this website that solves an ODE system. In it, we assume our ODE system has the form
+The **Runge-Kutta-Fehlberg 4th-order method with 5th-order error checking** (RKF45) is a numerical integration technique for [ordinary differential equations](https://en.wikipedia.org/wiki/Ordinary_differential_equation) (ODEs) that utilizes an adaptive step size to achieve a prescribed error tolerance, $\epsilon$. It is used by each page in this website that solves an ODE system. In it, we assume our ODE system has the form
 
 \begin{align*}
 \dfrac{d\mathbf{x}}{dt} &= f(\mathbf{x}, t). \\
@@ -24,7 +24,6 @@ s &= \min{\mathbf{S}_i} \\
 h &= sh.
 \end{align*}
 
-If $r \leq \epsilon $, we let $\mathbf{X}_{1,i}$ be our value of $\mathbf{x}_{i+1}$ and proceed to the next step. Otherwise, we repeat the calculation with our updated step size. 
+If $r \leq \epsilon $, we let $\mathbf{X}_{1,i}$ be our value of $\mathbf{x}_{i+1}$ and proceed to the next step. Otherwise, we repeat the calculation with our updated step size. In the $\mathbf{R}_i$ calculation, $|\mathbf{v}|$ denotes a vector whose elements are the absolute value of the elements of $\mathbf{v}$, not its vector magnitude. Here $r$ is the maximum error estimate we have for step $i$.
 
-In the $\mathbf{R}_i$ calculation, $|\mathbf{v}|$ denotes a vector whose elements are the absolute value of the elements of $\mathbf{v}$, not its vector magnitude. Here $r$ is the maximum error estimate we have for step $i$.
-
+$h$ can become unmanageably small if the problem one is solving is too numerically unstable. This can be seen in the [double elastic pendulum solver](/doubleElasticPendulum/) webpage. 
