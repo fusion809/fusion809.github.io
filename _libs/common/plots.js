@@ -567,11 +567,26 @@ function genMultPlot(solution, varnames, element, title) {
     Plotly.newPlot(element, dataTimePlot, layoutTimePlot);
 }
 
+/**
+ * Update time label in animation.
+ * @param layout   Layout object for animation.
+ * @param t        Time vector for solution.
+ * @param frame    Frame number we are up to in the animation.
+ * @param IdSuffix Suffix of element IDs used.
+ * @return         Nothing.
+ */
 function updateTimeLabel(layout, t, frame, IdSuffix) {
   layout.annotations[0].text = `Time: ${t[frame].toFixed(2)} s`;
   Plotly.relayout('animation' + IdSuffix, layout);
 }
 
+/**
+ * Pause animation via button.
+ * @param state        State object for animation.
+ * @param IdSuffix     Suffix of element IDs used.
+ * @param animateFrame animateFrame function.
+ * @return             Nothing.
+ */
 function pause(state, IdSuffix, animateFrame) {
   const pauseButton = document.getElementById("toggleButton" + IdSuffix);
   pauseButton.addEventListener("click", () => {
@@ -586,6 +601,14 @@ function pause(state, IdSuffix, animateFrame) {
   });
 }
 
+/**
+ * Restart animation via pressing a button.
+ * @param state    State object for animation.
+ * @param layout   Layout object for animation.
+ * @param t        Time vector for solution being animated.
+ * @param IdSuffix Suffix for element IDs used in animation.
+ * @return         Nothing.
+ */
 function restart(state, layout, t, IdSuffix) {
   const restartButton = document.getElementById("restartButton" + IdSuffix);
   restartButton.addEventListener("click", () => {
@@ -594,6 +617,15 @@ function restart(state, layout, t, IdSuffix) {
     updateTimeLabel(layout, t, state.frame, IdSuffix);
   });
 }
+
+/**
+ * Add time to animation.
+ * @param state    State object for animation.
+ * @param layout   Layout object for animation.
+ * @param t        Time vector for solution being animated.
+ * @param IdSuffix Suffix for element IDs used in animation.
+ * @return         Nothing.
+ */
 function addTime(state, layout, t, IdSuffix) {
   const addTimeButton = document.getElementById("addTimeButton" + IdSuffix);
   addTimeButton.addEventListener("click", () => {
@@ -614,6 +646,14 @@ function addTime(state, layout, t, IdSuffix) {
   });
 }
 
+/**
+ * Skip to skipTime in animation.
+ * @param state    State object of system.
+ * @param layout   Layout object of animation.
+ * @param t        Time vector for solution.
+ * @param IdSuffix Suffix for elements used in animation.
+ * @return         Nothing.
+ */
 function skipTo(state, layout, t, IdSuffix) {
   const skipToButton = document.getElementById("skipToButton" + IdSuffix);
   skipToButton.addEventListener("click", () => {
@@ -633,6 +673,7 @@ function skipTo(state, layout, t, IdSuffix) {
     updateTimeLabel(layout, t, state.frame, IdSuffix);
   });
 }
+
 /**
  * Create pendulum animation.
  * @param objectOfInputs Object of page inputs.
