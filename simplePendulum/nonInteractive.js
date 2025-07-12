@@ -13,13 +13,13 @@ var dtheta0 = 0;
 // Details of our numerical approximation
 // epsilon is our error tolerance
 var epsilon = 1e-12;
-var dtInitial = 0.1;
+var hInitial = 0.1;
 
 // Initialize arrays, dt and i
 var t = [t0];
 var theta = [theta0];
 var dtheta = [dtheta0];
-var dt = dtInitial;
+var dt = hInitial;
 var i = 0;
 
 while ( t[i] < tf ) {

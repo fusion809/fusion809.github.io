@@ -27,8 +27,8 @@ function prntObj(obj) {
  */
 function RKF45(objectOfInputs) {
     // Extract initial conditions from object and write to 2d array
-    var {theta0, thetaDot0} = objectOfInputs;
-    var vars0 = [[theta0, thetaDot0]];
+    var {theta0, dtheta0} = objectOfInputs;
+    var vars0 = [[theta0, dtheta0]];
     var [t, vars] = RKF45Body(f, objectOfInputs, vars0); 
     return [t, vars];
 }
@@ -45,7 +45,7 @@ function generatePhasePlot(solution) {
     var [theta, dtheta] = vars;
 
     // Generate 2D plot
-    gen2DPlot(theta, dtheta, "phasePlot", "Phase plot of dθ/dt and θ");
+    gen2DPlot(theta, dtheta, "phasePlot", "Phase plot of dθ/dt and θ", "θ", "dθ/dt");
 }
 
 /**
@@ -70,8 +70,8 @@ function generateTimePlot(solution) {
 
 /**
  * Generate two plots:
- * - one of thetaDot and theta against t;
- * - a phase plot of thetaDot against theta.
+ * - one of dtheta and theta against t;
+ * - a phase plot of dtheta against theta.
  * 
  * @param objectOfInputs An object that contains all the problem parameters.
  * @return               Nothing. Just generates the plots.
@@ -127,7 +127,7 @@ function generateAnimation() {
 }
 
 function generatePhaseAnimationBase(solution) {
-    animate2D(solution, ["θ", "dθ/dt"], [0, 0.98], "Phase");
+    animate2D(solution, ["θ", "dθ/dt"], [0, 0.98], "Phase", [0, 1], "Single pendulum: phase plot of dθ/dt against θ.");
 }
 
 function generatePhaseAnimation() {

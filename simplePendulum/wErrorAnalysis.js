@@ -12,7 +12,7 @@
  * @return              Array of 4th and 5th order corrections to theta and 
  * theta dot
  */
-function approximatorRKF45(g, l, theta0, thetaDot0, dt, t, theta, thetaDot, i) {
+function approximatorRKF45(g, l, theta0, dtheta0, dt, t, theta, thetaDot, i) {
     // Runge-Kutta-Fehlberg approximations of the change in theta and 
     // thetaDot over the step
     var k1 = dt*f(g, l, t[i], theta[i], thetaDot[i])[0];
@@ -36,7 +36,7 @@ function approximatorRKF45(g, l, theta0, thetaDot0, dt, t, theta, thetaDot, i) {
     var thetaDot2 = thetaDot[i] + 16*l1/135+6656*l3/12825+28561*l4/56430-9*l5/50+2*l6/55;
 
     // Error calculation
-    var errorThetaDoDeltat = Math.abs(thetaDoDeltat - Math.sign(thetaDoDeltat)*Math.sqrt(Math.abs(thetaDotSq(g, l, theta0, thetaDot0, theta1))));
+    var errorThetaDoDeltat = Math.abs(thetaDoDeltat - Math.sign(thetaDoDeltat)*Math.sqrt(Math.abs(thetaDotSq(g, l, theta0, dtheta0, theta1))));
 
     return [theta1, thetaDoDeltat, theta2, thetaDot2, errorThetaDoDeltat];
 }
@@ -84,26 +84,26 @@ function stepSizeChecker(theta1, theta2, thetaDoDeltat, thetaDot2, errorThetaDoD
 /**
  * Uses Runge-Kutta-Fehlberg 4/5th order method over the domain of integration.
  * 
- * @param dtInitial     Initial dt value.
+ * @param hInitial     Initial dt value.
  * @param epsilon       Maximum error tolerance.
  * @param g             Acceleration due to gravity.
  * @param l             Length of the pendulum bob.
  * @param t0            Beginning time for the simulation.
  * @param tf            End time of simulation.
  * @param theta0        theta(t0) initial condition.
- * @param thetaDot0     thetaDot(t0) initial condition.
+ * @param dtheta0     thetaDot(t0) initial condition.
  * @return              Solution object containing t, theta, thetaDot, 
  * errorThetaDot and logErrorThetaDot arrays.
  */
-function RKF45(dtInitial, epsilon, g, l, t0, tf, theta0, thetaDot0) {
+function RKF45(hInitial, epsilon, g, l, t0, tf, theta0, dtheta0) {
     // Initiate required variables
     var t = [t0];
     var theta = [theta0];
-    var thetaDot = [thetaDot0];
+    var thetaDot = [dtheta0];
     var errorThetaDot = [0];
     var logErrorThetaDot = [-Infinity];
     var i = 0;
-    var dt = dtInitial;
+    var dt = hInitial;
     var theta1, theta2, thetaDoDeltat, thetaDot2;
 
     // Loop over each step until we reach the endpoint
@@ -112,7 +112,7 @@ function RKF45(dtInitial, epsilon, g, l, t0, tf, theta0, thetaDot0) {
         dt = Math.min(dt, tf-t[i]);
     
         // Use approximatorRKF45 to make approximations
-        [theta1, thetaDoDeltat, theta2, thetaDot2, errorThetaDoDeltat] = approximatorRKF45(g, l, theta0, thetaDot0, dt, t, theta, thetaDot, i);
+        [theta1, thetaDoDeltat, theta2, thetaDot2, errorThetaDoDeltat] = approximatorRKF45(g, l, theta0, dtheta0, dt, t, theta, thetaDot, i);
     
         // The following are used to correct the step size
         [i, dt, t, theta, thetaDot, errorThetaDot, logErrorThetaDot] = stepSizeChecker(theta1, theta2, thetaDoDeltat, thetaDot2, errorThetaDoDeltat, epsilon, i, dt, t, theta, thetaDot, errorThetaDot, logErrorThetaDot);
@@ -138,10 +138,10 @@ function RKF45(dtInitial, epsilon, g, l, t0, tf, theta0, thetaDot0) {
  */
 function solveProblemSP(objectOfInputs) {
     // Obtain the parameters of the problem
-    var {g, l, t0, tf, theta0, thetaDot0, epsilon, dtInitial} = objectOfInputs;
+    var {g, l, t0, tf, theta0, dtheta0, epsilon, hInitial} = objectOfInputs;
 
     // Solve the problem
-    var solution = RKF45(dtInitial, epsilon, g, l, t0, tf, theta0, thetaDot0);
+    var solution = RKF45(hInitial, epsilon, g, l, t0, tf, theta0, dtheta0);
 
     // Write number of steps to table field
     document.getElementById("NRKF45").innerHTML = solution.t.length;
@@ -161,5 +161,5 @@ function generateErrorPlot(solution) {
     var {t, logErrorThetaDot} = solution;
 
     // Generate 2D plot
-    gen2DPlot(t, logErrorThetaDot, "errorPlot", "Semilogarithmic plot of our error estimate for theta dot against time")
+    gen2DPlot(t, logErrorThetaDot, "errorPlot", "Semilogarithmic plot of our error estimate for theta dot against time", "t", "Error")
 }

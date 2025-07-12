@@ -43,7 +43,7 @@ function generatePhasePlot(solution) {
     var [x, y] = vars;
 
     // Generate 2D phase plot
-    gen2DPlot(x, y, "phasePlot", "Phase plot of y against x")
+    gen2DPlot(x, y, "phasePlot", "Phase plot of predator vs prey animals.", "Prey", "Predator")
 }
 
 /**
@@ -54,7 +54,7 @@ function generatePhasePlot(solution) {
  */
 function generateTimePlot(solution) {
     // Generate time plot
-    genMultPlot(solution, ["x", "y"], "timePlot", "Plot of x and y against time");
+    genMultPlot(solution, ["x", "y"], "timePlot", "Plot of prey and predator animal numbers against time");
 }
 
 /**
@@ -92,5 +92,5 @@ function generateAnimation() {
 }
 
 function generatetable() {
-    fillTable(readInputs(), ['x', 'dx/dt'])
+    fillTable(readInputs(), ['x', 'y'])
 }

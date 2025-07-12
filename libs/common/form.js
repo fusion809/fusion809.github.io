@@ -24,5 +24,6 @@ function readInputs() {
     // Form elements
     var form = document.querySelectorAll('form')[0];
     var objectOfInputs = formDataExtractor(form);
+    objectOfInputs.t0 = 0;
     return objectOfInputs;
 }

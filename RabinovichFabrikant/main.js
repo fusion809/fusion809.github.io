@@ -58,7 +58,7 @@ function generateXYPhasePlot(solution) {
     var y = vars[1];
 
     // Generate phase plot
-    gen2DPlot(x, y, "phasePlotXY", "y against x phase plot");
+    gen2DPlot(x, y, "phasePlotXY", "y against x phase plot", "x", "y");
 }
 
 /**
@@ -74,7 +74,7 @@ function generateXZPhasePlot(solution) {
     var z = vars[2];
     
     // Generate phase plot
-    gen2DPlot(x, z, "phasePlotXZ", "z against x phase plot");
+    gen2DPlot(x, z, "phasePlotXZ", "z against x phase plot", "x", "z");
 }
 
 /**
@@ -90,7 +90,7 @@ function generateYZPhasePlot(solution) {
     var z = vars[2];
 
     // Generate 2D phase plot
-    gen2DPlot(y, z, "phasePlotYZ", "z against y phase plot");
+    gen2DPlot(y, z, "phasePlotYZ", "z against y phase plot", "y", "z");
 }
 
 /**
@@ -141,5 +141,5 @@ function removeAnimation() {
  */
 function generateAnimation() {
     var solution = solveProblem(RKF45, readInputs());
-    animate3D(solution, [2, 0, 0]);
+    animate3D(solution, [2, 0, 0], ["x", "y", "z"], [0, 1, 2], "", "Rabinovich&ndash;Fabrikant system: X, Y and Z phase plot.")
 }

@@ -413,7 +413,10 @@ PyPlot.savefig(joinpath(<span class=hljs-meta >@OUTPUT</span>, <span class=hljs-
 <br/>I favour Oxford spelling, so if you notice I generally use different spelling to Australian spelling, that is probably why.
 <br/><a href="/">Homepage</a>. Source code: <a href="https://github.com/fusion809/fusion809.github.io">https://github.com/fusion809/fusion809.github.io</a>.
 <br/>Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a>.
-<br/><div style="font-size: 16px;"><h2>List of pages</h2></div>
+<br/>
+  <button type=button  class=collapsible >Show website pages list</button>
+  <div class=content >
+    <p><div style="font-size: 16px;"><h2>List of pages</h2></div>
 
 <h3>Mathematical simulation/solver pages</h3>
 <ul>
@@ -469,8 +472,27 @@ PyPlot.savefig(joinpath(<span class=hljs-meta >@OUTPUT</span>, <span class=hljs-
     <ul>
         <li><a href="/Linux/Linux-distros-comparison/">Linux distributions: identifying the ideal use cases.</a>
     </ul>
-</div>
-    <br/>Last modified: July 11, 2025.
+</div></p>
+  </div>
+
+
+<script>
+  var coll = document.getElementsByClassName("collapsible");
+  var i;
+
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function () {
+      this.classList.toggle("active");
+      var content = this.nextElementSibling;
+      if (content.style.display === "block") {
+        content.style.display = "none";
+      } else {
+        content.style.display = "block";
+      }
+    });
+  }
+</script>
+    <br/>Last modified: July 12, 2025.
   </div>
 </div>
 </div>
