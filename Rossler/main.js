@@ -142,5 +142,5 @@ function removeAnimation() {
  */
 function generateAnimation() {
     var solution = solveProblem(RKF45, readInputs());
-    animate3D(solution, [0.5, -2, 0.5], ["x", "y", "z"], [0, 1, 2], "", "R&ouml;ssler system: x, y and z phase plot.")
+    animate3D(solution, {title: "R&ouml;ssler system: x, y and z phase plot."})
 }

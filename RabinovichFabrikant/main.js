@@ -141,5 +141,5 @@ function removeAnimation() {
  */
 function generateAnimation() {
     var solution = solveProblem(RKF45, readInputs());
-    animate3D(solution, [2, 0, 0], ["x", "y", "z"], [0, 1, 2], "", "Rabinovich&ndash;Fabrikant system: X, Y and Z phase plot.")
+    animate3D(solution, {view: [2, 0, 0], title: "Rabinovich&ndash;Fabrikant system: X, Y and Z phase plot."});
 }

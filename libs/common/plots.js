@@ -670,7 +670,7 @@ function addTime(state, layout, t, IdSuffix) {
       state.startTime =  null;
       state.frame = 0;
     } else {
-      state.startTime += t[state.frame] - Deltat*1000
+      state.startTime += t[state.frame] - Deltat*1000;
       let targetTime = t[state.frame] + Deltat;
       state.frame = t.reduce((prevIndex, currValue, currIndex, array) => {
         return Math.abs(currValue - targetTime) < Math.abs(array[prevIndex] - targetTime)
@@ -782,7 +782,13 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
       font: { size: 16 }
     }]
   };
-  Plotly.newPlot("animation" + IdSuffix, data, layout).then(() => {
+
+  var elementID = "animation" + IdSuffix;
+  var objectOfInputs = readInputs();
+  document.getElementById(elementID).style.width = objectOfInputs.Width + "px";
+  document.getElementById(elementID).style.height = objectOfInputs.Height + "px";
+  var delay = objectOfInputs.Delay;
+  Plotly.newPlot(elementID, data, layout).then(() => {
 
     let state = {
       startTime: null,
@@ -804,7 +810,7 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
         return;
       }
 
-      const elapsedSec = (timestamp - state.startTime - state.totalPausedTime) / 1000;
+      const elapsedSec = delay*(timestamp - state.startTime - state.totalPausedTime) / 1000;
 
 
       // Advance to the state.frame corresponding to elapsed time
@@ -816,7 +822,7 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
           cycle++;
       }
       if (label == "Double elastic pendulum" || label=="Double pendulum") {
-          Plotly.animate("animation" + IdSuffix, {
+          Plotly.animate(elementID, {
           data: [
               { x: [0, x1[state.frame]], y: [0, y1[state.frame]] },
               { x: [x1[state.frame], x2[state.frame]], y: [y1[state.frame], y2[state.frame]] }
@@ -826,7 +832,7 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
           frame: { duration: 0, redraw: true }
           });
       } else {
-          Plotly.animate("animation" + IdSuffix, {
+          Plotly.animate(elementID, {
               data: [
                   { x: [0, x[state.frame]], y: [0, y[state.frame]] }
               ]
@@ -836,7 +842,7 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
           });
       }
       layout.annotations[0].text = `Time: ${t[state.frame].toFixed(2)} s`;
-      Plotly.relayout('animation' + IdSuffix, layout);
+      Plotly.relayout(elementID, layout);
       requestAnimationFrame(animateFrame);
     }
 
@@ -908,7 +914,12 @@ function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], IdSuffix="", 
     showlegend: true
   };
 
-  Plotly.newPlot("animation" + IdSuffix, [tracePath, traceMarker], layout).then(() => {
+  var elementID = "animation" + IdSuffix;
+  var objectOfInputs = readInputs();
+  var delay = objectOfInputs.Delay;
+  document.getElementById(elementID).style.width = objectOfInputs.Width + "px";
+  document.getElementById(elementID).style.height = objectOfInputs.Height + "px";
+  Plotly.newPlot(elementID, [tracePath, traceMarker], layout).then(() => {
     let state = {
       frame: 0,
       startTime: null,
@@ -925,7 +936,7 @@ function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], IdSuffix="", 
       }
       if (state.paused) return;
 
-      const elapsedSec = (timestamp - state.startTime - state.totalPausedTime) / 1000;
+      const elapsedSec = delay*(timestamp - state.startTime - state.totalPausedTime) / 1000;
 
       while (state.frame < t.length - 1 && t[state.frame] < elapsedSec) {
         state.frame++;
@@ -934,7 +945,7 @@ function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], IdSuffix="", 
         state.frame =  t.length - 1;
         cycle++;
       }
-      Plotly.animate("animation" + IdSuffix, {
+      Plotly.animate(elementID, {
         data: [
           tracePath,
           {
@@ -994,7 +1005,11 @@ function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], IdSuffix="", 
  * @param IdSuffix Suffix for animation and button HTML IDs. 
  * @return         None
  */
-function animate3D(solution, view, varnames, nos, IdSuffix, title) {
+function animate3D(solution, {view = [0.5, -2, 0.5], 
+  varnames = ["x", "y", "z"],
+  nos = [0, 1, 2], 
+  IdSuffix = "",
+  title = "X, Y and Z phase plot."} = {}) {
   // var {solution, view, varnames, nos, IdSuffix, title} = inputs;
   // if (view == undefined) {
   //   view=[0.5, -2, 0.5]
@@ -1056,7 +1071,13 @@ function animate3D(solution, view, varnames, nos, IdSuffix, title) {
     showlegend: true
   };
 
-  Plotly.newPlot("animation" + IdSuffix, [tracePath, traceMarker], layout).then(() => {
+  var elementID = "animation" + IdSuffix;
+  var objectOfInputs = readInputs();
+  var delay = objectOfInputs.Delay;
+  document.getElementById(elementID).style.width = objectOfInputs.Width + "px";
+  document.getElementById(elementID).style.height = objectOfInputs.Height + "px";
+
+  Plotly.newPlot(elementID, [tracePath, traceMarker], layout).then(() => {
     let state = {
       frame: 0,
       startTime:  null,
@@ -1073,7 +1094,7 @@ function animate3D(solution, view, varnames, nos, IdSuffix, title) {
       }
       if (state.paused) return;
 
-      const elapsedSec = (timestamp - state.startTime - state.totalPausedTime) / 1000;
+      const elapsedSec = delay*(timestamp - state.startTime - state.totalPausedTime) / 1000;
 
       while (state.frame < t.length - 1 && t[state.frame] < elapsedSec) {
         state.frame++;
@@ -1082,7 +1103,7 @@ function animate3D(solution, view, varnames, nos, IdSuffix, title) {
         state.frame =  t.length - 1;
         cycle++;
       }
-      Plotly.animate("animation" + IdSuffix, {
+      Plotly.animate(elementID, {
         data: [
           tracePath,
           {
