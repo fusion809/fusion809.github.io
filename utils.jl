@@ -28,6 +28,11 @@ function add_params_end(params_val, params_desc, params_list, var, val, explanat
   push!(params_list, var)
 end
 
+"""
+  move_to_end!(val::Vector, list::Vector{String}, key::String)
+
+Moves the element of list that equals key and its corresponding element of val to the end. 
+"""
 function move_to_end!(val::Vector, list::Vector{String}, key::String)
     i = findfirst(==(key), list)
     if isnothing(i)
