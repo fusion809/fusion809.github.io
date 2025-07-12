@@ -148,5 +148,5 @@ function generateAnimation() {
 }
 
 function generateTable() {
-    fillTable(readInputs(), ['S', 'I', 'R'])
+    fillTable(readInputs(), ['Susceptible', 'Infectious', 'Recovered'])
 }
