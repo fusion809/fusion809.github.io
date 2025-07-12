@@ -15,7 +15,7 @@ function fillTable(objectOfInputs, headings) {
 
     // Write to table
     document.getElementById('tableOutputs').innerHTML = '';
-    var tableContents = '<tr>';
+    var tableContents = '<table><tr>';
     tableContents += '<th>Index</th>';
     tableContents += '<th>t (seconds)</th>';
     for (let j = 0; j < headings.length ; j++) {
@@ -31,6 +31,7 @@ function fillTable(objectOfInputs, headings) {
         }
         tableContents += '</tr>';
     }
+    tableContents += "</table>"
     document.getElementById('tableOutputs').innerHTML = tableContents;
 }
 

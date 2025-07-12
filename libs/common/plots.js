@@ -9,6 +9,7 @@ function adjustPlotHeight(element) {
     document.getElementById(element).style = "height: " + windowInnerHeight + "px;";
 }
 
+
 /**
  * Remove plot.
  * 
@@ -993,7 +994,23 @@ function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], IdSuffix="", 
  * @param IdSuffix Suffix for animation and button HTML IDs. 
  * @return         None
  */
-function animate3D(solution, view=[0.5, -2, 0.5], varnames=["x", "y", "z"], nos=[0, 1, 2], IdSuffix="", title="X, Y and Z phase plot.") {
+function animate3D(solution, view, varnames, nos, IdSuffix, title) {
+  // var {solution, view, varnames, nos, IdSuffix, title} = inputs;
+  // if (view == undefined) {
+  //   view=[0.5, -2, 0.5]
+  // }
+  // if (varnames == undefined) {
+  //   varnames=["x", "y", "z"]
+  // }
+  // if (nos == undefined) {
+  //   nos=[0, 1, 2]
+  // } 
+  // if (IdSuffix == undefined) {
+  //   IdSuffix=""
+  // }
+  // if (title == undefined) {
+  //   title="X, Y and Z phase plot."
+  // }
   const x = solution.vars[nos[0]];
   const y = solution.vars[nos[1]];
   const z = solution.vars[nos[2]];
