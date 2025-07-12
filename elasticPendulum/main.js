@@ -3,15 +3,15 @@
  *
  * @param objectOfInputs An object containing problem parameters.
  * @param t              Time (seconds).
- * @param vars           An array of [x, xDot, theta, thetaDot]
+ * @param vars           An array of [x, xDot, theta, dtheta]
  * @return               [dx/dt, d2x/dt2, dtheta/dt, d2theta/dt2]
  */
 function f(objectOfInputs, t, vars, dt) {
     var {g, l0, k, m} = objectOfInputs;
-    var [z, zDot, theta, thetaDot] = vars;
-    var zDDot = (l0+z)*thetaDot**2 - k*z/m + g*Math.sin(theta);
-    var thetaDDot = -g*Math.cos(theta)/(l0+z)-2*zDot*thetaDot/(l0+z);
-    return [dt*zDot, dt*zDDot, dt*thetaDot, dt*thetaDDot];
+    var [z, dz, theta, dtheta] = vars;
+    var zDDot = (l0+z)*dtheta**2 - k*z/m + g*Math.sin(theta);
+    var thetaDDot = -g*Math.cos(theta)/(l0+z)-2*dz*dtheta/(l0+z);
+    return [dt*dz, dt*zDDot, dt*dtheta, dt*thetaDDot];
 }
 
 /** 
@@ -22,8 +22,8 @@ function f(objectOfInputs, t, vars, dt) {
  */
 function RKF45(objectOfInputs) {
     // Extract initial from object and add to 2d array
-    var {z0, zDot0, theta0, thetaDot0} = objectOfInputs;
-    var vars0 = [[z0, zDot0, theta0, thetaDot0]];
+    var {z0, dz0, theta0, dtheta0} = objectOfInputs;
+    var vars0 = [[z0, dz0, theta0, dtheta0]];
     var [t, vars] = RKF45Body(f, objectOfInputs, vars0); 
     return [t, vars];
 }
@@ -41,7 +41,7 @@ function generateZThetaPhasePlot(solution) {
     var theta = vars[2];
 
     // Generate 2D plot
-    gen2DPlot(z, theta, "phasePlotZTheta", "Phase plot of θ against z");
+    gen2DPlot(z, theta, "phasePlotZTheta", "Phase plot of θ against z", "z", "θ");
 }
 
 /**
@@ -54,10 +54,10 @@ function generateZZDotPhasePlot(solution) {
     // Extract solution data from solution object
     var {vars} = solution;
     var z = vars[0];
-    var zDot = vars[1];
+    var dz = vars[1];
 
     // Generate 2D plot
-    gen2DPlot(z, zDot, "phasePlotZZDot", "Phase plot of dz/dt against z");
+    gen2DPlot(z, dz, "phasePlotZZDot", "Phase plot of dz/dt against z", "z", "dz/dt");
 }
 
 /**
@@ -70,10 +70,10 @@ function generateThetaThetaDotPhasePlot(solution) {
     // Extract solution data from solution object
     var {vars} = solution;
     var theta = vars[2];
-    var thetaDot = vars[3];
+    var dtheta = vars[3];
     
     // Generate 2D plot
-    gen2DPlot(theta, thetaDot, "phasePlotThetaThetaDot", "Phase plot of dθ/dt against theta");
+    gen2DPlot(theta, dtheta, "phasePlotThetaThetaDot", "Phase plot of dθ/dt against theta", "θ", "dθ/dt");
 }
 
 /**
@@ -151,7 +151,7 @@ function generateAnimation() {
 }
 
 function generateThetaPhaseAnimationBase(solution) {
-    animate2D(solution, ["θ", "dθ/dt"], [0.9, 0.98], "ThetaPhase", [2, 3]);
+    animate2D(solution, ["θ", "dθ/dt"], [0.9, 0.98], "ThetaPhase", [2, 3], "Elastic pendulum: phase plot of dθ/dt against θ.");
 }
 
 function generateThetaPhaseAnimation() {
@@ -165,7 +165,7 @@ function removeThetaPhaseAnimation() {
 }
 
 function generateZPhaseAnimationBase(solution) {
-    animate2D(solution, ["z", "dz/dt"], [0.9, 0.98], "ZPhase");
+    animate2D(solution, ["z", "dz/dt"], [0.9, 0.98], "ZPhase", "Elastic pendulum: phase plot of dz/dt against z.");
 }
 
 function generateZPhaseAnimation() {

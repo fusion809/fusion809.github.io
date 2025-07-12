@@ -21,12 +21,12 @@ function f(g, l, t, theta, thetaDot) {
  * @param g        Acceleration due to gravity.
  * @param l        Length of the pendulum.
  * @param theta0   Initial angle from the positive x-axis.
- * @param thetaDot0 Initial rate of change in the angle from the positive x-axis.
+ * @param dtheta0 Initial rate of change in the angle from the positive x-axis.
  * @param theta    Angle from the positive x-axis.
  * @return         Theta dot squared value.
  */
-function thetaDotSq(g, l, theta0, thetaDot0, theta) {
-    return thetaDot0**2 + 2*g/l * (Math.sin(theta0)-Math.sin(theta));
+function thetaDotSq(g, l, theta0, dtheta0, theta) {
+    return dtheta0**2 + 2*g/l * (Math.sin(theta0)-Math.sin(theta));
 }
 
 /**
@@ -47,12 +47,12 @@ function thetaDotSqPrime(g, l, theta) {
  * @param g        Acceleration due to gravity.
  * @param l        Length of the pendulum rod.
  * @param theta0   Initial angle from the positive x-axis.
- * @param thetaDot0 Initial rate of change against time of the angle from the positive x-axis.
+ * @param dtheta0 Initial rate of change against time of the angle from the positive x-axis.
  * @param theta    Angle from the x-axis.
  * @return         Correction to theta min/max value according to Newton's  method.
  */
-function newtonsCorrection(g, l, theta0, thetaDot0, theta) {
-    return -thetaDotSq(g, l, theta0, thetaDot0, theta)/thetaDotSqPrime(g, l, theta);
+function newtonsCorrection(g, l, theta0, dtheta0, theta) {
+    return -thetaDotSq(g, l, theta0, dtheta0, theta)/thetaDotSqPrime(g, l, theta);
 }
 
 /**
@@ -64,16 +64,16 @@ function newtonsCorrection(g, l, theta0, thetaDot0, theta) {
  */
 function thetaBounds(objectOfInputs) {
     // Parameters of the problem that are necessary to calculate the period
-    var {g, l, theta0, thetaDot0, t0} = objectOfInputs;
+    var {g, l, theta0, dtheta0, t0} = objectOfInputs;
 
     // Take our initial guess for thetaMax
     // Check if the problem satisfies the conditions for periodic behaviour
-    if ( thetaDot0**2 + 2*g/l * (Math.sin(theta0)-1) > 0) {
+    if ( dtheta0**2 + 2*g/l * (Math.sin(theta0)-1) > 0) {
         document.getElementById("integralDisplay").innerHTML = "Problem is not periodic.";
         // Too high of tf in these cases can freeze the solver up
         document.getElementById("tf").value = t0 + 10;
         // The default, 1e-11, can freeze the webpage up for these problems
-        // e.g. with thetaDot0 > 5, this will likely be the case.
+        // e.g. with dtheta0 > 5, this will likely be the case.
         document.getElementById("epsilon").value = 1e-9;
         // Add extra N to array, so that we can kill periodCalc() if we get 
         // this far
@@ -85,7 +85,7 @@ function thetaBounds(objectOfInputs) {
         return objectOfInputs;
     }
     objectOfInputs.periodic = true;
-    var thetaMin = Math.asin((thetaDot0**2+2*(g/l)*Math.sin(theta0))/(2*g/l));
+    var thetaMin = Math.asin((dtheta0**2+2*(g/l)*Math.sin(theta0))/(2*g/l));
     var thetaMax = - thetaMin - Math.PI;
 
     // Mention theta bounds and Newton's info in data table
@@ -108,7 +108,7 @@ function thetaBounds(objectOfInputs) {
  */
 function periodCalc(objectOfInputs) {
     // Parameters of the problem that are necessary to calculate the period
-    var {g, l, N, t0, theta0, thetaDot0} = objectOfInputs;
+    var {g, l, N, t0, theta0, dtheta0} = objectOfInputs;
     var nodes = 0;
     var integrand = 0;
     var transformedGrid = 0;
@@ -128,7 +128,7 @@ function periodCalc(objectOfInputs) {
     for ( let i = 1; i < N+1; i++) {
         nodes = Math.cos((2*i-1)*Math.PI/(2*N));
         transformedGrid = (thetaMax-thetaMin)*nodes/2+(thetaMax+thetaMin)/2;
-        integrand = Math.sqrt(1-nodes**2)*Math.pow(thetaDotSq(g, l, theta0, thetaDot0, transformedGrid),-1/2);
+        integrand = Math.sqrt(1-nodes**2)*Math.pow(thetaDotSq(g, l, theta0, dtheta0, transformedGrid),-1/2);
         integral += ((thetaMax-thetaMin)/2) * (Math.PI/N)*integrand;
     }
     period = 2*Math.abs(integral);

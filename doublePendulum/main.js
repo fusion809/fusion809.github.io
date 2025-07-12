@@ -62,7 +62,7 @@ function generateTheta1Theta2PhasePlot(solution) {
     var theta2 = vars[2];
 
     // Generate 2D plot
-    gen2DPlot(theta1, theta2, "phasePlotTheta1Theta2", "Phase plot of θ<sub>2</sub> against θ<sub>1</sub>");
+    gen2DPlot(theta1, theta2, "phasePlotTheta1Theta2", "Phase plot of θ<sub>2</sub> against θ<sub>1</sub>", "θ<sub>1</sub>", "θ<sub>2</sub>");
 }
 
 /**
@@ -78,7 +78,7 @@ function generateDtheta1Dtheta2PhasePlot(solution) {
     var dtheta2 = vars[3];
 
     // Generate 2D plot
-    gen2DPlot(dtheta1, dtheta2, "phasePlotDtheta1Dtheta2", "Phase plot of dθ<sub>2</sub>/dt against dθ<sub>1</sub>/dt");
+    gen2DPlot(dtheta1, dtheta2, "phasePlotDtheta1Dtheta2", "Phase plot of dθ<sub>2</sub>/dt against dθ<sub>1</sub>/dt", "dθ<sub>1</sub>/dt", "dθ<sub>2</sub>/dt");
 }
 
 /**
@@ -94,7 +94,7 @@ function generateTheta1Dtheta1PhasePlot(solution) {
     var dtheta1 = vars[1];
     
     // Generate 2D plot
-    gen2DPlot(theta1, dtheta1, "phasePlotTheta1Dtheta1", "Phase plot of dθ<sub>1</sub>/dt against θ<sub>1</sub>");
+    gen2DPlot(theta1, dtheta1, "phasePlotTheta1Dtheta1", "Phase plot of dθ<sub>1</sub>/dt against θ<sub>1</sub>", "θ<sub>1</sub>", "dθ<sub>1</sub>/dt");
 }
 
 /**
@@ -110,7 +110,7 @@ function generateTheta1Dtheta2PhasePlot(solution) {
     var dtheta2 = vars[2];
     
     // Generate 2D plot
-    gen2DPlot(theta1, dtheta2, "phasePlotTheta1Dtheta2", "Phase plot of dθ<sub>2</sub>/dt against θ<sub>1</sub>");
+    gen2DPlot(theta1, dtheta2, "phasePlotTheta1Dtheta2", "Phase plot of dθ<sub>2</sub>/dt against θ<sub>1</sub>", "θ<sub>1</sub>", "θ<sub>2</sub>/dt");
 }
 
 /**
@@ -126,7 +126,7 @@ function generateTheta2Dtheta1PhasePlot(solution) {
     var dtheta1 = vars[1];
     
     // Generate 2D plot
-    gen2DPlot(theta2, dtheta1, "phasePlotTheta2Dtheta1", "Phase plot of dθ<sub>1</sub>/dt against θ<sub>2</sub>");
+    gen2DPlot(theta2, dtheta1, "phasePlotTheta2Dtheta1", "Phase plot of dθ<sub>1</sub>/dt against θ<sub>2</sub>", "θ<sub>2</sub>", "dθ<sub>1</sub>/dt");
 }
 
 /**
@@ -142,7 +142,7 @@ function generateTheta2Dtheta2PhasePlot(solution) {
     var dtheta2 = vars[3];
     
     // Generate 2D plot
-    gen2DPlot(theta2, dtheta2, "phasePlotTheta2Dtheta2", "Phase plot of dθ<sub>2</sub>/dt against θ<sub>2</sub>");
+    gen2DPlot(theta2, dtheta2, "phasePlotTheta2Dtheta2", "Phase plot of dθ<sub>2</sub>/dt against θ<sub>2</sub>", "θ<sub>2</sub>", "dθ<sub>2</sub>/dt");
 }
 
 /**
@@ -340,7 +340,7 @@ function removeAnimation() {
 }
 
 function generateTheta1PhaseAnimationBase(solution) {
-    animate2D(solution, ["θ<sub>1</sub>", "dθ<sub>1</sub>/dt"], [0.05, 0.98], "Theta1Phase");
+    animate2D(solution, ["θ<sub>1</sub>", "dθ<sub>1</sub>/dt"], [0.05, 0.98], "Theta1Phase", "Phase plot of dθ<sub>1</sub>/dt against θ<sub>1</sub>.");
 }
 
 function generateTheta1PhaseAnimation() {
@@ -354,7 +354,7 @@ function removeTheta1PhaseAnimation() {
 }
 
 function generateTheta2PhaseAnimationBase(solution) {
-    animate2D(solution, ["θ<sub>2</sub>", "dθ<sub>2</sub>/dt"], [0.05, 0.98], "Theta2Phase", [2, 3]);
+    animate2D(solution, ["θ<sub>2</sub>", "dθ<sub>2</sub>/dt"], [0.05, 0.98], "Theta2Phase", [2, 3], "Phase plot of dθ<sub>2</sub>/dt against θ<sub>2</sub>.");
 }
 
 function generateTheta2PhaseAnimation() {

@@ -76,24 +76,24 @@ function stepSizeChecker(theta1, theta2, thetaDoDeltat, thetaDot2, epsilon, i, d
 /**
  * Uses Runge-Kutta-Fehlberg 4/5th order method over the domain of integration.
  * 
- * @param dtInitial     Initial dt value.
+ * @param hInitial     Initial dt value.
  * @param epsilon       Maximum error tolerance.
  * @param g             Acceleration due to gravity.
  * @param l             Length of the pendulum bob.
  * @param t0            Beginning time for the simulation.
  * @param tf            End time of simulation.
  * @param theta0        theta(t0) initial condition.
- * @param thetaDot0     thetaDot(t0) initial condition.
+ * @param dtheta0     thetaDot(t0) initial condition.
  * @return              Solution object containing t, theta and thetaDot 
  * arrays.
  */
-function RKF45(dtInitial, epsilon, g, l, t0, tf, theta0, thetaDot0) {
+function RKF45(hInitial, epsilon, g, l, t0, tf, theta0, dtheta0) {
     // Initialize global variables
     var t = [t0];
     var theta = [theta0];
-    var thetaDot = [thetaDot0];
+    var thetaDot = [dtheta0];
     var i = 0;
-    var dt = dtInitial;
+    var dt = hInitial;
     var theta1, theta2, thetaDoDeltat, thetaDot2;
 
     // Loop over each step until we reach the endpoint
@@ -127,10 +127,10 @@ function RKF45(dtInitial, epsilon, g, l, t0, tf, theta0, thetaDot0) {
  */
 function solveProblemSP(objectOfInputs) {
     // Obtain the parameters of the problem
-    var {g, l, t0, tf, theta0, thetaDot0, epsilon, dtInitial} = objectOfInputs;
+    var {g, l, t0, tf, theta0, dtheta0, epsilon, hInitial} = objectOfInputs;
 
     // Solve the problem
-    var solution = RKF45(dtInitial, epsilon, g, l, t0, tf, theta0, thetaDot0);
+    var solution = RKF45(hInitial, epsilon, g, l, t0, tf, theta0, dtheta0);
 
     // Write number of steps to table field
     document.getElementById("NRKF45").innerHTML = solution.t.length;

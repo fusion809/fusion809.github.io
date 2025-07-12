@@ -1,6 +1,6 @@
 var objectOfInputs = readInputs();
-var {dtInitial, t0, x0, y0, z0} = objectOfInputs;
-var dt = dtInitial;
+var {hInitial, t0, x0, y0, z0} = objectOfInputs;
+var dt = hInitial;
 var [t, x, y, z] = [[t0], [x0], [y0], [z0]];
 var vars = [[x0, y0, z0]];
 var i = 0;

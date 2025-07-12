@@ -45,7 +45,7 @@ function generate3DPhasePlot(solution) {
     var [S, I, R] = vars;
 
     // Generate 3D plot
-    gen3DPlot(S, I, R, "phasePlotXYZ", "Phase plot of the solution to the SIR equations. x = S, y = I and z = R");
+    gen3DPlot(S, I, R, "phasePlotXYZ", "Phase plot of the solution to the SIR equations. x = S, y = I and z = R", "S", "I", "R");
 }
 
 /**
@@ -61,7 +61,7 @@ function generateXYPhasePlot(solution) {
     var I = vars[1];
 
     // Generate 2D plot
-    gen2DPlot(S, I, "phasePlotXY", "SI phase plot, x = S and y = I")
+    gen2DPlot(S, I, "phasePlotXY", "SI phase plot, x = S and y = I", "S", "I")
 }
 
 /**
@@ -77,7 +77,7 @@ function generateXZPhasePlot(solution) {
     var R = vars[2];
     
     // Generate 2D plot
-    gen2DPlot(S, R, "phasePlotXZ", "SR phase plot, x = S and y = R");
+    gen2DPlot(S, R, "phasePlotXZ", "SR phase plot, x = S and y = R", "S", "R");
 }
 
 /**
@@ -93,7 +93,7 @@ function generateYZPhasePlot(solution) {
     var R = vars[2];
 
     // Generate 2D plot
-    gen2DPlot(I, R, "phasePlotYZ", "IR phase plot, x = I and y = R");
+    gen2DPlot(I, R, "phasePlotYZ", "IR phase plot, x = I and y = R", "S", "R");
 }
 
 /**
@@ -144,7 +144,7 @@ function removeAnimation() {
  */
 function generateAnimation() {
     var solution = solveProblem(RKF45, readInputs());
-    animate3D(solution, [0, 0, 0], ["S", "I", "R"]);
+    animate3D(solution, [0, 0, 0], ["S", "I", "R"], "S, I and R phase plot for the SIR infectious disease model.");
 }
 
 function generateTable() {

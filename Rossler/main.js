@@ -43,7 +43,7 @@ function generate3DPhasePlot(solution) {
     var [x, y, z] = vars;
 
     // Generate 3D plot
-    gen3DPlot(x, y, z, "phasePlotXYZ", "3D phase plot");
+    gen3DPlot(x, y, z, "phasePlotXYZ", "3D phase plot", "x", "y", "z");
 }
 
 /**
@@ -59,7 +59,7 @@ function generateXYPhasePlot(solution) {
     var y = vars[1];
 
     // Generate 2D phase plot
-    gen2DPlot(x, y, "phasePlotXY", "y against x phase plot");
+    gen2DPlot(x, y, "phasePlotXY", "y against x phase plot", "x", "y");
 }
 
 /**
@@ -75,7 +75,7 @@ function generateXZPhasePlot(solution) {
     var z = vars[2];
     
     // Generate 2D phase plot
-    gen2DPlot(x, z, "phasePlotXZ", "z against x phase plot");
+    gen2DPlot(x, z, "phasePlotXZ", "z against x phase plot", "x", "z");
 }
 
 /**
@@ -91,7 +91,7 @@ function generateYZPhasePlot(solution) {
     var z = vars[2];
 
     // Generate 2D phase plot
-    gen2DPlot(y, z, "phasePlotYZ", "z against y phase plot");
+    gen2DPlot(y, z, "phasePlotYZ", "z against y phase plot", "y", "z");
 }
 
 /**
@@ -142,5 +142,5 @@ function removeAnimation() {
  */
 function generateAnimation() {
     var solution = solveProblem(RKF45, readInputs());
-    animate3D(solution, [0.5, -2, 0.5]);
+    animate3D(solution, [0.5, -2, 0.5], ["x", "y", "z"], [0, 1, 2], "", "R&ouml;ssler system: X, Y and Z phase plot.")
 }

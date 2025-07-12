@@ -8,8 +8,11 @@
   {{insert style.html}}
   {{isdef hassim}} {{if hassim}}{{ insert head_solver.html }} {{end}} {{end}}
   {{isdef title}} <title>{{fill title}}</title>  {{end}}
+  {{isdef SP }}{{ if SP}}{{ insert head_solver_general.html }}<script src="/simplePendulum/common.js"></script>{{ end}}{{end}}
+  {{isdef SP.w}}{{ if SP.w}}<script src="/simplePendulum/wErrorAnalysis.js"></script>{{end}}{{end}}
+  {{isdef SP.wo}}{{ if SP.wo}}<script src="/simplePendulum/woErrorAnalysis.js"></script>{{end}}{{end}}
 </head>
-<body>
+{{isdef SP}}{{ if SP}}<body onload="periodCalc(thetaBounds(readInputs()))">{{ end}} {{end}}
 {{insert sidebar.html}}
 
 <!-- Content appended here -->

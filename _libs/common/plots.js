@@ -272,6 +272,32 @@ function removePendulumPlots() {
     rmPlot("pendulumTimePlot");
 }
 
+function min(x) {
+  var min;
+  try {
+    min = Math.min(...x)
+  } catch(e) {
+    if (e instanceof RangeError) {
+      min = x.reduce((a, b) => Math.min(a, b), Infinity);
+    } else {
+      throw e;
+    }
+  }
+  return min;
+}
+function max(x) {
+  var max;
+  try {
+    max = Math.max(...x)
+  } catch(e) {
+    if (e instanceof RangeError) {
+      max = x.reduce((a, b) => Math.max(a, b), -Infinity);
+    } else {
+      throw e;
+    }
+  }
+  return max;
+}
 /**
  * Range of values for a plot. 
  * @param x Either an array or array of arrays.
@@ -280,14 +306,14 @@ function removePendulumPlots() {
  */
 function range(x) {
   if (x[0].length == undefined) {
-    var xmin = Math.min(...x);
-    var xmax = Math.max(...x);
+    var xmin = min(x);
+    var xmax = max(x);
   } else {
-    var xmin = Math.max(...x[0]);
-    var xmax = Math.min(...x[0]);
+    var xmin = max(x[0]);
+    var xmax = min(x[0]);
     for (let i = 0; i < x.length; i++) {
-      let xmini = Math.min(...x[i]);
-      let xmaxi = Math.max(...x[i]);
+      let xmini = min(x[i]);
+      let xmaxi = max(x[i]);
       if (xmin > xmini) {
         xmin = xmini;
       } 
@@ -309,7 +335,7 @@ function range(x) {
  * @param title    Title of the plot.
  * @return         Nothing.
  */
-function gen2DPlot(x, y, element, title, xtitle, ytitle) {
+function gen2DPlot(x, y, element, title, xtitle="x", ytitle="y") {
     // Height and width of the plot
     adjustPlotHeight(element);
 
@@ -324,12 +350,14 @@ function gen2DPlot(x, y, element, title, xtitle, ytitle) {
 
     // layout object
     var layoutXY = {
-        title: title,
+        title: {text: title},
         xaxis: {
-          range: range(x)
+          range: range(x),
+          title: {text: xtitle}
         },
         yaxis: {
-          range: range(y)
+          range: range(y),
+          title: {text: ytitle}
         }
     };
 
@@ -361,7 +389,7 @@ function gen2DPlotXYLabs(x, y, element, title, xtitle, ytitle) {
 
     // layout object
     var layoutXY = {
-        title: title,
+        title: {text: title},
         xaxis: {
             title: {
                 text: xtitle
@@ -388,7 +416,7 @@ function gen2DPlotXYLabs(x, y, element, title, xtitle, ytitle) {
  * @param element  HTML element the plot will go in.
  * @param title    Title for the plot.
  */
-function gen3DPlot(x, y, z, element, title, view) {
+function gen3DPlot(x, y, z, element, title, view, xtitle="x", ytitle="y", ztitle="z") {
     // Height and width of plot
     adjustPlotHeight(element);
 
@@ -409,16 +437,21 @@ function gen3DPlot(x, y, z, element, title, view) {
    
     // layout object
     var layoutXYZ = {
-       title: title,
-       xaxis: {
-        range: range(x)
-       },
-       yaxis: {
-        range: range(y)
-       },
-       zaxis: {
-        range: range(z)
-       }
+       title: {text: title},
+       scene: {
+        xaxis: {
+          range: range(x),
+          title: { text: xtitle}
+        },
+        yaxis: {
+          range: range(y),
+          title: { text: ytitle}
+        },
+        zaxis: {
+          range: range(z),
+          title: { text: ztitle}
+        }
+      }
     };
     if (typeof view !== "undefined") {
       layoutXYZ.scene = {
@@ -556,7 +589,8 @@ function genMultPlot(solution, varnames, element, title) {
     var layoutTimePlot = {
         title: title,
         xaxis: {
-          range: range(t)
+          range: range(t),
+          title: { text: "t"}
         },
         yaxis: {
           range: range(vars)
@@ -575,8 +609,8 @@ function genMultPlot(solution, varnames, element, title) {
  * @param IdSuffix Suffix of element IDs used.
  * @return         Nothing.
  */
-function updateTimeLabel(layout, t, frame, IdSuffix) {
-  layout.annotations[0].text = `Time: ${t[frame].toFixed(2)} s`;
+function updateTimeLabel(layout, t, state, IdSuffix) {
+  layout.annotations[0].text = `Time: ${t[state.frame].toFixed(2)} s`;
   Plotly.relayout('animation' + IdSuffix, layout);
 }
 
@@ -614,7 +648,7 @@ function restart(state, layout, t, IdSuffix) {
   restartButton.addEventListener("click", () => {
     state.startTime =  null;
     state.frame =  0;  // Reset state.frame
-    updateTimeLabel(layout, t, state.frame, IdSuffix);
+    updateTimeLabel(layout, t, state, IdSuffix);
   });
 }
 
@@ -633,6 +667,7 @@ function addTime(state, layout, t, IdSuffix) {
     var Deltat = readInputs().Deltat;
     if (t[state.frame] + Deltat > t[t.length-1]) {
       state.startTime =  null;
+      state.frame = 0;
     } else {
       state.startTime += t[state.frame] - Deltat*1000
       let targetTime = t[state.frame] + Deltat;
@@ -642,12 +677,12 @@ function addTime(state, layout, t, IdSuffix) {
           : prevIndex;
       });
     }
-    updateTimeLabel(layout, t, state.frame, IdSuffix);
+    updateTimeLabel(layout, t, state, IdSuffix);
   });
 }
 
 /**
- * Skip to skipTime in animation.
+ * Skip to t1 in animation.
  * @param state    State object of system.
  * @param layout   Layout object of animation.
  * @param t        Time vector for solution.
@@ -657,21 +692,28 @@ function addTime(state, layout, t, IdSuffix) {
 function skipTo(state, layout, t, IdSuffix) {
   const skipToButton = document.getElementById("skipToButton" + IdSuffix);
   skipToButton.addEventListener("click", () => {
-    var skipTime = readInputs().skipTime;
-    if (skipTime > t[t.length-1]) {
+    var t1 = readInputs().t1;
+    if (t1 > t[t.length-1]) {
       state.startTime =  null;
       state.frame =  0;
-      alert("skipTime > tf, so restarting!");
+      alert("t1 > tf, so restarting!");
     } else {
-      state.startTime += (t[state.frame]-skipTime) * 1000;
+      state.startTime += (t[state.frame]-t1) * 1000;
       state.frame = t.reduce((prevIndex, currValue, currIndex, array) => {
-        return Math.abs(currValue - skipTime) < Math.abs(array[prevIndex] - skipTime)
+        return Math.abs(currValue - t1) < Math.abs(array[prevIndex] - t1)
           ? currIndex
           : prevIndex;
       });
     }
-    updateTimeLabel(layout, t, state.frame, IdSuffix);
+    updateTimeLabel(layout, t, state, IdSuffix);
   });
+}
+
+function buttons(state, layout, t, IdSuffix, animateFrame) {
+  pause(state, IdSuffix, animateFrame);
+  restart(state, layout, t, IdSuffix);
+  addTime(state, layout, t, IdSuffix);
+  skipTo(state, layout, t, IdSuffix);
 }
 
 /**
@@ -725,9 +767,9 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
   }
 
   const layout = {
-    title: label,
-    xaxis: { range: range(x), title: "x" },
-    yaxis: { range: range(y), title: "y", scaleanchor: "x" },
+    title: {text: label},
+    xaxis: { range: range(x), title: {text: "x"} },
+    yaxis: { range: range(y), title: {text: "y"}, scaleanchor: "x" },
     showlegend: false,
     annotations: [{
       x: 0,
@@ -797,10 +839,7 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
       requestAnimationFrame(animateFrame);
     }
 
-    pause(state, IdSuffix, animateFrame);
-    restart(state, layout, t, IdSuffix);
-    addTime(state, layout, t, IdSuffix);
-    skipTo(state, layout, t, IdSuffix);
+    buttons(state, layout, t, IdSuffix, animateFrame);
 
     requestAnimationFrame(animateFrame);
   });
@@ -815,7 +854,7 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
  * @param nos      The index of variables to be plotted within vars.
  * @return         Nothing.
  */
-function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], IdSuffix="", nos=[0, 1]) {
+function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], IdSuffix="", nos=[0, 1], title="Phase plot animation of y against x.") {
   const x = solution.vars[nos[0]];
   const y = solution.vars[nos[1]];
   const t = solution.t;
@@ -838,9 +877,10 @@ function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], IdSuffix="", 
   };
 
   const layout = {
-  margin: { l: 0, r: 0, b: 0, t: 0 },  // make space for labels
+  margin: { l: 0, r: 0, b: 0, t: 30 },  // make space for labels
+    title: {text: title},
     xaxis: {
-      title: varnames[0],
+      title: {text: varnames[0]},
       range: range(x),
       showticklabels: true,
       automargin: true,
@@ -848,7 +888,7 @@ function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], IdSuffix="", 
       tickfont: { size: 12 }
     },
     yaxis: {
-      title: varnames[1],
+      title: {text: varnames[1]},
       range: range(y),
       showticklabels: true,
       automargin: true,
@@ -915,15 +955,16 @@ function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], IdSuffix="", 
                 showarrow: false,
                 font: { size: 16 }
             }],
+            title: { text: title},
             xaxis: {
-                title: varnames[0],
+                title: {text: varnames[0]},
                 range: range(x),
                 showticklabels: true,
                 ticks: 'outside',
                 tickfont: { size: 12 }
             },
             yaxis: {
-                title: varnames[1],
+                title: {text: varnames[1]},
                 range: range(y),
                 showticklabels: true,
                 ticks: 'outside',
@@ -937,10 +978,7 @@ function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], IdSuffix="", 
 
       requestAnimationFrame(animateFrame);
     }
-    pause(state, IdSuffix, animateFrame);
-    restart(state, layout, t, IdSuffix);
-    addTime(state, layout, t, IdSuffix);
-    skipTo(state, layout, t, IdSuffix);
+    buttons(state, layout, t, IdSuffix, animateFrame);
 
     requestAnimationFrame(animateFrame);
   });
@@ -955,7 +993,7 @@ function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], IdSuffix="", 
  * @param IdSuffix Suffix for animation and button HTML IDs. 
  * @return         None
  */
-function animate3D(solution, view=[0.5, -2, 0.5], varnames=["x", "y", "z"], nos=[0, 1, 2], IdSuffix="") {
+function animate3D(solution, view=[0.5, -2, 0.5], varnames=["x", "y", "z"], nos=[0, 1, 2], IdSuffix="", title="X, Y and Z phase plot.") {
   const x = solution.vars[nos[0]];
   const y = solution.vars[nos[1]];
   const z = solution.vars[nos[2]];
@@ -982,11 +1020,12 @@ function animate3D(solution, view=[0.5, -2, 0.5], varnames=["x", "y", "z"], nos=
   };
 
   const layout = {
-    margin: { l: 0, r: 0, b: 0, t: 0 },
+    margin: { l: 0, r: 0, b: 0, t: 30 },
+    title: {text: title},
     scene: {
-      xaxis: { title: varnames[0] },
-      yaxis: { title: varnames[1] },
-      zaxis: { title: varnames[2] }
+      xaxis: { title: {text: varnames[0]} },
+      yaxis: { title: {text: varnames[1]} },
+      zaxis: { title: {text: varnames[2]} }
     },
     annotations: [{
       text: `Time: 0.00 s`,
@@ -1050,9 +1089,9 @@ function animate3D(solution, view=[0.5, -2, 0.5], varnames=["x", "y", "z"], nos=
             font: { size: 16 }
           }],
           scene: {
-            xaxis: { title: 'X' },
-            yaxis: { title: 'Y' },
-            zaxis: { title: 'Z' },
+            xaxis: { title: {text: varnames[0]} },
+            yaxis: { title: {text: varnames[1]} },
+            zaxis: { title: {text: varnames[2]} },
             camera: {
                 eye: {
                 x: view[0],   // Set to 0 to align the camera with the YZ plane
@@ -1069,10 +1108,7 @@ function animate3D(solution, view=[0.5, -2, 0.5], varnames=["x", "y", "z"], nos=
 
         requestAnimationFrame(animateFrame);
       }
-    pause(state, IdSuffix, animateFrame);
-    restart(state, layout, t, IdSuffix);
-    addTime(state, layout, t, IdSuffix);
-    skipTo(state, layout, t, IdSuffix);
+    buttons(state, layout, t, IdSuffix, animateFrame);
     requestAnimationFrame(animateFrame);
   });
 }
