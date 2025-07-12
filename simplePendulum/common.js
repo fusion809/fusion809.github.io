@@ -281,7 +281,7 @@ function removeAnimation() {
 }
 
 function generateAnimationBase(objectOfInputs, solution) {
-    animatePendulum(objectOfInputs, solution, "Simple pendulum");
+    animatePendulum(objectOfInputs, solution, "Simple pendulum", [0,1], "Simple pendulum: dθ/dt vs θ phase plot.");
 }
 /**
  * Generates animation.
