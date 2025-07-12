@@ -144,7 +144,7 @@ function removeAnimation() {
  */
 function generateAnimation() {
     var solution = solveProblem(RKF45, readInputs());
-    animate3D(solution, [0, 0, 0], ["S", "I", "R"], "S, I and R phase plot for the SIR infectious disease model.");
+    animate3D(solution, [0, 0, 0], ["Susceptible", "Infectious", "Recovered"], [0, 1, 2], "", "Susceptible, infectious and recovered population phase plot for the SIR infectious disease model.");
 }
 
 function generateTable() {
