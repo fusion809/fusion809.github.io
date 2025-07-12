@@ -38,7 +38,7 @@ function generate3DPhasePlot(solution) {
     var {vars} = solution;
     var [x, y, z] = vars;
 
-    gen3DPlot(x, y, z, "phasePlotXYZ", "Lorenz attractor phase plot", [2, 0, 0])
+    gen3DPlot(x, y, z, "phasePlotXYZ", "Lorenz attractor phase plot.", [2, 0, 0])
 }
 
 /**
@@ -53,7 +53,7 @@ function generateXYPhasePlot(solution) {
     var [x, y] = vars;
 
     // Generate 2D plot
-    gen2DPlot(x, y, "phasePlotXY", "y against x phase plot", "x", "y");
+    gen2DPlot(x, y, "phasePlotXY", "Lorenz system: y against x phase plot.", "x", "y");
 }
 
 /**
@@ -69,7 +69,7 @@ function generateXZPhasePlot(solution) {
     var z = vars[2];
     
     // Generate 2D plot
-    gen2DPlot(x, z, "phasePlotXZ", "z against x phase plot", "x", "z");
+    gen2DPlot(x, z, "phasePlotXZ", "Lorenz system: z against x phase plot.", "x", "z");
 }
 
 /**
@@ -85,7 +85,7 @@ function generateYZPhasePlot(solution) {
     var z = vars[2];
 
     // Generate 2D plot
-    gen2DPlot(y, z, "phasePlotYZ", "z against y phase plot", "y", "z");
+    gen2DPlot(y, z, "phasePlotYZ", "Lorenz system: z against y phase plot.", "y", "z");
 }
 
 /**
@@ -96,7 +96,7 @@ function generateYZPhasePlot(solution) {
  */
 function generateTimePlot(solution) {
     // Generate time plot
-    genMultPlot(solution, ["x", "y", "z"], "timePlot", "Plot of x, y and z against time")
+    genMultPlot(solution, ["x", "y", "z"], "timePlot", "Lorenz system: plot of x, y and z against time.")
 }
 
 /**
