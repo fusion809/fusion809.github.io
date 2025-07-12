@@ -83,6 +83,21 @@ function hfun_params_render()
     push!(params_desc, "Time you want to skip ahead to in animation when you press the skip button.")
     move_to_end!(params_val, params_list, "t1")
   end
+  if !haskey(params, :width)
+    push!(params_list, "Width")
+    push!(params_desc, "Width (in px) of Plotly windows used for plotting and animation below.")
+    push!(params_val, 800)
+  end
+  if !haskey(params, :height)
+    push!(params_list, "Height")
+    push!(params_desc, "Height (in px) of Plotly windows used for plotting and animation below.")
+    push!(params_val, 600)
+  end
+  if !haskey(params, :delay)
+    push!(params_list, "Delay")
+    push!(params_desc, "Proportion of animation time passed per real time. Delay=1.0 means animation and real time match. Delay<1 means the animation is going more slowly than real time. Delay>1.0 means it is going more rapidly.")
+    push!(params_val, 1.0)
+  end
 
   HTML = """"""
   for p in 1:length(params_list)
@@ -103,6 +118,8 @@ function hfun_params_render()
       else
         param_name_latex="\\dot{\\theta}"
       end
+    elseif (param_name == "Width" || param_name == "Height" || param_name=="Delay")
+      param_name_latex="\\mathrm{$param_name}"
     elseif (occursin.(r"theta", param_name))
       param_name_latex="\\theta"
       if (length(numbers) > 1)

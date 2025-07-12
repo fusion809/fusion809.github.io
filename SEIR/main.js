@@ -152,7 +152,7 @@ function removeAnimationSIR() {
 }
 
 function generateAnimationBaseSIR(solution) {
-    animate3D(solution, [0, 0, 0], ["Susceptible", "Infectious", "Recovered"], [0, 2, 3], "SIR", "Susceptible, infectious and recovered phase plot for the SEIR infectious disease model.");
+    animate3D(solution, {varnames: ["Susceptible", "Infectious", "Recovered"], nos: [0, 2, 3], IdSuffix: "SIR", title: "Susceptible, infectious and recovered phase plot for the SEIR infectious disease model."});
 }
 /**
  * Generate SIR animation
@@ -172,7 +172,7 @@ function removeAnimationSEI() {
 }
 
 function generateAnimationBaseSEI(solution) {
-    animate3D(solution, [0, 0, 0], ["Susceptible", "Exposed", "Infectious"], [0, 1, 2], "SEI", "Susceptible, exposed and recovered population phase plot for the SEI system.");
+    animate3D(solution, {view: [0, 0, 0], varnames: ["Susceptible", "Exposed", "Infectious"], IdSuffix: "SEI", title: "Susceptible, exposed and recovered population phase plot for the SEI system."});
 }
 /**
  * Generate SEI animation
@@ -192,7 +192,7 @@ function removeAnimationSER() {
 }
 
 function generateAnimationBaseSER(solution) {
-    animate3D(solution, [0, 0, 0], ["Susceptible", "Exposed", "Recovered"], [0, 1, 3], "SER", "Susceptible, exposed and recovered population phase plot for the SEIR infectious disease model.");
+    animate3D(solution, {varnames: ["Susceptible", "Exposed", "Recovered"], nos: [0, 1, 3], IdSuffix: "SER", title: "Susceptible, exposed and recovered population phase plot for the SEIR infectious disease model."});
 }
 /**
  * Generate SER animation
@@ -212,7 +212,7 @@ function removeAnimationEIR() {
 }
 
 function generateAnimationBaseEIR(solution) {
-    animate3D(solution, [0, 0, 0], ["Exposed", "Infectious", "Recovered"], [1, 2, 3], "EIR", "Exposed, infectious and recovered population phase plot for the SEIR infectious disease model.");
+    animate3D(solution, {varnames: ["Exposed", "Infectious", "Recovered"], nos: [1, 2, 3], IdSuffix: "EIR", title: "Exposed, infectious and recovered population phase plot for the SEIR infectious disease model."});
 }
 
 /**
