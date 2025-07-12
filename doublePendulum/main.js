@@ -332,7 +332,7 @@ function generateAnimationBase(objectOfInputs, solution) {
 function generateAnimation() {
   var objectOfInputs = readInputs();
   var solution = solveProblem(RKF45, objectOfInputs);
-  generateAnimationBase(solution);
+  generateAnimationBase(objectOfInputs, solution);
 }
 
 function removeAnimation() {
@@ -340,7 +340,7 @@ function removeAnimation() {
 }
 
 function generateTheta1PhaseAnimationBase(solution) {
-    animate2D(solution, ["θ<sub>1</sub>", "dθ<sub>1</sub>/dt"], [0.05, 0.98], "Theta1Phase", "Phase plot of dθ<sub>1</sub>/dt against θ<sub>1</sub>.");
+    animate2D(solution, ["θ<sub>1</sub>", "dθ<sub>1</sub>/dt"], [0.05, 0.98], "Theta1Phase", [0, 1], "Phase plot of dθ<sub>1</sub>/dt against θ<sub>1</sub>.");
 }
 
 function generateTheta1PhaseAnimation() {
