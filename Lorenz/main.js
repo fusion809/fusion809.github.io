@@ -136,5 +136,5 @@ function removeAnimation() {
  */
 function generateAnimation() {
     var solution = solveProblem(RKF45, readInputs());
-    animate3D({solution=solution, view=[2, 0, 0], title="Lorenz system: X, Y and Z phase plot."} = {});
+    animate3D(solution, [2, 0, 0], ["x", "y", "z"], [0, 1, 2], "", "Lorenz system: X, Y and Z phase plot.");
 }
