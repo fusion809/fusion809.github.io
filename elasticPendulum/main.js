@@ -151,7 +151,7 @@ function generateAnimation() {
 }
 
 function generateThetaPhaseAnimationBase(solution) {
-    animate2D(solution, ["θ", "dθ/dt"], [0.9, 0.98], "ThetaPhase", [2, 3], "Elastic pendulum: phase plot of dθ/dt against θ.");
+    animate2D(solution, {varnames: ["θ", "dθ/dt"], timer: [0.9, 0.98], IdSuffix: "ThetaPhase", nos: [2, 3], title: "Elastic pendulum: phase plot of dθ/dt against θ."});
 }
 
 function generateThetaPhaseAnimation() {
@@ -165,7 +165,7 @@ function removeThetaPhaseAnimation() {
 }
 
 function generateZPhaseAnimationBase(solution) {
-    animate2D(solution, ["z", "dz/dt"], [0.9, 0.98], "ZPhase", [0, 1], "Elastic pendulum: phase plot of dz/dt against z.");
+    animate2D(solution, {varnames: ["z", "dz/dt"], timer: [0.9, 0.98], IdSuffix: "ZPhase", title: "Elastic pendulum: phase plot of dz/dt against z."});
 }
 
 function generateZPhaseAnimation() {
