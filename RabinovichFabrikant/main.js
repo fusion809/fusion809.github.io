@@ -42,7 +42,7 @@ function generate3DPhasePlot(solution) {
     var [x, y, z] = vars;
 
     // Generate 3D phase plot
-    gen3DPlot(x, y, z, "phasePlotXYZ", "Rabinovich&ndash;Fabrikant system: 3D phase plot.", [2, 0, 0]);
+    gen3DPlot(x, y, z, "phasePlotXYZ", "Rabinovich&ndash;Fabrikant system: 3D phase plot.", {view: [2, 0, 0]});
 }
 
 /**

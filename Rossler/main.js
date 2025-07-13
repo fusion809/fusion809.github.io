@@ -43,7 +43,7 @@ function generate3DPhasePlot(solution) {
     var [x, y, z] = vars;
 
     // Generate 3D plot
-    gen3DPlot(x, y, z, "phasePlotXYZ", "R&ouml;ssler system: 3D phase plot.", "x", "y", "z");
+    gen3DPlot(x, y, z, "phasePlotXYZ", "R&ouml;ssler system: 3D phase plot.", {xtitle: "x", ytitle: "y", ztitle: "z"});
 }
 
 /**
