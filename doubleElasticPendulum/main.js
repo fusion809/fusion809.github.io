@@ -81,7 +81,7 @@ function generateTheta1Theta2PhasePlot(solution) {
     var theta2 = vars[6];
 
     // Generate 2D plot
-    gen2DPlot(theta1, theta2, "phasePlotTheta1Theta2", "Phase plot of theta2 against theta1");
+    gen2DPlot(theta1, theta2, "phasePlotTheta1Theta2", "Phase plot of θ<sub>2</sub> against θ<sub>1</sub>");
 }
 
 /**
