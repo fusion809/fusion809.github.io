@@ -307,14 +307,35 @@ function hfun_output_render()
 
 end
 
-function hfun_render_footlist() 
-  HTML = """
-  <button type='button' class='collapsible'>Show content pages list</button><div class='content'><p>{{ insert pages_list.html }}</p></div>
-  """;
-  index = locvar("index");
-  if (!@isdefined(index) && !index)
-    return HTML;
-  else
-    return """""";
-  end
+function resolve_inserts(html::String)::String
+    insert_pattern = r"\{\{\s*insert\s+([a-zA-Z0-9_./\-]+)\s*\}\}"
+
+    return replace(html, insert_pattern => s -> begin
+        filename = match(insert_pattern, s).captures[1]
+        filepath = joinpath(@__DIR__, "_layout", filename)
+        if isfile(filepath)
+            included = read(filepath, String)
+            resolve_inserts(included)  # recursive resolution
+        else
+            "<!-- Could not find: $filename -->"
+        end
+    end)
+end
+
+function hfun_render_footlist()
+    rpath = locvar("fd_rpath");
+    if (rpath == "index.md")
+        return """"""
+    else
+      mainfile = joinpath(@__DIR__, "_layout", "pages_list.html")
+      content = read(mainfile, String)
+      expanded = resolve_inserts(content)
+
+      return """
+      <button type='button' class='collapsible'>Show content pages list</button>
+      <div class='content'><p>
+      $expanded
+      </p></div>
+      """
+    end
 end

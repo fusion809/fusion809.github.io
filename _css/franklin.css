@@ -342,6 +342,6 @@ code {
     float: left;
 }
 .clearfix {
-  overflow: auto;
+  /*overflow: auto;*/
   clear: both;
 }

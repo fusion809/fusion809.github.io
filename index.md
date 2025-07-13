@@ -1,7 +1,9 @@
 @def title="Homepage"
-@def index=true
+@def hasmath=true
 
 This website you find yourself on is my &mdash; Brenton Horne &mdash; personal website. It mostly contains mathematics/physics problem solver webpages I created out of interest and a desire to showcase the power of mathematics; my reflections on my education journey, as a PhD in health student; my thoughts on Linux, my on and off operating system since 2012; and assorted other mathematics-related work. 
 
 ## List of content pages
+~~~
 {{ insert pages_list.html }}
+~~~
