@@ -135,7 +135,7 @@ html {
     text-indent: 2%;
     margin-top: 2em;
     margin-bottom: 1em; 
-    overflow: auto;
+    /* overflow: auto; */
     clear: both;
 }
 
@@ -342,6 +342,26 @@ code {
 .clearfix {
   /*overflow: auto;*/
   clear: both;
+}
+
+.button-bar {
+  /* display: flex;
+  flex-wrap: nowrap;          Keep buttons on one line */
+  text-align: left;
+  justify-content: left;
+  gap: 8px;                   /* Space between buttons */
+  margin-bottom: 8px;
+  width: fit-content;         /* Only as wide as necessary */
+  max-width: 100%;            /* Don't exceed container width */
+  padding: 5px;
+}
+
+.button-bar button {
+  white-space: nowrap;        /* Prevent text wrapping */
+  margin-right: 5px;
+  padding: 4px 8px;
+  width: auto;
+  justify-content: left;
 }
 
 .clearfix h3 {

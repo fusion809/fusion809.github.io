@@ -328,6 +328,29 @@ function range(x) {
   return [xmin - padding, xmax+padding]
 }
 
+function addTitleAndFrmt(objectOfInputs, element, {title: title, label:label} = {}) {
+  if (/[pP]lot/.test(element)) {
+    var plotID = element;
+  } else {
+    var plotID = "animation" + element;
+  }
+  var contID = "container" + element;
+  if (title == undefined) {
+    var title = "Animation of the " + label.toLowerCase() + ".";
+  }
+
+  var infoID = document.getElementById("info" + element)
+  infoID.innerHTML = title;
+  renderMathInElement(infoID, {
+    delimiters: [{left: "$", right: "$", display: false}, {left: "\(", right: "\)", display: false}]
+  });
+
+  infoID.style = "padding-top: 0px; border-bottom: 1px solid black; margin-bottom: 5px; width:100%;"
+  document.getElementById(contID).style = "border: 1px solid black; padding-bottom: 5px; padding-top: 0px; padding-left: 5px; width:100%";
+  document.getElementById(plotID).width = objectOfInputs.Width + "px";
+  document.getElementById(plotID).height = objectOfInputs.Height + "px";
+  return plotID;
+}
 /**
  * Generate 2D plot
  * @param x        Array of x-axis values.
@@ -352,7 +375,6 @@ function gen2DPlot(x, y, element, title, xtitle="x", ytitle="y") {
 
     // layout object
     var layoutXY = {
-        title: {text: title},
         width: objectOfInputs.Width,
         height: objectOfInputs.Height,
         xaxis: {
@@ -364,9 +386,8 @@ function gen2DPlot(x, y, element, title, xtitle="x", ytitle="y") {
           title: {text: ytitle, font: {size: 16}}
         }
     };
-
-    // Generate plot
-    Plotly.newPlot(element, dataXY, layoutXY);
+  addTitleAndFrmt(objectOfInputs, element, {title: title});
+  Plotly.newPlot(element, dataXY, layoutXY);
 }
 
 /**
@@ -394,7 +415,6 @@ function gen2DPlotXYLabs(x, y, element, title, xtitle, ytitle) {
 
     // layout object
     var layoutXY = {
-        title: {text: title},
         width: objectOfInputs.Width,
         height: objectOfInputs.Height,
         xaxis: {
@@ -410,8 +430,7 @@ function gen2DPlotXYLabs(x, y, element, title, xtitle, ytitle) {
             range: range(y)
         }
     };
-
-    // Generate plot
+    addTitleAndFrmt(objectOfInputs, element, {title: title});;
     Plotly.newPlot(element, dataXY, layoutXY);
 }
 /**
@@ -446,7 +465,6 @@ function gen3DPlot(x, y, z, element, title, {view = undefined, xtitle="x", ytitl
    
     // layout object
     var layoutXYZ = {
-       title: {text: title},
        width: objectOfInputs.Width,
        height: objectOfInputs.Height,
        scene: {
@@ -475,7 +493,7 @@ function gen3DPlot(x, y, z, element, title, {view = undefined, xtitle="x", ytitl
                 }
           }
         }
-    // Generate plot
+    addTitleAndFrmt(objectOfInputs, element, {title: title});;
     Plotly.newPlot(element, dataXYZ, layoutXYZ);
 }
 
@@ -601,7 +619,6 @@ function genMultPlot(solution, varnames, element, title) {
     var layoutTimePlot = {
       width: objectOfInputs.Width,
       height: objectOfInputs.Height,
-        title: {text: title},
         xaxis: {
           range: range(t),
           title: { text: "t", font: {size: 16}}
@@ -610,11 +627,232 @@ function genMultPlot(solution, varnames, element, title) {
           range: range(vars)
         }
     };
-    
-    // Generate plot
+    addTitleAndFrmt(objectOfInputs, element, {title: title});;
     Plotly.newPlot(element, dataTimePlot, layoutTimePlot);
 }
 
+function generatePendulumCoords(objectOfInputs, solution) {
+  if (objectOfInputs.hasOwnProperty("l1") && solution.vars.length == 8) {
+    // Extract solution values and pendulum lengths
+    var {t, vars} = solution;
+    var [r1, dr1, r2, dr2, theta1, dtheta1, theta2, dtheta2] = vars;
+    var N = theta1.length;
+
+    // Initialize arrays that will store x and y coords
+    var x1 = new Array(N);
+    var x2 = new Array(N);
+    var y1 = new Array(N);
+    var y2 = new Array(N);
+    for (let i = 0; i < N; i++) {
+        x1[i] = r1[i]*Math.cos(theta1[i]);
+        y1[i] = r1[i]*Math.sin(theta1[i]);
+        x2[i] = x1[i] + r2[i]*Math.cos(theta2[i]);
+        y2[i] = y1[i] + r2[i]*Math.sin(theta2[i]);
+    }
+
+    // Return t and Cartesian coordinates of the pendulum bobs
+    return [t, x1, y1, x2, y2];
+  } else if (objectOfInputs.hasOwnProperty("l1")) {
+    // Extract solution values and pendulum lengths
+    var {t, vars} = solution;
+    var [theta1, dtheta1, theta2, dtheta2] = vars;
+    var {l1, l2} = objectOfInputs;
+    var N = theta1.length;
+
+    // Initialize arrays that will store x and y coords
+    var x1 = new Array(N);
+    var x2 = new Array(N);
+    var y1 = new Array(N);
+    var y2 = new Array(N);
+    for (let i = 0; i < N; i++) {
+        x1[i] = l1*Math.cos(theta1[i]);
+        y1[i] = l1*Math.sin(theta1[i]);
+        x2[i] = x1[i] + l2*Math.cos(theta2[i]);
+        y2[i] = y1[i] + l2*Math.sin(theta2[i]);
+    }
+
+    // Return t and Cartesian coordinates of the pendulum bobs
+    return [t, x1, y1, x2, y2];
+  } else {
+    var vars = solution.vars;
+    var r = vars[0].map(item => item + objectOfInputs.l0);
+    var th = vars[2];
+    var N = th.length;
+    var x = new Array(N);
+    var y = new Array(N);
+    for (let i = 0; i < N; i++) {
+        x[i] = r[i]*Math.cos(th[i]);
+        y[i] = r[i]*Math.sin(th[i]);
+    }
+    return [x, y];
+  }
+}
+
+function generatePendulumPlot(objectOfInputs, solution) {
+  if (objectOfInputs.hasOwnProperty("l1") && solution.vars.length == 4) {
+    // This is for double pendulum
+    var [t1, x1, y1, x2, y2] = generatePendulumCoords(objectOfInputs, solution);
+    var x=[x1, x2];
+    var y=[y1, y2];
+  } else if (objectOfInputs.hasOwnProperty("l1")) {
+    // Double elastic pendulum
+    var [t1, x1, y1, x2, y2] = generatePendulumCoords(objectOfInputs, solution);
+    var x=[x1, x2];
+    var y=[y1, y2];
+  } else {
+    // single pendulum systems
+    var [x, y] = generatePendulumCoords(objectOfInputs, solution);
+    i
+  }
+  var element = "pendulumPlot"
+  if (x1 == undefined) {
+    adjustPlotHeight("pendulumPlot");
+        
+    // Show two pendulum bob locations on the same plot
+    var plotPen = {
+        x: x,
+        y: y,
+        type: 'scatter',
+        mode: 'lines',
+        opacity: 1,
+        name: "Pendulum bob"
+    }
+    var dataPen = [plotPen];
+    var layoutPen = {
+        width: objectOfInputs.Width,
+        height: objectOfInputs.Height,
+         xaxis: {
+            title: {font: "x", font: {size: 16}}
+        },
+        yaxis: {
+            title: {text: "y", font: {size: 16}}
+        }
+    };
+  } else {
+    adjustPlotHeight(element);
+    
+    // Show two pendulum bob locations on the same plot
+    var plotPen1 = {
+        x: x1,
+        y: y1,
+        type: 'scatter',
+        mode: 'lines',
+        opacity: 1,
+        name: "Pendulum 1 bob"
+    }
+    var plotPen2 = {
+        x: x2,
+        y: y2,
+        type: 'scatter',
+        mode: 'lines',
+        opacity: 1,
+        name: "Pendulum 2 bob"
+    }
+    var dataPen = [plotPen1, plotPen2];
+    var layoutPen = {
+      width: objectOfInputs.Width,
+      height: objectOfInputs.Height,
+      xaxis: {
+        title: {text: "x", font: {size: 16}}
+      },
+      yaxis: {
+        title: {text: "y", font: {size: 16}}
+      }
+    };
+  }
+  
+  Plotly.newPlot(element, dataPen, layoutPen);
+  var title = "Pendulum coordinate plot.";
+  addTitleAndFrmt(objectOfInputs, element, {title: title});
+}
+
+function generatePendulumTimePlot(objectOfInputs, solution) {
+  if (objectOfInputs.hasOwnProperty("l1") && solution.vars.length == 4) {
+    // This is for double pendulum
+    var [t1, x1, y1, x2, y2] = generatePendulumCoords(objectOfInputs, solution);
+    var x=[x1, x2];
+    var y=[y1, y2];
+  } else if (objectOfInputs.hasOwnProperty("l1")) {
+    // Double elastic pendulum
+    var [t1, x1, y1, x2, y2] = generatePendulumCoords(objectOfInputs, solution);
+    var x=[x1, x2];
+    var y=[y1, y2];
+  } else {
+    // single pendulum systems
+    var [x, y] = generatePendulumCoords(objectOfInputs, solution);
+    i
+  }
+  var element = "pendulumTimePlot";
+  adjustPlotHeight(element);
+  var t = solution.t
+  if (x1 == undefined) {
+    // Plot pendulum bob location against time plot
+    var plotPenTime = {
+      x: t,
+      y: x,
+      z: y,
+      type: 'scatter3d',
+      mode: 'lines',
+      opacity: 1,
+      line: {
+        width: 6,
+        reversescale: false
+      },
+      name: "Pendulum"
+    }
+    var dataPen = [plotPenTime];
+  } else {
+    // Plot pendulum bob location against time plot
+    var plotPen1Time = {
+        x: t,
+        y: x1,
+        z: y1,
+        type: 'scatter3d',
+        mode: 'lines',
+        opacity: 1,
+        line: {
+            width: 6,
+            reversescale: false
+        },
+        name: "Pendulum 1 bob"
+    };
+    var plotPen2Time = {
+        x: t,
+        y: x2,
+        z: y2,
+        type: 'scatter3d',
+        mode: 'lines',
+        opacity: 1,
+        line: {
+            width: 6,
+            reversescale: false
+        },
+        name: 'Pendulum 2 bob'
+    };
+    var dataPen = [plotPen1Time, plotPen2Time];
+  }
+  var layoutPenTime = {
+    width: objectOfInputs.Width,
+    height: objectOfInputs.Height,
+    xaxis: {
+      title: {text: "x", font: {size: 16}}
+    },
+    yaxis: {
+      title: {text: "y", font: {size: 16}}
+    },
+    zaxis: {
+      title: {text: "z", font: {size: 16}}
+    }
+  };
+  Plotly.newPlot(element, dataPen, layoutPenTime);
+  var title="Pendulum coordinate against time plot.";
+  addTitleAndFrmt(objectOfInputs, element, {title: title});
+}
+
+function generatePendulumPlots(objectOfInputs, solution) {
+  generatePendulumPlot(objectOfInputs, solution);
+  generatePendulumTimePlot(objectOfInputs, solution);
+}
 /**
  * Update time label in animation.
  * @param layout   Layout object for animation.
@@ -730,25 +968,6 @@ function buttons(state, layout, t, IdSuffix, animateFrame) {
   skipTo(state, layout, t, IdSuffix);
 }
 
-function addTitleAndFrmt(objectOfInputs, IdSuffix, {title: title, label:label} = {}) {
-  var animID = "animation" + IdSuffix;
-  var contID = "container" + IdSuffix;
-  if (title == undefined) {
-    var title = "Animation of the " + label.toLowerCase() + ".";
-  }
-
-  document.getElementById("info" + IdSuffix).innerHTML = title;
-  renderMathInElement(document.getElementById("info" + IdSuffix), {
-  delimiters: [{left: "$", right: "$", display: false}, {left: "\(", right: "\)", display: false}]
-});
-
-  document.getElementById("info" + IdSuffix).style = "padding-top: 0px; border-bottom: 1px solid black; margin-bottom: 5px; width:100%;"
-  document.getElementById(contID).style = "border: 1px solid black; padding-bottom: 5px; padding-top: 0px; padding-left: 5px; width:100%";
-  document.getElementById(animID).width = objectOfInputs.Width + "px";
-  document.getElementById(animID).height = objectOfInputs.Height + "px";
-  return animID;
-}
-
 /**
  * Create pendulum animation.
  * @param objectOfInputs Object of page inputs.
@@ -765,7 +984,7 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
     var x=[x1, x2];
     var y=[y1, y2];
   } else if (label == "Double elastic pendulum") {
-    var [t1, x1, y1, x2, y2] = generatePendulumCoords(solution);
+    var [t1, x1, y1, x2, y2] = generatePendulumCoords(objectOfInputs, solution);
     var x=[x1, x2];
     var y=[y1, y2];
   } else if (label == "Simple pendulum" || label == "Single pendulum" || label == "Elastic pendulum") {

@@ -154,7 +154,7 @@ function generatePhasePlot(solution) {
     var {theta, thetaDot} = solution;
 
     // Generate 2D plot
-    gen2DPlot(theta, thetaDot, "phasePlot", "Phase plot of theta dot against theta");
+    gen2DPlot(theta, thetaDot, "phasePlot", "Phase plot of $\\dfrac{d\\theta}{dt}$ against $\\theta$.");
 }
 
 /**
@@ -172,7 +172,7 @@ function generateTimePlot(solution) {
     }
 
     // Generate time plot
-    genMultPlot(sol, ["θ", "dθ/dt"], "timePlot", "Plot of θ and dθ/dt against time");
+    genMultPlot(sol, ["θ", "dθ/dt"], "timePlot", "Plot of $\\theta$ and $\\dfrac{d\\theta}{dt}$ against time.");
 }
 
 /**

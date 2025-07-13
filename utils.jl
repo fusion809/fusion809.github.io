@@ -313,7 +313,11 @@ function hfun_button_render()
     func2 = funcs[2*i];
     label1 = labels[2*i-1];
     label2 = labels[2*i];
-    id = replace(id, "animation" => "container")
+    if (occursin(r"animation", id))
+      id = replace(id, "animation" => "container")
+    else
+      id = "container$id"
+    end
     HTML *= """
     <tr style="border: 0px;">
       <td style="border: 0px;">
@@ -342,8 +346,8 @@ function hfun_output_render()
       idSuffix = replace(ids[i], r"^animation" => "")
       id = ids[i]
       HTML *= """
-      <div id="container$idSuffix" style="border: 0px; padding: 0; margin: 0">
-      <h2 id="info$idSuffix" style="border: 0px; padding: 0; margin: 0"></h2>
+      <div id="container$idSuffix" class="button-bar">
+      <h2 id="info$idSuffix" style="border: 0px; padding: 0; margin: 0; overflow: none;"></h2>
       <button id="toggleButton$idSuffix">Pause</button>
       <button id="restartButton$idSuffix">Restart</button>
       <button id="addTimeButton$idSuffix">Add time \\(\\Delta t\\) to animation.</button>
@@ -354,7 +358,10 @@ function hfun_output_render()
     else
       id = ids[i]
       HTML *= """
+      <div id="container$id" class="button-bar">
+      <h2 id="info$id" style="border: 0px; padding: 0; margin: 0; overflow: none;"></h2>
       <div id="$id"></div>
+      </div>
       """
     end
   end
