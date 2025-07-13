@@ -861,7 +861,7 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
  * @param nos      The index of variables to be plotted within vars.
  * @return         Nothing.
  */
-function animate2D(solution, varnames=["x", "y"], timer=[0, 0.98], IdSuffix="", nos=[0, 1], title="Phase plot animation of y against x.") {
+function animate2D(solution, {varnames=["x", "y"], timer=[0, 0.98], IdSuffix="", nos=[0, 1], title="Phase plot animation of y against x."} = {}) {
   const x = solution.vars[nos[0]];
   const y = solution.vars[nos[1]];
   const t = solution.t;

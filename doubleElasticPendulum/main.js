@@ -408,7 +408,7 @@ function removeAnimation() {
 }
 
 function generateR1PhaseAnimationBase(solution) {
-    animate2D(solution, ["r<sub>1</sub>", "dr<sub>1</sub>/dt"], [0.05, 0.98], "R1Phase", [0, 1], "Phase plot of dr<sub>1</sub>/dt against r<sub>1</sub>.");
+    animate2D(solution, {varnames: ["r<sub>1</sub>", "dr<sub>1</sub>/dt"],IdSuffix: "R1Phase", title: "Phase plot of dr<sub>1</sub>/dt against r<sub>1</sub>."});
 }
 
 function generateR1PhaseAnimation() {
@@ -422,7 +422,7 @@ function removeR1PhaseAnimation() {
 }
 
 function generateR2PhaseAnimationBase(solution) {
-    animate2D(solution, ["r<sub>2</sub>", "dr<sub>2</sub>/dt"], [0.98, 0.02], "R2Phase", [2, 3], "Phase plot of dr<sub>2</sub>/dt against r<sub>2</sub>.");
+    animate2D(solution, {varnames: ["r<sub>2</sub>", "dr<sub>2</sub>/dt"], IdSuffix: "R2Phase", nos: [2, 3], title: "Phase plot of dr<sub>2</sub>/dt against r<sub>2</sub>."});
 }
 
 function generateR2PhaseAnimation() {
@@ -436,7 +436,7 @@ function removeR2PhaseAnimation() {
 }
 
 function generateTheta1PhaseAnimationBase(solution) {
-    animate2D(solution, ["θ<sub>1</sub>", "dθ<sub>1</sub>/dt"], [0.05, 0.98], "Theta1Phase", [4, 5], "Phase plot of dθ<sub>1</sub>/dt against θ<sub>1</sub>.");
+    animate2D(solution, {varnames: ["θ<sub>1</sub>", "dθ<sub>1</sub>/dt"],IdSuffix: "Theta1Phase", nos: [4, 5], title: "Phase plot of dθ<sub>1</sub>/dt against θ<sub>1</sub>."});
 }
 
 function generateTheta1PhaseAnimation() {
@@ -450,7 +450,7 @@ function removeTheta1PhaseAnimation() {
 }
 
 function generateTheta2PhaseAnimationBase(solution) {
-    animate2D(solution, ["θ<sub>2</sub>", "dθ<sub>2</sub>/dt"], [0.98, 0.02], "Theta2Phase", [6, 7], "Phase plot of dθ<sub>2</sub>/dt against θ<sub>2</sub>.");
+    animate2D(solution, {varnames: ["θ<sub>2</sub>", "dθ<sub>2</sub>/dt"], timer: [0.98, 0.02], IdSuffix: "Theta2Phase", nos: [6, 7], title: "Phase plot of dθ<sub>2</sub>/dt against θ<sub>2</sub>."});
 }
 function generateTheta2PhaseAnimation() {
   var objectOfInputs = readInputs();

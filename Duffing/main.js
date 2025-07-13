@@ -77,7 +77,7 @@ function generatePlots(objectOfInputs) {
  */
 function generateAnimation() {
     var solution = solveProblem(RKF45, readInputs());
-    animate2D(solution, ["x", "dx/dt"], [0, 0.98], "", [0, 1], "Duffing system: phase plot of dx/dt against x.");
+    animate2D(solution, {varnames: ["x", "dx/dt"], nos: [0, 1], title: "Duffing system: phase plot of dx/dt against x."});
 }
 
 /**

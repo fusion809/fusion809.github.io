@@ -88,7 +88,7 @@ function removeAnimation() {
  */
 function generateAnimation() {
     var solution = solveProblem(RKF45, readInputs());
-    animate2D(solution);
+    animate2D(solution, {timer: [0.98, 0.98], varnames: ["Prey animals", "Predator animals"], title: "Phase plot of predator vs prey animals in system."});
 }
 
 function generatetable() {
