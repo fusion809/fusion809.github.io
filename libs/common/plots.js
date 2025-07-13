@@ -1009,22 +1009,6 @@ function animate3D(solution, {view = [0.5, -2, 0.5],
   nos = [0, 1, 2], 
   IdSuffix = "",
   title = "X, Y and Z phase plot."} = {}) {
-  // var {solution, view, varnames, nos, IdSuffix, title} = inputs;
-  // if (view == undefined) {
-  //   view=[0.5, -2, 0.5]
-  // }
-  // if (varnames == undefined) {
-  //   varnames=["x", "y", "z"]
-  // }
-  // if (nos == undefined) {
-  //   nos=[0, 1, 2]
-  // } 
-  // if (IdSuffix == undefined) {
-  //   IdSuffix=""
-  // }
-  // if (title == undefined) {
-  //   title="X, Y and Z phase plot."
-  // }
   const x = solution.vars[nos[0]];
   const y = solution.vars[nos[1]];
   const z = solution.vars[nos[2]];
@@ -1036,7 +1020,7 @@ function animate3D(solution, {view = [0.5, -2, 0.5],
     z: z,
     mode: 'lines',
     type: 'scatter3d',
-    line: { color: 'blue', width: 4 },
+    line: { color: 'blue', width: 4, opacity: 0.2 },
     name: 'Path',
   };
 
@@ -1046,7 +1030,7 @@ function animate3D(solution, {view = [0.5, -2, 0.5],
     z: [z[0]],
     mode: 'markers',
     type: 'scatter3d',
-    marker: { color: 'red', size: 7 },
+    marker: { color: 'red', size: 7, opacity: 1, layer: 'above' },
     name: 'Object'
   };
 
@@ -1056,7 +1040,14 @@ function animate3D(solution, {view = [0.5, -2, 0.5],
     scene: {
       xaxis: { title: {text: varnames[0]} },
       yaxis: { title: {text: varnames[1]} },
-      zaxis: { title: {text: varnames[2]} }
+      zaxis: { title: {text: varnames[2]} },
+      camera: {
+                eye: {
+                x: view[0],   // Set to 0 to align the camera with the YZ plane
+                y: view[1],
+                z: view[2]
+                }
+            }
     },
     annotations: [{
       text: `Time: 0.00 s`,
@@ -1111,7 +1102,7 @@ function animate3D(solution, {view = [0.5, -2, 0.5],
             z: [z[state.frame]],
             mode: 'markers',
             type: 'scatter3d',
-            marker: { color: 'red', size: 7 },
+            marker: { color: 'red', size: 7, opacity: 1, symbol: 'circle', layer: 'above' },
             name: 'Object'
           }
         ],
@@ -1128,14 +1119,7 @@ function animate3D(solution, {view = [0.5, -2, 0.5],
           scene: {
             xaxis: { title: {text: varnames[0]} },
             yaxis: { title: {text: varnames[1]} },
-            zaxis: { title: {text: varnames[2]} },
-            camera: {
-                eye: {
-                x: view[0],   // Set to 0 to align the camera with the YZ plane
-                y: view[1],
-                z: view[2]
-                }
-            }
+            zaxis: { title: {text: varnames[2]} }
           }
           }
         }, {
