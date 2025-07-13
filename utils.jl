@@ -275,8 +275,6 @@ end
 
 function hfun_output_render()
   ids, funcs, labels = getButtonVars();
-  animation_ids = [];
-  other_ids = [];
   HTML = """
   <table id="tableOutputs">
   """;
@@ -303,4 +301,16 @@ function hfun_output_render()
   </table>
   """
 
+end
+
+function hfun_render_footlist() 
+  HTML = """
+  <button type='button' class='collapsible'>Show content pages list</button><div class='content'><p>{{ insert pages_list.html }}</p></div>
+  """;
+  index = locvar("index");
+  if (!@isdefined(index) && !index)
+    return HTML;
+  else
+    return """""";
+  end
 end
