@@ -43,13 +43,41 @@ function move_to_end!(val::Vector, list::Vector{String}, key::String)
     push!(list,  popat!(list,  i))
 end
 
+"""
+  move3_to_end!(val::Vector{Number}, list::Vector{String}, desc::Vector{String}, key::String)
+
+Moves the element of list that equals key and its corresponding element of val to the end. 
+"""
+function move3_to_end!(val::Vector{Real}, list::Vector{String}, desc::Vector{Any}, key::String)
+    i = findfirst(==(key), list)
+    if isnothing(i)
+        @warn "Key $key not found in params_list"
+        return
+    end
+    push!(val,  popat!(val,  i))
+    push!(desc,  popat!(desc,  i))
+    push!(list,  popat!(list,  i))
+end
+
+function calls_animate3D()
+  path = locvar(:fd_rpath)
+  dir = splitdir(path)[1]
+  js_files = filter(f -> endswith(f, ".js"), readdir(dir; join=true))
+  for jsf in js_files
+    content = read(jsf, String)
+    if occursin("animate3D", content)
+      return true
+    end
+  end
+  return false
+end
+
 function hfun_params_render()
   params = locvar("params");
   params_desc = [v.desc for v in values(params) if hasproperty(v, :desc)]
   if isempty(params_desc)
     params_desc = [];
   end
-  params_el = collect(values(params));
   params_val = [v.val for v in values(params) if hasproperty(v, :val)]
   params_list = collect(String.(keys(params)));
   for key in (:alpha, :gamma, :sigma, :rho, :beta, :lambda, :mu, :a, :b, :c)
@@ -97,10 +125,32 @@ function hfun_params_render()
     push!(params_list, "Delay")
     push!(params_desc, "Proportion of animation time passed per real time. Delay=1.0 means animation and real time match. Delay<1.0 means the animation is going more slowly than real time. Delay>1.0 means it is going more rapidly.")
     push!(params_val, 1.0)
+  elseif !hasproperty(params.Delay, :desc)
+    idx = findfirst(==("Delay"), params_list);
+    insert!(params_desc, idx, "Proportion of animation time passed per real time. Delay=1.0 means animation and real time match. Delay<1.0 means the animation is going more slowly than real time. Delay>1.0 means it is going more rapidly.")
+    move3_to_end!(params_val, params_list, params_desc, "Delay");
+  end
+  if calls_animate3D()
+    opacity_desc="Opacity of the lines in the 3D phase space animation. Customizable in case you need to tweak it in order to see the red dot marker."
+    if !haskey(params, :Opacity)
+      push!(params_list, "Opacity")
+      push!(params_desc, opacity_desc)
+      push!(params_val, 0.2)
+    elseif !hasproperty(params.Opacity, :desc)
+      idx = findfirst(==("Opacity"), params_list);
+      insert!(params_desc, idx, opacity_desc)
+      move3_to_end!(params_val, params_list, params_desc, "Opacity");
+    end
   end
 
-  if (length(params_list) != length(params_desc) || length(params_list) != length(params_val))
-    println("There is a mismatch in the lengths of params_list, params_desc or params_val! Exiting params_render().")
+  params_list_len = length(params_list)
+  params_desc_len = length(params_desc)
+  params_val_len = length(params_val)
+  if (params_list_len != params_desc_len || params_list_len != params_val_len)
+    println("There is a mismatch in the lengths of params_list ($params_list_len), params_desc ($params_desc_len) or params_val ($params_val_len)! Exiting params_render().")
+    println("params_val = $params_val")
+    println("params_desc = $params_desc")
+    println("params_list = $params_list")
     return
   end
   HTML = """"""
@@ -122,7 +172,7 @@ function hfun_params_render()
       else
         param_name_latex="\\dot{\\theta}"
       end
-    elseif (param_name == "Width" || param_name == "Height" || param_name=="Delay")
+    elseif (param_name == "Width" || param_name == "Height" || param_name=="Delay" || param_name == "Opacity")
       param_name_latex="\\mathrm{$param_name}"
     elseif (occursin.(r"theta", param_name))
       param_name_latex="\\theta"

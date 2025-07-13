@@ -911,7 +911,7 @@ function animate2D(solution, {varnames=["x", "y"], timer=[0, 0.98], IdSuffix="",
       showarrow: false,
       font: { size: 16 }
     }],
-    showlegend: true
+    showlegend: false
   };
 
   var elementID = "animation" + IdSuffix;
@@ -1013,6 +1013,7 @@ function animate3D(solution, {view = [0.5, -2, 0.5],
   const y = solution.vars[nos[1]];
   const z = solution.vars[nos[2]];
   const t = solution.t;
+  var objectOfInputs = readInputs();
 
   const tracePath = {
     x: x,
@@ -1020,7 +1021,8 @@ function animate3D(solution, {view = [0.5, -2, 0.5],
     z: z,
     mode: 'lines',
     type: 'scatter3d',
-    line: { color: 'blue', width: 4, opacity: 0.2 },
+    opacity: objectOfInputs.Opacity,
+    line: { color: 'blue', width: 4 },
     name: 'Path',
   };
 
@@ -1030,7 +1032,8 @@ function animate3D(solution, {view = [0.5, -2, 0.5],
     z: [z[0]],
     mode: 'markers',
     type: 'scatter3d',
-    marker: { color: 'red', size: 7, opacity: 1, layer: 'above' },
+    opacity: 1,
+    marker: { color: 'red', size: 7, },
     name: 'Object'
   };
 
@@ -1058,11 +1061,10 @@ function animate3D(solution, {view = [0.5, -2, 0.5],
       showarrow: false,
       font: { size: 16 }
     }],
-    showlegend: true
+    showlegend: false
   };
 
   var elementID = "animation" + IdSuffix;
-  var objectOfInputs = readInputs();
   var delay = objectOfInputs.Delay;
   document.getElementById(elementID).style.width = objectOfInputs.Width + "px";
   document.getElementById(elementID).style.height = objectOfInputs.Height + "px";
@@ -1102,6 +1104,7 @@ function animate3D(solution, {view = [0.5, -2, 0.5],
             z: [z[state.frame]],
             mode: 'markers',
             type: 'scatter3d',
+            opacity: 1,
             marker: { color: 'red', size: 7, opacity: 1, symbol: 'circle', layer: 'above' },
             name: 'Object'
           }
