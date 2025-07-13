@@ -81,7 +81,7 @@ function generateTheta1Theta2PhasePlot(solution) {
     var theta2 = vars[6];
 
     // Generate 2D plot
-    gen2DPlot(theta1, theta2, "phasePlotTheta1Theta2", "Phase plot of θ<sub>2</sub> against θ<sub>1</sub>", "θ<sub>1</sub>", "θ<sub>2</sub>");
+    gen2DPlot(theta1, theta2, "phasePlotTheta1Theta2", "Phase plot of $\\theta_2$ against $\\theta_1$.", "θ<sub>1</sub>", "θ<sub>2</sub>");
 }
 
 /**
@@ -92,90 +92,90 @@ function generateTheta1Theta2PhasePlot(solution) {
  */
 function generateTimePlot(solution) {
     // Generate time plot
-    genMultPlot(solution, ["r<sub>1</sub>", "dr<sub>1</sub>/dt", "r<sub>2</sub>", "dr<sub>2</sub>/dt", "θ<sub>1</sub>", "dθ<sub>1</sub>/dt", "θ<sub>2</sub>", "dθ<sub>2</sub>/dt"], "timePlot", "Plot of r<sub>1</sub>, dr<sub>1</sub>/dt, r<sub>2</sub>, dr<sub>2</sub>/dt, θ<sub>1</sub>, dθ<sub>1</sub>/dt, θ<sub>2</sub> and dθ<sub>2</sub>/dt against time");
+    genMultPlot(solution, ["r<sub>1</sub>", "dr<sub>1</sub>/dt", "r<sub>2</sub>", "dr<sub>2</sub>/dt", "θ<sub>1</sub>", "dθ<sub>1</sub>/dt", "θ<sub>2</sub>", "dθ<sub>2</sub>/dt"], "timePlot", "Plot of $r_1$, $\\dfrac{dr_1}{dt}$, $r_2$, $\\dfrac{dr_2}{dt}$, $\\theta_1$, $\\dfrac{d\\theta_1}{dt}$, $\\theta_2$ and $\\dfrac{d\\theta_2}{dt}$ against time.");
 }
 
 function generateR1TPlot(solution) {
     var {t, vars} = solution;
     var r1 = vars[0];
-    gen2DPlotXYLabs(t, r1, "R1TPlot", "Time plot of r<sub>1</sub>", "t", "r<sub>1</sub>");
+    gen2DPlotXYLabs(t, r1, "R1TPlot", "Time plot of $r_1$.", "t", "r<sub>1</sub>");
 }
 
 function generateDr1TPlot(solution) {
     var {t, vars} = solution;
     var dr1 = vars[1];
-    gen2DPlotXYLabs(t, dr1, "Dr1TPlot", "Time plot of dr<sub>1</sub>/dt", "t", "dr<sub>1</sub>/dt");
+    gen2DPlotXYLabs(t, dr1, "Dr1TPlot", "Time plot of $\\dfrac{dr_1}{dt}$.", "t", "dr<sub>1</sub>/dt");
 }
 
 function generateDr1R1Plot(solution) {
     var {vars} = solution;
     var r1 = vars[0];
     var dr1 = vars[1];
-    gen2DPlotXYLabs(r1, dr1, "Dr1R1Plot", "Phase plot of dr<sub>1</sub>/dt vs r<sub>1</sub>", "r<sub>1</sub>", "dr<sub>1</sub>/dt");
+    gen2DPlotXYLabs(r1, dr1, "Dr1R1Plot", "Phase plot of $\\dfrac{dr_1}{dt}$ vs $r_1$.", "r<sub>1</sub>", "dr<sub>1</sub>/dt");
 }
 
 function generateR2TPlot(solution) {
     var {t, vars} = solution;
     var r2 = vars[2];
-    gen2DPlotXYLabs(t, r2, "R2TPlot", "Time plot of r<sub>2</sub>", "t", "r<sub>2</sub>");
+    gen2DPlotXYLabs(t, r2, "R2TPlot", "Time plot of $r_2$.", "t", "r<sub>2</sub>");
 }
 
 function generateDr2TPlot(solution) {
     var {t, vars} = solution;
     var dr2 = vars[3];
-    gen2DPlotXYLabs(t, dr2, "Dr2TPlot", "Time plot of dr<sub>2</sub>/dt", "t", "dr<sub>2</sub>/dt");
+    gen2DPlotXYLabs(t, dr2, "Dr2TPlot", "Time plot of $\\dfrac{dr_2}{dt}$.", "t", "dr<sub>2</sub>/dt");
 }
 
 function generateDr2R2Plot(solution) {
     var {vars} = solution;
     var r2 = vars[2];
     var dr2 = vars[3];
-    gen2DPlotXYLabs(r2, dr2, "Dr2R2Plot", "Phase plot of dr<sub>2</sub>/dt vs r<sub>2</sub>", "r<sub>2</sub>", "dr<sub>2</sub>/dt");
+    gen2DPlotXYLabs(r2, dr2, "Dr2R2Plot", "Phase plot of $\\dfrac{dr_2}{dt}$ vs $r_2$.", "r<sub>2</sub>", "dr<sub>2</sub>/dt");
 }
 
 function generateTheta1TPlot(solution) {
     var {t, vars} = solution;
     var theta1 = vars[4];
-    gen2DPlotXYLabs(t, theta1, "Theta1TPlot", "Time plot of θ<sub>1</sub>", "t", "θ<sub>1</sub>");
+    gen2DPlotXYLabs(t, theta1, "Theta1TPlot", "Time plot of $\\theta_1$.", "t", "θ<sub>1</sub>");
 }
 
 function generateDtheta1TPlot(solution) {
     var {t, vars} = solution;
     var dtheta1 = vars[5];
-    gen2DPlotXYLabs(t, dtheta1, "Dtheta1TPlot", "Time plot of dθ<sub>1</sub>/dt", "t", "dθ<sub>1</sub>/dt");
+    gen2DPlotXYLabs(t, dtheta1, "Dtheta1TPlot", "Time plot of $\\dfrac{d\\theta_1}{dt}$.", "t", "dθ<sub>1</sub>/dt");
 }
 
 function generateDtheta1Theta1Plot(solution) {
     var {vars} = solution;
     var theta1 = vars[4];
     var dtheta1 = vars[5];
-    gen2DPlotXYLabs(theta1, dtheta1, "Dtheta1Theta1Plot", "Phase plot of dθ<sub>1</sub>/dt vs θ<sub>1</sub>", "θ<sub>1</sub>", "dθ<sub>1</sub>/dt");
+    gen2DPlotXYLabs(theta1, dtheta1, "Dtheta1Theta1Plot", "Phase plot of $\\dfrac{d\\theta_1}{dt}$ vs $\\theta_1$.", "θ<sub>1</sub>", "dθ<sub>1</sub>/dt");
 }
 
 function generateTheta2TPlot(solution) {
     var {t, vars} = solution;
     var theta2 = vars[6];
-    gen2DPlotXYLabs(t, theta2, "Theta2TPlot", "Time plot of θ<sub>2</sub>", "t", "θ<sub>2</sub>");
+    gen2DPlotXYLabs(t, theta2, "Theta2TPlot", "Time plot of $\\theta_2$.", "t", "θ<sub>2</sub>");
 }
 
 function generateDtheta2TPlot(solution) {
     var {t, vars} = solution;
     var dtheta2 = vars[7];
-    gen2DPlotXYLabs(t, dtheta2, "Dtheta2TPlot", "Time plot of dθ<sub>2</sub>/dt", "t", "dθ<sub>2</sub>/dt");
+    gen2DPlotXYLabs(t, dtheta2, "Dtheta2TPlot", "Time plot of $\\dfrac{d\\theta_2}{dt}$.", "t", "dθ<sub>2</sub>/dt");
 }
 
 function generateDtheta2Theta2Plot(solution) {
     var {vars} = solution;
     var theta2 = vars[6];
     var dtheta2 = vars[7];
-    gen2DPlotXYLabs(theta2, dtheta2, "Dtheta2Theta2Plot", "Phase plot of dθ<sub>2</sub>/dt vs θ<sub>2</sub>", "θ<sub>2</sub>", "dθ<sub>2</sub>/dt");
+    gen2DPlotXYLabs(theta2, dtheta2, "Dtheta2Theta2Plot", "Phase plot of $\\dfrac{d\\theta_2}{dt}$ vs $\\theta_2$.", "θ<sub>2</sub>", "dθ<sub>2</sub>/dt");
 }
 
 function generateR1R2PhasePlot(solution) {
     var {vars} = solution;
     var r1 = vars[0];
     var r2 = vars[2];
-    gen2DPlotXYLabs(r1, r2, "R2R1Plot", "Phase plot of r<sub>2</sub> vs r<sub>1</sub>", "r<sub>1</sub>", "r<sub>2</sub>");
+    gen2DPlotXYLabs(r1, r2, "R2R1Plot", "Phase plot of $r_2$ vs $r_1$.", "r<sub>1</sub>", "r<sub>2</sub>");
 }
 
 
@@ -256,107 +256,6 @@ function rmPlots() {
 }
 
 /**
- * Generate cartesian coordinates 
- * @param func           Function being used to integrate problem
- * @param objectOfInputs Problem parameters.
- */
-function generatePendulumCoords(solution) {
-    // Extract solution values and pendulum lengths
-    var {t, vars} = solution;
-    var [r1, dr1, r2, dr2, theta1, dtheta1, theta2, dtheta2] = vars;
-    var N = theta1.length;
-
-    // Initialize arrays that will store x and y coords
-    var x1 = new Array(N);
-    var x2 = new Array(N);
-    var y1 = new Array(N);
-    var y2 = new Array(N);
-    for (let i = 0; i < N; i++) {
-        x1[i] = r1[i]*Math.cos(theta1[i]);
-        y1[i] = r1[i]*Math.sin(theta1[i]);
-        x2[i] = x1[i] + r2[i]*Math.cos(theta2[i]);
-        y2[i] = y1[i] + r2[i]*Math.sin(theta2[i]);
-    }
-
-    // Return t and Cartesian coordinates of the pendulum bobs
-    return [t, x1, y1, x2, y2];
-}
-
-/**
- * Generates two plots pertaining to the location of the bobs
- * 
- * @param solution       An object containing solution data.
- * @return               Nothing.
- */
-function generatePendulumPlots(solution) {
-    var [t, x1, y1, x2, y2] = generatePendulumCoords(solution);
-    adjustPlotHeight("pendulumPlot");
-    adjustPlotHeight("pendulumTimePlot");
-    
-    // Show two pendulum bob locations on the same plot
-    var plotPen1 = {
-        x: x1,
-        y: y1,
-        type: 'scatter',
-        mode: 'lines',
-        opacity: 1,
-        name: "Pendulum 1 bob"
-    }
-    var plotPen2 = {
-        x: x2,
-        y: y2,
-        type: 'scatter',
-        mode: 'lines',
-        opacity: 1,
-        name: "Pendulum 2 bob"
-    }
-    var dataPen = [plotPen1, plotPen2];
-    var layoutPen = {
-        title: "Pendulum coordinate plots"
-    };
-    Plotly.newPlot("pendulumPlot", dataPen, layoutPen);
-    
-    // Plot pendulum bob location against time plot
-    var plotPen1Time = {
-        x: t,
-        y: x1,
-        z: y1,
-        type: 'scatter3d',
-        mode: 'lines',
-        opacity: 1,
-        line: {
-            width: 6,
-            reversescale: false
-        },
-        name: "Pendulum 1 bob"
-    };
-    var plotPen2Time = {
-        x: t,
-        y: x2,
-        z: y2,
-        type: 'scatter3d',
-        mode: 'lines',
-        opacity: 1,
-        line: {
-            width: 6,
-            reversescale: false
-        },
-        name: 'Pendulum 2 bob'
-    };
-    var dataPen = [plotPen1Time, plotPen2Time];
-    var layoutPenTime = {
-        title: "Pendulum bob position against time plot",
-        xaxis: {
-            title: {text: "x"}
-        },
-        yaxis: {
-            title: {text: "y"}
-        }
-    };
-    Plotly.newPlot("pendulumTimePlot", dataPen, layoutPenTime);
-}
-
-/**
  * Generate all plots
  * 
  * @param objectOfInputs An object containing all the problem parameters.
@@ -367,7 +266,7 @@ function generatePlots(objectOfInputs) {
     var solution = solveProblem(RKF45, objectOfInputs);
 
     // Generate plots
-    generatePendulumPlots(solution);
+    generatePendulumPlots(objectOfInputs, solution);
     generateTimePlot(solution);
     generateTheta1Theta2PhasePlot(solution);
     generateR1R2PhasePlot(solution);

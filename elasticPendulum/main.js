@@ -106,26 +106,18 @@ function generatePlots(objectOfInputs) {
     generateZZDotPhasePlot(solution);
     generateThetaThetaDotPhasePlot(solution);
     generateTimePlot(solution);
+    generatePendulumPlots(objectOfInputs, solution);
 }
 
-/**
- * Generate pendulum Cartesian coordinates.
- * @param objectOfInputs An object that contains all parameters and initial conditions.
- * @param solution       [x, y]
- * @returns 
- */
-function generatePendulumCoords(objectOfInputs, solution) {
-    var vars = solution.vars;
-    var r = vars[0].map(item => item + objectOfInputs.l0);
-    var th = vars[2];
-    var N = th.length;
-    var x = new Array(N);
-    var y = new Array(N);
-    for (let i = 0; i < N; i++) {
-        x[i] = r[i]*Math.cos(th[i]);
-        y[i] = r[i]*Math.sin(th[i]);
-    }
-    return [x, y];
+function removePendulumPlot() {
+    rmPlot("pendulumPlot");
+}
+function removePendulumTimePlot() {
+    rmPlot("pendulumTimePlot");
+}
+function removePendulumPlots() {
+    removePendulumPlots();
+    removePendulumTimePlot();
 }
 
 /**
@@ -151,7 +143,7 @@ function generateAnimation() {
 }
 
 function generateThetaPhaseAnimationBase(solution) {
-    animate2D(solution, {varnames: ["θ", "dθ/dt"], timer: [0.9, 0.98], IdSuffix: "ThetaPhase", nos: [2, 3], title: "Elastic pendulum: phase plot of $\\dfrac{d\\theta}{dt} against $\\theta$."});
+    animate2D(solution, {varnames: ["θ", "dθ/dt"], timer: [0.9, 0.98], IdSuffix: "ThetaPhase", nos: [2, 3], title: "Elastic pendulum: phase plot of $\\dfrac{d\\theta}{dt}$ against $\\theta$."});
 }
 
 function generateThetaPhaseAnimation() {

@@ -153,103 +153,7 @@ function generateTheta2Dtheta2PhasePlot(solution) {
  */
 function generateTimePlot(solution) {
     // Generate time plot
-    genMultPlot(solution, ["θ<sub>1</sub>", "dθ<sub>1</sub>/dt", "θ<sub>2</sub>", "dθ<sub>2</sub>/dt"], "timePlot", "Plot of θ<sub>1</sub>, dθ<sub>1</sub>/dt, θ<sub>2</sub> and dθ<sub>2</sub>/dt against time");
-}
-
-/**
- * Generate cartesian coordinates 
- * @param func           Function being used to integrate problem
- * @param objectOfInputs Problem parameters.
- */
-function generatePendulumCoords(objectOfInputs, solution) {
-    // Extract solution values and pendulum lengths
-    var {t, vars} = solution;
-    var [theta1, dtheta1, theta2, dtheta2] = vars;
-    var {l1, l2} = objectOfInputs;
-    var N = theta1.length;
-
-    // Initialize arrays that will store x and y coords
-    var x1 = new Array(N);
-    var x2 = new Array(N);
-    var y1 = new Array(N);
-    var y2 = new Array(N);
-    for (let i = 0; i < N; i++) {
-        x1[i] = l1*Math.cos(theta1[i]);
-        y1[i] = l1*Math.sin(theta1[i]);
-        x2[i] = x1[i] + l2*Math.cos(theta2[i]);
-        y2[i] = y1[i] + l2*Math.sin(theta2[i]);
-    }
-
-    // Return t and Cartesian coordinates of the pendulum bobs
-    return [t, x1, y1, x2, y2];
-}
-
-/**
- * Generates two plots pertaining to the location of the bobs
- * 
- * @param solution       An object containing solution data.
- * @return               Nothing.
- */
-function generatePendulumPlots(objectOfInputs, solution) {
-    var [t, x1, y1, x2, y2] = generatePendulumCoords(objectOfInputs, solution);
-    adjustPlotHeight("pendulumPlot");
-    adjustPlotHeight("pendulumTimePlot");
-    
-    // Show two pendulum bob locations on the same plot
-    var plotPen1 = {
-        x: x1,
-        y: y1,
-        type: 'scatter',
-        mode: 'lines',
-        opacity: 1,
-        name: "Pendulum 1 bob"
-    }
-    var plotPen2 = {
-        x: x2,
-        y: y2,
-        type: 'scatter',
-        mode: 'lines',
-        opacity: 1,
-        name: "Pendulum 2 bob"
-    }
-    var dataPen = [plotPen1, plotPen2];
-    var layoutPen = {
-        title: "Pendulum coordinate plots"
-    };
-    Plotly.newPlot("pendulumPlot", dataPen, layoutPen);
-    
-    // Plot pendulum bob location against time plot
-    var plotPen1Time = {
-        x: t,
-        y: x1,
-        z: y1,
-        type: 'scatter3d',
-        mode: 'lines',
-        opacity: 1,
-        line: {
-            width: 6,
-            reversescale: false
-        },
-        name: "Pendulum 1 bob"
-    };
-    var plotPen2Time = {
-        x: t,
-        y: x2,
-        z: y2,
-        type: 'scatter3d',
-        mode: 'lines',
-        opacity: 1,
-        line: {
-            width: 6,
-            reversescale: false
-        },
-        name: 'Pendulum 2 bob'
-    };
-    var dataPen = [plotPen1Time, plotPen2Time];
-    var layoutPenTime = {
-        title: "Pendulum bob position against time plot"
-    };
-    Plotly.newPlot("pendulumTimePlot", dataPen, layoutPenTime);
+    genMultPlot(solution, ["θ<sub>1</sub>", "dθ<sub>1</sub>/dt", "θ<sub>2</sub>", "dθ<sub>2</sub>/dt"], "timePlot", "Plot of $\\theta_1$, $\\dfrac{d\\theta_1}{dt}$, $\\theta_2$ and $\\dfrac{d\\theta_2}{dt}$ against time");
 }
 
 /**
@@ -263,6 +167,7 @@ function generatePlots(objectOfInputs) {
     var solution = solveProblem(RKF45, objectOfInputs);
 
     // Generate plots
+    generatePendulumPlots(objectOfInputs, solution);
     generateTheta1Theta2PhasePlot(solution);
     generateTheta1Dtheta1PhasePlot(solution);
     generateTheta1Dtheta2PhasePlot(solution);
