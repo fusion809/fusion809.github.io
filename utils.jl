@@ -99,6 +99,10 @@ function hfun_params_render()
     push!(params_val, 1.0)
   end
 
+  if (length(params_list) != length(params_desc) || length(params_list) != length(params_val))
+    println("There is a mismatch in the lengths of params_list, params_desc or params_val! Exiting params_render().")
+    return
+  end
   HTML = """"""
   for p in 1:length(params_list)
     param_name = params_list[p];
@@ -227,7 +231,7 @@ function getButtonVars()
   if (locvar("type") == "attractor")
     ids = ["tableOutputs", "phasePlotXYZ", "phasePlotXY", "phasePlotXZ", "phasePlotYZ", "timePlot", "phasePlotXYZ", "animation"]
     funcs = ["generateTable()", "removeTable()", "generate3DPhasePlot(solveProblem(RKF45, readInputs()))", "remove3DPhasePlot()", "generateXYPhasePlot(solveProblem(RKF45, readInputs()))", "removeXYPhasePlot()", "generateXZPhasePlot(solveProblem(RKF45, readInputs()))", "removeXZPhasePlot()", "generateYZPhasePlot(solveProblem(RKF45, readInputs()))", "removeYZPhasePlot()", "generateTimePlot(solveProblem(RKF45, readInputs()))", "removeTimePlot()", "generatePlots(readInputs())", "removePlots()", "generateAnimation()", "removeAnimation()"]
-    labels = ["Tabulate the solution", "Remove the table", "Generate 3D phase plot", "Remove 3D phase plot", "Generate XY phase plot", "Remove XY phase plot", "Generate XZ phase plot", "Remove XZ phase plot", "Generate YZ phase plot", "Remove YZ phase plot", "Generate time plot for \\(x\\), \\(y\\) and \\(z\\)", "Remove time plot", "Generate all solution plots", "Remove all plots", "Generate an animation", "Remove animation"]
+    labels = ["Tabulate the solution", "Remove the table", "Generate 3D phase plot", "Remove \\(x\\), \\(y\\) and \\(z\\) phase plot", "Generate \\(x\\) and \\(y\\) phase plot", "Remove \\(x\\) and \\(y\\) phase plot", "Generate \\(x\\) and \\(z\\) phase plot", "Remove \\(x\\) and \\(z\\) phase plot", "Generate \\(y\\) and \\(z\\) phase plot", "Remove \\(y\\) and \\(z\\) phase plot", "Generate time plot for \\(x\\), \\(y\\) and \\(z\\)", "Remove time plot", "Generate all solution plots", "Remove all plots", "Generate an animation", "Remove animation"]
   else
     ids = locvar("ids")
     funcs = locvar("funcs")
@@ -237,6 +241,10 @@ function getButtonVars()
 end
 function hfun_button_render()
   ids, funcs, labels = getButtonVars();
+  if (2*length(ids) != length(labels) || 2*length(ids) != length(funcs))
+    println("Labels or funcs are not twice the length of ids. Exiting button_render().")
+    return;
+  end
 
   HTML="""
   <table id="buttontable" style="border: 0px;">

@@ -50,7 +50,7 @@ function RKF45(objectOfInputs) {
  * @param solution       An object containing solution data.
  * @return               Nothing.
  */
-function generate3DPhasePlot(solution) {
+function generateSIRPhasePlot(solution) {
     // Extract relevant solution values
     var {vars} = solution;
     var S = vars[0];
@@ -58,9 +58,41 @@ function generate3DPhasePlot(solution) {
     var R = vars[3];
 
     // Generate 3D phase plot
-    gen3DPlot(S, I, R, "phasePlotXYZ", "Phase plot of susceptible, infectious and recovered populations.", undefined, "Susceptible", "Infectious", "Recovered");
+    gen3DPlot(S, I, R, "phasePlotSIR", "Phase plot of susceptible, infectious and recovered populations.", {xtitle: "Susceptible", ytitle: "Infectious", ztitle: "Recovered"});
 }
 
+function generateEIRPhasePlot(solution) {
+    // Extract relevant solution values
+    var {vars} = solution;
+    var E = vars[1];
+    var I = vars[2];
+    var R = vars[3];
+
+    // Generate 3D phase plot
+    gen3DPlot(E, I, R, "phasePlotEIR", "Phase plot of exposed, infectious and recovered populations.", {xtitle: "Exposed", ytitle: "Infectious", ztitle: "Recovered"});
+}
+
+function generateSEIPhasePlot(solution) {
+    // Extract relevant solution values
+    var {vars} = solution;
+    var S = vars[0];
+    var E = vars[1];
+    var I = vars[2];
+
+    // Generate 3D phase plot
+    gen3DPlot(S, E, I, "phasePlotSEI", "Phase plot of susceptible, exposed and infectious populations.", {xtitle: "Susceptible", ytitle: "Exposed", ztitle: "Infectious"});
+}
+
+function generateSERPhasePlot(solution) {
+    // Extract relevant solution values
+    var {vars} = solution;
+    var S = vars[0];
+    var E = vars[1];
+    var R = vars[3];
+
+    // Generate 3D phase plot
+    gen3DPlot(S, E, R, "phasePlotSER", "Phase plot of susceptible, exposed and recovered populations.", {xtitle: "Susceptible", ytitle: "Exposed", ztitle: "Recovered"});
+}
 /**
  * Generates a XY phase plot
  * 
@@ -136,7 +168,10 @@ function generatePlots(objectOfInputs) {
     var solution = solveProblem(RKF45, objectOfInputs);
 
     // Generate plots
-    generate3DPhasePlot(solution);
+    generateSIRPhasePlot(solution);
+    generateEIRPhasePlot(solution);
+    generateSERPhasePlot(solution);
+    generateSEIPhasePlot(solution);
     generateXYPhasePlot(solution);
     generateXZPhasePlot(solution);
     generateYZPhasePlot(solution);
@@ -231,4 +266,20 @@ function generateAnimations() {
     generateAnimationBaseSEI(solution);
     generateAnimationBaseSER(solution);
     generateAnimationBaseEIR(solution);
+}
+
+function removeSIRPhasePlot() {
+    rmPlot("phasePlotSIR");
+}
+
+function removeSERPhasePlot() {
+    rmPlot("phasePlotSER");
+}
+
+function removeSEIPhasePlot() {
+    rmPlot("phasePlotSEI");
+}
+
+function removeEIRPhasePlot() {
+    rmPlot("phasePlotEIR");
 }

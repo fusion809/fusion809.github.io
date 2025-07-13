@@ -45,7 +45,7 @@ function generate3DPhasePlot(solution) {
     var [S, I, R] = vars;
 
     // Generate 3D plot
-    gen3DPlot(S, I, R, "phasePlotXYZ", "Phase plot of the solution to the SIR equations. x = S, y = I and z = R", "S", "I", "R");
+    gen3DPlot(S, I, R, "phasePlotXYZ", "Phase plot of the solution to the SIR equations.", {xtitle: "Susceptible", ytitle: "Infectious", ztitle: "Recovered"});
 }
 
 /**

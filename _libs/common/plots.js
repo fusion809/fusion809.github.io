@@ -417,7 +417,7 @@ function gen2DPlotXYLabs(x, y, element, title, xtitle, ytitle) {
  * @param element  HTML element the plot will go in.
  * @param title    Title for the plot.
  */
-function gen3DPlot(x, y, z, element, title, view, xtitle="x", ytitle="y", ztitle="z") {
+function gen3DPlot(x, y, z, element, title, {view = undefined, xtitle="x", ytitle="y", ztitle="z"} = {}) {
     // Height and width of plot
     adjustPlotHeight(element);
 

@@ -38,7 +38,7 @@ function generate3DPhasePlot(solution) {
     var {vars} = solution;
     var [x, y, z] = vars;
 
-    gen3DPlot(x, y, z, "phasePlotXYZ", "Lorenz attractor phase plot.", [2, 0, 0])
+    gen3DPlot(x, y, z, "phasePlotXYZ", "Lorenz attractor phase plot.", {view: [2, 0, 0]})
 }
 
 /**
