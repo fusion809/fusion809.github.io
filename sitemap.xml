@@ -140,6 +140,12 @@
     <priority>0.5</priority>
 </url>
 <url>
+    <loc>https://fusion809.github.io/index.html</loc>
+    <lastmod>2025-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
     <loc>https://fusion809.github.io/doublePendulum/index.html</loc>
     <lastmod>2025-07-13</lastmod>
     <changefreq>monthly</changefreq>
@@ -177,12 +183,6 @@
 </url>
 <url>
     <loc>https://fusion809.github.io/LotkaVolterra/_index/</loc>
-    <lastmod>2025-07-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
-    <loc>https://fusion809.github.io/index/</loc>
     <lastmod>2025-07-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
