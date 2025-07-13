@@ -121,14 +121,15 @@ function hfun_params_render()
     push!(params_desc, "Height (in px) of Plotly windows used for plotting and animation below.")
     push!(params_val, 600)
   end
-  if !haskey(params, :Delay)
-    push!(params_list, "Delay")
-    push!(params_desc, "Proportion of animation time passed per real time. Delay=1.0 means animation and real time match. Delay<1.0 means the animation is going more slowly than real time. Delay>1.0 means it is going more rapidly.")
+  tScale_desc = "Proportion of time passed per real time. \\(t_{\\mathrm{Scale}}=1.0\\) means animation and real time match. \\(t_{\\mathrm{Scale}}<1.0\\) means the animation is going more slowly than real time. \\(t_{\\mathrm{Scale}}>1.0\\) means it is going more rapidly.";
+  if !haskey(params, :tScale)
+    push!(params_list, "tScale")
+    push!(params_desc, tScale_desc)
     push!(params_val, 1.0)
-  elseif !hasproperty(params.Delay, :desc)
-    idx = findfirst(==("Delay"), params_list);
-    insert!(params_desc, idx, "Proportion of animation time passed per real time. Delay=1.0 means animation and real time match. Delay<1.0 means the animation is going more slowly than real time. Delay>1.0 means it is going more rapidly.")
-    move3_to_end!(params_val, params_list, params_desc, "Delay");
+  elseif !hasproperty(params.tScale, :desc)
+    idx = findfirst(==("tScale"), params_list);
+    insert!(params_desc, idx, tScale_desc)
+    move3_to_end!(params_val, params_list, params_desc, "tScale");
   end
   if calls_animate3D()
     opacity_desc="Opacity of the lines in the 3D phase space animation. Customizable in case you need to tweak it in order to see the red dot marker."
@@ -172,8 +173,10 @@ function hfun_params_render()
       else
         param_name_latex="\\dot{\\theta}"
       end
-    elseif (param_name == "Width" || param_name == "Height" || param_name=="Delay" || param_name == "Opacity")
+    elseif (param_name == "Width" || param_name == "Height" || param_name == "Opacity")
       param_name_latex="\\mathrm{$param_name}"
+    elseif (param_name == "tScale")
+      param_name_latex="t_\\mathrm{Scale}"
     elseif (occursin.(r"theta", param_name))
       param_name_latex="\\theta"
       if (length(numbers) > 1)
