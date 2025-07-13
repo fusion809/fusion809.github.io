@@ -250,7 +250,7 @@ function hfun_params_render()
       param_name_latex=param_name
     end
 
-    if (locvar("SP") !== "nothing")
+    if (locvar("SP") !== nothing)
       HTML *= """
     <tr>
         <td><label for="$param_name">\\($param_name_latex\\):</label></td>

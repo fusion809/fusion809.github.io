@@ -357,11 +357,11 @@ function gen2DPlot(x, y, element, title, xtitle="x", ytitle="y") {
         height: objectOfInputs.Height,
         xaxis: {
           range: range(x),
-          title: {text: xtitle}
+          title: {text: xtitle, font: {size: 16}}
         },
         yaxis: {
           range: range(y),
-          title: {text: ytitle}
+          title: {text: ytitle, font: {size: 16}}
         }
     };
 
@@ -399,13 +399,13 @@ function gen2DPlotXYLabs(x, y, element, title, xtitle, ytitle) {
         height: objectOfInputs.Height,
         xaxis: {
             title: {
-                text: xtitle
+                text: xtitle, font: {size: 16}
             },
             range: range(x)
         },
         yaxis: {
             title: {
-                text: ytitle
+                text: ytitle, font: {size: 16}
             },
             range: range(y)
         }
@@ -452,15 +452,15 @@ function gen3DPlot(x, y, z, element, title, {view = undefined, xtitle="x", ytitl
        scene: {
         xaxis: {
           range: range(x),
-          title: { text: xtitle}
+          title: { text: xtitle, font: {size: 16}}
         },
         yaxis: {
           range: range(y),
-          title: { text: ytitle}
+          title: { text: ytitle, font: {size: 16}}
         },
         zaxis: {
           range: range(z),
-          title: { text: ztitle}
+          title: { text: ztitle, font: {size: 16}}
         }
       }
     };
@@ -604,7 +604,7 @@ function genMultPlot(solution, varnames, element, title) {
         title: {text: title},
         xaxis: {
           range: range(t),
-          title: { text: "t"}
+          title: { text: "t", font: {size: 16}}
         },
         yaxis: {
           range: range(vars)
@@ -748,6 +748,7 @@ function addTitleAndFrmt(objectOfInputs, IdSuffix, {title: title, label:label} =
   document.getElementById(animID).height = objectOfInputs.Height + "px";
   return animID;
 }
+
 /**
  * Create pendulum animation.
  * @param objectOfInputs Object of page inputs.
@@ -772,6 +773,11 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
     i
   }
   var data;
+  var animID = addTitleAndFrmt(objectOfInputs, IdSuffix, {label: label});
+  var animElem = document.getElementById(animID);
+  if (animElem.frameRequest !== undefined) {
+    cancelAnimationFrame(animElem.frameRequest);
+  }
   if (label == "Double pendulum" || label == "Double elastic pendulum") {
     const trace1 = {
         x: [], y: [],
@@ -800,8 +806,10 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
   }
 
   const layout = {
-    xaxis: { range: range(x), title: {text: "x"} },
-    yaxis: { range: range(y), title: {text: "y"}, scaleanchor: "x" },
+    xaxis: { range: range(x), title: {text: "x", font: {size: 16}} },
+    yaxis: { range: range(y), title: {text: "y", font: {size: 16}}, scaleanchor: "x", },
+    width: objectOfInputs.Width,
+    height: objectOfInputs.Height,
     showlegend: false,
     annotations: [{
       x: 0,
@@ -815,9 +823,7 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
     }]
   };
   
-  var animID = addTitleAndFrmt(objectOfInputs, IdSuffix, {label: label});
   var tScale = objectOfInputs.tScale;
-
   Plotly.newPlot(animID, data, layout).then(() => {
 
     let state = {
@@ -873,12 +879,12 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
       }
       layout.annotations[0].text = `Time: ${t[state.frame].toFixed(2)} s`;
       Plotly.relayout(animID, layout);
-      requestAnimationFrame(animateFrame);
+      animElem.frameRequest = requestAnimationFrame(animateFrame);
     }
 
     buttons(state, layout, t, IdSuffix, animateFrame);
 
-    requestAnimationFrame(animateFrame);
+    animElem.frameRequest = requestAnimationFrame(animateFrame);
   });
 }
 
@@ -895,6 +901,11 @@ function animate2D(solution, {varnames=["x", "y"], timer=[0.05, 0.98], IdSuffix=
   const x = solution.vars[nos[0]];
   const y = solution.vars[nos[1]];
   var objectOfInputs = readInputs();
+  var animID = addTitleAndFrmt(objectOfInputs, IdSuffix, {title: title});
+  var animElem = document.getElementById(animID);
+  if (animElem.frameRequest !== undefined) {
+    cancelAnimationFrame(animElem.frameRequest);
+  }
   const t = solution.t;
   const tracePath = {
     x: x,
@@ -915,11 +926,11 @@ function animate2D(solution, {varnames=["x", "y"], timer=[0.05, 0.98], IdSuffix=
   };
 
   const layout = {
-  margin: { l: 15, r: 0, b: 15, t: 0 },  // make space for labels
-  width: objectOfInputs.Width,
-  height: objectOfInputs.Height,
+    margin: { l: 15, r: 0, b: 15, t: 0 },  // make space for labels
+    width: objectOfInputs.Width,
+    height: objectOfInputs.Height,
     xaxis: {
-      title: {text: varnames[0]},
+      title: {text: varnames[0], font: {size: 16}},
       range: range(x),
       showticklabels: true,
       automargin: true,
@@ -927,7 +938,7 @@ function animate2D(solution, {varnames=["x", "y"], timer=[0.05, 0.98], IdSuffix=
       tickfont: { size: 12 }
     },
     yaxis: {
-      title: {text: varnames[1]},
+      title: {text: varnames[1], font: {size: 16}},
       range: range(y),
       showticklabels: true,
       automargin: true,
@@ -947,9 +958,7 @@ function animate2D(solution, {varnames=["x", "y"], timer=[0.05, 0.98], IdSuffix=
     showlegend: false
   };
 
-  var animID = addTitleAndFrmt(objectOfInputs, IdSuffix, {title: title});
   var tScale = objectOfInputs.tScale;
-  
   Plotly.newPlot(animID, [tracePath, traceMarker], layout).then(() => {
     let state = {
       frame: 0,
@@ -1002,14 +1011,14 @@ function animate2D(solution, {varnames=["x", "y"], timer=[0.05, 0.98], IdSuffix=
               }
             ],
             xaxis: {
-                title: {text: varnames[0]},
+                title: {text: varnames[0], font: {size: 16}},
                 range: range(x),
                 showticklabels: true,
                 ticks: 'outside',
                 tickfont: { size: 12 }
             },
             yaxis: {
-                title: {text: varnames[1]},
+                title: {text: varnames[1], font: {size: 16}},
                 range: range(y),
                 showticklabels: true,
                 ticks: 'outside',
@@ -1021,10 +1030,10 @@ function animate2D(solution, {varnames=["x", "y"], timer=[0.05, 0.98], IdSuffix=
         frame: { duration: 0, redraw: true }
       });
       
-      requestAnimationFrame(animateFrame);
+      animElem.frameRequest = requestAnimationFrame(animateFrame);
     }
     buttons(state, layout, t, IdSuffix, animateFrame);
-    requestAnimationFrame(animateFrame);
+    animElem.frameRequest = requestAnimationFrame(animateFrame);
   });
 }
 
@@ -1047,6 +1056,11 @@ function animate3D(solution, {view = [0.5, -2, 0.5],
   const z = solution.vars[nos[2]];
   const t = solution.t;
   var objectOfInputs = readInputs();
+  var animID = addTitleAndFrmt(objectOfInputs, IdSuffix, {title: title});
+  var animElem = document.getElementById(animID);
+  if (animElem.frameRequest !== undefined) {
+    cancelAnimationFrame(animElem.frameRequest);
+  }
 
   const tracePath = {
     x: x,
@@ -1075,9 +1089,9 @@ function animate3D(solution, {view = [0.5, -2, 0.5],
     width: objectOfInputs.Width,
     height: objectOfInputs.Height,
     scene: {
-      xaxis: { title: {text: varnames[0]} },
-      yaxis: { title: {text: varnames[1]} },
-      zaxis: { title: {text: varnames[2]} },
+      xaxis: { title: {text: varnames[0], font: {size: 16}} },
+      yaxis: { title: {text: varnames[1], font: {size: 16}} },
+      zaxis: { title: {text: varnames[2], font: {size: 16}} },
       camera: {
                 eye: {
                 x: view[0],   // Set to 0 to align the camera with the YZ plane
@@ -1099,8 +1113,6 @@ function animate3D(solution, {view = [0.5, -2, 0.5],
   };
 
   var tScale = objectOfInputs.tScale;
-  var animID = addTitleAndFrmt(objectOfInputs, IdSuffix, {title: title});
-
   Plotly.newPlot(animID, [tracePath, traceMarker], layout).then(() => {
     let state = {
       frame: 0,
@@ -1153,18 +1165,18 @@ function animate3D(solution, {view = [0.5, -2, 0.5],
             font: { size: 16 }
           }],
           scene: {
-            xaxis: { title: {text: varnames[0]} },
-            yaxis: { title: {text: varnames[1]} },
-            zaxis: { title: {text: varnames[2]} }
+            xaxis: { title: {text: varnames[0], font: {size: 16}} },
+            yaxis: { title: {text: varnames[1], font: {size: 16}} },
+            zaxis: { title: {text: varnames[2], font: {size: 16}} }
           }
           }
         }, {
           transition: { duration: 0 },
           frame: { duration: 0, redraw: true }
         });
-        requestAnimationFrame(animateFrame);
+        animElem.frameRequest  = requestAnimationFrame(animateFrame);
       }
     buttons(state, layout, t, IdSuffix, animateFrame);
-    requestAnimationFrame(animateFrame);
+    animElem.frameRequest = requestAnimationFrame(animateFrame);
   });
 }
