@@ -43,7 +43,7 @@ function generate3DPhasePlot(solution) {
     var [x, y, z] = vars;
 
     // Generate 3D plot
-    gen3DPlot(x, y, z, "phasePlotXYZ", "Rössler system: 3D phase plot.", {xtitle: "x", ytitle: "y", ztitle: "z"});
+    gen3DPlot(x, y, z, "phasePlotXYZ", "Rössler system: $x$, $y$ and $z$ phase plot.", {xtitle: "x", ytitle: "y", ztitle: "z"});
 }
 
 /**
@@ -59,7 +59,7 @@ function generateXYPhasePlot(solution) {
     var y = vars[1];
 
     // Generate 2D phase plot
-    gen2DPlot(x, y, "phasePlotXY", "Rössler system: y against x phase plot.", "x", "y");
+    gen2DPlot(x, y, "phasePlotXY", "Rössler system: $y$ against $x$ phase plot.", "x", "y");
 }
 
 /**
@@ -75,7 +75,7 @@ function generateXZPhasePlot(solution) {
     var z = vars[2];
     
     // Generate 2D phase plot
-    gen2DPlot(x, z, "phasePlotXZ", "Rössler system: z against x phase plot.", "x", "z");
+    gen2DPlot(x, z, "phasePlotXZ", "Rössler system: $z$ against $x$ phase plot.", "x", "z");
 }
 
 /**
@@ -91,7 +91,7 @@ function generateYZPhasePlot(solution) {
     var z = vars[2];
 
     // Generate 2D phase plot
-    gen2DPlot(y, z, "phasePlotYZ", "Rössler system: z against y phase plot.", "y", "z");
+    gen2DPlot(y, z, "phasePlotYZ", "Rössler system: $z$ against $y$ phase plot.", "y", "z");
 }
 
 /**
@@ -102,7 +102,7 @@ function generateYZPhasePlot(solution) {
  */
 function generateTimePlot(solution) {
     // Generate time plot
-    genMultPlot(solution, ["x", "y", "z"], "timePlot", "Rössler system: plot of x, y and z against time.");
+    genMultPlot(solution, ["x", "y", "z"], "timePlot", "Rössler system: plot of $x$, $y$ and $z$ against time.");
 }
 
 /**
@@ -142,5 +142,5 @@ function removeAnimation() {
  */
 function generateAnimation() {
     var solution = solveProblem(RKF45, readInputs());
-    animate3D(solution, {title: "Rössler system: x, y and z phase plot."})
+    animate3D(solution, {title: "Rössler system: $x$, $y$ and $z$ phase plot."})
 }

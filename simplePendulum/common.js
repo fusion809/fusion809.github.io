@@ -294,7 +294,7 @@ function generateAnimation() {
 }
 
 function generatePhaseAnimationBase(solution) {
-    animate2D(solution, {varnames: ["θ", "dθ/dt"], IdSuffix: "Phase", title: "Simple pendulum: dθ/dt vs θ phase plot."});
+    animate2D(solution, {varnames: ["θ", "dθ/dt"], IdSuffix: "Phase", title: "Simple pendulum: $\\dfrac{d\\theta}{dt}$ vs $\\theta$ phase plot."});
 }
 
 function generatePhaseAnimation() {

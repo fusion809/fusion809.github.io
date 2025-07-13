@@ -121,7 +121,7 @@ function hfun_params_render()
     push!(params_desc, "Height (in px) of Plotly windows used for plotting and animation below.")
     push!(params_val, 600)
   end
-  tScale_desc = "Proportion of time passed per real time. \\(t_{\\mathrm{Scale}}=1.0\\) means animation and real time match. \\(t_{\\mathrm{Scale}}<1.0\\) means the animation is going more slowly than real time. \\(t_{\\mathrm{Scale}}>1.0\\) means it is going more rapidly.";
+  tScale_desc = "Proportion of animation time passed per real time. \\(t_{\\mathrm{Scale}}=1.0\\) means animation and real time match. \\(t_{\\mathrm{Scale}}<1.0\\) means the animation is going more slowly than real time. \\(t_{\\mathrm{Scale}}>1.0\\) means it is going more rapidly.";
   if !haskey(params, :tScale)
     push!(params_list, "tScale")
     push!(params_desc, tScale_desc)
@@ -313,6 +313,7 @@ function hfun_button_render()
     func2 = funcs[2*i];
     label1 = labels[2*i-1];
     label2 = labels[2*i];
+    id = replace(id, "animation" => "container")
     HTML *= """
     <tr style="border: 0px;">
       <td style="border: 0px;">
@@ -341,11 +342,14 @@ function hfun_output_render()
       idSuffix = replace(ids[i], r"^animation" => "")
       id = ids[i]
       HTML *= """
+      <div id="container$idSuffix" style="border: 0px; padding: 0; margin: 0">
+      <h2 id="info$idSuffix" style="border: 0px; padding: 0; margin: 0"></h2>
       <button id="toggleButton$idSuffix">Pause</button>
       <button id="restartButton$idSuffix">Restart</button>
       <button id="addTimeButton$idSuffix">Add time \\(\\Delta t\\) to animation.</button>
       <button id="skipToButton$idSuffix">Skip to \\(t_1\\)</button>
       <div id="animation$idSuffix"></div>
+      </div>
       """
     else
       id = ids[i]

@@ -40,7 +40,7 @@ function generatePhasePlot(solution) {
     var [x, dx] = vars;
 
     // Generate plot
-    gen2DPlot(x, dx, "phasePlot", "Phase plot of dx/dt against x", "x", "dx/dt");
+    gen2DPlot(x, dx, "phasePlot", "Phase plot of $\\dfrac{dx}{dt}$ against $x$", "x", "dx/dt");
 }
 
 /**
@@ -51,7 +51,7 @@ function generatePhasePlot(solution) {
  */
 function generateTimePlot(solution) {
     // Plot
-    genMultPlot(solution, ["x", "dx/dt"], "timePlot", "Plot of dx/dt and x against time");
+    genMultPlot(solution, ["x", "dx/dt"], "timePlot", "Plot of $\\dfrac{dx}{dt}$ and $x$ against time");
 }
 
 /**
@@ -77,7 +77,7 @@ function generatePlots(objectOfInputs) {
  */
 function generateAnimation() {
     var solution = solveProblem(RKF45, readInputs());
-    animate2D(solution, {varnames: ["x", "dx/dt"], nos: [0, 1], title: "Duffing system: phase plot of dx/dt against x."});
+    animate2D(solution, {varnames: ["x", "dx/dt"], nos: [0, 1], title: "Duffing system: phase plot of $\\dfrac{dx}{dt}$ against $x$."});
 }
 
 /**
