@@ -787,7 +787,7 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
   var objectOfInputs = readInputs();
   document.getElementById(elementID).style.width = objectOfInputs.Width + "px";
   document.getElementById(elementID).style.height = objectOfInputs.Height + "px";
-  var delay = objectOfInputs.Delay;
+  var tScale = objectOfInputs.tScale;
   Plotly.newPlot(elementID, data, layout).then(() => {
 
     let state = {
@@ -810,7 +810,7 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
         return;
       }
 
-      const elapsedSec = delay*(timestamp - state.startTime - state.totalPausedTime) / 1000;
+      const elapsedSec = tScale*(timestamp - state.startTime - state.totalPausedTime) / 1000;
 
 
       // Advance to the state.frame corresponding to elapsed time
@@ -916,7 +916,7 @@ function animate2D(solution, {varnames=["x", "y"], timer=[0, 0.98], IdSuffix="",
 
   var elementID = "animation" + IdSuffix;
   var objectOfInputs = readInputs();
-  var delay = objectOfInputs.Delay;
+  var tScale = objectOfInputs.tScale;
   document.getElementById(elementID).style.width = objectOfInputs.Width + "px";
   document.getElementById(elementID).style.height = objectOfInputs.Height + "px";
   Plotly.newPlot(elementID, [tracePath, traceMarker], layout).then(() => {
@@ -936,7 +936,7 @@ function animate2D(solution, {varnames=["x", "y"], timer=[0, 0.98], IdSuffix="",
       }
       if (state.paused) return;
 
-      const elapsedSec = delay*(timestamp - state.startTime - state.totalPausedTime) / 1000;
+      const elapsedSec = tScale*(timestamp - state.startTime - state.totalPausedTime) / 1000;
 
       while (state.frame < t.length - 1 && t[state.frame] < elapsedSec) {
         state.frame++;
@@ -1065,7 +1065,7 @@ function animate3D(solution, {view = [0.5, -2, 0.5],
   };
 
   var elementID = "animation" + IdSuffix;
-  var delay = objectOfInputs.Delay;
+  var tScale = objectOfInputs.tScale;
   document.getElementById(elementID).style.width = objectOfInputs.Width + "px";
   document.getElementById(elementID).style.height = objectOfInputs.Height + "px";
 
@@ -1086,7 +1086,7 @@ function animate3D(solution, {view = [0.5, -2, 0.5],
       }
       if (state.paused) return;
 
-      const elapsedSec = delay*(timestamp - state.startTime - state.totalPausedTime) / 1000;
+      const elapsedSec = tScale*(timestamp - state.startTime - state.totalPausedTime) / 1000;
 
       while (state.frame < t.length - 1 && t[state.frame] < elapsedSec) {
         state.frame++;
