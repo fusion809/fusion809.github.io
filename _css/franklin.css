@@ -353,3 +353,18 @@ code {
     margin-block-end: 0px;
     padding-bottom: 0.2em;
 }
+
+ul.flexcols {
+  list-style: disc inside;
+  margin: 0;
+  padding: 23px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20ch, 1fr)); /* adjust as needed */
+  gap: 0.5em 1em;
+}
+
+ul.flexcols li {
+  white-space: normal;        /* Allow wrapping inside items */
+  overflow: visible;          /* Let them expand naturally */
+  text-overflow: unset;       /* No ellipsis */
+}
