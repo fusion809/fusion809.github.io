@@ -83,19 +83,19 @@ function hfun_params_render()
     push!(params_desc, "Time you want to skip ahead to in animation when you press the skip button.")
     move_to_end!(params_val, params_list, "t1")
   end
-  if !haskey(params, :width)
+  if !haskey(params, :Width)
     push!(params_list, "Width")
     push!(params_desc, "Width (in px) of Plotly windows used for plotting and animation below.")
     push!(params_val, 800)
   end
-  if !haskey(params, :height)
+  if !haskey(params, :Height)
     push!(params_list, "Height")
     push!(params_desc, "Height (in px) of Plotly windows used for plotting and animation below.")
     push!(params_val, 600)
   end
-  if !haskey(params, :delay)
+  if !haskey(params, :Delay)
     push!(params_list, "Delay")
-    push!(params_desc, "Proportion of animation time passed per real time. Delay=1.0 means animation and real time match. Delay<1 means the animation is going more slowly than real time. Delay>1.0 means it is going more rapidly.")
+    push!(params_desc, "Proportion of animation time passed per real time. Delay=1.0 means animation and real time match. Delay<1.0 means the animation is going more slowly than real time. Delay>1.0 means it is going more rapidly.")
     push!(params_val, 1.0)
   end
 
