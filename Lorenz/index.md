@@ -17,6 +17,7 @@ This webpage uses the [Runge-Kutta-Fehlberg fourth-order method with fifth-order
     \dfrac{dz}{dt} &= xy - \beta z.
 \end{aligned}
 
+This system were first derived by Edward Lorenz and colleagues as a simplified mathematical model of [atmospheric convection](https://en.wikipedia.org/wiki/Atmospheric_convection), although it can also arise in other fields. It is frequently used as an example of chaotic systems. 
 ~~~
     {{ insert template.html}}
 ~~~
