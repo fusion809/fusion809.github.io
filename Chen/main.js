@@ -139,5 +139,5 @@ function removeAnimation() {
  */
 function generateAnimation() {
     var solution = solveProblem(RKF45, readInputs());
-    animate3D(solution, {view: [0, 2, 0], title: "Chen system: x, y and z phase plot."});
+    animate3D(solution, {view: [0, 2, 0], title: "Chen system: $x$, $y$ and $z$ phase plot."});
 }

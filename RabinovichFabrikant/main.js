@@ -42,7 +42,7 @@ function generate3DPhasePlot(solution) {
     var [x, y, z] = vars;
 
     // Generate 3D phase plot
-    gen3DPlot(x, y, z, "phasePlotXYZ", "Rabinovich–Fabrikant system: 3D phase plot.", {view: [2, 0, 0]});
+    gen3DPlot(x, y, z, "phasePlotXYZ", "Rabinovich–Fabrikant system: $x$, $y$ and $z$ phase plot.", {view: [2, 0, 0]});
 }
 
 /**
@@ -58,7 +58,7 @@ function generateXYPhasePlot(solution) {
     var y = vars[1];
 
     // Generate phase plot
-    gen2DPlot(x, y, "phasePlotXY", "Rabinovich–Fabrikant system: y against x phase plot.", "x", "y");
+    gen2DPlot(x, y, "phasePlotXY", "Rabinovich–Fabrikant system: $y$ against $x$ phase plot.", "x", "y");
 }
 
 /**
@@ -74,7 +74,7 @@ function generateXZPhasePlot(solution) {
     var z = vars[2];
     
     // Generate phase plot
-    gen2DPlot(x, z, "phasePlotXZ", "Rabinovich–Fabrikant system: z against x phase plot.", "x", "z");
+    gen2DPlot(x, z, "phasePlotXZ", "Rabinovich–Fabrikant system: $z$ against $x$ phase plot.", "x", "z");
 }
 
 /**
@@ -90,7 +90,7 @@ function generateYZPhasePlot(solution) {
     var z = vars[2];
 
     // Generate 2D phase plot
-    gen2DPlot(y, z, "phasePlotYZ", "Rabinovich–Fabrikant system: z against y phase plot.", "y", "z");
+    gen2DPlot(y, z, "phasePlotYZ", "Rabinovich–Fabrikant system: $z$ against $y$ phase plot.", "y", "z");
 }
 
 /**
@@ -101,7 +101,7 @@ function generateYZPhasePlot(solution) {
  */
 function generateTimePlot(solution) {
     // Generate time plot
-    genMultPlot(solution, ["x", "y", "z"], "timePlot", "Rabinovich–Fabrikant system: plot of x, y and z against time.");
+    genMultPlot(solution, ["x", "y", "z"], "timePlot", "Rabinovich–Fabrikant system: plot of $x$, $y$ and $z$ against time.");
 }
 
 /**
@@ -141,5 +141,5 @@ function removeAnimation() {
  */
 function generateAnimation() {
     var solution = solveProblem(RKF45, readInputs());
-    animate3D(solution, {view: [2, 0, 0], title: "Rabinovich–Fabrikant system: X, Y and Z phase plot."});
+    animate3D(solution, {view: [2, 0, 0], title: "Rabinovich–Fabrikant system: $x$, $y$ and $z$ phase plot."});
 }

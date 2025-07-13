@@ -339,6 +339,7 @@ function range(x) {
 function gen2DPlot(x, y, element, title, xtitle="x", ytitle="y") {
     // Height and width of the plot
     adjustPlotHeight(element);
+    var objectOfInputs = readInputs();
 
     var plotXY = {
         x: x,
@@ -352,6 +353,8 @@ function gen2DPlot(x, y, element, title, xtitle="x", ytitle="y") {
     // layout object
     var layoutXY = {
         title: {text: title},
+        width: objectOfInputs.Width,
+        height: objectOfInputs.Height,
         xaxis: {
           range: range(x),
           title: {text: xtitle}
@@ -378,6 +381,7 @@ function gen2DPlot(x, y, element, title, xtitle="x", ytitle="y") {
 function gen2DPlotXYLabs(x, y, element, title, xtitle, ytitle) {
     // Height and width of the plot
     adjustPlotHeight(element);
+    var objectOfInputs = readInputs();
 
     var plotXY = {
         x: x,
@@ -391,6 +395,8 @@ function gen2DPlotXYLabs(x, y, element, title, xtitle, ytitle) {
     // layout object
     var layoutXY = {
         title: {text: title},
+        width: objectOfInputs.Width,
+        height: objectOfInputs.Height,
         xaxis: {
             title: {
                 text: xtitle
@@ -420,6 +426,8 @@ function gen2DPlotXYLabs(x, y, element, title, xtitle, ytitle) {
 function gen3DPlot(x, y, z, element, title, {view = undefined, xtitle="x", ytitle="y", ztitle="z"} = {}) {
     // Height and width of plot
     adjustPlotHeight(element);
+    
+    var objectOfInputs = readInputs();
 
     // Plot object and data object array
     var plotXYZ = {
@@ -439,6 +447,8 @@ function gen3DPlot(x, y, z, element, title, {view = undefined, xtitle="x", ytitl
     // layout object
     var layoutXYZ = {
        title: {text: title},
+       width: objectOfInputs.Width,
+       height: objectOfInputs.Height,
        scene: {
         xaxis: {
           range: range(x),
@@ -481,6 +491,7 @@ function gen3DPlot(x, y, z, element, title, {view = undefined, xtitle="x", ytitl
 function genMultPlot(solution, varnames, element, title) {
     // Height and width of plot
     adjustPlotHeight(element);
+    var objectOfInputs = readInputs();
 
     // Extract solution
     var {t, vars} = solution;
@@ -588,6 +599,8 @@ function genMultPlot(solution, varnames, element, title) {
     
     // layout object
     var layoutTimePlot = {
+      width: objectOfInputs.Width,
+      height: objectOfInputs.Height,
         title: {text: title},
         xaxis: {
           range: range(t),
@@ -717,6 +730,24 @@ function buttons(state, layout, t, IdSuffix, animateFrame) {
   skipTo(state, layout, t, IdSuffix);
 }
 
+function addTitleAndFrmt(objectOfInputs, IdSuffix, {title: title, label:label} = {}) {
+  var animID = "animation" + IdSuffix;
+  var contID = "container" + IdSuffix;
+  if (title == undefined) {
+    var title = "Animation of the " + label.toLowerCase() + ".";
+  }
+
+  document.getElementById("info" + IdSuffix).innerHTML = title;
+  renderMathInElement(document.getElementById("info" + IdSuffix), {
+  delimiters: [{left: "$", right: "$", display: false}, {left: "\(", right: "\)", display: false}]
+});
+
+  document.getElementById("info" + IdSuffix).style = "padding-top: 0px; border-bottom: 1px solid black; margin-bottom: 5px; width:100%;"
+  document.getElementById(contID).style = "border: 1px solid black; padding-bottom: 5px; padding-top: 0px; padding-left: 5px; width:100%";
+  document.getElementById(animID).width = objectOfInputs.Width + "px";
+  document.getElementById(animID).height = objectOfInputs.Height + "px";
+  return animID;
+}
 /**
  * Create pendulum animation.
  * @param objectOfInputs Object of page inputs.
@@ -738,6 +769,7 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
     var y=[y1, y2];
   } else if (label == "Simple pendulum" || label == "Single pendulum" || label == "Elastic pendulum") {
     var [x, y] = generatePendulumCoords(objectOfInputs, solution);
+    i
   }
   var data;
   if (label == "Double pendulum" || label == "Double elastic pendulum") {
@@ -768,7 +800,6 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
   }
 
   const layout = {
-    title: {text: label},
     xaxis: { range: range(x), title: {text: "x"} },
     yaxis: { range: range(y), title: {text: "y"}, scaleanchor: "x" },
     showlegend: false,
@@ -778,17 +809,16 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
       xref: 'paper',
       yref: 'paper',
       text: 'Time: 0.00 s',
+      automargin: true,
       showarrow: false,
       font: { size: 16 }
     }]
   };
-
-  var elementID = "animation" + IdSuffix;
-  var objectOfInputs = readInputs();
-  document.getElementById(elementID).style.width = objectOfInputs.Width + "px";
-  document.getElementById(elementID).style.height = objectOfInputs.Height + "px";
+  
+  var animID = addTitleAndFrmt(objectOfInputs, IdSuffix, {label: label});
   var tScale = objectOfInputs.tScale;
-  Plotly.newPlot(elementID, data, layout).then(() => {
+
+  Plotly.newPlot(animID, data, layout).then(() => {
 
     let state = {
       startTime: null,
@@ -822,7 +852,7 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
           cycle++;
       }
       if (label == "Double elastic pendulum" || label=="Double pendulum") {
-          Plotly.animate(elementID, {
+          Plotly.animate(animID, {
           data: [
               { x: [0, x1[state.frame]], y: [0, y1[state.frame]] },
               { x: [x1[state.frame], x2[state.frame]], y: [y1[state.frame], y2[state.frame]] }
@@ -832,7 +862,7 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
           frame: { duration: 0, redraw: true }
           });
       } else {
-          Plotly.animate(elementID, {
+          Plotly.animate(animID, {
               data: [
                   { x: [0, x[state.frame]], y: [0, y[state.frame]] }
               ]
@@ -842,7 +872,7 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
           });
       }
       layout.annotations[0].text = `Time: ${t[state.frame].toFixed(2)} s`;
-      Plotly.relayout(elementID, layout);
+      Plotly.relayout(animID, layout);
       requestAnimationFrame(animateFrame);
     }
 
@@ -861,9 +891,10 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
  * @param nos      The index of variables to be plotted within vars.
  * @return         Nothing.
  */
-function animate2D(solution, {varnames=["x", "y"], timer=[0, 0.98], IdSuffix="", nos=[0, 1], title="Phase plot animation of y against x."} = {}) {
+function animate2D(solution, {varnames=["x", "y"], timer=[0.05, 0.98], IdSuffix="", nos=[0, 1], title="Phase plot animation of y against x."} = {}) {
   const x = solution.vars[nos[0]];
   const y = solution.vars[nos[1]];
+  var objectOfInputs = readInputs();
   const t = solution.t;
   const tracePath = {
     x: x,
@@ -884,8 +915,9 @@ function animate2D(solution, {varnames=["x", "y"], timer=[0, 0.98], IdSuffix="",
   };
 
   const layout = {
-  margin: { l: 0, r: 0, b: 0, t: 30 },  // make space for labels
-    title: {text: title},
+  margin: { l: 15, r: 0, b: 15, t: 0 },  // make space for labels
+  width: objectOfInputs.Width,
+  height: objectOfInputs.Height,
     xaxis: {
       title: {text: varnames[0]},
       range: range(x),
@@ -909,17 +941,16 @@ function animate2D(solution, {varnames=["x", "y"], timer=[0, 0.98], IdSuffix="",
       x: 0.05,
       y: 0.95,
       showarrow: false,
+      textangle: 0,
       font: { size: 16 }
     }],
     showlegend: false
   };
 
-  var elementID = "animation" + IdSuffix;
-  var objectOfInputs = readInputs();
+  var animID = addTitleAndFrmt(objectOfInputs, IdSuffix, {title: title});
   var tScale = objectOfInputs.tScale;
-  document.getElementById(elementID).style.width = objectOfInputs.Width + "px";
-  document.getElementById(elementID).style.height = objectOfInputs.Height + "px";
-  Plotly.newPlot(elementID, [tracePath, traceMarker], layout).then(() => {
+  
+  Plotly.newPlot(animID, [tracePath, traceMarker], layout).then(() => {
     let state = {
       frame: 0,
       startTime: null,
@@ -945,7 +976,7 @@ function animate2D(solution, {varnames=["x", "y"], timer=[0, 0.98], IdSuffix="",
         state.frame =  t.length - 1;
         cycle++;
       }
-      Plotly.animate(elementID, {
+      Plotly.animate(animID, {
         data: [
           tracePath,
           {
@@ -958,16 +989,18 @@ function animate2D(solution, {varnames=["x", "y"], timer=[0, 0.98], IdSuffix="",
           }
         ],
         layout: {
-            annotations: [{
+            annotations: [
+              {
                 text: `Time: ${t[state.frame].toFixed(2)} s`,
                 xref: 'paper',
                 yref: 'paper',
                 x: timer[0],
                 y: timer[1],
+                automargin: true,
                 showarrow: false,
                 font: { size: 16 }
-            }],
-            title: { text: title},
+              }
+            ],
             xaxis: {
                 title: {text: varnames[0]},
                 range: range(x),
@@ -987,7 +1020,7 @@ function animate2D(solution, {varnames=["x", "y"], timer=[0, 0.98], IdSuffix="",
         transition: { duration: 0 },
         frame: { duration: 0, redraw: true }
       });
-
+      
       requestAnimationFrame(animateFrame);
     }
     buttons(state, layout, t, IdSuffix, animateFrame);
@@ -1038,8 +1071,9 @@ function animate3D(solution, {view = [0.5, -2, 0.5],
   };
 
   const layout = {
-    margin: { l: 0, r: 0, b: 0, t: 30 },
-    title: {text: title},
+    margin: { l: 0, r: 0, b: 0, t: 0 },
+    width: objectOfInputs.Width,
+    height: objectOfInputs.Height,
     scene: {
       xaxis: { title: {text: varnames[0]} },
       yaxis: { title: {text: varnames[1]} },
@@ -1064,12 +1098,10 @@ function animate3D(solution, {view = [0.5, -2, 0.5],
     showlegend: false
   };
 
-  var elementID = "animation" + IdSuffix;
   var tScale = objectOfInputs.tScale;
-  document.getElementById(elementID).style.width = objectOfInputs.Width + "px";
-  document.getElementById(elementID).style.height = objectOfInputs.Height + "px";
+  var animID = addTitleAndFrmt(objectOfInputs, IdSuffix, {title: title});
 
-  Plotly.newPlot(elementID, [tracePath, traceMarker], layout).then(() => {
+  Plotly.newPlot(animID, [tracePath, traceMarker], layout).then(() => {
     let state = {
       frame: 0,
       startTime:  null,
@@ -1095,7 +1127,7 @@ function animate3D(solution, {view = [0.5, -2, 0.5],
         state.frame =  t.length - 1;
         cycle++;
       }
-      Plotly.animate(elementID, {
+      Plotly.animate(animID, {
         data: [
           tracePath,
           {
@@ -1116,6 +1148,7 @@ function animate3D(solution, {view = [0.5, -2, 0.5],
             yref: 'paper',
             x: 0.05,
             y: 0.95,
+            //automargin: true,
             showarrow: false,
             font: { size: 16 }
           }],
@@ -1129,7 +1162,6 @@ function animate3D(solution, {view = [0.5, -2, 0.5],
           transition: { duration: 0 },
           frame: { duration: 0, redraw: true }
         });
-
         requestAnimationFrame(animateFrame);
       }
     buttons(state, layout, t, IdSuffix, animateFrame);

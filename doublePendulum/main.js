@@ -340,7 +340,7 @@ function removeAnimation() {
 }
 
 function generateTheta1PhaseAnimationBase(solution) {
-    animate2D(solution, {varnames: ["θ<sub>1</sub>", "dθ<sub>1</sub>/dt"], IdSuffix: "Theta1Phase", title: "Phase plot of dθ<sub>1</sub>/dt against θ<sub>1</sub>."});
+    animate2D(solution, {varnames: ["θ<sub>1</sub>", "dθ<sub>1</sub>/dt"], IdSuffix: "Theta1Phase", title: "Phase plot of $\\dfrac{d\\theta_1}{dt}$ against $\\theta_1$."});
 }
 
 function generateTheta1PhaseAnimation() {
@@ -354,7 +354,7 @@ function removeTheta1PhaseAnimation() {
 }
 
 function generateTheta2PhaseAnimationBase(solution) {
-    animate2D(solution, {varnames: ["θ<sub>2</sub>", "dθ<sub>2</sub>/dt"], IdSuffix: "Theta2Phase", nos: [2, 3], title: "Phase plot of dθ<sub>2</sub>/dt against θ<sub>2</sub>."});
+    animate2D(solution, {varnames: ["θ<sub>2</sub>", "dθ<sub>2</sub>/dt"], IdSuffix: "Theta2Phase", nos: [2, 3], title: "Phase plot of $\\dfrac{d\\theta_2}{dt}$ against $\\theta_2$."});
 }
 
 function generateTheta2PhaseAnimation() {

@@ -41,7 +41,7 @@ function generateZThetaPhasePlot(solution) {
     var theta = vars[2];
 
     // Generate 2D plot
-    gen2DPlot(z, theta, "phasePlotZTheta", "Phase plot of θ against z", "z", "θ");
+    gen2DPlot(z, theta, "phasePlotZTheta", "Phase plot of $\\theta$ against $z$", "z", "θ");
 }
 
 /**
@@ -57,7 +57,7 @@ function generateZZDotPhasePlot(solution) {
     var dz = vars[1];
 
     // Generate 2D plot
-    gen2DPlot(z, dz, "phasePlotZZDot", "Phase plot of dz/dt against z", "z", "dz/dt");
+    gen2DPlot(z, dz, "phasePlotZZDot", "Phase plot of $\\dfrac{dz}{dt}$ against $z$", "z", "dz/dt");
 }
 
 /**
@@ -73,7 +73,7 @@ function generateThetaThetaDotPhasePlot(solution) {
     var dtheta = vars[3];
     
     // Generate 2D plot
-    gen2DPlot(theta, dtheta, "phasePlotThetaThetaDot", "Phase plot of dθ/dt against theta", "θ", "dθ/dt");
+    gen2DPlot(theta, dtheta, "phasePlotThetaThetaDot", "Phase plot of $\\dfrac{d\\theta}{dt}$ against $\\theta$", "θ", "dθ/dt");
 }
 
 /**
@@ -84,7 +84,7 @@ function generateThetaThetaDotPhasePlot(solution) {
  */
 function generateTimePlot(solution) {
     // Generate time plot
-    genMultPlot(solution, ["z", "dz/dt", "θ", "dθ/dt"], "timePlot", "Plot of x, dz/dt, θ and dθ/dt against time");
+    genMultPlot(solution, ["z", "dz/dt", "θ", "dθ/dt"], "timePlot", "Plot of $z$, $\\dfrac{dz}{dt}$, $\\theta$ and $\\dfrac{d\\theta}{dt}$ against time");
 }
 
 /**
@@ -151,7 +151,7 @@ function generateAnimation() {
 }
 
 function generateThetaPhaseAnimationBase(solution) {
-    animate2D(solution, {varnames: ["θ", "dθ/dt"], timer: [0.9, 0.98], IdSuffix: "ThetaPhase", nos: [2, 3], title: "Elastic pendulum: phase plot of dθ/dt against θ."});
+    animate2D(solution, {varnames: ["θ", "dθ/dt"], timer: [0.9, 0.98], IdSuffix: "ThetaPhase", nos: [2, 3], title: "Elastic pendulum: phase plot of $\\dfrac{d\\theta}{dt} against $\\theta$."});
 }
 
 function generateThetaPhaseAnimation() {
@@ -165,7 +165,7 @@ function removeThetaPhaseAnimation() {
 }
 
 function generateZPhaseAnimationBase(solution) {
-    animate2D(solution, {varnames: ["z", "dz/dt"], timer: [0.9, 0.98], IdSuffix: "ZPhase", title: "Elastic pendulum: phase plot of dz/dt against z."});
+    animate2D(solution, {varnames: ["z", "dz/dt"], timer: [0.9, 0.98], IdSuffix: "ZPhase", title: "Elastic pendulum: phase plot of $\\dfrac{dz}{dt}$ against $z$."});
 }
 
 function generateZPhaseAnimation() {
