@@ -317,11 +317,12 @@ function resolve_inserts(html::String)::String
             included = read(filepath, String)
             resolve_inserts(included)  # recursive resolution
         else
-            "<!-- Could not find: $filename -->"
+            println("$filepath was not found in resolve_inserts!")
         end
     end)
 end
 
+# Only need footer to include content pages list if it is not on the homepage.
 function hfun_render_footlist()
     rpath = locvar("fd_rpath");
     if (rpath == "index.md")
