@@ -991,7 +991,6 @@ function animate2D(solution, {varnames=["x", "y"], timer=[0, 0.98], IdSuffix="",
       requestAnimationFrame(animateFrame);
     }
     buttons(state, layout, t, IdSuffix, animateFrame);
-
     requestAnimationFrame(animateFrame);
   });
 }
