@@ -232,6 +232,10 @@ function getButtonVars()
     ids = ["tableOutputs", "phasePlotXYZ", "phasePlotXY", "phasePlotXZ", "phasePlotYZ", "timePlot", "phasePlotXYZ", "animation"]
     funcs = ["generateTable()", "removeTable()", "generate3DPhasePlot(solveProblem(RKF45, readInputs()))", "remove3DPhasePlot()", "generateXYPhasePlot(solveProblem(RKF45, readInputs()))", "removeXYPhasePlot()", "generateXZPhasePlot(solveProblem(RKF45, readInputs()))", "removeXZPhasePlot()", "generateYZPhasePlot(solveProblem(RKF45, readInputs()))", "removeYZPhasePlot()", "generateTimePlot(solveProblem(RKF45, readInputs()))", "removeTimePlot()", "generatePlots(readInputs())", "removePlots()", "generateAnimation()", "removeAnimation()"]
     labels = ["Tabulate the solution", "Remove the table", "Generate 3D phase plot", "Remove \\(x\\), \\(y\\) and \\(z\\) phase plot", "Generate \\(x\\) and \\(y\\) phase plot", "Remove \\(x\\) and \\(y\\) phase plot", "Generate \\(x\\) and \\(z\\) phase plot", "Remove \\(x\\) and \\(z\\) phase plot", "Generate \\(y\\) and \\(z\\) phase plot", "Remove \\(y\\) and \\(z\\) phase plot", "Generate time plot for \\(x\\), \\(y\\) and \\(z\\)", "Remove time plot", "Generate all solution plots", "Remove all plots", "Generate an animation", "Remove animation"]
+  elseif (locvar("type") == "2D")
+    ids = ["tableOutputs", "phasePlot", "timePlot", "phasePlot", "animation"];
+    funcs = ["generateTable()", "removeTable()", "generatePhasePlot(solveProblem(RKF45, readInputs()))", "removePhasePlot()", "generateTimePlot(solveProblem(RKF45, readInputs()))", "removeTimePlot()", "generatePlots(readInputs())", "removePlots()", "generateAnimation()", "removeAnimation()"];
+    labels = ["Tabulate the solution", "Remove the solution table", "Generate a phase plot", "Remove phase plot", "Generate a time plot", "Remove time plot", "Generate all solution plots", "Remove all solution plots", "Generate an animation", "Remove animation"];
   else
     ids = locvar("ids")
     funcs = locvar("funcs")

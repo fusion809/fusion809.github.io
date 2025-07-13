@@ -588,7 +588,7 @@ function genMultPlot(solution, varnames, element, title) {
     
     // layout object
     var layoutTimePlot = {
-        title: title,
+        title: {text: title},
         xaxis: {
           range: range(t),
           title: { text: "t"}
