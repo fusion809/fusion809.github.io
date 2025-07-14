@@ -153,7 +153,7 @@ function generateTheta2Dtheta2PhasePlot(solution) {
  */
 function generateTimePlot(solution) {
     // Generate time plot
-    genMultPlot(solution, ["θ<sub>1</sub>", "dθ<sub>1</sub>/dt", "θ<sub>2</sub>", "dθ<sub>2</sub>/dt"], "timePlot", "Plot of $\\theta_1$, $\\dfrac{d\\theta_1}{dt}$, $\\theta_2$ and $\\dfrac{d\\theta_2}{dt}$ against time");
+    genMultPlot(solution, ["θ<sub>1</sub>", "dθ<sub>1</sub>/dt", "θ<sub>2</sub>", "dθ<sub>2</sub>/dt"], "timePlot", "Plot of θ<sub>1</sub>, dθ<sub>1</sub>/dt, θ<sub>2</sub> and dθ<sub>2</sub>/dt against time");
 }
 
 /**
@@ -245,7 +245,7 @@ function removeAnimation() {
 }
 
 function generateTheta1PhaseAnimationBase(solution) {
-    animate2D(solution, {varnames: ["θ<sub>1</sub>", "dθ<sub>1</sub>/dt"], IdSuffix: "Theta1Phase", title: "Phase plot of $\\dfrac{d\\theta_1}{dt}$ against $\\theta_1$."});
+    animate2D(solution, {varnames: ["θ<sub>1</sub>", "dθ<sub>1</sub>/dt"], IdSuffix: "Theta1Phase", title: "Phase plot of dθ<sub>1</sub>/dt against θ<sub>1</sub>."});
 }
 
 function generateTheta1PhaseAnimation() {
@@ -259,7 +259,7 @@ function removeTheta1PhaseAnimation() {
 }
 
 function generateTheta2PhaseAnimationBase(solution) {
-    animate2D(solution, {varnames: ["θ<sub>2</sub>", "dθ<sub>2</sub>/dt"], IdSuffix: "Theta2Phase", nos: [2, 3], title: "Phase plot of $\\dfrac{d\\theta_2}{dt}$ against $\\theta_2$."});
+    animate2D(solution, {varnames: ["θ<sub>2</sub>", "dθ<sub>2</sub>/dt"], IdSuffix: "Theta2Phase", nos: [2, 3], title: "Phase plot of dθ<sub>2</sub>/dt against θ<sub>2</sub>."});
 }
 
 function generateTheta2PhaseAnimation() {

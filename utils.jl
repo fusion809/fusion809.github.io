@@ -315,8 +315,6 @@ function hfun_button_render()
     label2 = labels[2*i];
     if (occursin(r"animation", id))
       id = replace(id, "animation" => "container")
-    else
-      id = "container$id"
     end
     HTML *= """
     <tr style="border: 0px;">
@@ -358,10 +356,7 @@ function hfun_output_render()
     else
       id = ids[i]
       HTML *= """
-      <div id="container$id" class="button-bar">
-      <h2 id="info$id" style="border: 0px; padding: 0; margin: 0; overflow: none;"></h2>
       <div id="$id"></div>
-      </div>
       """
     end
   end
