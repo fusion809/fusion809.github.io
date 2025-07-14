@@ -98,84 +98,84 @@ function generateTimePlot(solution) {
 function generateR1TPlot(solution) {
     var {t, vars} = solution;
     var r1 = vars[0];
-    gen2DPlotXYLabs(t, r1, "R1TPlot", "Time plot of r<sub>1</sub>.", "t", "r<sub>1</sub>");
+    gen2DPlot(t, r1, "R1TPlot", "Time plot of r<sub>1</sub>.", "t", "r<sub>1</sub>");
 }
 
 function generateDr1TPlot(solution) {
     var {t, vars} = solution;
     var dr1 = vars[1];
-    gen2DPlotXYLabs(t, dr1, "Dr1TPlot", "Time plot of dr<sub>1</sub>/dt.", "t", "dr<sub>1</sub>/dt");
+    gen2DPlot(t, dr1, "Dr1TPlot", "Time plot of dr<sub>1</sub>/dt.", "t", "dr<sub>1</sub>/dt");
 }
 
 function generateDr1R1Plot(solution) {
     var {vars} = solution;
     var r1 = vars[0];
     var dr1 = vars[1];
-    gen2DPlotXYLabs(r1, dr1, "Dr1R1Plot", "Phase plot of dr<sub>1</sub>/dt vs r<sub>1</sub>.", "r<sub>1</sub>", "dr<sub>1</sub>/dt");
+    gen2DPlot(r1, dr1, "Dr1R1Plot", "Phase plot of dr<sub>1</sub>/dt vs r<sub>1</sub>.", "r<sub>1</sub>", "dr<sub>1</sub>/dt");
 }
 
 function generateR2TPlot(solution) {
     var {t, vars} = solution;
     var r2 = vars[2];
-    gen2DPlotXYLabs(t, r2, "R2TPlot", "Time plot of r<sub>2</sub>.", "t", "r<sub>2</sub>");
+    gen2DPlot(t, r2, "R2TPlot", "Time plot of r<sub>2</sub>.", "t", "r<sub>2</sub>");
 }
 
 function generateDr2TPlot(solution) {
     var {t, vars} = solution;
     var dr2 = vars[3];
-    gen2DPlotXYLabs(t, dr2, "Dr2TPlot", "Time plot of dr<sub>2</sub>/dt.", "t", "dr<sub>2</sub>/dt");
+    gen2DPlot(t, dr2, "Dr2TPlot", "Time plot of dr<sub>2</sub>/dt.", "t", "dr<sub>2</sub>/dt");
 }
 
 function generateDr2R2Plot(solution) {
     var {vars} = solution;
     var r2 = vars[2];
     var dr2 = vars[3];
-    gen2DPlotXYLabs(r2, dr2, "Dr2R2Plot", "Phase plot of dr<sub>2</sub>/dt vs r<sub>2</sub>.", "r<sub>2</sub>", "dr<sub>2</sub>/dt");
+    gen2DPlot(r2, dr2, "Dr2R2Plot", "Phase plot of dr<sub>2</sub>/dt vs r<sub>2</sub>.", "r<sub>2</sub>", "dr<sub>2</sub>/dt");
 }
 
 function generateTheta1TPlot(solution) {
     var {t, vars} = solution;
     var theta1 = vars[4];
-    gen2DPlotXYLabs(t, theta1, "Theta1TPlot", "Time plot of θ<sub>1</sub>.", "t", "θ<sub>1</sub>");
+    gen2DPlot(t, theta1, "Theta1TPlot", "Time plot of θ<sub>1</sub>.", "t", "θ<sub>1</sub>");
 }
 
 function generateDtheta1TPlot(solution) {
     var {t, vars} = solution;
     var dtheta1 = vars[5];
-    gen2DPlotXYLabs(t, dtheta1, "Dtheta1TPlot", "Time plot of dθ<sub>1</sub>/dt.", "t", "dθ<sub>1</sub>/dt");
+    gen2DPlot(t, dtheta1, "Dtheta1TPlot", "Time plot of dθ<sub>1</sub>/dt.", "t", "dθ<sub>1</sub>/dt");
 }
 
 function generateDtheta1Theta1Plot(solution) {
     var {vars} = solution;
     var theta1 = vars[4];
     var dtheta1 = vars[5];
-    gen2DPlotXYLabs(theta1, dtheta1, "Dtheta1Theta1Plot", "Phase plot of dθ<sub>1</sub>/dt vs θ<sub>1</sub>.", "θ<sub>1</sub>", "dθ<sub>1</sub>/dt");
+    gen2DPlot(theta1, dtheta1, "Dtheta1Theta1Plot", "Phase plot of dθ<sub>1</sub>/dt vs θ<sub>1</sub>.", "θ<sub>1</sub>", "dθ<sub>1</sub>/dt");
 }
 
 function generateTheta2TPlot(solution) {
     var {t, vars} = solution;
     var theta2 = vars[6];
-    gen2DPlotXYLabs(t, theta2, "Theta2TPlot", "Time plot of θ<sub>2</sub>.", "t", "θ<sub>2</sub>");
+    gen2DPlot(t, theta2, "Theta2TPlot", "Time plot of θ<sub>2</sub>.", "t", "θ<sub>2</sub>");
 }
 
 function generateDtheta2TPlot(solution) {
     var {t, vars} = solution;
     var dtheta2 = vars[7];
-    gen2DPlotXYLabs(t, dtheta2, "Dtheta2TPlot", "Time plot of dθ<sub>2</sub>/dt.", "t", "dθ<sub>2</sub>/dt");
+    gen2DPlot(t, dtheta2, "Dtheta2TPlot", "Time plot of dθ<sub>2</sub>/dt.", "t", "dθ<sub>2</sub>/dt");
 }
 
 function generateDtheta2Theta2Plot(solution) {
     var {vars} = solution;
     var theta2 = vars[6];
     var dtheta2 = vars[7];
-    gen2DPlotXYLabs(theta2, dtheta2, "Dtheta2Theta2Plot", "Phase plot of dθ<sub>2</sub>/dt vs θ<sub>2</sub>.", "θ<sub>2</sub>", "dθ<sub>2</sub>/dt");
+    gen2DPlot(theta2, dtheta2, "Dtheta2Theta2Plot", "Phase plot of dθ<sub>2</sub>/dt vs θ<sub>2</sub>.", "θ<sub>2</sub>", "dθ<sub>2</sub>/dt");
 }
 
 function generateR1R2PhasePlot(solution) {
     var {vars} = solution;
     var r1 = vars[0];
     var r2 = vars[2];
-    gen2DPlotXYLabs(r1, r2, "R2R1Plot", "Phase plot of r<sub>2</sub> vs r<sub>1</sub>.", "r<sub>1</sub>", "r<sub>2</sub>");
+    gen2DPlot(r1, r2, "R2R1Plot", "Phase plot of r<sub>2</sub> vs r<sub>1</sub>.", "r<sub>1</sub>", "r<sub>2</sub>");
 }
 
 
