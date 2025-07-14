@@ -335,6 +335,8 @@ function addTitleAndFrmt(objectOfInputs, element, {title: title, label:label} = 
     var plotID = "animation" + element;
   }
   var contID = "container" + element;
+  var contEl = document.getElementById(contID)
+  var plotEl = document.getElementById(plotID)
   if (label == undefined) {
     var label = title;
   }
@@ -342,17 +344,19 @@ function addTitleAndFrmt(objectOfInputs, element, {title: title, label:label} = 
     var title = "Animation of the " + label.toLowerCase() + ".";
   }
 
-  var infoID = document.getElementById("info" + element)
-  infoID.innerHTML = title.replace(/\\\\/g, "\\");
-  infoID.innerHTML = title;
-  renderMathInElement(infoID, {
-    delimiters: [{left: "$", right: "$", display: false}, {left: "\(", right: "\)", display: false}]
-  });
+  var infoEl = document.getElementById("info" + element)
+  if (infoEl) {
+    infoEl.innerHTML = title.replace(/\\\\/g, "\\");
+    infoEl.innerHTML = title;
+  }
+  // renderMathInElement(infoID, {
+  //   delimiters: [{left: "$", right: "$", display: false}, {left: "\(", right: "\)", display: false}]
+  // });
 
-  infoID.style = "padding-top: 0px; border-bottom: 1px solid black; margin-bottom: 5px; width:100%;"
-  document.getElementById(contID).style = "border: 1px solid black; padding-bottom: 5px; padding-top: 0px; padding-left: 5px; width:100%";
-  document.getElementById(contID).width = objectOfInputs.Width + "px";
-  document.getElementById(contID).height = objectOfInputs.Height + "px";
+  infoEl.style = "padding-top: 0px; border-bottom: 1px solid black; margin-bottom: 5px; width:100%;"
+  contEl.style = "border: 1px solid black; padding-bottom: 5px; padding-top: 0px; padding-left: 5px; width:100%";
+  plotEl.width = objectOfInputs.Width + "px";
+  plotEl.height = objectOfInputs.Height + "px";
   return plotID;
 }
 /**
@@ -381,6 +385,7 @@ function gen2DPlot(x, y, element, title, xtitle="x", ytitle="y") {
     var layoutXY = {
         width: objectOfInputs.Width,
         height: objectOfInputs.Height,
+        title: {text: title, font: {size: 20}},
         xaxis: {
           range: range(x),
           title: {text: xtitle, font: {size: 16}}
@@ -390,7 +395,6 @@ function gen2DPlot(x, y, element, title, xtitle="x", ytitle="y") {
           title: {text: ytitle, font: {size: 16}}
         }
     };
-  addTitleAndFrmt(objectOfInputs, element, {title: title});
   Plotly.newPlot(element, dataXY, layoutXY);
 }
 
@@ -421,6 +425,7 @@ function gen2DPlotXYLabs(x, y, element, title, xtitle, ytitle) {
     var layoutXY = {
         width: objectOfInputs.Width,
         height: objectOfInputs.Height,
+        title: {text: title, font: {size: 20}},
         xaxis: {
             title: {
                 text: xtitle, font: {size: 16}
@@ -434,7 +439,6 @@ function gen2DPlotXYLabs(x, y, element, title, xtitle, ytitle) {
             range: range(y)
         }
     };
-    addTitleAndFrmt(objectOfInputs, element, {title: title});;
     Plotly.newPlot(element, dataXY, layoutXY);
 }
 /**
@@ -471,6 +475,7 @@ function gen3DPlot(x, y, z, element, title, {view = undefined, xtitle="x", ytitl
     var layoutXYZ = {
        width: objectOfInputs.Width,
        height: objectOfInputs.Height,
+       title: {text: title, font: {size: 20}},
        scene: {
         xaxis: {
           range: range(x),
@@ -623,15 +628,15 @@ function genMultPlot(solution, varnames, element, title) {
     var layoutTimePlot = {
       width: objectOfInputs.Width,
       height: objectOfInputs.Height,
-        xaxis: {
-          range: range(t),
-          title: { text: "t", font: {size: 16}}
-        },
-        yaxis: {
-          range: range(vars)
-        }
+      title: {text: title, font: {size: 20}},
+      xaxis: {
+        range: range(t),
+        title: { text: "t", font: {size: 16}}
+      },
+      yaxis: {
+        range: range(vars)
+      }
     };
-    addTitleAndFrmt(objectOfInputs, element, {title: title});;
     Plotly.newPlot(element, dataTimePlot, layoutTimePlot);
 }
 
@@ -725,7 +730,8 @@ function generatePendulumPlot(objectOfInputs, solution) {
     var layoutPen = {
         width: objectOfInputs.Width,
         height: objectOfInputs.Height,
-         xaxis: {
+        title: {text: "Pendulum coordinates plot.", font: {size: 20}},
+        xaxis: {
             title: {font: "x", font: {size: 16}}
         },
         yaxis: {
@@ -756,6 +762,7 @@ function generatePendulumPlot(objectOfInputs, solution) {
     var layoutPen = {
       width: objectOfInputs.Width,
       height: objectOfInputs.Height,
+      title: {text: "Pendulum coordinates plot.", font: {size: 20}},
       xaxis: {
         title: {text: "x", font: {size: 16}}
       },
@@ -766,8 +773,6 @@ function generatePendulumPlot(objectOfInputs, solution) {
   }
   
   Plotly.newPlot(element, dataPen, layoutPen);
-  var title = "Pendulum coordinate plot.";
-  addTitleAndFrmt(objectOfInputs, element, {title: title});
 }
 
 function generatePendulumTimePlot(objectOfInputs, solution) {
@@ -838,6 +843,7 @@ function generatePendulumTimePlot(objectOfInputs, solution) {
   var layoutPenTime = {
     width: objectOfInputs.Width,
     height: objectOfInputs.Height,
+    title: {text: "Pendulum coordinates plot.", font: {size: 20}},
     xaxis: {
       title: {text: "x", font: {size: 16}}
     },
@@ -850,7 +856,6 @@ function generatePendulumTimePlot(objectOfInputs, solution) {
   };
   Plotly.newPlot(element, dataPen, layoutPenTime);
   var title="Pendulum coordinate against time plot.";
-  addTitleAndFrmt(objectOfInputs, element, {title: title});
 }
 
 function generatePendulumPlots(objectOfInputs, solution) {

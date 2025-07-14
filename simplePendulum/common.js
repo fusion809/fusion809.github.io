@@ -154,7 +154,7 @@ function generatePhasePlot(solution) {
     var {theta, thetaDot} = solution;
 
     // Generate 2D plot
-    gen2DPlot(theta, thetaDot, "phasePlot", "Phase plot of $\\dfrac{d\\theta}{dt}$ against $\\theta$.");
+    gen2DPlot(theta, thetaDot, "phasePlot", "Phase plot of dθ/dt against θ.");
 }
 
 /**
@@ -172,7 +172,7 @@ function generateTimePlot(solution) {
     }
 
     // Generate time plot
-    genMultPlot(sol, ["θ", "dθ/dt"], "timePlot", "Plot of $\\theta$ and $\\dfrac{d\\theta}{dt}$ against time.");
+    genMultPlot(sol, ["θ", "dθ/dt"], "timePlot", "Plot of θ and dθ/dt against time.");
 }
 
 /**
@@ -294,7 +294,7 @@ function generateAnimation() {
 }
 
 function generatePhaseAnimationBase(solution) {
-    animate2D(solution, {varnames: ["θ", "dθ/dt"], IdSuffix: "Phase", title: "Simple pendulum: $\\dfrac{d\\theta}{dt}$ vs $\\theta$ phase plot."});
+    animate2D(solution, {varnames: ["θ", "dθ/dt"], IdSuffix: "Phase", title: "Phase plot animation of dθ/dt and θ."});
 }
 
 function generatePhaseAnimation() {
