@@ -328,6 +328,7 @@ function range(x) {
   return [xmin - padding, xmax+padding]
 }
 
+
 function addTitleAndFrmt(objectOfInputs, element, {title: title, label:label} = {}) {
   if (/[pP]lot/.test(element)) {
     var plotID = element;
@@ -346,18 +347,66 @@ function addTitleAndFrmt(objectOfInputs, element, {title: title, label:label} = 
 
   var infoEl = document.getElementById("info" + element)
   if (infoEl) {
-    infoEl.innerHTML = title.replace(/\\\\/g, "\\");
     infoEl.innerHTML = title;
   }
-  // renderMathInElement(infoID, {
-  //   delimiters: [{left: "$", right: "$", display: false}, {left: "\(", right: "\)", display: false}]
-  // });
+
 
   infoEl.style = "padding-top: 0px; border-bottom: 1px solid black; margin-bottom: 5px; width:100%;"
   contEl.style = "border: 1px solid black; padding-bottom: 5px; padding-top: 0px; padding-left: 5px; width:100%";
   plotEl.width = objectOfInputs.Width + "px";
   plotEl.height = objectOfInputs.Height + "px";
   return plotID;
+}
+
+/**
+ * Calculate scaled font size based on plot dimensions
+ * @param {number} width - Plot width
+ * @param {number} height - Plot height
+ * @param {number} minSize - Minimum font size (default: 16)
+ * @param {number} maxSize - Maximum font size (default: 24)
+ * @param {number} baseWidth - Base width for minimum size (default: 800)
+ * @param {number} baseHeight - Base height for minimum size (default: 600)
+ * @param {number} maxWidth - Width for maximum size (default: 1920)
+ * @param {number} maxHeight - Height for maximum size (default: 1080)
+ * @returns {number} Scaled font size
+ */
+function getScaledFontSize(width, height, minSize = 16, maxSize = 24, 
+                          baseWidth = 800, baseHeight = 600, 
+                          maxWidth = 1920, maxHeight = 1080) {
+    // Calculate scaling factors for width and height
+    const widthFactor = Math.min(Math.max((width - baseWidth) / (maxWidth - baseWidth), 0), 1);
+    const heightFactor = Math.min(Math.max((height - baseHeight) / (maxHeight - baseHeight), 0), 1);
+    
+    // Use the average of width and height factors (or you could use max/min)
+    const scaleFactor = (widthFactor + heightFactor) / 2;
+    
+    // Linear interpolation between minSize and maxSize
+    const fontSize = minSize + (maxSize - minSize) * scaleFactor;
+    
+    return Math.round(fontSize);
+}
+
+/**
+ * Get scaled font sizes for different plot elements
+ * @param {number} width - Plot width
+ * @param {number} height - Plot height
+ * @returns {object} Object with scaled font sizes for different elements
+ */
+function getPlotFontSizes(objectOfInputs) {
+    return {
+        title: getScaledFontSize(objectOfInputs.Width, objectOfInputs.Height, 20, 32),      // Title: 20-32px
+        axisTitle: getScaledFontSize(objectOfInputs.Width, objectOfInputs.Height, 16, 24),  // Axis titles: 16-24px
+        axisLabels: getScaledFontSize(objectOfInputs.Width, objectOfInputs.Height, 12, 18), // Axis labels: 12-18px
+        legend: getScaledFontSize(objectOfInputs.Width, objectOfInputs.Height, 12, 16),     // Legend: 12-16px
+        annotation: getScaledFontSize(objectOfInputs.Width, objectOfInputs.Height, 16, 24)  // Annotations: 16-24px
+    };
+}
+
+function margin(objectOfInputs) {
+  return { l: Math.max(0.04*objectOfInputs.Width, 60), 
+    r: 0, 
+    b: 0.20*objectOfInputs.Height, 
+    t: 0.20*objectOfInputs.Height};
 }
 /**
  * Generate 2D plot
@@ -368,79 +417,41 @@ function addTitleAndFrmt(objectOfInputs, element, {title: title, label:label} = 
  * @return         Nothing.
  */
 function gen2DPlot(x, y, element, title, xtitle="x", ytitle="y") {
-    // Height and width of the plot
-    adjustPlotHeight(element);
-    var objectOfInputs = readInputs();
+  // Height and width of the plot
+  adjustPlotHeight(element);
+  var objectOfInputs = readInputs();
 
-    var plotXY = {
-        x: x,
-        y: y,
-        type: 'scatter',
-        mode: 'lines',
-        opacity: 1
-    }
-    var dataXY = [plotXY];
+  var plotXY = {
+    x: x,
+    y: y,
+    type: 'scatter',
+    mode: 'lines',
+    opacity: 1
+  }
+  var dataXY = [plotXY];
 
-    // layout object
-    var layoutXY = {
-        width: objectOfInputs.Width,
-        height: objectOfInputs.Height,
-        title: {text: title, font: {size: 20}},
-        xaxis: {
-          range: range(x),
-          title: {text: xtitle, font: {size: 16}}
-        },
-        yaxis: {
-          range: range(y),
-          title: {text: ytitle, font: {size: 16}}
-        }
-    };
+  // layout object
+  var fontSizes = getPlotFontSizes(objectOfInputs)
+  var layoutXY = {
+    margin: margin(objectOfInputs),  // make space for labels
+    width: objectOfInputs.Width,
+    height: objectOfInputs.Height,
+    title: {text: title, font: {size: fontSizes.title }},
+    xaxis: {
+      range: range(x),
+      title: {text: xtitle, font: {size: fontSizes.axisTitle}},
+      tickfont: {size: fontSizes.axisLabels}
+    },
+    yaxis: {
+      range: range(y),
+      title: {text: ytitle, font: {size: fontSizes.axisTitle}},
+      tickfont: {size: fontSizes.axisLabels}
+    },
+    font: {size: fontSizes.legend}
+  };
   Plotly.newPlot(element, dataXY, layoutXY);
 }
 
-/**
- * Generate a 2D plot with X and Y labels
- * @param x       Vector of x values.
- * @param y       Vector of y values.
- * @param element Element ID you want the plot to be in.
- * @param title   Title of plot.
- * @param xtitle  X axis label of the plot.
- * @param ytitle  Y axis label of the plot.
- */
-function gen2DPlotXYLabs(x, y, element, title, xtitle, ytitle) {
-    // Height and width of the plot
-    adjustPlotHeight(element);
-    var objectOfInputs = readInputs();
-
-    var plotXY = {
-        x: x,
-        y: y,
-        type: 'scatter',
-        mode: 'lines',
-        opacity: 1
-    }
-    var dataXY = [plotXY];
-
-    // layout object
-    var layoutXY = {
-        width: objectOfInputs.Width,
-        height: objectOfInputs.Height,
-        title: {text: title, font: {size: 20}},
-        xaxis: {
-            title: {
-                text: xtitle, font: {size: 16}
-            },
-            range: range(x)
-        },
-        yaxis: {
-            title: {
-                text: ytitle, font: {size: 16}
-            },
-            range: range(y)
-        }
-    };
-    Plotly.newPlot(element, dataXY, layoutXY);
-}
 /**
  * Generate 3D plot
  * 
@@ -472,38 +483,41 @@ function gen3DPlot(x, y, z, element, title, {view = undefined, xtitle="x", ytitl
     var dataXYZ = [plotXYZ];
    
     // layout object
+    var fontSizes = getPlotFontSizes(objectOfInputs)
     var layoutXYZ = {
-       width: objectOfInputs.Width,
-       height: objectOfInputs.Height,
-       title: {text: title, font: {size: 20}},
-       scene: {
-        xaxis: {
-          range: range(x),
-          title: { text: xtitle, font: {size: 16}}
-        },
-        yaxis: {
-          range: range(y),
-          title: { text: ytitle, font: {size: 16}}
-        },
-        zaxis: {
-          range: range(z),
-          title: { text: ztitle, font: {size: 16}}
-        }
+      margin: margin(objectOfInputs),  // make space for labels
+      width: objectOfInputs.Width,
+      height: objectOfInputs.Height,
+      title: {text: title, font: {size: fontSizes.title }},
+      xaxis: {
+        range: range(x),
+        title: {text: xtitle, font: {size: fontSizes.axisTitle}},
+        tickfont: {size: fontSizes.axisLabels}
+      },
+      yaxis: {
+        range: range(y),
+        title: {text: ytitle, font: {size: fontSizes.axisTitle}},
+        tickfont: {size: fontSizes.axisLabels}
+      },
+      font: {size: fontSizes.legend},
+      zaxis: {
+        range: range(z),
+        title: { text: ztitle, font: {size: fontSizes.axisTitle}},
+        tickfont: {size: fontSizes.axisLabels}
       }
-    };
-    if (typeof view !== "undefined") {
-      layoutXYZ.scene = {
-            camera: {
-                    eye: {
-                    x: view[0],   // Set to 0 to align the camera with the YZ plane
-                    y: view[1],
-                    z: view[2]
-                    }
-                }
+    }
+  if (typeof view !== "undefined") {
+    layoutXYZ.scene = {
+      camera: {
+        eye: {
+          x: view[0],   // Set to 0 to align the camera with the YZ plane
+          y: view[1],
+          z: view[2]
           }
         }
-    addTitleAndFrmt(objectOfInputs, element, {title: title});;
-    Plotly.newPlot(element, dataXYZ, layoutXYZ);
+       }
+  }
+  Plotly.newPlot(element, dataXYZ, layoutXYZ);
 }
 
 /**
@@ -624,20 +638,26 @@ function genMultPlot(solution, varnames, element, title) {
         }
     }
     
+    var fontSizes = getPlotFontSizes(objectOfInputs);
     // layout object
     var layoutTimePlot = {
+      margin: margin(objectOfInputs),  // make space for labels
       width: objectOfInputs.Width,
       height: objectOfInputs.Height,
-      title: {text: title, font: {size: 20}},
+      title: {text: title, font: {size: fontSizes.title }},
       xaxis: {
         range: range(t),
-        title: { text: "t", font: {size: 16}}
+        title: {text: "t", font: {size: fontSizes.axisTitle}},
+        tickfont: {size: fontSizes.axisLabels}
       },
       yaxis: {
-        range: range(vars)
-      }
+        range: range(vars),
+        title: {text: "Variables", font: {size: fontSizes.axisTitle}},
+        tickfont: {size: fontSizes.axisLabels}
+      },
+      font: {size: fontSizes.legend}
     };
-    Plotly.newPlot(element, dataTimePlot, layoutTimePlot);
+  Plotly.newPlot(element, dataTimePlot, layoutTimePlot);
 }
 
 function generatePendulumCoords(objectOfInputs, solution) {
@@ -714,6 +734,7 @@ function generatePendulumPlot(objectOfInputs, solution) {
     i
   }
   var element = "pendulumPlot"
+  var fontSizes = getPlotFontSizes(objectOfInputs);
   if (x1 == undefined) {
     adjustPlotHeight("pendulumPlot");
         
@@ -728,15 +749,21 @@ function generatePendulumPlot(objectOfInputs, solution) {
     }
     var dataPen = [plotPen];
     var layoutPen = {
-        width: objectOfInputs.Width,
-        height: objectOfInputs.Height,
-        title: {text: "Pendulum coordinates plot.", font: {size: 20}},
-        xaxis: {
-            title: {font: "x", font: {size: 16}}
-        },
-        yaxis: {
-            title: {text: "y", font: {size: 16}}
-        }
+      margin: margin(objectOfInputs),  // make space for labels
+      width: objectOfInputs.Width,
+      height: objectOfInputs.Height,
+      title: {text: "Pendulum position plot.", font: {size: fontSizes.title }},
+      xaxis: {
+        range: range(x),
+        title: {text: "x", font: {size: fontSizes.axisTitle}},
+        tickfont: {size: fontSizes.axisLabels}
+      },
+      yaxis: {
+        range: range(y),
+        title: {text: "y", font: {size: fontSizes.axisTitle}},
+        tickfont: {size: fontSizes.axisLabels}
+      },
+      font: {size: fontSizes.legend}
     };
   } else {
     adjustPlotHeight(element);
@@ -760,18 +787,23 @@ function generatePendulumPlot(objectOfInputs, solution) {
     }
     var dataPen = [plotPen1, plotPen2];
     var layoutPen = {
+      margin: margin(objectOfInputs),  // make space for labels
       width: objectOfInputs.Width,
       height: objectOfInputs.Height,
-      title: {text: "Pendulum coordinates plot.", font: {size: 20}},
+      title: {text: "Pendulum position plot.", font: {size: fontSizes.title }},
       xaxis: {
-        title: {text: "x", font: {size: 16}}
+        range: range(x),
+        title: {text: "x", font: {size: fontSizes.axisTitle}},
+        tickfont: {size: fontSizes.axisLabels}
       },
       yaxis: {
-        title: {text: "y", font: {size: 16}}
-      }
+        range: range(y),
+        title: {text: "y", font: {size: fontSizes.axisTitle}},
+        tickfont: {size: fontSizes.axisLabels}
+      },
+      font: {size: fontSizes.legend}
     };
   }
-  
   Plotly.newPlot(element, dataPen, layoutPen);
 }
 
@@ -838,24 +870,34 @@ function generatePendulumTimePlot(objectOfInputs, solution) {
         },
         name: 'Pendulum 2 bob'
     };
+    var x = [x1, x2];
+    var y = [y1, y2];
     var dataPen = [plotPen1Time, plotPen2Time];
   }
+  var fontSizes = getPlotFontSizes(objectOfInputs);
   var layoutPenTime = {
+    margin: margin(objectOfInputs),  // make space for labels
     width: objectOfInputs.Width,
     height: objectOfInputs.Height,
-    title: {text: "Pendulum coordinates plot.", font: {size: 20}},
+    title: {text: "Generate pendulum time plot.", font: {size: fontSizes.title }},
     xaxis: {
-      title: {text: "x", font: {size: 16}}
-    },
-    yaxis: {
-      title: {text: "y", font: {size: 16}}
-    },
-    zaxis: {
-      title: {text: "z", font: {size: 16}}
-    }
+      range: range(t),
+      title: {text: "t", font: {size: fontSizes.axisTitle}},
+      tickfont: {size: fontSizes.axisLabels}
+      },
+      yaxis: {
+        range: range(x),
+        title: {text: "x", font: {size: fontSizes.axisTitle}},
+        tickfont: {size: fontSizes.axisLabels}
+      },
+      font: {size: fontSizes.legend},
+      zaxis: {
+        range: range(y),
+        title: { text: "y", font: {size: fontSizes.axisTitle}},
+        tickfont: {size: fontSizes.axisLabels}
+      }
   };
   Plotly.newPlot(element, dataPen, layoutPenTime);
-  var title="Pendulum coordinate against time plot.";
 }
 
 function generatePendulumPlots(objectOfInputs, solution) {
@@ -1033,11 +1075,22 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
     data = [trace1];
   }
 
+  var fontSizes = getPlotFontSizes(objectOfInputs);
   const layout = {
-    xaxis: { range: range(x), title: {text: "x", font: {size: 16}} },
-    yaxis: { range: range(y), title: {text: "y", font: {size: 16}}, scaleanchor: "x", },
+    margin: margin(objectOfInputs),  // make space for labels
     width: objectOfInputs.Width,
     height: objectOfInputs.Height,
+    xaxis: {
+      range: range(x),
+      title: {text: "x", font: {size: fontSizes.axisTitle}},
+      tickfont: {size: fontSizes.axisLabels}
+    },
+    yaxis: {
+      range: range(y),
+      title: {text: "y", font: {size: fontSizes.axisTitle}},
+      tickfont: {size: fontSizes.axisLabels}
+    },
+    font: {size: fontSizes.legend},
     showlegend: false,
     annotations: [{
       x: 0,
@@ -1153,26 +1206,28 @@ function animate2D(solution, {varnames=["x", "y"], timer=[0.05, 0.98], IdSuffix=
     name: 'Object'
   };
 
+  var fontSizes = getPlotFontSizes(objectOfInputs);
   const layout = {
-    margin: { l: 15, r: 0, b: 15, t: 0 },  // make space for labels
+    margin: margin(objectOfInputs),  // make space for labels
     width: objectOfInputs.Width,
     height: objectOfInputs.Height,
     xaxis: {
-      title: {text: varnames[0], font: {size: 16}},
+      title: {text: varnames[0], font: {size: fontSizes.axisTitle}},
       range: range(x),
       showticklabels: true,
       automargin: true,
       ticks: 'outside',
-      tickfont: { size: 12 }
+      tickfont: { size: fontSizes.axisLabels }
     },
     yaxis: {
-      title: {text: varnames[1], font: {size: 16}},
+      title: {text: varnames[1], font: {size: fontSizes.axisTitle}},
       range: range(y),
       showticklabels: true,
       automargin: true,
       ticks: 'outside',
-      tickfont: { size: 12 }
+      tickfont: { size: fontSizes.axisLabels }
     },
+    font: {size: fontSizes.legend},
     annotations: [{
       text: `Time: 0.00 s`,
       xref: 'paper',
@@ -1238,20 +1293,22 @@ function animate2D(solution, {varnames=["x", "y"], timer=[0.05, 0.98], IdSuffix=
                 font: { size: 16 }
               }
             ],
+            margin: margin(objectOfInputs),
             xaxis: {
-                title: {text: varnames[0], font: {size: 16}},
+                title: {text: varnames[0], font: {size: fontSizes.axisTitle}},
                 range: range(x),
                 showticklabels: true,
                 ticks: 'outside',
-                tickfont: { size: 12 }
+                tickfont: { size: fontSizes.axisLabels }
             },
             yaxis: {
-                title: {text: varnames[1], font: {size: 16}},
+                title: {text: varnames[1], font: {size: fontSizes.axisTitle}},
                 range: range(y),
                 showticklabels: true,
                 ticks: 'outside',
-                tickfont: { size: 12 }
-            }
+                tickfont: { size: fontSizes.axisLabels }
+            },
+            font: {size: fontSizes.legend}
         }
       }, {
         transition: { duration: 0 },
@@ -1312,14 +1369,16 @@ function animate3D(solution, {view = [0.5, -2, 0.5],
     name: 'Object'
   };
 
+  var fontSizes = getPlotFontSizes(objectOfInputs);
   const layout = {
-    margin: { l: 0, r: 0, b: 0, t: 0 },
+    margin: margin(objectOfInputs),
     width: objectOfInputs.Width,
     height: objectOfInputs.Height,
     scene: {
-      xaxis: { title: {text: varnames[0], font: {size: 16}} },
-      yaxis: { title: {text: varnames[1], font: {size: 16}} },
-      zaxis: { title: {text: varnames[2], font: {size: 16}} },
+      xaxis: { title: {text: varnames[0], font: {size: fontSizes.axisTitle}}, tickfont: fontSizes.axisLabels },
+      yaxis: { title: {text: varnames[1], font: {size: fontSizes.axisTitle}}, tickfont: fontSizes.axisLabels },
+      zaxis: { title: {text: varnames[2], font: {size: fontSizes.axisTitle}}, tickfont: fontSizes.axisLabels },
+      font: {size: fontSizes.legend},
       camera: {
                 eye: {
                 x: view[0],   // Set to 0 to align the camera with the YZ plane

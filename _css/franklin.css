@@ -345,23 +345,31 @@ code {
 }
 
 .button-bar {
-  /* display: flex;
-  flex-wrap: nowrap;          Keep buttons on one line */
-  text-align: left;
-  justify-content: left;
-  gap: 8px;                   /* Space between buttons */
-  margin-bottom: 8px;
-  width: fit-content;         /* Only as wide as necessary */
-  max-width: 100%;            /* Don't exceed container width */
-  padding: 5px;
+    text-align: left;
+    justify-content: left;
+    gap: 8px;
+    margin-bottom: 8px;
+    width: fit-content;
+    max-width: 100%;
+    padding: 5px;
+    /* Add these properties: */
+    overflow: hidden;           /* Prevent content from overflowing */
+    position: relative;         /* Establish positioning context */
 }
 
-.button-bar button {
-  white-space: nowrap;        /* Prevent text wrapping */
-  margin-right: 5px;
-  padding: 4px 8px;
-  width: auto;
-  justify-content: left;
+/* Add a specific style for plot containers */
+.button-bar > div[id^="animation"] {
+    max-width: 100%;
+    overflow: hidden;
+    margin-top: 10px;          /* Space after buttons */
+}
+
+/* Ensure h2 elements stay visible */
+.button-bar h2 {
+    position: relative;
+    z-index: 10;               /* Keep above plots */
+    background: white;         /* Ensure visibility */
+    margin-bottom: 10px;
 }
 
 .clearfix h3 {
