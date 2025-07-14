@@ -335,11 +335,15 @@ function addTitleAndFrmt(objectOfInputs, element, {title: title, label:label} = 
     var plotID = "animation" + element;
   }
   var contID = "container" + element;
+  if (label == undefined) {
+    var label = title;
+  }
   if (title == undefined) {
     var title = "Animation of the " + label.toLowerCase() + ".";
   }
 
   var infoID = document.getElementById("info" + element)
+  infoID.innerHTML = title.replace(/\\\\/g, "\\");
   infoID.innerHTML = title;
   renderMathInElement(infoID, {
     delimiters: [{left: "$", right: "$", display: false}, {left: "\(", right: "\)", display: false}]
@@ -347,8 +351,8 @@ function addTitleAndFrmt(objectOfInputs, element, {title: title, label:label} = 
 
   infoID.style = "padding-top: 0px; border-bottom: 1px solid black; margin-bottom: 5px; width:100%;"
   document.getElementById(contID).style = "border: 1px solid black; padding-bottom: 5px; padding-top: 0px; padding-left: 5px; width:100%";
-  document.getElementById(plotID).width = objectOfInputs.Width + "px";
-  document.getElementById(plotID).height = objectOfInputs.Height + "px";
+  document.getElementById(contID).width = objectOfInputs.Width + "px";
+  document.getElementById(contID).height = objectOfInputs.Height + "px";
   return plotID;
 }
 /**
