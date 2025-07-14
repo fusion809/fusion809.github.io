@@ -4,3 +4,13 @@
       <div class="header">
         <h1>{{fill title}}</h1>
       </div>
+
+      <!-- TOC Sidebar -->
+{{isdef hassim}}{{ if hassim}}<div id="toc-toggle" style="position: fixed; right: 0; top: 10px; z-index: 1000;">
+  <button onclick="toggleTOC()">Navigation</button>
+</div>
+
+<nav id="toc-panel" style="display:none; position: fixed; right: 0; top: 150px; width: 250px; max-height: 80vh; overflow-y: auto; background: #f9f9f9; border-left: 1px solid #ccc; padding: 10px; z-index: 999;">
+  <h3 style="margin-top: 0">Contents</h3>
+  <ul id="toc-list" style="list-style: none; padding-left: 0;"></ul>
+</nav>{{end}}{{end}}

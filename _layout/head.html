@@ -12,7 +12,7 @@
   {{isdef SP.w}}{{ if SP.w}}<script src="/simplePendulum/wErrorAnalysis.js"></script>{{end}}{{end}}
   {{isdef SP.wo}}{{ if SP.wo}}<script src="/simplePendulum/woErrorAnalysis.js"></script>{{end}}{{end}}
 </head>
-{{isdef SP}}{{ if SP}}<body onload="periodCalc(thetaBounds(readInputs()))">{{ end}} {{end}}
+{{isdef SP}}{{ if SP}}<body onload="periodCalc(thetaBounds(readInputs()))">{{ else }}<body>{{ end}} {{end}}
 {{insert sidebar.html}}
 
 <!-- Content appended here -->

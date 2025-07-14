@@ -82,7 +82,5 @@ Below you can specify the various parameters for the problem we will solve.
 [^1] Dourmashkin, P (2022). [16.3 Rotational Kinetic Energy and Moment of Inertia](https://phys.libretexts.org/Bookshelves/Classical_Mechanics/Classical_Mechanics_(Dourmashkin)/16%3A_Two_Dimensional_Rotational_Kinematics/16.03%3A_Rotational_Kinetic_Energy_and_Moment_of_Inertia) in [*Classical Mechanics (Dourmashkin)*](https://commons.libretexts.org/book/phys-24413). Massachusetts Institute of Technology.
 
 ~~~
-{{ insert parameter_form.html }}
-{{ insert button_table.html }}
-{{ insert simple_pendulum_output.html }}
+{{ insert template.html }}
 ~~~

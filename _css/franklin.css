@@ -347,11 +347,11 @@ code {
 .button-bar {
     text-align: left;
     justify-content: left;
-    gap: 8px;
-    margin-bottom: 8px;
+    gap: 2px;
+    margin-bottom: 2px;
     width: fit-content;
     max-width: 100%;
-    padding: 5px;
+    padding: 1px;
     /* Add these properties: */
     overflow: hidden;           /* Prevent content from overflowing */
     position: relative;         /* Establish positioning context */
@@ -361,7 +361,7 @@ code {
 .button-bar > div[id^="animation"] {
     max-width: 100%;
     overflow: hidden;
-    margin-top: 10px;          /* Space after buttons */
+    margin-top: 2px;          /* Space after buttons */
 }
 
 /* Ensure h2 elements stay visible */
@@ -393,4 +393,22 @@ ul.flexcols li {
   white-space: normal;        /* Allow wrapping inside items */
   overflow: visible;          /* Let them expand naturally */
   text-overflow: unset;       /* No ellipsis */
+}
+
+#toc-panel a {
+  text-decoration: none;
+  color: black;
+  display: block;
+  padding: 2px 0;
+}
+#toc-panel a.active {
+  font-weight: bold;
+  color: blue;
+}
+#toc-panel li {
+  margin-left: 0;
+  margin-bottom: 5px;
+}
+#toc-panel li a strong {
+  font-size: 1.05em;
 }

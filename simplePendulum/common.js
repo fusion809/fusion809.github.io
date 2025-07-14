@@ -95,6 +95,9 @@ function thetaBounds(objectOfInputs) {
     // Add thetaMin and thetaMax to objectOfInputs
     objectOfInputs.thetaMin = thetaMin;
     objectOfInputs.thetaMax = thetaMax;
+    const el = document.querySelector('[id^="information-data-notes-ttt:"]');
+    if (el) el.id = "tableOfPeriodThetaMinimumAndMaximumAndStepNumber";
+    createTOC();
 
     return objectOfInputs;
 }

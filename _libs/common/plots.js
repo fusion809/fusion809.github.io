@@ -17,12 +17,19 @@ function adjustPlotHeight(element) {
  * @return              None.
  */
 function rmPlot(element) {
-    if (!!document.getElementById(element)) {
-        document.getElementById(element).innerHTML = '';
-        document.getElementById(element).style = '';
-    }
+  if (!!document.getElementById(element)) {
+    document.getElementById(element).innerHTML = '';
+    document.getElementById(element).style = '';
+  }
+  if (/animation/.test(element)) {
+    var IdSuffix = element.replace(/animation/, "");
+    var contID = "container" + IdSuffix;
+    var infoID = "info" + IdSuffix;
+    document.getElementById(infoID).innerHTML = "";
+    document.getElementById(infoID).style = "padding: 0px; border-bottom: 0px; margin: 0px;";
+    document.getElementById(contID).style = "border: 0px; padding: 0px;";
+  }
 }
-
 /**
  * Remove XY phase plot
  * 
@@ -273,6 +280,14 @@ function removePendulumPlots() {
     rmPlot("pendulumTimePlot");
 }
 
+function fixPlotHeight(plotID) {
+  const container = document.getElementById(plotID)?.closest('.plot-container');
+  const svg = container?.querySelector('.svg-container');
+  if (container && svg) {
+    container.style.height = svg.offsetHeight + "px";
+  }
+}
+
 function min(x) {
   var min;
   try {
@@ -450,6 +465,7 @@ function gen2DPlot(x, y, element, title, xtitle="x", ytitle="y") {
     font: {size: fontSizes.legend}
   };
   Plotly.newPlot(element, dataXY, layoutXY);
+  fixPlotHeight(element);
 }
 
 /**
@@ -518,6 +534,7 @@ function gen3DPlot(x, y, z, element, title, {view = undefined, xtitle="x", ytitl
        }
   }
   Plotly.newPlot(element, dataXYZ, layoutXYZ);
+  fixPlotHeight(element);
 }
 
 /**
@@ -658,6 +675,7 @@ function genMultPlot(solution, varnames, element, title) {
       font: {size: fontSizes.legend}
     };
   Plotly.newPlot(element, dataTimePlot, layoutTimePlot);
+  fixPlotHeight(element);
 }
 
 function generatePendulumCoords(objectOfInputs, solution) {
@@ -805,6 +823,7 @@ function generatePendulumPlot(objectOfInputs, solution) {
     };
   }
   Plotly.newPlot(element, dataPen, layoutPen);
+  fixPlotHeight(element);
 }
 
 function generatePendulumTimePlot(objectOfInputs, solution) {
@@ -898,6 +917,7 @@ function generatePendulumTimePlot(objectOfInputs, solution) {
       }
   };
   Plotly.newPlot(element, dataPen, layoutPenTime);
+  fixPlotHeight(element);
 }
 
 function generatePendulumPlots(objectOfInputs, solution) {

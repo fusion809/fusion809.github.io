@@ -39,61 +39,61 @@ function RKF45(objectOfInputs) {
  * @param solution       An object containing solution data. 
  * @return               Nothing.
  */
-function generate3DPhasePlot(solution) {
+function generateSIRPhasePlot(solution) {
     // Extract solution data
     var {vars} = solution;
     var [S, I, R] = vars;
 
     // Generate 3D plot
-    gen3DPlot(S, I, R, "phasePlotXYZ", "Phase plot of the solution to the SIR equations.", {xtitle: "Susceptible", ytitle: "Infectious", ztitle: "Recovered"});
+    gen3DPlot(S, I, R, "phasePlotSIR", "Phase plot of the solution to the SIR equations.", {xtitle: "Susceptible", ytitle: "Infectious", ztitle: "Recovered"});
 }
 
 /**
- * Generates a XY phase plot
+ * Generates a SI phase plot
  * 
  * @param solution       An object containing solution data. 
  * @return               Nothing.
  */
-function generateXYPhasePlot(solution) {
+function generateSIPhasePlot(solution) {
     // Extract solution data
     var {vars} = solution;
     var S = vars[0];
     var I = vars[1];
 
     // Generate 2D plot
-    gen2DPlot(S, I, "phasePlotXY", "SI phase plot, x = S and y = I", "S", "I")
+    gen2DPlot(S, I, "phasePlotSI", "SI phase plot, x = S and y = I", "S", "I")
 }
 
 /**
- * Generates a XZ phase plot
+ * Generates a SR phase plot
  * 
  * @param solution       An object containing solution data.
  * @return               Nothing.
  */
-function generateXZPhasePlot(solution) {
+function generateSRPhasePlot(solution) {
     // Extract solution data
     var {vars} = solution;
     var S = vars[0];
     var R = vars[2];
     
     // Generate 2D plot
-    gen2DPlot(S, R, "phasePlotXZ", "SR phase plot, x = S and y = R", "S", "R");
+    gen2DPlot(S, R, "phasePlotSR", "SR phase plot, x = S and y = R", "S", "R");
 }
 
 /**
- * Generates a YZ phase plot
+ * Generates a IR phase plot
  * 
  * @param solution       An object containing solution data. 
  * @return               Nothing.
  */
-function generateYZPhasePlot(solution) {
+function generateIRPhasePlot(solution) {
     // Extract solution data
     var {vars} = solution;
     var I = vars[1];
     var R = vars[2];
 
     // Generate 2D plot
-    gen2DPlot(I, R, "phasePlotYZ", "IR phase plot, x = I and y = R", "S", "R");
+    gen2DPlot(I, R, "phasePlotIR", "IR phase plot, x = I and y = R", "S", "R");
 }
 
 /**
@@ -123,10 +123,10 @@ function generatePlots(objectOfInputs) {
     var solution = solveProblem(RKF45, objectOfInputs);
 
     // Generate plots
-    generate3DPhasePlot(solution);
-    generateXYPhasePlot(solution);
-    generateXZPhasePlot(solution);
-    generateYZPhasePlot(solution);
+    generateSIRPhasePlot(solution);
+    generateSRPhasePlot(solution);
+    generateSRPhasePlot(solution);
+    generateIRPhasePlot(solution);
     generateTimePlot(solution);
 };
 
@@ -144,9 +144,31 @@ function removeAnimation() {
  */
 function generateAnimation() {
     var solution = solveProblem(RKF45, readInputs());
-    animate3D(solution, {view: [0, 0, 0], varnames: ["Susceptible", "Infectious", "Recovered"], title: "Susceptible, infectious and recovered population phase plot for the SIR infectious disease model."});
+    animate3D(solution, {varnames: ["Susceptible", "Infectious", "Recovered"], title: "Susceptible, infectious and recovered population phase plot for the SIR infectious disease model."});
 }
 
 function generateTable() {
     fillTable(readInputs(), ['Susceptible', 'Infectious', 'Recovered'])
+}
+
+function removeSRPhasePlot() {
+    rmPlot("phasePlotSR");
+}
+function removeSIPhasePlot() {
+    rmPlot("phasePlotSI");
+}
+
+function removeIRPhasePlot() {
+    rmPlot("phasePlotIR");
+}
+
+function removeSIRPhasePlot() {
+    rmPlot("phasePlotSIR");
+}
+function removePlots() {
+    removeSIRPhasePlot()
+    removeSRPhasePlot()
+    removeSIPhasePlot()
+    removeIRPhasePlot()
+    removeTimePlot();
 }

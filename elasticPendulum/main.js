@@ -50,14 +50,14 @@ function generateZThetaPhasePlot(solution) {
  * @param solution       An object containing solution data.
  * @return               Nothing.
  */
-function generateZZDotPhasePlot(solution) {
+function generateDzZPhasePlot(solution) {
     // Extract solution data from solution object
     var {vars} = solution;
     var z = vars[0];
     var dz = vars[1];
 
     // Generate 2D plot
-    gen2DPlot(z, dz, "phasePlotZZDot", "Phase plot of dz/dt against z", "z", "dz/dt");
+    gen2DPlot(z, dz, "phasePlotDzZ", "Phase plot of dz/dt against z", "z", "dz/dt");
 }
 
 /**
@@ -66,14 +66,14 @@ function generateZZDotPhasePlot(solution) {
  * @param solution       An object containing solution data.
  * @return               Nothing.
  */
-function generateThetaThetaDotPhasePlot(solution) {    
+function generateDThetaThetaPhasePlot(solution) {    
     // Extract solution data from solution object
     var {vars} = solution;
     var theta = vars[2];
     var dtheta = vars[3];
     
     // Generate 2D plot
-    gen2DPlot(theta, dtheta, "phasePlotThetaThetaDot", "Phase plot of dθ/dt against θ", "θ", "dθ/dt");
+    gen2DPlot(theta, dtheta, "phasePlotDThetaTheta", "Phase plot of dθ/dt against θ", "θ", "dθ/dt");
 }
 
 /**
@@ -103,8 +103,8 @@ function generatePlots(objectOfInputs) {
 
     // Plot solution
     generateZThetaPhasePlot(solution);
-    generateZZDotPhasePlot(solution);
-    generateThetaThetaDotPhasePlot(solution);
+    generateDzZPhasePlot(solution);
+    generateDThetaThetaPhasePlot(solution);
     generateTimePlot(solution);
     generatePendulumPlots(objectOfInputs, solution);
 }
@@ -179,15 +179,15 @@ function removeZPhaseAnimation() {
 }
 
 function removeThetaDthetaPhasePlot() {
-    rmPlot("phasePlotThetaThetaDot");
+    rmPlot("phasePlotDThetaTheta");
 }
 
 function removeZThetaPhasePlot() {
     rmPlot("phasePlotZTheta");
 }
 
-function removeZZDotPhasePlot() {
-    rmPlot("phasePlotZZDot");
+function removeDzZPhasePlot() {
+    rmPlot("phasePlotDzZ");
 }
 
 function removeThetaPhaseAnimation() {

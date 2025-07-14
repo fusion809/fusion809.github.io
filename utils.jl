@@ -154,7 +154,16 @@ function hfun_params_render()
     println("params_list = $params_list")
     return
   end
-  HTML = """"""
+  HTML = """
+  <form name="requiredData">
+    <table id="parameterForm">
+      <caption style="font-size: 20px; font-weight: bold; text-align: left; border: 1px solid black; padding: 5px;">Simulation parameter form.</caption>
+        <tr style="border: 0px solid black;">
+          <th style="border: 1px solid black;">Parameter</th>
+          <th style="border: 1px solid black;">Value</th>
+          <th style="border: 1px solid black;">Explanation</th>
+        </tr>
+  """
   for p in 1:length(params_list)
     param_name = params_list[p];
     param_val = params_val[p];
@@ -277,6 +286,10 @@ function hfun_params_render()
     end
   end
 
+  HTML *= """
+    </table>
+  </form>
+  """
   return HTML
 end
 
@@ -336,7 +349,7 @@ end
 function hfun_output_render()
   ids, funcs, labels = getButtonVars();
   HTML = """
-  <table id="tableOutputs">
+  <table>
   """;
   ids = unique(ids);
   for i in 1:length(ids)
@@ -356,7 +369,9 @@ function hfun_output_render()
     else
       id = ids[i]
       HTML *= """
+      <div id="container$id">
       <div id="$id"></div>
+      </div>
       """
     end
   end
