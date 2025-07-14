@@ -81,7 +81,7 @@ function generateTheta1Theta2PhasePlot(solution) {
     var theta2 = vars[6];
 
     // Generate 2D plot
-    gen2DPlot(theta1, theta2, "phasePlotTheta1Theta2", "Phase plot of θ<sub>2</sub> against θ<sub>1</sub>.", "θ<sub>1</sub>", "θ<sub>2</sub>");
+    gen2DPlot(theta1, theta2, "plotTheta1Theta2", "Phase plot of θ<sub>2</sub> against θ<sub>1</sub>.", "θ<sub>1</sub>", "θ<sub>2</sub>");
 }
 
 /**
@@ -98,84 +98,84 @@ function generateTimePlot(solution) {
 function generateR1TPlot(solution) {
     var {t, vars} = solution;
     var r1 = vars[0];
-    gen2DPlot(t, r1, "R1TPlot", "Time plot of r<sub>1</sub>.", "t", "r<sub>1</sub>");
+    gen2DPlot(t, r1, "plotR1T", "Time plot of r<sub>1</sub>.", "t", "r<sub>1</sub>");
 }
 
 function generateDr1TPlot(solution) {
     var {t, vars} = solution;
     var dr1 = vars[1];
-    gen2DPlot(t, dr1, "Dr1TPlot", "Time plot of dr<sub>1</sub>/dt.", "t", "dr<sub>1</sub>/dt");
+    gen2DPlot(t, dr1, "plotDr1T", "Time plot of dr<sub>1</sub>/dt.", "t", "dr<sub>1</sub>/dt");
 }
 
 function generateDr1R1Plot(solution) {
     var {vars} = solution;
     var r1 = vars[0];
     var dr1 = vars[1];
-    gen2DPlot(r1, dr1, "Dr1R1Plot", "Phase plot of dr<sub>1</sub>/dt vs r<sub>1</sub>.", "r<sub>1</sub>", "dr<sub>1</sub>/dt");
+    gen2DPlot(r1, dr1, "plotDr1R1", "Phase plot of dr<sub>1</sub>/dt vs r<sub>1</sub>.", "r<sub>1</sub>", "dr<sub>1</sub>/dt");
 }
 
 function generateR2TPlot(solution) {
     var {t, vars} = solution;
     var r2 = vars[2];
-    gen2DPlot(t, r2, "R2TPlot", "Time plot of r<sub>2</sub>.", "t", "r<sub>2</sub>");
+    gen2DPlot(t, r2, "plotR2T", "Time plot of r<sub>2</sub>.", "t", "r<sub>2</sub>");
 }
 
 function generateDr2TPlot(solution) {
     var {t, vars} = solution;
     var dr2 = vars[3];
-    gen2DPlot(t, dr2, "Dr2TPlot", "Time plot of dr<sub>2</sub>/dt.", "t", "dr<sub>2</sub>/dt");
+    gen2DPlot(t, dr2, "plotDr2T", "Time plot of dr<sub>2</sub>/dt.", "t", "dr<sub>2</sub>/dt");
 }
 
 function generateDr2R2Plot(solution) {
     var {vars} = solution;
     var r2 = vars[2];
     var dr2 = vars[3];
-    gen2DPlot(r2, dr2, "Dr2R2Plot", "Phase plot of dr<sub>2</sub>/dt vs r<sub>2</sub>.", "r<sub>2</sub>", "dr<sub>2</sub>/dt");
+    gen2DPlot(r2, dr2, "plotDr2R2", "Phase plot of dr<sub>2</sub>/dt vs r<sub>2</sub>.", "r<sub>2</sub>", "dr<sub>2</sub>/dt");
 }
 
 function generateTheta1TPlot(solution) {
     var {t, vars} = solution;
     var theta1 = vars[4];
-    gen2DPlot(t, theta1, "Theta1TPlot", "Time plot of θ<sub>1</sub>.", "t", "θ<sub>1</sub>");
+    gen2DPlot(t, theta1, "plotTheta1T", "Time plot of θ<sub>1</sub>.", "t", "θ<sub>1</sub>");
 }
 
 function generateDtheta1TPlot(solution) {
     var {t, vars} = solution;
     var dtheta1 = vars[5];
-    gen2DPlot(t, dtheta1, "Dtheta1TPlot", "Time plot of dθ<sub>1</sub>/dt.", "t", "dθ<sub>1</sub>/dt");
+    gen2DPlot(t, dtheta1, "plotDtheta1T", "Time plot of dθ<sub>1</sub>/dt.", "t", "dθ<sub>1</sub>/dt");
 }
 
 function generateDtheta1Theta1Plot(solution) {
     var {vars} = solution;
     var theta1 = vars[4];
     var dtheta1 = vars[5];
-    gen2DPlot(theta1, dtheta1, "Dtheta1Theta1Plot", "Phase plot of dθ<sub>1</sub>/dt vs θ<sub>1</sub>.", "θ<sub>1</sub>", "dθ<sub>1</sub>/dt");
+    gen2DPlot(theta1, dtheta1, "plotDtheta1Theta1", "Phase plot of dθ<sub>1</sub>/dt vs θ<sub>1</sub>.", "θ<sub>1</sub>", "dθ<sub>1</sub>/dt");
 }
 
 function generateTheta2TPlot(solution) {
     var {t, vars} = solution;
     var theta2 = vars[6];
-    gen2DPlot(t, theta2, "Theta2TPlot", "Time plot of θ<sub>2</sub>.", "t", "θ<sub>2</sub>");
+    gen2DPlot(t, theta2, "plotTheta2T", "Time plot of θ<sub>2</sub>.", "t", "θ<sub>2</sub>");
 }
 
 function generateDtheta2TPlot(solution) {
     var {t, vars} = solution;
     var dtheta2 = vars[7];
-    gen2DPlot(t, dtheta2, "Dtheta2TPlot", "Time plot of dθ<sub>2</sub>/dt.", "t", "dθ<sub>2</sub>/dt");
+    gen2DPlot(t, dtheta2, "plotDtheta2T", "Time plot of dθ<sub>2</sub>/dt.", "t", "dθ<sub>2</sub>/dt");
 }
 
 function generateDtheta2Theta2Plot(solution) {
     var {vars} = solution;
     var theta2 = vars[6];
     var dtheta2 = vars[7];
-    gen2DPlot(theta2, dtheta2, "Dtheta2Theta2Plot", "Phase plot of dθ<sub>2</sub>/dt vs θ<sub>2</sub>.", "θ<sub>2</sub>", "dθ<sub>2</sub>/dt");
+    gen2DPlot(theta2, dtheta2, "plotDtheta2Theta2", "Phase plot of dθ<sub>2</sub>/dt vs θ<sub>2</sub>.", "θ<sub>2</sub>", "dθ<sub>2</sub>/dt");
 }
 
 function generateR1R2PhasePlot(solution) {
     var {vars} = solution;
     var r1 = vars[0];
     var r2 = vars[2];
-    gen2DPlot(r1, r2, "R2R1Plot", "Phase plot of r<sub>2</sub> vs r<sub>1</sub>.", "r<sub>1</sub>", "r<sub>2</sub>");
+    gen2DPlot(r1, r2, "plotR2R1", "Phase plot of r<sub>2</sub> vs r<sub>1</sub>.", "r<sub>1</sub>", "r<sub>2</sub>");
 }
 
 
@@ -185,51 +185,51 @@ function removePendulumPlots() {
 }
 
 function removeDr1TPlot() {
-    rmPlot("Dr1TPlot");
+    rmPlot("plotDr1T");
 }
 
 function removeDr1R1Plot() {
-    rmPlot("Dr1R1Plot");
+    rmPlot("plotDr1R1");
 }
 
 function removeR2TPlot() {
-    rmPlot("R2TPlot");
+    rmPlot("plotR2T");
 }
 
 function removeDr2TPlot() {
-    rmPlot("Dr2TPlot");
+    rmPlot("plotDr2T");
 }
 
 function removeDr2R2Plot() {
-    rmPlot("Dr2R2Plot");
+    rmPlot("plotDr2R2");
 }
 
 function removeTheta1TPlot() {
-    rmPlot("Theta1TPlot");
+    rmPlot("plotTheta1T");
 }
 
 function removeDtheta1TPlot() {
-    rmPlot("Dtheta1TPlot");
+    rmPlot("plotDtheta1T");
 }
 
 function removeDtheta1Theta1Plot() {
-    rmPlot("Dtheta1Theta1Plot");
+    rmPlot("plotDtheta1Theta1");
 }
 
 function removeTheta2TPlot() {
-    rmPlot("Theta2TPlot");
+    rmPlot("plotTheta2T");
 }
 
 function removeDtheta2TPlot() {
-    rmPlot("Dtheta2TPlot");
+    rmPlot("plotDtheta2T");
 }
 
 function removeDtheta2Theta2Plot() {
-    rmPlot("Dtheta2Theta2Plot");
+    rmPlot("plotDtheta2Theta2");
 }
 
 function removeR1R2PhasePlot() {
-    rmPlot("R2R1Plot");
+    rmPlot("plotR2R1");
 }
 
 function removeTimePlot() {

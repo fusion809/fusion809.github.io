@@ -78,7 +78,7 @@ function generateDtheta1Dtheta2PhasePlot(solution) {
     var dtheta2 = vars[3];
 
     // Generate 2D plot
-    gen2DPlot(dtheta1, dtheta2, "phasePlotDtheta1Dtheta2", "Phase plot of dθ<sub>2</sub>/dt against dθ<sub>1</sub>/dt", "dθ<sub>1</sub>/dt", "dθ<sub>2</sub>/dt");
+    gen2DPlot(dtheta1, dtheta2, "phasePlotDtheta2Dtheta1", "Phase plot of dθ<sub>2</sub>/dt against dθ<sub>1</sub>/dt", "dθ<sub>1</sub>/dt", "dθ<sub>2</sub>/dt");
 }
 
 /**
@@ -87,14 +87,14 @@ function generateDtheta1Dtheta2PhasePlot(solution) {
  * @param solution       An object containing solution data.
  * @return               Nothing.
  */
-function generateTheta1Dtheta1PhasePlot(solution) {
+function generateDtheta1Theta1PhasePlot(solution) {
     // Extract solution data from solution object
     var {vars} = solution;
     var theta1 = vars[0];
     var dtheta1 = vars[1];
     
     // Generate 2D plot
-    gen2DPlot(theta1, dtheta1, "phasePlotTheta1Dtheta1", "Phase plot of dθ<sub>1</sub>/dt against θ<sub>1</sub>", "θ<sub>1</sub>", "dθ<sub>1</sub>/dt");
+    gen2DPlot(theta1, dtheta1, "phasePlotDtheta1Theta1", "Phase plot of dθ<sub>1</sub>/dt against θ<sub>1</sub>", "θ<sub>1</sub>", "dθ<sub>1</sub>/dt");
 }
 
 /**
@@ -110,7 +110,7 @@ function generateTheta1Dtheta2PhasePlot(solution) {
     var dtheta2 = vars[2];
     
     // Generate 2D plot
-    gen2DPlot(theta1, dtheta2, "phasePlotTheta1Dtheta2", "Phase plot of dθ<sub>2</sub>/dt against θ<sub>1</sub>", "θ<sub>1</sub>", "θ<sub>2</sub>/dt");
+    gen2DPlot(theta1, dtheta2, "phasePlotDtheta1Theta2", "Phase plot of dθ<sub>2</sub>/dt against θ<sub>1</sub>", "θ<sub>1</sub>", "θ<sub>2</sub>/dt");
 }
 
 /**
@@ -126,7 +126,7 @@ function generateTheta2Dtheta1PhasePlot(solution) {
     var dtheta1 = vars[1];
     
     // Generate 2D plot
-    gen2DPlot(theta2, dtheta1, "phasePlotTheta2Dtheta1", "Phase plot of dθ<sub>1</sub>/dt against θ<sub>2</sub>", "θ<sub>2</sub>", "dθ<sub>1</sub>/dt");
+    gen2DPlot(theta2, dtheta1, "phasePlotDtheta2Theta1", "Phase plot of dθ<sub>1</sub>/dt against θ<sub>2</sub>", "θ<sub>2</sub>", "dθ<sub>1</sub>/dt");
 }
 
 /**
@@ -135,14 +135,14 @@ function generateTheta2Dtheta1PhasePlot(solution) {
  * @param solution       An object containing solution data.
  * @return               Nothing.
  */
-function generateTheta2Dtheta2PhasePlot(solution) {
+function generateDtheta2Theta2PhasePlot(solution) {
     // Extract solution data from solution object
     var {vars} = solution;
     var theta2 = vars[2];
     var dtheta2 = vars[3];
     
     // Generate 2D plot
-    gen2DPlot(theta2, dtheta2, "phasePlotTheta2Dtheta2", "Phase plot of dθ<sub>2</sub>/dt against θ<sub>2</sub>", "θ<sub>2</sub>", "dθ<sub>2</sub>/dt");
+    gen2DPlot(theta2, dtheta2, "phasePlotDtheta2Theta2", "Phase plot of dθ<sub>2</sub>/dt against θ<sub>2</sub>", "θ<sub>2</sub>", "dθ<sub>2</sub>/dt");
 }
 
 /**
@@ -169,10 +169,10 @@ function generatePlots(objectOfInputs) {
     // Generate plots
     generatePendulumPlots(objectOfInputs, solution);
     generateTheta1Theta2PhasePlot(solution);
-    generateTheta1Dtheta1PhasePlot(solution);
+    generateDtheta1Theta1PhasePlot(solution);
     generateTheta1Dtheta2PhasePlot(solution);
     generateTheta2Dtheta1PhasePlot(solution);
-    generateTheta2Dtheta2PhasePlot(solution);
+    generateDtheta2Theta2PhasePlot(solution);
     generateDtheta1Dtheta2PhasePlot(solution);
     generatePendulumPlots(objectOfInputs, solution)
     generateTimePlot(solution);
@@ -190,8 +190,8 @@ function removeAnimation() {
  * Remove Theta1 Dtheta1 phase plot
  * @return nothing
  */
-function removeTheta1Dtheta1PhasePlot() {
-  rmPlot("phasePlotTheta1Dtheta1");
+function removeDtheta1Theta1PhasePlot() {
+  rmPlot("phasePlotDtheta1Theta1");
 }
 
 /**
@@ -214,8 +214,8 @@ function removeTheta2Dtheta1PhasePlot() {
  * Remove Theta2 Dtheta2 phase plot
  * @return nothing
  */
-function removeTheta2Dtheta2PhasePlot() {
-  rmPlot("phasePlotTheta2Dtheta2");
+function removeDtheta2Theta2PhasePlot() {
+  rmPlot("phasePlotDtheta2Theta2");
 }
 
 /**

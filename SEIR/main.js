@@ -94,51 +94,51 @@ function generateSERPhasePlot(solution) {
     gen3DPlot(S, E, R, "phasePlotSER", "Phase plot of susceptible, exposed and recovered populations.", {xtitle: "Susceptible", ytitle: "Exposed", ztitle: "Recovered"});
 }
 /**
- * Generates a XY phase plot
+ * Generates a SI phase plot
  * 
  * @param solution       An object containing solution data.
  * @return               Nothing.
  */
-function generateXYPhasePlot(solution) {
+function generateSIPhasePlot(solution) {
     // Extract relevant solution values
     var {vars} = solution;
     var S = vars[0];
     var I = vars[2];
 
     // Generate 2D plot
-    gen2DPlot(S, I, "phasePlotXY", "Number of infectious persons against number of susceptible persons", "Susceptible", "Infectious");
+    gen2DPlot(S, I, "phasePlotSI", "Number of infectious persons against number of susceptible persons", "Susceptible", "Infectious");
 }
 
 /**
- * Generates a XZ phase plot
+ * Generates a SR phase plot
  * 
  * @param solution       An object containing solution data.
  * @return               Nothing.
  */
-function generateXZPhasePlot(solution) {
+function generateSRPhasePlot(solution) {
     // Extract relevant solution variables
     var {vars} = solution;
     var S = vars[0];
     var R = vars[3];
 
     // Generate 2D plot
-    gen2DPlot(S, R, "phasePlotXZ", "Number of recovered persons against number of susceptible persons", "Susceptible", "Recovered");
+    gen2DPlot(S, R, "phasePlotSR", "Number of recovered persons against number of susceptible persons", "Susceptible", "Recovered");
 }
 
 /**
- * Generates a YZ phase plot
+ * Generates a IR phase plot
  * 
  * @param solution       An object containing solution data.
  * @return               Nothing.
  */
-function generateYZPhasePlot(solution) {
+function generateIRPhasePlot(solution) {
     // Extract relevant solution values
     var {vars} = solution;
     var I = vars[2];
     var R = vars[3];
 
     // Generate 2D plot
-    gen2DPlot(I, R, "phasePlotYZ", "Number of recovered persons against number of infectious persons", "Infectious", "Recovered");
+    gen2DPlot(I, R, "phasePlotIR", "Number of recovered persons against number of infectious persons", "Infectious", "Recovered");
 }
 
 /**
@@ -172,9 +172,9 @@ function generatePlots(objectOfInputs) {
     generateEIRPhasePlot(solution);
     generateSERPhasePlot(solution);
     generateSEIPhasePlot(solution);
-    generateXYPhasePlot(solution);
-    generateXZPhasePlot(solution);
-    generateYZPhasePlot(solution);
+    generateSIPhasePlot(solution);
+    generateSIPhasePlot(solution);
+    generateIRPhasePlot(solution);
     generateTimePlot(solution);
 };
 
@@ -272,6 +272,14 @@ function removeSIRPhasePlot() {
     rmPlot("phasePlotSIR");
 }
 
+function removeSIPhasePlot() {
+    rmPlot("phasePlotSI");
+}
+
+function removeSRPhasePlot() {
+    rmPlot("phasePlotSR");
+}
+
 function removeSERPhasePlot() {
     rmPlot("phasePlotSER");
 }
@@ -282,4 +290,20 @@ function removeSEIPhasePlot() {
 
 function removeEIRPhasePlot() {
     rmPlot("phasePlotEIR");
+}
+
+function removeIRPhasePlot() {
+    rmPlot("phasePlotIR");
+}
+
+function removePlots() {
+    removeEIRPhasePlot()
+    removeSEIPhasePlot()
+    removeSERPhasePlot()
+    removeSIRPhasePlot()
+    removeSRPhasePlot()
+    removeSIPhasePlot()
+    removeSRPhasePlot()
+    removeIRPhasePlot()
+    removeTimePlot();
 }
