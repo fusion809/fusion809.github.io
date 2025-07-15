@@ -243,7 +243,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }, {
-    threshold: 0.1
+    threshold: 1.0
   });
 
   // 👇 Observe heading and table anchors directly
