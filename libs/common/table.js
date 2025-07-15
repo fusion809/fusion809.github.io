@@ -104,15 +104,9 @@ function addTablesToTOC(tocList, tables) {
             label = suff.charAt(0).toUpperCase() + suff.slice(1)
         }
         if (!table.id) return;
-        const anchorId = "anchor-" + suffix;
-        if (!document.getElementById(anchorId)) {
-            const anchor = document.createElement("a");
-            anchor.id = anchorId;
-            table.parentNode.insertBefore(anchor, table);
-            
-        }
         const li = document.createElement("li");
-        li.innerHTML = `<a href="#${anchorId}">${label.trim()}</a>`;
+        li.innerHTML = `<a href="#${id}">${label.replace(/container/gi, "animation").trim()}</a>`;
+
         tocList.appendChild(li);
     });
 }
@@ -204,14 +198,8 @@ function addContainersToTOC(tocList, containers) {
         const content = document.getElementById(id).innerHTML;
         if (!label) label = generateContLabel(id, content);
         if (!div.id) return;
-        const anchorId = "anchor-" + suffix;
-        if (!document.getElementById(anchorId)) {
-            const anchor = document.createElement("a");
-            anchor.id = anchorId;
-            div.parentNode.insertBefore(anchor, div);
-        }
         const li = document.createElement("li");
-        li.innerHTML = `<a href="#${anchorId}">${label.replace(/container/gi, "animation").trim()}</a>`;
+        li.innerHTML = `<a href="#${id}">${label.replace(/container/gi, "animation").trim()}</a>`;
         tocList.appendChild(li);
     });
 }
@@ -231,39 +219,52 @@ function createTOC() {
 document.addEventListener("DOMContentLoaded", function () {
   createTOC();
 
+  const sectionMap = new Map(); // ID → entry
+  const tocLinks = document.querySelectorAll("#toc-list a");
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       const id = entry.target.getAttribute("id");
-      const tocLinks = document.querySelectorAll("#toc-list a");
+      if (!id) return;
 
-      if (entry.isIntersecting && id) {
-        tocLinks.forEach(link => link.classList.remove("active"));
-        const active = [...tocLinks].find(link => link.getAttribute("href") === `#${id}`);
-        if (active) active.classList.add("active");
+      if (entry.isIntersecting) {
+        sectionMap.set(id, entry);
+      } else {
+        sectionMap.delete(id);
       }
     });
-  }, {
-    threshold: 1.0
-  });
 
-  // 👇 Observe heading and table anchors directly
-  document.querySelectorAll("h1, h2, h3, h4, table").forEach(el => {
-    if (!el.id) {
-      el.id = el.textContent.trim().replace(/\s+/g, "-").toLowerCase();
+    let bestId = null;
+    let bestRatio = 0;
+    let bestTop = Infinity;
+
+    sectionMap.forEach((entry, id) => {
+      const ratio = entry.intersectionRatio;
+      const top = entry.boundingClientRect.top;
+
+      // Prefer highest visible ratio, break ties with top position
+      if (ratio > bestRatio || (ratio === bestRatio && top < bestTop)) {
+        bestRatio = ratio;
+        bestTop = top;
+        bestId = id;
+      }
+    });
+
+    tocLinks.forEach(link => link.classList.remove("active"));
+    if (bestId) {
+      const activeLink = document.querySelector(`#toc-list a[href="#${bestId}"]`);
+      if (activeLink) activeLink.classList.add("active");
     }
-    observer.observe(el);
+  }, {
+    threshold: [0.1, 0.25, 0.5, 0.75], // tracks how much is visible
+    rootMargin: "0px 0px -30% 0px" // helps delay early triggering
   });
 
-  // 👇 Observe all anchors inserted for containers
-  document.querySelectorAll("a[id^='anchor-']").forEach(anchor => {
-    observer.observe(anchor);
-  });
-  const visibleSections = entries
-  .filter(entry => entry.isIntersecting)
-  .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+  document.querySelectorAll("div[id^='container'], a[id^='anchor-'], table").forEach(container => {
+  observer.observe(container);
+});
+// document.querySelectorAll("a[id^='anchor-']").forEach(container => {
+//   observer.observe(container);
+// });
 
-if (visibleSections.length > 0) {
-  const id = visibleSections[0].target.getAttribute("id");
-  // highlight matching link...
-}
 });
