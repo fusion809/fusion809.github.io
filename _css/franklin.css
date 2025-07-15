@@ -395,6 +395,19 @@ ul.flexcols li {
   text-overflow: unset;       /* No ellipsis */
 }
 
+#toc-panel {
+    display:none; 
+    position: fixed;
+    right: 0; 
+    top: 40px; 
+    width: 250px; 
+    max-height: 95vh; 
+    overflow-y: auto; 
+    background: #f9f9f9; 
+    border-left: 1px solid #ccc; 
+    padding: 10px; 
+    z-index: 1000;
+}
 #toc-panel a {
   text-decoration: none;
   color: black;
