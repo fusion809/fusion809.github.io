@@ -47,10 +47,26 @@ function removeTable() {
 }
 
 function toggleTOC() {
-    const toc = document.getElementById("toc-panel");
-    toc.style.display = toc.style.display === "none" ? "block" : "none";
+  const toc = document.getElementById("toc-panel");
+  if (!toc) {
+    // Panel not yet loaded; retry shortly
+    setTimeout(toggleTOC, 10);
+    return;
+  }
+  toc.style.display = (toc.style.display === "none" || toc.style.display === "") ? "block" : "none";
 }
 
+function addH1ToTOC(tocPanel, headers) {
+    headers.forEach(h => {
+        if (!h.id) h.id = h.textContent.trim().replace(/\s+/g, "-").toLowerCase();
+        let label = h.textContent.trim();
+        if (!label) return;
+        if (h.tagName === "H1") {
+            var text = '<span id="h1_toc">' + label + '</span>'
+        }
+        tocPanel.insertAdjacentHTML("afterbegin", `<a href="#${h.id}">${text}</a>`);
+    });
+}
 function addHeadersToTOC(tocList, headers) {
     headers.forEach(h => {
         if (!h.id) h.id = h.textContent.trim().replace(/\s+/g, "-").toLowerCase();
@@ -58,11 +74,10 @@ function addHeadersToTOC(tocList, headers) {
         let label = h.textContent.trim();
         if (!label) return;
         if (h.tagName === "H1") {
-            var text = '<span style="font-size: 18px; font-weight: bold;">' + label + '</span>'
-        } else if (h.tagName === "H2") {
-            var text = '<strong>' + label + '</strong>'
+            return;
         } else {
-            var text = label;
+            var id = (h.tagName).toLowerCase() + "_toc";
+            var text = `<span id="${id}">` + label + '</span>';
         }
         li.innerHTML = `<a href="#${h.id}">${text}</a>`;
         tocList.appendChild(li);
@@ -91,9 +106,10 @@ function addTablesToTOC(tocList, tables) {
         if (!table.id) return;
         const anchorId = "anchor-" + suffix;
         if (!document.getElementById(anchorId)) {
-        const anchor = document.createElement("a");
-        anchor.id = anchorId;
-        table.parentNode.insertBefore(anchor, table);
+            const anchor = document.createElement("a");
+            anchor.id = anchorId;
+            table.parentNode.insertBefore(anchor, table);
+            
         }
         const li = document.createElement("li");
         li.innerHTML = `<a href="#${anchorId}">${label.trim()}</a>`;
@@ -200,12 +216,13 @@ function addContainersToTOC(tocList, containers) {
     });
 }
 function createTOC() {
-    const tocList = document.getElementById("toc-list");
-    tocList.innerHTML = "";
+    const tocPanel = document.getElementById("toc-panel");
+    tocPanel.innerHTML = '<ul id="toc-list" style="list-style: none; padding-left: 0;"></ul>';
     const headers = [...document.querySelectorAll('h1, h2, h3:not(div.page-foot h3):not(div[id^="container"] h3), h4, h5')];
     const containers = [...document.querySelectorAll("div[id^='container']")];
     const tables = [...document.querySelectorAll("table")];
-    
+    addH1ToTOC(tocPanel, headers);
+    const tocList = document.getElementById("toc-list");
     addHeadersToTOC(tocList, headers);
     addTablesToTOC(tocList, tables);
     addContainersToTOC(tocList, containers)
@@ -213,10 +230,12 @@ function createTOC() {
 
 document.addEventListener("DOMContentLoaded", function () {
   createTOC();
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       const id = entry.target.getAttribute("id");
       const tocLinks = document.querySelectorAll("#toc-list a");
+
       if (entry.isIntersecting && id) {
         tocLinks.forEach(link => link.classList.remove("active"));
         const active = [...tocLinks].find(link => link.getAttribute("href") === `#${id}`);
@@ -227,8 +246,24 @@ document.addEventListener("DOMContentLoaded", function () {
     threshold: 0.1
   });
 
-  document.querySelectorAll("h1, h2, h3, h4, div[id^='container'], table").forEach(el => {
-    if (!el.id) el.id = el.textContent.trim().replace(/\s+/g, "-").toLowerCase();
+  // 👇 Observe heading and table anchors directly
+  document.querySelectorAll("h1, h2, h3, h4, table").forEach(el => {
+    if (!el.id) {
+      el.id = el.textContent.trim().replace(/\s+/g, "-").toLowerCase();
+    }
     observer.observe(el);
   });
+
+  // 👇 Observe all anchors inserted for containers
+  document.querySelectorAll("a[id^='anchor-']").forEach(anchor => {
+    observer.observe(anchor);
+  });
+  const visibleSections = entries
+  .filter(entry => entry.isIntersecting)
+  .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+
+if (visibleSections.length > 0) {
+  const id = visibleSections[0].target.getAttribute("id");
+  // highlight matching link...
+}
 });
