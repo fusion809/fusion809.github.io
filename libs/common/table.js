@@ -231,49 +231,39 @@ function createTOC() {
 document.addEventListener("DOMContentLoaded", function () {
   createTOC();
 
-  const sectionMap = new Map(); // ID → entry
-  const tocLinks = document.querySelectorAll("#toc-list a");
-
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       const id = entry.target.getAttribute("id");
-      if (!id) return;
+      const tocLinks = document.querySelectorAll("#toc-list a");
 
-      if (entry.isIntersecting) {
-        sectionMap.set(id, entry);
-      } else {
-        sectionMap.delete(id);
+      if (entry.isIntersecting && id) {
+        tocLinks.forEach(link => link.classList.remove("active"));
+        const active = [...tocLinks].find(link => link.getAttribute("href") === `#${id}`);
+        if (active) active.classList.add("active");
       }
     });
-
-    let bestId = null;
-    let bestRatio = 0;
-    let bestTop = Infinity;
-
-    sectionMap.forEach((entry, id) => {
-      const ratio = entry.intersectionRatio;
-      const top = entry.boundingClientRect.top;
-
-      // Prefer highest visible ratio, break ties with top position
-      if (ratio > bestRatio || (ratio === bestRatio && top < bestTop)) {
-        bestRatio = ratio;
-        bestTop = top;
-        bestId = id;
-      }
-    });
-
-    tocLinks.forEach(link => link.classList.remove("active"));
-    if (bestId) {
-      const activeLink = document.querySelector(`#toc-list a[href="#${bestId}"]`);
-      if (activeLink) activeLink.classList.add("active");
-    }
   }, {
-    threshold: [0.1, 0.25, 0.5, 0.75], // tracks how much is visible
-    rootMargin: "0px 0px -30% 0px" // helps delay early triggering
+    threshold: 0.1
   });
 
-  document.querySelectorAll("h1, h2, h3, h4, div[id^='container'], table").forEach(el => {
-    if (!el.id) el.id = el.textContent.trim().replace(/\s+/g, "-").toLowerCase();
+  // 👇 Observe heading and table anchors directly
+  document.querySelectorAll("h1, h2, h3, h4, table").forEach(el => {
+    if (!el.id) {
+      el.id = el.textContent.trim().replace(/\s+/g, "-").toLowerCase();
+    }
     observer.observe(el);
   });
+
+  // 👇 Observe all anchors inserted for containers
+  document.querySelectorAll("a[id^='anchor-']").forEach(anchor => {
+    observer.observe(anchor);
+  });
+  const visibleSections = entries
+  .filter(entry => entry.isIntersecting)
+  .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+
+if (visibleSections.length > 0) {
+  const id = visibleSections[0].target.getAttribute("id");
+  // highlight matching link...
+}
 });
