@@ -370,6 +370,8 @@ function addTitleAndFrmt(objectOfInputs, element, {title: title, label:label} = 
   contEl.style = "border: 1px solid black; padding-bottom: 5px; padding-top: 0px; padding-left: 5px; width:100%";
   plotEl.width = objectOfInputs.Width + "px";
   plotEl.height = objectOfInputs.Height + "px";
+  document.getElementById(contID)
+  ?.style.setProperty("display", "inline-block", "important");
   return plotID;
 }
 
@@ -422,6 +424,19 @@ function margin(objectOfInputs) {
     r: 0, 
     b: 0.20*objectOfInputs.Height, 
     t: 0.20*objectOfInputs.Height};
+}
+
+function marginAn(timer, objectOfInputs) {
+  if (timer[1] > 0.95) {
+    var top = Math.max(0.08*objectOfInputs.Height, 48);
+  } else {
+    var top = 0;
+  }
+  // var top = 0;
+  return { l: Math.max(0.04*objectOfInputs.Width, 60), 
+    r: 0, 
+    b: 0.20*objectOfInputs.Height, 
+    t: top};
 }
 /**
  * Generate 2D plot
@@ -932,8 +947,9 @@ function generatePendulumPlots(objectOfInputs, solution) {
  * @param IdSuffix Suffix of element IDs used.
  * @return         Nothing.
  */
-function updateTimeLabel(layout, t, state, IdSuffix) {
+function updateTimeLabel(layout, fontSizes, t, state, IdSuffix) {
   layout.annotations[0].text = `Time: ${t[state.frame].toFixed(2)} s`;
+  layout.annotations[0].font = { size: fontSizes.annotation};
   Plotly.relayout('animation' + IdSuffix, layout);
 }
 
@@ -946,6 +962,7 @@ function updateTimeLabel(layout, t, state, IdSuffix) {
  */
 function pause(state, IdSuffix, animateFrame) {
   const pauseButton = document.getElementById("toggleButton" + IdSuffix);
+  if (!pauseButton) return;
   pauseButton.addEventListener("click", () => {
     state.paused = !state.paused;
     pauseButton.textContent = state.paused ? "Play" : "Pause";
@@ -968,10 +985,11 @@ function pause(state, IdSuffix, animateFrame) {
  */
 function restart(state, layout, t, IdSuffix) {
   const restartButton = document.getElementById("restartButton" + IdSuffix);
+  if (!restartButton) return;
   restartButton.addEventListener("click", () => {
     state.startTime =  null;
     state.frame =  0;  // Reset state.frame
-    updateTimeLabel(layout, t, state, IdSuffix);
+    updateTimeLabel(layout, fontSizes, t, state, IdSuffix);
   });
 }
 
@@ -985,6 +1003,7 @@ function restart(state, layout, t, IdSuffix) {
  */
 function addTime(state, layout, t, IdSuffix) {
   const addTimeButton = document.getElementById("addTimeButton" + IdSuffix);
+  if (!addTimeButton) return;
   addTimeButton.addEventListener("click", () => {
     //startTime += objectOfInputs.Time - t[state.frame];'
     var Deltat = readInputs().Deltat;
@@ -1000,7 +1019,7 @@ function addTime(state, layout, t, IdSuffix) {
           : prevIndex;
       });
     }
-    updateTimeLabel(layout, t, state, IdSuffix);
+    updateTimeLabel(layout, fontSizes, t, state, IdSuffix);
   });
 }
 
@@ -1014,6 +1033,7 @@ function addTime(state, layout, t, IdSuffix) {
  */
 function skipTo(state, layout, t, IdSuffix) {
   const skipToButton = document.getElementById("skipToButton" + IdSuffix);
+  if (!skipToButton) return;
   skipToButton.addEventListener("click", () => {
     var t1 = readInputs().t1;
     if (t1 > t[t.length-1]) {
@@ -1028,7 +1048,7 @@ function skipTo(state, layout, t, IdSuffix) {
           : prevIndex;
       });
     }
-    updateTimeLabel(layout, t, state, IdSuffix);
+    updateTimeLabel(layout, fontSizes, t, state, IdSuffix);
   });
 }
 
@@ -1097,7 +1117,7 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
 
   var fontSizes = getPlotFontSizes(objectOfInputs);
   const layout = {
-    margin: margin(objectOfInputs),  // make space for labels
+    margin: marginAn([0, 1], objectOfInputs),  // make space for labels
     width: objectOfInputs.Width,
     height: objectOfInputs.Height,
     xaxis: {
@@ -1178,8 +1198,7 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
               frame: { duration: 0, redraw: true }
           });
       }
-      layout.annotations[0].text = `Time: ${t[state.frame].toFixed(2)} s`;
-      Plotly.relayout(animID, layout);
+      updateTimeLabel(layout, fontSizes, t, state, IdSuffix);
       animElem.frameRequest = requestAnimationFrame(animateFrame);
     }
 
@@ -1228,7 +1247,7 @@ function animate2D(solution, {varnames=["x", "y"], timer=[0.05, 0.98], IdSuffix=
 
   var fontSizes = getPlotFontSizes(objectOfInputs);
   const layout = {
-    margin: margin(objectOfInputs),  // make space for labels
+    margin: marginAn(timer, objectOfInputs),  // make space for labels
     width: objectOfInputs.Width,
     height: objectOfInputs.Height,
     xaxis: {
@@ -1313,7 +1332,7 @@ function animate2D(solution, {varnames=["x", "y"], timer=[0.05, 0.98], IdSuffix=
                 font: { size: 16 }
               }
             ],
-            margin: margin(objectOfInputs),
+            margin: marginAn(timer, objectOfInputs),
             xaxis: {
                 title: {text: varnames[0], font: {size: fontSizes.axisTitle}},
                 range: range(x),
@@ -1391,7 +1410,7 @@ function animate3D(solution, {view = [0.5, -2, 0.5],
 
   var fontSizes = getPlotFontSizes(objectOfInputs);
   const layout = {
-    margin: margin(objectOfInputs),
+    margin: marginAn([0, 0], objectOfInputs),
     width: objectOfInputs.Width,
     height: objectOfInputs.Height,
     scene: {

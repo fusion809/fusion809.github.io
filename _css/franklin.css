@@ -352,6 +352,7 @@ code {
     width: fit-content;
     max-width: 100%;
     padding: 1px;
+    display: none;
     /* Add these properties: */
     overflow: hidden;           /* Prevent content from overflowing */
     position: relative;         /* Establish positioning context */
