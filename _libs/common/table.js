@@ -56,6 +56,7 @@ function addHeadersToTOC(tocList, headers) {
         if (!h.id) h.id = h.textContent.trim().replace(/\s+/g, "-").toLowerCase();
         const li = document.createElement("li");
         let label = h.textContent.trim();
+        if (!label) return;
         if (h.tagName === "H1") {
             var text = '<span style="font-size: 18px; font-weight: bold;">' + label + '</span>'
         } else if (h.tagName === "H2") {
@@ -201,7 +202,7 @@ function addContainersToTOC(tocList, containers) {
 function createTOC() {
     const tocList = document.getElementById("toc-list");
     tocList.innerHTML = "";
-    const headers = [...document.querySelectorAll(["h1", "h2"])].filter(h => !h.closest("page-foot"));
+    const headers = [...document.querySelectorAll('h1, h2, h3:not(div.page-foot h3):not(div[id^="container"] h3), h4, h5')];
     const containers = [...document.querySelectorAll("div[id^='container']")];
     const tables = [...document.querySelectorAll("table")];
     
