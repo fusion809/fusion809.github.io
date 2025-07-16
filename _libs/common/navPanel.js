@@ -16,6 +16,8 @@ function addH1ToTOC(tocPanel, tocList, headers) {
         if (!label) return;
         if (h.tagName === "H1") {
             var text = '<span id="h1_toc">' + label + '</span>'
+        } else {
+            return;
         }
         if (i == 0) {
             tocPanel.insertAdjacentHTML("afterbegin", `<a href="#${h.id}">${text}</a>`);
@@ -219,7 +221,7 @@ document.addEventListener("DOMContentLoaded", function () {
         rootMargin: "0px 0px -30% 0px" // helps delay early triggering
     });
 
-    document.querySelectorAll("div[id^='container'], a[id^='anchor-'], table").forEach(container => {
+    document.querySelectorAll("div[id^='container'], a[id^='anchor-'], h1, h2, h3, h4, h5, table").forEach(container => {
         observer.observe(container);
     });
 });
