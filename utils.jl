@@ -96,11 +96,19 @@ function hfun_params_render()
   end
   if !haskey(params, :epsilon)
     push!(params_list, "epsilon")
-    push!(params_desc, "Absolute error tolerance.")
+    push!(params_desc, "Error tolerance.")
     push!(params_val, 1e-11)
   end
   if haskey(params, :epsilon) && !hasproperty(params.epsilon, :desc)
-    push!(params_desc, "Absolute error tolerance.")
+    push!(params_desc, "Error tolerance.")
+  end
+  if !haskey(params, :tolType)
+    push!(params_list, "tolType")
+    push!(params_desc, "Tolerance type, can be either absolute (0) or relative (1).")
+    push!(params_val, 0)
+  end
+  if haskey(params, :tolType) && !hasproperty(params.tolType, :desc)
+    push!(params_desc, "Tolerance type, can be either absolute (0) or relative (1).")
   end
   add_params_end(params_val, params_desc, params_list, "hInitial", 0.1, "Initial step size.");
   add_params_end(params_val, params_desc, params_list, "hMin", 1e-8, "Minimum allowed step size.");
@@ -255,6 +263,8 @@ function hfun_params_render()
       param_name_latex="h_{\\mathrm{Initial}}"
     elseif (occursin.(r"hMin", param_name))
       param_name_latex="h_{\\mathrm{Min}}"
+    elseif (occursin.(r"tolType", param_name))
+      param_name_latex="\\mathrm{Tol}_{\\mathrm{type}}"
     else
       param_name_latex=param_name
     end

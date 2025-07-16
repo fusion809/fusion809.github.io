@@ -714,6 +714,31 @@ function generatePendulumCoords(objectOfInputs, solution) {
 
     // Return t and Cartesian coordinates of the pendulum bobs
     return [t, x1, y1, x2, y2];
+  } else if (objectOfInputs.hasOwnProperty("l3")) {
+    // Extract solution values and pendulum lengths
+    var {t, vars} = solution;
+    var [theta1, dtheta1, theta2, dtheta2, theta3, dtheta3] = vars;
+    var {l1, l2, l3} = objectOfInputs;
+    var N = theta1.length;
+
+    // Initialize arrays that will store x and y coords
+    var x1 = new Array(N);
+    var x2 = new Array(N);
+    var y1 = new Array(N);
+    var y2 = new Array(N);
+    var x3 = new Array(N);
+    var y3 = new Array(N);
+    for (let i = 0; i < N; i++) {
+        x1[i] = l1*Math.cos(theta1[i]);
+        y1[i] = l1*Math.sin(theta1[i]);
+        x2[i] = x1[i] + l2*Math.cos(theta2[i]);
+        y2[i] = y1[i] + l2*Math.sin(theta2[i]);
+        x3[i] = x2[i] + l3*Math.cos(theta3[i]);
+        y3[i] = y2[i] + l3*Math.sin(theta3[i]);
+    }
+
+    // Return t and Cartesian coordinates of the pendulum bobs
+    return [t, x1, y1, x2, y2, x3, y3];
   } else if (objectOfInputs.hasOwnProperty("l1")) {
     // Extract solution values and pendulum lengths
     var {t, vars} = solution;
@@ -1081,6 +1106,10 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
   } else if (label == "Simple pendulum" || label == "Single pendulum" || label == "Elastic pendulum") {
     var [x, y] = generatePendulumCoords(objectOfInputs, solution);
     i
+  } else if (label == "Triple pendulum") {
+    var [t1, x1, y1, x2, y2, x3, y3] = generatePendulumCoords(objectOfInputs, solution);
+    var x=[new Array(x1.length).fill(0), x1, x2, x3];
+    var y=[new Array(x1.length).fill(0), y1, y2, y3];
   }
   var data;
   var animID = addTitleAndFrmt(objectOfInputs, IdSuffix, {label: label});
@@ -1104,6 +1133,29 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
         name: "Rod 2"
     };
     data = [trace1, trace2];
+  } else if (label == "Triple pendulum") {
+    const trace1 = {
+        x: [], y: [],
+        mode: "lines+markers",
+        marker: { size: 8 },
+        line: { color: "blue" },
+        name: "Rod 1"
+    };
+    const trace2 = {
+        x: [], y: [],
+        mode: "lines+markers",
+        marker: { size: 8 },
+        line: { color: "red" },
+        name: "Rod 2"
+    };
+    const trace3 = {
+        x: [], y: [],
+        mode: "lines+markers",
+        marker: { size: 8 },
+        line: { color: "green" },
+        name: "Rod 3"
+    };
+    data = [trace1, trace2, trace3];
   } else {
     const trace1 = {
         x: [], y: [],
@@ -1183,6 +1235,17 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
           data: [
               { x: [0, x1[state.frame]], y: [0, y1[state.frame]] },
               { x: [x1[state.frame], x2[state.frame]], y: [y1[state.frame], y2[state.frame]] }
+          ]
+          }, {
+          transition: { duration: 0 },
+          frame: { duration: 0, redraw: true }
+          })  
+      } else if (label == "Triple pendulum") {
+          Plotly.animate(animID, {
+          data: [
+              { x: [0, x1[state.frame]], y: [0, y1[state.frame]] },
+              { x: [x1[state.frame], x2[state.frame]], y: [y1[state.frame], y2[state.frame]] },
+              { x: [x2[state.frame], x3[state.frame]], y: [y2[state.frame], y3[state.frame]] }
           ]
           }, {
           transition: { duration: 0 },

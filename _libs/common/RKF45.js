@@ -16,7 +16,7 @@ function approxRKF45(f, dt, objectOfInputs, t, vars, i) {
     var X2 = [];
     var Rarr = [];
     var sarr = [];
-    var {epsilon} = objectOfInputs;
+    var {tolType, epsilon} = objectOfInputs;
 
     // K[i][j], i goes from 0 to 5 and represents k1, k2, k3, k4, k5, k6
     // j goes from 0 to the dimensionality of the problem - 1
@@ -31,7 +31,11 @@ function approxRKF45(f, dt, objectOfInputs, t, vars, i) {
     for (let j = 0; j < K[0].length; j++) {
         X1[j] = vars[i][j] + 25*K[0][j]/216+1408*K[2][j]/2565+2197*K[3][j]/4104-K[4][j]/5;
         X2[j] = vars[i][j] + 16*K[0][j]/135+6656*K[2][j]/12825+28561*K[3][j]/56430-9*K[4][j]/50+2*K[5][j]/55;
-        Rarr[j] = Math.abs(X1[j]-X2[j])/dt;
+        if (X1[j] != 0 && tolType) {
+            Rarr[j] = Math.abs((X1[j]-X2[j])/(dt*X1[j]));
+        } else {
+            Rarr[j] = Math.abs((X1[j]-X2[j])/dt)
+        }
         sarr[j] = Math.pow(epsilon/(2*Rarr[j]), 0.25);  
     }
 
