@@ -1,0 +1,121 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/libs/highlight/github.min.css"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/pure.css"> <!--<link rel=stylesheet  href="/css/side-menu.css">--> <!--The width specified in frankin content under @media determines how wide the website is--> <style> .franklin-content{padding:0px;} @media (min-width: 940px) { .franklin-content {width: 100%; margin: 0px; padding-left: 1px} } </style> <link rel=icon  href="/assets/favicon.png"> <title>Derivation of the equations of motion of the triple pendulum</title> <div id=layout > <div id=main > <div class=header > <h1>Derivation of the equations of motion of the triple pendulum</h1> </div> <div class=franklin-content ><p>The following Python code was used to derive the equations of motion</p> <pre><code class="python hljs"><span class=hljs-keyword >from</span> sympy <span class=hljs-keyword >import</span> symbols, Function, diff, cos, sin, simplify, sqrt, Abs, Eq, solve, latex, Array
+<span class=hljs-keyword >from</span> sympy.vector <span class=hljs-keyword >import</span> CoordSys3D
+<span class=hljs-keyword >from</span> multiprocessing <span class=hljs-keyword >import</span> Pool, cpu_count
+N = CoordSys3D(<span class=hljs-string >&#x27;N&#x27;</span>);
+<span class=hljs-comment ># Set up symbols</span>
+t = symbols(<span class=hljs-string >&#x27;t&#x27;</span>)
+m1r = symbols(<span class=hljs-string >&#x27;m1r&#x27;</span>); 
+m2r = symbols(<span class=hljs-string >&#x27;m2r&#x27;</span>); 
+m3r = symbols(<span class=hljs-string >&#x27;m3r&#x27;</span>); 
+m1b = symbols(<span class=hljs-string >&#x27;m1b&#x27;</span>); 
+m2b = symbols(<span class=hljs-string >&#x27;m2b&#x27;</span>); 
+m3b = symbols(<span class=hljs-string >&#x27;m3b&#x27;</span>); 
+l1 = symbols(<span class=hljs-string >&#x27;11&#x27;</span>);
+l2 = symbols(<span class=hljs-string >&#x27;l2&#x27;</span>);
+l3 = symbols(<span class=hljs-string >&#x27;l3&#x27;</span>);
+g = symbols(<span class=hljs-string >&#x27;g&#x27;</span>); 
+b1r = symbols(<span class=hljs-string >&#x27;b1r&#x27;</span>); 
+b2r = symbols(<span class=hljs-string >&#x27;b2r&#x27;</span>); 
+b3r = symbols(<span class=hljs-string >&#x27;b3r&#x27;</span>); 
+b1b = symbols(<span class=hljs-string >&#x27;b1b&#x27;</span>); 
+b2b = symbols(<span class=hljs-string >&#x27;b2b&#x27;</span>); 
+b3b = symbols(<span class=hljs-string >&#x27;b3b&#x27;</span>); 
+c1r = symbols(<span class=hljs-string >&quot;c1r&quot;</span>); 
+c2r = symbols(<span class=hljs-string >&quot;c2r&quot;</span>); 
+c3r = symbols(<span class=hljs-string >&quot;c3r&quot;</span>);
+c1b = symbols(<span class=hljs-string >&quot;c1b&quot;</span>); 
+c2b = symbols(<span class=hljs-string >&quot;c2b&quot;</span>); 
+c3b = symbols(<span class=hljs-string >&quot;c3b&quot;</span>);
+
+theta1=Function(<span class=hljs-string >&#x27;theta1&#x27;</span>)(t); 
+theta2=Function(<span class=hljs-string >&#x27;theta2&#x27;</span>)(t); 
+theta3=Function(<span class=hljs-string >&#x27;theta3&#x27;</span>)(t); 
+x1b = l1*cos(theta1);
+x1r = x1b/<span class=hljs-number >2</span>;
+y1b = l1*sin(theta1);
+y1r = y1b/<span class=hljs-number >2</span>;
+r1b = x1b*N.i + y1b*N.j;
+r1r = x1r*N.i + y1r*N.j;
+x2b = x1b + l2*cos(theta2);
+y2b = y1b + l2*sin(theta2);
+x2r = x1b + l2*cos(theta2)/<span class=hljs-number >2</span>;
+y2r = y1b + l2*sin(theta2)/<span class=hljs-number >2</span>;
+r2b = x2b*N.i + y2b*N.j;
+r2r = x2r*N.i + y2r*N.j;
+x3b = x2b + l3*cos(theta3);
+y3b = y2b + l3*sin(theta3);
+x3r = x2b + l3*cos(theta3)/<span class=hljs-number >2</span>;
+y3r = y2b + l3*sin(theta3)/<span class=hljs-number >2</span>;
+r3b = x3b*N.i + y3b*N.j;
+r3r = x3r*N.i + y3r*N.j;
+
+<span class=hljs-keyword >def</span> <span class="hljs-title function_">compute_kinetic</span>(<span class=hljs-params >m, l, theta, r</span>):
+	T = <span class=hljs-number >0</span>;
+	j = <span class=hljs-number >0</span>;
+	v = [];
+	<span class=hljs-keyword >for</span> i <span class=hljs-keyword >in</span> m:
+		v.append(diff(r[j], t))
+		T += i*v[j].dot(v[j])/<span class=hljs-number >2</span>;
+		j += <span class=hljs-number >1</span>
+		
+	<span class=hljs-keyword >for</span> i <span class=hljs-keyword >in</span> <span class=hljs-built_in >range</span>(<span class=hljs-built_in >len</span>(l)):
+		T += m[<span class=hljs-number >2</span>*i]*l[i]**<span class=hljs-number >2</span>*diff(theta[i], t)**<span class=hljs-number >2</span>/<span class=hljs-number >24</span>;
+	
+	<span class=hljs-keyword >return</span> T
+	
+<span class=hljs-keyword >def</span> <span class="hljs-title function_">compute_potential</span>(<span class=hljs-params >g, m, r</span>):
+	V = <span class=hljs-number >0</span>;
+	<span class=hljs-keyword >for</span> j <span class=hljs-keyword >in</span> <span class=hljs-built_in >range</span>(<span class=hljs-built_in >len</span>(r)):
+		y = r[j].dot(N.j)
+		V += m[j] * g * y
+	
+	<span class=hljs-keyword >return</span> V
+	
+<span class=hljs-keyword >def</span> <span class="hljs-title function_">compute_lagrangian</span>(<span class=hljs-params >g, l, m, r, theta</span>):
+	L = compute_kinetic(m, l, theta, r) - compute_potential(g, m, r)
+	<span class=hljs-keyword >return</span> L
+
+<span class=hljs-keyword >def</span> <span class="hljs-title function_">diss_force</span>(<span class=hljs-params >b, c, r</span>):
+	v = diff(r, t);
+	<span class=hljs-keyword >return</span> -(b+c*sqrt(v.dot(v)))*v
+	
+<span class=hljs-keyword >def</span> <span class="hljs-title function_">gen_diss_force</span>(<span class=hljs-params >b, c, r, coord</span>):
+	Q = [<span class=hljs-number >0</span> <span class=hljs-keyword >for</span> i <span class=hljs-keyword >in</span> <span class=hljs-built_in >range</span>(<span class=hljs-built_in >len</span>(coord))]
+	<span class=hljs-keyword >for</span> j <span class=hljs-keyword >in</span> <span class=hljs-built_in >range</span>(<span class=hljs-built_in >len</span>(coord)):
+		<span class=hljs-keyword >for</span> i <span class=hljs-keyword >in</span> <span class=hljs-built_in >range</span>(<span class=hljs-built_in >len</span>(r)):
+			v = diff(r[i], t)
+			F = diss_force(b[i], c[i], r[i])
+			ehat = diff(r[i], coord[j])
+			Q[j] += F.dot(ehat)
+
+	<span class=hljs-keyword >return</span> Q
+	
+<span class=hljs-keyword >def</span> <span class="hljs-title function_">compute_eq_of_motion</span>(<span class=hljs-params >g, m, b, c, r, l, theta</span>):
+	t = symbols(<span class=hljs-string >&#x27;t&#x27;</span>)
+	L = compute_lagrangian(g, l, m, r, theta)
+	coord = [theta1, theta2, theta3]
+	Q = [Function(<span class=hljs-string >&#x27;Qtheta1&#x27;</span>)(t), Function(<span class=hljs-string >&#x27;Qtheta2&#x27;</span>)(t), Function(<span class=hljs-string >&#x27;Qtheta3&#x27;</span>)(t)];
+	lhs = [<span class=hljs-number >0</span> <span class=hljs-keyword >for</span> i <span class=hljs-keyword >in</span> <span class=hljs-built_in >range</span>(<span class=hljs-built_in >len</span>(coord))]
+	<span class=hljs-keyword >return</span> [Eq(diff(diff(L, diff(coord[i], t)), t) - diff(L, coord[i]), Q[i]) <span class=hljs-keyword >for</span> i <span class=hljs-keyword >in</span> <span class=hljs-built_in >range</span>(<span class=hljs-built_in >len</span>(coord))]
+	
+m = [m1r, m1b, m2r, m2b, m3r, m3b]
+b = [b1r, b1b, b2r, b2b, b3r, b3b]
+c = [c1r, c1b, c2r, c2b, c3r, c3b]
+r = [r1r, r1b, r2r, r2b, r3r, r3b]
+l = [l1, l2, l3];
+coord = [theta1, theta2, theta3]
+Q = gen_diss_force(b, c, r, coord)
+eqns = compute_eq_of_motion(g, m, b, c, r, l, coord)
+d2 = [diff(i, (t, <span class=hljs-number >2</span>)) <span class=hljs-keyword >for</span> i <span class=hljs-keyword >in</span> coord];
+theta_ddot_syms = symbols(<span class=hljs-string >&#x27;theta1_dd theta2_dd theta3_dd&#x27;</span>)
+<span class=hljs-comment >#sol = solve(eqn, d2)</span>
+
+<span class=hljs-comment ># Turn Eq(lhs, rhs) into lhs - rhs == 0</span>
+residuals = [eq.lhs - eq.rhs <span class=hljs-keyword >for</span> eq <span class=hljs-keyword >in</span> eqns]
+
+<span class=hljs-comment ># Substitute second derivatives with dummy symbols (e.g. theta1_dd)</span>
+residuals_subs = [res.subs(<span class=hljs-built_in >dict</span>(<span class=hljs-built_in >zip</span>(d2, theta_ddot_syms))) <span class=hljs-keyword >for</span> res <span class=hljs-keyword >in</span> residuals]
+<span class=hljs-keyword >from</span> sympy.solvers.solveset <span class=hljs-keyword >import</span> linear_eq_to_matrix
+
+A, b = linear_eq_to_matrix(residuals_subs, theta_ddot_syms)
+<span class=hljs-built_in >print</span>(simplify(A))</code></pre> <div class=page-foot > <div class=copyright > &copy; Brenton Horne. I do not claim to be infallible, so feel free to open <a href="https://github.com/fusion809/fusion809.github.io/issues/new">issues</a> or <a href="https://github.com/fusion809/fusion809.github.io/pulls">pull requests</a> on GitHub if you notice flaws or things that can be improved. <br/>I favour Oxford spelling, so if you notice I generally use different spelling to Australian spelling, that is probably why. <br/><a href="/">Homepage</a>. Source code: <a href="https://github.com/fusion809/fusion809.github.io">https://github.com/fusion809/fusion809.github.io</a>. <br/>Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a>. <br/> <button type='button' class='collapsible'>Show content pages list</button> <div class='content'><p> <h3>Mathematical simulation/solver pages</h3> <ul class=flexcols > <li><a href="/Chen/">Chen system solver</a> <li><a href="/doubleElasticPendulum/">Double elastic pendulum solver</a> <li><a href="/doublePendulum/">Double pendulum solver</a> <li><a href="/Duffing/">Duffing equations solver</a> <li><a href="/elasticPendulum/">Elastic pendulum solver</a> <li><a href="/Lorenz/">Lorenz equations solver</a> <li><a href="/LotkaVolterra/">Lotka-Volterra equations solver</a> <li><a href="/Rabinovich-Fabrikant/">Rabinovich-Fabrikant equations solver</a> <li><a href="/Rossler/">R&ouml;ssler system solver</a> <li><a href="/SEIR"/>SEIR system solver</a> <li><a href="/simplePendulum/wErrorAnalysis">Simple pendulum simulator with error analysis</a> <li><a href="/simplePendulum/woErrorAnalysis">Simple pendulum simulator without error analysis</a> <li><a href="/simplex/">Simplex linear programme solver</a> <li><a href="/singlePendulum/">Single pendulum: solver/equations derivation</a> <li><a href="/SIR/">SIR system solver</a> </ul> <div class=clearfix ><h3>Complex analysis pages</h3> <ul class=flexcols > <li><a href="/complexAnalysis/circleR2RedditInt/">Contour integration with a pole on the contour itself</a> <li><a href="/complexAnalysis/x2cosmxoverx4pa4sq/">Evaluating \(\displaystyle \int_{-\infty}^{\infty} \dfrac{x^2\cos{mx}}{(x^4+a^4)^2} dx\) using contour integration</a> <li><a href="/complexAnalysis/sinxoverxtimesx8plusa8/">Evaluating \(\displaystyle \int_{-\infty}^{\infty} \dfrac{\sin{mx}}{x(x^8+a^8)} dx\) using contour integration</a> </ul> </div> <div class=clearfix ><h3>Numerical mathematics</h3> <ul class=flexcols > <li><a href="/sqrt/">Root finding without a calculator</a> <li><a href="/RKF45/">Runge-Kutta-Fehlberg 4/5th-order method</a> </ul> </div> <div class=clearfix ><h3>Lagrangian mechanics pages</h3> <ul class=flexcols > <li><a href="/doubleElasticPendulum/derivation/">Double elastic pendulum with dissipation.</a> <li><a href="/doublePendulum/derivation/">Double pendulum with dissipation and massive rods.</a> </ul> </div> <div class=clearfix  style="width: 100%;"><h3>Other mathematics</h3> <ul class=flexcols > <li><a href="/FunctionIntegrator/">FunctionIntegrator.jl package description page</a> <li><a href="/STV+/">Proposed electoral system: single transferable vote plus</a> </ul> </div> <div class=clearfix ><h3>Education, my personal opinion largely</h3> <ul class=flexcols > <li><a href="/advice_for_wannabe_PhD_students/">Advice for undergraduate students wishing to study a PhD.</a> <li><a href="/PhD_entry_article/">Meeting the entry requirements of Australian PhD programmes</a> <li><a href="/Australian_education_system/">The Australian education system with a particular focus on the Queensland education system</a> </ul> </div> <div class=clearfix ><h3>Linux</h3> <ul> <li><a href="/Linux/Linux-distros-comparison/">Linux distributions: identifying the ideal use cases.</a> </ul> </div> </p></div> <script> var coll = document.getElementsByClassName("collapsible"); var i; for (i = 0; i < coll.length; i++) { coll[i].addEventListener("click", function () { this.classList.toggle("active"); var content = this.nextElementSibling; if (content.style.display === "block") { content.style.display = "none"; } else { content.style.display = "block"; } }); } </script> <br/>Last modified: July 16, 2025. </div> </div> </div> </div> </div> <script src="/libs/pure/ui.min.js"></script>

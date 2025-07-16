@@ -122,6 +122,18 @@
     <priority>0.5</priority>
 </url>
 <url>
+    <loc>https://fusion809.github.io/triplePendulum/index.html</loc>
+    <lastmod>2025-07-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://fusion809.github.io/triplePendulum/derivation/index.html</loc>
+    <lastmod>2025-07-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
     <loc>https://fusion809.github.io/doubleElasticPendulum/index.html</loc>
     <lastmod>2025-07-16</lastmod>
     <changefreq>monthly</changefreq>
