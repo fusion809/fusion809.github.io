@@ -56,7 +56,8 @@ function toggleTOC() {
   toc.style.display = (toc.style.display === "none" || toc.style.display === "") ? "block" : "none";
 }
 
-function addH1ToTOC(tocPanel, headers) {
+function addH1ToTOC(tocPanel, tocList, headers) {
+    var i = 0;
     headers.forEach(h => {
         if (!h.id) h.id = h.textContent.trim().replace(/\s+/g, "-").toLowerCase();
         let label = h.textContent.trim();
@@ -64,7 +65,15 @@ function addH1ToTOC(tocPanel, headers) {
         if (h.tagName === "H1") {
             var text = '<span id="h1_toc">' + label + '</span>'
         }
-        tocPanel.insertAdjacentHTML("afterbegin", `<a href="#${h.id}">${text}</a>`);
+        if (i == 0) {
+            tocPanel.insertAdjacentHTML("afterbegin", `<a href="#${h.id}">${text}</a>`);
+        } else {
+            const li = document.createElement("li");
+            var text = label;
+            li.innerHTML = `<a href="#${h.id}">${text}</a>`;
+            tocList.appendChild(li);
+        }
+        i++;
     });
 }
 function addHeadersToTOC(tocList, headers) {
@@ -76,8 +85,7 @@ function addHeadersToTOC(tocList, headers) {
         if (h.tagName === "H1") {
             return;
         } else {
-            var id = (h.tagName).toLowerCase() + "_toc";
-            var text = `<span id="${id}">` + label + '</span>';
+            var text = label;
         }
         li.innerHTML = `<a href="#${h.id}">${text}</a>`;
         tocList.appendChild(li);
@@ -209,8 +217,8 @@ function createTOC() {
     const headers = [...document.querySelectorAll('h1, h2, h3:not(div.page-foot h3):not(div[id^="container"] h3), h4, h5')];
     const containers = [...document.querySelectorAll("div[id^='container']")];
     const tables = [...document.querySelectorAll("table")];
-    addH1ToTOC(tocPanel, headers);
     const tocList = document.getElementById("toc-list");
+    addH1ToTOC(tocPanel, tocList, headers);
     addHeadersToTOC(tocList, headers);
     addTablesToTOC(tocList, tables);
     addContainersToTOC(tocList, containers)
