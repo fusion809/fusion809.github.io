@@ -5,9 +5,11 @@
  * @param headings       Headings for each dependent variable column of the table.
  * @return               Nothing. Just populates the table with the solution values. 
  */
-function fillTable(objectOfInputs, headings) {
+function fillTable(objectOfInputs, headings, solution=undefined) {
     // Solve the problem
-    var solution = solveProblem(RKF45, objectOfInputs);
+    if (solution == undefined) {
+        var solution = solveProblem(RKF45, objectOfInputs);
+    }
     if (solution.varsLen() != headings.length) {
         alert("libs/common.js#fillTable: vars length and headings length do not match!")
     }

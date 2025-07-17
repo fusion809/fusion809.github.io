@@ -3,9 +3,9 @@
 @def SP.wo=true;
 @def hassim=true;
 @def params = (g=(val=9.81, desc="Acceleration due to gravity."), l=(val=1, desc="Length of pendulum in metres."), tf=(val=9.4713677903049498, desc="End time for the simulation in seconds. Default is four times the period of the problem."), theta0=(val=0, desc="Initial angle relative to the positive \\(x\\)-axis."), dtheta0=(val=0, desc="Initial rate of change of the aforementioned angle."), N=(val=1e6, desc="Number of quadrature nodes used to approximate period"))
-@def ids=["tableOutputs", "phasePlot", "timePlot", "phasePlot", "animation", "animationPhase", "animation"]
-@def funcs=["fillTableSP(readInputs())","removeTable()","generatePhasePlot(solveProblemSP(readInputs()))","removePhasePlot()","generateTimePlot(solveProblemSP(readInputs()))","removeTimePlot()","generatePlots(readInputs())","removePlots()","generateAnimation()","removeAnimation()","generatePhaseAnimation()","removePhaseAnimation()","generateAnimations()","removeAnimations()"]
-@def labels=["Tabulate the solution","Remove the solution table","Generate a phase plot","Remove phase plot","Generate a time plot","Remove time plot","Generate all solution plots","Remove all solution plots","Generate an animation","Remove animation","Generate a phase plot animation","Remove phase plot animation","Generate all animations","Remove all animations"]
+@def ids=["tableOutputs", "phasePlot", "timePlot", "phasePlot", "animation", "animationPhase", "animation","animation"]
+@def funcs=["fillTableSP(readInputs())","removeTable()","generatePhasePlot(solveProblemSP(readInputs()))","removePhasePlot()","generateTimePlot(solveProblemSP(readInputs()))","removeTimePlot()","generatePlots(readInputs())","removePlots()","generateAnimation()","removeAnimation()","generatePhaseAnimation()","removePhaseAnimation()","generateAnimations()","removeAnimations()","generateAllOutputs()","removeAllOutputs()"]
+@def labels=["Tabulate the solution","Remove the solution table","Generate a phase plot","Remove phase plot","Generate a time plot","Remove time plot","Generate all solution plots","Remove all solution plots","Generate an animation","Remove animation","Generate a phase plot animation","Remove phase plot animation","Generate all animations","Remove all animations","Generate all outputs","Remove all outputs"]
 
 This webpage uses the [Runge-Kutta-Fehlberg fourth-order method with fifth-order error checking (RKF45)](/RKF45/) to approximate the solution to the problem of the simple pendulum:
 

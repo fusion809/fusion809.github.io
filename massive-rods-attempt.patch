@@ -1,0 +1,447 @@
+diff --git a/doubleElasticPendulum/derivation.md b/doubleElasticPendulum/derivation.md
+index 9d40093..f45034b 100755
+--- a/doubleElasticPendulum/derivation.md
++++ b/doubleElasticPendulum/derivation.md
+@@ -1,4 +1,4 @@
+-@def hassim=false;
++@def hassim=false;
+ @def title="Deriving the equations of motion for the double elastic pendulum"
+ @def maxtoclevel = 5
+ @def mintoclevel = 1
+@@ -588,3 +588,208 @@ So the solution is
+     \end{align*}
+ 
+ Ordinarily, I would use a symplectic method to integrate a classical mechanical system, as it minimizes cumulative errors in the Hamiltonian over long-term integration. That being said, symplectic methods typically are either implicit (which significantly increases their computational complexity) or require a separable Hamiltonian. The Hamiltonian of this system would not separable as the kinetic energy cannot be written entirely in terms of momenta. Additionally, rewriting the kinetic energy in terms of the momenta would be tedious and prone to error.
++
++# Derivation with massive rods
++```python
++from sympy import symbols, Function, diff, cos, sin, simplify, sqrt, Abs, Eq, solve, latex, integrate, factor
++from sympy.vector import CoordSys3D
++from multiprocessing import Pool, cpu_count
++from math import floor
++N = CoordSys3D('N');
++# Set up symbols
++t = symbols('t')
++m1b = symbols('m1b'); 
++m2b = symbols('m2b'); 
++m1r = symbols('m1r'); 
++m2r = symbols('m2r'); 
++l1 = symbols('11');
++l2 = symbols('l2');
++k1 = symbols('k1'); 
++k2 = symbols('k2'); 
++g = symbols('g'); 
++b1r = symbols('b1r'); 
++b2r = symbols('b2r'); 
++b1b = symbols('b1b'); 
++b2b = symbols('b2b'); 
++c1r = symbols("c1r"); 
++c1b = symbols("c1b"); 
++c2r = symbols("c2r"); 
++c2b = symbols("c2b");
++# Functions
++r1 = Function('r1')(t); 
++theta1=Function('theta1')(t); 
++r2 = Function('r2')(t); 
++theta2=Function('theta2')(t);
++
++# Bob 1
++x1b = r1*cos(theta1);
++y1b = r1*sin(theta1);
++y1r = r1*sin(theta1)/2;
++r1b = x1b * N.i + y1b * N.j;
++v1b = diff(r1b, t);
++v1b_sq = v1b.dot(v1b);
++v1b_mag = sqrt(v1b_sq);
++e1b_r1 = diff(r1b, r1);
++e1b_r2 = diff(r1b, r2);
++e1b_th1 = diff(r1b, theta1);
++e1b_th2 = diff(r1b, theta2);
++
++# Bob 2
++x2b = x1b+r2*cos(theta2);
++y2b = y1b + r2*sin(theta2);
++y2r = y1b + r2*sin(theta2)/2;
++r2b = x2b * N.i + y2b * N.j;
++v2b = diff(r2b, t);
++v2b_sq = v2b.dot(v2b);
++v2b_mag = sqrt(v2b_sq);
++e2b_r1 = diff(r2b, r1);
++e2b_r2 = diff(r2b, r2);
++e2b_th1 = diff(r2b, theta1);
++e2b_th2 = diff(r2b, theta2);
++
++# Rod 1
++x1r = x1b/2;
++y1r = y1b/2;
++r1r = x1r*N.i+y1r*N.j;
++v1r = diff(r1r, t);
++# Rod 2
++x2r = x1b + r2*cos(theta2)/2;
++y2r = y1b + r2*sin(theta2)/2;
++r2r = x2r*N.i+y2r*N.j;
++v2r = diff(r2r, t);
++pos = [r1b, r1r, r2b, r2r];
++
++def diss_force(b, c, pos):
++	v = diff(pos, t);
++	F = -(b+c*sqrt(v.dot(v)))*v;
++	return F;
++
++def gen_diss_force(b, c, l, pos, coords):
++	Q = [0 for i in range(len(coords))];
++	for i in range(len(coords)):
++		for j in range(len(b)):
++			F = diss_force(b[j], c[j], pos[j])
++			ehat = diff(pos[j], coords[i]);
++			if (any(expr.has("s") for expr in pos)):
++				lind = floor(j/2);
++				Q[i] += integrate(F.dot(ehat), (s, 0, l[lind]))
++			else:
++				Q[i] += F.dot(ehat);
++		Q[i] = simplify(Q[i])
++	return Q
++
++def compute_kinetic(m, pos):
++	T = 0;
++	v = [diff(posi, t) for posi in pos];
++	for i in range(len(l)):
++		# Translational energy for rods
++		if (i == 0):
++			T += m[2*i+1]/6 * v[2*i].dot(v[2*i])
++		else:
++			T += m[2*i+1]/6 * (v[2*(i-1)].dot(v[2*(i-1)])+v[2*i].dot(v[2*(i-1)])+v[2*i].dot(v[2*i]))
++		# Kinetic energy of bobs
++		T += m[2*i]/2 * v[2*i].dot(v[2*i]);
++	
++	return T
++
++def compute_potential(g, k, m, l, r, y):
++	V = 0;
++	for j in range(len(y)):
++		V += m[j] * g * y[j]
++	
++	for i in range(len(k)):
++		V += k[i]/2 * (r[i]-l[i])**2;
++		
++	return V
++	
++def compute_lagrangian(g, k, m, l, r, y, pos):
++	T = compute_kinetic(m, pos)
++	V = compute_potential(g, k, m, l, r, y)
++	return T-V
++	
++def compute_equations_motion(g, k, m, l, coords, y, pos):
++	L = compute_lagrangian(g, k, m, l, coords[0:2], y, pos)
++	Q = [Function('Qr1')(t), Function('Qr2')(t), Function('Qtheta1')(t), Function('Qtheta2')(t)]
++	return [Eq(diff(diff(L, diff(coords[i], t)), t) - diff(L, coords[i]), Q[i]) for i in range(len(coords))]
++	
++y = [y1b, y1r, y2b, y2r];
++r = [r1, r2];
++m = [m1b, m1r, m2b, m2r];
++l = [l1, l2];
++k = [k1, k2];
++theta = [theta1, theta2];
++coords = r + theta;
++
++d2 = [diff(i, (t, 2)) for i in coords];
++coords_ddot_syms = symbols('r1_dd r2_dd theta1_dd theta2_dd')
++equations = compute_equations_motion(g, k, m, l, coords, y, pos)
++
++# Turn Eq(lhs, rhs) into lhs - rhs == 0
++residuals = [eq.lhs - eq.rhs for eq in equations]
++
++# Substitute second derivatives with dummy symbols (e.g. theta1_dd)
++residuals_subs = [res.subs(dict(zip(d2, coords_ddot_syms))) for res in residuals]
++from sympy.solvers.solveset import linear_eq_to_matrix
++
++A, RHS = linear_eq_to_matrix(residuals_subs, coords_ddot_syms)
++print(simplify(A))
++print(factor(simplify(RHS)))
++print(simplify(gen_diss_force(b, c, l, pos, coords)))
++b = [b1b, b1r, b2b, b2r]
++c = [c1b, c1r, c2b, c2r]
++
++# Solve the system
++#sols = solve(equations, d2, simplify=True)
++
++#secdernames = ["d2r1", "d2r2", "d2theta1", "d2theta2"]
++#for i in range(4):
++#	print(secdernames[i] + " = \n" + latex(sols[d2[i]]))
++```
++
++Yielding:
++
++\begin{align*}
++\begin{bmatrix}
++m_{1b} + \frac{m_{1r}}{3} + m_{2b} + m_{2r} & 
++\left(m_{2b} + \frac{m_{2r}}{2}\right) \cos \Delta & 
++0 & 
++\frac{2 m_{2b} + m_{2r}}{2} r_2 \sin \Delta \\
++\\
++\left(m_{2b} + \frac{m_{2r}}{2}\right) \cos \Delta & 
++m_{2b} + \frac{m_{2r}}{3} & 
++-\frac{2 m_{2b} + m_{2r}}{2} r_1 \sin \Delta & 
++0 \\
++\\
++0 & 
++-\frac{2 m_{2b} + m_{2r}}{2} r_1 \sin \Delta & 
++\left(m_{1b} + \frac{m_{1r}}{3} + m_{2b} + m_{2r}\right) r_1^2 & 
++\frac{2 m_{2b} + m_{2r}}{2} r_1 r_2 \cos \Delta \\
++\\
++\frac{2 m_{2b} + m_{2r}}{2} r_2 \sin \Delta & 
++0 & 
++\frac{2 m_{2b} + m_{2r}}{2} r_1 r_2 \cos \Delta & 
++\left(m_{2b} + \frac{m_{2r}}{3}\right) r_2^2
++\end{bmatrix} \mathbf{\ddot{q}} &= \begin{bmatrix}
++- g \sin \theta_1 \left(m_{1b} + \frac{m_{1r}}{2} + m_{2b} + m_{2r}\right)
+++ k_1 (l_1-r_1) \\
+++ r_1 \dot{\theta}_1^2 \left(m_{1b} + \frac{m_{1r}}{3} + m_{2b} + m_{2r}\right) \\
+++ \dot{\theta}_2^2 r_2 \cos \Delta \left(- m_{2b} - \frac{m_{2r}}{2}\right) \\
+++ \dot{r}_2 \dot{\theta}_2 \sin \Delta \left(2 m_{2b} + m_{2r}\right) + Q_{r_1} \\[12pt]
++
++- g \sin \theta_2 \left(m_{2b} + \frac{m_{2r}}{2}\right) 
+++ k_2 (l_2 - r_2) \\
+++ \dot{\theta}_1^2 r_1 \cos \Delta \left(m_{2b} + \frac{m_{2r}}{2}\right) \\
+++ \dot{\theta}_2^2 r_2 \left(m_{2b} + \frac{m_{2r}}{3}\right) \\
++- \dot{r}_1 \dot{\theta}_1 \sin \Delta \left(2 m_{2b} + m_{2r}\right) + Q_{r_2} \\[12pt]
++
++- g \cos \theta_1 \, r_1 \left(m_{1b} + \frac{m_{1r}}{2} + m_{2b} + m_{2r}\right) \\
++- \dot{r}_1 \dot{\theta}_1 r_1 \left(2 m_{1b} + \frac{2 m_{1r}}{3} + 2 m_{2b} + m_{2r}\right) \\
+++ \dot{\theta}_2^2 r_1 r_2 \sin \Delta \left(m_{2b} + \frac{m_{2r}}{2}\right) \\
++- \dot{r}_2 \dot{\theta}_2 r_1 \cos \Delta \left(2 m_{2b} + m_{2r}\right) + Q_{\theta_1} \\[12pt]
++
++- g \cos \theta_2 \, r_2 \left(m_{2b} + \frac{m_{2r}}{2}\right) \\
++- \dot{\theta}_1^2 r_1 r_2 \sin \Delta \left(m_{2b} + \frac{m_{2r}}{2}\right) \\
+++ \dot{r}_1 \dot{\theta}_1 r_2 \cos \Delta \left(2 m_{2b} + m_{2r}\right) \\
++- \dot{r}_2 \dot{\theta}_2 r_2 \left(2 m_{2b} + \frac{2 m_{2r}}{3}\right) + Q_{\theta_2}
++\end{bmatrix}
++\end{align*}
+\ No newline at end of file
+diff --git a/doubleElasticPendulum/index.md b/doubleElasticPendulum/index.md
+index d475822..f39a3c2 100644
+--- a/doubleElasticPendulum/index.md
++++ b/doubleElasticPendulum/index.md
+@@ -1,6 +1,6 @@
+ @def title="Double elastic pendulum problem solver"
+ @def hassim=true;
+-@def params = (g=(val=9.81, desc="Gravitational acceleration in metres (m) per second (s) squared (\\(\\mathrm{m}\\cdot \\mathrm{s}^{-2}\\))."),l1=(val=1, desc="Rest length (m) of pendulum 1."),l2=(val=1, desc="Rest length (m) of pendulum 2."),m1=(val=1, desc="Mass (kilograms or kg) of pendulum bob 1."),m2=(val=1, desc="Mass (kg) of pendulum bob 2."),k1=(val=10, desc="Spring coefficient for the first pendulum."),k2=(val=10, desc="Spring coefficient for the second pendulum."),b1=(val=0, desc="Linear dissipation coefficient for pendulum 1."),b2=(val=0, desc="Linear dissipation coefficient for pendulum 2."),c1=(val=0, desc="Quadratic dissipation coefficient for pendulum 1."),c2=(val=0, desc="Quadratic dissipation coefficient for pendulum 2."),tf=(val=120, desc="End time (s) for the simulation."),r10=(val=1, desc="Initial value of \\(r_1\\) (m)."),dr10=(val=1, desc="Initial value of \\(\\dot{r}_1\\) in \\(\\mathrm{m}\\cdot \\mathrm{s}^{-1}\\)."),r20=(val=1, desc="Initial value of \\(r_2\\) (m)."),dr20=(val=1, desc="Initial value of \\(\\dot{r}_2\\) in \\(\\mathrm{m}\\cdot \\mathrm{s}^{-1}\\)."),theta10=(val=1, desc="Initial value of \\(\\theta_1\\) in radians (r)."),dtheta10=(val=1, desc="Initial value of \\(\\dot{\\theta}_1\\) in \\(\\mathrm{r}\\cdot \\mathrm{s}^{-1}\\)."),theta20=(val=1, desc="Initial value of \\(\\theta_2\\) in r."),dtheta20=(val=1, desc="Initial value of \\(\\dot{\\theta}_2\\) in \\(\\mathrm{r}\\cdot \\mathrm{s}^{-1}\\)."),epsilon=(val=1e-8,),tolType=(val=1,))
++@def params = (g=(val=9.81, desc="Gravitational acceleration in metres (m) per second (s) squared (\\(\\mathrm{m}\\cdot \\mathrm{s}^{-2}\\))."),l1=(val=1, desc="Rest length (m) of pendulum 1."),l2=(val=1, desc="Rest length (m) of pendulum 2."),m1b=(val=1, desc="Mass (kilograms or kg) of pendulum bob 1."),m1r=(val=1, desc="Mass (kilograms or kg) of pendulum rod 1."),m2b=(val=1, desc="Mass (kg) of pendulum bob 2."),m2r=(val=1, desc="Mass (kg) of pendulum rod 2."),k1=(val=10, desc="Spring coefficient for the first pendulum."),k2=(val=10, desc="Spring coefficient for the second pendulum."),b1b=(val=0, desc="Linear dissipation coefficient for pendulum bob 1."),b1r=(val=0, desc="Linear dissipation coefficient for pendulum rod 1."),b2b=(val=0, desc="Linear dissipation coefficient for pendulum bob 2."),b2r=(val=0, desc="Linear dissipation coefficient for pendulum rod 2."),c1b=(val=0, desc="Quadratic dissipation coefficient for pendulum bob 1."),c1r=(val=0, desc="Quadratic dissipation coefficient for pendulum rod 1."),c2b=(val=0, desc="Quadratic dissipation coefficient for pendulum bob 2."),c2r=(val=0, desc="Quadratic dissipation coefficient for pendulum rod 2."),tf=(val=120, desc="End time (s) for the simulation."),r10=(val=1, desc="Initial value of \\(r_1\\) (m)."),dr10=(val=1, desc="Initial value of \\(\\dot{r}_1\\) in \\(\\mathrm{m}\\cdot \\mathrm{s}^{-1}\\)."),r20=(val=1, desc="Initial value of \\(r_2\\) (m)."),dr20=(val=1, desc="Initial value of \\(\\dot{r}_2\\) in \\(\\mathrm{m}\\cdot \\mathrm{s}^{-1}\\)."),theta10=(val=1, desc="Initial value of \\(\\theta_1\\) in radians (r)."),dtheta10=(val=1, desc="Initial value of \\(\\dot{\\theta}_1\\) in \\(\\mathrm{r}\\cdot \\mathrm{s}^{-1}\\)."),theta20=(val=1, desc="Initial value of \\(\\theta_2\\) in r."),dtheta20=(val=1, desc="Initial value of \\(\\dot{\\theta}_2\\) in \\(\\mathrm{r}\\cdot \\mathrm{s}^{-1}\\)."),epsilon=(val=1e-8,),tolType=(val=1,))
+ 
+ @def labels=["Tabulate the solution","Remove the solution table","Generate pendulum position plots","Remove pendulum position plots","Generate a time plot of all variables (+time derivatives)","Remove time plot of all variables (+time derivatives)","Generate a \\(r_1\\) against time plot","Remove \\(r_1\\) against time plot","Generate a \\(\\dot{r}_1\\) against time plot","Remove \\(\\dot{r}_1\\) against time plot","Generate a phase plot of \\(\\dot{r}_1\\) vs \\(r_1\\)","Remove phase plot of \\(\\dot{r}_1\\) vs \\(r_1\\)","Generate a \\(r_2\\) against time plot","Remove \\(r_2\\) against time plot","Generate a \\(\\dot{r}_2\\) against time plot","Remove \\(\\dot{r}_2\\) against time plot","Generate a phase plot of \\(\\dot{r}_2\\) vs \\(r_2\\)","Remove phase plot of \\(\\dot{r}_2\\) vs \\(r_2\\)","Generate a \\(r_2\\) against \\(r_1\\) phase plot","Remove \\(r_2\\) against \\(r_1\\) phase plot","Generate a \\(\\theta_1\\) against time plot","Remove \\(\\theta_1\\) against time plot","Generate a \\(\\dot{\\theta}_1\\) against time plot","Remove \\(\\dot{\\theta}_1\\) against time plot","Generate a phase plot of \\(\\dot{\\theta}_1\\) vs \\(\\theta_1\\)","Remove phase plot of \\(\\dot{\\theta}_1\\) vs \\(\\theta_1\\)","Generate a \\(\\theta_2\\) against time plot","Remove \\(\\theta_2\\) against time plot","Generate a \\(\\dot{\\theta}_2\\) against time plot","Remove \\(\\dot{\\theta}_2\\) against time plot","Generate a phase plot of \\(\\dot{\\theta}_2\\) vs \\(\\theta_2\\)","Remove phase plot of \\(\\dot{\\theta}_2\\) vs \\(\\theta_2\\)","Generate a \\(\\theta_2\\) against \\(\\theta_1\\) phase plot","Remove \\(\\theta_2\\) against \\(\\theta_1\\) phase plot","Generate all solution plots","Remove all plots","Generate an animation of the system","Remove system animation","Generate a \\(r_1\\) phase plot animation","Remove \\(r_1\\) phase plot animation","Generate a \\(r_2\\) phase plot animation","Remove \\(r_2\\) phase plot animation","Generate a \\(\\theta_1\\) phase plot animation","Remove \\(\\theta_1\\) phase plot animation","Generate a \\(\\theta_2\\) phase plot animation","Remove \\(\\theta_2\\) phase plot animation","Generate all animations","Remove all animations"];
+ 
+diff --git a/doubleElasticPendulum/main.js b/doubleElasticPendulum/main.js
+index f1576ba..dc68f5b 100755
+--- a/doubleElasticPendulum/main.js
++++ b/doubleElasticPendulum/main.js
+@@ -54,6 +54,201 @@ function f(objectOfInputs, t, vars, dt) {
+     return [dt*dr1, dt*d2[0], dt*dr2, dt*d2[1], dt*dtheta1, dt*d2[2], dt*dtheta2, dt*d2[3]];
+ }
+ 
++function computeQ(vars, params) {
++  // Destructure vars
++  const [r1, dr1, r2, dr2, theta1, dtheta1, theta2, dtheta2] = vars;
++  const {
++    b1b, b1r, b2b, b2r, c1b, c1r, c2b, c2r
++  } = params;
++
++  // Helper trig
++  const delta = theta1 - theta2;
++  const sinDelta = Math.sin(delta);
++  const cosDelta = Math.cos(delta);
++
++  // Common sqrt terms for nonlinear damping
++  const v1Squared = r1**2 * dtheta1**2 + dr1**2;
++  const sqrtV1 = Math.sqrt(v1Squared);
++
++  const v2Squared = r1**2 * dtheta1**2 + 2 * r1 * r2 * cosDelta * dtheta1 * dtheta2
++    - 2 * r1 * sinDelta * dr2 * dtheta1 + r2**2 * dtheta2**2
++    + 2 * r2 * sinDelta * dr1 * dtheta2 + 2 * cosDelta * dr1 * dr2
++    + dr1**2 + dr2**2;
++  const sqrtV2 = Math.sqrt(v2Squared);
++
++  const v3Squared = 4 * r1**2 * dtheta1**2 + 4 * r1 * r2 * cosDelta * dtheta1 * dtheta2
++    - 4 * r1 * sinDelta * dr2 * dtheta1 + r2**2 * dtheta2**2
++    + 4 * r2 * sinDelta * dr1 * dtheta2 + 4 * cosDelta * dr1 * dr2
++    + 4 * dr1**2 + dr2**2;
++  const sqrtV3 = Math.sqrt(v3Squared);
++
++  // Compute each component of Q vector
++  const Qr1 = (
++    -b1b * dr1
++    - b1r * dr1 / 4
++    - b2b * r2 * sinDelta * dtheta2
++    - b2b * cosDelta * dr2
++    - b2b * dr1
++    - b2r * r2 * sinDelta * dtheta2 / 2
++    - b2r * cosDelta * dr2 / 2
++    - b2r * dr1
++    - c1b * sqrtV1 * dr1
++    - c1r * sqrtV1 * dr1 / 8
++    - c2b * sqrtV2 * r2 * sinDelta * dtheta2
++    - c2b * sqrtV2 * cosDelta * dr2
++    - c2b * sqrtV2 * dr1
++    - c2r * sqrtV3 * r2 * sinDelta * dtheta2 / 4
++    - c2r * sqrtV3 * cosDelta * dr2 / 4
++    - c2r * sqrtV3 * dr1 / 2
++  );
++
++  const Qr2 = (
++    b2b * r1 * sinDelta * dtheta1
++    - b2b * cosDelta * dr1
++    - b2b * dr2
++    + b2r * r1 * sinDelta * dtheta1 / 2
++    - b2r * cosDelta * dr1 / 2
++    - b2r * dr2 / 4
++    + c2b * sqrtV2 * r1 * sinDelta * dtheta1
++    - c2b * sqrtV2 * cosDelta * dr1
++    + c2b * sqrtV2 * dr2
++    + c2r * sqrtV3 * r1 * sinDelta * dtheta1 / 4
++    - c2r * sqrtV3 * cosDelta * dr1 / 4
++    + c2r * sqrtV3 * dr2 / 8
++  );
++
++  const Qtheta1 = (
++    -8 * b1b * r1 * dtheta1
++    - 2 * b1r * r1 * dtheta1
++    - 8 * b2b * r1 * dtheta1
++    - 8 * b2b * r2 * cosDelta * dtheta2
++    + 8 * b2b * sinDelta * dr2
++    - 8 * b2r * r1 * dtheta1
++    - 4 * b2r * r2 * cosDelta * dtheta2
++    + 4 * b2r * sinDelta * dr2
++    - 8 * c1b * sqrtV1 * r1 * dtheta1
++    - c1r * sqrtV1 * r1 * dtheta1
++    - 8 * c2b * sqrtV2 * r1 * dtheta1
++    + 8 * c2b * sqrtV2 * r2 * cosDelta * dtheta2
++    + 8 * c2b * sqrtV2 * sinDelta * dr2
++    - 4 * c2r * sqrtV3 * r1 * dtheta1
++    + 2 * c2r * sqrtV3 * r2 * cosDelta * dtheta2
++    - 2 * c2r * sqrtV3 * sinDelta * dr2
++  );
++
++  const Qtheta2 = (
++    -8 * b2b * r1 * cosDelta * dtheta1
++    - 8 * b2b * r2 * dtheta2
++    - 8 * b2b * sinDelta * dr1
++    - 4 * b2r * r1 * cosDelta * dtheta1
++    - 2 * b2r * r2 * dtheta2
++    - 4 * b2r * sinDelta * dr1
++    + 8 * c2b * sqrtV2 * r1 * cosDelta * dtheta1
++    + 8 * c2b * sqrtV2 * r2 * dtheta2
++    + 8 * c2b * sqrtV2 * sinDelta * dr1
++    + 2 * c2r * sqrtV3 * r1 * cosDelta * dtheta1
++    + c2r * sqrtV3 * r2 * dtheta2
++    + 2 * c2r * sqrtV3 * sinDelta * dr1
++  );
++
++  return [Qr1, Qr2, Qtheta1, Qtheta2];
++}
++
++function computeQddot(objectOfInputs, vars) {
++  // Destructure inputs
++  const {
++    g, l1, l2, m1b, m1r, m2b, m2r, k1, k2
++  } = objectOfInputs;
++
++  // Destructure vars
++  const [r1, dr1, r2, dr2, theta1, dtheta1, theta2, dtheta2] = vars;
++
++  var [Qr1, Qr2, Qtheta1, Qtheta2]= computeQ(vars, objectOfInputs);
++
++  // Delta
++  const Delta = theta2 - theta1;
++  const cosDelta = Math.cos(Delta);
++  const sinDelta = Math.sin(Delta);
++
++  const m2b2r = 2 * m2b + m2r;
++  const m1r2 = m1r / 2;
++  const m1r3 = m1r / 3;
++  const m2r2 = m2r / 2;
++  const m2r3 = m2r / 3;
++
++  // Matrix A (4x4)
++  const A = [
++    [
++      m1b + m1r3 + m2b + m2r,
++      (m2b + m2r2) * cosDelta,
++      0,
++      (m2b2r / 2) * r2 * sinDelta
++    ],
++    [
++      (m2b + m2r2) * cosDelta,
++      m2b + m2r3,
++      -(m2b2r / 2) * r1 * sinDelta,
++      0
++    ],
++    [
++      0,
++      -(m2b2r / 2) * r1 * sinDelta,
++      (m1b + m1r3 + m2b + m2r) * r1 * r1,
++      (m2b2r / 2) * r1 * r2 * cosDelta
++    ],
++    [
++      (m2b2r / 2) * r2 * sinDelta,
++      0,
++      (m2b2r / 2) * r1 * r2 * cosDelta,
++      (m2b + m2r3) * r2 * r2
++    ],
++  ];
++
++  // Vector b (length 4)
++  const b = [
++    l1 * k1
++    - g * Math.sin(theta1) * (m1b + m1r2 + m2b + m2r)
++    - k1 * r1
++    + r1 * dtheta1 * dtheta1 * (m1b + m1r3 + m2b + m2r)
++    - dtheta2 * dtheta2 * r2 * cosDelta * (m2b + m2r2)
++    + dr2 * dtheta2 * sinDelta * m2b2r
++    + Qr1,
++
++    - g * Math.sin(theta2) * (m2b + m2r2)
++    + k2 * (l2 - r2)
++    + dtheta1 * dtheta1 * r1 * cosDelta * (m2b + m2r2)
++    + dtheta2 * dtheta2 * r2 * (m2b + m2r3)
++    - dr1 * dtheta1 * sinDelta * m2b2r
++    + Qr2,
++
++    - g * Math.cos(theta1) * r1 * (m1b + m1r2 + m2b + m2r)
++    - 2 * dr1 * dtheta1 * r1 * (m1b + m1r3 / 2 + m2b + m2r)
++    + dtheta2 * dtheta2 * r1 * r2 * sinDelta * (m2b + m2r2)
++    - dr2 * dtheta2 * r1 * cosDelta * m2b2r
++    + Qtheta1,
++
++    - g * Math.cos(theta2) * r2 * (m2b + m2r2)
++    - dtheta1 * dtheta1 * r1 * r2 * sinDelta * (m2b + m2r2)
++    + dr1 * dtheta1 * r2 * cosDelta * m2b2r
++    - 2 * dr2 * dtheta2 * r2 * (m2b + m2r3)
++    + Qtheta2,
++  ];
++
++  // You need a 4x4 matrix inverse function, e.g., from math.js or numeric.js
++  // Example using math.js (assuming math is imported):
++  const qddot = math.lusolve(A, b);
++
++  return qddot;
++}
++
++function g(objectOfInputs, t, vars, dt) {
++    var [r1, dr1, r2, dr2, theta1, dtheta1, theta2, dtheta2] = vars;
++    var d2 = computeQddot(objectOfInputs, vars);
++
++    // Return statement
++    return [dt*dr1, dt*d2[0], dt*dr2, dt*d2[1], dt*dtheta1, dt*d2[2], dt*dtheta2, dt*d2[3]];
++}
++
+ /** 
+  * Solve the problem using RKF45
+  *
+@@ -64,7 +259,7 @@ function RKF45(objectOfInputs) {
+     // Extract initial from object and add to 2d array
+     var {r10, dr10, r20, dr20, theta10, dtheta10, theta20, dtheta20} = objectOfInputs;
+     var vars0 = [[r10, dr10, r20, dr20, theta10, dtheta10, theta20, dtheta20]];
+-    var [t, vars] = RKF45Body(f, objectOfInputs, vars0); 
++    var [t, vars] = RKF45Body(g, objectOfInputs, vars0); 
+     return [t, vars];
+ }
+ 

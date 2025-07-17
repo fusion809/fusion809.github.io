@@ -236,6 +236,13 @@ function removeTimePlot() {
     rmPlot("timePlot");
 }
 
+function removeR1TPlot() {
+    rmPlot("plotR1T");
+}
+
+function removeTheta1Theta2PhasePlot() {
+    rmPlot("plotTheta1Theta2");
+}
 function rmPlots() {
     removePendulumPlots();
     removeTimePlot();
@@ -261,10 +268,11 @@ function rmPlots() {
  * @param objectOfInputs An object containing all the problem parameters.
  * @return               Nothing. Just generates the plots.
  */
-function generatePlots(objectOfInputs) {
+function generatePlots(objectOfInputs, solution=undefined) {
     // Solve problem
-    var solution = solveProblem(RKF45, objectOfInputs);
-
+    if (solution == undefined) {
+        var solution = solveProblem(RKF45, objectOfInputs);
+    }
     // Generate plots
     generatePendulumPlots(objectOfInputs, solution);
     generateTimePlot(solution);
@@ -284,18 +292,18 @@ function generatePlots(objectOfInputs) {
     generateDtheta2Theta2Plot(solution);
 }
 
-function generateAnimationBase(objectOfInputs, solution) {
-    animatePendulum(objectOfInputs, solution, "Double elastic pendulum");
-}
-
 /**
  * Generate animation
  * @return nothing
  */
-function generateAnimation() {
-    var objectOfInputs = readInputs();
-    var solution = solveProblem(RKF45, objectOfInputs);
-    generateAnimationBase(objectOfInputs, solution);
+function generateAnimation(objectOfInputs=undefined, solution=undefined) {
+    if (objectOfInputs==undefined) {
+        var objectOfInputs = readInputs();
+    }
+    if (solution==undefined) {
+        var solution = solveProblem(RKF45, objectOfInputs);
+    }
+    animatePendulum(objectOfInputs, solution, "Double elastic pendulum");
 }
 
 /**
@@ -306,73 +314,81 @@ function removeAnimation() {
     rmPlot("animation");
 }
 
-function generateR1PhaseAnimationBase(solution) {
+function generateR1PhaseAnimation(objectOfInputs=undefined, solution=undefined) {
+    if (objectOfInputs==undefined) {
+        var objectOfInputs = readInputs();
+    }
+    if (solution==undefined) {
+        var solution = solveProblem(RKF45, objectOfInputs);
+    }
     animate2D(solution, {varnames: ["r<sub>1</sub>", "dr<sub>1</sub>/dt"],IdSuffix: "R1Phase", title: "Phase plot of dr<sub>1</sub>/dt vs r<sub>1</sub>."});
-}
-
-function generateR1PhaseAnimation() {
-  var objectOfInputs = readInputs();
-  var solution = solveProblem(RKF45, objectOfInputs);
-  generateR1PhaseAnimationBase(solution);
 }
 
 function removeR1PhaseAnimation() {
     rmPlot("animationR1Phase");
 }
 
-function generateR2PhaseAnimationBase(solution) {
+function generateR2PhaseAnimation(objectOfInputs=undefined, solution=undefined) {
+    if (objectOfInputs==undefined) {
+        var objectOfInputs = readInputs();
+    }
+    if (solution==undefined) {
+        var solution = solveProblem(RKF45, objectOfInputs);
+    }
     animate2D(solution, {timer: [1.0, 1.0], varnames: ["r<sub>2</sub>", "dr<sub>2</sub>/dt"], IdSuffix: "R2Phase", nos: [2, 3], title: "Phase plot of dr<sub>2</sub>/dt against r<sub>2</sub>."});
-}
-
-function generateR2PhaseAnimation() {
-  var objectOfInputs = readInputs();
-  var solution = solveProblem(RKF45, objectOfInputs);
-  generateR2PhaseAnimationBase(solution);
 }
 
 function removeR2PhaseAnimation() {
     rmPlot("animationR2Phase");
 }
 
-function generateTheta1PhaseAnimationBase(solution) {
+function generateTheta1PhaseAnimation(objectOfInputs=undefined, solution=undefined) {
+    if (objectOfInputs==undefined) {
+        var objectOfInputs = readInputs();
+    }
+    if (solution==undefined) {
+        var solution = solveProblem(RKF45, objectOfInputs);
+    }
     animate2D(solution, {varnames: ["θ<sub>1</sub>", "dθ<sub>1</sub>/dt"],IdSuffix: "Theta1Phase", nos: [4, 5], title: "Phase plot of dθ<sub>1</sub>/dt against θ<sub>1</sub> ."});
-}
-
-function generateTheta1PhaseAnimation() {
-  var objectOfInputs = readInputs();
-  var solution = solveProblem(RKF45, objectOfInputs);
-  generateTheta1PhaseAnimationBase(solution);
 }
 
 function removeTheta1PhaseAnimation() {
     rmPlot("animationTheta1Phase");
 }
 
-function generateTheta2PhaseAnimationBase(solution) {
+function generateTheta2PhaseAnimation(objectOfInputs=undefined, solution=undefined) {
+    if (objectOfInputs==undefined) {
+        var objectOfInputs = readInputs();
+    }
+    if (solution==undefined) {
+        var solution = solveProblem(RKF45, objectOfInputs);
+    }
     animate2D(solution, {varnames: ["θ<sub>2</sub>", "dθ<sub>2</sub>/dt"], timer: [0.0, 0.0], IdSuffix: "Theta2Phase", nos: [6, 7], title: "Phase plot of dθ<sub>2</sub>/dt against θ<sub>2</sub>."});
-}
-function generateTheta2PhaseAnimation() {
-  var objectOfInputs = readInputs();
-  var solution = solveProblem(RKF45, objectOfInputs);
-  generateTheta2PhaseAnimationBase(solution);
 }
 
 function removeTheta2PhaseAnimation() {
     rmPlot("animationTheta2Phase");
 }
 
-function generateTable() {
-    fillTable(readInputs(), ['r<sub>1</sub>', 'dr<sub>1</sub>/dt', 'r<sub>2</sub>', 'dr<sub>2</sub>/dt', '&theta;<sub>1</sub>', 'd&theta;<sub>1</sub>/dt', '&theta;<sub>2</sub>', 'd&theta;<sub>2</sub>/dt'])
+function generateTable(objectOfInputs=undefined, solution=undefined) {
+    if (objectOfInputs==undefined) {
+        var objectOfInputs = readInputs();
+    }
+    fillTable(objectOfInputs, ['r<sub>1</sub>', 'dr<sub>1</sub>/dt', 'r<sub>2</sub>', 'dr<sub>2</sub>/dt', '&theta;<sub>1</sub>', 'd&theta;<sub>1</sub>/dt', '&theta;<sub>2</sub>', 'd&theta;<sub>2</sub>/dt'], solution)
 }
 
-function generateAnimations() {
-    var objectOfInputs = readInputs();
-    var solution = solveProblem(RKF45, objectOfInputs);
-    generateAnimationBase(objectOfInputs, solution)
-    generateR1PhaseAnimationBase(solution);
-    generateR2PhaseAnimationBase(solution);
-    generateTheta1PhaseAnimationBase(solution);
-    generateTheta2PhaseAnimationBase(solution);
+function generateAnimations(objectOfInputs=undefined, solution=undefined) {
+    if (objectOfInputs==undefined) {
+        var objectOfInputs = readInputs();
+    }
+    if (solution==undefined) {
+        var solution = solveProblem(RKF45, objectOfInputs);
+    }
+    generateAnimation(objectOfInputs, solution)
+    generateR1PhaseAnimation(objectOfInputs, solution);
+    generateR2PhaseAnimation(objectOfInputs, solution);
+    generateTheta1PhaseAnimation(objectOfInputs, solution);
+    generateTheta2PhaseAnimation(objectOfInputs, solution);
 }
 
 function removeAnimations() {
@@ -381,4 +397,20 @@ function removeAnimations() {
     removeR2PhaseAnimation();
     removeTheta1PhaseAnimation();
     removeTheta2PhaseAnimation();
+}
+
+function generateAllOutputs(objectOfInputs=undefined) {
+    if (objectOfInputs==undefined) {
+        var objectOfInputs = readInputs();
+    }
+    var solution = solveProblem(RKF45, objectOfInputs);
+    generateTable(objectOfInputs, solution);
+    generatePlots(objectOfInputs, solution);
+    generateAnimations(objectOfInputs, solution);
+}
+
+function removeAllOutputs() {
+    removeTable();
+    removePlots();
+    removeAnimations();
 }

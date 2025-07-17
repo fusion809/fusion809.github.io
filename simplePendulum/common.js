@@ -283,43 +283,66 @@ function removeAnimation() {
     rmPlot("animation");
 }
 
-function generateAnimationBase(objectOfInputs, solution) {
-    animatePendulum(objectOfInputs, solution, "Simple pendulum");
-}
 /**
  * Generates animation.
  * @return nothing. 
  */
-function generateAnimation() {
-    var objectOfInputs = readInputs();
-    var solution = solveProblemSP(objectOfInputs);
-    generateAnimationBase(objectOfInputs, solution);
+function generateAnimation(objectOfInputs=undefined, solution=undefined) {
+    if (objectOfInputs==undefined) {
+        var objectOfInputs = readInputs();
+    }
+    if (solution==undefined) {
+        var solution = solveProblem(RKF45, objectOfInputs);
+    }
+    animatePendulum(objectOfInputs, solution, "Simple pendulum");
 }
 
-function generatePhaseAnimationBase(solution) {
-    animate2D(solution, {varnames: ["θ", "dθ/dt"], IdSuffix: "Phase", title: "Phase plot animation of dθ/dt and θ."});
-}
-
-function generatePhaseAnimation() {
-    var objectOfInputs = readInputs();
-    var solution = solveProblemSP(objectOfInputs);
+function generatePhaseAnimation(objectOfInputs=undefined, solution=undefined) {
+    if (objectOfInputs==undefined) {
+        var objectOfInputs = readInputs();
+    }
+    if (solution==undefined) {
+        var solution = solveProblem(RKF45, objectOfInputs);
+    }
     solution.vars = [solution.theta, solution.thetaDot];
-    generatePhaseAnimationBase(solution);
+    animate2D(solution, {varnames: ["θ", "dθ/dt"], IdSuffix: "Phase", title: "Phase plot animation of dθ/dt and θ."});
 }
 
 function removePhaseAnimation() {
     rmPlot("animationPhase");
 }
 
-function generateAnimations() {
-    var objectOfInputs = readInputs();
-    var solution = solveProblemSP(objectOfInputs);
-    generateAnimationBase(objectOfInputs, solution);
+function generateAnimations(objectOfInputs=undefined, solution=undefined) {
+    if (objectOfInputs==undefined) {
+        var objectOfInputs = readInputs();
+    }
+    if (solution==undefined) {
+        var solution = solveProblem(RKF45, objectOfInputs);
+    }
+    generateAnimation(objectOfInputs, solution);
     solution.vars = [solution.theta, solution.thetaDot];
-    generatePhaseAnimationBase(solution);
+    generatePhaseAnimation(solution);
 } 
 
 function removeAnimations() {
     removePhaseAnimation();
+    removeAnimation();
+}
+
+function generateAllOutputs(objectOfInputs=undefined, solution=undefined) {
+    if (objectOfInputs==undefined) {
+        var objectOfInputs = readInputs();
+    }
+    if (solution==undefined) {
+        var solution = solveProblem(RKF45, objectOfInputs);
+    }
+    fillTable(objectOfInputs, ['θ', 'dθ/dt'], solution)
+    generatePlots(objectOfInputs, solution);
+    generateAnimation(objectOfInputs, solution);
+}
+
+function removeAllOutputs() {
+    removeTable();
+    removePlots();
     removeAnimation();
 }

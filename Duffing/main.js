@@ -62,9 +62,13 @@ function generateTimePlot(solution) {
  * @param objectOfInputs An object containing all the problem parameters.
  * @return               Nothing. Just generates the plots.
  */
-function generatePlots(objectOfInputs) {
-    // Solve the problem
-    var solution = solveProblem(RKF45, objectOfInputs);
+function generatePlots(objectOfInputs=undefined, solution=undefined) {
+    if (objectOfInputs==undefined) {
+        var objectOfInputs = readInputs();
+    }
+    if (solution==undefined) {
+        var solution = solveProblem(RKF45, objectOfInputs);
+    }
     
     // Generate plots
     generateTimePlot(solution);
@@ -75,8 +79,13 @@ function generatePlots(objectOfInputs) {
  * Generate animation
  * @return nothing
  */
-function generateAnimation() {
-    var solution = solveProblem(RKF45, readInputs());
+function generateAnimation(objectOfInputs=undefined, solution=undefined) {
+    if (objectOfInputs==undefined) {
+        var objectOfInputs = readInputs();
+    }
+    if (solution==undefined) {
+        var solution = solveProblem(RKF45, objectOfInputs);
+    }
     animate2D(solution, {varnames: ["x", "dx/dt"], nos: [0, 1], title: "Duffing system: phase plot of dx/dt against x."});
 }
 
@@ -88,6 +97,24 @@ function removeAnimation() {
   rmPlots("animation");
 }
 
-function generateTable() {
-    fillTable(readInputs(), ['x', 'dx/dt'])
+function generateTable(objectOfInputs=undefined, solution=undefined) {
+    if (objectOfInputs==undefined) {
+        var objectOfInputs = readInputs();
+    }
+    if (solution==undefined) {
+        var solution = solveProblem(RKF45, objectOfInputs);
+    }
+    fillTable(objectOfInputs, ['x', 'dx/dt'], solution)
+}
+
+function generateAllOutputs(objectOfInputs=undefined, solution=undefined) {
+    if (objectOfInputs==undefined) {
+        var objectOfInputs = readInputs();
+    }
+    if (solution==undefined) {
+        var solution = solveProblem(RKF45, objectOfInputs);
+    }
+    generateTable(objectOfInputs, solution)
+    generatePlots(objectOfInputs, solution)
+    generateAnimations(objectOfInputs, solution)
 }
