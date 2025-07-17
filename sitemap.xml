@@ -14,12 +14,6 @@
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>https://fusion809.github.io/LotkaVolterra/index.html</loc>
-    <lastmod>2025-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
     <loc>https://fusion809.github.io/doublePendulum/derivation/index.html</loc>
     <lastmod>2025-07-17</lastmod>
     <changefreq>monthly</changefreq>
@@ -32,12 +26,6 @@
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>https://fusion809.github.io/Rossler/index.html</loc>
-    <lastmod>2025-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
     <loc>https://fusion809.github.io/sqrt/index.html</loc>
     <lastmod>2025-07-17</lastmod>
     <changefreq>monthly</changefreq>
@@ -45,12 +33,6 @@
 </url>
 <url>
     <loc>https://fusion809.github.io/Australian_education_system/index.html</loc>
-    <lastmod>2025-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
-    <loc>https://fusion809.github.io/Chen/index.html</loc>
     <lastmod>2025-07-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -80,18 +62,6 @@
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>https://fusion809.github.io/SEIR/index.html</loc>
-    <lastmod>2025-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
-    <loc>https://fusion809.github.io/SIR/index.html</loc>
-    <lastmod>2025-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
     <loc>https://fusion809.github.io/Linux/Linux-distros-comparison/index.html</loc>
     <lastmod>2025-07-17</lastmod>
     <changefreq>monthly</changefreq>
@@ -110,18 +80,6 @@
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>https://fusion809.github.io/RabinovichFabrikant/index.html</loc>
-    <lastmod>2025-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
-    <loc>https://fusion809.github.io/elasticPendulum/index.html</loc>
-    <lastmod>2025-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
     <loc>https://fusion809.github.io/triplePendulum/index.html</loc>
     <lastmod>2025-07-17</lastmod>
     <changefreq>monthly</changefreq>
@@ -134,37 +92,13 @@
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>https://fusion809.github.io/doubleElasticPendulum/index.html</loc>
-    <lastmod>2025-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
     <loc>https://fusion809.github.io/STV%2B/index.html</loc>
     <lastmod>2025-07-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>https://fusion809.github.io/Lorenz/index.html</loc>
-    <lastmod>2025-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
     <loc>https://fusion809.github.io/index.html</loc>
-    <lastmod>2025-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
-    <loc>https://fusion809.github.io/doublePendulum/index.html</loc>
-    <lastmod>2025-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
-    <loc>https://fusion809.github.io/Duffing/index.html</loc>
     <lastmod>2025-07-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -183,12 +117,6 @@
 </url>
 <url>
     <loc>https://fusion809.github.io/RKF45/index.html</loc>
-    <lastmod>2025-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
-    <loc>https://fusion809.github.io/singlePendulum/index.html</loc>
     <lastmod>2025-07-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
