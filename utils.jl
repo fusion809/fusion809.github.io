@@ -482,25 +482,23 @@ elseif (locvar("vars") !== nothing)
       conds *= ", "
     end
   end
-  content = """
-/** 
-* Solve the problem using RKF45
-*
-* @param objectOfInputs An object containing all the problem parameters.
-* @return               [t, vars]
-*/
-RKF45 = function(objectOfInputs) {
-    // Extract initial conditions from object and enter it into RKF45Body
-    var {$conds} = objectOfInputs;
-    var vars0 = [[$conds]];
-    var [t, vars] = RKF45Body(f, objectOfInputs, vars0);
-    return [t, vars];
-}
-  """
   title = replace(locvar("title"), " " => "_")
   targetFile = "_libs/rendered/RKF45_$title.js"
-  write(targetFile, content)
-  HTML = """<script src="/_libs/rendered/RKF45_$title.js"></script>"""
+  baseFile = "_libs/rendered/RKF45_base.js"
+  if !isfile(targetFile) || stat(baseFile).mtime > stat(targetFile).mtime
+      # Read the content of the copied file
+      cp(baseFile, targetFile, force=true);
+      content = read(targetFile, String)
+
+      # Replace characters or strings
+      new_content = replace(content, "\$conds" => "$conds")
+
+      # Write the modified content back to the file
+      write(targetFile, new_content)
+  end
+  HTML = """
+  <script src="/_libs/rendered/RKF45_$title.js"></script>
+  """
   else
     HTML = """"""
   end
