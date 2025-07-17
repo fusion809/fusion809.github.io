@@ -428,10 +428,10 @@ function hfun_render_footlist()
     end
 end
 
-function hfun_render_js()
-  
-  if (locvar("type")=="attractor")
-    artTitle = locvar("title")
+function render_js(pageTitle::String, type, vars)
+  title = replace(pageTitle, " " => "_")
+  if (type=="attractor")
+    artTitle = pageTitle
     artTitle = replace(artTitle, r" solver"=>"")
     if (occursin(r"Chen", artTitle))
       title = "Chen system"
@@ -454,53 +454,49 @@ function hfun_render_js()
       viewStr1 = ""
       viewStr2 = ""
     end
-    titleOneWord = split(title)[1];
-    targetFile = "_libs/rendered/attractor_$titleOneWord.js"
+    targetFile = "_libs/rendered/attractor_$title.js"
     baseFile = "_libs/common/attractor.js"
+  elseif (vars !== nothing)
+    varsList = vars
+    conds = ""
+    for (i, name) in enumerate(varsList)
+      conds *= name * "0"
+      if i != length(varsList)
+        conds *= ", "
+      end
+    end
+    targetFile = "_libs/rendered/RKF45_$title.js"
+    baseFile = "_libs/common/RKF45_base.js"
     if !isfile(targetFile) || stat(baseFile).mtime > stat(targetFile).mtime
-      # Read the content of the copied file
-      cp(baseFile, targetFile, force=true);
-      content = read(targetFile, String)
-
-      # Replace characters or strings
-      new_content = replace(content, "\$viewStr1" => "$viewStr1")
-      new_content = replace(new_content, "\$viewStr2" => "$viewStr2")
-      new_content = replace(new_content, "\$title" => "$title")
-
-      # Write the modified content back to the file
-      write(targetFile, new_content)
-    end
-    HTML = """
-    <script src="/_libs/rendered/attractor_$titleOneWord.js"></script>
-    """
-elseif (locvar("vars") !== nothing)
-  varsList = locvar("vars")
-  conds = ""
-  for (i, name) in enumerate(varsList)
-    conds *= name * "0"
-    if i != length(varsList)
-      conds *= ", "
-    end
-  end
-  title = replace(locvar("title"), " " => "_")
-  targetFile = "_libs/rendered/RKF45_$title.js"
-  baseFile = "_libs/common/RKF45_base.js"
-  if !isfile(targetFile) || stat(baseFile).mtime > stat(targetFile).mtime
-      # Read the content of the copied file
-      cp(baseFile, targetFile, force=true);
+      cp(baseFile, targetFile, force=true)
       content = read(targetFile, String)
 
       # Replace characters or strings
       new_content = replace(content, "\$conds" => "$conds")
 
+      if @isdefined(viewStr1)
+        new_content = replace(new_content, "\$viewStr1" => "$viewStr1")
+        new_content = replace(new_content, "\$viewStr2" => "$viewStr2")
+      end
+
+      new_content = replace(new_content, "\$title" => "$title")
+
       # Write the modified content back to the file
       write(targetFile, new_content)
+    end
   end
-  HTML = """
-  <script src="/_libs/rendered/RKF45_$title.js"></script>
-  """
+end
+
+function hfun_render_js()
+  title = locvar("title")
+  type = locvar("type")
+  vars = locvar("vars")
+  render_js(title, type, vars)
+  title = replace(title, " " => "_")
+  if (type == "attractor")
+    HTML = """<script src="/libs/rendered/attractor_$title.js"></script>"""
   else
-    HTML = """"""
+    HTML = """<script src="/libs/rendered/RKF45_$title.js"></script>"""
   end
   return HTML
 end
