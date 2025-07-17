@@ -1,6 +1,5 @@
 @def hassim=false;
 @def title="Linux distributions: identifying the ideal use cases."
-@def date=2026-01-01
 @def tag=["Linux"]
 
 My name is Brenton Horne and I have been using Linux on and off since 2012, including several years in which I used various distributions as my daily driver. These distributions include, among others: Arch Linux, Debian, Fedora, Funtoo Linux, Gentoo Linux, Linux Mint, Mageia, Manjaro Linux, NixOS, OpenMandriva Lx, openSUSE, Sabayon and Ubuntu. Consequently, I would classify myself as an experienced user, and I wanted to give my opinion about the ideal use case of several Linux distributions, especially independent and innovative distributions. 

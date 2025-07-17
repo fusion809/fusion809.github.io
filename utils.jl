@@ -473,17 +473,16 @@ function hfun_render_js()
     HTML = """
     <script src="/libs/rendered/attractor_$titleOneWord.js"></script>
     """
-  elseif (locvar("vars") !== nothing)
-    conds = ""
-    vars = locvar("vars")
-    for i in locvar("vars")
-      if (i == vars[end])
-        conds *= i * "0"
-      else
-        conds *= i * "0, "
-      end
+elseif (locvar("vars") !== nothing)
+  varsList = locvar("vars")
+  conds = ""
+  for (i, name) in enumerate(varsList)
+    conds *= name * "0"
+    if i != length(varsList)
+      conds *= ", "
     end
-    content = """
+  end
+  content = """
 /** 
 * Solve the problem using RKF45
 *
@@ -497,12 +496,11 @@ RKF45 = function(objectOfInputs) {
     var [t, vars] = RKF45Body(f, objectOfInputs, vars0);
     return [t, vars];
 }
-    """
-    title = locvar("title");
-    title = replace(title, " " => "_")
-    targetFile = "_libs/rendered/RKF45_$title.js"
-    write(targetFile, content);
-    HTML = """<script src="/libs/rendered/RKF45_$title.js"></script>"""
+  """
+  title = replace(locvar("title"), " " => "_")
+  targetFile = "_libs/rendered/RKF45_$title.js"
+  write(targetFile, content)
+  HTML = """<script src="/libs/rendered/RKF45_$title.js"></script>"""
   else
     HTML = """"""
   end
