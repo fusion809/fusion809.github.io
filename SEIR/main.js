@@ -259,13 +259,24 @@ function generateAnimationEIR() {
     generateAnimationBaseEIR(solution);
 }
 
-function generateAnimations() {
-    var objectOfInputs = readInputs();
-    var solution = solveProblem(RKF45, objectOfInputs);
+function generateAnimations(objectOfInputs=undefined, solution=undefined) {
+    if (objectOfInputs==undefined) {
+        var objectOfInputs = readInputs();
+    }
+    if (solution==undefined) {
+        var solution = solveProblem(RKF45, objectOfInputs);
+    }
     generateAnimationBaseSIR(solution);
     generateAnimationBaseSEI(solution);
     generateAnimationBaseSER(solution);
     generateAnimationBaseEIR(solution);
+}
+
+function removeAnimations() {
+    removeAnimationSEI();
+    removeAnimationSIR();
+    removeAnimationSER();
+    removeAnimationEIR();
 }
 
 function removeSIRPhasePlot() {
@@ -306,4 +317,32 @@ function removePlots() {
     removeSRPhasePlot()
     removeIRPhasePlot()
     removeTimePlot();
+}
+
+function generateTable(objectOfInputs=undefined, solution=undefined) {
+    if (objectOfInputs==undefined) {
+        var objectOfInputs = readInputs();
+    }
+    if (solution==undefined) {
+        var solution = solveProblem(RKF45, objectOfInputs);
+    }
+    fillTable(objectOfInputs, ['Susceptible', 'Exposed', 'Infectious', 'Recovered'], solution)
+}
+
+function generateAllOutputs(objectOfInputs=undefined, solution=undefined) {
+    if (objectOfInputs==undefined) {
+        var objectOfInputs = readInputs();
+    }
+    if (solution==undefined) {
+        var solution = solveProblem(RKF45, objectOfInputs);
+    }
+    generateTable(objectOfInputs, solution);
+    generatePlots(objectOfInputs, solution);
+    generateAnimations(objectOfInputs, solution);
+}
+
+function removeAllOutputs() {
+    removeTable();
+    removePlots();
+    removeAnimations();
 }

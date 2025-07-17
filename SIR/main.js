@@ -195,7 +195,7 @@ function generateAllOutputs(objectOfInputs=undefined, solution=undefined) {
     if (solution==undefined) {
         var solution = solveProblem(RKF45, objectOfInputs);
     }
-    fillTable(objectOfInputs, ['x', 'y', 'z'], solution)
+    fillTable(objectOfInputs, ['Susceptible', 'Infectious', 'Recovered'], solution)
     generatePlots(objectOfInputs, solution);
     generateAnimation(objectOfInputs, solution);
 }
