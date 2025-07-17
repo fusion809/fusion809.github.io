@@ -471,10 +471,10 @@ function render_js(pageTitle::String, type, vars)
     return;
   end
   if !isdir("_libs/rendered")
-    mkdir("_libs/rendered/")
+    mkpath("_libs/rendered/")
   end
   if !isdir("__site/libs/rendered/")
-    mkdir("__site/libs/rendered/")
+    mkpath("__site/libs/rendered/")
   end
   if !isfile(targetFile) || stat(baseFile).mtime > stat(targetFile).mtime
       cp(baseFile, targetFile, force=true)
