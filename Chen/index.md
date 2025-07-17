@@ -5,7 +5,7 @@
 ~~~
 
 @def hassim=true;
-@def title = "Chen solver"
+@def title = "Chen system solver"
 @def params = (a = (val=40, desc="Problem parameter"), b=(val=3, desc="Problem parameter"), c=(val=28, desc="Problem parameter"), tf=(val=120, desc="End time for the simulation in seconds (s)"), x0=(val=-0.1, desc="Initial \\(x\\) coordinate"), y0=(val=0.5, desc="Initial \\(y\\) coordinate"), z0=(val=-0.6, desc="Initial \\(z\\) coordinate"), epsilon=(val=1e-8,))
 @def type = "attractor"
 

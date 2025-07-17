@@ -424,3 +424,50 @@ function hfun_render_footlist()
       """
     end
 end
+
+function hfun_render_js()
+  
+  if (locvar("type")=="attractor")
+    artTitle = locvar("title")
+    artTitle = replace(artTitle, r" solver"=>"")
+    if (occursin(r"Chen", artTitle))
+      title = "Chen system"
+      view = "[0, 2, 0]";
+    elseif (occursin(r"Lorenz", artTitle))
+      title = "Lorenz system"
+      view = "[2, 0, 0]";
+    elseif (occursin(r"Rabinovich&ndash;Fabrikant", artTitle))
+      title = "Rabinovich&ndash;Fabrikant system"
+      view = "[2, 0, 0]";
+    elseif (occursin(r"R&ouml;ssler", artTitle))
+      title = "R&ouml;ssler system"
+    else
+      title = artTitle;
+    end
+    if (@isdefined(view))
+      viewStr1 = ", {view: $view}"
+      viewStr2 = "view: $view, "
+    else
+      viewStr1 = ""
+      viewStr2 = ""
+    end
+    titleOneWord = split(title)[1];
+    cp("_libs/common/attractor.js", "_libs/rendered/attractor_$titleOneWord.js", force=true);
+    # Read the content of the copied file
+content = read("_libs/rendered/attractor_$titleOneWord.js", String)
+
+# Replace characters or strings
+new_content = replace(content, "\$viewStr1" => "$viewStr1")
+new_content = replace(new_content, "\$viewStr2" => "$viewStr2")
+new_content = replace(new_content, "\$title" => "$title")
+
+# Write the modified content back to the file
+write("_libs/rendered/attractor_$titleOneWord.js", new_content)
+    HTML = """
+    <script src="/libs/rendered/attractor_$titleOneWord.js"></script>
+    """
+  else
+    HTML = """"""
+  end
+  return HTML
+end
