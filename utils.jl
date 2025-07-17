@@ -484,7 +484,7 @@ elseif (locvar("vars") !== nothing)
   end
   title = replace(locvar("title"), " " => "_")
   targetFile = "_libs/rendered/RKF45_$title.js"
-  baseFile = "_libs/rendered/RKF45_base.js"
+  baseFile = "_libs/common/RKF45_base.js"
   if !isfile(targetFile) || stat(baseFile).mtime > stat(targetFile).mtime
       # Read the content of the copied file
       cp(baseFile, targetFile, force=true);
