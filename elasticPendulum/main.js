@@ -14,20 +14,6 @@ function f(objectOfInputs, t, vars, dt) {
     return [dt*dz, dt*zDDot, dt*dtheta, dt*thetaDDot];
 }
 
-/** 
- * Solve the problem using RKF45
- *
- * @param objectOfInputs An object containing all the problem parameters.
- * @return               [t, vars]
- */
-function RKF45(objectOfInputs) {
-    // Extract initial from object and add to 2d array
-    var {z0, dz0, theta0, dtheta0} = objectOfInputs;
-    var vars0 = [[z0, dz0, theta0, dtheta0]];
-    var [t, vars] = RKF45Body(f, objectOfInputs, vars0); 
-    return [t, vars];
-}
-
 /**
  * Generates a 2D phase plot of x against theta
  * 

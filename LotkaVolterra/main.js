@@ -17,20 +17,6 @@ function f(objectOfInputs, t, vars, dt) {
     return [dt*(alpha*x - beta*x*y), dt*(delta*x*y-gamma*y)];
 }
 
-/** 
- * Solve the problem using RKF45
- *
- * @param solution       An object containing solution data.
- * @return               [t, vars]
- */
-function RKF45(objectOfInputs) {
-    // Extract initial conditions from object and write to 2d array
-    var {x0, y0} = objectOfInputs;
-    var vars0 = [[x0, y0]];
-    var [t, vars] = RKF45Body(f, objectOfInputs, vars0);
-    return [t, vars];
-}
-
 /**
  * Generate phase plot
  * 
