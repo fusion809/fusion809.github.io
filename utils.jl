@@ -471,7 +471,7 @@ function hfun_render_js()
       write(targetFile, new_content)
     end
     HTML = """
-    <script src="/libs/rendered/attractor_$titleOneWord.js"></script>
+    <script src="/_libs/rendered/attractor_$titleOneWord.js"></script>
     """
 elseif (locvar("vars") !== nothing)
   varsList = locvar("vars")
@@ -500,7 +500,7 @@ RKF45 = function(objectOfInputs) {
   title = replace(locvar("title"), " " => "_")
   targetFile = "_libs/rendered/RKF45_$title.js"
   write(targetFile, content)
-  HTML = """<script src="/libs/rendered/RKF45_$title.js"></script>"""
+  HTML = """<script src="/_libs/rendered/RKF45_$title.js"></script>"""
   else
     HTML = """"""
   end
