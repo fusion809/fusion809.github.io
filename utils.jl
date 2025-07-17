@@ -467,24 +467,34 @@ function render_js(pageTitle::String, type, vars)
     end
     targetFile = "_libs/rendered/RKF45_$title.js"
     baseFile = "_libs/common/RKF45_base.js"
-    if !isfile(targetFile) || stat(baseFile).mtime > stat(targetFile).mtime
+  else
+    return;
+  end
+  if !isdir("_libs/rendered")
+    mkdir("_libs/rendered/")
+  end
+  if !isdir("__site/libs/rendered/")
+    mkdir("__site/libs/rendered/")
+  end
+  if !isfile(targetFile) || stat(baseFile).mtime > stat(targetFile).mtime
       cp(baseFile, targetFile, force=true)
       content = read(targetFile, String)
 
       # Replace characters or strings
-      new_content = replace(content, "\$conds" => "$conds")
-
-      if @isdefined(viewStr1)
-        new_content = replace(new_content, "\$viewStr1" => "$viewStr1")
-        new_content = replace(new_content, "\$viewStr2" => "$viewStr2")
+      if (@isdefined(conds))
+        content = replace(content, "\$conds" => "$conds")
       end
 
-      new_content = replace(new_content, "\$title" => "$title")
+      if @isdefined(viewStr1)
+        content = replace(content, "\$viewStr1" => "$viewStr1")
+        content = replace(content, "\$viewStr2" => "$viewStr2")
+      end
+
+      content = replace(content, "\$title" => "$title")
 
       # Write the modified content back to the file
-      write(targetFile, new_content)
+      write(targetFile, content)
     end
-  end
 end
 
 function hfun_render_js()
