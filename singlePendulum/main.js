@@ -113,39 +113,62 @@ function removeAnimation() {
     rmPlot("animation");
 }
 
-function generateAnimationBase(objectOfInputs, solution) {
-     animatePendulum(objectOfInputs, solution, "Single pendulum");
-}
 /**
  * Generates animation.
  * @return nothing. 
  */
-function generateAnimation() {
-    var objectOfInputs = readInputs();
-    var solution = solveProblem(RKF45, objectOfInputs);
-   generateAnimationBase(objectOfInputs, solution);
+function generateAnimation(objectOfInputs=undefined, solution=undefined) {
+    if (objectOfInputs==undefined) {
+        var objectOfInputs = readInputs();
+    }
+    if (solution==undefined) {
+        var solution = solveProblem(RKF45, objectOfInputs);
+    }
+    animatePendulum(objectOfInputs, solution, "Single pendulum");
 }
 
-function generatePhaseAnimationBase(solution) {
+function generatePhaseAnimation(objectOfInputs=undefined, solution=undefined) {
+    if (objectOfInputs==undefined) {
+        var objectOfInputs = readInputs();
+    }
+    if (solution==undefined) {
+        var solution = solveProblem(RKF45, objectOfInputs);
+    }
     animate2D(solution, {varnames: ["θ", "dθ/dt"], IdSuffix: "Phase", title: "Single pendulum: phase plot of dθ/dt against θ."});
 }
 
-function generatePhaseAnimation() {
-    var objectOfInputs = readInputs();
-    var solution = solveProblem(RKF45, objectOfInputs);
-    generatePhaseAnimationBase(solution);
-}
-
-function generateAnimations() {
-    var objectOfInputs = readInputs();
-    var solution = solveProblem(RKF45, objectOfInputs);
-    generateAnimationBase(objectOfInputs, solution);
-    generatePhaseAnimationBase(solution);
+function generateAnimations(objectOfInputs=undefined, solution=undefined) {
+    if (objectOfInputs==undefined) {
+        var objectOfInputs = readInputs();
+    }
+    if (solution==undefined) {
+        var solution = solveProblem(RKF45, objectOfInputs);
+    }
+    generateAnimation(objectOfInputs, solution);
+    generatePhaseAnimation(solution);
 }
 function removePhaseAnimation() {
     rmPlot("animationPhase");
 }
 function removeAnimations() {
     removePhaseAnimation();
+    removeAnimation();
+}
+
+function generateAllOutputs(objectOfInputs=undefined, solution=undefined) {
+    if (objectOfInputs==undefined) {
+        var objectOfInputs = readInputs();
+    }
+    if (solution==undefined) {
+        var solution = solveProblem(RKF45, objectOfInputs);
+    }
+    fillTable(objectOfInputs, ['θ', 'dθ/dt'], solution)
+    generatePlots(objectOfInputs, solution);
+    generateAnimation(objectOfInputs, solution);
+}
+
+function removeAllOutputs() {
+    removeTable();
+    removePlots();
     removeAnimation();
 }

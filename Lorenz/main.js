@@ -110,9 +110,13 @@ function generateTimePlot(solution) {
  * @param objectOfInputs An object containing all the problem parameters.
  * @return               Nothing. Just generates the plots.
  */
-function generatePlots(objectOfInputs) {
-    // Solve problem
-    var solution = solveProblem(RKF45, objectOfInputs);
+function generatePlots(objectOfInputs=undefined, solution=undefined) {
+    if (objectOfInputs==undefined) {
+        var objectOfInputs = readInputs();
+    }
+    if (solution==undefined) {
+        var solution = solveProblem(RKF45, objectOfInputs);
+    }
 
     // Generate plots
     generate3DPhasePlot(solution);
@@ -134,7 +138,30 @@ function removeAnimation() {
  * Generate animation
  * @return nothing.
  */
-function generateAnimation() {
-    var solution = solveProblem(RKF45, readInputs());
+function generateAnimation(objectOfInputs=undefined, solution=undefined) {
+    if (objectOfInputs==undefined) {
+        var objectOfInputs = readInputs();
+    }
+    if (solution==undefined) {
+        var solution = solveProblem(RKF45, objectOfInputs);
+    }
     animate3D(solution, {view: [2, 0, 0], title: "Lorenz system: x, y and z phase plot."});
+}
+
+function generateAllOutputs(objectOfInputs=undefined, solution=undefined) {
+    if (objectOfInputs==undefined) {
+        var objectOfInputs = readInputs();
+    }
+    if (solution==undefined) {
+        var solution = solveProblem(RKF45, objectOfInputs);
+    }
+    fillTable(objectOfInputs, ['x', 'y', 'z'], solution)
+    generatePlots(objectOfInputs, solution);
+    generateAnimation(objectOfInputs, solution);
+}
+
+function removeAllOutputs() {
+    removeTable();
+    removePlots();
+    removeAnimation();
 }
