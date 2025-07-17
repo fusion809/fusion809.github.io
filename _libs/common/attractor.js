@@ -4,7 +4,7 @@
 * @param objectOfInputs An object containing all the problem parameters.
 * @return               [t, vars]
 */
-window.RKF45 = function(objectOfInputs) {
+RKF45 = function(objectOfInputs) {
     // Extract initial conditions from object and enter it into RKF45Body
     var {x0, y0, z0} = objectOfInputs;
     var vars0 = [[x0, y0, z0]];

@@ -5,6 +5,7 @@
 ~~~
 
 @def hassim=true;
+@def vars = ["S", "I", "R"]
 @def title = "SIR equations solver"
 @def params = (beta=(val=0.33, desc="A parameter that pertains to how many contacts there are per person and how easily the disease spreads from an infected person to an infected person."), gamma=(val=0.25, desc="A parameter that is a measure of how quickly people recover from the disease."), delta=(val=0.5, desc="A parameter with values from 0 to 1 pertaining to how effective quarantine measures are at slowing the disease outbreak. If \\(\\delta = 0\\), the measures are either non-existent or completely ineffective. If \\(\\delta = 1\\), all infected persons are immediately, as soon as they become infected, quarantined."), tf=(val=300,), S0=(val=89,), I0=(val=1,), R0=(val=0,), epsilon=(val=1e-11,))
 @def ids = ["tableOutputs", "phasePlotSIR", "phasePlotSI", "phasePlotSR", "phasePlotIR", "timePlot", "phasePlotSIR", "animation"]

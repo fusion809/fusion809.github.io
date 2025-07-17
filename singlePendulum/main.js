@@ -19,19 +19,6 @@ function prntObj(obj) {
     }
     return str;
 }
-/** 
- * Solve the problem using RKF45
- *
- * @param objectOfInputs An object containing all the problem parameters.
- * @return               [t, vars]
- */
-function RKF45(objectOfInputs) {
-    // Extract initial conditions from object and write to 2d array
-    var {theta0, dtheta0} = objectOfInputs;
-    var vars0 = [[theta0, dtheta0]];
-    var [t, vars] = RKF45Body(f, objectOfInputs, vars0); 
-    return [t, vars];
-}
 
 /**
  * Generate phase plot of theta dot against theta

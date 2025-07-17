@@ -1,5 +1,6 @@
 @def title="Lotka-Volterra equations solver"
 @def hassim=true
+@def vars = ["x", "y"]
 @def params = (alpha=(val=1.1, desc="Natural growth rate of the population of prey animals."),beta=(val=0.4, desc="The rate at which prey animals are killed by the predators."),gamma=(val=0.4, desc="The rate at which predator animals die in the absence of their prey."),delta=(val=0.1, desc="The rate at which the population of predator animals increases due to the presence of their prey."),tf=(val=37, desc="End time for the simulation in seconds."),x0=(val=100, desc="Prey population."),y0=(val=10, desc="Predator population."), epsilon=(val=1e-9,), t1=(val=30,))
 @def type="2D"
 

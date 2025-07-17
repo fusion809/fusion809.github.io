@@ -14,20 +14,6 @@ function f(objectOfInputs, t, vars, dt) {
     return [dt*dx, dt*(- delta*dx - alpha*x - beta*x**3 + gamma * Math.cos(omega*t))];
 }
 
-/** 
- * Solve the problem using RKF45
- *
- * @param objectOfInputs An object containing all the problem parameters.
- * @return               [t, vars]
- */
-function RKF45(objectOfInputs) {
-    // Extract initial conditions and enter into 2d array
-    var {x0, dx0} = objectOfInputs;
-    var vars0 = [[x0, dx0]];
-    var [t, vars] = RKF45Body(f, objectOfInputs, vars0);
-    return [t, vars];
-}
-
 /**
  * Generate phase plot of x dot against x
  * 
