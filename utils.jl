@@ -206,6 +206,9 @@ function hfun_params_render()
           param_name_latex *= "$no"
         end
         param_name_latex *= "}"
+      elseif (length(numbers) == 1)
+        no = numbers[1]
+        param_name_latex = "\\theta_{$no}"
       end
     elseif (occursin.(r"alpha", param_name))
       param_name_latex="\\alpha"
