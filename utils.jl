@@ -452,17 +452,21 @@ function hfun_render_js()
       viewStr2 = ""
     end
     titleOneWord = split(title)[1];
-    cp("_libs/common/attractor.js", "_libs/rendered/attractor_$titleOneWord.js", force=true);
-    # Read the content of the copied file
-content = read("_libs/rendered/attractor_$titleOneWord.js", String)
+    targetFile = "_libs/rendered/attractor_$titleOneWord.js"
+    baseFile = "_libs/common/attractor.js"
+    if !isfile(targetFile) || stat(baseFile).mtime > stat(targetFile).mtime
+      # Read the content of the copied file
+      cp(baseFile, targetFile, force=true);
+      content = read(targetFile, String)
 
-# Replace characters or strings
-new_content = replace(content, "\$viewStr1" => "$viewStr1")
-new_content = replace(new_content, "\$viewStr2" => "$viewStr2")
-new_content = replace(new_content, "\$title" => "$title")
+      # Replace characters or strings
+      new_content = replace(content, "\$viewStr1" => "$viewStr1")
+      new_content = replace(new_content, "\$viewStr2" => "$viewStr2")
+      new_content = replace(new_content, "\$title" => "$title")
 
-# Write the modified content back to the file
-write("_libs/rendered/attractor_$titleOneWord.js", new_content)
+      # Write the modified content back to the file
+      write(targetFile, new_content)
+    end
     HTML = """
     <script src="/libs/rendered/attractor_$titleOneWord.js"></script>
     """
