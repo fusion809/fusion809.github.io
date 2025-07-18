@@ -6,8 +6,8 @@
 */
 RKF45 = function(objectOfInputs) {
     // Extract initial conditions from object and enter it into RKF45Body
-    var {x0, y0} = objectOfInputs;
-    var vars0 = [[x0, y0]];
+    var {"x"0, "y"0} = objectOfInputs;
+    var vars0 = [["x"0, "y"0]];
     var [t, vars] = RKF45Body(f, objectOfInputs, vars0);
     return [t, vars];
 }
