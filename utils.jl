@@ -1,3 +1,4 @@
+using SHA
 function hfun_bar(vname)
   val = Meta.parse(vname[1])
   return round(sqrt(val), digits=2)
@@ -428,6 +429,40 @@ function hfun_render_footlist()
     end
 end
 
+function latest_input_time()
+    # Get base files (utils and base JS files)
+    base_files = [
+        "utils.jl",
+        "_libs/common/RKF45_base.js",
+        "_libs/common/attractor.js"
+    ]
+
+    # Get all Markdown files recursively in the pwd
+    md_dir = joinpath(@__DIR__, ".")
+    md_files = [];
+    for (root, _, files) in walkdir(md_dir)
+      for file in files
+        if endswith(file, ".md")
+          push!(md_files, root * "/" * file)
+        end
+      end
+    end
+
+    # Only keep those defining title, type, and vars
+    filtered_md_files = filter(md_files) do f
+        content = read(f, String)
+        occursin("@def title", content) &&
+        occursin("@def type", content) &&
+        occursin("@def vars", content)
+    end
+
+    # Combine with base files
+    all_inputs = vcat(base_files, filtered_md_files)
+
+    # Return latest mtime
+    return maximum(stat(f).mtime for f in all_inputs if isfile(f))
+end
+
 function render_js(pageTitle, type, vars)
   title = replace(pageTitle, " " => "_")
   if (type=="attractor")
@@ -465,7 +500,6 @@ function render_js(pageTitle, type, vars)
         conds *= ", "
       end
     end
-    println("conds = " * conds)
     targetFile = "_libs/rendered/RKF45_$title.js"
     baseFile = "_libs/common/RKF45_base.js"
   else
@@ -494,25 +528,31 @@ function render_js(pageTitle, type, vars)
 
       content = replace(content, "\$title" => "$title")
       content = replace(content, r"\"" => "")
-      println("content = " * content)
+      new_hash = sha256(content)
+      old_hash = isfile(targetFile) ? sha256(read(targetFile, String)) : ""
       # Write the modified content back to the file
-      write(targetFile, content)
-      cp(targetFile, "__site/libs/rendered/RKF45_$title.js", force=true)
+      if (new_hash != old_hash)
+        write(targetFile, content)
+        cp(targetFile, "__site/libs/rendered/RKF45_$title.js", force=true)
+      end
     end
 end
 
 
 function render_rmPlot(funcs, ids, title)
   title = replace(title, " " => "_");
+  filepath1 = "_libs/rendered/rmPlot_$title.js"
+  filepath2 = "__site/libs/rendered/rmPlot_$title.js"
+  if isfile(filepath1) && stat(filepath1).mtime > latest_input_time() &&
+    isfile(filepath2) && stat(filepath2).mtime > latest_input_time()
+      return
+  end
   src = """""";
   for k in [r"[pP]lot", r"[aA]nimation"]
     rmFuncs = filter(f -> occursin("remove", f) && occursin(k, f), funcs)
     plotIDs = filter(f -> occursin(k, f), ids)
-    if (length(rmFuncs) != length(plotIDs))
-      println("rmFuncs ($rmFuncs) does not match plotIDs ($plotIDs) for length")
-      if (length(rmFuncs) < length(plotIDs))
-        plotIDs = plotIDs[1:length(rmFuncs)]
-      end
+    if (length(rmFuncs) < length(plotIDs))
+      plotIDs = plotIDs[1:length(rmFuncs)]
     end
     for i in eachindex(rmFuncs)
       rmFunc = rmFuncs[i]
@@ -523,7 +563,39 @@ function render_rmPlot(funcs, ids, title)
           rmPlot("$plotID")
         }
         """
-      else
+      elseif occursin("removePendulumPlots", rmFunc)
+        src *= """
+        function $rmFunc {
+        """
+        for j in eachindex(rmFuncs)
+          rmFuncj = rmFuncs[j]
+          if (i != j) && occursin(r"[pP]endulum", rmFuncj)
+            println("rmFuncj = " * rmFuncj)
+            src *= """
+              $rmFuncj
+            """
+          end
+        end
+        src *= """
+        }
+        """
+      elseif occursin("removePlots", rmFunc)
+        src *= """
+        function $rmFunc {
+        """
+        for j in eachindex(rmFuncs)
+          rmFuncj = rmFuncs[j]
+          if (i != j) && !occursin(r"[pP]endulum.*Plot\(\)", rmFuncj)
+
+            src *= """
+              $rmFuncj
+            """
+          end
+        end
+        src *= """
+        }
+        """
+      elseif occursin("removeAnimations", rmFunc)
         src *= """
         function $rmFunc {
         """
@@ -541,8 +613,6 @@ function render_rmPlot(funcs, ids, title)
       end
     end
   end
-  filepath1 = "_libs/rendered/rmPlot_$title.js"
-  filepath2 = "__site/libs/rendered/rmPlot_$title.js"
   write(filepath1, src)
   write(filepath2, src)
 end
@@ -564,12 +634,3 @@ function hfun_render_js()
   end
   return HTML
 end
-
-# function hfun_render_rmPlot()
-#   funcs = locvar("funcs");
-#   ids = locvar("ids");
-#   title = locvar("title");
-#   render_rmPlot(funcs, ids, title)
-#   title = replace(title, " " => "_")
-#   return """<script src="/libs/rendered/rmPlot_$title.js"></script>"""
-# end

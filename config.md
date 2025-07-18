@@ -6,7 +6,7 @@ The website_* must be defined for the RSS to work
 @def website_title = "The Hornery"
 @def website_descr = "My professional website"
 @def website_url   = "https://fusion809.github.io/"
-
+@def title = "Tag"
 @def author = "Brenton Horne"
 
 @def mintoclevel = 2
