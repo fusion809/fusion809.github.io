@@ -198,7 +198,7 @@ function removePlots() {
     removeDzZPhasePlot()
 }
 
-function generateAllOutputs(objectOfInputs=undefined, solution=undefined) {
+function generateTable(objectOfInputs=undefined, solution=undefined) {
     if (objectOfInputs==undefined) {
         var objectOfInputs = readInputs();
     }
@@ -206,12 +206,4 @@ function generateAllOutputs(objectOfInputs=undefined, solution=undefined) {
         var solution = solveProblem(RKF45, objectOfInputs);
     }
     fillTable(objectOfInputs, ['z', 'dz/dt', '&theta;', 'd&theta;/dt'], solution)
-    generatePlots(objectOfInputs, solution)
-    generateAnimations(objectOfInputs, solution)
-}
-
-function removeAllOutputs() {
-    removeTable();
-    removePlots();
-    removeAnimations();
 }

@@ -329,7 +329,7 @@ function removeAnimations() {
     removeAnimation();
 }
 
-function generateAllOutputs(objectOfInputs=undefined, solution=undefined) {
+function generateTable(objectOfInputs=undefined, solution=undefined) {
     if (objectOfInputs==undefined) {
         var objectOfInputs = readInputs();
     }
@@ -337,12 +337,4 @@ function generateAllOutputs(objectOfInputs=undefined, solution=undefined) {
         var solution = solveProblem(RKF45, objectOfInputs);
     }
     fillTable(objectOfInputs, ['θ', 'dθ/dt'], solution)
-    generatePlots(objectOfInputs, solution);
-    generateAnimation(objectOfInputs, solution);
-}
-
-function removeAllOutputs() {
-    removeTable();
-    removePlots();
-    removeAnimation();
 }

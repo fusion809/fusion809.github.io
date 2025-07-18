@@ -384,19 +384,3 @@ function removeAnimations() {
     removeTheta1PhaseAnimation();
     removeTheta2PhaseAnimation();
 }
-
-function generateAllOutputs(objectOfInputs=undefined) {
-    if (objectOfInputs==undefined) {
-        var objectOfInputs = readInputs();
-    }
-    var solution = solveProblem(RKF45, objectOfInputs);
-    generateTable(objectOfInputs, solution);
-    generatePlots(objectOfInputs, solution);
-    generateAnimations(objectOfInputs, solution);
-}
-
-function removeAllOutputs() {
-    removeTable();
-    removePlots();
-    removeAnimations();
-}

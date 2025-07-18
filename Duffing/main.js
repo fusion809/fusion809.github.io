@@ -92,15 +92,3 @@ function generateTable(objectOfInputs=undefined, solution=undefined) {
     }
     fillTable(objectOfInputs, ['x', 'dx/dt'], solution)
 }
-
-function generateAllOutputs(objectOfInputs=undefined, solution=undefined) {
-    if (objectOfInputs==undefined) {
-        var objectOfInputs = readInputs();
-    }
-    if (solution==undefined) {
-        var solution = solveProblem(RKF45, objectOfInputs);
-    }
-    generateTable(objectOfInputs, solution)
-    generatePlots(objectOfInputs, solution)
-    generateAnimations(objectOfInputs, solution)
-}
