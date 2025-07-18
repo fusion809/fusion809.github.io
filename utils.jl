@@ -478,6 +478,7 @@ function render_js(pageTitle, type, vars)
     mkpath("__site/libs/rendered/")
   end
   if !isfile(targetFile) || stat(baseFile).mtime > stat(targetFile).mtime
+      println("Copying $baseFile to $targetFile...")
       cp(baseFile, targetFile, force=true)
       content = read(targetFile, String)
 
