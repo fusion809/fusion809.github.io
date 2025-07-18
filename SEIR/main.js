@@ -164,14 +164,6 @@ function generatePlots(objectOfInputs) {
     generateTimePlot(solution);
 };
 
-/**
- * Remove SIR animation
- * @return nothing
- */
-function removeAnimationSIR() {
-    rmPlot("animationSIR");
-}
-
 function generateAnimationBaseSIR(solution) {
     animate3D(solution, {varnames: ["Susceptible", "Infectious", "Recovered"], nos: [0, 2, 3], IdSuffix: "SIR", title: "Susceptible, infectious and recovered phase plot for the SEIR infectious disease model."});
 }
@@ -182,14 +174,6 @@ function generateAnimationBaseSIR(solution) {
 function generateAnimationSIR() {
     var solution = solveProblem(RKF45, readInputs());
     generateAnimationBaseSIR(solution);
-}
-
-/**
- * Remove SEI animation
- * @return nothing
- */
-function removeAnimationSEI() {
-    rmPlot("animationSEI");
 }
 
 function generateAnimationBaseSEI(solution) {
@@ -204,14 +188,6 @@ function generateAnimationSEI() {
     generateAnimationBaseSEI(solution);
 }
 
-/**
- * Remove SER animation
- * @return nothing
- */
-function removeAnimationSER() {
-    rmPlot("animationSER");
-}
-
 function generateAnimationBaseSER(solution) {
     animate3D(solution, {varnames: ["Susceptible", "Exposed", "Recovered"], nos: [0, 1, 3], IdSuffix: "SER", title: "Susceptible, exposed and recovered population phase plot for the SEIR infectious disease model."});
 }
@@ -222,14 +198,6 @@ function generateAnimationBaseSER(solution) {
 function generateAnimationSER() {
     var solution = solveProblem(RKF45, readInputs());
     generateAnimationBaseSER(solution);
-}
-
-/**
- * Remove EIR animation
- * @return nothing
- */
-function removeAnimationEIR() {
-    rmPlot("animationEIR");
 }
 
 function generateAnimationBaseEIR(solution) {
@@ -256,53 +224,6 @@ function generateAnimations(objectOfInputs=undefined, solution=undefined) {
     generateAnimationBaseSEI(solution);
     generateAnimationBaseSER(solution);
     generateAnimationBaseEIR(solution);
-}
-
-function removeAnimations() {
-    removeAnimationSEI();
-    removeAnimationSIR();
-    removeAnimationSER();
-    removeAnimationEIR();
-}
-
-function removeSIRPhasePlot() {
-    rmPlot("phasePlotSIR");
-}
-
-function removeSIPhasePlot() {
-    rmPlot("phasePlotSI");
-}
-
-function removeSRPhasePlot() {
-    rmPlot("phasePlotSR");
-}
-
-function removeSERPhasePlot() {
-    rmPlot("phasePlotSER");
-}
-
-function removeSEIPhasePlot() {
-    rmPlot("phasePlotSEI");
-}
-
-function removeEIRPhasePlot() {
-    rmPlot("phasePlotEIR");
-}
-
-function removeIRPhasePlot() {
-    rmPlot("phasePlotIR");
-}
-
-function removePlots() {
-    removeEIRPhasePlot()
-    removeSEIPhasePlot()
-    removeSERPhasePlot()
-    removeSIRPhasePlot()
-    removeSRPhasePlot()
-    removeSIPhasePlot()
-    removeSRPhasePlot()
-    removeIRPhasePlot()
-    removeTimePlot();
 }
 
 function generateTable(objectOfInputs=undefined, solution=undefined) {

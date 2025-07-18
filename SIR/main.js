@@ -121,14 +121,6 @@ function generatePlots(objectOfInputs=undefined, solution=undefined) {
 };
 
 /**
- * Remove animation
- * @return nothing.
- */
-function removeAnimation() {
-    rmPlot("animation");
-}
-
-/**
  * Generate animation
  * @return nothing. 
  */
@@ -150,28 +142,6 @@ function generateTable(objectOfInputs=undefined, solution=undefined) {
         var solution = solveProblem(RKF45, objectOfInputs);
     }
     fillTable(objectOfInputs, ['Susceptible', 'Infectious', 'Recovered'], solution)
-}
-
-function removeSRPhasePlot() {
-    rmPlot("phasePlotSR");
-}
-function removeSIPhasePlot() {
-    rmPlot("phasePlotSI");
-}
-
-function removeIRPhasePlot() {
-    rmPlot("phasePlotIR");
-}
-
-function removeSIRPhasePlot() {
-    rmPlot("phasePlotSIR");
-}
-function removePlots() {
-    removeSIRPhasePlot()
-    removeSRPhasePlot()
-    removeSIPhasePlot()
-    removeIRPhasePlot()
-    removeTimePlot();
 }
 
 function generateTable(objectOfInputs=undefined, solution=undefined) {

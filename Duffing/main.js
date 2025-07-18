@@ -75,14 +75,6 @@ function generateAnimation(objectOfInputs=undefined, solution=undefined) {
     animate2D(solution, {varnames: ["x", "dx/dt"], nos: [0, 1], title: "Duffing system: phase plot of dx/dt against x."});
 }
 
-/**
- * Remove animation
- * @return nothing
- */
-function removeAnimation() {
-  rmPlots("animation");
-}
-
 function generateTable(objectOfInputs=undefined, solution=undefined) {
     if (objectOfInputs==undefined) {
         var objectOfInputs = readInputs();

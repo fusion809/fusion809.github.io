@@ -93,14 +93,6 @@ function generatePendulumCoords(objectOfInputs, solution) {
 }
 
 /**
- * Removes animation.
- * @returns nothing, just removes the animation.
- */
-function removeAnimation() {
-    rmPlot("animation");
-}
-
-/**
  * Generates animation.
  * @return nothing. 
  */
@@ -133,13 +125,6 @@ function generateAnimations(objectOfInputs=undefined, solution=undefined) {
     }
     generateAnimation(objectOfInputs, solution);
     generatePhaseAnimation(solution);
-}
-function removePhaseAnimation() {
-    rmPlot("animationPhase");
-}
-function removeAnimations() {
-    removePhaseAnimation();
-    removeAnimation();
 }
 
 function generateTable(objectOfInputs=undefined, solution=undefined) {
