@@ -460,11 +460,12 @@ function render_js(pageTitle, type, vars)
     varsList = vars
     conds = ""
     for (i, name) in enumerate(varsList)
-      conds *= name * "0"
+      conds *= string(name, "0")
       if i != length(varsList)
         conds *= ", "
       end
     end
+    println("conds = " * conds)
     targetFile = "_libs/rendered/RKF45_$title.js"
     baseFile = "_libs/common/RKF45_base.js"
   else
@@ -491,7 +492,8 @@ function render_js(pageTitle, type, vars)
       end
 
       content = replace(content, "\$title" => "$title")
-
+      content = replace(content, r"\"" => "")
+      println("content = " * content)
       # Write the modified content back to the file
       write(targetFile, content)
     end

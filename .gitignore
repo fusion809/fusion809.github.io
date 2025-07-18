@@ -7,4 +7,4 @@ node_modules/
 octave-workspace
 .ccls-cache
 .patches
-#_libs/rendered/*.js
+_libs/rendered/*.js
