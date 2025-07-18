@@ -57,7 +57,11 @@ function generateAllOutputs(objectOfInputs=undefined, solution=undefined) {
     }
     generateTable(objectOfInputs, solution);
     generatePlots(objectOfInputs, solution);
-    generateAnimations(objectOfInputs, solution);
+    try {
+        generateAnimations(objectOfInputs, solution);
+    } catch(e) {
+        generateAnimation(objectOfInputs, solution);
+    }
 }
 
 function removeAllOutputs() {

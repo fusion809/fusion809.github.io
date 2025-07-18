@@ -501,16 +501,75 @@ function render_js(pageTitle, type, vars)
     end
 end
 
+
+function render_rmPlot(funcs, ids, title)
+  title = replace(title, " " => "_");
+  src = """""";
+  for k in [r"[pP]lot", r"[aA]nimation"]
+    rmFuncs = filter(f -> occursin("remove", f) && occursin(k, f), funcs)
+    plotIDs = filter(f -> occursin(k, f), ids)
+    if (length(rmFuncs) != length(plotIDs))
+      println("rmFuncs ($rmFuncs) does not match plotIDs ($plotIDs) for length")
+      if (length(rmFuncs) < length(plotIDs))
+        plotIDs = plotIDs[1:length(rmFuncs)]
+      end
+    end
+    for i in eachindex(rmFuncs)
+      rmFunc = rmFuncs[i]
+      plotID = plotIDs[i]
+      if !occursin(k * "s", rmFunc)
+        src *= """
+        function $rmFunc {
+          rmPlot("$plotID")
+        }
+        """
+      else
+        src *= """
+        function $rmFunc {
+        """
+        for j in eachindex(rmFuncs)
+          rmFuncj = rmFuncs[j]
+          if (i != j)
+            src *= """
+              $rmFuncj
+            """
+          end
+        end
+        src *= """
+        }
+        """
+      end
+    end
+  end
+  filepath1 = "_libs/rendered/rmPlot_$title.js"
+  filepath2 = "__site/libs/rendered/rmPlot_$title.js"
+  write(filepath1, src)
+  write(filepath2, src)
+end
+
 function hfun_render_js()
   title = locvar("title")
   type = locvar("type")
   vars = locvar("vars")
   render_js(title, type, vars)
+  if (type != "attractor")
+    ids, funcs, labels = getButtonVars();
+    render_rmPlot(funcs, ids, title)
+  end
   title = replace(title, " " => "_")
   if (type == "attractor")
     HTML = """<script src="/libs/rendered/attractor_$title.js"></script>"""
   else
-    HTML = """<script src="/libs/rendered/RKF45_$title.js"></script>"""
+    HTML = """<script src="/libs/rendered/RKF45_$title.js"></script><script src="/libs/rendered/rmPlot_$title.js"></script>"""
   end
   return HTML
 end
+
+# function hfun_render_rmPlot()
+#   funcs = locvar("funcs");
+#   ids = locvar("ids");
+#   title = locvar("title");
+#   render_rmPlot(funcs, ids, title)
+#   title = replace(title, " " => "_")
+#   return """<script src="/libs/rendered/rmPlot_$title.js"></script>"""
+# end

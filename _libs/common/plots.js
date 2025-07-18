@@ -240,30 +240,30 @@ function removePendulum2TimePlot() {
  * @params           None.
  * @return           Nothing. Just removes the solution plots.
  */
-function removePlots() {
-    // Clear HTML and CSS of the plots
-    removeXYPhasePlot();
-    removeXZPhasePlot();
-    removeYZPhasePlot();
-    remove3DPhasePlot();
-    removePhasePlot();
-    removeTimePlot();
-    removeErrorPlot();
-    removeXXDotPhasePlot();
-    removeXThetaPhasePlot();
-    removeThetaThetaDotPhasePlot();
-    removeTheta1Theta2PhasePlot();
-    removeTheta1Dtheta1PhasePlot();
-    removeTheta1Dtheta2PhasePlot();
-    removeTheta2Dtheta1PhasePlot();
-    removeTheta2Dtheta2PhasePlot();
-    removeDtheta1Dtheta2PhasePlot();
-    removePendulum1Plot();
-    removePendulum1TimePlot();
-    removePendulum2Plot();
-    removePendulum2TimePlot();
-    removePendulumPlots();
-}
+// function removePlots() {
+//     // Clear HTML and CSS of the plots
+//     removeXYPhasePlot();
+//     removeXZPhasePlot();
+//     removeYZPhasePlot();
+//     remove3DPhasePlot();
+//     removePhasePlot();
+//     removeTimePlot();
+//     removeErrorPlot();
+//     removeXXDotPhasePlot();
+//     removeXThetaPhasePlot();
+//     removeThetaThetaDotPhasePlot();
+//     removeTheta1Theta2PhasePlot();
+//     removeTheta1Dtheta1PhasePlot();
+//     removeTheta1Dtheta2PhasePlot();
+//     removeTheta2Dtheta1PhasePlot();
+//     removeTheta2Dtheta2PhasePlot();
+//     removeDtheta1Dtheta2PhasePlot();
+//     removePendulum1Plot();
+//     removePendulum1TimePlot();
+//     removePendulum2Plot();
+//     removePendulum2TimePlot();
+//     removePendulumPlots();
+// }
 
 /**
  * Remove all pendulum coordinate plots.
