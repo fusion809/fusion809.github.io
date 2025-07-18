@@ -22,12 +22,17 @@ function eager_generate_js()
         page_title = isnothing(title) ? "Untitled" : title.captures[1]
         page_type  = type.captures[1]
         page_vars  = split(vars.captures[1], r"\s*,\s*")
-        println("page_title = " * page_title)
-        println("page_type = " * page_type)
-        println("page_vars[1] = " * page_vars[1])
+        if (page_type == "2D")
+          ids = ["tableOutputs", "phasePlot", "timePlot", "phasePlot", "animation", "animation"];
+          funcs = ["generateTable()", "removeTable()", "generatePhasePlot(solveProblem(RKF45, readInputs()))", "removePhasePlot()", "generateTimePlot(solveProblem(RKF45, readInputs()))", "removeTimePlot()", "generatePlots(readInputs())", "removePlots()", "generateAnimation()", "removeAnimation()","generateAllOutputs()", "removeAllOutputs()"];
+        else
+          ids   = split(match(r"ids *= *\[([^\]]+)\]", content).captures[1], r"\s*,\s*")
+          funcs   = split(match(r"funcs *= *\[([^\]]+)\]", content).captures[1], r"\s*,\s*")
+        end
 
         try
           render_js(page_title, page_type, page_vars)
+          render_rmPlot(funcs, ids, page_title)
         catch e
           @warn "Error generating JS for $file" exception = e
         end
