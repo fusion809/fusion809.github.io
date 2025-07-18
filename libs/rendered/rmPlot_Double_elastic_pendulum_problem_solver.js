@@ -1,4 +1,60 @@
+function removePendulumPlot() {
+  rmPlot("pendulumPlot")
+}
+function removePendulumTimePlot() {
+  rmPlot("pendulumTimePlot")
+}
 function removePendulumPlots() {
+  removePendulumPlot()
+  removePendulumTimePlot()
+}
+function removeTimePlot() {
+  rmPlot("timePlot")
+}
+function removeR1TPlot() {
+  rmPlot("plotR1T")
+}
+function removeDr1TPlot() {
+  rmPlot("plotDr1T")
+}
+function removeDr1R1Plot() {
+  rmPlot("plotDr1R1")
+}
+function removeR2TPlot() {
+  rmPlot("plotR2T")
+}
+function removeDr2TPlot() {
+  rmPlot("plotDr2T")
+}
+function removeDr2R2Plot() {
+  rmPlot("plotDr2R2")
+}
+function removeR1R2PhasePlot() {
+  rmPlot("plotR2R1")
+}
+function removeTheta1TPlot() {
+  rmPlot("plotTheta1T")
+}
+function removeDtheta1TPlot() {
+  rmPlot("plotDtheta1T")
+}
+function removeDtheta1Theta1Plot() {
+  rmPlot("plotDtheta1Theta1")
+}
+function removeTheta2TPlot() {
+  rmPlot("plotTheta2T")
+}
+function removeDtheta2TPlot() {
+  rmPlot("plotDtheta2T")
+}
+function removeDtheta2Theta2Plot() {
+  rmPlot("plotDtheta2Theta2")
+}
+function removeTheta1Theta2PhasePlot() {
+  rmPlot("plotTheta1Theta2")
+}
+function removePlots() {
+  removePendulumPlots()
   removeTimePlot()
   removeR1TPlot()
   removeDr1TPlot()
@@ -14,51 +70,6 @@ function removePendulumPlots() {
   removeDtheta2TPlot()
   removeDtheta2Theta2Plot()
   removeTheta1Theta2PhasePlot()
-}
-function removeTimePlot() {
-  rmPlot("pendulumTimePlot")
-}
-function removeR1TPlot() {
-  rmPlot("timePlot")
-}
-function removeDr1TPlot() {
-  rmPlot("plotR1T")
-}
-function removeDr1R1Plot() {
-  rmPlot("plotDr1T")
-}
-function removeR2TPlot() {
-  rmPlot("plotDr1R1")
-}
-function removeDr2TPlot() {
-  rmPlot("plotR2T")
-}
-function removeDr2R2Plot() {
-  rmPlot("plotDr2T")
-}
-function removeR1R2PhasePlot() {
-  rmPlot("plotDr2R2")
-}
-function removeTheta1TPlot() {
-  rmPlot("plotR2R1")
-}
-function removeDtheta1TPlot() {
-  rmPlot("plotTheta1T")
-}
-function removeDtheta1Theta1Plot() {
-  rmPlot("plotDtheta1T")
-}
-function removeTheta2TPlot() {
-  rmPlot("plotDtheta1Theta1")
-}
-function removeDtheta2TPlot() {
-  rmPlot("plotTheta2T")
-}
-function removeDtheta2Theta2Plot() {
-  rmPlot("plotDtheta2T")
-}
-function removeTheta1Theta2PhasePlot() {
-  rmPlot("plotDtheta2Theta2")
 }
 function removeAnimation() {
   rmPlot("animation")

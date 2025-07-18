@@ -17,14 +17,6 @@ function removeDtheta1Dtheta2PhasePlot() {
   rmPlot("phasePlotDtheta2Dtheta1")
 }
 function removePendulumPlots() {
-  removeTheta1Theta2PhasePlot()
-  removeDtheta1Theta1PhasePlot()
-  removeTheta1Dtheta2PhasePlot()
-  removeTheta2Dtheta1PhasePlot()
-  removeDtheta2Theta2PhasePlot()
-  removeDtheta1Dtheta2PhasePlot()
-  removeTimePlot()
-  removePlots()
 }
 function removeTimePlot() {
   rmPlot("pendulumTimePlot")

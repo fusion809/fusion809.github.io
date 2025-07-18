@@ -17,21 +17,14 @@ function removePendulumTimePlot() {
   rmPlot("pendulumTimePlot")
 }
 function removePendulumPlots() {
-  removeZThetaPhasePlot()
-  removeDzZPhasePlot()
-  removeDthetaThetaPhasePlot()
-  removeTimePlot()
   removePendulumPlot()
   removePendulumTimePlot()
-  removePlots()
 }
 function removePlots() {
   removeZThetaPhasePlot()
   removeDzZPhasePlot()
   removeDthetaThetaPhasePlot()
   removeTimePlot()
-  removePendulumPlot()
-  removePendulumTimePlot()
   removePendulumPlots()
 }
 function removeAnimation() {

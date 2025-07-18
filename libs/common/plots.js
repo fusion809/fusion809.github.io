@@ -6,7 +6,10 @@
  */
 function adjustPlotHeight(element) {
     windowInnerHeight = window.innerHeight;
-    document.getElementById(element).style = "height: " + windowInnerHeight + "px;";
+    var element = document.getElementById(element)
+    if (element !== null) {
+      element.style = "height: " + windowInnerHeight + "px;";
+    }
 }
 
 
