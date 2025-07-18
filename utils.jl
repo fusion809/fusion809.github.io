@@ -428,7 +428,7 @@ function hfun_render_footlist()
     end
 end
 
-function render_js(pageTitle::String, type, vars)
+function render_js(pageTitle, type, vars)
   title = replace(pageTitle, " " => "_")
   if (type=="attractor")
     artTitle = pageTitle
