@@ -497,7 +497,7 @@ function render_js(pageTitle, type, vars)
       println("content = " * content)
       # Write the modified content back to the file
       write(targetFile, content)
-      cp(targetFile, "__site/libs/rendered/RKF45_$title.js")
+      cp(targetFile, "__site/libs/rendered/RKF45_$title.js", force=true)
     end
 end
 

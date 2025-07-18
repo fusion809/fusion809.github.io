@@ -1,0 +1,516 @@
+_libs/common/allOutputs.js
+function generateAllOutputs(objectOfInputs=undefined, solution=undefined) {
+    if (objectOfInputs==undefined) {
+        var objectOfInputs = readInputs();
+    }
+    if (solution==undefined) {
+        var solution = solveProblem(RKF45, objectOfInputs);
+    }
+    fillTable(objectOfInputs, $varsFull, solution)
+    generatePlots(objectOfInputs, solution);
+    generateAnimation(objectOfInputs, solution);
+}
+
+function removeAllOutputs() {
+    removeTable();
+    removePlots();
+    try {
+        removeAnimations()
+    } catch(e) {
+        removeAnimation();
+    }
+}
+diff --git a/Duffing/index.md b/Duffing/index.md
+index 34f98eb..c418929 100644
+--- a/Duffing/index.md
++++ b/Duffing/index.md
+@@ -1,6 +1,7 @@
+ @def title="Duffing oscillator solver"
+ @def hassim=true
+ @def vars = ["x", "dx"]
++@def varsFull = ["x", "dx/dt"]
+ @def params = (alpha=(val=1, desc="Linear stiffness parameter."),beta=(val=5, desc="Nonlinearity in restoring force parameter."),gamma=(val=8, desc="Amplitude of periodic driving force."),delta=(val=0.02, desc="Damping parameter."),omega=(val=0.5, desc="Angular frequency of periodic driving force."),tf=(val=20, desc="End time (in seconds or s) for the simulation."),x0=(val=1, desc="Initial \\(x\\) coordinate in metres (m) ."),dx0=(val=0, desc="Initial value of \\(\\dot{x}\\) (\\(\\mathrm{m}\\cdot \\mathrm{s}^{-1}\\))."))
+ @def type="2D"
+ 
+diff --git a/Duffing/main.js b/Duffing/main.js
+index 24cda24..8abff14 100755
+--- a/Duffing/main.js
++++ b/Duffing/main.js
+@@ -91,16 +91,4 @@ function generateTable(objectOfInputs=undefined, solution=undefined) {
+         var solution = solveProblem(RKF45, objectOfInputs);
+     }
+     fillTable(objectOfInputs, ['x', 'dx/dt'], solution)
+-}
+-
+-function generateAllOutputs(objectOfInputs=undefined, solution=undefined) {
+-    if (objectOfInputs==undefined) {
+-        var objectOfInputs = readInputs();
+-    }
+-    if (solution==undefined) {
+-        var solution = solveProblem(RKF45, objectOfInputs);
+-    }
+-    generateTable(objectOfInputs, solution)
+-    generatePlots(objectOfInputs, solution)
+-    generateAnimations(objectOfInputs, solution)
+ }
+\ No newline at end of file
+diff --git a/LotkaVolterra/main.js b/LotkaVolterra/main.js
+index 172c256..ee72837 100755
+--- a/LotkaVolterra/main.js
++++ b/LotkaVolterra/main.js
+@@ -88,22 +88,4 @@ function generateAnimation(objectOfInputs=undefined, solution=undefined) {
+ 
+ function generatetable() {
+     fillTable(readInputs(), ['x', 'y'])
+-}
+-
+-function generateAllOutputs(objectOfInputs=undefined, solution=undefined) {
+-    if (objectOfInputs==undefined) {
+-        var objectOfInputs = readInputs();
+-    }
+-    if (solution==undefined) {
+-        var solution = solveProblem(RKF45, objectOfInputs);
+-    }
+-    fillTable(objectOfInputs, ['x', 'y'], solution)
+-    generatePlots(objectOfInputs, solution);
+-    generateAnimation(objectOfInputs, solution);
+-}
+-
+-function removeAllOutputs() {
+-    removeTable();
+-    removePlots();
+-    removeAnimation();
+ }
+\ No newline at end of file
+diff --git a/SEIR/index.md b/SEIR/index.md
+index 96e01da..6dd41b8 100644
+--- a/SEIR/index.md
++++ b/SEIR/index.md
+@@ -9,6 +9,7 @@
+ @def params = (a=(val=0.33, desc="Inverse of the average incubation period."), beta=(val=0.33, desc="A parameter that pertains to how many contacts there are per person and how easily the disease spreads from an infected person to an infected person."), gamma=(val=0.25, desc="A parameter that is a measure of how quickly people recover from the disease."), delta=(val=0.5, desc="A parameter with values from 0 to 1 pertaining to how effective quarantine measures are at slowing the disease outbreak. If \\(\\delta = 0\\), the measures are either non-existent or completely ineffective. If \\(\\delta = 1\\), all infected persons are immediately, as soon as they become infected, quarantined."), lambda=(val=1e-4, desc="Birth rate."), mu=(val=1e-5, desc="Death rate."), tf=(val=300,), S0=(val=89,), E0=(val=0,), I0=(val=11,), R0=(val=0,), epsilon=(val=1e-11,))
+ @def ids = ["tableOutputs", "phasePlotSIR", "phasePlotSEI", "phasePlotSER", "phasePlotEIR", "phasePlotSI", "phasePlotSR", "phasePlotIR", "timePlot", "phasePlotSIR", "animationSIR", "animationSEI", "animationSER", "animationEIR", "animation", "animation"];
+ @def vars=["S", "E", "I", "R"]
++@def varsFull = ["Susceptible", "Exposed", "Infectious", "Recovered"]
+ @def funcs = ["fillTable(readInputs(), ['Susceptible', 'Exposed', 'Infectious', 'Recovered'])","removeTable()","generateSIRPhasePlot(solveProblem(RKF45, readInputs()))","removeSIRPhasePlot()","generateSEIPhasePlot(solveProblem(RKF45, readInputs()))","removeSEIPhasePlot()","generateSERPhasePlot(solveProblem(RKF45, readInputs()))","removeSERPhasePlot()","generateEIRPhasePlot(solveProblem(RKF45, readInputs()))","removeEIRPhasePlot()","generateSIPhasePlot(solveProblem(RKF45, readInputs()))","removeSIPhasePlot()","generateSRPhasePlot(solveProblem(RKF45, readInputs()))","removeSRPhasePlot()","generateIRPhasePlot(solveProblem(RKF45, readInputs()))","removeIRPhasePlot()","generateTimePlot(solveProblem(RKF45, readInputs()))","removeTimePlot()","generatePlots(readInputs())","removePlots()","generateAnimationSIR()","removeAnimationSIR()","generateAnimationSEI()","removeAnimationSEI()","generateAnimationSER()","removeAnimationSER()","generateAnimationEIR()","removeAnimationEIR()","generateAnimations()","removeAnimations()","generateAllOutputs()", "removeAllOutputs()"] 
+ @def labels = ["Tabulate the solution","Remove the solution table","Generate a \\(S\\), \\(I\\) and \\(R\\) phase plot","Remove \\(S\\), \\(I\\) and \\(R\\) plot","Generate a \\(S\\), \\(E\\) and \\(I\\) phase plot","Remove \\(S\\), \\(E\\) and \\(I\\) plot","Generate a \\(S\\), \\(E\\) and \\(R\\) phase plot","Remove \\(S\\), \\(E\\) and \\(R\\) plot","Generate a \\(E\\), \\(I\\) and \\(R\\) phase plot","Remove \\(E\\), \\(I\\) and \\(R\\) plot","Generate a \\(S\\) and \\(I\\) phase plot","Remove \\(S\\) and \\(I\\) plot","Generate a \\(S\\) and \\(R\\) phase plot","Remove \\(S\\) and \\(R\\) plot","Generate an \\(I\\) and \\(R\\) phase plot","Remove \\(I\\) and \\(R\\) plot","Generate a \\(S\\), \\(E\\), \\(I\\) and \\(R\\) against time plot","Remove time plot","Generate all solution plots","Remove all plots","Generate a \\(S\\), \\(I\\) and \\(R\\) phase plot animation","Remove \\(S\\), \\(I\\) and \\(R\\) animation","Generate a \\(S\\), \\(E\\) and \\(I\\) phase plot animation","Remove \\(S\\), \\(E\\) and \\(I\\) animation","Generate a \\(S\\), \\(E\\) and \\(R\\) phase plot animation","Remove \\(S\\), \\(E\\) and \\(R\\) animation","Generate \\(E\\), \\(I\\) and \\(R\\) phase plot animation","Remove a \\(E\\), \\(I\\) and \\(R\\) phase plot animation","Generate all animations","Remove all animations","Generate all outputs","Remove all outputs"]
+ 
+diff --git a/SEIR/main.js b/SEIR/main.js
+index 2b4d515..dd773b6 100755
+--- a/SEIR/main.js
++++ b/SEIR/main.js
+@@ -313,22 +313,4 @@ function generateTable(objectOfInputs=undefined, solution=undefined) {
+         var solution = solveProblem(RKF45, objectOfInputs);
+     }
+     fillTable(objectOfInputs, ['Susceptible', 'Exposed', 'Infectious', 'Recovered'], solution)
+-}
+-
+-function generateAllOutputs(objectOfInputs=undefined, solution=undefined) {
+-    if (objectOfInputs==undefined) {
+-        var objectOfInputs = readInputs();
+-    }
+-    if (solution==undefined) {
+-        var solution = solveProblem(RKF45, objectOfInputs);
+-    }
+-    generateTable(objectOfInputs, solution);
+-    generatePlots(objectOfInputs, solution);
+-    generateAnimations(objectOfInputs, solution);
+-}
+-
+-function removeAllOutputs() {
+-    removeTable();
+-    removePlots();
+-    removeAnimations();
+ }
+\ No newline at end of file
+diff --git a/SIR/index.md b/SIR/index.md
+index 0a54dd7..620b94e 100644
+--- a/SIR/index.md
++++ b/SIR/index.md
+@@ -6,6 +6,7 @@
+ 
+ @def hassim=true;
+ @def vars = ["S", "I", "R"]
++@def varsFull = ["Susceptible", "Infectious", "Recovered"]
+ @def title = "SIR equations solver"
+ @def params = (beta=(val=0.33, desc="A parameter that pertains to how many contacts there are per person and how easily the disease spreads from an infected person to an infected person."), gamma=(val=0.25, desc="A parameter that is a measure of how quickly people recover from the disease."), delta=(val=0.5, desc="A parameter with values from 0 to 1 pertaining to how effective quarantine measures are at slowing the disease outbreak. If \\(\\delta = 0\\), the measures are either non-existent or completely ineffective. If \\(\\delta = 1\\), all infected persons are immediately, as soon as they become infected, quarantined."), tf=(val=300,), S0=(val=89,), I0=(val=1,), R0=(val=0,), epsilon=(val=1e-11,))
+ @def ids = ["tableOutputs", "phasePlotSIR", "phasePlotSI", "phasePlotSR", "phasePlotIR", "timePlot", "phasePlotSIR", "animation"]
+diff --git a/SIR/main.js b/SIR/main.js
+index dfe15b6..6675724 100755
+--- a/SIR/main.js
++++ b/SIR/main.js
+@@ -172,22 +172,4 @@ function removePlots() {
+     removeSIPhasePlot()
+     removeIRPhasePlot()
+     removeTimePlot();
+-}
+-
+-function generateAllOutputs(objectOfInputs=undefined, solution=undefined) {
+-    if (objectOfInputs==undefined) {
+-        var objectOfInputs = readInputs();
+-    }
+-    if (solution==undefined) {
+-        var solution = solveProblem(RKF45, objectOfInputs);
+-    }
+-    fillTable(objectOfInputs, ['Susceptible', 'Infectious', 'Recovered'], solution)
+-    generatePlots(objectOfInputs, solution);
+-    generateAnimation(objectOfInputs, solution);
+-}
+-
+-function removeAllOutputs() {
+-    removeTable();
+-    removePlots();
+-    removeAnimation();
+ }
+\ No newline at end of file
+diff --git a/deploy.jl b/deploy.jl
+index 4e24fa4..22f81ea 100644
+--- a/deploy.jl
++++ b/deploy.jl
+@@ -14,6 +14,7 @@ function eager_generate_js()
+         title = match(r"title *= *\"([^\"]+)\"", content)
+         type  = match(r"type *= *\"([^\"]+)\"", content)
+         vars  = match(r"vars *= *\[([^\]]+)\]", content)
++        varsFull  = match(r"varsFull *= *\[([^\]]+)\]", content)
+         if isnothing(type) || isnothing(vars)
+           continue
+         end
+@@ -22,12 +23,20 @@ function eager_generate_js()
+         page_title = isnothing(title) ? "Untitled" : title.captures[1]
+         page_type  = type.captures[1]
+         page_vars  = split(vars.captures[1], r"\s*,\s*")
++        if (!isnothing(varsFull))
++          page_varsFull  = split(varsFull.captures[1], r"\s*,\s*")
++          println("page_varsFull[1] = " * page_varsFull[1])
++        end
+         println("page_title = " * page_title)
+         println("page_type = " * page_type)
+         println("page_vars[1] = " * page_vars[1])
+ 
+         try
+-          render_js(page_title, page_type, page_vars)
++          if (!isnothing(varsFull))
++            render_js(page_title, page_type, page_vars, page_varsFull)
++          else
++            render_js(page_title, page_type, page_vars)
++          end
+         catch e
+           @warn "Error generating JS for $file" exception = e
+         end
+diff --git a/doubleElasticPendulum/index.md b/doubleElasticPendulum/index.md
+index 0f73289..2db3ac8 100644
+--- a/doubleElasticPendulum/index.md
++++ b/doubleElasticPendulum/index.md
+@@ -2,6 +2,7 @@
+ @def hassim=true;
+ @def params = (g=(val=9.81, desc="Gravitational acceleration in metres (m) per second (s) squared (\\(\\mathrm{m}\\cdot \\mathrm{s}^{-2}\\))."),l1=(val=1, desc="Rest length (m) of pendulum 1."),l2=(val=1, desc="Rest length (m) of pendulum 2."),m1=(val=1, desc="Mass (kilograms or kg) of pendulum bob 1."),m2=(val=1, desc="Mass (kg) of pendulum bob 2."),k1=(val=10, desc="Spring coefficient for the first pendulum."),k2=(val=10, desc="Spring coefficient for the second pendulum."),b1=(val=0, desc="Linear dissipation coefficient for pendulum 1."),b2=(val=0, desc="Linear dissipation coefficient for pendulum 2."),c1=(val=0, desc="Quadratic dissipation coefficient for pendulum 1."),c2=(val=0, desc="Quadratic dissipation coefficient for pendulum 2."),tf=(val=120, desc="End time (s) for the simulation."),r10=(val=1, desc="Initial value of \\(r_1\\) (m)."),dr10=(val=1, desc="Initial value of \\(\\dot{r}_1\\) in \\(\\mathrm{m}\\cdot \\mathrm{s}^{-1}\\)."),r20=(val=1, desc="Initial value of \\(r_2\\) (m)."),dr20=(val=1, desc="Initial value of \\(\\dot{r}_2\\) in \\(\\mathrm{m}\\cdot \\mathrm{s}^{-1}\\)."),theta10=(val=1, desc="Initial value of \\(\\theta_1\\) in radians (r)."),dtheta10=(val=1, desc="Initial value of \\(\\dot{\\theta}_1\\) in \\(\\mathrm{r}\\cdot \\mathrm{s}^{-1}\\)."),theta20=(val=1, desc="Initial value of \\(\\theta_2\\) in r."),dtheta20=(val=1, desc="Initial value of \\(\\dot{\\theta}_2\\) in \\(\\mathrm{r}\\cdot \\mathrm{s}^{-1}\\)."),epsilon=(val=1e-8,),tolType=(val=1,))
+ @def vars =["r1", "dr1", "r2", "dr2", "theta1", "dtheta1", "theta2", "dtheta2"]
++@def varsFull =["r<sub>1</sub>", "dr<sub>1</sub>/dt", "r<sub>2</sub>", "dr<sub>2</sub>/dt", "&theta;<sub>1</sub>", "d&theta;<sub>1</sub>/dt", "&theta;<sub>2</sub>", "d&theta;<sub>2</sub>/dt"]
+ @def labels=["Tabulate the solution","Remove the solution table","Generate pendulum position plots","Remove pendulum position plots","Generate a time plot of all variables (+time derivatives)","Remove time plot of all variables (+time derivatives)","Generate a \\(r_1\\) against time plot","Remove \\(r_1\\) against time plot","Generate a \\(\\dot{r}_1\\) against time plot","Remove \\(\\dot{r}_1\\) against time plot","Generate a phase plot of \\(\\dot{r}_1\\) vs \\(r_1\\)","Remove phase plot of \\(\\dot{r}_1\\) vs \\(r_1\\)","Generate a \\(r_2\\) against time plot","Remove \\(r_2\\) against time plot","Generate a \\(\\dot{r}_2\\) against time plot","Remove \\(\\dot{r}_2\\) against time plot","Generate a phase plot of \\(\\dot{r}_2\\) vs \\(r_2\\)","Remove phase plot of \\(\\dot{r}_2\\) vs \\(r_2\\)","Generate a \\(r_2\\) against \\(r_1\\) phase plot","Remove \\(r_2\\) against \\(r_1\\) phase plot","Generate a \\(\\theta_1\\) against time plot","Remove \\(\\theta_1\\) against time plot","Generate a \\(\\dot{\\theta}_1\\) against time plot","Remove \\(\\dot{\\theta}_1\\) against time plot","Generate a phase plot of \\(\\dot{\\theta}_1\\) vs \\(\\theta_1\\)","Remove phase plot of \\(\\dot{\\theta}_1\\) vs \\(\\theta_1\\)","Generate a \\(\\theta_2\\) against time plot","Remove \\(\\theta_2\\) against time plot","Generate a \\(\\dot{\\theta}_2\\) against time plot","Remove \\(\\dot{\\theta}_2\\) against time plot","Generate a phase plot of \\(\\dot{\\theta}_2\\) vs \\(\\theta_2\\)","Remove phase plot of \\(\\dot{\\theta}_2\\) vs \\(\\theta_2\\)","Generate a \\(\\theta_2\\) against \\(\\theta_1\\) phase plot","Remove \\(\\theta_2\\) against \\(\\theta_1\\) phase plot","Generate all solution plots","Remove all plots","Generate an animation of the system","Remove system animation","Generate a \\(r_1\\) phase plot animation","Remove \\(r_1\\) phase plot animation","Generate a \\(r_2\\) phase plot animation","Remove \\(r_2\\) phase plot animation","Generate a \\(\\theta_1\\) phase plot animation","Remove \\(\\theta_1\\) phase plot animation","Generate a \\(\\theta_2\\) phase plot animation","Remove \\(\\theta_2\\) phase plot animation","Generate all animations","Remove all animations", "Generate all outputs &mdash; table, plots and animations", "Remove all outputs"];
+ 
+ @def ids=["tableOutputs", "pendulumPlot", "pendulumTimePlot", "timePlot", "plotR1T", "plotDr1T", "plotDr1R1", "plotR2T", "plotDr2T", "plotDr2R2", "plotR2R1", "plotTheta1T", "plotDtheta1T", "plotDtheta1Theta1", "plotTheta2T", "plotDtheta2T", "plotDtheta2Theta2", "plotTheta1Theta2", "animation", "animationR1Phase", "animationR2Phase", "animationTheta1Phase", "animationTheta2Phase", "animation", "animation"]
+diff --git a/doubleElasticPendulum/main.js b/doubleElasticPendulum/main.js
+index 86b5eea..0a82c16 100755
+--- a/doubleElasticPendulum/main.js
++++ b/doubleElasticPendulum/main.js
+@@ -383,20 +383,4 @@ function removeAnimations() {
+     removeR2PhaseAnimation();
+     removeTheta1PhaseAnimation();
+     removeTheta2PhaseAnimation();
+-}
+-
+-function generateAllOutputs(objectOfInputs=undefined) {
+-    if (objectOfInputs==undefined) {
+-        var objectOfInputs = readInputs();
+-    }
+-    var solution = solveProblem(RKF45, objectOfInputs);
+-    generateTable(objectOfInputs, solution);
+-    generatePlots(objectOfInputs, solution);
+-    generateAnimations(objectOfInputs, solution);
+-}
+-
+-function removeAllOutputs() {
+-    removeTable();
+-    removePlots();
+-    removeAnimations();
+ }
+\ No newline at end of file
+diff --git a/doublePendulum/index.md b/doublePendulum/index.md
+index b861b59..8e439cc 100644
+--- a/doublePendulum/index.md
++++ b/doublePendulum/index.md
+@@ -2,6 +2,7 @@
+ @def hassim=true
+ @def params = (g=(val=9.81, desc="Gravitational acceleration (in \\(\\mathrm{m}\\cdot \\mathrm{s}^{-2}\\))."),l1=(val=1, desc="Length of pendulum 1 in metres."),l2=(val=1, desc="Length of pendulum 2 in metres."),m1b=(val=1, desc="Mass of pendulum bob 1 in kilograms."),m1r=(val=1, desc="Mass of pendulum rod 1 in kilograms."),m2b=(val=1, desc="Mass of pendulum bob 2 in kilograms."),m2r=(val=1, desc="Mass of pendulum rod 2 in kilograms."),b1b=(val=0.0, desc="Linear dissipation coefficient of pendulum bob 1."),b1r=(val=0.0, desc="Linear dissipation coefficient of pendulum rod 1."),c1b=(val=0.0, desc="Quadratic dissipation coefficient of pendulum bob 1."),c1r=(val=0.0, desc="Quadratic dissipation coefficient of pendulum rod 1."),b2b=(val=0.0, desc="Linear dissipation coefficient for pendulum bob 2."),b2r=(val=0.0, desc="Linear dissipation coefficient for pendulum rod 2."),c2b=(val=0.0, desc="Quadratic dissipation coefficient for pendulum bob 2."),c2r=(val=0.0, desc="Quadratic dissipation coefficient for pendulum rod 2."),tf=(val=60, desc="End time for the simulation in seconds."),theta10=(val=0, desc="Initial value of \\(\\theta_1\\) in radians."),dtheta10=(val=0, desc="Initial value of \\(\\dot{\\theta}_1\\) in radians per second."),theta20=(val=0, desc="Initial value of \\(\\theta_2\\) in radians."),dtheta20=(val=0, desc="Initial value of \\(\\dot{\\theta}_2\\) in radians per second."),epsilon=(val=1e-10,))
+ @def vars = ["theta1", "dtheta1", "theta2", "dtheta2"];
++@def varsFull = ["&theta;<sub>1</sub>", "d&theta;<sub>1</sub>/dt", "&theta;<sub>2</sub>", "d&theta;<sub>2</sub>/dt"];
+ @def funcs = ["generateTable()","removeTable()", "generateTheta1Theta2PhasePlot(solveProblem(RKF45, readInputs()))","removeTheta1Theta2PhasePlot()", "generateDtheta1Theta1PhasePlot(solveProblem(RKF45, readInputs()))","removeDtheta1Theta1PhasePlot()", "generateTheta1Dtheta2PhasePlot(solveProblem(RKF45, readInputs()))","removeTheta1Dtheta2PhasePlot()", "generateTheta2Dtheta1PhasePlot(solveProblem(RKF45, readInputs()))","removeTheta2Dtheta1PhasePlot()","generateDtheta2Theta2PhasePlot(solveProblem(RKF45, readInputs()))","removeDtheta2Theta2PhasePlot()", "generateDtheta1Dtheta2PhasePlot(solveProblem(RKF45, readInputs()))","removeDtheta1Dtheta2PhasePlot()", "generatePendulumPlots(readInputs(), solveProblem(RKF45, readInputs()))","removePendulumPlots()", "generateTimePlot(solveProblem(RKF45, readInputs()))","removeTimePlot()", "generatePlots(readInputs())","removePlots()", "generateAnimation()","removeAnimation()", "generateTheta1PhaseAnimation()","removeTheta1PhaseAnimation()", "generateTheta2PhaseAnimation()","removeTheta2PhaseAnimation()", "generateAnimations()","removeAnimations()","generateAllOutputs()", "removeAllOutputs()"]
+ @def labels = ["Tabulate the solution","Remove the solution table","Generate a \\(\\theta_2\\) against \\(\\theta_1\\) phase plot","Remove \\(\\theta_2\\) against \\(\\theta_1\\) phase plot","Generate a \\(\\dot{\\theta}_1\\) against \\(\\theta_1\\) phase plot","Remove \\(\\dot{\\theta}_1\\) against \\(\\theta_1\\) phase plot","Generate a \\(\\dot{\\theta}_2\\) against \\(\\theta_1\\) phase plot","Remove \\(\\dot{\\theta}_2\\) against \\(\\theta_1\\) phase plot","Generate a \\(\\dot{\\theta}_1\\) against \\(\\theta_2\\) phase plot","Remove \\(\\dot{\\theta}_1\\) against \\(\\theta_2\\) phase plot","Generate a \\(\\dot{\\theta}_2\\) against \\(\\theta_2\\) phase plot","Remove \\(\\dot{\\theta}_2\\) against \\(\\theta_2\\) phase plot","Generate a \\(\\dot{\\theta}_2\\) against \\(\\dot{\\theta}_1\\) phase plot","Remove \\(\\dot{\\theta}_2\\) against \\(\\dot{\\theta}_1\\) phase plot","Generate pendulum plots","Remove pendulum plots","Generate a \\(\\theta_1\\), \\(\\dot{\\theta}_1\\), \\(\\theta_2\\) and \\(\\dot{\\theta}_2\\) against time plot","Remove \\(\\theta_1\\), \\(\\dot{\\theta}_1\\), \\(\\theta_2\\) and \\(\\dot{\\theta}_2\\) against time plot","Generate all solution plots","Remove all plots","Generate an animation of the system","Remove system animation","Generate a \\(\\theta_1\\) phase plot animation","Remove \\(\\theta_1\\) phase plot animation","Generate a \\(\\theta_2\\) phase plot animation","Remove \\(\\theta_2\\) phase plot animation","Generate all animations","Remove all animations", "Generate all outputs", "Remove all outputs"]
+ @def ids=["tableOutputs", "phasePlotTheta1Theta2","phasePlotDtheta1Theta1","phasePlotDtheta1Theta2","phasePlotDtheta2Theta1","phasePlotDtheta2Theta2","phasePlotDtheta2Dtheta1","pendulumPlot","pendulumTimePlot","timePlot","animation","animationTheta1Phase","animationTheta2Phase", "animation", "animation"]
+diff --git a/doublePendulum/main.js b/doublePendulum/main.js
+index 6f376db..055b92b 100755
+--- a/doublePendulum/main.js
++++ b/doublePendulum/main.js
+@@ -285,12 +285,4 @@ function removeAnimations() {
+     removeAnimation();
+     removeTheta1PhaseAnimation();
+     removeTheta2PhaseAnimation();
+-}
+-
+-function generateAllOutputs() {
+-    var objectOfInputs = readInputs(); 
+-    var solution = solveProblem(RKF45, objectOfInputs);
+-    generateTable(objectOfInputs, solution)
+-    generatePlots(objectOfInputs, solution)
+-    generateAnimations(objectOfInputs, solution)
+ }
+\ No newline at end of file
+diff --git a/elasticPendulum/index.md b/elasticPendulum/index.md
+index 3a68f50..9ba60b3 100644
+--- a/elasticPendulum/index.md
++++ b/elasticPendulum/index.md
+@@ -1,5 +1,6 @@
+ @def title="Elastic pendulum solver"
+ @def hassim=true
++@def varsFull = ["z", "dz/dt", "&theta;", "d&theta;/dt"]
+ @def vars = ["z", "dz", "theta", "dtheta"]
+ @def ids = ["tableOutputs", "phasePlotZTheta","phasePlotDzZ","phasePlotDthetaTheta","timePlot","pendulumPlot", "pendulumTimePlot", "pendulumPlot", "phasePlotZTheta", "animation","animationThetaPhase","animationZPhase","animation","animation"]
+ @def params = (g=(val=9.81, desc="Acceleration due to gravity in metres (m) per second (s) squared (\\(\\mathrm{m}\\cdot \\mathrm{s}^{-2}\\))."),l0=(val=1, desc="Rest length (m) of pendulum rod."),k=(val=1, desc="Spring coefficient of pendulum."),m=(val=1, desc="Mass (kilograms or kg) of pendulum bob."),tf=(val=60, desc="End time (s) for the simulation."),z0=(val=1, desc="Initial value of \\(z\\) (m)."),dz0=(val=1, desc="Initial value of \\(\\dot{z}\\) (\\(\\mathrm{m}\\cdot \\mathrm{s}^{-1}\\))."),theta0=(val=0, desc="Initial value of \\(\\theta\\) in radians (r)."),dtheta0=(val=0, desc="Initial value of \\(\\dot{\\theta}\\) (\\(\\mathrm{r}\\cdot \\mathrm{s}^{-1}\\))."),epsilon=(val=1e-9,))
+diff --git a/elasticPendulum/main.js b/elasticPendulum/main.js
+index 679bb40..394e527 100755
+--- a/elasticPendulum/main.js
++++ b/elasticPendulum/main.js
+@@ -196,22 +196,4 @@ function removePlots() {
+     removeThetaDthetaPhasePlot();
+     removeZThetaPhasePlot();
+     removeDzZPhasePlot()
+-}
+-
+-function generateAllOutputs(objectOfInputs=undefined, solution=undefined) {
+-    if (objectOfInputs==undefined) {
+-        var objectOfInputs = readInputs();
+-    }
+-    if (solution==undefined) {
+-        var solution = solveProblem(RKF45, objectOfInputs);
+-    }
+-    fillTable(objectOfInputs, ['z', 'dz/dt', '&theta;', 'd&theta;/dt'], solution)
+-    generatePlots(objectOfInputs, solution)
+-    generateAnimations(objectOfInputs, solution)
+-}
+-
+-function removeAllOutputs() {
+-    removeTable();
+-    removePlots();
+-    removeAnimations();
+ }
+\ No newline at end of file
+diff --git a/simplePendulum/common.js b/simplePendulum/common.js
+index 3f382cb..5ac439f 100755
+--- a/simplePendulum/common.js
++++ b/simplePendulum/common.js
+@@ -327,22 +327,4 @@ function generateAnimations(objectOfInputs=undefined, solution=undefined) {
+ function removeAnimations() {
+     removePhaseAnimation();
+     removeAnimation();
+-}
+-
+-function generateAllOutputs(objectOfInputs=undefined, solution=undefined) {
+-    if (objectOfInputs==undefined) {
+-        var objectOfInputs = readInputs();
+-    }
+-    if (solution==undefined) {
+-        var solution = solveProblem(RKF45, objectOfInputs);
+-    }
+-    fillTable(objectOfInputs, ['θ', 'dθ/dt'], solution)
+-    generatePlots(objectOfInputs, solution);
+-    generateAnimation(objectOfInputs, solution);
+-}
+-
+-function removeAllOutputs() {
+-    removeTable();
+-    removePlots();
+-    removeAnimation();
+ }
+\ No newline at end of file
+diff --git a/simplePendulum/wErrorAnalysis.md b/simplePendulum/wErrorAnalysis.md
+index 426bade..5a96aac 100644
+--- a/simplePendulum/wErrorAnalysis.md
++++ b/simplePendulum/wErrorAnalysis.md
+@@ -1,6 +1,7 @@
+ @def title="Simple pendulum Runge-Kutta-Fehlberg solver with error analysis"
+ @def SP=true;
+ @def SP.w=true;
++@def varsFull = ["θ", "dθ/dt"]
+ @def hassim=true;
+ @def params = (g=(val=9.81, desc="Acceleration due to gravity."), l=(val=1, desc="Length of pendulum in metres."), tf=(val=9.4713677903049498, desc="End time for the simulation in seconds. Default is four times the period of the problem."), theta0=(val=0, desc="Initial angle relative to the positive \\(x\\)-axis."), dtheta0=(val=0, desc="Initial rate of change of the aforementioned angle."), N=(val=1e6, desc="Number of quadrature nodes used to approximate period"))
+ @def ids=["tableOutputs", "phasePlot", "timePlot", "errorPlot", "phasePlot", "animation", "animationPhase", "animation", "animation"]
+diff --git a/simplePendulum/woErrorAnalysis.md b/simplePendulum/woErrorAnalysis.md
+index 09a8683..09ed923 100644
+--- a/simplePendulum/woErrorAnalysis.md
++++ b/simplePendulum/woErrorAnalysis.md
+@@ -1,6 +1,7 @@
+ @def title="Simple pendulum Runge-Kutta-Fehlberg solver without error analysis"
+ @def SP=true;
+ @def SP.wo=true;
++@def varsFull = ["θ", "dθ/dt"]
+ @def hassim=true;
+ @def params = (g=(val=9.81, desc="Acceleration due to gravity."), l=(val=1, desc="Length of pendulum in metres."), tf=(val=9.4713677903049498, desc="End time for the simulation in seconds. Default is four times the period of the problem."), theta0=(val=0, desc="Initial angle relative to the positive \\(x\\)-axis."), dtheta0=(val=0, desc="Initial rate of change of the aforementioned angle."), N=(val=1e6, desc="Number of quadrature nodes used to approximate period"))
+ @def ids=["tableOutputs", "phasePlot", "timePlot", "phasePlot", "animation", "animationPhase", "animation","animation"]
+diff --git a/singlePendulum/index.md b/singlePendulum/index.md
+index 327a6f1..f604926 100644
+--- a/singlePendulum/index.md
++++ b/singlePendulum/index.md
+@@ -1,6 +1,7 @@
+ @def title="Single pendulum"
+ @def hassim=true
+ @def vars = ["theta", "dtheta"]
++@def varsFull = ["θ", "dθ/dt"]
+ @def funcs = ["fillTable(readInputs(), ['θ', 'dθ/dt'])","removeTable()", "generatePhasePlot(solveProblem(RKF45, readInputs()))","removePhasePlot()", "generateTimePlot(solveProblem(RKF45, readInputs()))","removeTimePlot()", "generatePlots(readInputs())","removePlots()", "generateAnimation()","removeAnimation()", "generatePhaseAnimation()","removePhaseAnimation()", "generateAnimations()","removeAnimations()","generateAllOutputs()","removeAllOutputs()"]
+ @def params = (g=(val=9.81, desc="Acceleration due to gravity in metres (m) per second (s) squared (\\(\\mathrm{m} \\cdot \\mathrm{s}^{-2}\\))."), l=(val=1, desc="Length (m) of the pendulum rod."),mr=(val=1, desc="Mass (kilograms or kg) of rod."), mb=(val=1, desc="Mass (kg) of bob."),br=(val=0.05, desc="Linear dissipation coefficient of rod."),bb=(val=0.05, desc="Linear dissipation coefficient of bob."),cr=(val=0.02, desc="Quadratic dissipation coefficient of rod."),cb=(val=0.02, desc="Quadratic dissipation coefficient of bob."),tf=(val=100, desc="End time (s) for the simulation. The default \\(t_f\\) value is equal to four times the period \\(T\\) of the problem."),theta0=(val=0, desc="Initial angle (radians or r) from the positive \\(x\\)-axis."),dtheta0=(val=0, desc="Initial first derivative of \\(\\theta\\) with respect to \\(t\\) (\\(\\mathrm{r}\\cdot \\mathrm{s}^{-1}\\))."),epsilon=(val=1e-7,))
+ @def labels = ["Tabulate the solution","Remove the solution table","Generate a phase plot","Remove plot","Generate a time plot","Remove plot","Generate all solution plots","Remove all solution plots","Generate an animation of the system","Remove animation","Generate a phase plot animation","Remove phase plot animation","Generate all animations","Remove all animations","Generate all outputs", "Remove all outputs"]
+diff --git a/singlePendulum/main.js b/singlePendulum/main.js
+index 7a5bcdd..2723802 100755
+--- a/singlePendulum/main.js
++++ b/singlePendulum/main.js
+@@ -140,22 +140,4 @@ function removePhaseAnimation() {
+ function removeAnimations() {
+     removePhaseAnimation();
+     removeAnimation();
+-}
+-
+-function generateAllOutputs(objectOfInputs=undefined, solution=undefined) {
+-    if (objectOfInputs==undefined) {
+-        var objectOfInputs = readInputs();
+-    }
+-    if (solution==undefined) {
+-        var solution = solveProblem(RKF45, objectOfInputs);
+-    }
+-    fillTable(objectOfInputs, ['θ', 'dθ/dt'], solution)
+-    generatePlots(objectOfInputs, solution);
+-    generateAnimation(objectOfInputs, solution);
+-}
+-
+-function removeAllOutputs() {
+-    removeTable();
+-    removePlots();
+-    removeAnimation();
+ }
+\ No newline at end of file
+diff --git a/utils.jl b/utils.jl
+index e319992..c62bd7a 100755
+--- a/utils.jl
++++ b/utils.jl
+@@ -428,8 +428,8 @@ function hfun_render_footlist()
+     end
+ end
+ 
+-function render_js(pageTitle, type, vars)
+-  title = replace(pageTitle, " " => "_")
++function render_js(pageTitle, type, vars, varsFull=nothing)
++  JStitle = replace(pageTitle, " " => "_")
+   if (type=="attractor")
+     artTitle = pageTitle
+     artTitle = replace(artTitle, r" solver"=>"")
+@@ -454,7 +454,8 @@ function render_js(pageTitle, type, vars)
+       viewStr1 = ""
+       viewStr2 = ""
+     end
+-    targetFile = "_libs/rendered/attractor_$title.js"
++    targetFile = "_libs/rendered/attractor_$JStitle.js"
++    targetFileS = "__site/libs/rendered/attractor_$JStitle.js"
+     baseFile = "_libs/common/attractor.js"
+   elseif (vars !== nothing)
+     varsList = vars
+@@ -466,8 +467,13 @@ function render_js(pageTitle, type, vars)
+       end
+     end
+     println("conds = " * conds)
+-    targetFile = "_libs/rendered/RKF45_$title.js"
++    targetFile = "_libs/rendered/RKF45_$JStitle.js"
++    targetFileS = "__site/libs/rendered/RKF45_$JStitle.js"
+     baseFile = "_libs/common/RKF45_base.js"
++    baseFileOut = "_libs/common/allOutputs.js"
++    targetFileOut = "_libs/rendered/allOutputs_$JStitle.js"
++    targetFileOutS = "__site/libs/rendered/allOutputs_$JStitle.js"
++    
+   else
+     return;
+   end
+@@ -477,7 +483,8 @@ function render_js(pageTitle, type, vars)
+   if !isdir("__site/libs/rendered/")
+     mkpath("__site/libs/rendered/")
+   end
+-  if !isfile(targetFile) || stat(baseFile).mtime > stat(targetFile).mtime
++  if !isfile(targetFile) 
++    #|| stat(baseFile).mtime > stat(targetFile).mtime
+       println("Copying $baseFile to $targetFile...")
+       cp(baseFile, targetFile, force=true)
+       content = read(targetFile, String)
+@@ -490,14 +497,43 @@ function render_js(pageTitle, type, vars)
+       if @isdefined(viewStr1)
+         content = replace(content, "\$viewStr1" => "$viewStr1")
+         content = replace(content, "\$viewStr2" => "$viewStr2")
++      else
++        content = replace(content, r"\"" => "")
+       end
+ 
+       content = replace(content, "\$title" => "$title")
+-      content = replace(content, r"\"" => "")
+       println("content = " * content)
+       # Write the modified content back to the file
+       write(targetFile, content)
+-      cp(targetFile, "__site/libs/rendered/RKF45_$title.js")
++      cp(targetFile, targetFileS, force=true)
++  end
++    if @isdefined(baseFileOut) 
++      #&& (!isfile(targetFileOut) || stat(baseFileOut).mtime > stat(targetFileOut).mtime)
++      println("Copying $baseFileOut to $targetFileOut...")
++      cp(baseFileOut, targetFileOut, force=true)
++      content = read(targetFileOut, String)
++
++      # Replace characters or strings
++      if (@isdefined(varsFull))
++        # Create a string like ["Susceptible", "Exposed", ...] with quotes
++        quoted = "[" * join(["\"$v\"" for v in varsFull], ", ") * "]"
++
++        # Replace `$varsFull` in content with this quoted string
++        content = replace(content, "\$varsFull" => quoted)
++      else
++        replacement = ["\"" * var * "\"" for var in vars]
++        content = replace(content, "\$varsFull" => replacement)
++      end
++      content = replace(content, r"\[" => "[\"")
++      content = replace(content, r"\]" => "\"]")
++      content = replace(content, "\\" => "\"")
++      content = replace(content, ", " => "\", \"")
++  
++      content = replace(content, r"\"" => "")
++      println("content = " * content)
++      # Write the modified content back to the FileOut
++      write(targetFileOut, content)
++      cp(targetFileOut, targetFileOutS, force=true)
+     end
+ end
+ 
+@@ -505,12 +541,20 @@ function hfun_render_js()
+   title = locvar("title")
+   type = locvar("type")
+   vars = locvar("vars")
+-  render_js(title, type, vars)
++  varsFull = locvar("varsFull")
++  render_js(title, type, vars, varsFull)
+   title = replace(title, " " => "_")
+   if (type == "attractor")
+     HTML = """<script src="/libs/rendered/attractor_$title.js"></script>"""
++  elseif (varsFull !== nothing)
++    HTML = """
++    <script src="/libs/rendered/allOutputs_$title.js"></script>
++    """
+   else
+-    HTML = """<script src="/libs/rendered/RKF45_$title.js"></script>"""
++    HTML = """
++    <script src="/libs/rendered/RKF45_$title.js"></script>
++    <script src="/libs/rendered/allOutputs_$title.js"></script>
++    """
+   end
+   return HTML
+ end

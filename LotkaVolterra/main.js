@@ -86,11 +86,7 @@ function generateAnimation(objectOfInputs=undefined, solution=undefined) {
     animate2D(solution, {timer: [0.98, 0.98], varnames: ["Prey animals", "Predator animals"], title: "Phase plot of predator vs prey animals in system."});
 }
 
-function generatetable() {
-    fillTable(readInputs(), ['x', 'y'])
-}
-
-function generateAllOutputs(objectOfInputs=undefined, solution=undefined) {
+function generateTable(objectOfInputs=undefined, solution=undefined) {
     if (objectOfInputs==undefined) {
         var objectOfInputs = readInputs();
     }
@@ -98,12 +94,4 @@ function generateAllOutputs(objectOfInputs=undefined, solution=undefined) {
         var solution = solveProblem(RKF45, objectOfInputs);
     }
     fillTable(objectOfInputs, ['x', 'y'], solution)
-    generatePlots(objectOfInputs, solution);
-    generateAnimation(objectOfInputs, solution);
-}
-
-function removeAllOutputs() {
-    removeTable();
-    removePlots();
-    removeAnimation();
 }

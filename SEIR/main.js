@@ -314,21 +314,3 @@ function generateTable(objectOfInputs=undefined, solution=undefined) {
     }
     fillTable(objectOfInputs, ['Susceptible', 'Exposed', 'Infectious', 'Recovered'], solution)
 }
-
-function generateAllOutputs(objectOfInputs=undefined, solution=undefined) {
-    if (objectOfInputs==undefined) {
-        var objectOfInputs = readInputs();
-    }
-    if (solution==undefined) {
-        var solution = solveProblem(RKF45, objectOfInputs);
-    }
-    generateTable(objectOfInputs, solution);
-    generatePlots(objectOfInputs, solution);
-    generateAnimations(objectOfInputs, solution);
-}
-
-function removeAllOutputs() {
-    removeTable();
-    removePlots();
-    removeAnimations();
-}
