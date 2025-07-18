@@ -65,14 +65,6 @@ function generatePlots(objectOfInputs=undefined, solution=undefined) {
 }
 
 /**
- * Remove animation
- * @return nothing.
- */
-function removeAnimation() {
-    rmPlot("animation");
-}
-
-/**
  * Generate animation
  * @return nothing.
  */

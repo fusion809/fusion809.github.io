@@ -95,25 +95,6 @@ function generatePlots(objectOfInputs) {
     generatePendulumPlots(objectOfInputs, solution);
 }
 
-function removePendulumPlot() {
-    rmPlot("pendulumPlot");
-}
-function removePendulumTimePlot() {
-    rmPlot("pendulumTimePlot");
-}
-function removePendulumPlots() {
-    removePendulumPlot();
-    removePendulumTimePlot();
-}
-
-/**
- * Remove animation
- * @return nothing. 
- */
-function removeAnimation() {
-    rmPlot("animation");
-}
-
 /**
  * Generate animation
  * @return nothing.
@@ -138,10 +119,6 @@ function generateThetaPhaseAnimation(objectOfInputs=undefined, solution=undefine
     animate2D(solution, {varnames: ["θ", "dθ/dt"], timer: [0.9, 0.98], IdSuffix: "ThetaPhase", nos: [2, 3], title: "Elastic pendulum: phase plot of dθ/dt against θ."});
 }
 
-function removeThetaPhaseAnimation() {
-    rmPlot("animationThetaPhase");
-}
-
 function generateZPhaseAnimation(objectOfInputs=undefined, solution=undefined) {
     if (objectOfInputs==undefined) {
         var objectOfInputs = readInputs();
@@ -162,40 +139,6 @@ function generateAnimations(objectOfInputs=undefined, solution=undefined) {
     generateAnimation(objectOfInputs, solution);
     generateThetaPhaseAnimation(objectOfInputs, solution);
     generateZPhaseAnimation(objectOfInputs, solution); 
-}
-
-function removeZPhaseAnimation() {
-    rmPlot("animationZPhase");
-}
-
-function removeThetaPhaseAnimation() {
-    rmPlot("animationThetaPhase");
-}
-
-function removeAnimations() {
-    removeAnimation();
-    removeThetaPhaseAnimation();
-    removeZPhaseAnimation();
-}
-
-function removeThetaDthetaPhasePlot() {
-    rmPlot("phasePlotDthetaTheta");
-}
-
-function removeZThetaPhasePlot() {
-    rmPlot("phasePlotZTheta");
-}
-
-function removeDzZPhasePlot() {
-    rmPlot("phasePlotDzZ");
-}
-
-function removePlots() {
-    removePendulumPlots()
-    removeTimePlot();
-    removeThetaDthetaPhasePlot();
-    removeZThetaPhasePlot();
-    removeDzZPhasePlot()
 }
 
 function generateTable(objectOfInputs=undefined, solution=undefined) {

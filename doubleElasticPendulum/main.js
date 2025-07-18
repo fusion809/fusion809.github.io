@@ -164,90 +164,6 @@ function generateR1R2PhasePlot(solution) {
     gen2DPlot(r1, r2, "plotR2R1", "Phase plot of r<sub>2</sub> vs r<sub>1</sub>.", "r<sub>1</sub>", "r<sub>2</sub>");
 }
 
-
-function removePendulumPlots() {
-    rmPlot("pendulumPlot");
-    rmPlot("pendulumTimePlot");
-}
-
-function removeDr1TPlot() {
-    rmPlot("plotDr1T");
-}
-
-function removeDr1R1Plot() {
-    rmPlot("plotDr1R1");
-}
-
-function removeR2TPlot() {
-    rmPlot("plotR2T");
-}
-
-function removeDr2TPlot() {
-    rmPlot("plotDr2T");
-}
-
-function removeDr2R2Plot() {
-    rmPlot("plotDr2R2");
-}
-
-function removeTheta1TPlot() {
-    rmPlot("plotTheta1T");
-}
-
-function removeDtheta1TPlot() {
-    rmPlot("plotDtheta1T");
-}
-
-function removeDtheta1Theta1Plot() {
-    rmPlot("plotDtheta1Theta1");
-}
-
-function removeTheta2TPlot() {
-    rmPlot("plotTheta2T");
-}
-
-function removeDtheta2TPlot() {
-    rmPlot("plotDtheta2T");
-}
-
-function removeDtheta2Theta2Plot() {
-    rmPlot("plotDtheta2Theta2");
-}
-
-function removeR1R2PhasePlot() {
-    rmPlot("plotR2R1");
-}
-
-function removeTimePlot() {
-    rmPlot("timePlot");
-}
-
-function removeR1TPlot() {
-    rmPlot("plotR1T");
-}
-
-function removeTheta1Theta2PhasePlot() {
-    rmPlot("plotTheta1Theta2");
-}
-function rmPlots() {
-    removePendulumPlots();
-    removeTimePlot();
-    removeTheta1Theta2PhasePlot();
-    removeR1TPlot();
-    removeDr1TPlot();
-    removeDr1R1Plot()
-    removeR2TPlot()
-    removeDr2TPlot()
-    removeDr2R2Plot()
-    removeTheta1TPlot()
-    removeDtheta1TPlot()
-    removeDtheta1Theta1Plot()
-    removeTheta2TPlot()
-    removeDtheta2TPlot()
-    removeDtheta2Theta2Plot()
-    removeR1R2PhasePlot();
-}
-
 /**
  * Generate all plots
  * 
@@ -292,14 +208,6 @@ function generateAnimation(objectOfInputs=undefined, solution=undefined) {
     animatePendulum(objectOfInputs, solution, "Double elastic pendulum");
 }
 
-/**
- * Remove animation
- * @return nothing
- */
-function removeAnimation() {
-    rmPlot("animation");
-}
-
 function generateR1PhaseAnimation(objectOfInputs=undefined, solution=undefined) {
     if (objectOfInputs==undefined) {
         var objectOfInputs = readInputs();
@@ -308,10 +216,6 @@ function generateR1PhaseAnimation(objectOfInputs=undefined, solution=undefined) 
         var solution = solveProblem(RKF45, objectOfInputs);
     }
     animate2D(solution, {varnames: ["r<sub>1</sub>", "dr<sub>1</sub>/dt"],IdSuffix: "R1Phase", title: "Phase plot of dr<sub>1</sub>/dt vs r<sub>1</sub>."});
-}
-
-function removeR1PhaseAnimation() {
-    rmPlot("animationR1Phase");
 }
 
 function generateR2PhaseAnimation(objectOfInputs=undefined, solution=undefined) {
@@ -324,10 +228,6 @@ function generateR2PhaseAnimation(objectOfInputs=undefined, solution=undefined) 
     animate2D(solution, {timer: [1.0, 1.0], varnames: ["r<sub>2</sub>", "dr<sub>2</sub>/dt"], IdSuffix: "R2Phase", nos: [2, 3], title: "Phase plot of dr<sub>2</sub>/dt against r<sub>2</sub>."});
 }
 
-function removeR2PhaseAnimation() {
-    rmPlot("animationR2Phase");
-}
-
 function generateTheta1PhaseAnimation(objectOfInputs=undefined, solution=undefined) {
     if (objectOfInputs==undefined) {
         var objectOfInputs = readInputs();
@@ -338,10 +238,6 @@ function generateTheta1PhaseAnimation(objectOfInputs=undefined, solution=undefin
     animate2D(solution, {varnames: ["θ<sub>1</sub>", "dθ<sub>1</sub>/dt"],IdSuffix: "Theta1Phase", nos: [4, 5], title: "Phase plot of dθ<sub>1</sub>/dt against θ<sub>1</sub> ."});
 }
 
-function removeTheta1PhaseAnimation() {
-    rmPlot("animationTheta1Phase");
-}
-
 function generateTheta2PhaseAnimation(objectOfInputs=undefined, solution=undefined) {
     if (objectOfInputs==undefined) {
         var objectOfInputs = readInputs();
@@ -350,10 +246,6 @@ function generateTheta2PhaseAnimation(objectOfInputs=undefined, solution=undefin
         var solution = solveProblem(RKF45, objectOfInputs);
     }
     animate2D(solution, {varnames: ["θ<sub>2</sub>", "dθ<sub>2</sub>/dt"], timer: [0.0, 0.0], IdSuffix: "Theta2Phase", nos: [6, 7], title: "Phase plot of dθ<sub>2</sub>/dt against θ<sub>2</sub>."});
-}
-
-function removeTheta2PhaseAnimation() {
-    rmPlot("animationTheta2Phase");
 }
 
 function generateTable(objectOfInputs=undefined, solution=undefined) {
@@ -375,12 +267,4 @@ function generateAnimations(objectOfInputs=undefined, solution=undefined) {
     generateR2PhaseAnimation(objectOfInputs, solution);
     generateTheta1PhaseAnimation(objectOfInputs, solution);
     generateTheta2PhaseAnimation(objectOfInputs, solution);
-}
-
-function removeAnimations() {
-    removeAnimation();
-    removeR1PhaseAnimation();
-    removeR2PhaseAnimation();
-    removeTheta1PhaseAnimation();
-    removeTheta2PhaseAnimation();
 }
