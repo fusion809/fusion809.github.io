@@ -76,6 +76,9 @@ function testRKF45(i, tf, vars, dt, t, objectOfInputs) {
         msg += "vars = "
         for (let j = 0; j < vars.length; j++) {
             msg += vars[j]
+            if (j != vars.length - 1) {
+                msg += ", "
+            }
         }
         alert(msg);
         console.log(msg);
