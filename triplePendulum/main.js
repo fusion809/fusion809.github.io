@@ -1,191 +1,36 @@
-/**
- * Right-hand side of our ODE written as a system of first-order ODEs.
- *
- * @param objectOfInputs An object containing problem parameters.
- * @param t              Time (seconds).
- * @param vars           An array of [theta1, p1, theta2, p2]
- * @return               [dtheta1/dt, dp1/dt, dtheta2/dt, dp2/dt]
- */
-// === Solve A * ddtheta = b ===
-// Use simple Gauss-Jordan elimination or a numeric library (like math.js) if preferred
-function solveLinearSystem(A, b) {
-  const math = window.math || require("mathjs");
-  return math.lusolve(math.matrix(A), math.matrix(b)).toArray().flat();
-}
-
-// === Dissipative and driving terms Qtheta ===
-function Qtheta1(objectOfInputs, vars) {
-    const {
-    l2, l3,
-    b2b, b2r, b3b, b3r,
-    c2b, c2r, c3b, c3r
-  } = objectOfInputs;
-
-  const [theta1, dtheta1, theta2, dtheta2, theta3, dtheta3] = vars;
-    const v1 = dtheta1;
-    const v2 = dtheta2;
-    const v3 = dtheta3;
-    const d12 = theta1 - theta2;
-  const d13 = theta1 - theta3;
-  const d23 = theta2 - theta3;
-    const s = Math.sin, c = Math.cos, sqrt = Math.sqrt;
-    const cos12 = c(d12), cos13 = c(d13), cos23 = c(d23);
-
-    const sqrt1 = sqrt(l1 ** 2 * v1 ** 2);
-    const sqrt2 = sqrt(l1 ** 2 * v1 ** 2 + 2 * l1 * l2 * cos12 * v1 * v2 + l2 ** 2 * v2 ** 2);
-    const sqrt2r = sqrt(4 * l1 ** 2 * v1 ** 2 + 4 * l1 * l2 * cos12 * v1 * v2 + l2 ** 2 * v2 ** 2);
-
-    const sqrt3 = sqrt(
-      l1 ** 2 * v1 ** 2 + 2 * l1 * l2 * cos12 * v1 * v2 + 2 * l1 * l3 * cos13 * v1 * v3
-      + l2 ** 2 * v2 ** 2 + 2 * l2 * l3 * cos23 * v2 * v3 + l3 ** 2 * v3 ** 2
-    );
-    const sqrt3r = sqrt(
-      4 * l1 ** 2 * v1 ** 2 + 8 * l1 * l2 * cos12 * v1 * v2 + 4 * l1 * l3 * cos13 * v1 * v3
-      + 4 * l2 ** 2 * v2 ** 2 + 4 * l2 * l3 * cos23 * v2 * v3 + l3 ** 2 * v3 ** 2
-    );
-
-    const term1 = l1 * (
-      8 * b1b * v1 + 2 * b1r * v1 + 8 * b2b * v1 + 8 * b2r * v1 + 8 * b3b * v1 + 8 * b3r * v1
-      + 8 * c1b * sqrt1 * v1 + c1r * sqrt1 * v1
-      + 8 * c2b * sqrt2 * v1 + 4 * c2r * sqrt2r * v1
-      + 8 * c3b * sqrt3 * v1 + 4 * c3r * sqrt3r * v1
-    );
-
-    const term2 = l2 * (
-      8 * b2b * cos12 * v2 + 4 * b2r * cos12 * v2 + 8 * b3b * cos12 * v2 + 8 * b3r * cos12 * v2
-      + 8 * c2b * sqrt2 * cos12 * v2 + 2 * c2r * sqrt2r * cos12 * v2
-      + 8 * c3b * sqrt3 * cos12 * v2 + 4 * c3r * sqrt3r * cos12 * v2
-    );
-
-    const term3 = l3 * (
-      8 * b3b * cos13 * v3 + 4 * b3r * cos13 * v3
-      + 8 * c3b * sqrt3 * cos13 * v3 + 2 * c3r * sqrt3r * cos13 * v3
-    );
-
-    return -(term1 + term2 + term3);
-}
-
-function Qtheta2(objectOfInputs, vars) {
-  const {
-    l2, l3,
-    b2b, b2r, b3b, b3r,
-    c2b, c2r, c3b, c3r
-  } = objectOfInputs;
-
-  const [theta1, dtheta1, theta2, dtheta2, theta3, dtheta3] = vars;
-
-  const Delta21 = theta2 - theta1;
-  const Delta32 = theta3 - theta2;
-
-  const v2bMag = Math.abs(l2 * dtheta2) / Math.SQRT2;
-  const v2rMag = Math.abs(l2 * dtheta2) / (2 * Math.SQRT2);
-  const v3bMag = Math.abs(l3 * dtheta3) / Math.SQRT2;
-  const v3rMag = Math.abs(l3 * dtheta3) / (2 * Math.SQRT2);
-
-  const Qtheta2 =
-    - (b2b + c2b * v2bMag) * l2 * l2 * dtheta2
-    - (b2r + c2r * v2rMag) * l2 * l2 * dtheta2 / 4
-    - (b3b + c3b * v3bMag) * l2 * l3 * dtheta3 * Math.cos(Delta32)
-    - (b3r + c3r * v3rMag) * l2 * l3 * dtheta3 * Math.cos(Delta32) / 2;
-
-  return Qtheta2;
-}
-
-function Qtheta3(objectOfInputs, vars) {
-  const {
-    l2, l3,
-    b3b, b3r,
-    c3b, c3r
-  } = objectOfInputs;
-
-  const [theta1, dtheta1, theta2, dtheta2, theta3, dtheta3] = vars;
-
-  const Delta31 = theta3 - theta1;
-  const Delta32 = theta3 - theta2;
-
-  const v3bMag = Math.abs(l3 * dtheta3) / Math.SQRT2;
-  const v3rMag = Math.abs(l3 * dtheta3) / (2 * Math.SQRT2);
-  const v2bMag = Math.abs(l2 * dtheta2) / Math.SQRT2;
-  const v2rMag = Math.abs(l2 * dtheta2) / (2 * Math.SQRT2);
-
-  const Qtheta3 =
-    - (b3b + c3b * v3bMag) * l3 * l3 * dtheta3
-    - (b3r + c3r * v3rMag) * l3 * l3 * dtheta3 / 4
-    - (b3b + c3b * v2bMag) * l2 * l3 * dtheta2 * Math.cos(Delta32)
-    - (b3r + c3r * v2rMag) * l2 * l3 * dtheta2 * Math.cos(Delta32) / 2;
-
-  return Qtheta3;
-}
-
-
-function computeDdTheta(objectOfInputs, vars) {
-  const {
-    l1, l2, l3, g,
-    m1b, m1r, m2b, m2r, m3b, m3r,
-    b1b, b1r, b2b, b2r, b3b, b3r,
-    c1b, c1r, c2b, c2r, c3b, c3r
-  } = objectOfInputs;
-
-  const [theta1, dtheta1, theta2, dtheta2, theta3, dtheta3] = vars;
-  
-  const s = Math.sin, c = Math.cos, sqrt = Math.sqrt;
-
-  const d12 = theta1 - theta2;
-  const d13 = theta1 - theta3;
-  const d23 = theta2 - theta3;
-
-  // === Inertia Matrix A ===
-  const A = [
-    [
-      l1 ** 2 * (m1r / 12 + 0.5 * (m1b + 0.5 * m1r + m2b + m2r + m3b + m3r)),
-      l1 * l2 * c(d12) * (m2b + 0.5 * m2r + m3b + m3r),
-      l1 * l3 * c(d13) * (m3b + 0.5 * m3r),
-    ],
-    [
-      l1 * l2 * c(d12) * (m2b + 0.5 * m2r + m3b + m3r),
-      l2 ** 2 * (m2r / 12 + 0.5 * (m2b + 0.5 * m2r + m3b + m3r)),
-      l2 * l3 * c(d23) * (m3b + 0.5 * m3r),
-    ],
-    [
-      l1 * l3 * c(d13) * (m3b + 0.5 * m3r),
-      l2 * l3 * c(d23) * (m3b + 0.5 * m3r),
-      l3 ** 2 * (m3r / 12 + 0.5 * (m3b + 0.5 * m3r))
-    ]
-  ];
-
-  // === Gravitational and centrifugal force vector b ===
-  const b = [
-    -g * l1 * c(theta1) * (m1b + 0.5 * m1r + m2b + m2r + m3b + m3r)
-    - l1 * l2 * s(d12) * dtheta2 ** 2 * (m2b + 0.5 * m2r + m3b + m3r)
-    - l1 * l3 * s(d13) * dtheta3 ** 2 * (m3b + 0.5 * m3r),
-
-    l1 * l2 * s(d12) * dtheta1 ** 2 * (m2b + 0.5 * m2r + m3b + m3r)
-    - g * l2 * c(theta2) * (m2b + 0.5 * m2r + m3b + m3r)
-    - l2 * l3 * s(d23) * dtheta3 ** 2 * (m3b + 0.5 * m3r),
-
-    l1 * l3 * s(d13) * dtheta1 ** 2 * (m3b + 0.5 * m3r)
-    - g * l3 * c(theta3) * (m3b + 0.5 * m3r)
-    + l2 * l3 * s(d23) * dtheta2 ** 2 * (m3b + 0.5 * m3r),
-  ];
-
-  b[0] += Qtheta1(objectOfInputs, vars);
-  b[1] += Qtheta2(objectOfInputs, vars);
-  b[2] += Qtheta3(objectOfInputs, vars);
-
-  // Similar functions Qtheta2 and Qtheta3 omitted for brevity
-  // b[1] += Qtheta2();
-  // b[2] += Qtheta3();
-
-  // === Solve A * ddtheta = b ===
-  const ddtheta = math.lusolve(math.matrix(A), math.matrix(b)).toArray().flat();
-
-  return ddtheta; // [ddtheta1, ddtheta2, ddtheta3]
-}
-
 function f(objectOfInputs, t, vars, dt) {
     var [theta1, dtheta1, theta2, dtheta2, theta3, dtheta3] = vars;
-    var d2 = computeDdTheta(objectOfInputs, vars)
-    
+    var {b1, c1, b2, c2, b3, c3, l1, l2, l3, m1, m2, m3, g} = objectOfInputs;
+    var Delta21 = theta2-theta1;
+    var Delta32 = theta3-theta2;
+    var Delta31 = theta3 - theta1;
+    var v1 = l1*Math.abs(dtheta1);
+    var v2 = Math.sqrt(l1**2*dtheta1**2 + 2*l1*l2*dtheta1*dtheta2*Math.cos(Delta21)+l2**2*dtheta2**2);
+    var v3 = Math.sqrt(l1**2*dtheta1**2 + l2**2*dtheta2**2 + l3**2*dtheta3**2 + 2*l1*l2*dtheta1*dtheta2*Math.cos(Delta21) + 2*l1*l3*dtheta1*dtheta3*Math.cos(Delta31)+2*l2*l3*dtheta2*dtheta3*Math.cos(Delta32))
+    var m123 = m1 + m2 + m3;
+    var m23 = m2 + m3;
+    var Qtheta1 = -(b1+c1*v1)*(l1**2*dtheta1) - (b2+c2*v2)*(l1**2*dtheta1 + l1*l2*dtheta2*Math.cos(Delta21))-(b3+c3*v3)*(l1**2*dtheta1 + l1*l2*dtheta2*Math.cos(Delta21) + l1*l3*dtheta3*Math.cos(Delta31));
+    var Qtheta2 = -(b2+c2*v2)*(l2**2*dtheta2 + l1*l2*dtheta1*Math.cos(Delta21)) - (b3+c3*v3)*(l2**2*dtheta2 + l1*l2*dtheta1*Math.cos(Delta21) + l2*l3*dtheta3*Math.cos(Delta32))
+    var Qtheta3 = -(b3+c3*v3)*(l3**2*dtheta3 + l1*l3*dtheta1*Math.cos(Delta31) + l2*l3*dtheta2*Math.cos(Delta32));
+    // var A = [
+    //   [m123*l1**2, m23*l1*l2*Math.cos(Delta21), m3*l1*l3*Math.cos(Delta31)],
+    //   [m23*l1*l2*Math.cos(Delta21), m23*l2**2, m3*l2*l3*Math.cos(Delta32)],
+    //   [m3*l1*l3*Math.cos(Delta31), m3*l2*l3*Math.cos(Delta32), m3*l3**2]
+    // ]
+    // var b = [
+    //   Qtheta1 - m123*g*l1*Math.cos(theta1) + m23*l1*l2*dtheta2**2*Math.sin(Delta21)+m3*l1*l3*dtheta3**2*Math.sin(Delta31),
+    //   Qtheta2 - m23*l1*l2*dtheta1**2*Math.sin(Delta21) - m23*l2*g*Math.cos(theta2) + m3*l2*l3*dtheta3**2*Math.sin(Delta32),
+    //   Qtheta3 - m3*l1*3*dtheta1**2*Math.sin(Delta31) - m3*l2*l3*dtheta2**2*Math.sin(Delta32) - m3*l3*g*Math.cos(theta3)
+    // ]
+    var A = [
+      [m1*(2*l1**2*Math.sin(theta1)**2 + 2*l1**2*Math.cos(theta1)**2)/2 + m2*(2*l1**2*Math.sin(theta1)**2 + 2*l1**2*Math.cos(theta1)**2)/2 + m3*(2*l1**2*Math.sin(theta1)**2 + 2*l1**2*Math.cos(theta1)**2)/2, m2*(2*l1*l2*Math.sin(theta1)*Math.sin(theta2) + 2*l1*l2*Math.cos(theta1)*Math.cos(theta2))/2 + m3*(2*l1*l2*Math.sin(theta1)*Math.sin(theta2) + 2*l1*l2*Math.cos(theta1)*Math.cos(theta2))/2, m3*(2*l1*l3*Math.sin(theta1)*Math.sin(theta3) + 2*l1*l3*Math.cos(theta1)*Math.cos(theta3))/2],
+      [m2*(2*l1*l2*Math.sin(theta1)*Math.sin(theta2) + 2*l1*l2*Math.cos(theta1)*Math.cos(theta2))/2 + m3*(2*l1*l2*Math.sin(theta1)*Math.sin(theta2) + 2*l1*l2*Math.cos(theta1)*Math.cos(theta2))/2,                                                 m2*(2*l2**2*Math.sin(theta2)**2 + 2*l2**2*Math.cos(theta2)**2)/2 + m3*(2*l2**2*Math.sin(theta2)**2 + 2*l2**2*Math.cos(theta2)**2)/2, m3*(2*l2*l3*Math.sin(theta2)*Math.sin(theta3) + 2*l2*l3*Math.cos(theta2)*Math.cos(theta3))/2],
+      [m3*(2*l1*l3*Math.sin(theta1)*Math.sin(theta3) + 2*l1*l3*Math.cos(theta1)*Math.cos(theta3))/2, m3*(2*l2*l3*Math.sin(theta2)*Math.sin(theta3) + 2*l2*l3*Math.cos(theta2)*Math.cos(theta3))/2, m3*(2*l3**2*Math.sin(theta3)**2 + 2*l3**2*Math.cos(theta3)**2)/2]
+    ]
+    var b = [
+      -l1*g*m1*Math.cos(theta1) - l1*g*m2*Math.cos(theta1) - l1*g*m3*Math.cos(theta1) + m2*(-2*l1*(-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2)*Math.cos(theta1)*dtheta1 - 2*l1*(l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2)*Math.sin(theta1)*dtheta1)/2 - m2*(-2*l1*(-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2)*Math.cos(theta1)*dtheta1 + 2*l1*(-l1*Math.sin(theta1)*dtheta1**2 - l2*Math.sin(theta2)*dtheta2**2)*Math.cos(theta1) - 2*l1*(l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2)*Math.sin(theta1)*dtheta1 - 2*l1*(-l1*Math.cos(theta1)*dtheta1**2 - l2*Math.cos(theta2)*dtheta2**2)*Math.sin(theta1))/2 + m3*(-2*l1*(-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2 - l3*Math.sin(theta3)*dtheta3)*Math.cos(theta1)*dtheta1 - 2*l1*(l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2 + l3*Math.cos(theta3)*dtheta3)*Math.sin(theta1)*dtheta1)/2 - m3*(-2*l1*(-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2 - l3*Math.sin(theta3)*dtheta3)*Math.cos(theta1)*dtheta1 + 2*l1*(-l1*Math.sin(theta1)*dtheta1**2 - l2*Math.sin(theta2)*dtheta2**2 - l3*Math.sin(theta3)*dtheta3**2)*Math.cos(theta1) - 2*l1*(l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2 + l3*Math.cos(theta3)*dtheta3)*Math.sin(theta1)*dtheta1 - 2*l1*(-l1*Math.cos(theta1)*dtheta1**2 - l2*Math.cos(theta2)*dtheta2**2 - l3*Math.cos(theta3)*dtheta3**2)*Math.sin(theta1))/2 + Qtheta1, m2*(-2*l2*(-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2)*Math.cos(theta2)*dtheta2 - 2*l2*(l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2)*Math.sin(theta2)*dtheta2)/2 - m2*(-2*l2*(-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2)*Math.cos(theta2)*dtheta2 + 2*l2*(-l1*Math.sin(theta1)*dtheta1**2 - l2*Math.sin(theta2)*dtheta2**2)*Math.cos(theta2) - 2*l2*(l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2)*Math.sin(theta2)*dtheta2 - 2*l2*(-l1*Math.cos(theta1)*dtheta1**2 - l2*Math.cos(theta2)*dtheta2**2)*Math.sin(theta2))/2 + m3*(-2*l2*(-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2 - l3*Math.sin(theta3)*dtheta3)*Math.cos(theta2)*dtheta2 - 2*l2*(l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2 + l3*Math.cos(theta3)*dtheta3)*Math.sin(theta2)*dtheta2)/2 - m3*(-2*l2*(-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2 - l3*Math.sin(theta3)*dtheta3)*Math.cos(theta2)*dtheta2 + 2*l2*(-l1*Math.sin(theta1)*dtheta1**2 - l2*Math.sin(theta2)*dtheta2**2 - l3*Math.sin(theta3)*dtheta3**2)*Math.cos(theta2) - 2*l2*(l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2 + l3*Math.cos(theta3)*dtheta3)*Math.sin(theta2)*dtheta2 - 2*l2*(-l1*Math.cos(theta1)*dtheta1**2 - l2*Math.cos(theta2)*dtheta2**2 - l3*Math.cos(theta3)*dtheta3**2)*Math.sin(theta2))/2 + Qtheta2, m3*(-2*l3*(-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2 - l3*Math.sin(theta3)*dtheta3)*Math.cos(theta3)*dtheta3 - 2*l3*(l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2 + l3*Math.cos(theta3)*dtheta3)*Math.sin(theta3)*dtheta3)/2 - m3*(-2*l3*(-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2 - l3*Math.sin(theta3)*dtheta3)*Math.cos(theta3)*dtheta3 + 2*l3*(-l1*Math.sin(theta1)*dtheta1**2 - l2*Math.sin(theta2)*dtheta2**2 - l3*Math.sin(theta3)*dtheta3**2)*Math.cos(theta3) - 2*l3*(l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2 + l3*Math.cos(theta3)*dtheta3)*Math.sin(theta3)*dtheta3 - 2*l3*(-l1*Math.cos(theta1)*dtheta1**2 - l2*Math.cos(theta2)*dtheta2**2 - l3*Math.cos(theta3)*dtheta3**2)*Math.sin(theta3))/2 + Qtheta3
+    ]
+    var d2 = math.lusolve(A, b);
     // Return statement
     return [dt*dtheta1, dt*d2[0], dt*dtheta2, dt*d2[1], dt*dtheta3, dt*d2[2]];
 }
@@ -301,6 +146,22 @@ function generateDtheta2Theta2PhasePlot(solution) {
 }
 
 /**
+ * Generates a dtheta2 against theta2 phase plot
+ * 
+ * @param solution       An object containing solution data.
+ * @return               Nothing.
+ */
+function generateDtheta3Theta3PhasePlot(solution) {
+    // Extract solution data from solution object
+    var {vars} = solution;
+    var theta3 = vars[4];
+    var dtheta3 = vars[5];
+    
+    // Generate 2D plot
+    gen2DPlot(theta3, dtheta3, "phasePlotDtheta3Theta3", "Phase plot of dθ<sub>3</sub>/dt against θ<sub>3</sub>", "θ<sub>3</sub>", "dθ<sub>3</sub>/dt");
+}
+
+/**
  * Generates a time plot
  * 
  * @param solution       An object containing solution data.
@@ -308,7 +169,7 @@ function generateDtheta2Theta2PhasePlot(solution) {
  */
 function generateTimePlot(solution) {
     // Generate time plot
-    genMultPlot(solution, ["θ<sub>1</sub>", "dθ<sub>1</sub>/dt", "θ<sub>2</sub>", "dθ<sub>2</sub>/dt"], "timePlot", "Plot of θ<sub>1</sub>, dθ<sub>1</sub>/dt, θ<sub>2</sub> and dθ<sub>2</sub>/dt against time");
+    genMultPlot(solution, ["θ<sub>1</sub>", "dθ<sub>1</sub>/dt", "θ<sub>2</sub>", "dθ<sub>2</sub>/dt", "θ<sub>3</sub>", "dθ<sub>3</sub>/dt"], "timePlot", "Plot of θ<sub>1</sub>, dθ<sub>1</sub>/dt, θ<sub>2</sub>, dθ<sub>2</sub>/dt, θ<sub>3</sub> and dθ<sub>3</sub>/dt against time");
 }
 
 /**
@@ -329,118 +190,74 @@ function generatePlots(objectOfInputs) {
     generateTheta2Dtheta1PhasePlot(solution);
     generateDtheta2Theta2PhasePlot(solution);
     generateDtheta1Dtheta2PhasePlot(solution);
+    generateDtheta3Theta3PhasePlot(solution);
     generatePendulumPlots(objectOfInputs, solution)
     generateTimePlot(solution);
-}
-
-/**
- * Remove animation
- * @return nothing
- */
-function removeAnimation() {
-    rmPlot("animation");
-}
-
-/**
- * Remove Theta1 Dtheta1 phase plot
- * @return nothing
- */
-function removeDtheta1Theta1PhasePlot() {
-  rmPlot("phasePlotDtheta1Theta1");
-}
-
-/**
- * Remove Theta1 Dtheta2 phase plot
- * @return nothing
- */
-function removeTheta1Dtheta2PhasePlot() {
-  rmPlot("phasePlotTheta1Dtheta2");
-}
-
-/**
- * Remove Theta2 Dtheta1 phase plot
- * @return nothing
- */
-function removeTheta2Dtheta1PhasePlot() {
-  rmPlot("phasePlotTheta2Dtheta1");
-}
-
-/**
- * Remove Theta2 Dtheta2 phase plot
- * @return nothing
- */
-function removeDtheta2Theta2PhasePlot() {
-  rmPlot("phasePlotDtheta2Theta2");
-}
-
-/**
- * Remove Dtheta1 Dtheta2 phase plot
- * @return nothing
- */
-function removeDtheta1Dtheta2PhasePlot() {
-  rmPlot("phasePlotDtheta1Dtheta2");
-}
-
-function generateAnimationBase(objectOfInputs, solution) {
-    animatePendulum(objectOfInputs, solution, "Triple pendulum");
 }
 
 /**
  * Generate animation
  * @return nothing
  */
-function generateAnimation() {
-  var objectOfInputs = readInputs();
-  var solution = solveProblem(RKF45, objectOfInputs);
-  generateAnimationBase(objectOfInputs, solution);
-}
-
-function removeAnimation() {
-    rmPlot("animation");
-}
-
-function generateTheta1PhaseAnimationBase(solution) {
-    animate2D(solution, {varnames: ["θ<sub>1</sub>", "dθ<sub>1</sub>/dt"], IdSuffix: "Theta1Phase", title: "Phase plot of dθ<sub>1</sub>/dt against θ<sub>1</sub>."});
-}
-
-function generateTheta1PhaseAnimation() {
-  var objectOfInputs = readInputs();
-  var solution = solveProblem(RKF45, objectOfInputs);
-  generateTheta1PhaseAnimationBase(solution);
-}
-
-function removeTheta1PhaseAnimation() {
-    rmPlot("animationTheta1Phase");
-}
-
-function generateTheta2PhaseAnimationBase(solution) {
-    animate2D(solution, {timer: [0, 1.0], varnames: ["θ<sub>2</sub>", "dθ<sub>2</sub>/dt"], IdSuffix: "Theta2Phase", nos: [2, 3], title: "Phase plot of dθ<sub>2</sub>/dt against θ<sub>2</sub>."});
-}
-
-function generateTheta2PhaseAnimation() {
-  var objectOfInputs = readInputs();
-  var solution = solveProblem(RKF45, objectOfInputs);
-  generateTheta2PhaseAnimationBase(solution);
-}
-
-function removeTheta2PhaseAnimation() {
-    rmPlot("animationTheta2Phase");
-}
-
-function generateTable() {
-    fillTable(readInputs(), ['&theta;<sub>1</sub>', 'd&theta;<sub>1</sub>/dt', '&theta;<sub>2</sub>', 'd&theta;<sub>2</sub>/dt', '&theta;<sub>3</sub>', 'd&theta;<sub>3</sub>/dt'])
-}
-
-function generateAnimations() {
+function generateAnimation(objectOfInputs=undefined, solution=undefined) {
+  if (objectOfInputs == undefined) {
     var objectOfInputs = readInputs();
+  } 
+  if (solution == undefined) {
     var solution = solveProblem(RKF45, objectOfInputs);
-    generateAnimationBase(objectOfInputs, solution)
-    generateTheta1PhaseAnimationBase(solution);
-    generateTheta2PhaseAnimationBase(solution);
+  }
+  animatePendulum(objectOfInputs, solution, "Triple pendulum");
 }
 
-function removeAnimations() {
-    removeAnimation();
-    removeTheta1PhaseAnimation();
-    removeTheta2PhaseAnimation();
+function generateTheta1PhaseAnimation(objectOfInputs=undefined, solution=undefined) {
+  if (objectOfInputs == undefined) {
+    var objectOfInputs = readInputs();
+  } 
+  if (solution == undefined) {
+    var solution = solveProblem(RKF45, objectOfInputs);
+  }
+  animate2D(solution, {varnames: ["θ<sub>1</sub>", "dθ<sub>1</sub>/dt"], IdSuffix: "Theta1Phase", title: "Phase plot of dθ<sub>1</sub>/dt against θ<sub>1</sub>."});
+}
+
+function generateTheta2PhaseAnimation(objectOfInputs=undefined, solution=undefined) {
+  if (objectOfInputs == undefined) {
+    var objectOfInputs = readInputs();
+  } 
+  if (solution == undefined) {
+    var solution = solveProblem(RKF45, objectOfInputs);
+  }
+  animate2D(solution, {timer: [0, 1.0], varnames: ["θ<sub>2</sub>", "dθ<sub>2</sub>/dt"], IdSuffix: "Theta2Phase", nos: [2, 3], title: "Phase plot of dθ<sub>2</sub>/dt against θ<sub>2</sub>."});
+}
+
+function generateTheta3PhaseAnimation(objectOfInputs=undefined, solution=undefined) {
+  if (objectOfInputs == undefined) {
+    var objectOfInputs = readInputs();
+  } 
+  if (solution == undefined) {
+    var solution = solveProblem(RKF45, objectOfInputs);
+  }
+  animate2D(solution, {timer: [0, 1.0], varnames: ["θ<sub>3</sub>", "dθ<sub>3</sub>/dt"], IdSuffix: "Theta3Phase", nos: [4, 5], title: "Phase plot of dθ<sub>3</sub>/dt against θ<sub>3</sub>."});
+}
+
+function generateTable(objectOfInputs=undefined, solution=undefined) {
+  if (objectOfInputs == undefined) {
+    var objectOfInputs = readInputs();
+  } 
+  if (solution == undefined) {
+    var solution = solveProblem(RKF45, objectOfInputs);
+  }
+  fillTable(objectOfInputs, ['&theta;<sub>1</sub>', 'd&theta;<sub>1</sub>/dt', '&theta;<sub>2</sub>', 'd&theta;<sub>2</sub>/dt', '&theta;<sub>3</sub>', 'd&theta;<sub>3</sub>/dt'], solution)
+}
+
+function generateAnimations(objectOfInputs=undefined, solution=undefined) {
+  if (objectOfInputs == undefined) {
+    var objectOfInputs = readInputs();
+  } 
+  if (solution == undefined) {
+    var solution = solveProblem(RKF45, objectOfInputs);
+  }
+  generateAnimation(objectOfInputs, solution)
+  generateTheta1PhaseAnimation(objectOfInputs, solution);
+  generateTheta2PhaseAnimation(objectOfInputs, solution);
+  generateTheta3PhaseAnimation(objectOfInputs, solution);
 }

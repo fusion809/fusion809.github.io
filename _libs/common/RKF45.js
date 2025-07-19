@@ -63,7 +63,7 @@ function approxRKF45(f, dt, objectOfInputs, t, vars, i) {
  * @param objectOfInputs Object of page inputs.
  * @returns              Boolean.
  */
-function testRKF45(i, tf, dt, t, objectOfInputs) {
+function testRKF45(i, tf, vars, dt, t, objectOfInputs) {
     test1 = t[i] < tf;
     if (Object.hasOwn(objectOfInputs, 'hMin')) {
         hMin = objectOfInputs.hMin;
@@ -72,7 +72,11 @@ function testRKF45(i, tf, dt, t, objectOfInputs) {
     }
     test2 = dt >= hMin;
     if (!test2) {
-        var msg = "Exiting RKF45 at t = " + t[i] + " because dt = " + dt + " is <" + hMin;
+        var msg = "Exiting RKF45 at t = " + t[i] + " because dt = " + dt + " is <" + hMin + ".";
+        msg += "vars = "
+        for (let j = 0; j < vars.length; j++) {
+            msg += vars[j]
+        }
         alert(msg);
         console.log(msg);
     }
@@ -99,7 +103,7 @@ function RKF45Body(f, objectOfInputs, vars0) {
     var i = 0;
 
     // Loop over each step until we reach the endpoint
-    while ( testRKF45(i, tf, dt, t, objectOfInputs) ) {
+    while ( testRKF45(i, tf, vars[i], dt, t, objectOfInputs) ) {
         dt = Math.min(dt, tf-t[i]);
         [dt, t, vars, i] = approxRKF45(f, dt, objectOfInputs, t, vars, i);
     }
