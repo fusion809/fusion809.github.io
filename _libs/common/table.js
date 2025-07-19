@@ -53,7 +53,12 @@ function generateAllOutputs(objectOfInputs=undefined, solution=undefined) {
         var objectOfInputs = readInputs();
     }
     if (solution==undefined) {
-        var solution = solveProblem(RKF45, objectOfInputs);
+        var solution;
+        try {
+            solution = solveProblem(RKF45, objectOfInputs);
+        } catch(e) {
+            solution = solveProblemSP(objectOfInputs);
+        }
     }
     generateTable(objectOfInputs, solution);
     generatePlots(objectOfInputs, solution);
