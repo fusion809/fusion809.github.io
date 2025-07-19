@@ -43,10 +43,6 @@ function removeXYPhasePlot() {
     rmPlot("phasePlotXY");
 }
 
-function removeR1TPlot() {
-    rmPlot("R1TPlot");
-}
-
 /**
  * Remove XZ phase plot
  * 
@@ -105,96 +101,6 @@ function removeErrorPlot() {
  */
 function removePhasePlot() {
     rmPlot("phasePlot");
-}
-
-/**
- * Remove theta1 theta2 plot
- * 
- * @params         None.
- * @return         Nothing.
- */
-function removeTheta1Theta2PhasePlot() {
-    rmPlot("phasePlotTheta1Theta2");
-}
-
-/**
- * Remove theta1 ptheta1 plot
- * 
- * @params         None.
- * @return         Nothing.
- */
-function removeTheta1P1PhasePlot() {
-    rmPlot("phasePlotTheta1P1");
-}
-
-/**
- * Remove theta1 ptheta2 plot
- * 
- * @params         None.
- * @return         Nothing.
- */
-function removeTheta1P2PhasePlot() {
-    rmPlot("phasePlotTheta1P2");
-}
-
-/**
- * Remove ptheta1 ptheta2 plot
- * 
- * @params         None.
- * @return         Nothing.
- */
-function removeP1P2PhasePlot() {
-    rmPlot("phasePlotP1P2");
-}
-
-/**
- * Remove theta1 ptheta1 plot
- * 
- * @params         None.
- * @return         Nothing.
- */
-function removeTheta2P2PhasePlot() {
-    rmPlot("phasePlotTheta2P2");
-}
-
-/**
- * Remove theta2 ptheta1 plot
- * 
- * @params         None.
- * @return         Nothing.
- */
-function removeTheta2P1PhasePlot() {
-    rmPlot("phasePlotTheta2P1");
-}
-
-/**
- * Remove xDot vs x plot
- * 
- * @params         None.
- * @return         Nothing.
- */
-function removeXXDotPhasePlot() {
-    rmPlot("phasePlotXXDot");
-}
-
-/**
- * Remove theta vs x plot
- * 
- * @params         None.
- * @return         Nothing.
- */
-function removeXThetaPhasePlot() {
-    rmPlot("phasePlotXTheta");
-}
-
-/**
- * Remove thetaDot vs theta plot
- * 
- * @params         None.
- * @return         Nothing.
- */
-function removeThetaThetaDotPhasePlot() {
-    rmPlot("phasePlotThetaThetaDot");
 }
 
 /**
