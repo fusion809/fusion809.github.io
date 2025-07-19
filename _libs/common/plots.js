@@ -669,28 +669,26 @@ function generatePendulumCoords(objectOfInputs, solution) {
 
     // Return t and Cartesian coordinates of the pendulum bobs
     return [t, x1, y1, x2, y2];
-  } else if (solution.varsLen() > 2) {
-    var vars = solution.vars;
-    var r = vars[0].map(item => item + objectOfInputs.l0);
-    var th = vars[2];
-    var N = th.length;
-    var x = new Array(N);
-    var y = new Array(N);
-    for (let i = 0; i < N; i++) {
-        x[i] = r[i]*Math.cos(th[i]);
-        y[i] = r[i]*Math.sin(th[i]);
-    }
-    return [x, y];
   } else {
     var vars = solution.vars;
-    var r = objectOfInputs.l;
-    var th = vars[0];
+    if (solution.varsLen() > 2) {
+      var r = vars[0].map(item => item + objectOfInputs.l0);
+      var th = vars[2];
+    } else {
+      var r = objectOfInputs.l
+      var th = vars[0];
+    }
     var N = th.length;
     var x = new Array(N);
     var y = new Array(N);
     for (let i = 0; i < N; i++) {
-        x[i] = r*Math.cos(th[i]);
-        y[i] = r*Math.sin(th[i]);
+      if (typeof(r) == 'number') {
+        ri = r;
+      } else {
+        ri = r[i];
+      }
+      x[i] = ri*Math.cos(th[i]);
+      y[i] = ri*Math.sin(th[i]);
     }
     return [x, y];
   }
