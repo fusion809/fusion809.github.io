@@ -73,26 +73,6 @@ function generatePlots(objectOfInputs) {
 };
 
 /**
- * Generate x and y coordinates of pendulum.
- * @param objectOfInputs An object that contains all the problem parameters.
- * @param solution       solution object; solution.t is a vector of time
- *                       values, solution.vars contains theta and theta dot. 
- * @returns              [x, y] coordinates.
- */
-function generatePendulumCoords(objectOfInputs, solution) {
-    var theta = solution.vars[0];
-    var l = objectOfInputs.l;
-    var N = theta.length;
-    var x = new Array(N);
-    var y = new Array(N);
-    for (let i = 0; i < N; i++) {
-        x[i] = l*Math.cos(theta[i]);
-        y[i] = l*Math.sin(theta[i]);
-    }
-    return [x, y];
-}
-
-/**
  * Generates animation.
  * @return nothing. 
  */
@@ -124,7 +104,7 @@ function generateAnimations(objectOfInputs=undefined, solution=undefined) {
         var solution = solveProblem(RKF45, objectOfInputs);
     }
     generateAnimation(objectOfInputs, solution);
-    generatePhaseAnimation(solution);
+    generatePhaseAnimation(objectOfInputs, solution);
 }
 
 function generateTable(objectOfInputs=undefined, solution=undefined) {
