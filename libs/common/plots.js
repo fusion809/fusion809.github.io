@@ -689,8 +689,8 @@ function generatePendulumCoords(objectOfInputs, solution) {
     var x = new Array(N);
     var y = new Array(N);
     for (let i = 0; i < N; i++) {
-        x[i] = r[i]*Math.cos(th[i]);
-        y[i] = r[i]*Math.sin(th[i]);
+        x[i] = r*Math.cos(th[i]);
+        y[i] = r*Math.sin(th[i]);
     }
     return [x, y];
   }
