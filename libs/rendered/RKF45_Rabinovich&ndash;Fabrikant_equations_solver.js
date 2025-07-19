@@ -22,7 +22,7 @@ function generate3DPhasePlot(solution) {
     var vars = solution.vars;
     var [x, y, z] = vars;
 
-    gen3DPlot(x, y, z, phasePlotXYZ, Phase plot of the solution to the Lorenz system, {view: [2, 0, 0]})
+    gen3DPlot(x, y, z, "phasePlotXYZ", "Phase plot of the solution to the Rabinovich&ndash;Fabrikant system", {view: [2, 0, 0]})
 }
 
 /**
@@ -38,7 +38,7 @@ function generateXYPhasePlot(solution) {
     var y = vars[1];
 
     // Generate plot
-    gen2DPlot(x, y, phasePlotXY, y against x phase plot, x, y);
+    gen2DPlot(x, y, "phasePlotXY", "y against x phase plot", "x", "y");
 }
 
 /**
@@ -54,7 +54,7 @@ function generateXZPhasePlot(solution) {
     var z = vars[2];
 
     // Generate plot
-    gen2DPlot(x, z, phasePlotXZ, z against x phase plot, x, z);
+    gen2DPlot(x, z, "phasePlotXZ", "z against x phase plot", "x", "z");
 }
 
 /**
@@ -70,7 +70,7 @@ function generateYZPhasePlot(solution) {
     var z = vars[2];
 
     // Generate plot
-    gen2DPlot(y, z, phasePlotYZ, z against y phase plot, y, z);
+    gen2DPlot(y, z, "phasePlotYZ", "z against y phase plot", "y", "z");
 }
 
 /**
@@ -81,7 +81,7 @@ function generateYZPhasePlot(solution) {
 */
 function generateTimePlot(solution) {
     // Extract solution data from solution object
-    genMultPlot(solution, [x, y, z], timePlot, Time plots of the solution to the problem)
+    genMultPlot(solution, ["x", "y", "z"], "timePlot", "Time plots of the solution to the problem")
 }
 
 /**
@@ -89,7 +89,7 @@ function generateTimePlot(solution) {
 * @return nothing
 */
 function removeAnimation() {
-    rmPlot(animation);
+    rmPlot("animation");
 }
 
 /**
@@ -103,7 +103,7 @@ function generateAnimation(objectOfInputs=undefined, solution=undefined) {
     if (solution==undefined) {
         var solution = solveProblem(RKF45, objectOfInputs);
     }
-    animate3D(solution, {view: [2, 0, 0], title: Lorenz system: x, y and z phase plot.});
+    animate3D(solution, {view: [2, 0, 0], title: "Rabinovich&ndash;Fabrikant system: x, y and z phase plot."});
 }
 
 /**
