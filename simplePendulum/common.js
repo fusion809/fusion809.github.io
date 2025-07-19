@@ -204,7 +204,7 @@ function fillTableSP(objectOfInputs) {
     
     // Generate table
     document.getElementById('tableOutputs').innerHTML = '';
-    var tableContents = '<tr>';
+    var tableContents = '<table><tr>';
     tableContents += '<th>Index</th>';
     tableContents += '<th>t (seconds)</th>';
     tableContents += '<th>&theta; (radians) </th>';
@@ -231,6 +231,7 @@ function fillTableSP(objectOfInputs) {
         tableContents += '</td>';
         tableContents += '</tr>';
     }
+    tableContents += "</table>"
     document.getElementById('tableOutputs').innerHTML = tableContents;
 };
 
@@ -336,5 +337,5 @@ function generateTable(objectOfInputs=undefined, solution=undefined) {
     if (solution==undefined) {
         var solution = solveProblem(RKF45, objectOfInputs);
     }
-    fillTable(objectOfInputs, ['θ', 'dθ/dt'], solution)
+    fillTableSP(objectOfInputs, ['θ', 'dθ/dt'], solution)
 }
