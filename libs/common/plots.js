@@ -695,20 +695,18 @@ function generatePendulumCoords(objectOfInputs, solution) {
 }
 
 function generatePendulumPlot(objectOfInputs, solution) {
-  if (objectOfInputs.hasOwnProperty("l1") && solution.vars.length == 4) {
+  if (objectOfInputs.hasOwnProperty("l1") && !objectOfInputs.hasOwnProperty("l3")) {
     // This is for double pendulum
     var [t1, x1, y1, x2, y2] = generatePendulumCoords(objectOfInputs, solution);
     var x=[x1, x2];
     var y=[y1, y2];
-  } else if (objectOfInputs.hasOwnProperty("l1")) {
-    // Double elastic pendulum
-    var [t1, x1, y1, x2, y2] = generatePendulumCoords(objectOfInputs, solution);
-    var x=[x1, x2];
-    var y=[y1, y2];
+  } else if (objectOfInputs.hasOwnProperty("l3")) {
+    var [t1, x1, y1, x2, y2, x3, y3] = generatePendulumCoords(objectOfInputs, solution);
+    var x=[x1, x2, x3];
+    var y=[y1, y2, y3];
   } else {
     // single pendulum systems
     var [x, y] = generatePendulumCoords(objectOfInputs, solution);
-    i
   }
   var element = "pendulumPlot"
   var fontSizes = getPlotFontSizes(objectOfInputs);
@@ -742,7 +740,7 @@ function generatePendulumPlot(objectOfInputs, solution) {
       },
       font: {size: fontSizes.legend}
     };
-  } else {
+  } else if (x3 == undefined) {
     adjustPlotHeight(element);
     
     // Show two pendulum bob locations on the same plot
@@ -780,26 +778,70 @@ function generatePendulumPlot(objectOfInputs, solution) {
       },
       font: {size: fontSizes.legend}
     };
+  } else {
+    adjustPlotHeight(element);
+    
+    // Show two pendulum bob locations on the same plot
+    var plotPen1 = {
+        x: x1,
+        y: y1,
+        type: 'scatter',
+        mode: 'lines',
+        opacity: 1,
+        name: "Pendulum 1 bob"
+    }
+    var plotPen2 = {
+        x: x2,
+        y: y2,
+        type: 'scatter',
+        mode: 'lines',
+        opacity: 1,
+        name: "Pendulum 2 bob"
+    }
+    var plotPen3 = {
+        x: x3,
+        y: y3,
+        type: 'scatter',
+        mode: 'lines',
+        opacity: 1,
+        name: "Pendulum 3 bob"
+    }
+    var dataPen = [plotPen1, plotPen2, plotPen3];
+    var layoutPen = {
+      margin: margin(objectOfInputs),  // make space for labels
+      width: objectOfInputs.Width,
+      height: objectOfInputs.Height,
+      title: {text: "Pendulum position plot.", font: {size: fontSizes.title }},
+      xaxis: {
+        range: range(x),
+        title: {text: "x", font: {size: fontSizes.axisTitle}},
+        tickfont: {size: fontSizes.axisLabels}
+      },
+      yaxis: {
+        range: range(y),
+        title: {text: "y", font: {size: fontSizes.axisTitle}},
+        tickfont: {size: fontSizes.axisLabels}
+      },
+      font: {size: fontSizes.legend}
+    };
   }
   Plotly.newPlot(element, dataPen, layoutPen);
   fixPlotHeight(element);
 }
 
 function generatePendulumTimePlot(objectOfInputs, solution) {
-  if (objectOfInputs.hasOwnProperty("l1") && solution.vars.length == 4) {
+  if (objectOfInputs.hasOwnProperty("l1") && !objectOfInputs.hasOwnProperty("l3")) {
     // This is for double pendulum
     var [t1, x1, y1, x2, y2] = generatePendulumCoords(objectOfInputs, solution);
     var x=[x1, x2];
     var y=[y1, y2];
-  } else if (objectOfInputs.hasOwnProperty("l1")) {
-    // Double elastic pendulum
-    var [t1, x1, y1, x2, y2] = generatePendulumCoords(objectOfInputs, solution);
-    var x=[x1, x2];
-    var y=[y1, y2];
+  } else if (objectOfInputs.hasOwnProperty("l3")) {
+    var [t1, x1, y1, x2, y2, x3, y3] = generatePendulumCoords(objectOfInputs, solution);
+    var x=[x1, x2, x3];
+    var y=[y1, y2, y3];
   } else {
     // single pendulum systems
     var [x, y] = generatePendulumCoords(objectOfInputs, solution);
-    i
   }
   var element = "pendulumTimePlot";
   adjustPlotHeight(element);
@@ -820,7 +862,7 @@ function generatePendulumTimePlot(objectOfInputs, solution) {
       name: "Pendulum"
     }
     var dataPen = [plotPenTime];
-  } else {
+  } else if (x3 == undefined) {
     // Plot pendulum bob location against time plot
     var plotPen1Time = {
         x: t,
@@ -851,6 +893,50 @@ function generatePendulumTimePlot(objectOfInputs, solution) {
     var x = [x1, x2];
     var y = [y1, y2];
     var dataPen = [plotPen1Time, plotPen2Time];
+  } else {
+    // Plot pendulum bob location against time plot
+    var plotPen1Time = {
+        x: t,
+        y: x1,
+        z: y1,
+        type: 'scatter3d',
+        mode: 'lines',
+        opacity: 1,
+        line: {
+            width: 6,
+            reversescale: false
+        },
+        name: "Pendulum 1 bob"
+    };
+    var plotPen2Time = {
+        x: t,
+        y: x2,
+        z: y2,
+        type: 'scatter3d',
+        mode: 'lines',
+        opacity: 1,
+        line: {
+            width: 6,
+            reversescale: false
+        },
+        name: 'Pendulum 2 bob'
+    };
+    var plotPen3Time = {
+        x: t,
+        y: x3,
+        z: y3,
+        type: 'scatter3d',
+        mode: 'lines',
+        opacity: 1,
+        line: {
+            width: 6,
+            reversescale: false
+        },
+        name: 'Pendulum 3 bob'
+    };
+    var x = [x1, x2, x3];
+    var y = [y1, y2, y3];
+    var dataPen = [plotPen1Time, plotPen2Time, plotPen3Time];
   }
   var fontSizes = getPlotFontSizes(objectOfInputs);
   var layoutPenTime = {
