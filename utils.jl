@@ -465,6 +465,7 @@ end
 
 function render_js(pageTitle, type, vars)
   title = replace(pageTitle, " " => "_")
+  fileTitle = replace(pageTitle, " " => "_")
   if (type=="attractor")
     artTitle = pageTitle
     artTitle = replace(artTitle, r" solver"=>"")
@@ -489,7 +490,7 @@ function render_js(pageTitle, type, vars)
       viewStr1 = ""
       viewStr2 = ""
     end
-    targetFile = "_libs/rendered/attractor_$title.js"
+    targetFile = "_libs/rendered/attractor_$fileTitle.js"
     baseFile = "_libs/common/attractor.js"
   elseif (vars !== nothing)
     varsList = vars
@@ -500,7 +501,7 @@ function render_js(pageTitle, type, vars)
         conds *= ", "
       end
     end
-    targetFile = "_libs/rendered/RKF45_$title.js"
+    targetFile = "_libs/rendered/RKF45_$fileTitle.js"
     baseFile = "_libs/common/RKF45_base.js"
   else
     return;
@@ -527,13 +528,16 @@ function render_js(pageTitle, type, vars)
       end
 
       content = replace(content, "\$title" => "$title")
-      content = replace(content, r"\"" => "")
+      if (!occursin("attractor", baseFile))
+        content = replace(content, r"\"" => "")
+      end
       new_hash = sha256(content)
       old_hash = isfile(targetFile) ? sha256(read(targetFile, String)) : ""
+
       # Write the modified content back to the file
       if (new_hash != old_hash)
         write(targetFile, content)
-        cp(targetFile, "__site/libs/rendered/RKF45_$title.js", force=true)
+        cp(targetFile, "__site/libs/rendered/RKF45_$fileTitle.js", force=true)
       end
     end
 end
@@ -628,7 +632,7 @@ function hfun_render_js()
   end
   title = replace(title, " " => "_")
   if (type == "attractor")
-    HTML = """<script src="/libs/rendered/attractor_$title.js"></script>"""
+    HTML = """<script src="/libs/rendered/attractor_$title.js"></script><script src="/libs/rendered/rmPlot_$title.js"></script>"""
   else
     HTML = """<script src="/libs/rendered/RKF45_$title.js"></script><script src="/libs/rendered/rmPlot_$title.js"></script>"""
   end
