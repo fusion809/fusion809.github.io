@@ -4,59 +4,16 @@ function f(objectOfInputs, t, vars, dt) {
     m1b, m1r, m2b, m2r, m3b, m3r,
     b1b, b1r, b2b, b2r, b3b, b3r,
     c1b, c1r, c2b, c2r, c3b, c3r} = objectOfInputs;
-    var {l1, l2, l3, g,
-    m1, m2, m3, 
-    b1, b2, b3, 
-    c1, c2, c3} = objectOfInputs;
     var Delta21 = theta2-theta1;
     var Delta32 = theta3-theta2;
     var Delta31 = theta3 - theta1;
-    // var v1 = l1*Math.abs(dtheta1);
-    // var v2 = Math.sqrt(l1**2*dtheta1**2 + 2*l1*l2*dtheta1*dtheta2*Math.cos(Delta21)+l2**2*dtheta2**2);
-    // var v3 = Math.sqrt(l1**2*dtheta1**2 + l2**2*dtheta2**2 + l3**2*dtheta3**2 + 2*l1*l2*dtheta1*dtheta2*Math.cos(Delta21) + 2*l1*l3*dtheta1*dtheta3*Math.cos(Delta31)+2*l2*l3*dtheta2*dtheta3*Math.cos(Delta32))
-    var v1b = l1*Math.abs(dtheta1);
     var v2b = Math.sqrt(l1**2*dtheta1**2 + 2*l1*l2*dtheta1*dtheta2*Math.cos(Delta21)+l2**2*dtheta2**2);
     var v3b = Math.sqrt(l1**2*dtheta1**2 + l2**2*dtheta2**2 + l3**2*dtheta3**2 + 2*l1*l2*dtheta1*dtheta2*Math.cos(Delta21) + 2*l1*l3*dtheta1*dtheta3*Math.cos(Delta31)+2*l2*l3*dtheta2*dtheta3*Math.cos(Delta32))
-    var v1r = l1*Math.abs(dtheta1)/2;
     var v2r = Math.sqrt(l1**2*dtheta1**2 + l1*l2*dtheta1*dtheta2*Math.cos(Delta21)+l2**2*dtheta2**2/4);
     var v3r = Math.sqrt(l1**2*dtheta1**2 + l2**2*dtheta2**2 + l3**2*dtheta3**2/4 + 2*l1*l2*dtheta1*dtheta2*Math.cos(Delta21) + l1*l3*dtheta1*dtheta3*Math.cos(Delta31)+l2*l3*dtheta2*dtheta3*Math.cos(Delta32))
-    var m123 = m1 + m2 + m3;
-    var m23 = m2 + m3;
-    //var Qtheta1 = -(b1+c1*v1)*(l1**2*dtheta1) - (b2+c2*v2)*(l1**2*dtheta1 + l1*l2*dtheta2*Math.cos(Delta21))-(b3+c3*v3)*(l1**2*dtheta1 + l1*l2*dtheta2*Math.cos(Delta21) + l1*l3*dtheta3*Math.cos(Delta31));
     var Qtheta1 = -(b1b + c1b*l1*Math.abs(dtheta1))*(l1**2*dtheta1) - (b1r+c1r*l1*Math.abs(dtheta1)/2)*(l1**2*dtheta1/4) - (b2b+c2b*v2b)*(l1**2*dtheta1 + l1*l2*dtheta2*Math.cos(Delta21)) - (b2r + c2r*v2r)*(l1**2*dtheta1+l1*l2*dtheta2*Math.cos(Delta21)/2) - (b3b+c3b*v3b) * (l1**2*dtheta1 + l1*l2*dtheta2*Math.cos(Delta21) + l1*l3*dtheta3*Math.cos(Delta31)) - (b3r+c3r*v3r)*(l1**2*dtheta1 + l1*l2*dtheta2*Math.cos(Delta21) + l1*l3*dtheta3*Math.cos(Delta31)/2)
-    //var Qtheta2 = -(b2+c2*v2)*(l2**2*dtheta2 + l1*l2*dtheta1*Math.cos(Delta21)) - (b3+c3*v3)*(l2**2*dtheta2 + l1*l2*dtheta1*Math.cos(Delta21) + l2*l3*dtheta3*Math.cos(Delta32))
     var Qtheta2 = -(b2b + c2b*v2b)*(l2**2*dtheta2 + l1*l2*dtheta1*Math.cos(Delta21)) - (b2r+c2r*v2r)*(l2**2*dtheta2/4 + l1*l2*dtheta1*Math.cos(Delta21)/2) - (b3b + c3b*v3b)*(l1*l2*dtheta1*Math.cos(Delta21)+l2**2*dtheta2+l2*l3*dtheta3*Math.cos(Delta32)) - (b3r+c3r*v3r)*(l1*l2*dtheta1*Math.cos(Delta21) + l2**2*dtheta2 + l2*l3*dtheta3*Math.cos(Delta32)/2);
-    //var Qtheta3 = -(b3+c3*v3)*(l3**2*dtheta3 + l1*l3*dtheta1*Math.cos(Delta31) + l2*l3*dtheta2*Math.cos(Delta32));
     var Qtheta3 = -(b3b+c3b*v3b)*(l1*l3*dtheta1*Math.cos(Delta31) + l2*l3*dtheta2*Math.cos(Delta32) + l3**2*dtheta3) - (b3r+c3r*v3r)*(l1*l3*dtheta1*Math.cos(Delta31)/2 + l2*l3*dtheta2*Math.cos(Delta32)/2+l3**2*dtheta3/4)
-    // Hand derivation, explodes after t~7
-    // var A = [
-    //   [m123*l1**2, m23*l1*l2*Math.cos(Delta21), m3*l1*l3*Math.cos(Delta31)],
-    //   [m23*l1*l2*Math.cos(Delta21), m23*l2**2, m3*l2*l3*Math.cos(Delta32)],
-    //   [m3*l1*l3*Math.cos(Delta31), m3*l2*l3*Math.cos(Delta32), m3*l3**2]
-    // ]
-    // var b = [
-    //   Qtheta1 - m123*g*l1*Math.cos(theta1) + m23*l1*l2*dtheta2**2*Math.sin(Delta21)+m3*l1*l3*dtheta3**2*Math.sin(Delta31),
-    //   Qtheta2 - m23*l1*l2*dtheta1**2*Math.sin(Delta21) - m23*l2*g*Math.cos(theta2) + m3*l2*l3*dtheta3**2*Math.sin(Delta32),
-    //   Qtheta3 - m3*l1*3*dtheta1**2*Math.sin(Delta31) - m3*l2*l3*dtheta2**2*Math.sin(Delta32) - m3*l3*g*Math.cos(theta3)
-    // ]
-    // SymPy derivation for massless rods, fairly stable
-    // var A = [
-    //   [m1*(2*l1**2*Math.sin(theta1)**2 + 2*l1**2*Math.cos(theta1)**2)/2 + m2*(2*l1**2*Math.sin(theta1)**2 + 2*l1**2*Math.cos(theta1)**2)/2 + m3*(2*l1**2*Math.sin(theta1)**2 + 2*l1**2*Math.cos(theta1)**2)/2, m2*(2*l1*l2*Math.sin(theta1)*Math.sin(theta2) + 2*l1*l2*Math.cos(theta1)*Math.cos(theta2))/2 + m3*(2*l1*l2*Math.sin(theta1)*Math.sin(theta2) + 2*l1*l2*Math.cos(theta1)*Math.cos(theta2))/2, m3*(2*l1*l3*Math.sin(theta1)*Math.sin(theta3) + 2*l1*l3*Math.cos(theta1)*Math.cos(theta3))/2],
-    //   [m2*(2*l1*l2*Math.sin(theta1)*Math.sin(theta2) + 2*l1*l2*Math.cos(theta1)*Math.cos(theta2))/2 + m3*(2*l1*l2*Math.sin(theta1)*Math.sin(theta2) + 2*l1*l2*Math.cos(theta1)*Math.cos(theta2))/2,                                                 m2*(2*l2**2*Math.sin(theta2)**2 + 2*l2**2*Math.cos(theta2)**2)/2 + m3*(2*l2**2*Math.sin(theta2)**2 + 2*l2**2*Math.cos(theta2)**2)/2, m3*(2*l2*l3*Math.sin(theta2)*Math.sin(theta3) + 2*l2*l3*Math.cos(theta2)*Math.cos(theta3))/2],
-    //   [m3*(2*l1*l3*Math.sin(theta1)*Math.sin(theta3) + 2*l1*l3*Math.cos(theta1)*Math.cos(theta3))/2, m3*(2*l2*l3*Math.sin(theta2)*Math.sin(theta3) + 2*l2*l3*Math.cos(theta2)*Math.cos(theta3))/2, m3*(2*l3**2*Math.sin(theta3)**2 + 2*l3**2*Math.cos(theta3)**2)/2]
-    // ];
-    // var b = [-l1*g*m1*Math.cos(theta1) - l1*g*m2*Math.cos(theta1) - l1*g*m3*Math.cos(theta1) + m2*(-2*l1*(-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2)*Math.cos(theta1)*dtheta1 - 2*l1*(l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2)*Math.sin(theta1)*dtheta1)/2 - m2*(-2*l1*(-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2)*Math.cos(theta1)*dtheta1 + 2*l1*(-l1*Math.sin(theta1)*dtheta1**2 - l2*Math.sin(theta2)*dtheta2**2)*Math.cos(theta1) - 2*l1*(l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2)*Math.sin(theta1)*dtheta1 - 2*l1*(-l1*Math.cos(theta1)*dtheta1**2 - l2*Math.cos(theta2)*dtheta2**2)*Math.sin(theta1))/2 + m3*(-2*l1*(-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2 - l3*Math.sin(theta3)*dtheta3)*Math.cos(theta1)*dtheta1 - 2*l1*(l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2 + l3*Math.cos(theta3)*dtheta3)*Math.sin(theta1)*dtheta1)/2 - m3*(-2*l1*(-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2 - l3*Math.sin(theta3)*dtheta3)*Math.cos(theta1)*dtheta1 + 2*l1*(-l1*Math.sin(theta1)*dtheta1**2 - l2*Math.sin(theta2)*dtheta2**2 - l3*Math.sin(theta3)*dtheta3**2)*Math.cos(theta1) - 2*l1*(l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2 + l3*Math.cos(theta3)*dtheta3)*Math.sin(theta1)*dtheta1 - 2*l1*(-l1*Math.cos(theta1)*dtheta1**2 - l2*Math.cos(theta2)*dtheta2**2 - l3*Math.cos(theta3)*dtheta3**2)*Math.sin(theta1))/2 + Qtheta1, m2*(-2*l2*(-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2)*Math.cos(theta2)*dtheta2 - 2*l2*(l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2)*Math.sin(theta2)*dtheta2)/2 - m2*(-2*l2*(-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2)*Math.cos(theta2)*dtheta2 + 2*l2*(-l1*Math.sin(theta1)*dtheta1**2 - l2*Math.sin(theta2)*dtheta2**2)*Math.cos(theta2) - 2*l2*(l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2)*Math.sin(theta2)*dtheta2 - 2*l2*(-l1*Math.cos(theta1)*dtheta1**2 - l2*Math.cos(theta2)*dtheta2**2)*Math.sin(theta2))/2 + m3*(-2*l2*(-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2 - l3*Math.sin(theta3)*dtheta3)*Math.cos(theta2)*dtheta2 - 2*l2*(l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2 + l3*Math.cos(theta3)*dtheta3)*Math.sin(theta2)*dtheta2)/2 - m3*(-2*l2*(-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2 - l3*Math.sin(theta3)*dtheta3)*Math.cos(theta2)*dtheta2 + 2*l2*(-l1*Math.sin(theta1)*dtheta1**2 - l2*Math.sin(theta2)*dtheta2**2 - l3*Math.sin(theta3)*dtheta3**2)*Math.cos(theta2) - 2*l2*(l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2 + l3*Math.cos(theta3)*dtheta3)*Math.sin(theta2)*dtheta2 - 2*l2*(-l1*Math.cos(theta1)*dtheta1**2 - l2*Math.cos(theta2)*dtheta2**2 - l3*Math.cos(theta3)*dtheta3**2)*Math.sin(theta2))/2 + Qtheta2, m3*(-2*l3*(-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2 - l3*Math.sin(theta3)*dtheta3)*Math.cos(theta3)*dtheta3 - 2*l3*(l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2 + l3*Math.cos(theta3)*dtheta3)*Math.sin(theta3)*dtheta3)/2 - m3*(-2*l3*(-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2 - l3*Math.sin(theta3)*dtheta3)*Math.cos(theta3)*dtheta3 + 2*l3*(-l1*Math.sin(theta1)*dtheta1**2 - l2*Math.sin(theta2)*dtheta2**2 - l3*Math.sin(theta3)*dtheta3**2)*Math.cos(theta3) - 2*l3*(l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2 + l3*Math.cos(theta3)*dtheta3)*Math.sin(theta3)*dtheta3 - 2*l3*(-l1*Math.cos(theta1)*dtheta1**2 - l2*Math.cos(theta2)*dtheta2**2 - l3*Math.cos(theta3)*dtheta3**2)*Math.sin(theta3))/2 + Qtheta3
-    // ]
-  // Q =
-  // [l1**2*(-b1b - c1b*Math.sqrt(l1**2*Math.sin(theta1)**2*dtheta1**2 + l1**2*Math.cos(theta1)**2*dtheta1**2))*Math.sin(theta1)**2*dtheta1 + l1**2*(-b1b - c1b*Math.sqrt(l1**2*Math.sin(theta1)**2*dtheta1**2 + l1**2*Math.cos(theta1)**2*dtheta1**2))*Math.cos(theta1)**2*dtheta1 + l1**2*(-b1r - c1r*Math.sqrt(l1**2*Math.sin(theta1)**2*dtheta1**2/4 + l1**2*Math.cos(theta1)**2*dtheta1**2/4))*Math.sin(theta1)**2*dtheta1/4 + l1**2*(-b1r - c1r*Math.sqrt(l1**2*Math.sin(theta1)**2*dtheta1**2/4 + l1**2*Math.cos(theta1)**2*dtheta1**2/4))*Math.cos(theta1)**2*dtheta1/4 - l1*(-b2b - c2b*Math.sqrt((-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2)**2 + (l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2)**2))*(-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2)*Math.sin(theta1) + l1*(-b2b - c2b*Math.sqrt((-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2)**2 + (l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2)**2))*(l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2)*Math.cos(theta1) - l1*(-b2r - c2r*Math.sqrt((-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2/2)**2 + (l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2/2)**2))*(-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2/2)*Math.sin(theta1) + l1*(-b2r - c2r*Math.sqrt((-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2/2)**2 + (l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2/2)**2))*(l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2/2)*Math.cos(theta1) - l1*(-b3b - c3b*Math.sqrt((-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2 - l3*Math.sin(theta3)*dtheta3)**2 + (l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2 + l3*Math.cos(theta3)*dtheta3)**2))*(-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2 - l3*Math.sin(theta3)*dtheta3)*Math.sin(theta1) + l1*(-b3b - c3b*Math.sqrt((-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2 - l3*Math.sin(theta3)*dtheta3)**2 + (l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2 + l3*Math.cos(theta3)*dtheta3)**2))*(l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2 + l3*Math.cos(theta3)*dtheta3)*Math.cos(theta1) - l1*(-b3r - c3r*Math.sqrt((-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2 - l3*Math.sin(theta3)*dtheta3/2)**2 + (l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2 + l3*Math.cos(theta3)*dtheta3/2)**2))*(-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2 - l3*Math.sin(theta3)*dtheta3/2)*Math.sin(theta1) + l1*(-b3r - c3r*Math.sqrt((-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2 - l3*Math.sin(theta3)*dtheta3/2)**2 + (l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2 + l3*Math.cos(theta3)*dtheta3/2)**2))*(l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2 + l3*Math.cos(theta3)*dtheta3/2)*Math.cos(theta1), -l2*(-b2b - c2b*Math.sqrt((-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2)**2 + (l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2)**2))*(-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2)*Math.sin(theta2) + l2*(-b2b - c2b*Math.sqrt((-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2)**2 + (l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2)**2))*(l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2)*Math.cos(theta2) - l2*(-b2r - c2r*Math.sqrt((-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2/2)**2 + (l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2/2)**2))*(-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2/2)*Math.sin(theta2)/2 + l2*(-b2r - c2r*Math.sqrt((-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2/2)**2 + (l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2/2)**2))*(l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2/2)*Math.cos(theta2)/2 - l2*(-b3b - c3b*Math.sqrt((-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2 - l3*Math.sin(theta3)*dtheta3)**2 + (l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2 + l3*Math.cos(theta3)*dtheta3)**2))*(-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2 - l3*Math.sin(theta3)*dtheta3)*Math.sin(theta2) + l2*(-b3b - c3b*Math.sqrt((-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2 - l3*Math.sin(theta3)*dtheta3)**2 + (l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2 + l3*Math.cos(theta3)*dtheta3)**2))*(l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2 + l3*Math.cos(theta3)*dtheta3)*Math.cos(theta2) - l2*(-b3r - c3r*Math.sqrt((-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2 - l3*Math.sin(theta3)*dtheta3/2)**2 + (l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2 + l3*Math.cos(theta3)*dtheta3/2)**2))*(-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2 - l3*Math.sin(theta3)*dtheta3/2)*Math.sin(theta2) + l2*(-b3r - c3r*Math.sqrt((-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2 - l3*Math.sin(theta3)*dtheta3/2)**2 + (l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2 + l3*Math.cos(theta3)*dtheta3/2)**2))*(l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2 + l3*Math.cos(theta3)*dtheta3/2)*Math.cos(theta2), -l3*(-b3b - c3b*Math.sqrt((-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2 - l3*Math.sin(theta3)*dtheta3)**2 + (l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2 + l3*Math.cos(theta3)*dtheta3)**2))*(-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2 - l3*Math.sin(theta3)*dtheta3)*Math.sin(theta3) + l3*(-b3b - c3b*Math.sqrt((-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2 - l3*Math.sin(theta3)*dtheta3)**2 + (l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2 + l3*Math.cos(theta3)*dtheta3)**2))*(l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2 + l3*Math.cos(theta3)*dtheta3)*Math.cos(theta3) - l3*(-b3r - c3r*Math.sqrt((-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2 - l3*Math.sin(theta3)*dtheta3/2)**2 + (l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2 + l3*Math.cos(theta3)*dtheta3/2)**2))*(-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2 - l3*Math.sin(theta3)*dtheta3/2)*Math.sin(theta3)/2 + l3*(-b3r - c3r*Math.sqrt((-l1*Math.sin(theta1)*dtheta1 - l2*Math.sin(theta2)*dtheta2 - l3*Math.sin(theta3)*dtheta3/2)**2 + (l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2 + l3*Math.cos(theta3)*dtheta3/2)**2))*(l1*Math.cos(theta1)*dtheta1 + l2*Math.cos(theta2)*dtheta2 + l3*Math.cos(theta3)*dtheta3/2)*Math.cos(theta3)/2]
-  // var A = [
-  //   [l1**2*(m1b + m1r/3 + m2b + m2r + m3b + m3r), l1*l2*(2*m2b + m2r + 2*m3b + 2*m3r)*Math.cos(theta1 - theta2)/2, l1*l3*(2*m3b + m3r)*Math.cos(theta1 - theta3)/2], 
-  //   [l1*l2*(2*m2b + m2r + 2*m3b + 2*m3r)*Math.cos(theta1 - theta2)/2, l2**2*(m2b + m2r/3 + m3b + m3r), l2*l3*(2*m3b + m3r)*Math.cos(theta2 - theta3)/2], 
-  //   [l1*l3*(2*m3b + m3r)*Math.cos(theta1 - theta3)/2, l2*l3*(2*m3b + m3r)*Math.cos(theta2 - theta3)/2, l3**2*(m3b + m3r/3)]
-  // ]
-  // var b = [-l1*g*m1b*Math.cos(theta1) - l1*g*m1r*Math.cos(theta1)/2 - l1*g*m2b*Math.cos(theta1) - l1*g*m2r*Math.cos(theta1) - l1*g*m3b*Math.cos(theta1) - l1*g*m3r*Math.cos(theta1) - l1*l2*m2b*Math.sin(theta1 - theta2)*dtheta2**2 - l1*l2*m2r*Math.sin(theta1 - theta2)*dtheta2**2/2 - l1*l2*m3b*Math.sin(theta1 - theta2)*dtheta2**2 - l1*l2*m3r*Math.sin(theta1 - theta2)*dtheta2**2 - l1*l3*m3b*Math.sin(theta1 - theta3)*dtheta3**2 - l1*l3*m3r*Math.sin(theta1 - theta3)*dtheta3**2/2 + Q[0], 
-  // l1*l2*m2b*Math.sin(theta1 - theta2)*dtheta1**2 + l1*l2*m2r*Math.sin(theta1 - theta2)*dtheta1**2/2 + l1*l2*m3b*Math.sin(theta1 - theta2)*dtheta1**2 + l1*l2*m3r*Math.sin(theta1 - theta2)*dtheta1**2 - g*l2*m2b*Math.cos(theta2) - g*l2*m2r*Math.cos(theta2)/2 - g*l2*m3b*Math.cos(theta2) - g*l2*m3r*Math.cos(theta2) - l2*l3*m3b*Math.sin(theta2 - theta3)*dtheta3**2 - l2*l3*m3r*Math.sin(theta2 - theta3)*dtheta3**2/2 + Q[1],
-  // l1*l3*m3b*Math.sin(theta1 - theta3)*dtheta1**2 + l1*l3*m3r*Math.sin(theta1 - theta3)*dtheta1**2/2 - g*l3*m3b*Math.cos(theta3) - g*l3*m3r*Math.cos(theta3)/2 + l2*l3*m3b*Math.sin(theta2 - theta3)*dtheta2**2 + l2*l3*m3r*Math.sin(theta2 - theta3)*dtheta2**2/2 + Q[2]]
     // Massive rods, self calc
     var M1 = m1b + m1r/3 + m2b + m2r + m3b + m3r;
     var M2 = m2b + m2r/3 + m3b + m3r;
@@ -217,6 +174,67 @@ function generateTimePlot(solution) {
 }
 
 /**
+ * Generate a theta1 vs time plot
+ * 
+ */
+function generateTheta1TPlot(solution) {
+  var {t, vars} = solution;
+  var theta1 = vars[0];
+  gen2DPlot(t, theta1, "theta1TPlot", "θ<sub>1</sub> against time", "t", "θ<sub>1</sub>");
+}
+
+/**
+ * Generate a dtheta1 vs time plot
+ * 
+ */
+function generateDtheta1TPlot(solution) {
+  var {t, vars} = solution;
+  var dtheta1 = vars[1];
+  gen2DPlot(t, dtheta1, "dtheta1TPlot", "dθ<sub>1</sub>/dt against time", "t", "dθ<sub>1</sub>/dt");
+}
+
+/**
+ * Generate a theta2 vs time plot
+ * 
+ */
+function generateTheta2TPlot(solution) {
+  var {t, vars} = solution;
+  var theta2 = vars[2];
+  gen2DPlot(t, theta2, "theta2TPlot", "θ<sub>2</sub> against time", "t", "θ<sub>2</sub>");
+}
+
+/**
+ * Generate a dtheta2 vs time plot
+ * 
+ */
+function generateDtheta2TPlot(solution) {
+  var {t, vars} = solution;
+  var dtheta2 = vars[3];
+  gen2DPlot(t, dtheta2, "dtheta2TPlot", "dθ<sub>2</sub>/dt against time", "t", "dθ<sub>2</sub>/dt");
+}
+
+/**
+ * Generate a dtheta3 vs time plot
+ * 
+ */
+function generateDtheta3TPlot(solution) {
+  var {t, vars} = solution;
+  var dtheta3 = vars[5];
+  gen2DPlot(t, dtheta3, "dtheta3TPlot", "dθ<sub>3</sub>/dt against time", "t", "dθ<sub>3</sub>/dt");
+}
+
+/**
+ * Generate a theta3 vs time plot
+ * 
+ */
+function generateTheta3TPlot(solution) {
+  var {t, vars} = solution;
+  var theta3 = vars[4];
+  gen2DPlot(t, theta3, "theta3TPlot", "θ<sub>3</sub> against time", "t", "θ<sub>3</sub>");
+}
+
+
+/**
  * Generate all plots
  * 
  * @param objectOfInputs An object containing all the problem parameters.
@@ -235,6 +253,12 @@ function generatePlots(objectOfInputs) {
     generateDtheta2Theta2PhasePlot(solution);
     generateDtheta1Dtheta2PhasePlot(solution);
     generateDtheta3Theta3PhasePlot(solution);
+    generateTheta1TPlot(solution);
+    generateTheta2TPlot(solution);
+    generateTheta3TPlot(solution);
+    generateDtheta1TPlot(solution);
+    generateDtheta2TPlot(solution);
+    generateDtheta3TPlot(solution);
     generatePendulumPlots(objectOfInputs, solution)
     generateTimePlot(solution);
 }
