@@ -125,7 +125,32 @@ V &= m_{1b} gy_{1b} + m_{1r}gy_{1r} + m_{2b}gy_{2b} + m_{2r}gy_{2r} + m_{3b}gy_{
 &= \dfrac{M_1 l_1^2 \dot{\theta}_1^2}{2} + \dfrac{M_2 l_2^2 \dot{\theta}_2^2}{2} + \dfrac{M_3 l_3^2 \dot{\theta}_3^2}{2} + \mu_2 l_2(l_1 \dot{\theta}_1 \dot{\theta}_2 \cos{\Delta_{21}}-g\sin{\theta_2}) + \mu_3 l_3(\dot{\theta}_3(l_2\dot{\theta}_2\cos{\Delta_{32}}+l_1\dot{\theta}_1\cos{\Delta_{31}})-g\sin{\theta_3}) - \mu_1 gl_1 \sin{\theta_1}.
 \end{align*}
 
-## Euler-Lagrange equations with dissipation
+## Generalized dissipative force
+### $\theta_1$
+\begin{align*}
+Q_{\theta_1} &= -(b_{1b}+c_{1b}|v_{1b}|)\vec{v}_{1b} \cdot \hat{e}_{1b, \theta_1}-(b_{1r}+c_{1r}|v_{1r}|)\vec{v}_{1r} \cdot \hat{e}_{1r, \theta_1} -(b_{2b}+c_{2b}|v_{2b}|)\vec{v}_{2b} \cdot \hat{e}_{2b, \theta_1}-(b_{2r}+c_{2r}|v_{2r}|)\vec{v}_{2r} \cdot \hat{e}_{2r, \theta_1} -(b_{3b}+c_{3b}|v_{3b}|)\vec{v}_{3b} \cdot \hat{e}_{3b, \theta_1}-(b_{3r}+c_{3r}|v_{3r}|)\vec{v}_{3r} \cdot \hat{e}_{3r, \theta_1}.
+\end{align*}
+
+We will not substitute our values of $v_{2b}$ to $v_{3r}$ as they will only complicate our equation
+\begin{align*}
+Q_{\theta_1} &=-(b_{1b}+c_{1b}l_1|\dot{\theta}_1|)l_1^2 \dot{\theta}_1-\left(b_{1r}+c_{1r}\dfrac{l_1|\dot{\theta}_1|}{2}\right)\dfrac{l_1^2 \dot{\theta}_1}{4} -(b_{2b}+c_{2b}|v_{2b}|)(l_1^2\dot{\theta}_1 + l_1l_2\dot{\theta}_2\cos{\Delta_{21}})-(b_{2r}+c_{2r}|v_{2r}|)(l_1^2\dot{\theta}_1 + \dfrac{l_1l_2\dot{\theta}_2\cos{\Delta_{21}}}{2}) -(b_{3b}+c_{3b}|v_{3b}|)(l_1^2\dot{\theta}_1 + l_1l_2\dot{\theta}_2\cos{\Delta_{21}}+l_1l_3\dot{\theta}_3\cos{\Delta_{31}})-(b_{3r}+c_{3r}|v_{3r}|)(l_1^2\dot{\theta}_1 + l_1l_2\dot{\theta}_2\cos{\Delta_{21}}+\dfrac{l_1l_3\dot{\theta}_3\cos{\Delta_{31}}}{2}).
+\end{align*}
+
+### $\theta_2$
+The generalized dissipative force for $\theta_2$ is (pendulum 1 terms are ignored because their generalized basis vectors are zero)
+
+\begin{align*}
+Q_{\theta_2} &= -(b_{2b}+c_{2b}|v_{2b}|)\vec{v}_{2b} \cdot \hat{e}_{2b, \theta_2} - (b_{2r}+c_{2r}|v_{2r}|) \vec{v}_{2r} \cdot \hat{e}_{2r, \theta_2} -(b_{3b}+c_{3b}|v_{3b}|)\vec{v}_{3b} \cdot \hat{e}_{3b, \theta_2} - (b_{3r}+c_{3r}|v_{3r}|) \vec{v}_{3r} \cdot \hat{e}_{3r, \theta_2}\\
+&= -(b_{2b}+c_{2b}|v_{2b}|)(l_2^2 \dot{\theta}_2 + l_1l_2 \dot{\theta}_1 \cos{\Delta_{21}}) - (b_{2r}+c_{2r}|v_{2r}|) (\dfrac{l_2^2 \dot{\theta}_2}{4} + \dfrac{l_1l_2 \dot{\theta}_1 \cos{\Delta_{21}}}{2}) -(b_{3b}+c_{3b}|v_{3b}|)(l_2^2\dot{\theta}_2 + l_1l_2 \dot{\theta}_1\cos{\Delta_{21}} + l_2l_3\dot{\theta}_3 \cos{\Delta_{32}}) - (b_{3r}+c_{3r}|v_{3r}|) (l_2^2\dot{\theta}_2 + l_1l_2 \dot{\theta}_1\cos{\Delta_{21}} + \dfrac{l_2l_3\dot{\theta}_3 \cos{\Delta_{32}}}{2}).
+\end{align*}
+
+### $\theta_3$
+\begin{align*}
+Q_{\theta_3} &= -(b_{3b}+c_{3b}|v_{3b}|)\vec{v}_{3b} \cdot \hat{e}_{3b, \theta_3} - (b_{3r}+c_{3r}|v_{3r}|) \vec{v}_{3r} \cdot \hat{e}_{3r, \theta_3}\\
+&= -(b_{3b}+c_{3b}|v_{3b}|)(l_3^2\dot{\theta}_3 + l_1l_3 \dot{\theta}_1\cos{\Delta_{31}} + l_2l_3\dot{\theta}_2 \cos{\Delta_{32}}) - (b_{3r}+c_{3r}|v_{3r}|) \left(\dfrac{l_3^2\dot{\theta}_3}{4} + \dfrac{l_1l_3 \dot{\theta}_1\cos{\Delta_{31}}}{2} + \dfrac{l_2l_3\dot{\theta}_3 \cos{\Delta_{32}}}{2}\right).
+\end{align*}
+
+## Left-hand side of the Euler-Lagrange equations
 ### $\theta_1$
 \begin{align*}
 p_{\theta_1} &= \dfrac{\partial \mathcal{L}}{\partial \dot{\theta}_1} \\
@@ -136,14 +161,7 @@ F_{\theta_1} &= \dfrac{\partial \mathcal{L}}{\partial \theta_1} \\
 &= \mu_2 l_1 l_2 \dot{\theta}_1\dot{\theta}_2\sin{\Delta_{21}} + \mu_3l_1 l_3\dot{\theta}_1\dot{\theta}_3\sin{\Delta_{31}} - \mu_1 gl_1\cos{\theta_1}
 \end{align*}
 
-As for the generalized dissipation force, it is
 \begin{align*}
-Q_{\theta_1} &= -(b_{1b}+c_{1b}|v_{1b}|)\vec{v}_{1b} \cdot \hat{e}_{1b, \theta_1}-(b_{1r}+c_{1r}|v_{1r}|)\vec{v}_{1r} \cdot \hat{e}_{1r, \theta_1} -(b_{2b}+c_{2b}|v_{2b}|)\vec{v}_{2b} \cdot \hat{e}_{2b, \theta_1}-(b_{2r}+c_{2r}|v_{2r}|)\vec{v}_{2r} \cdot \hat{e}_{2r, \theta_1} -(b_{3b}+c_{3b}|v_{3b}|)\vec{v}_{3b} \cdot \hat{e}_{3b, \theta_1}-(b_{3r}+c_{3r}|v_{3r}|)\vec{v}_{3r} \cdot \hat{e}_{3r, \theta_1}.
-\end{align*}
-
-We will not substitute our values of $v_{2b}$ to $v_{3r}$ as they will only complicate our equation
-\begin{align*}
-Q_{\theta_1} &=-(b_{1b}+c_{1b}l_1|\dot{\theta}_1|)l_1^2 \dot{\theta}_1-\left(b_{1r}+c_{1r}\dfrac{l_1|\dot{\theta}_1|}{2}\right)\dfrac{l_1^2 \dot{\theta}_1}{4} -(b_{2b}+c_{2b}|v_{2b}|)(l_1^2\dot{\theta}_1 + l_1l_2\dot{\theta}_2\cos{\Delta_{21}})-(b_{2r}+c_{2r}|v_{2r}|)(l_1^2\dot{\theta}_1 + \dfrac{l_1l_2\dot{\theta}_2\cos{\Delta_{21}}}{2}) -(b_{3b}+c_{3b}|v_{3b}|)(l_1^2\dot{\theta}_1 + l_1l_2\dot{\theta}_2\cos{\Delta_{21}}+l_1l_3\dot{\theta}_3\cos{\Delta_{31}})-(b_{3r}+c_{3r}|v_{3r}|)(l_1^2\dot{\theta}_1 + l_1l_2\dot{\theta}_2\cos{\Delta_{21}}+\dfrac{l_1l_3\dot{\theta}_3\cos{\Delta_{31}}}{2}).\\
 \therefore \delta'_{\theta_1} \mathcal{L} &= \dot{p}_{\theta_1} - F_{\theta_1} \\
 &= M_1 l_1^2 \ddot{\theta}_1 + \mu_2 l_1l_2 (\ddot{\theta}_2\cos{\Delta_{21}} - \dot{\theta}_2(\dot{\theta}_2-\theta_1)\sin{\Delta_{21}}) + \mu_3 l_1 l_3(\ddot{\theta}_3\cos{\Delta_{31}} - \dot{\theta}_3(\dot{\theta}_3-\dot{\theta_1})\sin{\Delta_{31}}) - \mu_2 l_1 l_2 \dot{\theta}_1\dot{\theta}_2\sin{\Delta_{21}} + \mu_3l_1 l_3\dot{\theta}_1\dot{\theta}_3\sin{\Delta_{31}} + \mu_1 gl_1\cos{\theta_1}\\
 &= M_1 l_1^2 \ddot{\theta}_1 + \mu_2 l_1l_2 (\ddot{\theta}_2\cos{\Delta_{21}} - [\dot{\theta}_2(\dot{\theta}_2-\theta_1)+\dot{\theta}_1\dot{\theta}_2]\sin{\Delta_{21}}) + \mu_3 l_1 l_3(\ddot{\theta}_3\cos{\Delta_{31}} - [\dot{\theta}_3(\dot{\theta}_3-\dot{\theta_1})+\dot{\theta}_1\dot{\theta}_3]\sin{\Delta_{31}}) + \mu_1 gl_1\cos{\theta_1} \\
@@ -163,21 +181,7 @@ F_{\theta_2} &= -\mu_2 l_2(l_1\dot{\theta}_1\dot{\theta}_2 \dfrac{\partial \Delt
 &= M_2 l_2^2 \ddot{\theta}_2 + \mu_2 l_2 (l_1(\ddot{\theta}_1\cos{\Delta_{21}} + \dot{\theta}_1^2\sin{\Delta_{21}})+g\cos{\theta_2})+ \mu_3 l_2l_3 (\ddot{\theta}_3 \cos{\Delta_{32}} -\dot{\theta}_3^2\sin{\Delta_{32}}).
 \end{align*}
 
-As for the generalized dissipation force, it is (pendulum 1 terms are ignored because their generalized basis vectors are zero)
-
-\begin{align*}
-Q_{\theta_2} &= -(b_{2b}+c_{2b}|v_{2b}|)\vec{v}_{2b} \cdot \hat{e}_{2b, \theta_2} - (b_{2r}+c_{2r}|v_{2r}|) \vec{v}_{2r} \cdot \hat{e}_{2r, \theta_2} -(b_{3b}+c_{3b}|v_{3b}|)\vec{v}_{3b} \cdot \hat{e}_{3b, \theta_2} - (b_{3r}+c_{3r}|v_{3r}|) \vec{v}_{3r} \cdot \hat{e}_{3r, \theta_2}\\
-&= -(b_{2b}+c_{2b}|v_{2b}|)(l_2^2 \dot{\theta}_2 + l_1l_2 \dot{\theta}_1 \cos{\Delta_{21}}) - (b_{2r}+c_{2r}|v_{2r}|) (\dfrac{l_2^2 \dot{\theta}_2}{4} + \dfrac{l_1l_2 \dot{\theta}_1 \cos{\Delta_{21}}}{2}) -(b_{3b}+c_{3b}|v_{3b}|)(l_2^2\dot{\theta}_2 + l_1l_2 \dot{\theta}_1\cos{\Delta_{21}} + l_2l_3\dot{\theta}_3 \cos{\Delta_{32}}) - (b_{3r}+c_{3r}|v_{3r}|) (l_2^2\dot{\theta}_2 + l_1l_2 \dot{\theta}_1\cos{\Delta_{21}} + \dfrac{l_2l_3\dot{\theta}_3 \cos{\Delta_{32}}}{2}).
-\end{align*}
-
 ### $\theta_3$
-\begin{align*}
-Q_{\theta_3} &= -(b_{3b}+c_{3b}|v_{3b}|)\vec{v}_{3b} \cdot \hat{e}_{3b, \theta_3} - (b_{3r}+c_{3r}|v_{3r}|) \vec{v}_{3r} \cdot \hat{e}_{3r, \theta_3}\\
-&= -(b_{3b}+c_{3b}|v_{3b}|)(l_3^2\dot{\theta}_3 + l_1l_3 \dot{\theta}_1\cos{\Delta_{31}} + l_2l_3\dot{\theta}_2 \cos{\Delta_{32}}) - (b_{3r}+c_{3r}|v_{3r}|) \left(\dfrac{l_3^2\dot{\theta}_3}{4} + \dfrac{l_1l_3 \dot{\theta}_1\cos{\Delta_{31}}}{2} + \dfrac{l_2l_3\dot{\theta}_3 \cos{\Delta_{32}}}{2}\right).
-\end{align*}
-
-As for the LHS of the Euler-Lagrange equation with dissipation for $\theta_3$
-
 \begin{align*}
 p_{\theta_3} &= \dfrac{\partial \mathcal{L}}{\partial \dot{\theta}_3} \\
 &= M_3 l_3^2 \dot{\theta}_3 + \mu_3 l_3(l_2 \dot{\theta}_2\cos{\Delta_{32}}+l_1\dot{\theta}_1\cos{\Delta_{31}}) \\
@@ -189,6 +193,7 @@ F_{\theta_3} &= \dfrac{\partial \mathcal{L}}{\partial \theta_3} \\
 &= M_3l_3^2 \ddot{\theta}_3 + \mu_3 l_3\left[l_2 (\ddot{\theta}_2\cos{\Delta_{32}} + \dot{\theta}_2^2\sin{\Delta_{32}})+l_1(\ddot{\theta}_1\cos{\Delta_{31}}+\dot{\theta}_1^2\sin{\Delta_{31}})+g\cos{\theta_3}\right].
 \end{align*}
 
+## Final system
 Hence given our equations of motion are $\delta'_{\theta_i}\mathcal{L} = Q_{\theta_i}$, we could write them in matrix form as (given how long $Q_{\theta_i}$ is, we will not expand on it)
 
 \begin{align*}
