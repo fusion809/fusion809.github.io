@@ -1,3 +1,21 @@
+function removeTheta1TPlot() {
+  rmPlot("theta1TPlot")
+}
+function removeDtheta1TPlot() {
+  rmPlot("dtheta1TPlot")
+}
+function removeTheta2TPlot() {
+  rmPlot("theta2TPlot")
+}
+function removeDtheta2TPlot() {
+  rmPlot("dtheta2TPlot")
+}
+function removeTheta3TPlot() {
+  rmPlot("theta3TPlot")
+}
+function removeDtheta3TPlot() {
+  rmPlot("dtheta3TPlot")
+}
 function removeDtheta1Theta1PhasePlot() {
   rmPlot("phasePlotDtheta1Theta1")
 }
@@ -25,6 +43,12 @@ function removeTimePlot() {
   rmPlot("pendulumTimePlot")
 }
 function removePlots() {
+  removeTheta1TPlot()
+  removeDtheta1TPlot()
+  removeTheta2TPlot()
+  removeDtheta2TPlot()
+  removeTheta3TPlot()
+  removeDtheta3TPlot()
   removeDtheta1Theta1PhasePlot()
   removeDtheta2Theta2PhasePlot()
   removeDtheta3Theta3PhasePlot()
