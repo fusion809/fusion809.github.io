@@ -3,6 +3,8 @@
 @def mintoclevel=1
 @def maxtoclevel=5
 
+In this article, the equations of motion of the triple pendulum will be derived via the Euler-Lagrange equations with dissipation. See [this article](/triplePendulum/) for a solver of this system of equations. 
+
 \tableofcontents
 
 ## Positions, velocities and generalized basis vectors
