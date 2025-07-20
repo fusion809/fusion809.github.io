@@ -8,6 +8,13 @@ In this article, the equations of motion of the triple pendulum will be derived 
 \tableofcontents
 
 ## Positions, velocities and generalized basis vectors
+~~~
+<figure>
+    <img src="/triplePendulum/Triple pendulum.svg" width="500px"></img>
+    <figcaption style="font-weight: bold; font-size: 18px;">Figure 1: Diagram of the triple pendulum.</b></figcaption>
+</figure>
+~~~
+
 ### Pendulum bob 1
 \begin{align*}
 & x_{1b} &= l_1 \cos{\theta_1}, & y_{1b} &= l_1 \sin{\theta_1}, & \dot{x}_{1b} &= -l_1 \dot{\theta}_1 \sin{\theta_1}, & \dot{y}_{1b} &= l_1 \dot{\theta}_1 \cos{\theta_1}\\
