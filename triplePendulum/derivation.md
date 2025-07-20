@@ -162,7 +162,7 @@ F_{\theta_1} &= \dfrac{\partial \mathcal{L}}{\partial \theta_1} \\
 \end{align*}
 
 \begin{align*}
-\therefore \delta'_{\theta_1} \mathcal{L} &= \dot{p}_{\theta_1} - F_{\theta_1} \\
+\delta'_{\theta_1} \mathcal{L} &= \dot{p}_{\theta_1} - F_{\theta_1} \\
 &= M_1 l_1^2 \ddot{\theta}_1 + \mu_2 l_1l_2 (\ddot{\theta}_2\cos{\Delta_{21}} - \dot{\theta}_2(\dot{\theta}_2-\theta_1)\sin{\Delta_{21}}) + \mu_3 l_1 l_3(\ddot{\theta}_3\cos{\Delta_{31}} - \dot{\theta}_3(\dot{\theta}_3-\dot{\theta_1})\sin{\Delta_{31}}) - \mu_2 l_1 l_2 \dot{\theta}_1\dot{\theta}_2\sin{\Delta_{21}} + \mu_3l_1 l_3\dot{\theta}_1\dot{\theta}_3\sin{\Delta_{31}} + \mu_1 gl_1\cos{\theta_1}\\
 &= M_1 l_1^2 \ddot{\theta}_1 + \mu_2 l_1l_2 (\ddot{\theta}_2\cos{\Delta_{21}} - [\dot{\theta}_2(\dot{\theta}_2-\theta_1)+\dot{\theta}_1\dot{\theta}_2]\sin{\Delta_{21}}) + \mu_3 l_1 l_3(\ddot{\theta}_3\cos{\Delta_{31}} - [\dot{\theta}_3(\dot{\theta}_3-\dot{\theta_1})+\dot{\theta}_1\dot{\theta}_3]\sin{\Delta_{31}}) + \mu_1 gl_1\cos{\theta_1} \\
 &= M_1 l_1^2 \ddot{\theta}_1 + \mu_2 l_1l_2 (\ddot{\theta}_2\cos{\Delta_{21}} - \dot{\theta}_2(\dot{\theta}_2-\theta_1)\sin{\Delta_{21}}) + \mu_3 l_1 l_3(\ddot{\theta}_3\cos{\Delta_{31}} - \dot{\theta}_3(\dot{\theta}_3-\dot{\theta_1})\sin{\Delta_{31}}) - \mu_2 l_1 l_2 \dot{\theta}_1\dot{\theta}_2\sin{\Delta_{21}} + \mu_3l_1 l_3\dot{\theta}_1\dot{\theta}_3\sin{\Delta_{31}} + \mu_1 gl_1\cos{\theta_1}\\
