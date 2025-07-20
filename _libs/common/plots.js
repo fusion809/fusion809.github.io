@@ -1064,6 +1064,7 @@ function addTime(state, layout, t, IdSuffix) {
 function skipTo(state, layout, t, IdSuffix) {
   const skipToButton = document.getElementById("skipToButton" + IdSuffix);
   if (!skipToButton) return;
+  var objectOfInputs = readInputs();
   skipToButton.addEventListener("click", () => {
     var t1 = readInputs().t1;
     if (t1 > t[t.length-1]) {
@@ -1071,13 +1072,14 @@ function skipTo(state, layout, t, IdSuffix) {
       state.frame =  0;
       alert("t1 > tf, so restarting!");
     } else {
-      state.startTime += (t[state.frame]-t1) * 1000;
+      state.startTime += (t[state.frame]-t1) * 1000/objectOfInputs.tScale;
       state.frame = t.reduce((prevIndex, currValue, currIndex, array) => {
         return Math.abs(currValue - t1) < Math.abs(array[prevIndex] - t1)
           ? currIndex
           : prevIndex;
       });
     }
+    fontSizes = getPlotFontSizes(objectOfInputs);
     updateTimeLabel(layout, fontSizes, t, state, IdSuffix);
   });
 }
