@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="439.60104mm"
-   height="250mm"
-   viewBox="0 0 439.60104 250"
+   width="417.15982mm"
+   height="276.19241mm"
+   viewBox="0 0 417.15982 276.19242"
    version="1.1"
    id="svg1"
    inkscape:version="1.4 (86a8ad7, 2024-10-11)"
@@ -23,9 +23,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     inkscape:zoom="0.25"
-     inkscape:cx="1314"
-     inkscape:cy="1154"
+     inkscape:zoom="0.5"
+     inkscape:cx="1143"
+     inkscape:cy="633"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="-8"
@@ -59,39 +59,39 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-132.8501,35.256041)">
+     transform="translate(-132.8501,61.448455)">
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.997348;stroke-dasharray:none;marker-end:url(#Triangle)"
-       d="M 132.8501,171.44912 H 568.90949"
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-dasharray:none;marker-end:url(#Triangle)"
+       d="M 132.8501,171.44912 H 546.45885"
        id="path1"
        sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1;stroke-dasharray:none;marker-start:url(#Triangle)"
-       d="M 175.00069,-31.704966 V 214.74396"
+       d="M 175.00069,-57.89738 V 214.74396"
        id="path1-5"
        sodipodi:nodetypes="cc" />
     <text
        xml:space="preserve"
        style="font-size:21.8722px;font-family:'Cambria Math';-inkscape-font-specification:'Cambria Math';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-dasharray:none"
-       x="559.75488"
-       y="188.38405"
+       x="538.05255"
+       y="187.6357"
        id="text1"><tspan
          sodipodi:role="line"
          id="tspan1"
          style="fill:#000000;fill-opacity:1;stroke-width:1"
-         x="559.75488"
-         y="188.38405">x</tspan></text>
+         x="538.05255"
+         y="187.6357">x</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:21.8722px;font-family:'Cambria Math';-inkscape-font-specification:'Cambria Math';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-dasharray:none"
-       x="180.24159"
-       y="9.3291683"
+       x="153.675"
+       y="-47.919964"
        id="text2"><tspan
          sodipodi:role="line"
          id="tspan2"
          style="fill:#000000;fill-opacity:1;stroke-width:1"
-         x="180.24159"
-         y="9.3291683">y</tspan></text>
+         x="153.675"
+         y="-47.919964">y</tspan></text>
     <path
        style="fill:#000000;stroke:#000000;stroke-width:1.02317"
        d="m 175.25579,171.00632 89.04537,-51.41036 -0.56132,-0.97224"
@@ -107,8 +107,8 @@
        d="M 265.44313,118.11249 316.8535,29.067125 315.88127,28.5058"
        id="path2-8" />
     <path
-       style="fill:#000000;stroke:#000000;stroke-width:1.02317"
-       d="m 316.39537,26.745165 90.73891,-48.358595 -0.52799,-0.990728"
+       style="fill:#000000;stroke:#000000;stroke-width:1;stroke-dasharray:none"
+       d="m 316.78278,28.495753 68.5641,-76.622892 -0.8366,-0.748617"
        id="path2-8-8" />
     <circle
        style="fill:#000000;stroke:#000000;stroke-width:1.05634"
@@ -118,10 +118,10 @@
        r="4.4718308"
        transform="rotate(-30)" />
     <circle
-       style="fill:#000000;stroke:#000000;stroke-width:1.05634"
+       style="fill:#000000;stroke:#000000;stroke-width:1;stroke-dasharray:none"
        id="path3-8-1"
-       cx="364.79617"
-       cy="185.38147"
+       cx="360.0654"
+       cy="149.65459"
        r="4.4718308"
        transform="rotate(-30)" />
     <text
@@ -140,14 +140,14 @@
     <text
        xml:space="preserve"
        style="font-size:21.8722px;font-family:'Cambria Math';-inkscape-font-specification:'Cambria Math';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;stroke:#000000;stroke-width:1"
-       x="383.69952"
-       y="6.9240918"
+       x="366.23703"
+       y="-10.009241"
        id="text3-5-22"><tspan
          sodipodi:role="line"
          id="tspan3-1-1"
          style="stroke-width:1"
-         x="383.69952"
-         y="6.9240918">l<tspan
+         x="366.23703"
+         y="-10.009241">l<tspan
    style="font-size:65%;baseline-shift:sub"
    id="tspan4-7-68">3</tspan></tspan></text>
     <text
@@ -189,38 +189,38 @@
     <text
        xml:space="preserve"
        style="font-size:19.7556px;font-family:'Cambria Math';-inkscape-font-specification:'Cambria Math';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;stroke:#000000;stroke-width:1"
-       x="134.06177"
-       y="58.620308"
+       x="136.08763"
+       y="67.638168"
        id="text5-3"><tspan
          sodipodi:role="line"
          style="font-size:21.8722px;stroke-width:1"
-         x="134.06177"
-         y="58.620308"
+         x="136.08763"
+         y="67.638168"
          id="tspan8-2">Rod 2 mass=m<tspan
    style="font-size:65%;baseline-shift:sub"
    id="tspan6">2r</tspan></tspan><tspan
          sodipodi:role="line"
          style="font-size:19.7556px;stroke-width:1"
-         x="134.06177"
-         y="84.049622"
+         x="136.08763"
+         y="93.067482"
          id="tspan10-1" /></text>
     <text
        xml:space="preserve"
        style="font-size:19.7556px;font-family:'Cambria Math';-inkscape-font-specification:'Cambria Math';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;stroke:#000000;stroke-width:1"
-       x="201.79509"
-       y="-5.1857686"
+       x="192.2701"
+       y="-13.917019"
        id="text5-3-2"><tspan
          sodipodi:role="line"
          style="font-size:21.8722px;stroke-width:1"
-         x="201.79509"
-         y="-5.1857686"
+         x="192.2701"
+         y="-13.917019"
          id="tspan8-2-3">Rod 3 mass=m<tspan
    style="font-size:65%;baseline-shift:sub"
    id="tspan5">3r</tspan></tspan><tspan
          sodipodi:role="line"
          style="font-size:19.7556px;stroke-width:1"
-         x="201.79509"
-         y="20.243547"
+         x="192.2701"
+         y="11.512297"
          id="tspan10-1-4" /></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1"
@@ -269,14 +269,14 @@
     <text
        xml:space="preserve"
        style="font-size:21.8722px;font-family:'Cambria Math';-inkscape-font-specification:'Cambria Math';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1"
-       x="416.10757"
-       y="-19.473269"
+       x="393.08884"
+       y="-45.402435"
        id="text16-7"><tspan
          sodipodi:role="line"
          id="tspan16-9"
          style="font-size:21.8722px;stroke-width:1"
-         x="416.10757"
-         y="-19.473269">Bob 3 mass=m<tspan
+         x="393.08884"
+         y="-45.402435">Bob 3 mass=m<tspan
    style="font-size:65%;baseline-shift:sub"
    id="tspan3">3b</tspan><tspan
    style="font-size:21.8722px;baseline-shift:sub"
@@ -296,7 +296,7 @@
        sodipodi:nodetypes="cc" />
     <path
        style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-dasharray:none;stroke-dashoffset:0"
-       d="m 350.64137,8.2425307 c 9.84988,4.7744633 6.33804,14.5033433 4.63021,19.4468713"
+       d="m 339.94326,2.1585744 c 9.84988,4.7744633 15.82996,20.6549066 15.41198,25.4661426"
        id="path20-1"
        sodipodi:nodetypes="cc" />
     <text
@@ -315,14 +315,14 @@
     <text
        xml:space="preserve"
        style="font-size:21.8722px;font-family:'Cambria Math';-inkscape-font-specification:'Cambria Math';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:none;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-dasharray:none;stroke-dashoffset:0"
-       x="359.86484"
-       y="21.297531"
+       x="352.45651"
+       y="17.857948"
        id="text20-1"><tspan
          sodipodi:role="line"
          id="tspan20-1"
          style="font-size:21.8722px;fill:#000000;fill-opacity:1;stroke-width:1"
-         x="359.86484"
-         y="21.297531">θ<tspan
+         x="352.45651"
+         y="17.857948">θ<tspan
    style="font-size:65%;baseline-shift:sub"
    id="tspan24-5">3</tspan></tspan></text>
   </g>
