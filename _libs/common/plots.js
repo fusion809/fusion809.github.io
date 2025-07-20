@@ -1061,10 +1061,9 @@ function addTime(state, layout, t, IdSuffix) {
  * @param IdSuffix Suffix for elements used in animation.
  * @return         Nothing.
  */
-function skipTo(state, layout, t, IdSuffix) {
+function skipTo(state, layout, t, IdSuffix, objectOfInputs) {
   const skipToButton = document.getElementById("skipToButton" + IdSuffix);
   if (!skipToButton) return;
-  var objectOfInputs = readInputs();
   skipToButton.addEventListener("click", () => {
     var t1 = readInputs().t1;
     if (t1 > t[t.length-1]) {
@@ -1084,11 +1083,11 @@ function skipTo(state, layout, t, IdSuffix) {
   });
 }
 
-function buttons(state, layout, t, IdSuffix, animateFrame) {
+function buttons(state, layout, t, IdSuffix, animateFrame, objectOfInputs) {
   pause(state, IdSuffix, animateFrame);
   restart(state, layout, t, IdSuffix);
   addTime(state, layout, t, IdSuffix);
-  skipTo(state, layout, t, IdSuffix);
+  skipTo(state, layout, t, IdSuffix, objectOfInputs);
 }
 
 /**
@@ -1272,7 +1271,7 @@ function animatePendulum(objectOfInputs, solution, label, IdSuffix="") {
       animElem.frameRequest = requestAnimationFrame(animateFrame);
     }
 
-    buttons(state, layout, t, IdSuffix, animateFrame);
+    buttons(state, layout, t, IdSuffix, animateFrame, objectOfInputs);
 
     animElem.frameRequest = requestAnimationFrame(animateFrame);
   });
@@ -1426,7 +1425,7 @@ function animate2D(solution, {varnames=["x", "y"], timer=[0.05, 0.98], IdSuffix=
       
       animElem.frameRequest = requestAnimationFrame(animateFrame);
     }
-    buttons(state, layout, t, IdSuffix, animateFrame);
+    buttons(state, layout, t, IdSuffix, animateFrame, objectOfInputs);
     animElem.frameRequest = requestAnimationFrame(animateFrame);
   });
 }
@@ -1572,7 +1571,7 @@ function animate3D(solution, {view = [0.5, -2, 0.5],
         });
         animElem.frameRequest  = requestAnimationFrame(animateFrame);
       }
-    buttons(state, layout, t, IdSuffix, animateFrame);
+    buttons(state, layout, t, IdSuffix, animateFrame, objectOfInputs);
     animElem.frameRequest = requestAnimationFrame(animateFrame);
   });
 }
