@@ -1,131 +1,208 @@
 @def hassim=false;
 @def title="Derivation of the equations of motion of the triple pendulum"
 @def mintoclevel=1
-@def maxtoclevel=2
+@def maxtoclevel=5
 
+\tableofcontents
 
-The following Python code was used to derive the equations of motion
+## Positions, velocities and generalized basis vectors
+### Pendulum bob 1
+\begin{align*}
+& x_{1b} &= l_1 \cos{\theta_1}, & y_{1b} &= l_1 \sin{\theta_1}, & \dot{x}_{1b} &= -l_1 \dot{\theta}_1 \sin{\theta_1}, & \dot{y}_{1b} &= l_1 \dot{\theta}_1 \cos{\theta_1}\\
+& \therefore v_{1b} &= l_1 \dot{\theta}_1 \\
+& \vec{v}_{1b} &= l_1 \dot{\theta}_1\begin{bmatrix}
+-\sin{\theta_1} \\
+\cos{\theta_1}
+\end{bmatrix}, & \hat{e}_{1b, \theta_1} &= l_1 \begin{bmatrix}
+-\sin{\theta_1} \\
+\cos{\theta_1}
+\end{bmatrix}, & \hat{e}_{1b, \theta_2} &= \hat{e}_{1b, \theta_3} &= \vec{0} \\
+\end{align*}
+### Pendulum rod 1
+\begin{align*}
+& x_{1r} &= \dfrac{l_1 \cos{\theta_1}}{2}, & y_{1r} &= \dfrac{l_1 \sin{\theta_1}}{2}, & \dot{x}_{1r} &= -\dfrac{l_1 \dot{\theta}_1 \cos{\theta_1}}{2}, & \dot{y}_{1r} &= \dfrac{l_1\dot{\theta}_1 \cos{\theta_1}}{2} \\
+& \therefore v_{1r} &= \dfrac{l_1 \dot{\theta}_1}{2} \\
+& \vec{v}_{1r} &= \dfrac{l_1 \dot{\theta}_1}{2}\begin{bmatrix}
+-\sin{\theta_1} \\
+\cos{\theta_1}
+\end{bmatrix}, & \hat{e}_{1r, \theta_1} &= \dfrac{l_1}{2} \begin{bmatrix}
+-\sin{\theta_1} \\
+\cos{\theta_1}
+\end{bmatrix}, & \hat{e}_{1r, \theta_2} &= \hat{e}_{1r, \theta_3} &= \vec{0}
+\end{align*}
+### Pendulum bob 2
+Defining $\Delta_{ij} = \theta_i - \theta_j$, we get
+\begin{align*}
+& x_{2b} &= l_1\cos{\theta_1} + l_2 \cos{\theta_2}, & y_{2b} &= l_1 \sin{\theta_1} + l_2 \sin{\theta_2} & \dot{x}_{2b} &= -l_1 \dot{\theta_1}\sin{\theta_1} - l_2\dot{\theta_2}\sin{\theta_2}, &\dot{y}_{2b} &= l_1 \dot{\theta_1} \cos{\theta_1} + l_2 \dot{\theta_2}\cos{\theta_2} \\
+& \therefore v_{2b} &= \sqrt{l_1^2 \dot{\theta}_1^2 + 2l_1 l_2 \dot{\theta}_1 \dot{\theta}_2 \cos{\Delta_{21}} + l_2^2 \dot{\theta}_2^2} \\
+& \vec{v}_{2b} &= \begin{bmatrix}
+-l_1 \dot{\theta_1}\sin{\theta_1} - l_2\dot{\theta_2}\sin{\theta_2} \\
+l_1 \dot{\theta_1} \cos{\theta_1} + l_2 \dot{\theta_2}\cos{\theta_2}
+\end{bmatrix}, \hat{e}_{2b, \theta_1} &= l_1 \begin{bmatrix}
+-\sin{\theta_1} \\
+\cos{\theta_1}
+\end{bmatrix}, & \hat{e}_{2b, \theta_2} &= l_2 \begin{bmatrix}
+-\sin{\theta_2} \\
+\cos{\theta_2}
+\end{bmatrix}, & \hat{e}_{2b, \theta_3} &= \vec{0}
+\end{align*}
+### Pendulum rod 2
+\begin{align*}
+& x_{2r} &= l_1\cos{\theta_1} + \dfrac{l_2 \cos{\theta_2}}{2}, & y_{2r} &= l_1 \sin{\theta_1} + \dfrac{l_2 \sin{\theta_2}}{2} & \dot{x}_{2r} &= -l_1 \dot{\theta_1}\sin{\theta_1} - \dfrac{l_2\dot{\theta_2}\sin{\theta_2}}{2}, &\dot{y}_{2r} &= l_1 \dot{\theta_1} \cos{\theta_1} + \dfrac{l_2 \dot{\theta_2}\cos{\theta_2}}{2} \\
+& \therefore v_{2r} &= \sqrt{l_1^2 \dot{\theta}_1^2 + l_1 l_2 \dot{\theta}_1 \dot{\theta}_2 \cos{\Delta_{21}} + \dfrac{l_2^2 \dot{\theta}_2^2}{4}} \\
+& \vec{v}_{2r} &= \begin{bmatrix}
+-l_1 \dot{\theta_1}\sin{\theta_1} - \dfrac{l_2\dot{\theta_2}\sin{\theta_2}}{2} \\
+l_1 \dot{\theta_1} \cos{\theta_1} + \dfrac{l_2 \dot{\theta_2}\cos{\theta_2}}{2}
+\end{bmatrix}, \hat{e}_{2r, \theta_1} &= l_1 \begin{bmatrix}
+-\sin{\theta_1} \\
+\cos{\theta_1}
+\end{bmatrix}, & \hat{e}_{2r, \theta_2} &= \dfrac{l_2}{2} \begin{bmatrix}
+-\sin{\theta_2} \\
+\cos{\theta_2}
+\end{bmatrix}, & \hat{e}_{2r, \theta_3} &= \vec{0}
+\end{align*}
+### Pendulum bob 3
+\begin{align*}
+& x_{3b} &= l_1\cos{\theta_1} + l_2 \cos{\theta_2} + l_3 \cos{\theta_3}, & y_{3b} &= l_1 \sin{\theta_1} + l_2\sin{\theta_2} + l_3 \sin{\theta_3} & \dot{x}_{3b} &= -l_1 \dot{\theta_1}\sin{\theta_1} - l_2 \dot{\theta}_2\sin{\theta_2} - l_3\dot{\theta_3}\sin{\theta_3}, &\dot{y}_{3b} &= l_1 \dot{\theta_1} \cos{\theta_1} + l_2 \dot{\theta}_2 \cos{\theta_2} + l_3 \dot{\theta_3}\cos{\theta_3}\\
+& \therefore v_{3b} &= \sqrt{l_1^2 \dot{\theta}_1^2 + 2l_1 l_2 \dot{\theta}_1 \dot{\theta}_2 \cos{\Delta_{21}} + l_2^2 \dot{\theta}_2^2 + 2l_2 l_3 \dot{\theta}_2 \dot{\theta}_3 \cos{\Delta_{32}} + 2l_1l_3 \dot{\theta}_1\dot{\theta}_3 \cos{\Delta_{31}} + l_3^2 \dot{\theta}_3^2}\\
+& \vec{v}_{3b} &= \begin{bmatrix}
+-l_1 \dot{\theta_1}\sin{\theta_1} - l_2\dot{\theta_2}\sin{\theta_2} - l_3\dot{\theta_3}\sin{\theta_3} \\
+l_1 \dot{\theta_1} \cos{\theta_1} + l_2 \dot{\theta_2}\cos{\theta_2} + l_3 \dot{\theta_3}\cos{\theta_3}
+\end{bmatrix}, \hat{e}_{3b, \theta_1} &= l_1 \begin{bmatrix}
+-\sin{\theta_1} \\
+\cos{\theta_1}
+\end{bmatrix}, & \hat{e}_{3b, \theta_2} &= l_2 \begin{bmatrix}
+-\sin{\theta_2} \\
+\cos{\theta_2}
+\end{bmatrix}, & \hat{e}_{3b, \theta_3} &= l_3 \begin{bmatrix}
+-\sin{\theta_3}
+\cos{\theta_3}
+\end{bmatrix}
+\end{align*}
+### Pendulum rod 3
+\begin{align*}
+& x_{3r} &= l_1\cos{\theta_1} + l_2 \cos{\theta_2} + \dfrac{l_3 \cos{\theta_3}}{2}, & y_{3r} &= l_1 \sin{\theta_1} + l_2\sin{\theta_2} + \dfrac{l_3 \sin{\theta_3}}{2} & \dot{x}_{3r} &= -l_1 \dot{\theta_1}\sin{\theta_1} - l_2 \dot{\theta}_2\sin{\theta_2} - \dfrac{l_3\dot{\theta_3}\sin{\theta_3}}{2}, &\dot{y}_{3r} &= l_1 \dot{\theta_1} \cos{\theta_1} + l_2 \dot{\theta}_2 \cos{\theta_2} + \dfrac{l_3 \dot{\theta_3}\cos{\theta_3}}{2}\\
+& \therefore v_{3r} &= \sqrt{l_1^2 \dot{\theta}_1^2 + 2l_1 l_2 \dot{\theta}_1 \dot{\theta}_2 \cos{\Delta_{21}} + l_2^2 \dot{\theta}_2^2 + l_1l_3 \dot{\theta}_1\dot{\theta}_3\cos{\Delta_{31}} + l_2l_3\dot{\theta}_2 \dot{\theta}_3 \cos{\Delta_{32}} + \dfrac{l_3^2 \dot{\theta}_3^2}{4}}\\
+& \vec{v}_{3r} &= \begin{bmatrix}
+-l_1 \dot{\theta_1}\sin{\theta_1} - \dfrac{l_2\dot{\theta_2}\sin{\theta_2}}{2}  - \dfrac{l_3\dot{\theta_3}\sin{\theta_3}}{2}\\
+l_1 \dot{\theta_1} \cos{\theta_1} + \dfrac{l_2 \dot{\theta_2}\cos{\theta_2}}{2} + \dfrac{l_3 \dot{\theta_3}\cos{\theta_3}}{2}
+\end{bmatrix}, \hat{e}_{3r, \theta_1} &= l_1 \begin{bmatrix}
+-\sin{\theta_1} \\
+\cos{\theta_1}
+\end{bmatrix}, & \hat{e}_{3r, \theta_2} &= l_2 \begin{bmatrix}
+-\sin{\theta_2} \\
+\cos{\theta_2}
+\end{bmatrix}, & \hat{e}_{3r, \theta_3} &= \dfrac{l_3}{2} \begin{bmatrix}
+-\sin{\theta_3} \\
+\cos{\theta_3}
+\end{bmatrix}
+\end{align*}
 
-```python
-from sympy import symbols, Function, diff, cos, sin, simplify, sqrt, Abs, Eq, solve, latex, Array
-from sympy.vector import CoordSys3D
-from multiprocessing import Pool, cpu_count
-N = CoordSys3D('N');
-# Set up symbols
-t = symbols('t')
-m1r = symbols('m1r'); 
-m2r = symbols('m2r'); 
-m3r = symbols('m3r'); 
-m1b = symbols('m1b'); 
-m2b = symbols('m2b'); 
-m3b = symbols('m3b'); 
-l1 = symbols('11');
-l2 = symbols('l2');
-l3 = symbols('l3');
-g = symbols('g'); 
-b1r = symbols('b1r'); 
-b2r = symbols('b2r'); 
-b3r = symbols('b3r'); 
-b1b = symbols('b1b'); 
-b2b = symbols('b2b'); 
-b3b = symbols('b3b'); 
-c1r = symbols("c1r"); 
-c2r = symbols("c2r"); 
-c3r = symbols("c3r");
-c1b = symbols("c1b"); 
-c2b = symbols("c2b"); 
-c3b = symbols("c3b");
+## Kinetic energy
+\begin{align*}
+T &= \dfrac{m_{1b}}{2} v_{1b}^2 + \dfrac{m_{1r}}{2} v_{1r}^2 + \dfrac{m_{1r}I_{\mathrm{cm},1r} \omega_{1r}^2}{2} + \dfrac{m_{2b}}{2} v_{2b}^2 + \dfrac{m_{2r}}{2} v_{2r}^2 + \dfrac{m_{2r}I_{\mathrm{cm},2r} \omega_{2r}^2}{2} + \dfrac{m_{3b}}{2} v_{3b}^2 + \dfrac{m_{3r}}{2} v_{3r}^2 + \dfrac{m_{3r}I_{\mathrm{cm},3r} \omega_{3r}^2}{2} \\
+&= \dfrac{m_{1b}l_1^2 \dot{\theta}_1^2}{2} + \dfrac{m_{1r}l_1^2 \dot{\theta}_1^2}{8} + \dfrac{m_{1r}l_1^2 \dot{\theta}_1^2}{24} + \dfrac{m_{2b}}{2}(l_1^2 \dot{\theta}_1^2 + 2l_1 l_2 \dot{\theta}_1\dot{\theta}_2 \cos{\Delta_{21}} + l_2^2 \dot{\theta}_2^2) + \dfrac{m_{2r}}{2}\left(l_1^2 \dot{\theta}_1^2 + l_1 l_2 \dot{\theta}_1\dot{\theta}_2 \cos{\Delta_{21}} + \dfrac{l_2^2 \dot{\theta}_2^2}{4}\right)  + \dfrac{m_{2r}l_2^2 \dot{\theta}_2^2}{24} + \dfrac{m_{3b}}{2} \left(l_1^2 \dot{\theta}_1^2 + 2l_1 l_2 \dot{\theta}_1 \dot{\theta}_2 \cos{\Delta_{21}} + l_2^2 \dot{\theta}_2^2 + 2l_2 l_3 \dot{\theta}_2 \dot{\theta}_3 \cos{\Delta_{32}} + 2l_1l_3 \dot{\theta}_1\dot{\theta}_3 \cos{\Delta_{31}} + l_3^2 \dot{\theta}_3^2\right)+ \dfrac{m_{3r}}{2}\left(l_1^2 \dot{\theta}_1^2 + 2l_1 l_2 \dot{\theta}_1 \dot{\theta}_2 \cos{\Delta_{21}} + l_2^2 \dot{\theta}_2^2 + l_1l_3 \dot{\theta}_1\dot{\theta}_3\cos{\Delta_{31}} + l_2l_3\dot{\theta}_2 \dot{\theta}_3 \cos{\Delta_{32}} + \dfrac{l_3^2 \dot{\theta}_3^2}{4}\right)  + \dfrac{m_{3r}l_3^2 \dot{\theta}_3^2}{24} \\
+&= \dfrac{1}{2}\left(m_{1b}+\dfrac{m_{1r}}{3} + m_{2b} + m_{2r} + m_{3b} + m_{3r}\right)l_1^2 \dot{\theta}_1^2 + \dfrac{1}{2}\left(m_{2b} + \dfrac{m_{2r}}{3} + m_{3b} + m_{3r}\right)l_2^2 \dot{\theta}_2^2 + \dfrac{1}{2}\left(m_{3b} + \dfrac{m_{3r}}{3}\right)l_3^2 \dot{\theta}_3^2 + \left(m_{2b} + \dfrac{m_{2r}}{2} + m_{3b} + m_{3r}\right)l_1l_2\dot{\theta}_1\dot{\theta}_2\cos{\Delta_{21}} + \left(m_{3b} + \dfrac{m_{3r}}{2}\right)l_3(l_2\dot{\theta}_2\dot{\theta}_3\cos{\Delta_{32}}+l_1\dot{\theta}_1\dot{\theta}_3\cos{\Delta_{31}})
+\end{align*}
 
-theta1=Function('theta1')(t); 
-theta2=Function('theta2')(t); 
-theta3=Function('theta3')(t); 
-x1b = l1*cos(theta1);
-x1r = x1b/2;
-y1b = l1*sin(theta1);
-y1r = y1b/2;
-r1b = x1b*N.i + y1b*N.j;
-r1r = x1r*N.i + y1r*N.j;
-x2b = x1b + l2*cos(theta2);
-y2b = y1b + l2*sin(theta2);
-x2r = x1b + l2*cos(theta2)/2;
-y2r = y1b + l2*sin(theta2)/2;
-r2b = x2b*N.i + y2b*N.j;
-r2r = x2r*N.i + y2r*N.j;
-x3b = x2b + l3*cos(theta3);
-y3b = y2b + l3*sin(theta3);
-x3r = x2b + l3*cos(theta3)/2;
-y3r = y2b + l3*sin(theta3)/2;
-r3b = x3b*N.i + y3b*N.j;
-r3r = x3r*N.i + y3r*N.j;
+Defining $M_1 = m_{1b}+\dfrac{m_{1r}}{3} + m_{2b} + m_{2r} + m_{3b} + m_{3r}$, $M_2 = m_{2b} + \dfrac{m_{2r}}{3} + m_{3b} + m_{3r}$, $M_3 = m_{3b} + \dfrac{m_{3r}}{3}$, $\mu_1 = m_{1b}+\dfrac{m_{1r}}{2} + m_{2b} + m_{2r} + m_{3b} + m_{3r}$, $\mu_2 = m_{2b} + \dfrac{m_{2r}}{2} + m_{3b} + m_{3r}$ and $\mu_3 = m_{3b} + \dfrac{m_{3r}}{2}$.
 
-def compute_kinetic(m, l, theta, r):
-	T = 0;
-	j = 0;
-	v = [];
-	for i in m:
-		v.append(diff(r[j], t))
-		T += i*v[j].dot(v[j])/2;
-		j += 1
-		
-	for i in range(len(l)):
-		T += m[2*i]*l[i]**2*diff(theta[i], t)**2/24;
-	
-	return T
-	
-def compute_potential(g, m, r):
-	V = 0;
-	for j in range(len(r)):
-		y = r[j].dot(N.j)
-		V += m[j] * g * y
-	
-	return V
-	
-def compute_lagrangian(g, l, m, r, theta):
-	L = compute_kinetic(m, l, theta, r) - compute_potential(g, m, r)
-	return L
+\begin{align*}
+T &= \dfrac{M_1 l_1^2 \dot{\theta}_1^2}{2} + \dfrac{M_2 l_2^2 \dot{\theta}_2^2}{2} + \dfrac{M_3 l_3^2 \dot{\theta}_3^2}{2} + \mu_2 l_1l_2 \dot{\theta}_1 \dot{\theta}_2 \cos{\Delta_{21}} + \mu_3 l_3\dot{\theta}_3(l_2\dot{\theta}_2\cos{\Delta_{32}}+l_1\dot{\theta}_1\cos{\Delta_{31}}).
+\end{align*}
 
-def diss_force(b, c, r):
-	v = diff(r, t);
-	return -(b+c*sqrt(v.dot(v)))*v
-	
-def gen_diss_force(b, c, r, coord):
-	Q = [0 for i in range(len(coord))]
-	for j in range(len(coord)):
-		for i in range(len(r)):
-			v = diff(r[i], t)
-			F = diss_force(b[i], c[i], r[i])
-			ehat = diff(r[i], coord[j])
-			Q[j] += F.dot(ehat)
+## Potential energy
+\begin{align*}
+V &= m_{1b} gy_{1b} + m_{1r}gy_{1r} + m_{2b}gy_{2b} + m_{2r}gy_{2r} + m_{3b}gy_{3b} + m_{3r}gy_{3r} \\
+&= m_{1b}gl_1 \sin{\theta_1} + \dfrac{m_{1r}gl_1\sin{\theta_1}}{2} + m_{2b} g(l_1\sin{\theta_1} + l_2\sin{\theta_2}) + m_{2r}g\left(l_1\sin{\theta_1}+\dfrac{l_2\sin{\theta_2}}{2}\right) + m_{3b} g(l_1\sin{\theta_1} + l_2\sin{\theta_2}+l_3\sin{\theta_3}) + m_{3r}g\left(l_1\sin{\theta_1} + l_2\sin{\theta_2} +\dfrac{l_3\sin{\theta_3}}{2}\right) \\
+&= \mu_1 gl_1 \sin{\theta_1} + \mu_2 gl_2\sin{\theta_2} + \mu_3 gl_3\sin{\theta_3}.
+\end{align*}
 
-	return Q
-	
-def compute_eq_of_motion(g, m, b, c, r, l, theta):
-	t = symbols('t')
-	L = compute_lagrangian(g, l, m, r, theta)
-	coord = [theta1, theta2, theta3]
-	Q = [Function('Qtheta1')(t), Function('Qtheta2')(t), Function('Qtheta3')(t)];
-	lhs = [0 for i in range(len(coord))]
-	return [Eq(diff(diff(L, diff(coord[i], t)), t) - diff(L, coord[i]), Q[i]) for i in range(len(coord))]
-	
-m = [m1r, m1b, m2r, m2b, m3r, m3b]
-b = [b1r, b1b, b2r, b2b, b3r, b3b]
-c = [c1r, c1b, c2r, c2b, c3r, c3b]
-r = [r1r, r1b, r2r, r2b, r3r, r3b]
-l = [l1, l2, l3];
-coord = [theta1, theta2, theta3]
-Q = gen_diss_force(b, c, r, coord)
-eqns = compute_eq_of_motion(g, m, b, c, r, l, coord)
-d2 = [diff(i, (t, 2)) for i in coord];
-theta_ddot_syms = symbols('theta1_dd theta2_dd theta3_dd')
-#sol = solve(eqn, d2)
+## Lagrangian
+\begin{align*}
+\mathcal{L} &= T - V\\
+&= \dfrac{M_1 l_1^2 \dot{\theta}_1^2}{2} + \dfrac{M_2 l_2^2 \dot{\theta}_2^2}{2} + \dfrac{M_3 l_3^2 \dot{\theta}_3^2}{2} + \mu_2 l_1l_2 \dot{\theta}_1 \dot{\theta}_2 \cos{\Delta_{21}} + \mu_3 l_3\dot{\theta}_3(l_2\dot{\theta}_2\cos{\Delta_{32}}+l_1\dot{\theta}_1\cos{\Delta_{31}}) - \mu_1 gl_1 \sin{\theta_1} - \mu_2 gl_2\sin{\theta_2} - \mu_3 gl_3\sin{\theta_3} \\
+&= \dfrac{M_1 l_1^2 \dot{\theta}_1^2}{2} + \dfrac{M_2 l_2^2 \dot{\theta}_2^2}{2} + \dfrac{M_3 l_3^2 \dot{\theta}_3^2}{2} + \mu_2 l_2(l_1 \dot{\theta}_1 \dot{\theta}_2 \cos{\Delta_{21}}-g\sin{\theta_2}) + \mu_3 l_3(\dot{\theta}_3(l_2\dot{\theta}_2\cos{\Delta_{32}}+l_1\dot{\theta}_1\cos{\Delta_{31}})-g\sin{\theta_3}) - \mu_1 gl_1 \sin{\theta_1}.
+\end{align*}
 
-# Turn Eq(lhs, rhs) into lhs - rhs == 0
-residuals = [eq.lhs - eq.rhs for eq in eqns]
+## Euler-Lagrange equations with dissipation
+### $\theta_1$
+\begin{align*}
+p_{\theta_1} &= \dfrac{\partial \mathcal{L}}{\partial \dot{\theta}_1} \\
+&= M_1 l_1^2 \dot{\theta}_1 + \mu_2 l_1l_2 \dot{\theta}_2\cos{\Delta_{21}} + \mu_3 l_1 l_3\dot{\theta}_3\cos{\Delta_{31}} \\
+\dot{p}_{\theta_1} &=  M_1 l_1^2 \ddot{\theta}_1 + \mu_2 l_1l_2 (\ddot{\theta}_2\cos{\Delta_{21}} - \dot{\theta}_2(\dot{\theta}_2-\theta_1)\sin{\Delta_{21}}) + \mu_3 l_1 l_3(\ddot{\theta}_3\cos{\Delta_{31}} - \dot{\theta}_3(\dot{\theta}_3-\dot{\theta_1})\sin{\Delta_{31}}) \\
+F_{\theta_1} &= \dfrac{\partial \mathcal{L}}{\partial \theta_1} \\
+&= -\mu_2 l_1 l_2 \dot{\theta}_1\dot{\theta}_2\dfrac{\partial \Delta_{21}}{\partial \theta_1}\sin{\Delta_{21}} - \mu_3l_1 l_3\dot{\theta}_1\dot{\theta}_3\dfrac{\partial \Delta_{31}}{\partial \theta_1}\sin{\Delta_{31}} - \mu_1 gl_1\cos{\theta_1} \\
+&= \mu_2 l_1 l_2 \dot{\theta}_1\dot{\theta}_2\sin{\Delta_{21}} + \mu_3l_1 l_3\dot{\theta}_1\dot{\theta}_3\sin{\Delta_{31}} - \mu_1 gl_1\cos{\theta_1}
+\end{align*}
 
-# Substitute second derivatives with dummy symbols (e.g. theta1_dd)
-residuals_subs = [res.subs(dict(zip(d2, theta_ddot_syms))) for res in residuals]
-from sympy.solvers.solveset import linear_eq_to_matrix
+As for the generalized dissipation force, it is
+\begin{align*}
+Q_{\theta_1} &= -(b_{1b}+c_{1b}|v_{1b}|)\vec{v}_{1b} \cdot \hat{e}_{1b, \theta_1}-(b_{1r}+c_{1r}|v_{1r}|)\vec{v}_{1r} \cdot \hat{e}_{1r, \theta_1} -(b_{2b}+c_{2b}|v_{2b}|)\vec{v}_{2b} \cdot \hat{e}_{2b, \theta_1}-(b_{2r}+c_{2r}|v_{2r}|)\vec{v}_{2r} \cdot \hat{e}_{2r, \theta_1} -(b_{3b}+c_{3b}|v_{3b}|)\vec{v}_{3b} \cdot \hat{e}_{3b, \theta_1}-(b_{3r}+c_{3r}|v_{3r}|)\vec{v}_{3r} \cdot \hat{e}_{3r, \theta_1}.
+\end{align*}
 
-A, b = linear_eq_to_matrix(residuals_subs, theta_ddot_syms)
-print(simplify(A))
-```
+We will not substitute our values of $v_{2b}$ to $v_{3r}$ as they will only complicate our equation
+\begin{align*}
+Q_{\theta_1} &=-(b_{1b}+c_{1b}l_1|\dot{\theta}_1|)l_1^2 \dot{\theta}_1-\left(b_{1r}+c_{1r}\dfrac{l_1|\dot{\theta}_1|}{2}\right)\dfrac{l_1^2 \dot{\theta}_1}{4} -(b_{2b}+c_{2b}|v_{2b}|)(l_1^2\dot{\theta}_1 + l_1l_2\dot{\theta}_2\cos{\Delta_{21}})-(b_{2r}+c_{2r}|v_{2r}|)(l_1^2\dot{\theta}_1 + \dfrac{l_1l_2\dot{\theta}_2\cos{\Delta_{21}}}{2}) -(b_{3b}+c_{3b}|v_{3b}|)(l_1^2\dot{\theta}_1 + l_1l_2\dot{\theta}_2\cos{\Delta_{21}}+l_1l_3\dot{\theta}_3\cos{\Delta_{31}})-(b_{3r}+c_{3r}|v_{3r}|)(l_1^2\dot{\theta}_1 + l_1l_2\dot{\theta}_2\cos{\Delta_{21}}+\dfrac{l_1l_3\dot{\theta}_3\cos{\Delta_{31}}}{2}).\\
+\therefore \delta'_{\theta_1} \mathcal{L} &= \dot{p}_{\theta_1} - F_{\theta_1} \\
+&= M_1 l_1^2 \ddot{\theta}_1 + \mu_2 l_1l_2 (\ddot{\theta}_2\cos{\Delta_{21}} - \dot{\theta}_2(\dot{\theta}_2-\theta_1)\sin{\Delta_{21}}) + \mu_3 l_1 l_3(\ddot{\theta}_3\cos{\Delta_{31}} - \dot{\theta}_3(\dot{\theta}_3-\dot{\theta_1})\sin{\Delta_{31}}) - \mu_2 l_1 l_2 \dot{\theta}_1\dot{\theta}_2\sin{\Delta_{21}} + \mu_3l_1 l_3\dot{\theta}_1\dot{\theta}_3\sin{\Delta_{31}} + \mu_1 gl_1\cos{\theta_1}\\
+&= M_1 l_1^2 \ddot{\theta}_1 + \mu_2 l_1l_2 (\ddot{\theta}_2\cos{\Delta_{21}} - [\dot{\theta}_2(\dot{\theta}_2-\theta_1)+\dot{\theta}_1\dot{\theta}_2]\sin{\Delta_{21}}) + \mu_3 l_1 l_3(\ddot{\theta}_3\cos{\Delta_{31}} - [\dot{\theta}_3(\dot{\theta}_3-\dot{\theta_1})+\dot{\theta}_1\dot{\theta}_3]\sin{\Delta_{31}}) + \mu_1 gl_1\cos{\theta_1} \\
+&= M_1 l_1^2 \ddot{\theta}_1 + \mu_2 l_1l_2 (\ddot{\theta}_2\cos{\Delta_{21}} - \dot{\theta}_2(\dot{\theta}_2-\theta_1)\sin{\Delta_{21}}) + \mu_3 l_1 l_3(\ddot{\theta}_3\cos{\Delta_{31}} - \dot{\theta}_3(\dot{\theta}_3-\dot{\theta_1})\sin{\Delta_{31}}) - \mu_2 l_1 l_2 \dot{\theta}_1\dot{\theta}_2\sin{\Delta_{21}} + \mu_3l_1 l_3\dot{\theta}_1\dot{\theta}_3\sin{\Delta_{31}} + \mu_1 gl_1\cos{\theta_1}\\
+&= M_1 l_1^2 \ddot{\theta}_1 + \mu_2 l_1l_2 (\ddot{\theta}_2\cos{\Delta_{21}} - \dot{\theta}_2^2\sin{\Delta_{21}}) + \mu_3 l_1 l_3(\ddot{\theta}_3\cos{\Delta_{31}} - \dot{\theta}_3^2\sin{\Delta_{31}}) + \mu_1 gl_1\cos{\theta_1}.
+\end{align*}
+
+### $\theta_2$
+\begin{align*}
+p_{\theta_2} &= \dfrac{\partial \mathcal{L}}{\partial \dot{\theta}_2} \\
+&= M_2 l_2^2 \dot{\theta}_2 + \mu_2 l_1l_2 \dot{\theta}_1\cos{\Delta_{21}} + \mu_3 l_2l_3 \dot{\theta}_3 \cos{\Delta_{32}}\\
+\dot{p}_{\theta_2} &= M_2 l_2^2 \ddot{\theta}_2 + \mu_2 l_1l_2 (\ddot{\theta}_1\cos{\Delta_{21}} - \dot{\theta}_1 (\dot{\theta}_2-\dot{\theta}_1)\sin{\Delta_{21}})+ \mu_3 l_2l_3 (\ddot{\theta}_3 \cos{\Delta_{32}} -\dot{\theta}_3 (\dot{\theta}_3-\dot{\theta}_2)\sin{\Delta_{32}})\\
+F_{\theta_2} &= -\mu_2 l_2(l_1\dot{\theta}_1\dot{\theta}_2 \dfrac{\partial \Delta_{21}}{\partial \theta_2}\sin{\Delta_{21}}+g\cos{\theta_2}) - \mu_3 l_2l_3\dot{\theta}_2\dot{\theta}_3\dfrac{\partial \Delta_{32}}{\partial \theta_2}\sin{\Delta_{32}}\\
+&= -\mu_2 l_2(l_1\dot{\theta}_1\dot{\theta}_2 \sin{\Delta_{21}}+g\cos{\theta_2}) + \mu_3 l_2l_3\dot{\theta}_2\dot{\theta}_3\sin{\Delta_{32}}\\
+\delta'_{\theta_2} \mathcal{L} &= M_2 l_2^2 \ddot{\theta}_2 + \mu_2 l_1l_2 (\ddot{\theta}_1\cos{\Delta_{21}} - \dot{\theta}_1 (\dot{\theta}_2-\dot{\theta}_1)\sin{\Delta_{21}})+ \mu_3 l_2l_3 (\ddot{\theta}_3 \cos{\Delta_{32}} -\dot{\theta}_3 (\dot{\theta}_3-\dot{\theta}_2)\sin{\Delta_{32}}) + \mu_2 l_2(l_1\dot{\theta}_1\dot{\theta}_2 \sin{\Delta_{21}}+g\cos{\theta_2}) - \mu_3 l_2l_3\dot{\theta}_2\dot{\theta}_3\sin{\Delta_{32}} \\
+&= M_2 l_2^2 \ddot{\theta}_2 + \mu_2 l_1l_2 (\ddot{\theta}_1\cos{\Delta_{21}} + \dot{\theta}_1^2\sin{\Delta_{21}})+ \mu_3 l_2l_3 (\ddot{\theta}_3 \cos{\Delta_{32}} -\dot{\theta}_3^2\sin{\Delta_{32}}) +\mu_2 l_2g\cos{\theta_2} \\
+&= M_2 l_2^2 \ddot{\theta}_2 + \mu_2 l_2 (l_1(\ddot{\theta}_1\cos{\Delta_{21}} + \dot{\theta}_1^2\sin{\Delta_{21}})+g\cos{\theta_2})+ \mu_3 l_2l_3 (\ddot{\theta}_3 \cos{\Delta_{32}} -\dot{\theta}_3^2\sin{\Delta_{32}}).
+\end{align*}
+
+As for the generalized dissipation force, it is (pendulum 1 terms are ignored because their generalized basis vectors are zero)
+
+\begin{align*}
+Q_{\theta_2} &= -(b_{2b}+c_{2b}|v_{2b}|)\vec{v}_{2b} \cdot \hat{e}_{2b, \theta_2} - (b_{2r}+c_{2r}|v_{2r}|) \vec{v}_{2r} \cdot \hat{e}_{2r, \theta_2} -(b_{3b}+c_{3b}|v_{3b}|)\vec{v}_{3b} \cdot \hat{e}_{3b, \theta_2} - (b_{3r}+c_{3r}|v_{3r}|) \vec{v}_{3r} \cdot \hat{e}_{3r, \theta_2}\\
+&= -(b_{2b}+c_{2b}|v_{2b}|)(l_2^2 \dot{\theta}_2 + l_1l_2 \dot{\theta}_1 \cos{\Delta_{21}}) - (b_{2r}+c_{2r}|v_{2r}|) (\dfrac{l_2^2 \dot{\theta}_2}{4} + \dfrac{l_1l_2 \dot{\theta}_1 \cos{\Delta_{21}}}{2}) -(b_{3b}+c_{3b}|v_{3b}|)(l_2^2\dot{\theta}_2 + l_1l_2 \dot{\theta}_1\cos{\Delta_{21}} + l_2l_3\dot{\theta}_3 \cos{\Delta_{32}}) - (b_{3r}+c_{3r}|v_{3r}|) (l_2^2\dot{\theta}_2 + l_1l_2 \dot{\theta}_1\cos{\Delta_{21}} + \dfrac{l_2l_3\dot{\theta}_3 \cos{\Delta_{32}}}{2}).
+\end{align*}
+
+### $\theta_3$
+\begin{align*}
+Q_{\theta_3} &= -(b_{3b}+c_{3b}|v_{3b}|)\vec{v}_{3b} \cdot \hat{e}_{3b, \theta_3} - (b_{3r}+c_{3r}|v_{3r}|) \vec{v}_{3r} \cdot \hat{e}_{3r, \theta_3}\\
+&= -(b_{3b}+c_{3b}|v_{3b}|)(l_3^2\dot{\theta}_3 + l_1l_3 \dot{\theta}_1\cos{\Delta_{31}} + l_2l_3\dot{\theta}_2 \cos{\Delta_{32}}) - (b_{3r}+c_{3r}|v_{3r}|) \left(\dfrac{l_3^2\dot{\theta}_3}{4} + \dfrac{l_1l_3 \dot{\theta}_1\cos{\Delta_{31}}}{2} + \dfrac{l_2l_3\dot{\theta}_3 \cos{\Delta_{32}}}{2}\right).
+\end{align*}
+
+As for the LHS of the Euler-Lagrange equation with dissipation for $\theta_3$
+
+\begin{align*}
+p_{\theta_3} &= \dfrac{\partial \mathcal{L}}{\partial \dot{\theta}_3} \\
+&= M_3 l_3^2 \dot{\theta}_3 + \mu_3 l_3(l_2 \dot{\theta}_2\cos{\Delta_{32}}+l_1\dot{\theta}_1\cos{\Delta_{31}}) \\
+\dot{p}_{\theta_3} &= M_3 l_3^2 \ddot{\theta}_3 + \mu_3 l_3(l_2 (\ddot{\theta}_2\cos{\Delta_{32}} - \dot{\theta}_2 (\dot{\theta}_3-\dot{\theta}_2)\sin{\Delta_{32}})+l_1(\ddot{\theta}_1\cos{\Delta_{31}}-\dot{\theta}_1(\dot{\theta}_3-\dot{\theta}_1)\sin{\Delta_{31}})) \\
+F_{\theta_3} &= \dfrac{\partial \mathcal{L}}{\partial \theta_3} \\
+&= -\mu_3 l_3\left[\dot{\theta}_3 (l_2\dot{\theta}_2 \dfrac{\partial \Delta_{32}}{\partial \theta_3}\sin{\Delta_{32}}+l_1\dot{\theta}_1\dfrac{\partial \Delta_{31}}{\partial \theta_3}\sin{\Delta_{31}}) + g\cos{\theta_3}\right] \\
+&= -\mu_3 l_3\left[\dot{\theta}_3 (l_2\dot{\theta}_2 \sin{\Delta_{32}}+l_1\dot{\theta}_1\sin{\Delta_{31}}) + g\cos{\theta_3}\right] \\
+\delta'_{\theta_3} \mathcal{L} &= M_3l_3^2 \ddot{\theta}_3 + \mu_3 l_3(l_2 (\ddot{\theta}_2\cos{\Delta_{32}} - \dot{\theta}_2 (\dot{\theta}_3-\dot{\theta}_2)\sin{\Delta_{32}})+l_1(\ddot{\theta}_1\cos{\Delta_{31}}-\dot{\theta}_1(\dot{\theta}_3-\dot{\theta}_1)\sin{\Delta_{31}})) + \mu_3 l_3\left[\dot{\theta}_3 (l_2\dot{\theta}_2 \sin{\Delta_{32}}+l_1\dot{\theta}_1\sin{\Delta_{31}}) + g\cos{\theta_3}\right]\\
+&= M_3l_3^2 \ddot{\theta}_3 + \mu_3 l_3\left[l_2 (\ddot{\theta}_2\cos{\Delta_{32}} + \dot{\theta}_2^2\sin{\Delta_{32}})+l_1(\ddot{\theta}_1\cos{\Delta_{31}}+\dot{\theta}_1^2\sin{\Delta_{31}})+g\cos{\theta_3}\right].
+\end{align*}
+
+Hence given our equations of motion are $\delta'_{\theta_i}\mathcal{L} = Q_{\theta_i}$, we could write them in matrix form as (given how long $Q_{\theta_i}$ is, we will not expand on it)
+
+\begin{align*}
+\begin{bmatrix}
+M_1 l_1^2 & \mu_2 l_1l_2 \cos{\Delta_{21}} & \mu_3 l_1l_3 \cos{\Delta_{31}} \\
+\mu_2 l_1l_2 \cos{\Delta_{21}} & M_2 l_2^2 & \mu_3 l_2l_3 \cos{\Delta_{32}} \\
+\mu_3 l_1l_3 \cos{\Delta_{31}} & \mu_3 l_2 l_3 \cos{\Delta_{32}} & M_3 l_3^2 
+\end{bmatrix} \begin{bmatrix}
+\ddot{\theta}_1 \\
+\ddot{\theta}_2 \\
+\ddot{\theta}_3
+\end{bmatrix} &= \begin{bmatrix}
+Q_{\theta_1} + \mu_2 l_1l_2\dot{\theta}_2^2 \sin{\Delta_{21}} + \mu_3l_1l_3 \dot{\theta}_3^2 \sin{\Delta_{31}} - \mu_1gl_1\cos{\theta_1}\\
+Q_{\theta_2} - \mu_2 l_2 (l_1\dot{\theta}_1^2\sin{\Delta_{21}}+g\cos{\theta_2}) + \mu_3 l_2l_3\dot{\theta}_3^2 \sin{\Delta_{32}}\\
+Q_{\theta_3} - \mu_3 l_2l_3 \dot{\theta}_2^2 \cos{\Delta_{32}} - \mu_3 l_1 l_3 \dot{\theta}_1^2 \sin{\Delta_{31}} - \mu_3 gl_3 \cos{\theta}_3
+\end{bmatrix}.
+\end{align*}
