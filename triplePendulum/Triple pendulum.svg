@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="417.15982mm"
-   height="276.19241mm"
-   viewBox="0 0 417.15982 276.19242"
+   width="429.32059mm"
+   height="283.30179mm"
+   viewBox="0 0 429.32058 283.3018"
    version="1.1"
    id="svg1"
    inkscape:version="1.4 (86a8ad7, 2024-10-11)"
@@ -23,14 +23,14 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     inkscape:zoom="0.5"
-     inkscape:cx="1143"
-     inkscape:cy="633"
-     inkscape:window-width="1920"
-     inkscape:window-height="1009"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
-     inkscape:window-maximized="1"
+     inkscape:zoom="0.35355339"
+     inkscape:cx="753.77583"
+     inkscape:cy="-19.79899"
+     inkscape:window-width="1150"
+     inkscape:window-height="1000"
+     inkscape:window-x="-7"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
      inkscape:current-layer="layer1"
      showgrid="false" />
   <defs
@@ -59,39 +59,39 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-132.8501,61.448455)">
+     transform="translate(-132.8501,68.557824)">
     <path
        style="fill:none;stroke:#000000;stroke-width:1;stroke-dasharray:none;marker-end:url(#Triangle)"
-       d="M 132.8501,171.44912 H 546.45885"
+       d="M 132.8501,171.44912 H 558.61961"
        id="path1"
        sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1;stroke-dasharray:none;marker-start:url(#Triangle)"
-       d="M 175.00069,-57.89738 V 214.74396"
+       d="M 175.00069,-65.006749 V 214.74396"
        id="path1-5"
        sodipodi:nodetypes="cc" />
     <text
        xml:space="preserve"
        style="font-size:21.8722px;font-family:'Cambria Math';-inkscape-font-specification:'Cambria Math';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-dasharray:none"
-       x="538.05255"
-       y="187.6357"
+       x="548.90369"
+       y="187.82278"
        id="text1"><tspan
          sodipodi:role="line"
          id="tspan1"
          style="fill:#000000;fill-opacity:1;stroke-width:1"
-         x="538.05255"
-         y="187.6357">x</tspan></text>
+         x="548.90369"
+         y="187.82278">x</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:21.8722px;font-family:'Cambria Math';-inkscape-font-specification:'Cambria Math';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-dasharray:none"
-       x="153.675"
-       y="-47.919964"
+       x="156.48134"
+       y="-55.964775"
        id="text2"><tspan
          sodipodi:role="line"
          id="tspan2"
          style="fill:#000000;fill-opacity:1;stroke-width:1"
-         x="153.675"
-         y="-47.919964">y</tspan></text>
+         x="156.48134"
+         y="-55.964775">y</tspan></text>
     <path
        style="fill:#000000;stroke:#000000;stroke-width:1.02317"
        d="m 175.25579,171.00632 89.04537,-51.41036 -0.56132,-0.97224"
