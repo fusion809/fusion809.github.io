@@ -1,8 +1,8 @@
-function removeZThetaPhasePlot() {
-  rmPlot("phasePlotZTheta")
+function removeRThetaPhasePlot() {
+  rmPlot("phasePlotRTheta")
 }
-function removeDzZPhasePlot() {
-  rmPlot("phasePlotDzZ")
+function removeDrRPhasePlot() {
+  rmPlot("phasePlotDrR")
 }
 function removeDthetaThetaPhasePlot() {
   rmPlot("phasePlotDthetaTheta")
@@ -21,8 +21,8 @@ function removePendulumPlots() {
   removePendulumTimePlot()
 }
 function removePlots() {
-  removeZThetaPhasePlot()
-  removeDzZPhasePlot()
+  removeRThetaPhasePlot()
+  removeDrRPhasePlot()
   removeDthetaThetaPhasePlot()
   removeTimePlot()
   removePendulumPlots()
@@ -33,11 +33,11 @@ function removeAnimation() {
 function removeThetaPhaseAnimation() {
   rmPlot("animationThetaPhase")
 }
-function removeZPhaseAnimation() {
-  rmPlot("animationZPhase")
+function removeRPhaseAnimation() {
+  rmPlot("animationRPhase")
 }
 function removeAnimations() {
   removeAnimation()
   removeThetaPhaseAnimation()
-  removeZPhaseAnimation()
+  removeRPhaseAnimation()
 }
