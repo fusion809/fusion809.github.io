@@ -1031,23 +1031,30 @@ function restart(state, layout, t, IdSuffix) {
  * @param IdSuffix Suffix for element IDs used in animation.
  * @return         Nothing.
  */
-function addTime(state, layout, t, IdSuffix) {
+function addTime(state, layout, t, IdSuffix, objectOfInputs) {
   const addTimeButton = document.getElementById("addTimeButton" + IdSuffix);
   if (!addTimeButton) return;
   addTimeButton.addEventListener("click", () => {
     //startTime += objectOfInputs.Time - t[state.frame];'
     var Deltat = readInputs().Deltat;
-    if (t[state.frame] + Deltat > t[t.length-1]) {
+    const tScale = objectOfInputs.tScale;
+    const targetTime = t[state.frame] + Deltat;
+    if (targetTime > t[t.length-1]) {
       state.startTime =  null;
       state.frame = 0;
     } else {
-      state.startTime += t[state.frame] - Deltat*1000;
-      let targetTime = t[state.frame] + Deltat;
-      state.frame = t.reduce((prevIndex, currValue, currIndex, array) => {
+      const newFrame = t.reduce((prevIndex, currValue, currIndex, array) => {
         return Math.abs(currValue - targetTime) < Math.abs(array[prevIndex] - targetTime)
           ? currIndex
           : prevIndex;
       });
+
+      // Adjust startTime so that animation aligns with new frame time
+      const realTimeAtTarget = t[newFrame] * 1000 / tScale;
+      const currentTimestamp = performance.now();
+      state.startTime = currentTimestamp - realTimeAtTarget - state.totalPausedTime;
+
+      state.frame = newFrame;
     }
     updateTimeLabel(layout, fontSizes, t, state, IdSuffix);
   });
@@ -1086,7 +1093,7 @@ function skipTo(state, layout, t, IdSuffix, objectOfInputs) {
 function buttons(state, layout, t, IdSuffix, animateFrame, objectOfInputs) {
   pause(state, IdSuffix, animateFrame);
   restart(state, layout, t, IdSuffix);
-  addTime(state, layout, t, IdSuffix);
+  addTime(state, layout, t, IdSuffix, objectOfInputs);
   skipTo(state, layout, t, IdSuffix, objectOfInputs);
 }
 
