@@ -28,7 +28,7 @@ M_1 l_1^2 & \mu_2 l_1 l_2 \cos{\Delta_{21}} & \mu_3 l_1 l_3\cos{\Delta_{31}} \\
 \end{bmatrix} &= \begin{bmatrix}
 Q_{\theta_1} - \mu_1 g l_1 \cos{\theta_1} + \mu_2 l_1 l_2 \dot{\theta}_2^2 \sin{\Delta_{21}} + \mu_3 l_1 l_3 \dot{\theta}_3^2 \sin{\Delta_{31}} \\
 Q_{\theta_2} - \mu_2 l_2(l_1\dot{\theta}_1^2\sin{\Delta_{21}}+g\cos{\theta_2}) + \mu_3 l_2 l_3 \dot{\theta}_3^2 \sin{\Delta_{32}}\\
-Q_{\theta_3} - \mu_3 l_3 (l_1\dot{\theta}_1^2 \sin{\Delta_{31}} + l_2\dot{\theta}_2^2 \sin{\Delta_{32}} \ddot{\theta}_1 + g\cos{\theta_3})
+Q_{\theta_3} - \mu_3 l_3 (l_1\dot{\theta}_1^2 \sin{\Delta_{31}} + l_2\dot{\theta}_2^2 \sin{\Delta_{32}} + g\cos{\theta_3})
 \end{bmatrix}
 \end{aligned}
 
