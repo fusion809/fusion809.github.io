@@ -239,8 +239,12 @@ function hfun_params_render()
       param_name_latex="\\dot{z}_0"
     elseif (occursin.(r"dr", param_name))
       first = numbers[1];
-      second = numbers[2];
-      param_name_latex="\\dot{r}_{$first,$second}"
+      if (length(numbers) > 1)
+        second = numbers[2];
+        param_name_latex="\\dot{r}_{$first,$second}"
+      else
+        param_name_latex="\\dot{r}_{$first}"
+      end
     elseif (occursin.(r"omega", param_name))
       param_name_latex="\\omega"
     elseif (param_name == "mb1")
