@@ -14,6 +14,9 @@ function arrAdd(...arrs) {
     return result.map((_, i) => arrs.map(xs => xs[i] || 0).reduce((sum, x) => sum + x, 0));
 }
 
+function arrScAdd(arr, scalar) {
+    return arr.map(x => x + scalar);
+}
 /**
  * Divide arr by scalar
  * 
@@ -33,6 +36,14 @@ function arrDiv(arr, scalar) {
  */
 function arrMult(arr, scalar) {
     return arr.map(x => x*scalar);
+}
+
+function arrsMult(arr1, arr2) {
+    return arr1.map((val, i) => val * arr2[i]);
+}
+
+function arrSq(arr) {
+    return arrsMult(arr, arr);
 }
 
 /**
