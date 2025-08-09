@@ -284,13 +284,13 @@ Hence the negative functional derivative for $r_1$ is
 	&= 2\cos{\Delta}(\ddot{r}_2-r_2\dot{\theta}_2(\dot{\Delta}+\dot{\theta}_1)) - 2\sin{\Delta} (\dot{r}_2(\dot{\Delta}_2+\dot{\theta}_1)+r_2\ddot{\theta}_2).
 \end{align*}
 
-Where $\dot{\Delta} + \dot{\theta}_1 = \dot{\theta}_2 - \dot{\theta}_1 + \dot{\theta}_1 = \dot{\theta}_2$ and $\dot{\Delta}_2 + \dot{\theta}_1 = 2\dot{\theta}_2 - \dot{\theta}_1 + \dot{\theta}_1 = 2\dot{\theta}_2$.
+Where $\dot{\Delta} + \dot{\theta}_1 = \dot{\theta}_2 - \dot{\theta}_1 + \dot{\theta}_1 = \dot{\theta}_2$ and $\dot{\Delta}_2 + \dot{\theta}_1 = 2\dot{\theta}_2 - \dot{\theta}_1 + \dot{\theta}_1 = 2\dot{\theta}_2$. (Confirmed with SymPy)
 
 \begin{align*}
 	\delta'_{r_1} |\Delta \vec{v}_{2,1}^I|^2 &= 2\cos{\Delta}(\ddot{r}_2-r_2\dot{\theta}_2^2) - 2\sin{\Delta} (2\dot{r}_2\dot{\theta}_2+r_2\ddot{\theta}_2).
 \end{align*}
 
-As for $r_2$
+As for $r_2$ (checked)
 
 \begin{align*}
 	\delta'_{r_2} |\Delta \vec{v}_{2,1}^I|^2 &= \dfrac{d}{dt}\dfrac{\partial |\Delta \vec{v}_{2,1}^I|^2}{\partial \dot{r}_2} - \dfrac{\partial |\Delta \vec{v}_{2,1}^I|^2}{\partial r_2} \\
@@ -304,7 +304,7 @@ Hence $\dot{\Delta}-\dot{\theta}_2 = \dot{\theta}_2-\dot{\theta}_1-\dot{\theta}_
 	\delta'_{r_2} |\Delta \vec{v}_{2,1}^I|^2 &= 2\cos{\Delta}(\ddot{r}_1 - r_1\dot{\theta}_1^2)+2\sin{\Delta}(r_1\ddot{\theta}_1 + 2\dot{r}_1\dot{\theta}_1).
 \end{align*}
 
-As for $\theta_1$
+As for $\theta_1$ (confirmed by SymPy)
 
 \begin{align*}
 	\delta'_{\theta_1} |\Delta \vec{v}_{2,1}^I|^2 &= \dfrac{d}{dt}\dfrac{\partial |\Delta \vec{v}_{2,1}^I|^2}{\partial \dot{\theta}_1} - \dfrac{\partial |\Delta \vec{v}_{2,1}^I|^2}{\partial \theta_1} \\
@@ -313,7 +313,7 @@ As for $\theta_1$
 	&= 2\cos{\Delta}(2r_1\dot{r}_2\dot{\theta}_2+r_1r_2\ddot{\theta}_2) +2\sin{\Delta}(r_1\ddot{r}_2-r_1r_2\dot{\theta}_2^2).
 \end{align*}
 
-As for $\theta_2$
+As for $\theta_2$ (correct, checked with SymPy)
 
 \begin{align*}
 	\delta'_{\theta_2} |\Delta \vec{v}_{2,1}^I|^2 &= \dfrac{d}{dt}\dfrac{\partial |\Delta \vec{v}_{2,1}^I|^2}{\partial \dot{\theta}_2} - \dfrac{\partial |\Delta \vec{v}_{2,1}^I|^2}{\partial \theta_2} \\

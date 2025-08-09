@@ -34,11 +34,6 @@ function f(objectOfInputs, t, vars, dt) {
     var v1r = v1b/2;
     var v2r = Math.sqrt(r1**2*dtheta1**2 + r1*r2*Math.cos(Delta)*dtheta1*dtheta2 - r1*-Math.sin(Delta)*dr2*dtheta1 + r2**2*dtheta2**2/4 + r2*-Math.sin(Delta)*dr1*dtheta2 + Math.cos(Delta)*dr1*dr2 + dr1**2 + dr2**2/4)
 
-    var Q = [-b1b*dr1 - b1r*dr1/4 - b2b*r2*-Math.sin(Delta)*dtheta2 - b2b*Math.cos(Delta)*dr2 - b2b*dr1 - b2r*r2*-Math.sin(Delta)*dtheta2/2 - b2r*Math.cos(Delta)*dr2/2 - b2r*dr1 - c1b*v1b*dr1 - c1r*v1b*dr1/8 - c2b*v2b*r2*-Math.sin(Delta)*dtheta2 - c2b*v2b*Math.cos(Delta)*dr2 - c2b*v2b*dr1 - c2r*2*v2r*r2*-Math.sin(Delta)*dtheta2/4 - c2r*2*v2r*Math.cos(Delta)*dr2/4 - c2r*2*v2r*dr1/2,
- b2b*r1*-Math.sin(Delta)*dtheta1 - b2b*Math.cos(Delta)*dr1 - b2b*dr2 + b2r*r1*-Math.sin(Delta)*dtheta1/2 - b2r*Math.cos(Delta)*dr1/2 - b2r*dr2/4 + c2b*v2b*r1*-Math.sin(Delta)*dtheta1 - c2b*v2b*Math.cos(Delta)*dr1 - c2b*v2b*dr2 + c2r*2*v2r*r1*-Math.sin(Delta)*dtheta1/4 - c2r*2*v2r*Math.cos(Delta)*dr1/4 - c2r*2*v2r*dr2/8,
- (-8*b1b*r1*dtheta1 - 2*b1r*r1*dtheta1 - 8*b2b*r1*dtheta1 - 8*b2b*r2*Math.cos(Delta)*dtheta2 + 8*b2b*-Math.sin(Delta)*dr2 - 8*b2r*r1*dtheta1 - 4*b2r*r2*Math.cos(Delta)*dtheta2 + 4*b2r*-Math.sin(Delta)*dr2 - 8*c1b*v1b*r1*dtheta1 - c1r*v1b*r1*dtheta1 - 8*c2b*v2b*r1*dtheta1 - 8*c2b*v2b*r2*Math.cos(Delta)*dtheta2 + 8*c2b*v2b*-Math.sin(Delta)*dr2 - 4*c2r*2*v2r*r1*dtheta1 - 2*c2r*2*v2r*r2*Math.cos(Delta)*dtheta2 + 2*c2r*2*v2r*-Math.sin(Delta)*dr2)*r1/8,
- -(8*b2b*r1*Math.cos(Delta)*dtheta1 + 8*b2b*r2*dtheta2 + 8*b2b*-Math.sin(Delta)*dr1 + 4*b2r*r1*Math.cos(Delta)*dtheta1 + 2*b2r*r2*dtheta2 + 4*b2r*-Math.sin(Delta)*dr1 + 8*c2b*v2b*r1*Math.cos(Delta)*dtheta1 + 8*c2b*v2b*r2*dtheta2 + 8*c2b*v2b*-Math.sin(Delta)*dr1 + 2*c2r*2*v2r*r1*Math.cos(Delta)*dtheta1 + c2r*2*v2r*r2*dtheta2 + 2*c2r*2*v2r*-Math.sin(Delta)*dr1)*r2/8]
-
 // varruct the 4x4 matrix A
     // var A = [
     //     [1, m2 * cosDelta / (m1 + m2), 0, -m2 * r2 * sinDelta / (m1 + m2)],
@@ -59,6 +54,12 @@ function f(objectOfInputs, t, vars, dt) {
         [0, mu2*r1*Math.sin(Delta), M1*r1**2, mu2*r1*r2*Math.cos(Delta)],
         [-mu2*r2*Math.sin(Delta), 0, mu2*r1*r2*Math.cos(Delta), M2*r2**2]
     ]
+    // var A = [
+    //     [M1, mu2*Math.cos(Delta), mu2*r1*r2*Math.cos(Delta), -mu2*r2*Math.sin(Delta)],
+    //     [mu2*Math.cos(Delta), M2, -mu2*r1*Math.sin(Delta), mu2*r1*r2*Math.cos(Delta)],
+    //     [mu2*r1*r2*Math.cos(Delta), -mu2*r1*Math.sin(Delta), M1*r1**2, 0],
+    //     [-mu2*r2*Math.sin(Delta), mu2*r1*r2*Math.cos(Delta), 0, M2*r2**2]
+    // ]
 
 // varruct the RHS vector B
     // var b = [
@@ -87,11 +88,15 @@ function f(objectOfInputs, t, vars, dt) {
     var Qtheta1 = -(b1b+c1b*v1b)*r1**2*dtheta1 - 1/4*(b1r+c1r*v1r)*(r1**2*dtheta1) - (b2b+c2b*v2b)*(r1**2*dtheta1+r1*dr2*Math.sin(Delta)+r1*r2*dtheta2*Math.cos(Delta)) - (b2r+c2r*v2r)*(r1**2*dtheta1+(r1*dr2*Math.sin(Delta)+r1*r2*dtheta2*Math.cos(Delta))/2);
     var Qtheta2 = -(b2b+c2b*v2b)*(r2**2*dtheta2-dr1*r2*Math.sin(Delta)+r1*r2*dtheta1*Math.cos(Delta)) - 1/2*(b2r+c2r*v2r)*(r2**2*dtheta2/2 - dr1*r2*Math.sin(Delta) + r1*r2*dtheta1*Math.cos(Delta))
     var b = [
-        M1*r1*dtheta1**2 + mu2*(r2*dtheta2**2*Math.cos(Delta) + 2*dr2*dtheta2*Math.sin(Delta)) - mu1*g*Math.sin(theta1) - k1*(r1-l1) + Qr1,
-        M2*r2*dtheta2**2 + mu2*(r1*dtheta1**2*Math.cos(Delta)-2*dr1*dtheta1*Math.sin(Delta)-g*Math.sin(theta2)) - k2*(r2-l2) + Qr2,
-        -2*M1*r1*dr1*dtheta1 + mu2*(r1*r2*dtheta2**2*Math.sin(Delta) - 2*r1*dr2*dtheta2*Math.cos(Delta)) - mu1*g*r1*Math.cos(theta1) + Qtheta1,
-        -2*M2*r2*dr2*dtheta2 - mu2*(2*dr1*r2*dtheta1*Math.cos(Delta) + r1*r2*dtheta1**2*Math.sin(Delta) + g*r2*Math.cos(theta2)) + Qtheta2
+        M1*r1*dtheta1**2 - g*mu1*Math.sin(theta1) + k1*(l1 - r1) + mu2*(r2*Math.cos(Delta)*dtheta2**2 + 2*Math.sin(Delta)*dr2*dtheta2) + Qr1,
+        M2*r2*dtheta2**2 + k2*(l2 - r2) + mu2*(-g*Math.sin(theta2) + r1*Math.cos(Delta)*dtheta1**2 - 2*Math.sin(Delta)*dr1*dtheta1) + Qr2,
+        -2*M1*r1*dr1*dtheta1 - g*mu1*r1*Math.cos(theta1) + mu2*(r1*r2*Math.sin(Delta)*dtheta2**2 - 2*r1*Math.cos(Delta)*dr2*dtheta2) + Qtheta1,
+        -2*M2*r2*dr2*dtheta2 + mu2*(-g*r2*Math.cos(theta2) - r1*r2*Math.sin(Delta)*dtheta1**2 - 2*r2*Math.cos(Delta)*dr1*dtheta1) + Qtheta2
     ]
+    // var b = [
+    //     mu2*(Math.cos(Delta)*(dtheta1*dtheta2*r2+dr2*dtheta1*dtheta2)+Math.sin(Delta)*(dr2*dtheta1-r2*dtheta1*dtheta2))-mu1*g*Math.sin(theta1)-k1*(r1-l1) + Qr1,
+    //     mu2*(Math.cos(Delta)*(-dr1*dtheta1*dtheta2+r1*dtheta1**2)-Math.sin(Delta)*(dr1*dtheta2))
+    // ]
     var d2 = math.lusolve(A, b);
 
     // Return statement
