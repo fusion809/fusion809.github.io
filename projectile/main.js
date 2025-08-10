@@ -42,7 +42,7 @@ function solve(objectOfInputs=undefined) {
     if (objectOfInputs==undefined) {
         var objectOfInputs = readInputs();
     }
-    var N = 10001;
+    var N = objectOfInputs.N;
     if (objectOfInputs.b == 0 && objectOfInputs.c == 0) {
         var t = linspace(0, objectOfInputs.tf, N);
         var x = t.map(val => objectOfInputs.dx0*val + objectOfInputs.x0);
