@@ -168,7 +168,7 @@ function addContainersToTOC(tocList, containers) {
 function createTOC() {
     const tocPanel = document.getElementById("toc-panel");
     tocPanel.innerHTML = '<ul id="toc-list" style="list-style: none; padding-left: 0;"></ul>';
-    const headers = [...document.querySelectorAll('h1, h2, h3:not(div.page-foot h3):not(div[id^="container"] h3), h4, h5')];
+    const headers = [...document.querySelectorAll('h1, h2, h3:not(div.page-foot h3):not(div[id^="container"] h3), h4:not(div.page-foot h4), h5')];
     const containers = [...document.querySelectorAll("div[id^='container']")];
     const tables = [...document.querySelectorAll("table")];
     const tocList = document.getElementById("toc-list");
