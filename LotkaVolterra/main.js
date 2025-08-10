@@ -75,7 +75,7 @@ function generateAnimation(objectOfInputs=undefined, solution=undefined) {
     if (solution==undefined) {
         var solution = solveProblem(RKF45, objectOfInputs);
     }
-    animate2D(solution, {timer: [0.98, 0.98], varnames: ["Prey animals", "Predator animals"], title: "Phase plot of predator vs prey animals in system."});
+    animate2D(solution, {timer: [0.98, 0.98], varnames: ["Prey animals", "Predator animals"], title: "Phase animation of predator vs prey animals in system."});
 }
 
 function generateTable(objectOfInputs=undefined, solution=undefined) {
