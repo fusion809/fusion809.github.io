@@ -10,95 +10,47 @@
  * @return               Updated [dt, t, vars, i]
  */
 function approxRKF45(f, dt, objectOfInputs, t, vars, i) {
-    const { tolType, epsilon } = objectOfInputs;
-    const nVars = vars[i].length;
+    // Initialize variables
+    var K = new Array(6);
+    var X1 = [];
+    var X2 = [];
+    var Rarr = [];
+    var sarr = [];
+    var {tolType, epsilon} = objectOfInputs;
 
-    // Allocate arrays only once
-    const K = Array.from({ length: 6 }, () => new Array(nVars));
-    const X1 = new Array(nVars);
-    const X2 = new Array(nVars);
-    const Rarr = new Array(nVars);
-    const sarr = new Array(nVars);
-
-    // Precompute the six K vectors without using arrAdd/arrMult
+    // K[i][j], i goes from 0 to 5 and represents k1, k2, k3, k4, k5, k6
+    // j goes from 0 to the dimensionality of the problem - 1
     K[0] = f(objectOfInputs, t[i], vars[i], dt);
+    K[1] = f(objectOfInputs, t[i] + dt/4, arrAdd(vars[i], arrDiv(K[0], 4)), dt);
+    K[2] = f(objectOfInputs, t[i] + 3*dt/8, arrAdd(vars[i], arrMult(K[0], 3/32), arrMult(K[1], 9/32)), dt);
+    K[3] = f(objectOfInputs, t[i] + 12*dt/13, arrAdd(vars[i], arrMult(K[0], 1932/2197), arrMult(K[1], -7200/2197), arrMult(K[2], 7296/2197)), dt);
+    K[4] = f(objectOfInputs, t[i]+dt, arrAdd(vars[i], arrMult(K[0], 439/216), arrMult(K[1], -8), arrMult(K[2], 3680/513), arrMult(K[3], -845/4104)), dt);
+    K[5] = f(objectOfInputs, t[i] + dt/2, arrAdd(vars[i], arrMult(K[0], -8/27), arrMult(K[1], 2), arrMult(K[2], -3544/2565), arrMult(K[3], 1859/4104), arrMult(K[4], -11/40)), dt);
 
-    {
-        const temp = new Array(nVars);
-        for (let j = 0; j < nVars; j++) temp[j] = vars[i][j] + K[0][j] / 4;
-        K[1] = f(objectOfInputs, t[i] + dt / 4, temp, dt);
-    }
-
-    {
-        const temp = new Array(nVars);
-        for (let j = 0; j < nVars; j++) temp[j] = vars[i][j] + (3 / 32) * K[0][j] + (9 / 32) * K[1][j];
-        K[2] = f(objectOfInputs, t[i] + (3 * dt) / 8, temp, dt);
-    }
-
-    {
-        const temp = new Array(nVars);
-        for (let j = 0; j < nVars; j++) {
-            temp[j] = vars[i][j] +
-                (1932 / 2197) * K[0][j] -
-                (7200 / 2197) * K[1][j] +
-                (7296 / 2197) * K[2][j];
+    // X1[j] are our fourth order approxs & X2[j] are our 5th order approxs
+    for (let j = 0; j < K[0].length; j++) {
+        X1[j] = vars[i][j] + 25*K[0][j]/216+1408*K[2][j]/2565+2197*K[3][j]/4104-K[4][j]/5;
+        X2[j] = vars[i][j] + 16*K[0][j]/135+6656*K[2][j]/12825+28561*K[3][j]/56430-9*K[4][j]/50+2*K[5][j]/55;
+        if (X1[j] != 0 && tolType) {
+            Rarr[j] = Math.abs((X1[j]-X2[j])/(dt*X1[j]));
+        } else {
+            Rarr[j] = Math.abs((X1[j]-X2[j])/dt)
         }
-        K[3] = f(objectOfInputs, t[i] + (12 * dt) / 13, temp, dt);
+        sarr[j] = Math.pow(epsilon/(2*Rarr[j]), 0.25);  
     }
 
-    {
-        const temp = new Array(nVars);
-        for (let j = 0; j < nVars; j++) {
-            temp[j] = vars[i][j] +
-                (439 / 216) * K[0][j] -
-                8 * K[1][j] +
-                (3680 / 513) * K[2][j] -
-                (845 / 4104) * K[3][j];
-        }
-        K[4] = f(objectOfInputs, t[i] + dt, temp, dt);
-    }
-
-    {
-        const temp = new Array(nVars);
-        for (let j = 0; j < nVars; j++) {
-            temp[j] = vars[i][j] -
-                (8 / 27) * K[0][j] +
-                2 * K[1][j] -
-                (3544 / 2565) * K[2][j] +
-                (1859 / 4104) * K[3][j] -
-                (11 / 40) * K[4][j];
-        }
-        K[5] = f(objectOfInputs, t[i] + dt / 2, temp, dt);
-    }
-
-    // Compute X1, X2, Rarr, sarr in one loop
-    for (let j = 0; j < nVars; j++) {
-        const k0 = K[0][j], k2 = K[2][j], k3 = K[3][j], k4 = K[4][j], k5 = K[5][j];
-
-        const x1 = vars[i][j] + (25 / 216) * k0 + (1408 / 2565) * k2 + (2197 / 4104) * k3 - (1 / 5) * k4;
-        const x2 = vars[i][j] + (16 / 135) * k0 + (6656 / 12825) * k2 + (28561 / 56430) * k3 - (9 / 50) * k4 + (2 / 55) * k5;
-
-        X1[j] = x1;
-        X2[j] = x2;
-
-        const diff = Math.abs(x1 - x2);
-        Rarr[j] = tolType && x1 !== 0 ? diff / (dt * Math.abs(x1)) : diff / dt;
-
-        sarr[j] = Math.pow(epsilon / (2 * Rarr[j]), 0.25);
-    }
-
-    // Max error estimate
-    const R = Math.max(...Rarr);
-    const s = Math.min(...sarr);
-
-    // Accept step if within tolerance
-    if (R <= epsilon) {
-        t.push(t[i] + dt);
+    // R is our error estimate
+    // s is the factor by which our step size is to be adjusted
+    var R = Math.max(...Rarr);
+    var s = Math.min(...sarr);
+    // If R is less than or equal to epsilon move onto the next step
+    if ( R <= epsilon ) {
+        t.push(t[i]+dt);
         vars.push(X1);
         i++;
     }
-
     dt *= s;
+
     return [dt, t, vars, i];
 }
 
