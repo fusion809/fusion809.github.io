@@ -74,3 +74,11 @@ function vecMag(vec) {
     }
     return Math.sqrt(sum);
 }
+
+function linspace(start, end, n) {
+  if (n < 2) {
+    return n === 1 ? [start] : [];
+  }
+  const step = (end - start) / (n - 1);
+  return Array.from({ length: n }, (_, i) => start + i * step);
+}

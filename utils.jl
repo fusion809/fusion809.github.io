@@ -235,6 +235,8 @@ function hfun_params_render()
       param_name_latex="t_f"
     elseif (occursin.(r"dx0", param_name))
       param_name_latex="\\dot{x}_0"
+    elseif (occursin.(r"dy0", param_name))
+      param_name_latex="\\dot{y}_0"
     elseif (occursin.(r"dz0", param_name))
       param_name_latex="\\dot{z}_0"
     elseif (occursin.(r"dr", param_name))
