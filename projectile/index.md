@@ -6,7 +6,7 @@
 @def funcs = ["generateTable()", "removeTable()", "generateXPhasePlot(solve(readInputs()))", "removeXPhasePlot()", "generateYPhasePlot(solve(readInputs()))", "removeYPhasePlot()", "generateXYPlot(solve(readInputs()))", "removeXYPlot()", "generateTimePlot(solve(readInputs()))", "removeTimePlot()", "generatePlots(readInputs())", "removePlots()", "generateXAnimation()", "removeXAnimation()","generateYAnimation()", "removeYAnimation()", "generateXYAnimation()", "removeXYAnimation()", "generateAnimations()", "removeAnimations()", "generateAllOutputs()", "removeAllOutputs()"];
 @def labels = ["Tabulate the solution", "Remove the solution table", "Generate an X phase plot", "Remove X phase plot", "Generate a Y phase plot", "Remove Y phase plot", "Generate an XY plot", "Remove XY plot", "Generate a time plot", "Remove time plot", "Generate all solution plots", "Remove all solution plots", "Generate an X phase animation", "Remove X phase animation", "Generate a Y phase animation", "Remove Y phase animation", "Generate XY animation", "Remove XY animation", "Generate all animations", "Remove all animations", "Generate all outputs", "Remove all outputs"];
 
-This webpage uses the [Runge-Kutta-Fehlberg fourth-order method with fifth-order error checking (RKF45)](/RKF45/) to approximate the solution to the equations of motion for a projectile subjected to constant gravity and linear and quadratic drag:
+This webpage uses the [Runge-Kutta-Fehlberg fourth-order method with fifth-order error checking (RKF45)](/RKF45/) to approximate the solution to the equations of motion for a projectile subjected to constant gravity and linear and quadratic drag
 
 \begin{aligned}
 \dfrac{d^2 x}{dt^2} &= -\dfrac{dx}{dt}\left(b+c\sqrt{\left(\dfrac{dx}{dt}\right)^2+\left(\dfrac{dy}{dt}\right)^2}\right) \\
@@ -17,7 +17,7 @@ Where $g$ is the gravitational acceleration constant, $b$ is the linear drag coe
 
 \begin{aligned}
 x(t) &= x_0 + \dfrac{\dot{x}_0}{b}\left(1-e^{-bt}\right) \\
-y(t) &= y_0 - \dfrac{gt^2}{2} + \dfrac{\dot{y}_0}{b}\left(1-e^{-bt}\right)
+y(t) &= y_0 - \dfrac{gt^2}{2} + \dfrac{\dot{y}_0}{b}\left(1-e^{-bt}\right),
 \end{aligned}
 
 whereas if $b=0$
