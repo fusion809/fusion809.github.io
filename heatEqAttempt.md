@@ -1,4 +1,4 @@
-@def title="Attempt at creating a webpage for solving the heat equations"
+@def title="Attempt at creating a webpage for solving the heat equation"
 @def hassim=false
 
 An attempt was made to create a 1D heat equation numerical solver webpage and add it to this website. However, this attempt was abandoned, as it proved too computationally expensive for a webpage. The numerical integration technique I attempted involved approximating spatial derivatives from grid point values using fast Fourier transforms (FFTs) and their inverses (IFFTs), then integrating in time using the [Runge–Kutta–Fehlberg 4th-order method with 5th-order error checking (RKF45)](/RKF45/). The calculations took too long and froze the JavaScript console when run there.  
