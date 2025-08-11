@@ -7,7 +7,7 @@
 This webpage uses the [Runge-Kutta-Fehlberg fourth-order method with fifth-order error checking (RKF45)](/RKF45/) to approximate the solution to the problem of the [Duffing oscillator](https://en.wikipedia.org/wiki/Duffing_oscillator):
 
 \begin{align*}
-\ddot{x} + \delta \dot{x} + \alpha x + \beta x^3 = \gamma \cos{(\omega t)}
+\ddot{x} + \delta \dot{x} + \alpha x + \beta x^3 = \gamma \cos{(\omega t)}.
 \end{align*}
 
 Below you can specify these various parameters, as well as the initial conditions and starting and end times. The default values give chaotic behaviour.

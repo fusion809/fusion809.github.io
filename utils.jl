@@ -223,6 +223,8 @@ function hfun_params_render()
       param_name_latex="\\epsilon"
     elseif (occursin.(r"sigma", param_name))
       param_name_latex="\\sigma"
+    elseif (occursin.(r"kappa", param_name))
+      param_name_latex="\\kappa"
     elseif (occursin.(r"rho", param_name))
       param_name_latex="\\rho"
     elseif (occursin.(r"Deltat", param_name))
