@@ -157,7 +157,7 @@ T = repeat(t_vals', length(x), 1)          # N × nt (t_vals' transposed to row 
 
 # Surface plot
 surface(X, T, Umat, xlabel="x", ylabel="t", zlabel="u(x,t)",
-        title="Heat Equation Evolution", legend=false)
+        title="Heat equation", legend=false)
 savefig(joinpath(@OUTPUT, "HeatEquation.svg"))
 
 # Animate
@@ -189,14 +189,14 @@ anim = @animate for i in 1:nt_uniform
 end
 
 Deltat = t_uniform[2]-t_uniform[1];
-mp4(anim, joinpath(@OUTPUT, "heat_evolution.mp4"), fps = 1/Deltat)
+mp4(anim, joinpath(@OUTPUT, "heat.mp4"), fps = 1/Deltat)
 ```
 
 \fig{HeatEquation}
 
 ~~~
 <video width="800" controls>
-  <source src="/assets/heatEqAttempt/code/output/heat_evolution.mp4" type="video/mp4">
+  <source src="/assets/heatEqAttempt/code/output/heat.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 ~~~
