@@ -172,7 +172,7 @@ for i in 1:size(Umat, 1)
 end
 
 function fixed_decimals(x; digits=3)
-    s = string(round(x, digits=digits))
+    s = "t = " * string(round(x, digits=digits))
     # Check if decimal part exists
     if !occursin('.', s)
         # Add decimal point and zeros if missing
