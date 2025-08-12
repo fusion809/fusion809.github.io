@@ -153,11 +153,19 @@ U_interp = zeros(size(Umat, <span class=hljs-number >1</span>), length(t_uniform
     U_interp[i, :] = itp.(t_uniform)
 <span class=hljs-keyword >end</span>
 
-<span class=hljs-keyword >function</span> fixed_width_time(t; digits=<span class=hljs-number >3</span>, width=<span class=hljs-number >7</span>)
-    <span class=hljs-comment ># Format time with fixed decimal places</span>
-    s = string(round(t, digits=digits))
-    <span class=hljs-comment ># Pad with spaces on left so total length is &#x27;width&#x27;</span>
-    <span class=hljs-keyword >return</span> lpad(s, width)
+<span class=hljs-keyword >function</span> fixed_decimals(x; digits=<span class=hljs-number >3</span>)
+    s = string(round(x, digits=digits))
+    <span class=hljs-comment ># Check if decimal part exists</span>
+    <span class=hljs-keyword >if</span> !occursin(<span class=hljs-string >&#x27;.&#x27;</span>, s)
+        <span class=hljs-comment ># Add decimal point and zeros if missing</span>
+        s *= <span class=hljs-string >&quot;.&quot;</span> * <span class=hljs-string >&quot;0&quot;</span>^digits
+    <span class=hljs-keyword >else</span>
+        parts = split(s, <span class=hljs-string >&#x27;.&#x27;</span>)
+        decimals = parts[<span class=hljs-number >2</span>]
+        zeros_needed = digits - length(decimals)
+        s *= <span class=hljs-string >&quot;0&quot;</span>^max(<span class=hljs-number >0</span>, zeros_needed)
+    <span class=hljs-keyword >end</span>
+    <span class=hljs-keyword >return</span> s
 <span class=hljs-keyword >end</span>
 
 ymin, ymax = extrema(U_interp)
@@ -166,7 +174,7 @@ anim = <span class=hljs-meta >@animate</span> <span class=hljs-keyword >for</spa
          ylim = (ymin, ymax),
          xlabel = <span class=hljs-string >&quot;x&quot;</span>,
          ylabel = <span class=hljs-string >&quot;u(x, t)&quot;</span>,
-         title = <span class=hljs-string >&quot;t = <span class=hljs-subst >$(fixed_width_time(t_uniform[i])</span>)&quot;</span>,
+         title = fixed_decimals(t_uniform[i]),
          legend = <span class=hljs-literal >false</span>)
 <span class=hljs-keyword >end</span>
 

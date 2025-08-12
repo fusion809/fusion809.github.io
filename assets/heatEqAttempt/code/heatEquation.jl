@@ -154,11 +154,19 @@ for i in 1:size(Umat, 1)
     U_interp[i, :] = itp.(t_uniform)
 end
 
-function fixed_width_time(t; digits=3, width=7)
-    # Format time with fixed decimal places
-    s = string(round(t, digits=digits))
-    # Pad with spaces on left so total length is 'width'
-    return lpad(s, width)
+function fixed_decimals(x; digits=3)
+    s = string(round(x, digits=digits))
+    # Check if decimal part exists
+    if !occursin('.', s)
+        # Add decimal point and zeros if missing
+        s *= "." * "0"^digits
+    else
+        parts = split(s, '.')
+        decimals = parts[2]
+        zeros_needed = digits - length(decimals)
+        s *= "0"^max(0, zeros_needed)
+    end
+    return s
 end
 
 ymin, ymax = extrema(U_interp)
@@ -167,7 +175,7 @@ anim = @animate for i in 1:nt_uniform
          ylim = (ymin, ymax),
          xlabel = "x",
          ylabel = "u(x, t)",
-         title = "t = $(fixed_width_time(t_uniform[i]))",
+         title = fixed_decimals(t_uniform[i]),
          legend = false)
 end
 
