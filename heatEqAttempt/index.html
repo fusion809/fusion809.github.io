@@ -154,7 +154,7 @@ U_interp = zeros(size(Umat, <span class=hljs-number >1</span>), length(t_uniform
 <span class=hljs-keyword >end</span>
 
 <span class=hljs-keyword >function</span> fixed_decimals(x; digits=<span class=hljs-number >3</span>)
-    s = string(round(x, digits=digits))
+    s = <span class=hljs-string >&quot;t = &quot;</span> * string(round(x, digits=digits))
     <span class=hljs-comment ># Check if decimal part exists</span>
     <span class=hljs-keyword >if</span> !occursin(<span class=hljs-string >&#x27;.&#x27;</span>, s)
         <span class=hljs-comment ># Add decimal point and zeros if missing</span>
