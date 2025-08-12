@@ -1,4 +1,3 @@
-# This file was generated, do not modify it. # hide
 using FFTW, StaticArrays, Plots, Interpolations
 
 """
@@ -141,7 +140,6 @@ T = repeat(t_vals', length(x), 1)          # N × nt (t_vals' transposed to row 
 # Surface plot
 surface(X, T, Umat, xlabel="x", ylabel="t", zlabel="u(x,t)",
         title="Heat equation", legend=false)
-savefig(joinpath(@OUTPUT, "heatEquation.svg"))
 
 # Animate
 nt_uniform = Int64(round((tf-t0)*30));
