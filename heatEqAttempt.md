@@ -192,11 +192,11 @@ Deltat = t_uniform[2]-t_uniform[1];
 mp4(anim, joinpath(@OUTPUT, "heat.mp4"), fps = 1/Deltat)
 ```
 
-\fig{HeatEquation}
+\fig{./code/output/HeatEquation}
 
 ~~~
 <video width="800" controls>
-  <source src="/assets/heatEqAttempt/code/output/heat.mp4" type="video/mp4">
+  <source src="./code/output/heat.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 ~~~
