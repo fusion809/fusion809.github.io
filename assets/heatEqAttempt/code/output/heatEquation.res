@@ -1,1 +1,1 @@
-nothing
+Plots.AnimatedGif("/home/runner/work/fusion809.github.io/fusion809.github.io/__site/assets/heatEqAttempt/code/output/heat.mp4")
