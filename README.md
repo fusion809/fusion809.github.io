@@ -22,6 +22,7 @@ Parts of this repository that are my own, namely:
 * [Duffing/](Duffing/)
 * [elasticPendulum/](/elasticPendulum/)
 * [FunctionIntegrator.md](FunctionIntegrator.md)
+* [heatEqAttempt](heatEqAttempt.md)
 * [index.md](index.md)
 * [Lorenz/](Lorenz/)
 * [LotkaVolterra/](LotkaVolterra/)
