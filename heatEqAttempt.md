@@ -7,7 +7,7 @@ An attempt was made to create a 1D heat equation numerical solver webpage and ad
 \dfrac{\partial u}{\partial t} &= \dfrac{\partial^2 u}{\partial x^2}.
 \end{aligned}
 
-However, this attempt was abandoned, as it proved too computationally expensive for a webpage. The numerical integration technique I attempted involved approximating spatial derivatives from grid point values using fast Fourier transforms (FFTs) and their inverses (IFFTs), then integrating in time using the [Runge–Kutta–Fehlberg 4th-order method with 5th-order error checking (RKF45)](/RKF45/). The calculations took too long and froze the JavaScript console when run there.  
+Yes, I do know it has an exact solution in the form of an infinite series, but I wanted to numerically approximate its solution for a webpage. This attempt was abandoned, however, as it proved too computationally expensive for a webpage. The numerical integration technique I attempted involved approximating spatial derivatives from grid point values using fast Fourier transforms (FFTs) and their inverses (IFFTs), then integrating in time using the [Runge–Kutta–Fehlberg 4th-order method with 5th-order error checking (RKF45)](/RKF45/). The calculations took too long and froze the JavaScript console when run there.  
 
 In fairness, RKF45 already takes a few seconds to solve the [double elastic pendulum (DEP)](/doubleElasticPendulum/) and [triple pendulum (TP)](/triplePendulum/) ordinary differential equations (ODEs). It is therefore not surprising that increasing the complexity by orders of magnitude—by adding an FFT and IFFT to every system evaluation and having more than 100 ODEs in the system (one for each grid point)—was simply too much for a webpage to handle.  
 
