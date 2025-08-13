@@ -1,3 +1,7 @@
 MethodError: no method matching asy1(::Int64, ::Int64, ::Int64, ::Int64)
+The function `asy1` exists, but no method is defined for this combination of argument types.
+
 Closest candidates are:
-  asy1(::Integer, !Matched::Float64, !Matched::Float64, ::Integer) at /home/runner/.julia/packages/FastGaussQuadrature/BRLTf/src/gaussjacobi.jl:200
+  asy1(::Integer, !Matched::Float64, !Matched::Float64, ::Integer)
+   @ FastGaussQuadrature ~/.julia/packages/FastGaussQuadrature/BRLTf/src/gaussjacobi.jl:200
+
