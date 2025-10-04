@@ -265,7 +265,7 @@ No conversation about Linux distributions geared towards advanced users would be
 
 It is ideal for users that:
 
-* Are comfortable with the command line. Those not comfortable with the command line may favour [EndeavourOS](https://endeavouros.com/), [Garuda Linux](https://garudalinux.org/) or [Manjaro Linux](https://distrowatch.com/table.php?distribution=manjaro).
+* Are comfortable with the command line. Those not as comfortable with the command line may favour [EndeavourOS](https://endeavouros.com/), [Garuda Linux](https://garudalinux.org/) or [Manjaro Linux](https://distrowatch.com/table.php?distribution=manjaro). I should clarify, however, that using the command line may sometimes be necessary on these distributions, too. Manjaro may be marginally less likely than the others to require users to tinker at the command line. 
 * Want the freedom to customize their system and have the knowledge and experience to do so successfully.
 * Do not have the desire to compile most components of their system from source. 
 * Want the very latest software. On the flip side of this, they should also know how to recover from an update breaking their system. Users that do not have this knowledge should probably use Garuda Linux instead as it comes with tools for backing up the system and restoring it in case a system update breaks it. 
