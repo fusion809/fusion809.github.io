@@ -81,21 +81,33 @@ XFS is a journalling file system designed to have superior performance to ext4 i
 Linux distributions are almost always [Unix-like](https://en.wikipedia.org/wiki/Unix-like) too, although there are exceptions like [Android](https://en.wikipedia.org/wiki/Android_(operating_system)). This means, among other things, that most Linux distributions share similar commands to [Unix](https://en.wikipedia.org/wiki/Unix) systems and roughly follow the [design philosophy](https://en.wikipedia.org/wiki/Unix_philosophy) of Unix with each command doing just one thing and doing it well. 
 
 ## Core components of a Linux distribution
-What other software a Linux distribution uses varies markedly between distributions and even between different installs of the same distribution. Other core components of a Linux operating system include, but are not limited to a:
-* [Bootloader](https://en.wikipedia.org/wiki/Bootloader). This is essentially what boots the system, loading the kernel. [GNU GRUB](https://en.wikipedia.org/wiki/GNU_GRUB), [SYSLINUX](https://en.wikipedia.org/wiki/SYSLINUX), [LILO](https://en.wikipedia.org/wiki/LILO_(bootloader)) and [systemd-boot](https://en.wikipedia.org/wiki/Gummiboot_(software)) are popular bootloaders for Linux distributions.
-* [Init system and service manager](https://en.wikipedia.org/wiki/Init). The init is the first process that the kernel starts after the system is booted. It starts, either directly or indirectly, all other processes. Service managers manage [daemons](https://en.wikipedia.org/wiki/Daemon_(computing)), which are background processes. These processes can be important and manage things like the internet connection (e.g. dhcpcd) and graphical login manager. The most popular Linux init systems, many of which also function as service managers, are in approximately descending order of popularity: [systemd](https://en.wikipedia.org/wiki/Systemd), [SysV init](https://en.wikipedia.org/wiki/Init#SysV-style), [OpenRC](https://en.wikipedia.org/wiki/OpenRC), [runit](https://en.wikipedia.org/wiki/Runit), [Dinit](https://davmac.org/projects/dinit/), [BusyBox-init](https://en.wikipedia.org/wiki/BusyBox), [GNU Shepherd](https://en.wikipedia.org/wiki/GNU_Guix#GNU_Shepherd_init_system) and [s6](https://skarnet.org/software/s6/). systemd is disliked by some Linux users, one reason they often cite for this is that it violates the Unix philosophy in that it does so many different things (including providing its own replacements for some daemons).
-* [C standard library](https://en.wikipedia.org/wiki/C_standard_library). This provides functions, macros and type definitions that programs written in [C](https://en.wikipedia.org/wiki/C_(programming_language))&mdash;which many core components of any Linux system are&mdash;can call. The vast majority of Linux distributions use [glibc](https://en.wikipedia.org/wiki/Glibc) (from the [GNU Project](https://en.wikipedia.org/wiki/GNU_Project)) to provide this. [Musl](https://en.wikipedia.org/wiki/Musl) is a less commonly used alternative that has a security focus. [uClibc](https://en.wikipedia.org/wiki/UClibc) is another possible alternative for Linux distributions.
-* [Toolchain, including a compiler](https://en.wikipedia.org/wiki/Toolchain). This is basically what it used to build most components of the system, converting source code into binaries that can be executed. [GNU Toolchain](https://en.wikipedia.org/wiki/GNU_toolchain), including the [GNU Compiler Collection](https://en.wikipedia.org/wiki/GNU_Compiler_Collection) (GCC), is the most common toolchain on Linux. [LLVM](https://en.wikipedia.org/wiki/LLVM) and [Clang](https://en.wikipedia.org/wiki/Clang) are popular alternatives.
-* [The Unix shell](https://en.wikipedia.org/wiki/Unix_shell). This serves as a crucial part of the systems command-line interface. [Bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell)) is the most common Unix shell on Linux and is developed as part of the GNU Project. [Zsh](https://en.wikipedia.org/wiki/Z_shell) is a popular alternative, although it is not a popular default shell for Linux distributions and is usually manually installed by users that want a shell with advanced features. [tcsh](https://en.wikipedia.org/wiki/Tcsh) and [sh](https://en.wikipedia.org/wiki/Almquist_shell) are less popular Unix shells that can be installed on Linux. 
-* [Unix commands, or userland utilities](https://en.wikipedia.org/wiki/List_of_POSIX_commands). These are used to perform common command-line tasks such as copying files, moving files, manipulating strings, producing checksums, determining the current directory, etc. Most Linux distributions use the [GNU coreutils](https://en.wikipedia.org/wiki/GNU_Core_Utilities) package to provide these commands. [BusyBox](https://en.wikipedia.org/wiki/BusyBox) also provides many of these commands. Other Unix and Unix-like systems such as [FreeBSD](https://en.wikipedia.org/wiki/FreeBSD), [NetBSD](https://en.wikipedia.org/wiki/NetBSD), [OpenBSD](https://en.wikipedia.org/wiki/OpenBSD) and [OpenIndiana](https://en.wikipedia.org/wiki/OpenIndiana) provide their own versions of these commands. I know that at least FreeBSD's Unix commands have been ported to Linux.
-* [util-linux](https://en.wikipedia.org/wiki/Util-linux). It is provided by the Linux Kernel Organization, like the kernel itself. util-linux provides some more commands on most Linux distributions such as `chsh` for changing the default Unix shell, `dmesg` for checking the status of kernel modules and `fsck` for checking and fixing file systems. 
-* [Package manager](https://en.wikipedia.org/wiki/Package_manager). This provides a means of installing, removing and updating software on one's system. In this section, I am going to limit myself to command-line package managers, although many of these command-line package managers have graphical front-ends that utilize these command-line package managers in the background. Examples include [GNOME Software](https://en.wikipedia.org/wiki/GNOME_Software) and [Discover](https://apps.kde.org/discover/) which can be front-ends to a range of different command-line package managers thanks to [PackageKit](https://en.wikipedia.org/wiki/PackageKit). Some distributions, such as Bodhi Linux, also use browser-based app stores. There are several different command-line package managers, including, but not limited to:
-    - [dpkg](https://en.wikipedia.org/wiki/Dpkg) and its frontend [Advanced Packaging Tool](https://en.wikipedia.org/wiki/APT_(software)) (APT).
-    - [Nix](https://en.wikipedia.org/wiki/Nix_(package_manager)).
-    - [RPM](https://en.wikipedia.org/wiki/RPM_Package_Manager) and its frontends [APT-RPM](https://en.wikipedia.org/wiki/APT-RPM), [Dandified YUM](https://en.wikipedia.org/wiki/Dandified_YUM) (DNF), [urpmi](https://en.wikipedia.org/wiki/Urpmi), [YUM](https://en.wikipedia.org/wiki/Yum_(software)) and [ZYpp](https://en.wikipedia.org/wiki/ZYpp).
-    - [pacman](https://en.wikipedia.org/wiki/Arch_Linux#Pacman).
-    - [Portage](https://en.wikipedia.org/wiki/Portage_(software)).
-    - [slackpkg](https://en.wikipedia.org/wiki/Slackware#Management).
+What other software a Linux distribution uses varies markedly between distributions and even between different installs of the same distribution. Other core components of a Linux operating system include those listed in the sections below.
+
+### [Bootloader](https://en.wikipedia.org/wiki/Bootloader)
+This is essentially what boots the system, loading the kernel. [GNU GRUB](https://en.wikipedia.org/wiki/GNU_GRUB), [SYSLINUX](https://en.wikipedia.org/wiki/SYSLINUX), [LILO](https://en.wikipedia.org/wiki/LILO_(bootloader)) and [systemd-boot](https://en.wikipedia.org/wiki/Gummiboot_(software)) are popular bootloaders for Linux distributions.
+### [Init system and service manager](https://en.wikipedia.org/wiki/Init)
+The init is the first process that the kernel starts after the system is booted. It starts, either directly or indirectly, all other processes. Service managers manage [daemons](https://en.wikipedia.org/wiki/Daemon_(computing)), which are background processes. These processes can be important and manage things like the internet connection (e.g. dhcpcd) and graphical login manager. The most popular Linux init systems, many of which also function as service managers, are in approximately descending order of popularity: [systemd](https://en.wikipedia.org/wiki/Systemd), [SysV init](https://en.wikipedia.org/wiki/Init#SysV-style), [OpenRC](https://en.wikipedia.org/wiki/OpenRC), [runit](https://en.wikipedia.org/wiki/Runit), [Dinit](https://davmac.org/projects/dinit/), [BusyBox-init](https://en.wikipedia.org/wiki/BusyBox), [GNU Shepherd](https://en.wikipedia.org/wiki/GNU_Guix#GNU_Shepherd_init_system) and [s6](https://skarnet.org/software/s6/). systemd is disliked by some Linux users, one reason they often cite for this is that it violates the Unix philosophy in that it does so many different things (including providing its own replacements for some daemons).
+### [C standard library](https://en.wikipedia.org/wiki/C_standard_library)
+This provides functions, macros and type definitions that programs written in [C](https://en.wikipedia.org/wiki/C_(programming_language))&mdash;which many core components of any Linux system are&mdash;can call. The vast majority of Linux distributions use [glibc](https://en.wikipedia.org/wiki/Glibc) (from the [GNU Project](https://en.wikipedia.org/wiki/GNU_Project)) to provide this. [Musl](https://en.wikipedia.org/wiki/Musl) is a less commonly used alternative that has a security focus. [uClibc](https://en.wikipedia.org/wiki/UClibc) is another possible alternative for Linux distributions.
+### [Toolchain, including a compiler](https://en.wikipedia.org/wiki/Toolchain)
+This is basically what it used to build most components of the system, converting source code into binaries that can be executed. [GNU Toolchain](https://en.wikipedia.org/wiki/GNU_toolchain), including the [GNU Compiler Collection](https://en.wikipedia.org/wiki/GNU_Compiler_Collection) (GCC), is the most common toolchain on Linux. [LLVM](https://en.wikipedia.org/wiki/LLVM) and [Clang](https://en.wikipedia.org/wiki/Clang) are popular alternatives.
+### [The Unix shell](https://en.wikipedia.org/wiki/Unix_shell)
+This serves as a crucial part of the systems command-line interface. [Bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell)) is the most common Unix shell on Linux and is developed as part of the GNU Project. [Zsh](https://en.wikipedia.org/wiki/Z_shell) is a popular alternative, although it is not a popular default shell for Linux distributions and is usually manually installed by users that want a shell with advanced features. [tcsh](https://en.wikipedia.org/wiki/Tcsh) and [sh](https://en.wikipedia.org/wiki/Almquist_shell) are less popular Unix shells that can be installed on Linux. 
+### [Unix commands, or userland utilities](https://en.wikipedia.org/wiki/List_of_POSIX_commands)
+These are used to perform common command-line tasks such as copying files, moving files, manipulating strings, producing checksums, determining the current directory, etc. Most Linux distributions use the [GNU coreutils](https://en.wikipedia.org/wiki/GNU_Core_Utilities) package to provide these commands. [BusyBox](https://en.wikipedia.org/wiki/BusyBox) also provides many of these commands. Other Unix and Unix-like systems such as [FreeBSD](https://en.wikipedia.org/wiki/FreeBSD), [NetBSD](https://en.wikipedia.org/wiki/NetBSD), [OpenBSD](https://en.wikipedia.org/wiki/OpenBSD) and [OpenIndiana](https://en.wikipedia.org/wiki/OpenIndiana) provide their own versions of these commands. I know that at least FreeBSD's Unix commands have been ported to Linux.
+### [util-linux](https://en.wikipedia.org/wiki/Util-linux)
+It is provided by the Linux Kernel Organization, like the kernel itself. util-linux provides some more commands on most Linux distributions such as `chsh` for changing the default Unix shell, `dmesg` for checking the status of kernel modules and `fsck` for checking and fixing file systems. 
+### [Package manager](https://en.wikipedia.org/wiki/Package_manager)
+This provides a means of installing, removing and updating software on one's system. In this section, I am going to limit myself to command-line package managers, although many of these command-line package managers have graphical front-ends that utilize these command-line package managers in the background. Examples include [GNOME Software](https://en.wikipedia.org/wiki/GNOME_Software) and [Discover](https://apps.kde.org/discover/) which can be front-ends to a range of different command-line package managers thanks to [PackageKit](https://en.wikipedia.org/wiki/PackageKit). Some distributions, such as Bodhi Linux, also use browser-based app stores. There are several different command-line package managers, including, but not limited to:
+* [dpkg](https://en.wikipedia.org/wiki/Dpkg) and its frontend [Advanced Packaging Tool](https://en.wikipedia.org/wiki/APT_(software)) (APT).
+* [Flatpak](https://en.wikipedia.org/wiki/Flatpak). A cross-distribution package manager mostly used for installing graphical application software as opposed to command-line applications and system software. 
+* [GNU Guix](https://en.wikipedia.org/wiki/GNU_Guix). Which also serves as a cross-distribution package manager.
+* [Nix](https://en.wikipedia.org/wiki/Nix_(package_manager)). Which also serves as a cross-distribution package manager.
+* [RPM](https://en.wikipedia.org/wiki/RPM_Package_Manager) and its frontends [APT-RPM](https://en.wikipedia.org/wiki/APT-RPM), [Dandified YUM](https://en.wikipedia.org/wiki/Dandified_YUM) (DNF), [urpmi](https://en.wikipedia.org/wiki/Urpmi), [YUM](https://en.wikipedia.org/wiki/Yum_(software)) and [ZYpp](https://en.wikipedia.org/wiki/ZYpp).
+* [pacman](https://en.wikipedia.org/wiki/Arch_Linux#Pacman).
+* [Portage](https://en.wikipedia.org/wiki/Portage_(software)).
+* [slackpkg](https://en.wikipedia.org/wiki/Slackware#Management).
+* [Snap](https://en.wikipedia.org/wiki/Snap_(software)). A cross-distribution package manager primarily used by Ubuntu.
 
 As many core components of most Linux distributions are created as part of the GNU Project, many argue that most Linux distributions should be called GNU/Linux distributions to give appropriate credit to the GNU Project.
 
@@ -1557,7 +1569,7 @@ Something interesting about NuTyX that I noticed in one of my virtual machines t
     </tr>
     <tr>
         <td style="padding: 10px;">Installer</td>
-        <td style="padding: 10px;">YaST&mdash;graphical.</td>
+        <td style="padding: 10px;">YaST/Cockpit<sup><a href="#footnote-13">13</a></sup>&mdash;graphical.</td>
     </tr>
     <tr>
         <td style="padding: 10px;">Package manager (type)</td>
@@ -1602,7 +1614,7 @@ Something interesting about NuTyX that I noticed in one of my virtual machines t
 </table>
 ~~~
 
-**openSUSE** is a continuation of the SUSE Linux distribution developed by a group of German computer science students and first released in March 1994. Like OpenMandriva Lx, it comes into separate editions &mdash; one, Leap, that features a fixed release model and another, Tumbleweed, that features a rolling release model. openSUSE started providing two separate editions in 2014,~~~<sup><a href="#footnote-13">13</a></sup>~~~ whereas OpenMandriva Lx adopted this two edition approach around 2023.~~~<sup><a href="#footnote-12">12</a></sup>~~~ 
+**openSUSE** is a continuation of the SUSE Linux distribution developed by a group of German computer science students and first released in March 1994. Like OpenMandriva Lx, it comes into separate editions &mdash; one, Leap, that features a fixed release model and another, Tumbleweed, that features a rolling release model. openSUSE started providing two separate editions in 2014,~~~<sup><a href="#footnote-14">14</a></sup>~~~ whereas OpenMandriva Lx adopted this two edition approach around 2023.~~~<sup><a href="#footnote-12">12</a></sup>~~~ 
 
 One notable feature of openSUSE is that, by default, it uses [Btrfs](https://en.wikipedia.org/wiki/Btrfs) as its root file system. It is used as it allows for easier snapshots to backup the root file system. In my experience, this is more of a curse than a blessing, as I tend to find that openSUSE with a Btrfs root file system becomes unbootable within about a fortnight for me, at least. This is even when I keep on top of the snapshots, delete the old ones and keep an eye on my disk usage using Btrfs' own tools. I mention that I use Btrfs' own tools as the Linux command-line tool `df` is not accurate in measuring file system usage when it is a Btrfs file system. openSUSE also uses [XFS](https://en.wikipedia.org/wiki/XFS) as its default home file system. 
 
@@ -1703,7 +1715,7 @@ PCLinuxOS is perhaps best suited to beginners that do not need exotic software, 
     </tr>
     <tr>
         <td style="padding: 10px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
-        <td style="padding: 10px;">Old stable<sup><a href="#footnote-14">14</a></sup></td>
+        <td style="padding: 10px;">Old stable<sup><a href="#footnote-15">15</a></sup></td>
     </tr>
     <tr>
         <td style="padding: 10px;">Installer</td>
@@ -1747,7 +1759,7 @@ PCLinuxOS is perhaps best suited to beginners that do not need exotic software, 
     </tr>
     <tr>
         <td style="padding: 10px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
-        <td style="padding: 10px;">None<sup><a href="#footnote-15">15</a></sup></td>
+        <td style="padding: 10px;">None<sup><a href="#footnote-16">16</a></sup></td>
     </tr>
 </table>
 ~~~
@@ -1782,7 +1794,7 @@ PCLinuxOS is perhaps best suited to beginners that do not need exotic software, 
     </tr>
     <tr>
         <td style="padding: 10px;">Package manager (type)</td>
-        <td style="padding: 10px;"><a href="https://github.com/volitank/nala">Nala</a> (binary), <a href="https://github.com/pacstall/pacstall">Pacstall</a> (source) and distro-agnostic package managers (binary).<sup><a href="#footnote-16">16</a></sup></td>
+        <td style="padding: 10px;"><a href="https://github.com/volitank/nala">Nala</a> (binary), <a href="https://github.com/pacstall/pacstall">Pacstall</a> (source) and distro-agnostic package managers (binary).<sup><a href="#footnote-17">17</a></sup></td>
     </tr>
     <tr>
         <td style="padding: 10px;">Packaging file(s)</td>
@@ -2103,7 +2115,7 @@ Zorin OS uses a Windows-like layout and is aimed at beginners as well.
     </tr>
     <tr>
         <td style="padding: 10px;">Package manager (type)</td>
-        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/OSTree">OSTree</a> (read-only root), distro-agnostic package managers<sup><a href="#footnote-18">18</a></sup> and <a href="https://github.com/Vanilla-OS/apx">Apx</a> (applications).</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/OSTree">OSTree</a> (read-only root), distro-agnostic package managers<sup><a href="#footnote-19">19</a></sup> and <a href="https://github.com/Vanilla-OS/apx">Apx</a> (applications).</td>
     </tr>
     <tr>
         <td style="padding: 10px;">Packaging file(s)</td>
@@ -2236,11 +2248,12 @@ Void is ideal for experienced users that are content with the software in Void's
     <li id="footnote-10">Earliest release in DistroWatch's database is the 2009 release which was <a href="https://distrowatch.com/5667">reported on 14 September 2009</a>. NuTyX's website has a copyright notice that begins in 2007, so its first release could be as long ago as 2007.</li>
     <li id="footnote-11">Earliest release in DistroWatch's database is the 1.1 release which was <a href="https://distrowatch.com/?newsid=05607">released on 4 August 2009</a>. This was meant to be an update to the earlier release of openmamba GNU/Linux 1.0.</li>
     <li id="footnote-12">This I say based on <a href="https://distrowatch.com/?newsid=11735">this news release from DistroWatch</a>.</li>
-    <li id="footnote-13">Source: <a href="https://en.opensuse.org/Portal%3ATumbleweed?">Portal:Tumbleweed at openSUSE Wiki</a>.</li> <!-- openSUSE-->
-    <li id="footnote-14">This is based on the fact that the latest release as of 26 January 2025 is based on Ubuntu 22.04.</li>
-    <li id="footnote-15">I checked the Pop!_OS website and could not find documentation on it.</li>
-    <li id="footnote-16">I mention these, even though I omit them in most distro's infoboxes, because Rhino Linux has options to enable cross-distro package managers/formats in its setup wizard. Specifically, it allows users to enable Flatpak, Nix, Snap or AppImages.</li> 
-    <li id="footnote-17"><a href="https://vanillaos.org/blog/article/2022-12-29/vanilla-os-2210-kinetic-is-out">Vanilla OS 22.10</a> was this release and it was the first release mentioned in the <a href="https://vanillaos.org/blog">Vanilla OS</a> blog.</li>
-    <li id="footnote-18">I say this because <a ref="https://docs.vanillaos.org/handbook/en/install-flatpaks">Flatpak installation instructions</a> and <a href="https://docs.vanillaos.org/handbook/en/install-homebrew">Homebrew installation instructions</a> are given in Vanilla OS's documentation.</li>
+    <li id="footnote-13">I am unsure of this. I installed openSUSE Leap 16.0 on 6 October 2025 and noticed it used a different installer to the familiar YaST. <a href="https://distrowatch.com/weekly.php?issue=20251006">DistroWatch's 6 October 2025 edition</a> said that openSUSE was moving towards using Cockpit for graphical configuration, so I am guessing this tool is now also used for system installation.</li> 
+    <li id="footnote-14">Source: <a href="https://en.opensuse.org/Portal%3ATumbleweed?">Portal:Tumbleweed at openSUSE Wiki</a>.</li> <!-- openSUSE-->
+    <li id="footnote-15">This is based on the fact that the latest release as of 26 January 2025 is based on Ubuntu 22.04.</li>
+    <li id="footnote-16">I checked the Pop!_OS website and could not find documentation on it.</li>
+    <li id="footnote-17">I mention these, even though I omit them in most distro's infoboxes, because Rhino Linux has options to enable cross-distro package managers/formats in its setup wizard. Specifically, it allows users to enable Flatpak, Nix, Snap or AppImages.</li> 
+    <li id="footnote-18"><a href="https://vanillaos.org/blog/article/2022-12-29/vanilla-os-2210-kinetic-is-out">Vanilla OS 22.10</a> was this release and it was the first release mentioned in the <a href="https://vanillaos.org/blog">Vanilla OS</a> blog.</li>
+    <li id="footnote-19">I say this because <a ref="https://docs.vanillaos.org/handbook/en/install-flatpaks">Flatpak installation instructions</a> and <a href="https://docs.vanillaos.org/handbook/en/install-homebrew">Homebrew installation instructions</a> are given in Vanilla OS's documentation.</li>
 </ol>
 ~~~
