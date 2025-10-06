@@ -1569,7 +1569,7 @@ Something interesting about NuTyX that I noticed in one of my virtual machines t
     </tr>
     <tr>
         <td style="padding: 10px;">Installer</td>
-        <td style="padding: 10px;">YaST/Cockpit<sup><a href="#footnote-13">13</a></sup>&mdash;graphical.</td>
+        <td style="padding: 10px;">YaST/Agama<sup><a href="#footnote-13">13</a></sup>&mdash;graphical.</td>
     </tr>
     <tr>
         <td style="padding: 10px;">Package manager (type)</td>
@@ -2248,7 +2248,7 @@ Void is ideal for experienced users that are content with the software in Void's
     <li id="footnote-10">Earliest release in DistroWatch's database is the 2009 release which was <a href="https://distrowatch.com/5667">reported on 14 September 2009</a>. NuTyX's website has a copyright notice that begins in 2007, so its first release could be as long ago as 2007.</li>
     <li id="footnote-11">Earliest release in DistroWatch's database is the 1.1 release which was <a href="https://distrowatch.com/?newsid=05607">released on 4 August 2009</a>. This was meant to be an update to the earlier release of openmamba GNU/Linux 1.0.</li>
     <li id="footnote-12">This I say based on <a href="https://distrowatch.com/?newsid=11735">this news release from DistroWatch</a>.</li>
-    <li id="footnote-13">I am unsure of this. I installed openSUSE Leap 16.0 on 6 October 2025 and noticed it used a different installer to the familiar YaST. <a href="https://distrowatch.com/weekly.php?issue=20251006">DistroWatch's 6 October 2025 edition</a> said that openSUSE was moving towards using Cockpit for graphical configuration, so I am guessing this tool is now also used for system installation.</li> 
+    <li id="footnote-13">This is web-based, as is the new configuration tool of openSUSE, Cockpit.</li> 
     <li id="footnote-14">Source: <a href="https://en.opensuse.org/Portal%3ATumbleweed?">Portal:Tumbleweed at openSUSE Wiki</a>.</li> <!-- openSUSE-->
     <li id="footnote-15">This is based on the fact that the latest release as of 26 January 2025 is based on Ubuntu 22.04.</li>
     <li id="footnote-16">I checked the Pop!_OS website and could not find documentation on it.</li>
