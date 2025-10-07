@@ -510,8 +510,9 @@ Popular Debian derivatives include:
 * [deepin](https://www.deepin.org/index/en) &mdash; although, in 2022 [they announced they were becoming independent](https://distrowatch.com/dwres.php?resource=showheadline&story=14870), but it seems to still be using Debian packages.
 * [Devuan GNU+Linux](https://www.devuan.org/)
 * [MX Linux](https://mxlinux.org/)
+* [Q4OS](https://q4os.org/).
 * [Ubuntu](https://ubuntu.com/) and its derivatives. 
-I cover deepin and Ubuntu and some Ubuntu derivatives in separate sections, the rest I will cover here. 
+I cover deepin, Q4OS and Ubuntu and some Ubuntu derivatives in separate sections, the rest I will cover here. 
 
 antiX is designed to be lightweight and fast distribution with runit or SysV init as its init system. It uses JWM as its default user interface. It is ideal for users that want or need a lightweight distribution such as due to using old hardware. 
 
@@ -1765,6 +1766,79 @@ PCLinuxOS is perhaps best suited to beginners that do not need exotic software, 
 ~~~
 
 **Pop!_OS** originally used a customized GNOME desktop but its team has been developing a desktop environment written in Rust called COSMIC. It is beautiful by default. Pop!\_OS is developed by the computer manufacturer called System76. According to its website, it is aimed at STEM and creative professionals. It does seem fairly beginner friendly from my experience with it, but it does use pretty old software due to it, at the time of writing (26 January 2025), being based on the previous long-term support (LTS) release of Ubuntu. I would recommend Pop!\_OS to users that want an eye candy desktop by default, do not mind older packages and prefer a fixed release distribution.
+
+# Q4OS
+~~~
+<table style="width: 380px; float: right; border-collapse: collapse;">
+    <tr>
+        <td colspan="2"><image width="380px;" src="/Linux/Q4OS 6.1 TDE.png"/></td>
+    </tr> 
+    <tr>
+        <td style="padding: 10px;">Initial release</td>
+        <td style="padding: 10px;">4 July 2013</td>
+    </tr>
+    <tr>
+        <td style="padding: 10px; width: 190px;">Website</td>
+        <td style="padding: 10px;"><a href="https://q4os.org/">q4os.org</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 10px;">Release model</td>
+        <td style="padding: 10px;">Fixed</td>
+    </tr>
+    <tr>
+        <td style="padding: 10px;">Modernity<sup><a href="#footnote-1">1</a></sup></td>
+        <td style="padding: 10px;">Stable<sup><a href="#footnote-5">5</a></sup></td>
+    </tr>
+    <tr>
+        <td style="padding: 10px;">Installer</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Calamares_(software)">Calamares</a>&mdash;graphical.</td>
+    </tr>
+    <tr>
+        <td style="padding: 10px;">Package manager (type)</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Advanced_Packaging_Tool">Advanced Packaging Tool</a> (APT; binary)</td>
+    </tr>
+    <tr>
+        <td style="padding: 10px;">Packaging file(s)</td>
+        <td style="padding: 10px;"><a href="https://wiki.debian.org/Packaging/Intro">Rules (Makefile), control, copyright and changelog files</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 10px;">Compiler</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection">GCC</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 10px;">Init system</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Systemd">systemd</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 10px;">C standard library</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Glibc">glibc</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 10px;">Userland</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/GNU">GNU</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 10px;">Shell</td>
+        <td style="padding: 10px;"><a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a></td>
+    </tr>
+    <tr>
+        <td style="padding: 10px;">Repository size<sup><a href="#footnote-2">2</a></sup></td>
+        <td style="padding: 10px;">Very large</td>
+    </tr>
+    <tr>
+        <td style="padding: 10px;">Base install<sup><a href="#footnote-3">3</a></sup></td>
+        <td style="padding: 10px;">Minimal or compete</td>
+    </tr>
+    <tr>
+        <td style="padding: 10px;">Documentation<sup><a href="#footnote-4">4</a></sup></td>
+        <td style="padding: 10px;">Detailed</td>
+    </tr>
+</table>
+~~~
+
+**Q4OS** is a Linux distribution based on Debian that aims to be user friendly. It offers two main editions -- one based on KDE Plasma and another based on the Trinity Desktop Environment (TDE). The TDE edition is designed to be compatible with older hardware as it is fairly lightweight (it is essentially a fork of KDE 3.5 from ca. 2010). I quite enjoy the visual themes of Q4OS, as it is meant to look a lot like Windows. It also has an installer for the system that can be run on Windows itself and sets up a dual boot. That being said, it does also have a live medium graphical installer. 
+
+This makes it a pretty good choice for people used to Windows. Although, I will admit that users that want application software not found in Debian's official repositories but instead found within Flathub may need to install these apps via the command-line interface with `flatpak install <package>`. Q4OS does have graphical tools for package installation, but I have noticed that while some Flathub apps are listed in the Q4OS Software Centre, many Flathub apps (e.g. the RuneScape NXt Client is not) are not listed in this tool, even though `flatpak remote-ls` does list them as available from installed remotes. Due to this, I would not recommend it to beginners unless they are okay with using the command-line interface. 
 
 # Rhino Linux
 ~~~
