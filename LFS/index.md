@@ -177,7 +177,7 @@ The base [executor](https://github.com/raujonas/executor) extension provides up 
 * Tooltips, which can include command output at their end; and
 * Command execution upon clicking the widget in the panel. 
 
-### Scripts called by extension
+### Scripts called by the extension
 Includes:
 * [`count-wallpapers.sh`](https://github.com/fusion809/lfs-scripts/blob/master/count-wallpapers.sh) &mdash; displays the number of the currently shown wallpaper / the total number of wallpapers in `~/wallpapers`. In my set up, it is used to generate output by the centre widget.
 * [`list-wallpaper.sh`](https://github.com/fusion809/lfs-scripts/blob/master/list-wallpapers.sh) &mdash; displays the list of wallpapers in `~/wallpapers` with the currently shown wallpaper highlighted and centred. `gnome-terminal -- zsh -ic "~/lfs-scripts/list-wallpapers.sh"` is run when left-clicking the centre widget in my setup. 
@@ -185,7 +185,7 @@ Includes:
 * [`updates_no.sh`](https://github.com/fusion809/lfs-scripts/blob/master/updates_no.sh) &mdash; checks for updates using the `updates` command in the shell profile. It displays `$in_progress $mod_time  $no_updates 󰂕 $no_missing_total  $no_failed` where `$in_progress` is replaced with nothing if the `updates` command is not running, and `󰦕 ${percent}% ` otherwise, where `$percent` is an approximation of how far through the running of `updates` we are. `$mod_time` is replaced with the time the `updates` command last stopped running. `$no_updates` is replaced with the number of available package updates. `$no_missing_total` is replaced with the number of packages with missing inventories. `$no_failed` is replaced with the number of package versioning failures. 
 * [`update-table.sh`](https://github.com/fusion809/lfs-scripts/blob/master/update-table.sh) &mdash; generates a more compact table of packages with updates, missing inventories and versioning failures. It is run to generate the tooltip for the right widget. 
 
-Left-clicking the right widget opens a terminal in which `update` is run. Middle-clicking the right widget re-runs `updates` to update the displayed values. Right-clicking the right widget runs `tail -f ~/updates.log` (which contains the output of the last `updates` run).
+Left-clicking the right widget opens a terminal in which `update` is run. Middle-clicking the right widget re-runs `updates` to update the displayed values. Right-clicking the right widget runs `tail -f ~/updates.log` (`~/updates.log` contains the output of the last `updates` run).
 
 # KDE Plasma
 KDE Plasma was the second desktop I installed. Spacer extension is installed, as is the [Command Output](https://github.com/Zren/plasma-applet-commandoutput) Plasma widget. 
