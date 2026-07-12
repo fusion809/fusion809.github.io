@@ -164,6 +164,12 @@ Package inventories are stored within [/var/lib/book-packages](https://github.co
 # Custom desktop configuration files
 These are defined in [~/lfs_apps](https://github.com/fusion809/lfs_apps). They include desktop configuration files that generate plots of boot times and cycle through wallpapers.
 
+# Custom packages
+[`~/lfs_packaging`](https://github.com/fusion809/lfs_packaging) provides custom build scripts to install many packages. Some of these packages are also provided by LFS and BFLS &mdash; such as Linux PAM, Vim, rustc and packages within the xorg-apps and xorg-libs metapackages. I provide these custom packages sometimes to overcome build errors that the book-extraction function cause and other times to more robustly ensure I have the latest version of these packages at all times. Other packages are provided in this repository because LFS and BLFS do not provide them; other books in the LFS such as SLFS do provide some of these packages, but some are unique to this repository (e.g. GNU Octave and R are).
+
+# Fastfetch/HyFetch
+I have also customized Fastfetch/HyFetch output so that it accurately prints the number of packages I have installed. The configuration file used is located in [`~/lfs-scripts/config.jsonc`](https://github.com/fusion809/lfs-scripts/blob/master/config.jsonc). In the screenshot above, `807 (󰌽 573,  130,  1,  74,  29)` means that 807 packages are installed in total. Of them 573 are LFS or BLFS book packages installed via `autobuild` and its extracting build commands and source URLs from the books' webpages. A further 130 were installed via custom build scripts in [`~/lfs_packaging`](https://github.com/fusion809/lfs_packaging). 1 Julia package was installed; this package is Julia itself which was installed via `juliaup` (the compilation process of Julia is incredibly complex and even requires its own custom build of LLVM). 74 Python packages were installed via `pip`. 29 R packages were installed. 
+
 # Shell profile
 My shell profile is defined in [here](https://github.com/fusion809/lfs-scripts). Some scripts called for by GNOME and KDE Plasma Executor/Command Output commands are in this repository, too. 
 
