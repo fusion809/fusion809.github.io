@@ -137,7 +137,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
             <code>--dry-run</code>: Show what would be updated without downloading/building.<br/>
             <code>--no-upstream</code>: Check only LFS/BLFS book versions (disable upstream tracking).<br/>
             <code>-h</code>/<code>--help</code>: Show help message.
-        </td
+        </td>
     </tr>
     <tr>
         <td style="font-size: 16px; padding: 10px;">
@@ -154,7 +154,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
         </td>
         <td style="font-size: 16px; padding: 10px;">
             Print table that list available updates (marked with <code>[UPDATE]</code>), as well as packages with missing inventories (marked with <code>[FILES MISSING]</code>) and packages with versioning failures (marked with <code>[FAILED]</code>). 
-        </td
+        </td>
     </tr>
 </table>
 ~~~
