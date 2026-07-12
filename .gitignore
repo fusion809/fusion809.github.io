@@ -8,3 +8,4 @@ octave-workspace
 .ccls-cache
 .patches
 _libs/rendered/*.js
+core.*

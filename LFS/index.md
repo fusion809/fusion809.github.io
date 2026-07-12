@@ -1,0 +1,191 @@
+@def hassim=false;
+@def title="Linux From Scratch (LFS) virtual machine (VM)"
+@def tag=["Linux"]
+
+![LFS screenshot](https://fusion809.github.io/images/executor-raujonas.github.io/LFS_screenshot_12-07-2026_r13.0-143.png)
+
+**Figure 1: Screenshot of my LFS VM's GNOME session as of 12 July 2026.**
+
+I first installed LFS 12.4 systemd edition to a virtual machine on 9 February 2026. Since then, I have upgraded the system to the development systemd branch, and kept the system up to date. It has been a challenging, yet informative journey. 
+
+# Package management
+From my NixOS host machine, I have written &mdash; with the help of artificial intelligence (AI) &mdash; several shell functions that are imported into my LFS VM and provide basic package management functionality. These functions are part of both my host's and VM's shell profile. These functions can be found in my [NixOS configuration user shell profile](https://github.com/fusion809/NixOS-configs/tree/26.05/shell/user/). 
+
+~~~
+<table style="border-collapse: collapse;">
+    <caption style="font-size: 24px; padding: 10px;"><b>Table 1: Shell functions used for package management within the LFS VM.</b></caption>
+    <tr>
+        <td style="font-size: 20px; padding: 10px; text-align: center;" colspan="2">
+            <b>Function name</b>
+        </td>
+        <td style="font-size: 20px; padding: 10px; text-align: center;" rowspan="2">
+            <b>Defined in</b>
+        </td>
+        <td style="font-size: 20px; padding: 10px;" rowspan="2">
+            <b>Syntax</b>
+        </td>
+        <td style="font-size: 20px; padding: 10px;" rowspan="2">
+            <b>Description</b>
+        </td>
+    </tr>
+    <tr>
+        <td style="font-size: 20px; padding: 10px;">
+            <b>Guest</b>
+        </td>
+        <td style="font-size: 20px; padding: 10px;">
+            <b>Host</b>
+        </td>
+    </tr>
+    <tr>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>autobuild</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>lfs_autobuild</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/lfs-autobuild.sh">lfs-autobuild.sh</a>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>autobuild PACKAGE(S) [OPTION(S)]</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            Default: build and install the specified package(s), if and only if the latest version of the package is not already installed. LFS/Beyond LFS (BLFS) instructions are used to build most packages. Although, some packages are built using custom build scripts defined in <a href="https://github.com/fusion809/lfs_packaging"><code>~/lfs_packaging</code></a>.<br/>
+            <code>--dry-run</code>: show what actions would be executed to build and install the package.<br/>
+            <code>--strip</code>: run stripping commands after build.<br/>
+            <code>--no-upstream</code>: disable upstream version searching.<br/>
+            <code>--include-config</code>: include configuration commands in the LFS/BLFS book entry.<br/>
+            <code>--rm-libs</code>: remove old library versions after build (disabled by default).<br/>
+            <code>--lfs</code>: search only in the LFS book.<br/>
+            <code>--blfs</code>: search only in the BLFS book.<br/>
+            <code>--lfs-book <book></code>: specify LFS book (e.g., development, systemd, stable, or full URL).<br/>
+            <code>--blfs-book <book></code>: specify BLFS book (e.g., systemd, development, stable, or full URL).<br/>
+            <code>--skip-tests</code>: skip test commands (make check/test, etc.).<br/>
+            <code>--ignore-test-failures</code>: ignore test failures by appending '|| true' to test commands.<br/>
+            <code>-f</code>/<code>--force</code>: force rebuild and installation even when latest version is already installed.<br/>
+            <code>-h</code>/<code>--help</code>: show help message.<br/>
+        </td>
+    </tr>
+    <tr>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>autoremove</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>lfs_autoremove</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>autoremove PACKAGE(S) [OPTION(S)]</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            Default: remove the specified package(s), if and only if no other packages have libraries that depend on the package(s).<br/>
+            <code>--dry-run</code>: show what actions would be executed to remove the package.<br/>
+            <code>-f</code>/<code>--force</code>: force removal, without regard for library dependencies.<br/>
+        </td>
+    </tr>
+    <tr>
+        <td style="font-size: 16px; padding: 10px;">
+            N/A
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>cleanup_old_libraries_gpt</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>cleanup_old_libraries_gpt</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            Remove old unused libraries. As for used old used libraries, rebuild packages that depend on the library and then remove it. 
+        </td>
+    </tr>
+    <tr>
+        <td style="font-size: 16px; padding: 10px;">
+            N/A
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>cleanup_old_doc_dirs_gpt</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>cleanup_old_doc_dirs_gpt</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            Remove old unused documentation directories. 
+        </td>
+    </tr>
+    <tr>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>update</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>lfs_update</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>update [OPTION(s)]</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            Update packages. 
+            <code>--dry-run</code>: Show what would be updated without downloading/building.<br/>
+            <code>--no-upstream</code>: Check only LFS/BLFS book versions (disable upstream tracking).<br/>
+            <code>-h</code>/<code>--help</code>: Show help message.
+        </td
+    </tr>
+    <tr>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>updates</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>lfs_updates</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/lfs-updates.sh">lfs-updates.sh</a>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>updates</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            Print table that list available updates (marked with <code>[UPDATE]</code>), as well as packages with missing inventories (marked with <code>[FILES MISSING]</code>) and packages with versioning failures (marked with <code>[FAILED]</code>). 
+        </td
+    </tr>
+</table>
+~~~
+
+Package inventories are stored within [/var/lib/book-packages](https://github.com/fusion809/lfs_book-packages) for LFS/BLFS packages and [/var/lib/custom-packages](https://github.com/fusion809/lfs_custom-packages) for custom packages.
+
+# Custom desktop configuration files
+These are defined in [~/lfs_apps](https://github.com/fusion809/lfs_apps). They include desktop configuration files that generate plots of boot times and cycle through wallpapers.
+
+# Shell profile
+My shell profile is defined in [here](https://github.com/fusion809/lfs-scripts). Some scripts called for by GNOME and KDE Plasma Executor/Command Output commands are in this repository, too. 
+
+# GNOME
+GNOME was the first desktop I installed. Its packages are kept at the latest upstream version, not merely the latest version in the BLFS book. [Dash to Dock](https://github.com/micheleg/dash-to-dock) is enabled and installed, as is [WeatherPanel](https://github.com/attentivecoder/weatherpanel) and [Show Desktop Button](https://github.com/amivaleo/Show-Desktop-Button). [Executor](https://github.com/raujonas/executor) is another extension I use; I've actually created my [own fork](https://github.com/fusion809/executor-raujonas.github.io) with more features.
+
+## Executor fork
+*Installed via the [executor `~/lfs_packaging` package](https://github.com/fusion809/lfs_packaging/tree/master/executor). It can be installed via more standard ways, too.*
+
+The base [executor](https://github.com/raujonas/executor) extension provides up to three widgets in the GNOME panel on the left, centre and right of the panel. In these widgets is displayed the output of specified commands. The interval at which the command is re-run can also be specified. The [executor fork](https://github.com/fusion809/executor-raujonas.github.io) I maintain provides the following additional features:
+* Tooltips, which can include command output at their end; and
+* Command execution upon clicking the widget in the panel. 
+
+### Scripts called by extension
+Includes:
+* [`count-wallpapers.sh`](https://github.com/fusion809/lfs-scripts/blob/master/count-wallpapers.sh) &mdash; displays the number of the currently shown wallpaper / the total number of wallpapers in `~/wallpapers`. In my set up, it is used to generate output by the centre widget.
+* [`list-wallpaper.sh`](https://github.com/fusion809/lfs-scripts/blob/master/list-wallpapers.sh) &mdash; displays the list of wallpapers in `~/wallpapers` with the currently shown wallpaper highlighted and centred. `gnome-terminal -- zsh -ic "~/lfs-scripts/list-wallpapers.sh"` is run when left-clicking the centre widget in my setup. 
+* [`open-wallpaper.sh`](https://github.com/fusion809/lfs-scripts/blob/master/open-wallpaper.sh) &mdash; opens the displayed wallpaper in Eye of GNOME. This script is run when I right-click the centre widget in my setup.
+* [`updates_no.sh`](https://github.com/fusion809/lfs-scripts/blob/master/updates_no.sh) &mdash; checks for updates using the `updates` command in the shell profile. It displays `$in_progress $mod_time  $no_updates 󰂕 $no_missing_total  $no_failed` where `$in_progress` is replaced with nothing if the `updates` command is not running, and `󰦕 ${percent}% ` otherwise, where `$percent` is an approximation of how far through the running of `updates` we are. `$mod_time` is replaced with the time the `updates` command last stopped running. `$no_updates` is replaced with the number of available package updates. `$no_missing_total` is replaced with the number of packages with missing inventories. `$no_failed` is replaced with the number of package versioning failures. 
+* [`update-table.sh`](https://github.com/fusion809/lfs-scripts/blob/master/update-table.sh) &mdash; generates a more compact table of packages with updates, missing inventories and versioning failures. It is run to generate the tooltip for the right widget. 
+
+Left-clicking the right widget opens a terminal in which `update` is run. Middle-clicking the right widget re-runs `updates` to update the displayed values. Right-clicking the right widget runs `tail -f ~/updates.log` (which contains the output of the last `updates` run).
+
+# KDE Plasma
+KDE Plasma was the second desktop I installed. Spacer extension is installed, as is the [Command Output](https://github.com/Zren/plasma-applet-commandoutput) Plasma widget. 
