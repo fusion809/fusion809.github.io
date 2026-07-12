@@ -180,8 +180,8 @@ GNOME was the first desktop I installed. Its packages are kept at the latest ups
 *Installed via the [executor `~/lfs_packaging` package](https://github.com/fusion809/lfs_packaging/tree/master/executor). It can be installed via more standard ways, too.*
 
 The base [executor](https://github.com/raujonas/executor) extension provides up to three widgets in the GNOME panel on the left, centre and right of the panel. In these widgets is displayed the output of specified commands. The interval at which the command is re-run can also be specified. The [executor fork](https://github.com/fusion809/executor-raujonas.github.io) I maintain provides the following additional features:
-* Tooltips, which can include command output at their end; and
-* Command execution upon clicking the widget in the panel. 
+* Tooltips, which can include command output at their end as well as the static text within the widget that precedes the command output; and
+* Command execution upon clicking the widget in the panel. Left, middle and right click options are specifiable. 
 
 ### Scripts called by the extension
 Includes:
@@ -194,4 +194,4 @@ Includes:
 Left-clicking the right widget opens a terminal in which `update` is run. Middle-clicking the right widget re-runs `updates` to update the displayed values. Right-clicking the right widget runs `tail -f ~/updates.log` (`~/updates.log` contains the output of the last `updates` run).
 
 # KDE Plasma
-KDE Plasma was the second desktop I installed. Spacer extension is installed, as is the [Command Output](https://github.com/Zren/plasma-applet-commandoutput) Plasma widget. 
+KDE Plasma was the second desktop I installed. [Panel Spacer Extended](https://github.com/luisbocanegra/plasma-panel-spacer-extended) extension is installed, as is the [Command Output](https://github.com/Zren/plasma-applet-commandoutput) Plasma widget. 
