@@ -168,6 +168,25 @@ html {
     font-size: 18px;
     background-color: rgb(255,255,255);
 }
+.franklin-toc ol {
+    counter-reset: item;
+    list-style-type: none;
+    padding-left: 25px;
+}
+.franklin-toc > ol {
+    padding-left: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 15px;
+}
+.franklin-toc li {
+    display: block;
+}
+.franklin-toc li::before {
+    content: counters(item, ".") ". ";
+    counter-increment: item;
+    color: #333;
+}
 
 .franklin-content form {
     text-align: left; margin: auto;
@@ -210,9 +229,7 @@ input {
 .franklin-content li p {
         margin: 10px 0; }
 
-ol>ol>li:before {
-    content: counters(item, ".") ". "; counter-increment: item
-}
+/* Removed broken ol>ol>li rule that was trying to do hierarchical numbering */
 
 .franklin-content a {
     color: #004de6;

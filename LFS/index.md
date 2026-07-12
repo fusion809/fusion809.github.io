@@ -1,6 +1,7 @@
 @def hassim=false;
 @def title="Linux From Scratch (LFS) virtual machine (VM)"
 @def tag=["Linux"]
+@def mintoclevel=1
 
 ![LFS screenshot](https://fusion809.github.io/images/executor-raujonas.github.io/LFS_screenshot_12-07-2026_r13.0-143.png)
 
@@ -8,12 +9,14 @@
 
 I first installed LFS 12.4 systemd edition to a virtual machine on 9 February 2026. Since then, I have upgraded the system to the development systemd branch, and kept the system up to date. It has been a challenging, yet informative journey. 
 
+\toc
+
 # Package management
 From my NixOS host machine, I have written &mdash; with the help of artificial intelligence (AI) &mdash; several shell functions that are imported into my LFS VM and provide basic package management functionality. These functions are part of both my host's and VM's shell profile. These functions can be found in my [NixOS configuration user shell profile](https://github.com/fusion809/NixOS-configs/tree/26.05/shell/user/). 
 
 ~~~
 <table style="border-collapse: collapse;">
-    <caption style="font-size: 24px; padding: 10px;"><b>Table 1: Shell functions used for package management within the LFS VM.</b></caption>
+    <caption style="font-size: 24px; padding: 10px; text-align: left;"><b>Table 1: Shell functions used for package management within the LFS VM.</b></caption>
     <tr>
         <td style="font-size: 20px; padding: 10px; text-align: center;" colspan="2">
             <b>Function name</b>
@@ -51,6 +54,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
         </td>
         <td style="font-size: 16px; padding: 10px;">
             Default: build and install the specified package(s), if and only if the latest version of the package is not already installed. LFS/Beyond LFS (BLFS) instructions are used to build most packages. Although, some packages are built using custom build scripts defined in <a href="https://github.com/fusion809/lfs_packaging"><code>~/lfs_packaging</code></a>.<br/>
+            Options:<br/>
             <code>--dry-run</code>: show what actions would be executed to build and install the package.<br/>
             <code>--strip</code>: run stripping commands after build.<br/>
             <code>--no-upstream</code>: disable upstream version searching.<br/>
@@ -81,6 +85,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
         </td>
         <td style="font-size: 16px; padding: 10px;">
             Default: remove the specified package(s), if and only if no other packages have libraries that depend on the package(s).<br/>
+            Options:<br/>
             <code>--dry-run</code>: show what actions would be executed to remove the package.<br/>
             <code>-f</code>/<code>--force</code>: force removal, without regard for library dependencies.<br/>
         </td>
@@ -133,7 +138,8 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
             <code>update [OPTION(s)]</code>
         </td>
         <td style="font-size: 16px; padding: 10px;">
-            Update packages. 
+            Update packages.<br/>
+            Options:<br/>
             <code>--dry-run</code>: Show what would be updated without downloading/building.<br/>
             <code>--no-upstream</code>: Check only LFS/BLFS book versions (disable upstream tracking).<br/>
             <code>-h</code>/<code>--help</code>: Show help message.
@@ -159,10 +165,20 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
 </table>
 ~~~
 
-Package inventories are stored within [/var/lib/book-packages](https://github.com/fusion809/lfs_book-packages) for LFS/BLFS packages and [/var/lib/custom-packages](https://github.com/fusion809/lfs_custom-packages) for custom packages.
+Package inventories are stored within [`/var/lib/book-packages`](https://github.com/fusion809/lfs_book-packages) for LFS/BLFS packages and [`/var/lib/custom-packages`](https://github.com/fusion809/lfs_custom-packages) for custom packages.
 
 # Custom desktop configuration files
-These are defined in [~/lfs_apps](https://github.com/fusion809/lfs_apps). They include desktop configuration files that generate plots of boot times and cycle through wallpapers.
+These are defined in [`~/lfs_apps`](https://github.com/fusion809/lfs_apps). They include desktop configuration files that generate plots of boot times and desktop configuration files that cycle through wallpapers.
+
+Plotting files:
+* `plotbts` and `plotbts.desktop` &mdash; boot time histogram with linear scaling on both axes; outliers excluded; not including more recent boots.
+* `plotbtsa` and `plotbtsa.desktop` &mdash; boot time histogram with logarithmic scaling on both axes; outliers included; including more recent boots.
+* `plotbtso` and `plotbtso.desktop` &mdash; boot time histogram with linear scaling on both axes; outliers included; not including more recent boots.
+
+Wallpaper cycling files:
+* `cycle-wallpaper.sh` and `cycle-wallpaper.desktop` &mdash; moves us forward through the wallpapers in `~/wallpapers`. 
+* `cycle-wallpaper-previous.sh` and `cycle-wallpaper-previous.desktop` &mdash; moves us backward through the wallpapers in `~/wallpapers`. 
+* `cycle-wallpaper-shuffle.sh` and `cycle-wallpaper-shuffle.desktop` &mdash; moves us randomly through the wallpapers in `~/wallpapers`. 
 
 # Custom packages
 [`~/lfs_packaging`](https://github.com/fusion809/lfs_packaging) provides custom build scripts to install many packages. Some of these packages are also provided by LFS and BFLS &mdash; such as Linux PAM, Vim, rustc and packages within the xorg-apps and xorg-libs metapackages. I provide these custom packages sometimes to overcome build errors that the book-extraction function cause and other times to more robustly ensure I have the latest version of these packages at all times. Other packages are provided in this repository because LFS and BLFS do not provide them; other books in the LFS such as SLFS do provide some of these packages, but some are unique to this repository (e.g. GNU Octave and R are).
