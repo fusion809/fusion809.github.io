@@ -193,7 +193,7 @@ My shell profile is defined in [`~/lfs-scripts`](https://github.com/fusion809/lf
 GNOME was the first desktop I installed. Its packages are kept at the latest upstream version, not merely the latest version in the BLFS book. [Dash to Dock](https://github.com/micheleg/dash-to-dock) is enabled and installed, as is [WeatherPanel](https://github.com/attentivecoder/weatherpanel) and [Show Desktop Button](https://github.com/amivaleo/Show-Desktop-Button). [Executor](https://github.com/raujonas/executor) is another extension I use; I've actually created my [own fork](https://github.com/fusion809/executor-raujonas.github.io) with more features.
 
 ## Executor fork
-*Installed via the [executor `~/lfs_packaging` package](https://github.com/fusion809/lfs_packaging/tree/master/executor). It can be installed via more standard ways, too.*
+*Has `~/lfs_packaging` package called [executor](https://github.com/fusion809/lfs_packaging/tree/master/executor). It can be installed via more standard ways, too.*
 
 The base [executor](https://github.com/raujonas/executor) extension provides up to three widgets in the GNOME panel on the left, centre and right of the panel. In these widgets is displayed the output of specified commands. The interval at which the command is re-run can also be specified. The [executor fork](https://github.com/fusion809/executor-raujonas.github.io) I maintain provides the following additional features:
 * Tooltips &mdash; which can have two components, in order: (1) static text and (2) command output.
