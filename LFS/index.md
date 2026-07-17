@@ -196,8 +196,8 @@ GNOME was the first desktop I installed. Its packages are kept at the latest ups
 *Installed via the [executor `~/lfs_packaging` package](https://github.com/fusion809/lfs_packaging/tree/master/executor). It can be installed via more standard ways, too.*
 
 The base [executor](https://github.com/raujonas/executor) extension provides up to three widgets in the GNOME panel on the left, centre and right of the panel. In these widgets is displayed the output of specified commands. The interval at which the command is re-run can also be specified. The [executor fork](https://github.com/fusion809/executor-raujonas.github.io) I maintain provides the following additional features:
-* Tooltips, which can include command output at their end as well as the static text within the widget that precedes the command output; and
-* Command execution upon clicking the widget in the panel. Left, middle and right click options are specifiable. 
+* Tooltips &mdash; which can have two components, in order: (1) static text and (2) command output.
+* Command execution when the panel widget is clicked, with separate commands for left-, middle- and right-click actions. 
 
 ### Scripts called by the extension
 Includes:
