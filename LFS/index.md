@@ -175,15 +175,14 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
 </table>
 ~~~
 
-Package inventories are stored within [`/var/lib/book-packages`](https://github.com/fusion809/lfs_book-packages) for LFS/BLFS packages and [`/var/lib/custom-packages`](https://github.com/fusion809/lfs_custom-packages) for custom packages.
-
 # Custom desktop configuration files
-These are defined in [`~/lfs_apps`](https://github.com/fusion809/lfs_apps). They include desktop configuration files that generate plots of boot times and desktop configuration files that cycle through wallpapers.
+The desktop configuration files in [`~/lfs_apps`](https://github.com/fusion809/lfs_apps) generate plots of boot times and cycle through wallpapers.
 
 Plotting files:
-* `plotbts` and `plotbts.desktop` &mdash; boot time histogram with linear scaling on both axes; outliers excluded; not including more recent boots.
-* `plotbtsa` and `plotbtsa.desktop` &mdash; boot time histogram with logarithmic scaling on both axes; outliers included; including more recent boots.
-* `plotbtso` and `plotbtso.desktop` &mdash; boot time histogram with linear scaling on both axes; outliers included; not including more recent boots.
+* `plotbts.sh` and `plotbts.desktop` &mdash; boot time histogram with linear scaling on both axes; outliers excluded; not including more recent boots. 
+* `plotbtsa.sh` and `plotbtsa.desktop` &mdash; boot time histogram with logarithmic scaling on both axes; outliers included; including more recent boots.
+* `plotbtso.sh` and `plotbtso.desktop` &mdash; boot time histogram with linear scaling on both axes; outliers included; not including more recent boots.
+These rely on [`~/lfs_gnuplot`](https://github.com/fusion809/lfs_gnuplot) Gnuplot code.
 
 Wallpaper cycling files:
 * `cycle-wallpaper.sh` and `cycle-wallpaper.desktop` &mdash; moves us forward through the wallpapers in `~/wallpapers`. 
@@ -191,10 +190,12 @@ Wallpaper cycling files:
 * `cycle-wallpaper-shuffle.sh` and `cycle-wallpaper-shuffle.desktop` &mdash; moves us randomly through the wallpapers in `~/wallpapers`. 
 
 # Custom packages
-[`~/lfs_packaging`](https://github.com/fusion809/lfs_packaging) provides custom build scripts to install many packages. Some of these packages are also provided by LFS and BFLS &mdash; such as Linux PAM, Vim, rustc and packages within the xorg-apps and xorg-libs metapackages. I provide these custom packages sometimes to overcome build errors that the book-extraction function cause and other times to more robustly ensure I have the latest version of these packages at all times. Other packages are provided in this repository because LFS and BLFS do not provide them; other books in the LFS such as SLFS do provide some of these packages, but some are unique to this repository (e.g. GNU Octave and R are).
+Some of the packages in [`~/lfs_packaging`](https://github.com/fusion809/lfs_packaging) also have build instructions in LFS and BLFS books &mdash; such as Linux PAM, Vim, rustc and packages within the xorg-apps and xorg-libs metapackages. I provide these custom packages sometimes to overcome build errors that the book-extraction function cause and other times to more robustly ensure I have the latest version of these packages at all times. Other packages are provided in this repository because LFS and BLFS do not provide them; other books in the LFS such as SLFS do provide some of these packages, but some are unique to this repository (e.g. GNU Octave and R are).
 
 # Fastfetch/HyFetch
-I have also customized Fastfetch/HyFetch output so that it accurately prints the number of packages I have installed. The configuration file used is located in [`~/lfs-scripts/config.jsonc`](https://github.com/fusion809/lfs-scripts/blob/master/config.jsonc). In the screenshot above, `807 (󰌽 573,  130,  1,  74,  29)` means that 807 packages are installed in total. Of them 573 are LFS or BLFS book packages installed via `autobuild` and its extracting build commands and source URLs from the books' webpages. A further 130 were installed via custom build scripts in [`~/lfs_packaging`](https://github.com/fusion809/lfs_packaging). 1 Julia package was installed; this package is Julia itself which was installed via `juliaup` (the compilation process of Julia is incredibly complex and even requires its own custom build of LLVM). 74 Python packages were installed via `pip`. 29 R packages were installed. 
+I have also customized Fastfetch/HyFetch output so that it accurately prints the number of packages I have installed. The Fastfetch configuration file used is located in [`~/lfs_dotfiles/config.jsonc`](https://github.com/fusion809/lfs_dotfiles/blob/master/config.jsonc). The HyFetch configuration files are also in [`~/lfs_dotfiles/hyfetch.json`](https://github.com/fusion809/lfs_dotfiles/blob/master/hyfetch.json). 
+
+In the screenshot above, `807 (󰌽 573,  130,  1,  74,  29)` means that 807 packages are installed in total. Of them 573 are LFS or BLFS book packages installed via `autobuild` and its extracting build commands and source URLs from the books' webpages. A further 130 were installed via custom build scripts in [`~/lfs_packaging`](https://github.com/fusion809/lfs_packaging). 1 Julia package was installed; this package is Julia itself which was installed via `juliaup` (the compilation process of Julia is incredibly complex and even requires its own custom build of LLVM). 74 Python packages were installed via `pip`. 29 R packages were installed. 
 
 # Shell profile
 My shell profile is defined in [`~/lfs-scripts`](https://github.com/fusion809/lfs-scripts). Some scripts called for by GNOME and KDE Plasma Executor/Command Output commands are in this repository, too. 
