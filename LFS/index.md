@@ -11,6 +11,16 @@ I first installed LFS 12.4 systemd edition to a virtual machine on 9 February 20
 
 \toc
 
+# GitHub repositories relating to VM and their locations on VM
+* Host system [`NixOS-configs`](https://github.com/fusion809/NixOS-configs) has shell profile for managing VM, including package management shell functions. 
+* [`~/lfs_apps`](https://github.com/fusion809/lfs_apps) &mdash; desktop configuration files and shell scripts these desktop files call. 
+* [`~/lfs_dotfiles`](https://github.com/fusion809/lfs_dotfiles) &mdash; fastfetch configuration file for LFS VM.
+* [`~/lfs_gnuplot`](https://github.com/fusion809/lfs_gnuplot) &mdash; Gnuplot files for my LFS VM.
+* [`~/lfs_packaging`](https://github.com/fusion809/lfs_packaging) &mdash; which contains packaging scripts for building custom packages.
+* [`~/lfs-scripts`](https://github.com/fusion809/lfs-scripts) &mdash; shell scripts (including VM shell profile and scripts called by Executor and Command Output extensions/widgets) used by LFS system. 
+* [`/var/lib/book-packages`](https://github.com/fusion809/lfs_book-packages) &mdash; package inventories for LFS and BLFS packages.
+* [`/var/lib/custom-packages`](https://github.com/fusion809/lfs_custom-packages) &mdash; package inventories for custom packages (`~/lfs_packaging`).
+
 # Package management
 From my NixOS host machine, I have written &mdash; with the help of artificial intelligence (AI) &mdash; several shell functions that are imported into my LFS VM and provide basic package management functionality. These functions are part of both my host's and VM's shell profile. These functions can be found in my [NixOS configuration user shell profile](https://github.com/fusion809/NixOS-configs/tree/26.05/shell/user/). 
 
@@ -196,8 +206,8 @@ GNOME was the first desktop I installed. Its packages are kept at the latest ups
 *Has `~/lfs_packaging` package called [executor](https://github.com/fusion809/lfs_packaging/tree/master/executor). It can be installed via more standard ways, too.*
 
 The base [executor](https://github.com/raujonas/executor) extension provides up to three widgets in the GNOME panel on the left, centre and right of the panel. In these widgets is displayed the output of specified commands. The interval at which the command is re-run can also be specified. The [executor fork](https://github.com/fusion809/executor-raujonas.github.io) I maintain provides the following additional features:
-* Tooltips &mdash; which can have two components, in order: (1) static text and (2) command output.
-* Command execution when the panel widget is clicked, with separate commands for left-, middle- and right-click actions. 
+* Tooltips &mdash; which can have two components. They are, in order: (1) static text and (2) command output.
+* Command execution when the panel widget is clicked, with separate commands for left-, middle-, and right-click actions. 
 
 ### Scripts called by the extension
 Includes:
