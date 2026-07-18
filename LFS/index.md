@@ -14,7 +14,7 @@ I first installed LFS 12.4 systemd edition to a virtual machine on 9 February 20
 # GitHub repositories relating to VM and their locations on VM
 * Host system [`NixOS-configs`](https://github.com/fusion809/NixOS-configs) has shell profile for managing VM, including package management shell functions. 
 * [`~/lfs_apps`](https://github.com/fusion809/lfs_apps) &mdash; desktop configuration files and shell scripts these desktop files call. 
-* [`~/lfs_dotfiles`](https://github.com/fusion809/lfs_dotfiles) &mdash; fastfetch configuration file for LFS VM.
+* [`~/lfs_dotfiles`](https://github.com/fusion809/lfs_dotfiles) &mdash; Fastfetch and HyFetch configuration files for LFS VM.
 * [`~/lfs_gnuplot`](https://github.com/fusion809/lfs_gnuplot) &mdash; Gnuplot files for my LFS VM.
 * [`~/lfs_packaging`](https://github.com/fusion809/lfs_packaging) &mdash; which contains packaging scripts for building custom packages.
 * [`~/lfs-scripts`](https://github.com/fusion809/lfs-scripts) &mdash; shell scripts (including VM shell profile and scripts called by Executor and Command Output extensions/widgets) used by LFS system. 
