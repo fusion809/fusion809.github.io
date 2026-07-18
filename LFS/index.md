@@ -7,9 +7,14 @@
 
 **Figure 1: Screenshot of my LFS VM's GNOME session as of 12 July 2026.**
 
-I first installed LFS 12.4 systemd edition to a virtual machine on 9 February 2026. Since then, I have upgraded the system to the development systemd branch, and kept the system up to date. It has been a challenging, yet informative journey. 
+I first installed LFS 12.4 systemd edition to a virtual machine on 9 February 2026. Since then, I have upgraded the system to the development systemd branch, and kept the system up to date. It has been a challenging, yet informative journey.
 
 \toc
+
+# Motivations
+My motivations for setting us this VM include:
+* Curiosity, as I have dozens of free operating system (OS) VMs that I maintain just as a curiosity, so setting up a LFS VM keeps within this. 
+* A desire to prove to myself that I can actually run and maintain LFS long term and get it to the point of being a viable daily driver. 
 
 # GitHub repositories relating to VM and their locations on VM
 * Host system [`NixOS-configs`](https://github.com/fusion809/NixOS-configs) has shell profile for managing VM, including package management shell functions. 
