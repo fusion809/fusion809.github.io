@@ -3,7 +3,7 @@
 @def tag=["Linux"]
 @def mintoclevel=1
 
-![LFS screenshot](https://fusion809.github.io/images/executor-raujonas.github.io/LFS_screenshot_26-07-2026_2.png)
+![LFS screenshot](https://fusion809.github.io/images/executor-raujonas.github.io/LFS_screenshot_26-07-2026.png)
 
 **Figure 1: Screenshot of my LFS VM's GNOME session as of 26 July 2026.**
 
