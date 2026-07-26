@@ -107,16 +107,16 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
     </tr>
     <tr>
         <td style="font-size: 16px; padding: 10px;">
-            N/A
+            <code>cleanup_old_libraries</code>
         </td>
         <td style="font-size: 16px; padding: 10px;">
-            <code>cleanup_old_libraries_gpt</code>
+            <code>cleanup_old_libraries</code>
         </td>
         <td style="font-size: 16px; padding: 10px;">
             <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
         </td>
         <td style="font-size: 16px; padding: 10px;">
-            <code>cleanup_old_libraries_gpt</code>
+            <code>cleanup_old_libraries [OPTION(S)]</code>
         </td>
         <td style="font-size: 16px; padding: 10px;">
             Remove old unused libraries. As for used old used libraries, rebuild packages that depend on the library and then remove it. 
@@ -124,19 +124,53 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
     </tr>
     <tr>
         <td style="font-size: 16px; padding: 10px;">
-            N/A
+            <code>cleanup_old_doc_dirs</code>
         </td>
         <td style="font-size: 16px; padding: 10px;">
-            <code>cleanup_old_doc_dirs_gpt</code>
+            <code>cleanup_old_doc_dirs</code>
         </td>
         <td style="font-size: 16px; padding: 10px;">
             <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
         </td>
         <td style="font-size: 16px; padding: 10px;">
-            <code>cleanup_old_doc_dirs_gpt</code>
+            <code>cleanup_old_doc_dirs [OPTION(S)]</code>
         </td>
         <td style="font-size: 16px; padding: 10px;">
             Remove old unused documentation directories. 
+        </td>
+    </tr>
+    <tr>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>cleanup_share_dirs</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            N/A
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/lfs-vm-bootstrap.sh">lfs-vm-bootstrap.sh</a>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>cleanup_share_dirs [OPTION(S)]</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            Removes old unused <code>/usr/share</code> subdirectories. 
+        </td>
+    </tr>
+    <tr>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>ls_old_libs</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+        N/A
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+        <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+        <code>ls_old_libs [OPTION(S)]</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+        List old installed versions of libraries. With `-d` option it list files that depend on listed files.
         </td>
     </tr>
     <tr>
