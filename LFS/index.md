@@ -280,7 +280,7 @@ GNOME was the first desktop I installed. Its packages are kept at the latest ups
 ## Executor fork
 *Has `~/lfs_packaging` package called [executor](https://github.com/fusion809/lfs_packaging/tree/master/executor). It can be installed via more standard ways, too.*
 
-The base [executor](https://github.com/raujonas/executor) extension provides up to three widgets in the GNOME panel on the left, centre and right of the panel. In these widgets is displayed the output of specified commands. The interval at which the command is re-run can also be specified. The [executor fork](https://github.com/fusion809/executor-raujonas.github.io) I maintain provides the following additional features:
+The base [Executor](https://github.com/raujonas/executor) extension provides up to three widgets in the GNOME panel on the left, centre and right of the panel. In these widgets is displayed the output of specified commands. The interval at which the command is re-run can also be specified. The [Executor fork](https://github.com/fusion809/executor-raujonas.github.io) I maintain provides the following additional features:
 * Tooltips &mdash; which can have two components. They are, in order: (1) static text and (2) command output.
 * Command execution when the panel widget is clicked, with separate commands for left-, middle-, and right-click actions. 
 
