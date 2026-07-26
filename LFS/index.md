@@ -119,7 +119,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
             <code>cleanup_old_libraries [OPTION(S)]</code>
         </td>
         <td style="font-size: 16px; padding: 10px;">
-            Remove old unused libraries. As for used old used libraries, rebuild packages that depend on the library and then remove it. 
+            Remove old unused libraries. As for used old used libraries, rebuild packages that depend on the library and then remove it. Options:<br/><code>--dry-run</code> shows what would be done without actually executing those actions.
         </td>
     </tr>
     <tr>
@@ -136,7 +136,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
             <code>cleanup_old_doc_dirs [OPTION(S)]</code>
         </td>
         <td style="font-size: 16px; padding: 10px;">
-            Remove old unused documentation directories. 
+            Remove old unused documentation directories. Options:<br/><code>--dry-run</code> shows what would be done without actually executing those actions.
         </td>
     </tr>
     <tr>
@@ -153,7 +153,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
             <code>cleanup_share_dirs [OPTION(S)]</code>
         </td>
         <td style="font-size: 16px; padding: 10px;">
-            Removes old unused <code>/usr/share</code> subdirectories. 
+            Removes old unused <code>/usr/share</code> subdirectories. Options:<br/><code>--dry-run</code> shows what would be done without actually executing those actions.
         </td>
     </tr>
     <tr>
@@ -170,7 +170,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
         <code>ls_old_libs [OPTION(S)]</code>
         </td>
         <td style="font-size: 16px; padding: 10px;">
-        List old installed versions of libraries. With `-d` option it list files that depend on listed files.
+        List old installed versions of libraries. Options:<br/><code>-d</code> option it list files that depend on listed files.
         </td>
     </tr>
     <tr>
