@@ -3,9 +3,9 @@
 @def tag=["Linux"]
 @def mintoclevel=1
 
-![LFS screenshot](https://fusion809.github.io/images/executor-raujonas.github.io/LFS_screenshot_12-07-2026_r13.0-143.png)
+![LFS screenshot](https://fusion809.github.io/images/executor-raujonas.github.io/LFS_screenshot_26-07-2026_2.png)
 
-**Figure 1: Screenshot of my LFS VM's GNOME session as of 12 July 2026.**
+**Figure 1: Screenshot of my LFS VM's GNOME session as of 26 July 2026.**
 
 I first installed LFS 12.4 systemd edition to a virtual machine on 9 February 2026. Since then, I have upgraded the system to the development systemd branch, and kept the system up to date. It has been a challenging, yet informative journey.
 
@@ -200,7 +200,7 @@ Some of the packages in [`~/lfs_packaging`](https://github.com/fusion809/lfs_pac
 # Fastfetch/HyFetch
 I have also customized Fastfetch/HyFetch output so that it accurately prints the number of packages I have installed. The Fastfetch configuration file used is located in [`~/lfs_dotfiles/config.jsonc`](https://github.com/fusion809/lfs_dotfiles/blob/master/config.jsonc). The HyFetch configuration files are also in [`~/lfs_dotfiles/hyfetch.json`](https://github.com/fusion809/lfs_dotfiles/blob/master/hyfetch.json). 
 
-In the screenshot above, `807 (󰌽 573,  130,  1,  74,  29)` means that 807 packages are installed in total. Of them 573 are LFS or BLFS book packages installed via `autobuild` and its extracting build commands and source URLs from the books' webpages. A further 130 were installed via custom build scripts in [`~/lfs_packaging`](https://github.com/fusion809/lfs_packaging). 1 Julia package was installed; this package is Julia itself which was installed via `juliaup` (the compilation process of Julia is incredibly complex and even requires its own custom build of LLVM). 74 Python packages were installed via `pip`. 29 R packages were installed. 
+In the screenshot above, `811 (󰌽 552,  155,  1,  74,  29)` means that 811 packages are installed in total. Of them 552 are LFS or BLFS book packages installed via `autobuild` and its extracting build commands and source URLs from the books' webpages. A further 155 were installed via custom build scripts in [`~/lfs_packaging`](https://github.com/fusion809/lfs_packaging). 1 Julia package was installed; this package is Julia itself which was installed via `juliaup` (the compilation process of Julia is incredibly complex and even requires its own custom build of LLVM). 74 Python packages were installed via `pip`. 29 R packages were installed. 
 
 # Shell profile
 My shell profile is defined in [`~/lfs-scripts`](https://github.com/fusion809/lfs-scripts). Some scripts called for by GNOME and KDE Plasma Executor/Command Output commands are in this repository, too. 
@@ -217,7 +217,11 @@ The base [executor](https://github.com/raujonas/executor) extension provides up 
 
 ### Scripts called by the extension
 Includes:
+* [`boot_time.sh`](https://github.com/fusion809/lfs-scripts/blob/master/boot_time.sh) &mdash; displays the boot time of the system. In my set up, it is used to generate output for the left widget.
 * [`count-wallpapers.sh`](https://github.com/fusion809/lfs-scripts/blob/master/count-wallpapers.sh) &mdash; displays the number of the currently shown wallpaper / the total number of wallpapers in `~/wallpapers`. In my set up, it is used to generate output by the centre widget.
+* [`cycle-wallpaper.sh`](https://github.com/fusion809/lfs_apps/blob/master/cycle-wallpaper.sh) &mdash; show next wallpaper. Triggered by right clicking left widget. 
+* [`cycle-wallpaper-previous.sh`](https://github.com/fusion809/lfs_apps/blob/master/cycle-wallpaper-previous.sh) &mdash; show previous wallpaper. Triggered by left clicking left widget. 
+* [`cycle-wallpaper-shuffle.sh`](https://github.com/fusion809/lfs_apps/blob/master/cycle-wallpaper-shuffle.sh) &mdash; show a random wallpaper. Triggered by middle clicking left widget. 
 * [`list-wallpaper.sh`](https://github.com/fusion809/lfs-scripts/blob/master/list-wallpapers.sh) &mdash; displays the list of wallpapers in `~/wallpapers` with the currently shown wallpaper highlighted and centred. `gnome-terminal -- zsh -ic "~/lfs-scripts/list-wallpapers.sh"` is run when left-clicking the centre widget in my setup. 
 * [`open-wallpaper.sh`](https://github.com/fusion809/lfs-scripts/blob/master/open-wallpaper.sh) &mdash; opens the displayed wallpaper in Eye of GNOME. This script is run when I right-click the centre widget in my setup.
 * [`updates_no.sh`](https://github.com/fusion809/lfs-scripts/blob/master/updates_no.sh) &mdash; checks for updates using the `updates` command in the shell profile. It displays `$in_progress $mod_time  $no_updates 󰂕 $no_missing_total  $no_failed` where `$in_progress` is replaced with nothing if the `updates` command is not running, and `󰦕 ${percent}% ` otherwise, where `$percent` is an approximation of how far through the running of `updates` we are. `$mod_time` is replaced with the time the `updates` command last stopped running. `$no_updates` is replaced with the number of available package updates. `$no_missing_total` is replaced with the number of packages with missing inventories. `$no_failed` is replaced with the number of package versioning failures. It runs every 5 minutes - the average duration of `updates` runs. 
