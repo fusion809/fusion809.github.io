@@ -430,7 +430,7 @@ Right click: show log of last update check.
     <img src="https://fusion809.github.io/images/executor-raujonas.github.io/Centre_tooltip.png"/>
     </td>
     <td style="font-size: 16px; padding: 10px;">
-    Below is outdated; it is now left-aligned. <br/><img src="https://fusion809.github.io/images/executor-raujonas.github.io/Right_tooltip.png"/>
+    <img src="https://fusion809.github.io/images/executor-raujonas.github.io/Right_tooltip.png"/>
     </td>
     </tr>
 </table>
