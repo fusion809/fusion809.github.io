@@ -407,6 +407,35 @@ Right click: show log of last update check.
 </table>
 ~~~
 
+~~~
+<br/>
+<table style="border-collapse: collapse;">
+    <caption style="font-size: 24px; padding: 10px; text-align: left;"><b>Table 4: Example tooltip contents.</b></caption>
+    <tr>
+    <td style="font-size: 20px; padding: 10px; text-align: center;">
+    <b>Left</b>
+    </td>
+    <td style="font-size: 20px; padding: 10px; text-align: center;">
+    <b>Centre</b>
+    </td>
+    <td style="font-size: 20px; padding: 10px; text-align: center;">
+    <b>Right</b>
+    </td>
+    </tr>
+    <tr>
+    <td style="font-size: 16px; padding: 10px;">
+    <img src="https://fusion809.github.io/images/executor-raujonas.github.io/Left_tooltip.png"/>
+    </td>
+    <td style="font-size: 16px; padding: 10px;">
+    <img src="https://fusion809.github.io/images/executor-raujonas.github.io/Centre_tooltip.png"/>
+    </td>
+    <td style="font-size: 16px; padding: 10px;">
+    Below is outdated; it is now left-aligned. <br/><img src="https://fusion809.github.io/images/executor-raujonas.github.io/Right_tooltip.png"/>
+    </td>
+    </tr>
+</table>
+~~~
+
 ## Installing extensions via my web browser
 BLFS did not provide a `gnome-browser-connector` package, which is required for installing GNOME extensions within one's browser. Manually compiling and installing it was fairly easy, however. That being said, whenever I tried to install an extension using it, I noticed that the extension was not successfully installed despite there being a folder in `~/.local/share/gnome-shell/extensions` for it. As this folder would be completely empty. Why? Well, running strace on GNOME shell revealed the problem was actually that the `gnome-browser-connector` was running `unzip` commands that assumed that Info-ZIP's unzip command was installed, not the `bsdunzip` variety provided by libarchive (which is the only one provided by BLFS or LFS). 
 
