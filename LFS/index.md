@@ -405,5 +405,12 @@ Right click: show log of last update check.
 </table>
 ~~~
 
+## Installing extensions via my web browser
+BLFS did not provide a `gnome-browser-connector` package, which is required for installing GNOME extensions within one's browser. Manually compiling and installing it was fairly easy, however. That being said, whenever I tried to install an extension using it, I noticed that the extension was not successfully installed despite there being a folder in `~/.local/share/gnome-shell/extensions` for it. As this folder would be completely empty. Why? Well, running strace on GNOME shell revealed the problem was actually that the `gnome-browser-connector` was running `unzip` commands that assumed that Info-ZIP's unzip command was installed, not the `bsdunzip` variety provided by libarchive (which is the only one provided by BLFS or LFS). 
+
+I tried compiling Info-ZIP's unzip, such as by following some [old BLFS instructions](https://www.linuxfromscratch.org/blfs/view/cvs/general/unzip.html) but this failed as Info-ZIP's unzip has not been updated since ~2009 and requires multiple intricate patches to get it to compile. The consolidated patch provided by BLFS was not even sufficient, even after I located the patch (the link provided in the book entry shared is actually dead, so I had to find a link to the patch elsewhere by Googling). 
+
+Luckily, ChatGPT provided a script version of `unzip` that would run `bsdtar` in the background and could take all the arguments that `gnome-browser-connector` provided it. I have since included this script in my [custom package for libarchive](https://github.com/fusion809/lfs_packaging/tree/master/libarchive).
+
 # KDE Plasma
 KDE Plasma was the second desktop I installed. [Panel Spacer Extended](https://github.com/luisbocanegra/plasma-panel-spacer-extended) extension is installed, as is the [Command Output](https://github.com/Zren/plasma-applet-commandoutput) Plasma widget. 
