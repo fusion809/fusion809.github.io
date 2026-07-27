@@ -3,9 +3,9 @@
 @def tag=["Linux"]
 @def mintoclevel=1
 
-![LFS screenshot](https://fusion809.github.io/images/executor-raujonas.github.io/LFS_screenshot_27-07-2026.png)
+![LFS screenshot](https://fusion809.github.io/images/executor-raujonas.github.io/LFS_screenshot_28-07-2026.png)
 
-**Figure 1: Screenshot of my LFS VM's GNOME session as of 27 July 2026.**
+**Figure 1: Screenshot of my LFS VM's GNOME session as of 28 July 2026.**
 
 I first installed LFS 12.4 systemd edition to a virtual machine on 9 February 2026. Since then, I have upgraded the system to the development systemd branch, and kept the system up to date. It has been a challenging, yet informative journey.
 
@@ -317,7 +317,7 @@ The base [Executor](https://github.com/raujonas/executor) extension provides up 
             <b>Output command</b>
         </td>
         <td style="font-size: 16px; padding: 10px;">
-            <a href="https://github.com/fusion809/lfs-scripts/blob/master/boot_time.sh" target="_blank"><code>~/lfs-scripts/boot_time.sh</code></a> &mdash; displays the version of LFS being run and the boot time of the system. In my set up, it is used to generate output for the left widget. Runs every 60s.
+            <a href="https://github.com/fusion809/lfs-scripts/blob/master/left_widget_command.sh" target="_blank"><code>~/lfs-scripts/left_widget_command.sh</code></a> &mdash; displays the boot time of the system. In my set up, it is used to generate output for the left widget. Runs every 60s.
         </td>
         <td style="font-size: 16px; padding: 10px;">
             <a href="https://github.com/fusion809/lfs-scripts/blob/master/count-wallpapers.sh" target="_blank"><code>~/lfs-scripts/count-wallpapers.sh</code></a> &mdash; displays the number of the currently shown wallpaper / the total number of wallpapers in <code>~/wallpapers</code>. Runs every second.
