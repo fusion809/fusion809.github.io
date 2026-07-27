@@ -317,7 +317,7 @@ The base [Executor](https://github.com/raujonas/executor) extension provides up 
             <b>Output command</b>
         </td>
         <td style="font-size: 16px; padding: 10px;">
-            <a href="https://github.com/fusion809/lfs-scripts/blob/master/boot_time.sh" target="_blank"><code>~/lfs-scripts/boot_time.sh</code></a> &mdash; displays the boot time of the system. In my set up, it is used to generate output for the left widget. Runs every 60s.
+            <a href="https://github.com/fusion809/lfs-scripts/blob/master/boot_time.sh" target="_blank"><code>~/lfs-scripts/boot_time.sh</code></a> &mdash; displays the version of LFS being run and the boot time of the system. In my set up, it is used to generate output for the left widget. Runs every 60s.
         </td>
         <td style="font-size: 16px; padding: 10px;">
             <a href="https://github.com/fusion809/lfs-scripts/blob/master/count-wallpapers.sh" target="_blank"><code>~/lfs-scripts/count-wallpapers.sh</code></a> &mdash; displays the number of the currently shown wallpaper / the total number of wallpapers in <code>~/wallpapers</code>. Runs every second.
