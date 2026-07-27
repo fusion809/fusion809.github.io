@@ -244,7 +244,7 @@ In the screenshot above, `811 (󰌽 552,  155,  1,  74,  29)` means 
 My shell profile is defined in [`~/lfs-scripts`](https://github.com/fusion809/lfs-scripts). Some scripts called for by GNOME and KDE Plasma Executor/Command Output commands are in this repository, too. 
 
 # GNOME
-GNOME was the first desktop I installed. Its packages are kept at the latest upstream version, not merely the latest version in the BLFS book. [Dash to Dock](https://github.com/micheleg/dash-to-dock) is enabled and installed, as is [WeatherPanel](https://github.com/attentivecoder/weatherpanel), [Kiwimenu](https://github.com/kem-a/kiwi-menu), [Show Desktop Button](https://github.com/amivaleo/Show-Desktop-Button) and [Super Into Apps](https://github.com/mikelei8291/super-into-apps). [Executor](https://github.com/raujonas/executor) is another extension I use; I've actually created my [own fork](https://github.com/fusion809/executor-raujonas.github.io) with more features.
+GNOME was the first desktop I installed. Its packages are kept at the latest upstream version, not merely the latest version in the BLFS book. [Dash to Dock](https://github.com/micheleg/dash-to-dock) is enabled and installed, as is [WeatherPanel](https://github.com/attentivecoder/weatherpanel), [Extension List](https://github.com/tuberry/extension-list), [Kiwimenu](https://github.com/kem-a/kiwi-menu), [Show Desktop Button](https://github.com/amivaleo/Show-Desktop-Button) and [Super Into Apps](https://github.com/mikelei8291/super-into-apps). [Executor](https://github.com/raujonas/executor) is another extension I use; I've actually created my [own fork](https://github.com/fusion809/executor-raujonas.github.io) with more features.
 
 ~~~
 <table style="border-collapse: collapse;">
