@@ -395,7 +395,7 @@ Right click: show log of last update check.
             <b>Tooltip command</b>
         </td>
         <td style="font-size: 16px; padding: 10px;">
-            N/A
+            <a href="https://github.com/fusion809/lfs-scripts/blob/master/left_widget_tooltip_command.sh" target="_blank"><code>~/lfs-scripts/left_widget_tooltip_command.sh</code></a> &mdash; generates a line describing the version of LFS/BLFS installed, along with the number of packages installed via different means, and package inventory commit numbers in a similar format as in the Fastfetch output. 
         </td>
         <td style="font-size: 16px; padding: 10px;">
             N/A
