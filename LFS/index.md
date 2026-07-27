@@ -309,7 +309,7 @@ The base [Executor](https://github.com/raujonas/executor) extension provides up 
     </td>
     <td style="font-size: 16px; padding: 10px;">2
     </td>
-    <td style="font-size: 16px; padding: 10px;">1
+    <td style="font-size: 16px; padding: 10px;">2
     </td>
     </tr>
     <tr>
