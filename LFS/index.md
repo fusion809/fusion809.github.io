@@ -228,10 +228,10 @@ Plotting files:
 These rely on [`~/lfs_gnuplot`](https://github.com/fusion809/lfs_gnuplot) Gnuplot code.
 
 Wallpaper cycling files:
-* `cycle-wallpaper.sh` and `cycle-wallpaper.desktop` &mdash; moves us forward through the wallpapers in `~/wallpapers`. 
-* `cycle-wallpaper-previous.sh` and `cycle-wallpaper-previous.desktop` &mdash; moves us backward through the wallpapers in `~/wallpapers`. 
-* `cycle-wallpaper-shuffle.sh` and `cycle-wallpaper-shuffle.desktop` &mdash; moves us randomly through the wallpapers in `~/wallpapers`. 
-* `specify-wallpaper.sh` and `specify-wallpaper.desktop` &mdash; specify the wallpaper (by number) that you want to be set as you desktop background. 
+* `cycle-wallpaper.sh` and `cycle-wallpaper.desktop` &mdash; moves us forward through the wallpapers in `~/wallpapers`. Keyboard shortcut: Win+W.
+* `cycle-wallpaper-previous.sh` and `cycle-wallpaper-previous.desktop` &mdash; moves us backward through the wallpapers in `~/wallpapers`. Keyboard shortcut: Win+Z.
+* `cycle-wallpaper-shuffle.sh` and `cycle-wallpaper-shuffle.desktop` &mdash; moves us randomly through the wallpapers in `~/wallpapers`. Keyboard shortcut: Win+S.
+* `specify-wallpaper.sh` and `specify-wallpaper.desktop` &mdash; specify the wallpaper (by number) that you want to be set as you desktop background. Keyboard shortcut: Win+N.
 
 # Custom packages
 Some of the packages in [`~/lfs_packaging`](https://github.com/fusion809/lfs_packaging) also have build instructions in LFS and BLFS books &mdash; such as Linux PAM, Vim, rustc and packages within the xorg-apps and xorg-libs metapackages. I provide these custom packages sometimes to overcome build errors that the book-extraction function cause and other times to more robustly ensure I have the latest version of these packages at all times. Other packages are provided in this repository because LFS and BLFS do not provide them; other books in the LFS such as SLFS do provide some of these packages, but some are unique to this repository (e.g. GNU Octave and R are).
@@ -378,7 +378,8 @@ The base [Executor](https://github.com/raujonas/executor) extension provides up 
         <td style="font-size: 16px; padding: 10px;">
             Left click: previous wallpaper (Win+Z).<br/>
 Middle click: shuffle wallpaper (Win+S).<br/>
-Right click: next wallpaper (Win+W).
+Right click: next wallpaper (Win+W).<br/>
+Win+N: specify the number of wallpaper shown.
         </td>
         <td style="font-size: 16px; padding: 10px;">
             Left click: list wallpapers with displayed wallpaper centred and highlighted.<br/>
