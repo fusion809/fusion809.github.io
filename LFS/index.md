@@ -398,7 +398,7 @@ Right click: show log of last update check.
             <a href="https://github.com/fusion809/lfs-scripts/blob/master/left_widget_tooltip_command.sh" target="_blank"><code>~/lfs-scripts/left_widget_tooltip_command.sh</code></a> &mdash; generates a line describing the version of LFS/BLFS installed, along with the number of packages installed via different means, and package inventory commit numbers in a similar format as in the Fastfetch output. 
         </td>
         <td style="font-size: 16px; padding: 10px;">
-            <a href="https://github.com/fusion809/lfs-scripts/blob/master/centre_widget_tooltip_command.sh" target="_blank"><code>~/lfs-scripts/centre_widget_tooltip_command.sh</code></a> &mdash; lists selected wallpaper and the 25 wallpapers before and after this one.
+            <a href="https://github.com/fusion809/lfs-scripts/blob/master/centre_widget_tooltip_command.sh" target="_blank"><code>~/lfs-scripts/centre_widget_tooltip_command.sh</code></a> &mdash; lists selected wallpaper (indicated with `>`) and the 25 wallpapers before and after this one.
         </td>
         <td style="font-size: 16px; padding: 10px;">
             <a href="https://github.com/fusion809/lfs-scripts/blob/master/update-table.sh" target="_blank"><code>~/lfs-scripts/update-table.sh</code></a> &mdash; generates a more compact table of packages with updates, missing inventories and versioning failures.
