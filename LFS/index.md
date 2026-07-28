@@ -381,8 +381,8 @@ Right click: next wallpaper (Win+W).
         </td>
         <td style="font-size: 16px; padding: 10px;">
             Left click: list wallpapers with displayed wallpaper centred and highlighted.<br/>
-Middle click: open ~/wallpapers in Nautilus.<br/>
-Right click: open wallpaper in eog.
+Middle click: open Executor settings (Win+E).<br/>
+Right click: open wallpaper in EOG.
         </td>
         <td style="font-size: 16px; padding: 10px;">
             Left click: run `update`.<br/>
