@@ -379,7 +379,7 @@ The base [Executor](https://github.com/raujonas/executor) extension provides up 
             Left click: previous wallpaper (Win+Z).<br/>
 Middle click: shuffle wallpaper (Win+S).<br/>
 Right click: next wallpaper (Win+W).<br/>
-Win+N: specify the number of wallpaper shown.
+Win+N: show wallpaper whose number you will be asked to specify.
         </td>
         <td style="font-size: 16px; padding: 10px;">
             Left click: list wallpapers with displayed wallpaper centred and highlighted.<br/>
