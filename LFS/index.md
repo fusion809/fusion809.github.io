@@ -133,11 +133,10 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
             <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
         </td>
         <td style="font-size: 16px; padding: 10px;">
-            <code>cleanup_old_doc_dirs [OPTION(S)]</code>
+            <code>cleanup_old_doc_dirs</code>
         </td>
         <td style="font-size: 16px; padding: 10px;">
-            Remove old unused documentation directories.<br/>
-            Options:<br/><code>--dry-run</code> shows what would be done without actually executing those actions.
+            Remove old unused documentation directories.
         </td>
     </tr>
     <tr>
