@@ -107,126 +107,6 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
     </tr>
     <tr>
         <td style="font-size: 16px; padding: 10px;">
-            <code>cleanup_book_src</code>
-        </td>
-        <td style="font-size: 16px; padding: 10px;">
-            <code>cleanup_book_src</code>
-        </td>
-        <td style="font-size: 16px; padding: 10px;">
-            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
-        </td>
-        <td style="font-size: 16px; padding: 10px;">
-            <code>cleanup_book_src</code>
-        </td>
-        <td style="font-size: 16px; padding: 10px;">
-            Remove book source files.
-        </td>
-    </tr>  
-    <tr>
-        <td style="font-size: 16px; padding: 10px;">
-            <code>cleanup_lfp_src</code>
-        </td>
-        <td style="font-size: 16px; padding: 10px;">
-            <code>cleanup_lfp_src</code>
-        </td>
-        <td style="font-size: 16px; padding: 10px;">
-            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
-        </td>
-        <td style="font-size: 16px; padding: 10px;">
-            <code>cleanup_lfp_src</code>
-        </td>
-        <td style="font-size: 16px; padding: 10px;">
-            Remove custom package source tarballs.
-        </td>
-    </tr>    
-    <tr>
-        <td style="font-size: 16px; padding: 10px;">
-            <code>cleanup_old_doc_dirs</code>
-        </td>
-        <td style="font-size: 16px; padding: 10px;">
-            <code>cleanup_old_doc_dirs</code>
-        </td>
-        <td style="font-size: 16px; padding: 10px;">
-            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
-        </td>
-        <td style="font-size: 16px; padding: 10px;">
-            <code>cleanup_old_doc_dirs</code>
-        </td>
-        <td style="font-size: 16px; padding: 10px;">
-            Remove old unused documentation directories.
-        </td>
-    </tr>
-    <tr>
-        <td style="font-size: 16px; padding: 10px;">
-            <code>cleanup_old_kernels</code>
-        </td>
-        <td style="font-size: 16px; padding: 10px;">
-            <code>cleanup_old_kernels</code>
-        </td>
-        <td style="font-size: 16px; padding: 10px;">
-            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
-        </td>
-        <td style="font-size: 16px; padding: 10px;">
-            <code>cleanup_old_kernels</code>
-        </td>
-        <td style="font-size: 16px; padding: 10px;">
-            Remove old unused kernels.
-        </td>
-    </tr>
-        <tr>
-        <td style="font-size: 16px; padding: 10px;">
-            <code>cleanup_old_libraries</code>
-        </td>
-        <td style="font-size: 16px; padding: 10px;">
-            <code>cleanup_old_libraries</code>
-        </td>
-        <td style="font-size: 16px; padding: 10px;">
-            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
-        </td>
-        <td style="font-size: 16px; padding: 10px;">
-            <code>cleanup_old_libraries</code>
-        </td>
-        <td style="font-size: 16px; padding: 10px;">
-            Remove old unused libraries. As for used old used libraries, rebuild packages that depend on the library and then remove it.
-        </td>
-    </tr>
-    <tr>
-        <td style="font-size: 16px; padding: 10px;">
-            <code>cleanup_old_share_dirs</code>
-        </td>
-        <td style="font-size: 16px; padding: 10px;">
-            N/A
-        </td>
-        <td style="font-size: 16px; padding: 10px;">
-            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/lfs-vm-bootstrap.sh">lfs-vm-bootstrap.sh</a>
-        </td>
-        <td style="font-size: 16px; padding: 10px;">
-            <code>cleanup_old_share_dirs [OPTION(S)]</code>
-        </td>
-        <td style="font-size: 16px; padding: 10px;">
-            Removes old unused <code>/usr/share</code> subdirectories.<br/>
-            Options:<br/><code>--dry-run</code> shows what would be done without actually executing those actions.
-        </td>
-    </tr>
-        <tr>
-        <td style="font-size: 16px; padding: 10px;">
-            <code>cleanup_src</code>
-        </td>
-        <td style="font-size: 16px; padding: 10px;">
-            <code>cleanup_src</code>
-        </td>
-        <td style="font-size: 16px; padding: 10px;">
-            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
-        </td>
-        <td style="font-size: 16px; padding: 10px;">
-            <code>cleanup_src</code>
-        </td>
-        <td style="font-size: 16px; padding: 10px;">
-            Remove old source archives.
-        </td>
-    </tr>
-    <tr>
-        <td style="font-size: 16px; padding: 10px;">
             <code>ls_old_libs</code>
         </td>
         <td style="font-size: 16px; padding: 10px;">
@@ -241,6 +121,126 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
         <td style="font-size: 16px; padding: 10px;">
         List old installed versions of libraries.<br/>
         Options:<br/><code>-d</code> option it list files that depend on listed files.
+        </td>
+    </tr>
+    <tr>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>rm_book_src</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>rm_book_src</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>rm_book_src</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            Remove book source files.
+        </td>
+    </tr>  
+    <tr>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>rm_lfp_src</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>rm_lfp_src</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>rm_lfp_src</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            Remove custom package source tarballs.
+        </td>
+    </tr>    
+    <tr>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>rm_old_docs</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>rm_old_docs</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>rm_old_docs</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            Remove old unused documentation directories.
+        </td>
+    </tr>
+    <tr>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>rm_old_kerns</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>rm_old_kerns</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>rm_old_kerns</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            Remove old unused kernels.
+        </td>
+    </tr>
+        <tr>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>rm_old_libs</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>rm_old_libs</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>rm_old_libs</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            Remove old unused libraries. As for used old used libraries, rebuild packages that depend on the library and then remove it.
+        </td>
+    </tr>
+    <tr>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>rm_old_share</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            N/A
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/lfs-vm-bootstrap.sh">lfs-vm-bootstrap.sh</a>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>rm_old_share [OPTION(S)]</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            Removes old unused <code>/usr/share</code> subdirectories.<br/>
+            Options:<br/><code>--dry-run</code> shows what would be done without actually executing those actions.
+        </td>
+    </tr>
+        <tr>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>rm_src</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>rm_src</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>rm_src</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            Remove old source archives.
         </td>
     </tr>
     <tr>
@@ -287,11 +287,11 @@ function updatec {
     local broken_pkgs=$(find /var/lib/book-packages /var/lib/custom-packages -maxdepth 1 -type f ! -name ".*" 2>/dev/null | grep -vE "/(COMMIT_EDITMSG|HEAD|config|description|ORIG_HEAD)$" | while read -r f; do (head -n 1 "$f" | grep -q "^BUILD_FAILED$" || [ $(wc -l < "$f") -le 1 ]) && basename "$f"; done | tr -d '\r')
     
     if [ -z "$broken_pkgs" ]; then
-        cleanup_old_doc_dirs
-        cleanup_old_kernels
-        cleanup_old_libraries
-        cleanup_old_share_dirs
-        cleanup_src
+        rm_old_docs
+        rm_old_kerns
+        rm_old_libs
+        rm_old_share
+        rm_src
     else
         echo "Build failures or missing inventories detected. Skipping cleanup."
     fi
