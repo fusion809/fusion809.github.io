@@ -30,7 +30,7 @@ My motivations for setting us this VM include:
 From my NixOS host machine, I have written &mdash; with the help of artificial intelligence (AI) &mdash; several shell functions that are imported into my LFS VM and provide basic package management functionality. These functions are part of both my host's and VM's shell profile. These functions can be found in my [NixOS configuration user shell profile](https://github.com/fusion809/NixOS-configs/tree/26.05/shell/user/). 
 
 ~~~
-<table style="border-collapse: collapse;">
+<table style="border-collapse: collapse; table-layout: fixed; width: 100%; word-wrap: break-word; word-break: break-word;">
     <caption style="font-size: 24px; padding: 10px; text-align: left;"><b>Table 1: Shell functions used for package management within the LFS VM.</b></caption>
     <tr>
         <td style="font-size: 20px; padding: 10px; text-align: center;" colspan="2">
@@ -39,7 +39,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
         <td style="font-size: 20px; padding: 10px; text-align: center;" rowspan="2">
             <b>Defined in</b>
         </td>
-        <td style="font-size: 20px; padding: 10px;" rowspan="2">
+        <td style="font-size: 20px; padding: 10px; white-space: nowrap;" rowspan="2">
             <b>Syntax</b>
         </td>
         <td style="font-size: 20px; padding: 10px;" rowspan="2">
@@ -64,7 +64,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
         <td style="font-size: 16px; padding: 10px;">
             <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/lfs-autobuild.sh">lfs-autobuild.sh</a>
         </td>
-        <td style="font-size: 16px; padding: 10px;">
+        <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
             <code>autobuild PACKAGE(S) [OPTION(S)]</code>
         </td>
         <td style="font-size: 16px; padding: 10px;">
@@ -95,7 +95,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
         <td style="font-size: 16px; padding: 10px;">
             <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
         </td>
-        <td style="font-size: 16px; padding: 10px;">
+        <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
             <code>autoremove PACKAGE(S) [OPTION(S)]</code>
         </td>
         <td style="font-size: 16px; padding: 10px;">
@@ -115,7 +115,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
         <td style="font-size: 16px; padding: 10px;">
         <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
         </td>
-        <td style="font-size: 16px; padding: 10px;">
+        <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
         <code>ls_old_libs [OPTION(S)]</code>
         </td>
         <td style="font-size: 16px; padding: 10px;">
@@ -133,7 +133,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
         <td style="font-size: 16px; padding: 10px;">
             <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
         </td>
-        <td style="font-size: 16px; padding: 10px;">
+        <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
             <code>rm_book_src</code>
         </td>
         <td style="font-size: 16px; padding: 10px;">
@@ -150,7 +150,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
         <td style="font-size: 16px; padding: 10px;">
             <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
         </td>
-        <td style="font-size: 16px; padding: 10px;">
+        <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
             <code>rm_lfp_src</code>
         </td>
         <td style="font-size: 16px; padding: 10px;">
@@ -167,7 +167,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
         <td style="font-size: 16px; padding: 10px;">
             <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
         </td>
-        <td style="font-size: 16px; padding: 10px;">
+        <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
             <code>rm_old_docs</code>
         </td>
         <td style="font-size: 16px; padding: 10px;">
@@ -184,7 +184,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
         <td style="font-size: 16px; padding: 10px;">
             <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
         </td>
-        <td style="font-size: 16px; padding: 10px;">
+        <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
             <code>rm_old_kerns</code>
         </td>
         <td style="font-size: 16px; padding: 10px;">
@@ -201,7 +201,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
         <td style="font-size: 16px; padding: 10px;">
             <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
         </td>
-        <td style="font-size: 16px; padding: 10px;">
+        <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
             <code>rm_old_libs</code>
         </td>
         <td style="font-size: 16px; padding: 10px;">
@@ -218,7 +218,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
         <td style="font-size: 16px; padding: 10px;">
             <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/lfs-vm-bootstrap.sh">lfs-vm-bootstrap.sh</a>
         </td>
-        <td style="font-size: 16px; padding: 10px;">
+        <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
             <code>rm_old_share [OPTION(S)]</code>
         </td>
         <td style="font-size: 16px; padding: 10px;">
@@ -236,7 +236,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
         <td style="font-size: 16px; padding: 10px;">
             <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
         </td>
-        <td style="font-size: 16px; padding: 10px;">
+        <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
             <code>rm_src</code>
         </td>
         <td style="font-size: 16px; padding: 10px;">
@@ -253,7 +253,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
         <td style="font-size: 16px; padding: 10px;">
             <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
         </td>
-        <td style="font-size: 16px; padding: 10px;">
+        <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
             <code>update [OPTION(s)]</code>
         </td>
         <td style="font-size: 16px; padding: 10px;">
@@ -274,7 +274,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
         <td style="font-size: 16px; padding: 10px;">
             <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/lfs-updates.sh">lfs-updates.sh</a>
         </td>
-        <td style="font-size: 16px; padding: 10px;">
+        <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
             <code>updatec [OPTION(s)]</code>
         </td>
         <td style="font-size: 16px; padding: 10px;">
@@ -309,7 +309,7 @@ In other words, it updates all packages and if this succeeds without error, it c
         <td style="font-size: 16px; padding: 10px;">
             <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/lfs-updates.sh">lfs-updates.sh</a>
         </td>
-        <td style="font-size: 16px; padding: 10px;">
+        <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
             <code>updates</code>
         </td>
         <td style="font-size: 16px; padding: 10px;">
