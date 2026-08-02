@@ -30,7 +30,7 @@ My motivations for setting us this VM include:
 From my NixOS host machine, I have written &mdash; with the help of artificial intelligence (AI) &mdash; several shell functions that are imported into my LFS VM and provide basic package management functionality. These functions are part of both my host's and VM's shell profile. These functions can be found in my [NixOS configuration user shell profile](https://github.com/fusion809/NixOS-configs/tree/26.05/shell/user/). 
 
 ~~~
-<table style="border-collapse: collapse; width: 100%; word-wrap: break-word; word-break: break-word;">
+<table style="border-collapse: collapse; width: 100%;">
     <caption style="font-size: 24px; padding: 10px; text-align: left;"><b>Table 1: Shell functions used for package management within the LFS VM.</b></caption>
     <tr>
         <td style="font-size: 20px; padding: 10px; text-align: center;" colspan="2">
