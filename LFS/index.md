@@ -296,7 +296,7 @@ function updatec {
         echo "Build failures or missing inventories detected. Skipping cleanup."
     fi
 }</pre>
-In other words, it updates all packages, cleans up old libraries, share directories, documentation and source files. It takes the same arguments as <code>updates</code>.
+In other words, it updates all packages and if this succeeds without error, it cleans up old libraries, share directories, documentation and source files. It takes the same arguments as <code>update</code>.
         </td>
     </tr>
     <tr>
