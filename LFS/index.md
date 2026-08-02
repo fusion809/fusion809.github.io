@@ -110,7 +110,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
             <code>ls_old_libs</code>
         </td>
         <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
-        N/A
+        <code>ls_old_libs</code>
         </td>
         <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
         <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
