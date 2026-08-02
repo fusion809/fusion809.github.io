@@ -240,7 +240,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
             <code>rm_src</code>
         </td>
         <td style="font-size: 16px; padding: 10px; overflow-wrap: break-word;">
-            Remove old source archives.
+            Remove old source archives and directories (not including git repos).
         </td>
     </tr>
     <tr>
