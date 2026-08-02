@@ -281,13 +281,13 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
             Runs:
 
             <pre>
-            function updatec {
-        update "$@"
-        cleanup_old_doc_dirs
-        cleanup_old_kernels
-        cleanup_old_libraries
-        cleanup_old_share_dirs
-        cleanup_src
+function updatec {
+    update "$@"
+    cleanup_old_doc_dirs
+    cleanup_old_kernels
+    cleanup_old_libraries
+    cleanup_old_share_dirs
+    cleanup_src
 }</pre>
 In other words, it updates all packages, cleans up old libraries, share directories, documentation and source files. It takes the same arguments as <code>updates</code>.
         </td>
