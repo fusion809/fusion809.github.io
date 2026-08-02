@@ -213,6 +213,35 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
             Print table that list available updates (marked with <code>[UPDATE]</code>), as well as packages with missing inventories (marked with <code>[FILES MISSING]</code>) and packages with versioning failures (marked with <code>[FAILED]</code>). 
         </td>
     </tr>
+    <tr>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>updatec</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>lfs_updatec</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/lfs-updates.sh">lfs-updates.sh</a>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            <code>updatec</code>
+        </td>
+        <td style="font-size: 16px; padding: 10px;">
+            Runs:
+
+            <pre>
+            function updatec {
+        update
+        cleanup_old_libraries
+        cleanup_old_doc_dirs
+        cleanup_share_dirs
+        clean_lfp_src
+        sudo rm -rf /sources/*
+        mkdir /sources/archives -p
+}</pre>
+In other words, it updates all packages, cleans up old libraries, share directories, documentation and source files. 
+        </td>
+    </tr>
 </table>
 ~~~
 
