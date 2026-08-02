@@ -201,7 +201,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
             <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/lfs-vm-bootstrap.sh">lfs-vm-bootstrap.sh</a>
         </td>
         <td style="font-size: 16px; padding: 10px;">
-            <code>cleanup_share_dirs [OPTION(S)]</code>
+            <code>cleanup_old_share_dirs [OPTION(S)]</code>
         </td>
         <td style="font-size: 16px; padding: 10px;">
             Removes old unused <code>/usr/share</code> subdirectories.<br/>
