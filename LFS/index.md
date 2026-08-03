@@ -157,7 +157,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
             <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh"><code>updatec [OPTION(s)]</code></a>
         </td>
         <td style="font-size: 16px; padding: 10px; overflow-wrap: break-word;">
-            Runs, in order, <code>rm_old_docs</code>, <code>rm_old_kerns</code>, <code>rm_old_libs</code>, <code>rm_old_share</code> and <code>rm_src</code> if and only if <code>update</code> runs without error.
+            Runs, in order, <code>rm_old_docs</code>, <code>rm_old_kerns</code>, <code>rm_old_libs</code>, <code>rm_old_share</code> and <code>rm_src</code> if and only if <code>update</code> runs without error. Options are passed directory to <code>update</code>.
         </td>
     </tr>
     <tr>
