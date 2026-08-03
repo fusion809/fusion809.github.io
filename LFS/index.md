@@ -34,10 +34,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
     <caption style="font-size: 24px; padding: 10px; text-align: left;"><b>Table 1: Shell functions used for package management within the LFS VM.</b></caption>
     <tr>
         <td style="font-size: 20px; padding: 10px; text-align: center; white-space: nowrap;">
-            <b>Syntax</b>
-        </td>
-        <td style="font-size: 20px; padding: 10px; text-align: center; white-space: nowrap;">
-            <b>Defined in</b>
+            <b>Syntax</b> (hyperlinked to definition file)
         </td>
         <td style="font-size: 20px; padding: 10px; overflow-wrap: break-word;">
             <b>Description</b>
@@ -45,10 +42,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
     </tr>
     <tr>
         <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
-            <code>autobuild PACKAGE(S) [OPTION(S)]</code>
-        </td>
-        <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
-            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/lfs-autobuild.sh">lfs-autobuild.sh</a>
+            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/lfs-autobuild.sh"><code>autobuild PACKAGE(S) [OPTION(S)]</code></a>
         </td>
         <td style="font-size: 16px; padding: 10px; overflow-wrap: break-word;">
             Default: build and install the specified package(s), if and only if the latest version of the package is not already installed. LFS/Beyond LFS (BLFS) instructions are used to build most packages. Although, some packages are built using custom build scripts defined in <a href="https://github.com/fusion809/lfs_packaging"><code>~/lfs_packaging</code></a>.<br/>
@@ -70,10 +64,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
     </tr>
     <tr>
         <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
-            <code>autoremove PACKAGE(S) [OPTION(S)]</code>
-        </td>
-        <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
-            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
+            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh"><code>autoremove PACKAGE(S) [OPTION(S)]</code></a>
         </td>
         <td style="font-size: 16px; padding: 10px; overflow-wrap: break-word;">
             Default: remove the specified package(s), if and only if no other packages have libraries that depend on the package(s).<br/>
@@ -84,22 +75,16 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
     </tr>
     <tr>
         <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
-        <code>ls_old_libs [OPTION(S)]</code>
-        </td>
-        <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
-        <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
+            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh"><code>ls_old_libs [OPTION(S)]</code></a>
         </td>
         <td style="font-size: 16px; padding: 10px; overflow-wrap: break-word;">
-        List old installed versions of libraries.<br/>
-        Options:<br/><code>-d</code> option it list files that depend on listed files.
+            List old installed versions of libraries.<br/>
+            Options:<br/><code>-d</code> option it list files that depend on listed files.
         </td>
     </tr>
     <tr>
         <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
-            <code>rm_book_src</code>
-        </td>
-        <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
-            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
+            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh"><code>rm_book_src</code></a>
         </td>
         <td style="font-size: 16px; padding: 10px; overflow-wrap: break-word;">
             Remove book source files.
@@ -107,10 +92,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
     </tr>  
     <tr>
         <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
-            <code>rm_lfp_src</code>
-        </td>
-        <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
-            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
+            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh"><code>rm_lfp_src</code></a>
         </td>
         <td style="font-size: 16px; padding: 10px; overflow-wrap: break-word;">
             Remove custom package source tarballs.
@@ -118,10 +100,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
     </tr>    
     <tr>
         <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
-            <code>rm_old_docs</code>
-        </td>
-        <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
-            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
+            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh"><code>rm_old_docs</code></a>
         </td>
         <td style="font-size: 16px; padding: 10px; overflow-wrap: break-word;">
             Remove old unused documentation directories.
@@ -129,10 +108,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
     </tr>
     <tr>
         <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
-            <code>rm_old_kerns</code>
-        </td>
-        <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
-            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
+            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh"><code>rm_old_kerns</code></a>
         </td>
         <td style="font-size: 16px; padding: 10px; overflow-wrap: break-word;">
             Remove old unused kernels.
@@ -140,10 +116,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
     </tr>
     <tr>
         <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
-            <code>rm_old_libs</code>
-        </td>
-        <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
-            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
+            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh"><code>rm_old_libs</code></a>
         </td>
         <td style="font-size: 16px; padding: 10px; overflow-wrap: break-word;">
             Remove old unused libraries. As for used old used libraries, rebuild packages that depend on the library and then remove it.
@@ -151,10 +124,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
     </tr>
     <tr>
         <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
-            <code>rm_old_share [OPTION(S)]</code>
-        </td>
-        <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
-            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/lfs-vm-bootstrap.sh">lfs-vm-bootstrap.sh</a>
+            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/lfs-vm-bootstrap.sh"><code>rm_old_share [OPTION(S)]</code></a>
         </td>
         <td style="font-size: 16px; padding: 10px; overflow-wrap: break-word;">
             Removes old unused <code>/usr/share</code> subdirectories.<br/>
@@ -163,10 +133,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
     </tr>
     <tr>
         <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
-            <code>rm_src</code>
-        </td>
-        <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
-            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
+            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh"><code>rm_src</code></a>
         </td>
         <td style="font-size: 16px; padding: 10px; overflow-wrap: break-word;">
             Remove old source archives and directories (not including git repos).
@@ -174,10 +141,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
     </tr>
     <tr>
         <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
-            <code>update [OPTION(s)]</code>
-        </td>
-        <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
-            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh">21-lfs.sh</a>
+            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh"><code>update [OPTION(s)]</code></a>
         </td>
         <td style="font-size: 16px; padding: 10px; overflow-wrap: break-word;">
             Update packages.<br/>
@@ -190,10 +154,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
     </tr>
     <tr>
         <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
-            <code>updatec [OPTION(s)]</code>
-        </td>
-        <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
-            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/lfs-updates.sh">lfs-updates.sh</a>
+            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh"><code>updatec [OPTION(s)]</code></a>
         </td>
         <td style="font-size: 16px; padding: 10px; overflow-wrap: break-word;">
             Runs, in order, <code>rm_old_docs</code>, <code>rm_old_kerns</code>, <code>rm_old_libs</code>, <code>rm_old_share</code> and <code>rm_src</code> if and only if <code>update</code> runs without error.
@@ -201,10 +162,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
     </tr>
     <tr>
         <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
-            <code>updates</code>
-        </td>
-        <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
-            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/lfs-updates.sh">lfs-updates.sh</a>
+            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/lfs-updates.sh"><code>updates</code></a>
         </td>
         <td style="font-size: 16px; padding: 10px; overflow-wrap: break-word;">
             Print table that list available updates (marked with <code>[UPDATE]</code>), as well as packages with missing inventories (marked with <code>[FILES MISSING]</code>) and packages with versioning failures (marked with <code>[FAILED]</code>). 
