@@ -183,8 +183,9 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
             Update packages.<br/>
             Options:<br/>
             <code>--dry-run</code>: Show what would be updated without downloading/building.<br/>
+            <code>-h</code>/<code>--help</code>: Show help message.<br/>
             <code>--no-upstream</code>: Check only LFS/BLFS book versions (disable upstream tracking).<br/>
-            <code>-h</code>/<code>--help</code>: Show help message.
+            <code>-v</code>/<code>--verbose</code>: Show custom package local and upstream versions during version checking.
         </td>
     </tr>
     <tr>
