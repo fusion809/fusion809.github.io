@@ -34,7 +34,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
     <caption style="font-size: 24px; padding: 10px; text-align: left;"><b>Table 1: Shell functions used for package management within the LFS VM.</b></caption>
     <tr>
         <td style="font-size: 20px; padding: 10px; text-align: center; white-space: nowrap;">
-            <b>Syntax</b> (hyperlinked to definition file)
+            <b>Syntax</b> (definition file hyperlink)
         </td>
         <td style="font-size: 20px; padding: 10px; overflow-wrap: break-word;">
             <b>Description</b>
