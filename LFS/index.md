@@ -141,6 +141,14 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
     </tr>
     <tr>
         <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
+            <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/lfs-sync-to-vm.sh"><code>sync_to_vm</code></a>
+        </td>
+        <td style="font-size: 16px; padding: 10px; overflow-wrap: break-word;">
+            Only available on host; synchronize scripts from host to virtual machine. 
+        </td>
+    </tr>
+    <tr>
+        <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
             <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/lfs-update.sh"><code>update [OPTION(s)]</code></a>
         </td>
         <td style="font-size: 16px; padding: 10px; overflow-wrap: break-word;">
