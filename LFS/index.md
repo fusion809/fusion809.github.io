@@ -3,9 +3,9 @@
 @def tag=["Linux"]
 @def mintoclevel=1
 
-![LFS screenshot](https://fusion809.github.io/images/executor-raujonas.github.io/LFS_screenshot_06-08-2026.png)
+![LFS screenshot](https://fusion809.github.io/images/executor-raujonas.github.io/LFS_screenshot_13-08-2026.png)
 
-**Figure 1: Screenshot of my LFS VM's GNOME session as of 6 August 2026.**
+**Figure 1: Screenshot of my LFS VM's GNOME session as of 13 August 2026.**
 
 I first installed LFS 12.4 systemd edition to a virtual machine on 9 February 2026. Since then, I have upgraded the system to the development systemd branch, and kept the system up to date. It has been a challenging, yet informative journey.
 
@@ -200,9 +200,9 @@ Some of the packages in [`~/lfs_packaging`](https://github.com/fusion809/lfs_pac
 # Fastfetch/HyFetch
 I have also customized Fastfetch/HyFetch output so that it accurately prints the number of packages I have installed. The Fastfetch configuration file used is located in [`~/lfs_dotfiles/config.jsonc`](https://github.com/fusion809/lfs_dotfiles/blob/master/config.jsonc). The HyFetch configuration files are also in [`~/lfs_dotfiles/hyfetch.json`](https://github.com/fusion809/lfs_dotfiles/blob/master/hyfetch.json). 
 
-In the screenshot above, `813 [ 552,  157,  1,  74,  29]` means that 813 packages are installed in total. Of them 552 are LFS or BLFS book packages installed via `autobuild` and its extracting build commands and source URLs from the books' webpages. A further 157 were installed via custom build scripts in [`~/lfs_packaging`](https://github.com/fusion809/lfs_packaging). 1 Julia package was installed; this package is Julia itself which was installed via `juliaup` (the compilation process of Julia is incredibly complex and even requires its own custom build of LLVM). 74 Python packages were installed via `pip`. 29 R packages were installed. 
+In the screenshot above, `818 [ 547,  166,  1,  75,  29]` means that 817 packages are installed in total. Of them 547 are LFS or BLFS book packages installed via `autobuild` and its extracting build commands and source URLs from the books' webpages. A further 166 were installed via custom build scripts in [`~/lfs_packaging`](https://github.com/fusion809/lfs_packaging). 1 Julia package was installed; this package is Julia itself which was installed via `juliaup` (the compilation process of Julia is incredibly complex and even requires its own custom build of LLVM). 75 Python packages were installed via `pip`. 29 R packages were installed. 
 
-` 383,  212` refers to number of package inventory git repository commits I have published. 383 refers to `/var/lib/book-packages` and 212 refers to `/var/lib/custom-packages`. I include it in Fastfetch output as a way of tracking the versions of custom packages.
+` 405,  255` refers to number of package inventory git repository commits I have published. 405 refers to `/var/lib/book-packages` and 255 refers to `/var/lib/custom-packages`. I include it in Fastfetch output as a way of tracking the versions of custom packages.
 
 # Shell profile
 My shell profile is defined in [`~/lfs-scripts`](https://github.com/fusion809/lfs-scripts). Some scripts called for by GNOME and KDE Plasma Executor/Command Output commands are in this repository, too. 
@@ -281,13 +281,13 @@ The base [Executor](https://github.com/raujonas/executor) extension provides up 
             <b>Output command</b>
         </td>
         <td style="font-size: 16px; padding: 10px;">
-            <a href="https://github.com/fusion809/lfs-scripts/blob/master/left_widget_command.sh" target="_blank"><code>~/lfs-scripts/left_widget_command.sh</code></a> &mdash; displays the boot time of the system. In my set up, it is used to generate output for the left widget. Runs every 60s.
+            <a href="https://github.com/fusion809/lfs-scripts/blob/master/left_widget_command.sh" target="_blank"><code>~/lfs-scripts/left_widget_command.sh</code></a> &mdash; displays the boot time and age of the system. The age is displayed as days/minutes/years hours:minutes:seconds. In my set up, it is used to generate output for the left widget. Runs every 60ms.
         </td>
         <td style="font-size: 16px; padding: 10px;">
-            <a href="https://github.com/fusion809/lfs-scripts/blob/master/centre_widget_command.sh" target="_blank"><code>~/lfs-scripts/centre_widget_command.sh</code></a> &mdash; displays CPU and RAM usage percentage and the number of the currently shown wallpaper / the total number of wallpapers in <code>~/wallpapers</code>. Runs every second.
+            <a href="https://github.com/fusion809/lfs-scripts/blob/master/centre_widget_command.sh" target="_blank"><code>~/lfs-scripts/centre_widget_command.sh</code></a> &mdash; displays CPU and RAM usage percentage and the number of the currently shown wallpaper / the total number of wallpapers in <code>~/wallpapers</code>. Runs every millisecond.
         </td>
         <td style="font-size: 16px; padding: 10px;">
-            <a href="https://github.com/fusion809/lfs-scripts/blob/master/updates_no.sh" target="_blank"><code>~/lfs-scripts/updates_no.sh</code></a> &mdash; checks for updates using the <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/lfs-updates.sh" target="_blank"><code>updates</code></a> command in the shell profile. It displays <code>$in_progress $mod_time  $no_updates 󰂕 $no_missing_total  $no_failed</code> where <code>$in_progress</code> is replaced with nothing if the <code>updates</code> command is not running, and <code>󰦕 ${percent}% </code> otherwise, where <code>$percent</code> is an approximation of how far through the running of <code>updates</code> we are. <code>$mod_time</code> is replaced with the time the <code>updates</code> command last stopped running. <code>$no_updates</code> is replaced with the number of available package updates. <code>$no_missing_total</code> is replaced with the number of packages with missing inventories. <code>$no_failed</code> is replaced with the number of package versioning failures. <code>updates</code> runs every 5 minutes - the average duration of <code>updates</code> runs. <code>updates_no.sh</code> is run every second.
+            <a href="https://github.com/fusion809/lfs-scripts/blob/master/updates_no.sh" target="_blank"><code>~/lfs-scripts/updates_no.sh</code></a> &mdash; checks for updates using the <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/lfs-updates.sh" target="_blank"><code>updates</code></a> command in the shell profile. It displays <code>$in_progress $mod_time  $no_updates 󰂕 $no_missing_total  $no_failed</code> where <code>$in_progress</code> is replaced with nothing if the <code>updates</code> command is not running, and <code>󰦕 ${percent}% </code> otherwise, where <code>$percent</code> is an approximation of how far through the running of <code>updates</code> we are. <code>$mod_time</code> is replaced with the time the <code>updates</code> command last stopped running. <code>$no_updates</code> is replaced with the number of available package updates. <code>$no_missing_total</code> is replaced with the number of packages with missing inventories. <code>$no_failed</code> is replaced with the number of package versioning failures. <code>updates</code> runs every 5 minutes - the average duration of <code>updates</code> runs. <code>updates_no.sh</code> is run every millisecond.
         </td>
     </tr>
     <tr>
