@@ -3,9 +3,9 @@
 @def tag=["Linux"]
 @def mintoclevel=1
 
-![LFS screenshot](https://fusion809.github.io/images/executor-raujonas.github.io/LFS_screenshot_28-08-2026.png)
+![LFS screenshot](https://fusion809.github.io/images/executor-raujonas.github.io/LFS_screenshot_02-09-2026.png)
 
-**Figure 1: Screenshot of my LFS VM's GNOME session as of 28 August 2026.**
+**Figure 1: Screenshot of my LFS VM's GNOME session as of 2 September 2026.**
 
 I first installed LFS 12.4 systemd edition to a virtual machine on 9 February 2026. Since then, I have upgraded the system to the development systemd branch, and kept the system up to date. It has been a challenging, yet informative journey.
 
