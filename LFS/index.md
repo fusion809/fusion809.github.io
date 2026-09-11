@@ -3,9 +3,9 @@
 @def tag=["Linux"]
 @def mintoclevel=1
 
-![LFS screenshot](https://fusion809.github.io/images/executor-raujonas.github.io/LFS_screenshot_02-09-2026.png)
+![LFS screenshot](https://fusion809.github.io/images/executor-raujonas.github.io/LFS_screenshot_11-09-2026.png)
 
-**Figure 1: Screenshot of my LFS VM's GNOME session as of 2 September 2026.**
+**Figure 1: Screenshot of my LFS VM's GNOME session as of 11 September 2026.**
 
 I first installed LFS 12.4 systemd edition to a virtual machine on 9 February 2026. Since then, I have upgraded the system to the development systemd branch, and kept the system up to date. It has been a challenging, yet informative journey.
 
@@ -45,7 +45,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
             <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/lfs-autobuild-func.sh"><code>autobuild PACKAGE(S) [OPTION(S)]</code></a>
         </td>
         <td style="font-size: 16px; padding: 10px; overflow-wrap: break-word;">
-            Default: build and install the specified package(s), if and only if the latest version of the package is not already installed. LFS/Beyond LFS (BLFS) instructions are used to build most packages. Although, some packages are built using custom build scripts defined in <a href="https://github.com/fusion809/lfs_packaging"><code>~/lfs_packaging</code></a>.<br/>
+            Default: build and install the specified package(s), if and only if the latest version of the package is not already installed. LFS/Beyond LFS (BLFS) instructions were used to build most packages. Although, some packages were built using custom build scripts defined in <a href="https://github.com/fusion809/lfs_packaging"><code>~/lfs_packaging</code></a>. These custom build scripts have since become the primary source of software for the system, as it tends to be more reliable and easier to tweak.<br/>
             Options:<br/>
             <code>--dry-run</code>: show what actions would be executed to build and install the package.<br/>
             <code>--strip</code>: run stripping commands after build.<br/>
@@ -200,9 +200,9 @@ Some of the packages in [`~/lfs_packaging`](https://github.com/fusion809/lfs_pac
 # Fastfetch/HyFetch
 I have also customized Fastfetch/HyFetch output so that it accurately prints the number of packages I have installed. The Fastfetch configuration file used is located in [`~/lfs_dotfiles/config.jsonc`](https://github.com/fusion809/lfs_dotfiles/blob/master/config.jsonc). The HyFetch configuration files are also in [`~/lfs_dotfiles/hyfetch.json`](https://github.com/fusion809/lfs_dotfiles/blob/master/hyfetch.json). 
 
-In the screenshot above, `824 [ 546,  173,  1,  75,  29]` means that 824 packages are installed in total. Of them 546 are LFS or BLFS book packages installed via `autobuild` and its extracting build commands and source URLs from the books' webpages. A further 173 were installed via custom build scripts in [`~/lfs_packaging`](https://github.com/fusion809/lfs_packaging). 1 Julia package was installed; this package is Julia itself which was installed via `juliaup` (the compilation process of Julia is incredibly complex and even requires its own custom build of LLVM). 75 Python packages were installed via `pip`. 29 R packages were installed. 
+In the screenshot above, `836 [ 724,  1,  82,  29]` means that 836 packages are installed in total. Of them 724 were installed via custom build scripts in [`~/lfs_packaging`](https://github.com/fusion809/lfs_packaging). 1 Julia package was installed; this package is Julia itself which was installed via `juliaup` (the compilation process of Julia is incredibly complex and even requires its own custom build of LLVM). 82 Python packages were installed via `pip`. 29 R packages were installed. 
 
-` 420,  308` refers to number of package inventory git repository commits I have published. 420 refers to `/var/lib/book-packages` and 308 refers to `/var/lib/custom-packages`. I include it in Fastfetch output as a way of tracking the versions of custom packages.
+` 576,  486` refers to number of package inventory git repository commits I have published. 576 refers to `/var/lib/book-packages` and 486 refers to `/var/lib/custom-packages`. I include it in Fastfetch output as a way of tracking the versions of custom packages.
 
 # Shell profile
 My shell profile is defined in [`~/lfs-scripts`](https://github.com/fusion809/lfs-scripts). Some scripts called for by GNOME and KDE Plasma Executor/Command Output commands are in this repository, too. 
@@ -358,7 +358,7 @@ Right click: show log of last update check.
             <b>Tooltip command</b>
         </td>
         <td style="font-size: 16px; padding: 10px;">
-            <a href="https://github.com/fusion809/lfs-scripts/blob/master/left_widget_tooltip_command.sh" target="_blank"><code>~/lfs-scripts/left_widget_tooltip_command.sh</code></a> &mdash; generates a line describing the version of LFS/BLFS installed, along with the number of packages installed via different means, and package inventory commit numbers in a similar format as in the Fastfetch output. 
+            <a href="https://github.com/fusion809/lfs-scripts/blob/master/left_widget_tooltip_command.sh" target="_blank"><code>~/lfs-scripts/left_widget_tooltip_command.sh</code></a> &mdash; generates a line describing the version of LFS/BLFS installed, along with the number of packages installed via different means, and package inventory commit numbers in a similar format as in the Fastfetch output. Also includes lines indicating how far into the current run of <code>autobuild <package name></code> the system is. 
         </td>
         <td style="font-size: 16px; padding: 10px;">
             <a href="https://github.com/fusion809/lfs-scripts/blob/master/centre_widget_tooltip_command_wrap.sh" target="_blank"><code>~/lfs-scripts/centre_widget_tooltip_command_wrap.sh</code></a> &mdash; lists selected wallpaper (indicated with <code>></code>) and the 25 wallpapers before and after this one. If there are not 25 wallpapers before the current one, it will show some of the last wallpapers in the collection before the wallpaper numbered 1 to ensure that 51 wallpapers are listed (including the one set as the desktop background). If there are not 25 wallpapers after the current one, it will show some of the first wallpapers in the collection after the final one in the list to ensure that 51 wallpapers are listed in total.
