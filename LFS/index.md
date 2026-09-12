@@ -3,9 +3,9 @@
 @def tag=["Linux"]
 @def mintoclevel=1
 
-![LFS screenshot](https://fusion809.github.io/images/executor-raujonas.github.io/LFS_screenshot_11-09-2026.png)
+![LFS screenshot](https://fusion809.github.io/images/executor-raujonas.github.io/LFS_screenshot_12-09-2026.png)
 
-**Figure 1: Screenshot of my LFS VM's GNOME session as of 11 September 2026.**
+**Figure 1: Screenshot of my LFS VM's GNOME session as of 12 September 2026.**
 
 I first installed LFS 12.4 systemd edition to a virtual machine on 9 February 2026. Since then, I have upgraded the system to the development systemd branch, and kept the system up to date. It has been a challenging, yet informative journey.
 
@@ -200,7 +200,7 @@ Some of the packages in [`~/lfs_packaging`](https://github.com/fusion809/lfs_pac
 # Fastfetch/HyFetch
 I have also customized Fastfetch/HyFetch output so that it accurately prints the number of packages I have installed. The Fastfetch configuration file used is located in [`~/lfs_dotfiles/config.jsonc`](https://github.com/fusion809/lfs_dotfiles/blob/master/config.jsonc). The HyFetch configuration files are also in [`~/lfs_dotfiles/hyfetch.json`](https://github.com/fusion809/lfs_dotfiles/blob/master/hyfetch.json). 
 
-In the screenshot above, `836 [ 724,  1,  82,  29]` means that 836 packages are installed in total. Of them 724 were installed via custom build scripts in [`~/lfs_packaging`](https://github.com/fusion809/lfs_packaging). 1 Julia package was installed; this package is Julia itself which was installed via `juliaup` (the compilation process of Julia is incredibly complex and even requires its own custom build of LLVM). 82 Python packages were installed via `pip`. 29 R packages were installed. 
+In the screenshot above, `837 [ 725,  1,  82,  29]` means that 837 packages are installed in total. Of them 725 were installed via custom build scripts in [`~/lfs_packaging`](https://github.com/fusion809/lfs_packaging). 1 Julia package was installed; this package is Julia itself which was installed via `juliaup` (the compilation process of Julia is incredibly complex and even requires its own custom build of LLVM). 82 Python packages were installed via `pip`. 29 R packages were installed. 
 
 ` 576,  486` refers to number of package inventory git repository commits I have published. 576 refers to `/var/lib/book-packages` and 486 refers to `/var/lib/custom-packages`. I include it in Fastfetch output as a way of tracking the versions of custom packages.
 
