@@ -176,7 +176,7 @@ show(a)</code></pre>
 <pre><code class="julia hljs"><span class=hljs-keyword >using</span> FunctionIntegrator
 a = abs(radau_quadrature(x -&gt; cos(x), <span class=hljs-number >1000</span>, <span class=hljs-number >0</span>, <span class=hljs-literal >pi</span>/<span class=hljs-number >2</span>)-<span class=hljs-number >1</span>)
 show(a)</code></pre>
-<pre><code class="plaintext hljs">1.1102230246251565e-16</code></pre>
+<pre><code class="plaintext hljs">0.0</code></pre>
 <h3 id=rectangleruleleft ><a href="#rectangleruleleft" class=header-anchor >rectangle&#95;rule&#95;left</a></h3>
 <p>In this section, integral 1 is being approximated and the result compared to the analytical result. </p>
 <pre><code class="julia hljs"><span class=hljs-keyword >using</span> FunctionIntegrator
