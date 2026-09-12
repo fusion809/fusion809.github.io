@@ -301,7 +301,7 @@ The base [Executor](https://github.com/raujonas/executor) extension provides up 
             <code>gnome-terminal -- zsh -ic <a href="https://github.com/fusion809/lfs-scripts/blob/master/list-wallpapers.sh" target="_blank">~/lfs-scripts/list-wallpapers.sh</a></code> &mdash; displays the list of wallpapers in `~/wallpapers` with the currently shown wallpaper highlighted and centred.
         </td>
         <td style="font-size: 16px; padding: 10px;">
-            <code>gnome-terminal -- zsh -ic "<a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh" target="_blank">update</a>; exec zsh"</code> &mdash; updates the system's packages, including those installed via book instructions, custom packages and pip-managed packages. 
+            <code>gnome-terminal -- zsh -ic "<a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh" target="_blank">updatec</a>; exec zsh"</code> &mdash; updates the system's packages, including those installed via book instructions, custom packages and pip-managed packages and removes unneeded files. 
         </td>
     </tr>
     <tr>
