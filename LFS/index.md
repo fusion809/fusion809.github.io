@@ -7,7 +7,7 @@
 
 **Figure 1: Screenshot of my LFS VM's GNOME session as of 13 September 2026.**
 
-I first installed LFS 12.4 systemd edition to a virtual machine on 9 February 2026. Since then, I have upgraded the system to the development systemd branch, and kept the system up to date. It has been a challenging, yet informative journey.
+I first installed LFS 12.4 systemd edition to a virtual machine on 9 February 2026. Since then, I have upgraded the system to the development systemd branch, and then gradually made it even more bleeding edge than this by upgrading all packages to the latest stable upstream release. Sometimes I need to keep a package back simply because its latest stable release actually depends on pre-release versions of other packages. This was the case for `gnome-control-center` on 12 September, as at this point version `51.0` of the package was out but it depended on version `51.alpha` or later of `gnome-desktop` and out of these versions only `51.alpha` was available at the time. 
 
 \toc
 
@@ -16,18 +16,8 @@ My motivations for setting us this VM include:
 * Curiosity, as I have dozens of free operating system (OS) VMs that I maintain just as a curiosity, so setting up a LFS VM keeps within this. 
 * A desire to prove to myself that I can actually run and maintain LFS long term and get it to the point of being a viable daily driver. 
 
-# GitHub repositories relating to VM and their locations on VM
-* Host system [`NixOS-configs`](https://github.com/fusion809/NixOS-configs/tree/26.05/shell/user/) has shell profile for managing VM, including package management shell functions. Specifically [21-lfs.sh](https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh), [lfs-autobuild.sh](https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/lfs-autobuild.sh), [lfs-updates.sh](https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/lfs-updates.sh) and [lfs-vm-bootstrap.sh](https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/lfs-vm-bootstrap.sh) are the scripts for LFS management. 
-* [`~/lfs_apps`](https://github.com/fusion809/lfs_apps) &mdash; desktop configuration files and shell scripts these desktop files call. 
-* [`~/lfs_dotfiles`](https://github.com/fusion809/lfs_dotfiles) &mdash; Fastfetch and HyFetch configuration files for LFS VM.
-* [`~/lfs_gnuplot`](https://github.com/fusion809/lfs_gnuplot) &mdash; Gnuplot files for my LFS VM.
-* [`~/lfs_packaging`](https://github.com/fusion809/lfs_packaging) &mdash; which contains packaging scripts for building custom packages.
-* [`~/lfs-scripts`](https://github.com/fusion809/lfs-scripts) &mdash; shell scripts (including VM shell profile and scripts called by Executor and Command Output extensions/widgets) used by LFS system. 
-* [`/var/lib/book-packages`](https://github.com/fusion809/lfs_book-packages) &mdash; package inventories for LFS and BLFS packages.
-* [`/var/lib/custom-packages`](https://github.com/fusion809/lfs_custom-packages) &mdash; package inventories for custom packages (`~/lfs_packaging`).
-
 # Package management
-From my NixOS host machine, I have written &mdash; with the help of artificial intelligence (AI) &mdash; several shell functions that are imported into my LFS VM and provide basic package management functionality. These functions are part of both my host's and VM's shell profile. These functions can be found in my [NixOS configuration user shell profile](https://github.com/fusion809/NixOS-configs/tree/26.05/shell/user/). 
+From my NixOS host machine, I have written &mdash; with the help of artificial intelligence (AI) &mdash; several shell functions that are imported into my LFS VM and provide basic package management functionality. These functions are part of both my host's and VM's shell profile. These functions can be found in my [NixOS configuration user shell profile](https://github.com/fusion809/NixOS-configs/tree/26.05/shell/user/). [lfs-custom-updates.py](https://github.com/fusion809/NixOS-configs/blob/26.05/python/lfs-custom-updates.py) is used to parallelize and more efficiently check the versions of all custom packages to see if updates are available.
 
 ~~~
 <table style="border-collapse: collapse; width: 100%;">
@@ -84,7 +74,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
     </tr>
     <tr>
         <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
-            <a href="https://github.com/fusion809/lfs-scripts/blob/master/Shell/02-pms.sh"><code>rm_book_src</code></a>
+            <a href="https://github.com/fusion809/lfs_scripts/blob/master/Shell/02-pms.sh"><code>rm_book_src</code></a>
         </td>
         <td style="font-size: 16px; padding: 10px; overflow-wrap: break-word;">
             Remove book source files.
@@ -92,7 +82,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
     </tr>  
     <tr>
         <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
-            <a href="https://github.com/fusion809/lfs-scripts/blob/master/Shell/02-pms.sh"><code>rm_lfp_src</code></a>
+            <a href="https://github.com/fusion809/lfs_scripts/blob/master/Shell/02-pms.sh"><code>rm_lfp_src</code></a>
         </td>
         <td style="font-size: 16px; padding: 10px; overflow-wrap: break-word;">
             Remove custom package source tarballs.
@@ -133,7 +123,7 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
     </tr>
     <tr>
         <td style="font-size: 16px; padding: 10px; white-space: nowrap;">
-            <a href="https://github.com/fusion809/lfs-scripts/blob/master/Shell/02-pms.sh"><code>rm_src</code></a>
+            <a href="https://github.com/fusion809/lfs_scripts/blob/master/Shell/02-pms.sh"><code>rm_src</code></a>
         </td>
         <td style="font-size: 16px; padding: 10px; overflow-wrap: break-word;">
             Remove old source archives and directories (not including git repos).
@@ -179,8 +169,23 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
 </table>
 ~~~
 
-# Custom desktop configuration files
-The desktop configuration files in [`~/lfs_apps`](https://github.com/fusion809/lfs_apps) generate plots of boot times and cycle through wallpapers.
+# GitHub repositories relating to VM and their locations on VM
+* Host system [`NixOS-configs`](https://github.com/fusion809/NixOS-configs/tree/26.05/shell/user/) has shell profile for managing VM, including package management shell functions. Specifically [21-lfs.sh](https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh), [lfs-autobuild.sh](https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/lfs-autobuild.sh), [lfs-updates.sh](https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/lfs-updates.sh) and [lfs-vm-bootstrap.sh](https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/lfs-vm-bootstrap.sh) are the scripts for LFS management. 
+* [`~/build_duration`](https://github.com/fusion809/lfs_package_build_times) &mdash; contains text files that contain the duration, in seconds, of building each package.
+* [`~/lfs_apps`](https://github.com/fusion809/lfs_apps) &mdash; desktop configuration files and shell scripts these desktop files call. 
+* [`~/lfs_dotfiles`](https://github.com/fusion809/lfs_dotfiles) &mdash; Fastfetch, HyFetch and systemd configuration files for LFS VM.
+* [`~/lfs_gnuplot`](https://github.com/fusion809/lfs_gnuplot) &mdash; Gnuplot files for my LFS VM.
+* [`~/lfs_packaging`](https://github.com/fusion809/lfs_packaging) &mdash; which contains packaging scripts for building custom packages.
+* [`~/lfs_scripts`](https://github.com/fusion809/lfs_scripts) &mdash; shell scripts (including VM shell profile and scripts called by Executor and Command Output extensions/widgets) used by LFS system. 
+* [`/usr/share/gnome-shell/extensions/executor@raujonas.github.io`](https://github.com/fusion809/executor-raujonas.github.io) &mdash; customized verison of the [`executor@raujonas.github.io`](https://github.com/raujonas/executor) I use under my GNOME session (which is the main session I boot).
+* [`/var/lib/book-packages`](https://github.com/fusion809/lfs_book_packages) &mdash; package inventories for LFS and BLFS packages. Now empty as all packages are now provided by custom build scripts. 
+* [`/var/lib/custom-packages`](https://github.com/fusion809/lfs_custom_packages) &mdash; package inventories for custom packages (those in `~/lfs_packaging`).
+
+# [`~/build_duration`](https://github.com/fusion809/build_duration)
+`~/build_duration` merely contains the logs of how long each completed build has taken. Its contents are created by `~/lfs_scripts/autobuild-log.sh`, which is in turn automatically run by `~/lfs_dotfiles/systemd/user/autobuild-log.service` (which is symlinked to `~/.config/systemd/user/autobuild-log.service`). As for 13 September 2026, it is new and is far from being complete, so many packages' build times are not logged. `build_time pkg` is a shell script function defined in `~/lfs_scripts` that converts the build time into hours, minutes and seconds. `lfs_commit` commits changes made to this repository, along with changes made to `/var/lib/book-packages` and `/var/lib/custom-packages`. 
+
+# [`~/lfs_apps`](https://github.com/fusion809/lfs_apps)
+The desktop configuration files in `~/lfs_apps` generate plots of boot times and cycle through wallpapers.
 
 Plotting files:
 * `plotbts.sh` and `plotbts.desktop` &mdash; boot time histogram with linear scaling on both axes; outliers excluded; not including more recent boots. 
@@ -194,21 +199,27 @@ Wallpaper cycling files:
 * `cycle-wallpaper-shuffle.sh` and `cycle-wallpaper-shuffle.desktop` &mdash; moves us randomly through the wallpapers in `~/wallpapers`. Keyboard shortcut: Win+S.
 * `specify-wallpaper.sh` and `specify-wallpaper.desktop` &mdash; specify the wallpaper (by number) that you want to be set as you desktop background. Keyboard shortcut: Win+N.
 
-# Custom packages
-Some of the packages in [`~/lfs_packaging`](https://github.com/fusion809/lfs_packaging) also have build instructions in LFS and BLFS books &mdash; such as Linux PAM, Vim, rustc and packages within the xorg-apps and xorg-libs metapackages. I provide these custom packages sometimes to overcome build errors that the book-extraction function cause and other times to more robustly ensure I have the latest version of these packages at all times. Other packages are provided in this repository because LFS and BLFS do not provide them; other books in the LFS such as SLFS do provide some of these packages, but some are unique to this repository (e.g. GNU Octave and R are).
-
-# Fastfetch/HyFetch
+# [`~/lfs_dotfiles`](https://github.com/fusion809/lfs_dotfiles)
 I have also customized Fastfetch/HyFetch output so that it accurately prints the number of packages I have installed. The Fastfetch configuration file used is located in [`~/lfs_dotfiles/config.jsonc`](https://github.com/fusion809/lfs_dotfiles/blob/master/config.jsonc). The HyFetch configuration files are also in [`~/lfs_dotfiles/hyfetch.json`](https://github.com/fusion809/lfs_dotfiles/blob/master/hyfetch.json). 
 
 In the screenshot above, `838 [ 726,  1,  82,  29]` means that 837 packages are installed in total. Of them 725 were installed via custom build scripts in [`~/lfs_packaging`](https://github.com/fusion809/lfs_packaging). 1 Julia package was installed; this package is Julia itself which was installed via `juliaup` (the compilation process of Julia is incredibly complex and even requires its own custom build of LLVM). 82 Python packages were installed via `pip`. 29 R packages were installed. 
 
 ` 576,  498` refers to number of package inventory git repository commits I have published. 576 refers to `/var/lib/book-packages` and 498 refers to `/var/lib/custom-packages`. I include it in Fastfetch output as a way of tracking the versions of custom packages.
 
-# Shell profile
-My shell profile is defined in [`~/lfs-scripts`](https://github.com/fusion809/lfs-scripts). Some scripts called for by GNOME and KDE Plasma Executor/Command Output commands are in this repository, too. 
+There is one systemd service file in [`~/lfs_dotfiles/systemd/user/autobuild-log.service`](https://github.com/fusion809/lfs_dotfiles/blob/master/systemd/user/autobuild-log.service) to autostart [`~/lfs_scripts/autobuild-log.sh`](https://github.com/fusion809/lfs_scripts/blob/master/autobuild-log.sh). 
+
+# [`~/lfs_packaging`](https://github.com/fusion809/lfs_packaging)
+`~/lfs_packaging` is presently used to provide all the packages of my LFS virtual machine. It contains directories whose names match the name of the package the `build.sh` script within provides. These scripts cannot be manually executed; instead packages are built using `autobuild pkg` (with the `-f` option required if the latest version of the package is already installed). That being said, `autobuild` does have the capacity to install BLFS and LFS packages from the development book instructions, too, but I prefer the custom package script approach as it allows me to easily edit the build commands and set the version of the package as the latest upstream stable release. Consequently, `autobuild pkg` always defaults to using the `~/lfs_packaging` package when one is available. 
+
+Most of the build instructions in `build.sh` scripts are based on LFS and BLFS build instructions; some are based on SlackBuilds developed, by other packagers, to provide the package for Slackware. Some are also based on Arch Linux PKGBUILDs. `version=` lines in these scripts typically, as their first port of call, will opt to determine the latest upstream version from the source archive website of the package. Failing this, it will use the tags of its git repository. Failing this, it will use [tox-wtf's Version Aggregator and Tracker](https://github.com/tox-wtf/vat). Failing this, it will use Arch Linux's PKGBUILD for the package. Failing this, it will use the LFS or BLFS development book. If all of these methods fail, it will just print the installed version and write to `~/logs/failed_versioning.log` the time and the name of the package whose upstream versioning failed. 
+
+# [`~/lfs_scripts`](https://github.com/fusion809/lfs_scripts)
+My shell profile is defined in `~/lfs_scripts`. Some scripts called for by GNOME and KDE Plasma Executor/Command Output commands are in this repository, too. 
 
 # GNOME
-GNOME was the first desktop I installed. Its packages are kept at the latest upstream version, not merely the latest version in the BLFS book. [Dash to Dock](https://github.com/micheleg/dash-to-dock) is enabled and installed, as is [WeatherPanel](https://github.com/attentivecoder/weatherpanel), [Extension List](https://github.com/tuberry/extension-list), [Kiwimenu](https://github.com/kem-a/kiwi-menu), [Show Desktop Button](https://github.com/amivaleo/Show-Desktop-Button) and [Super Into Apps](https://github.com/mikelei8291/super-into-apps). [Executor](https://github.com/raujonas/executor) is another extension I use; I've actually created my [own fork](https://github.com/fusion809/executor-raujonas.github.io) with more features.
+GNOME was the first desktop I installed and is the main user interface I use in the virtual machine. My NixOS system uses Hyprland instead, but I have struggled to get Hyprland to actually work in a KVM/QEMU virtual machine, so I decided to just use GNOME in the LFS VM. 
+
+[Dash to Dock](https://github.com/micheleg/dash-to-dock) is enabled and installed, as is [WeatherPanel](https://github.com/attentivecoder/weatherpanel), [Extension List](https://github.com/tuberry/extension-list), [Kiwimenu](https://github.com/kem-a/kiwi-menu), [Show Desktop Button](https://github.com/amivaleo/Show-Desktop-Button) and [Super Into Apps](https://github.com/mikelei8291/super-into-apps). As previously mentioned, I also use my own [own fork](https://github.com/fusion809/executor-raujonas.github.io) of the Executor extension. 
 
 ~~~
 <table style="border-collapse: collapse;">
@@ -281,13 +292,13 @@ The base [Executor](https://github.com/raujonas/executor) extension provides up 
             <b>Output command</b>
         </td>
         <td style="font-size: 16px; padding: 10px;">
-            <a href="https://github.com/fusion809/lfs-scripts/blob/master/left_widget_command.sh" target="_blank"><code>~/lfs-scripts/left_widget_command.sh</code></a> &mdash; displays the boot time and age of the system. The age is displayed as days/minutes/years hours:minutes:seconds. In my set up, it is used to generate output for the left widget. Runs every 60ms.
+            <a href="https://github.com/fusion809/lfs_scripts/blob/master/left_widget_command.sh" target="_blank"><code>~/lfs_scripts/left_widget_command.sh</code></a> &mdash; displays the boot time and age of the system. The age is displayed as days/minutes/years hours:minutes:seconds. In my set up, it is used to generate output for the left widget. Runs every 60ms.
         </td>
         <td style="font-size: 16px; padding: 10px;">
-            <a href="https://github.com/fusion809/lfs-scripts/blob/master/centre_widget_command.sh" target="_blank"><code>~/lfs-scripts/centre_widget_command.sh</code></a> &mdash; displays CPU, RAM and root filesystem usage percentage and the number of the currently shown wallpaper / the total number of wallpapers in <code>~/wallpapers</code>. Runs every millisecond.
+            <a href="https://github.com/fusion809/lfs_scripts/blob/master/centre_widget_command.sh" target="_blank"><code>~/lfs_scripts/centre_widget_command.sh</code></a> &mdash; displays CPU, RAM and root filesystem usage percentage and the number of the currently shown wallpaper / the total number of wallpapers in <code>~/wallpapers</code>. Runs every millisecond.
         </td>
         <td style="font-size: 16px; padding: 10px;">
-            <a href="https://github.com/fusion809/lfs-scripts/blob/master/updates_no.sh" target="_blank"><code>~/lfs-scripts/updates_no.sh</code></a> &mdash; checks for updates using the <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/lfs-updates.sh" target="_blank"><code>updates</code></a> command in the shell profile. It displays <code>$in_progress󰔚 $updates_avg_duration  $mod_time  $no_updates 󰂕 $no_missing_total  $no_failed</code> where <code>$in_progress</code> is replaced with nothing if the <code>updates</code> command is not running, and <code>󰦕 ${percent}% </code> otherwise, where <code>$percent</code> is an approximation of how far through the running of <code>updates</code> we are. <code>$updates_avg_duration</code> is the average duration, in minutes and seconds, of the run of <code>updates</code> based on <code>~/logs/updates_duration.log</code>. <code>$mod_time</code> is replaced with the time the <code>updates</code> command last stopped running. <code>$no_updates</code> is replaced with the number of available package updates. <code>$no_missing_total</code> is replaced with the number of packages with missing inventories. <code>$no_failed</code> is replaced with the number of package versioning failures. <code>updates</code> runs every 5 minutes - the average duration of <code>updates</code> runs. <code>updates_no.sh</code> is run every millisecond.
+            <a href="https://github.com/fusion809/lfs_scripts/blob/master/updates_no.sh" target="_blank"><code>~/lfs_scripts/updates_no.sh</code></a> &mdash; checks for updates using the <a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/lfs-updates.sh" target="_blank"><code>updates</code></a> command in the shell profile. It displays <code>$in_progress󰔚 $updates_avg_duration  $mod_time  $no_updates 󰂕 $no_missing_total  $no_failed$failed_version</code> where <code>$in_progress</code> is replaced with nothing if the <code>updates</code> command is not running, and <code>󰦕 ${percent}% </code> otherwise, where <code>$percent</code> is an approximation of how far through the running of <code>updates</code> we are. <code>$updates_avg_duration</code> is the average duration, in minutes and seconds, of the run of <code>updates</code> based on <code>~/logs/updates_duration.log</code>. <code>$mod_time</code> is replaced with the time the <code>updates</code> command last stopped running. <code>$no_updates</code> is replaced with the number of available package updates. <code>$no_missing_total</code> is replaced with the number of packages with missing inventories. <code>$no_failed</code> is replaced with the number of package versioning failures. <code>$failed_version</code>, if <code>~/log/failed_versioning.log</code> is not empty, is replaced by F and the number of packages with version failures in <code>~/logs/failed_versioning.log</code>. <code>updates</code> runs every 5 minutes - the average duration of <code>updates</code> runs. <code>updates_no.sh</code> is run every millisecond.
         </td>
     </tr>
     <tr>
@@ -298,7 +309,7 @@ The base [Executor](https://github.com/raujonas/executor) extension provides up 
             <a href="https://github.com/fusion809/lfs_apps/blob/master/cycle-wallpaper-previous.sh" target="_blank"><code>~/lfs_apps/cycle-wallpaper-previous.sh</code></a> &mdash; show previous wallpaper.
         </td>
         <td style="font-size: 16px; padding: 10px;">
-            <code>gnome-terminal -- zsh -ic <a href="https://github.com/fusion809/lfs-scripts/blob/master/list-wallpapers.sh" target="_blank">~/lfs-scripts/list-wallpapers.sh</a></code> &mdash; displays the list of wallpapers in `~/wallpapers` with the currently shown wallpaper highlighted and centred.
+            <code>gnome-terminal -- zsh -ic <a href="https://github.com/fusion809/lfs_scripts/blob/master/list-wallpapers.sh" target="_blank">~/lfs_scripts/list-wallpapers.sh</a></code> &mdash; displays the list of wallpapers in `~/wallpapers` with the currently shown wallpaper highlighted and centred.
         </td>
         <td style="font-size: 16px; padding: 10px;">
             <code>gnome-terminal -- zsh -ic "<a href="https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh" target="_blank">updatec</a>; exec zsh"</code> &mdash; updates the system's packages, including those installed via book instructions, custom packages and pip-managed packages and removes unneeded files. 
@@ -315,7 +326,7 @@ The base [Executor](https://github.com/raujonas/executor) extension provides up 
             <code>gnome-extensions prefs executor@raujonas.github.io</code> &mdash; opens the settings dialog for Executor.
         </td>
         <td style="font-size: 16px; padding: 10px;">
-            <code>gnome-terminal -- zsh -ic "source <a href="https://github.com/fusion809/lfs-scripts/blob/master/updates_no_func.sh" target="_blank">~/lfs-scripts/updates_no_func.sh</a>; silent_updates"</code> &mdash; runs <code>updates</code> to update the output shown in the widget.
+            <code>gnome-terminal -- zsh -ic "source <a href="https://github.com/fusion809/lfs_scripts/blob/master/updates_no_func.sh" target="_blank">~/lfs_scripts/updates_no_func.sh</a>; silent_updates"</code> &mdash; runs <code>updates</code> to update the output shown in the widget.
         </td>
     </tr>
     <tr>
@@ -326,7 +337,7 @@ The base [Executor](https://github.com/raujonas/executor) extension provides up 
             <a href="https://github.com/fusion809/lfs_apps/blob/master/cycle-wallpaper.sh" target="_blank"><code>~/lfs_apps/cycle-wallpaper.sh</code></a> &mdash; show next wallpaper.
         </td>
         <td style="font-size: 16px; padding: 10px;">
-            <a href="https://github.com/fusion809/lfs-scripts/blob/master/open-wallpaper.sh" target="_blank"><code>~/lfs-scripts/open-wallpaper.sh</code></a> &mdash; opens the displayed wallpaper in Eye of GNOME.
+            <a href="https://github.com/fusion809/lfs_scripts/blob/master/open-wallpaper.sh" target="_blank"><code>~/lfs_scripts/open-wallpaper.sh</code></a> &mdash; opens the displayed wallpaper in Eye of GNOME.
         </td>
         <td style="font-size: 16px; padding: 10px;">
             <code>gnome-terminal -- zsh -ic "tail -f ~/updates.log"</code> &mdash; opens a terminal and follows the output of the <code>updates</code> command being used to generate the widget content.
@@ -358,13 +369,13 @@ Right click: show log of last update check.
             <b>Tooltip command</b>
         </td>
         <td style="font-size: 16px; padding: 10px;">
-            <a href="https://github.com/fusion809/lfs-scripts/blob/master/left_widget_tooltip_command.sh" target="_blank"><code>~/lfs-scripts/left_widget_tooltip_command.sh</code></a> &mdash; generates a line describing the version of LFS/BLFS installed, along with the number of packages installed via different means, and package inventory commit numbers in a similar format as in the Fastfetch output. Also includes lines indicating how far into the current run of <code>autobuild &lt;package&gt;</code> the system is. 
+            <a href="https://github.com/fusion809/lfs_scripts/blob/master/left_widget_tooltip_command.sh" target="_blank"><code>~/lfs_scripts/left_widget_tooltip_command.sh</code></a> &mdash; generates a line describing the version of LFS/BLFS installed, along with the number of packages installed via different means, and package inventory commit numbers in a similar format as in the Fastfetch output. Also includes lines indicating how far into the current run of <code>autobuild &lt;package&gt;</code> the system is. 
         </td>
         <td style="font-size: 16px; padding: 10px;">
-            <a href="https://github.com/fusion809/lfs-scripts/blob/master/centre_widget_tooltip_command_wrap.sh" target="_blank"><code>~/lfs-scripts/centre_widget_tooltip_command_wrap.sh</code></a> &mdash; lists selected wallpaper (indicated with <code>></code>) and the 25 wallpapers before and after this one. If there are not 25 wallpapers before the current one, it will show some of the last wallpapers in the collection before the wallpaper numbered 1 to ensure that 51 wallpapers are listed (including the one set as the desktop background). If there are not 25 wallpapers after the current one, it will show some of the first wallpapers in the collection after the final one in the list to ensure that 51 wallpapers are listed in total.
+            <a href="https://github.com/fusion809/lfs_scripts/blob/master/centre_widget_tooltip_command_wrap.sh" target="_blank"><code>~/lfs_scripts/centre_widget_tooltip_command_wrap.sh</code></a> &mdash; lists selected wallpaper (indicated with <code>></code>) and the 25 wallpapers before and after this one. If there are not 25 wallpapers before the current one, it will show some of the last wallpapers in the collection before the wallpaper numbered 1 to ensure that 51 wallpapers are listed (including the one set as the desktop background). If there are not 25 wallpapers after the current one, it will show some of the first wallpapers in the collection after the final one in the list to ensure that 51 wallpapers are listed in total.
         </td>
         <td style="font-size: 16px; padding: 10px;">
-            <a href="https://github.com/fusion809/lfs-scripts/blob/master/update-table.sh" target="_blank"><code>~/lfs-scripts/update-table.sh</code></a> &mdash; generates a more compact table of packages with updates, missing inventories and versioning failures.
+            <a href="https://github.com/fusion809/lfs_scripts/blob/master/update-table.sh" target="_blank"><code>~/lfs_scripts/update-table.sh</code></a> &mdash; generates a more compact table of packages with updates, missing inventories and versioning failures.
         </td>
     </tr>
 </table>
