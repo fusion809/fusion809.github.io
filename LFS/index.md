@@ -181,10 +181,10 @@ From my NixOS host machine, I have written &mdash; with the help of artificial i
 * [`/var/lib/book-packages`](https://github.com/fusion809/lfs_book_packages) &mdash; package inventories for LFS and BLFS packages. Now empty as all packages are now provided by custom build scripts. 
 * [`/var/lib/custom-packages`](https://github.com/fusion809/lfs_custom_packages) &mdash; package inventories for custom packages (those in `~/lfs_packaging`).
 
-# [`~/build_duration`](https://github.com/fusion809/build_duration)
+# `~/build_duration`
 `~/build_duration` merely contains the logs of how long each completed build has taken. Its contents are created by `~/lfs_scripts/autobuild-log.sh`, which is in turn automatically run by `~/lfs_dotfiles/systemd/user/autobuild-log.service` (which is symlinked to `~/.config/systemd/user/autobuild-log.service`). As for 13 September 2026, it is new and is far from being complete, so many packages' build times are not logged. `build_time pkg` is a shell script function defined in `~/lfs_scripts` that converts the build time into hours, minutes and seconds. `lfs_commit` commits changes made to this repository, along with changes made to `/var/lib/book-packages` and `/var/lib/custom-packages`. 
 
-# [`~/lfs_apps`](https://github.com/fusion809/lfs_apps)
+# `~/lfs_apps`
 The desktop configuration files in `~/lfs_apps` generate plots of boot times and cycle through wallpapers.
 
 Plotting files:
@@ -199,7 +199,7 @@ Wallpaper cycling files:
 * `cycle-wallpaper-shuffle.sh` and `cycle-wallpaper-shuffle.desktop` &mdash; moves us randomly through the wallpapers in `~/wallpapers`. Keyboard shortcut: Win+S.
 * `specify-wallpaper.sh` and `specify-wallpaper.desktop` &mdash; specify the wallpaper (by number) that you want to be set as you desktop background. Keyboard shortcut: Win+N.
 
-# [`~/lfs_dotfiles`](https://github.com/fusion809/lfs_dotfiles)
+# `~/lfs_dotfiles`
 I have also customized Fastfetch/HyFetch output so that it accurately prints the number of packages I have installed. The Fastfetch configuration file used is located in [`~/lfs_dotfiles/config.jsonc`](https://github.com/fusion809/lfs_dotfiles/blob/master/config.jsonc). The HyFetch configuration files are also in [`~/lfs_dotfiles/hyfetch.json`](https://github.com/fusion809/lfs_dotfiles/blob/master/hyfetch.json). 
 
 In the screenshot above, `838 [ 726,  1,  82,  29]` means that 837 packages are installed in total. Of them 725 were installed via custom build scripts in [`~/lfs_packaging`](https://github.com/fusion809/lfs_packaging). 1 Julia package was installed; this package is Julia itself which was installed via `juliaup` (the compilation process of Julia is incredibly complex and even requires its own custom build of LLVM). 82 Python packages were installed via `pip`. 29 R packages were installed. 
@@ -208,12 +208,12 @@ In the screenshot above, `838 [ 726,  1,  82,  29]` means that 837 p
 
 There is one systemd service file in [`~/lfs_dotfiles/systemd/user/autobuild-log.service`](https://github.com/fusion809/lfs_dotfiles/blob/master/systemd/user/autobuild-log.service) to autostart [`~/lfs_scripts/autobuild-log.sh`](https://github.com/fusion809/lfs_scripts/blob/master/autobuild-log.sh). 
 
-# [`~/lfs_packaging`](https://github.com/fusion809/lfs_packaging)
+# `~/lfs_packaging`
 `~/lfs_packaging` is presently used to provide all the packages of my LFS virtual machine. It contains directories whose names match the name of the package the `build.sh` script within provides. These scripts cannot be manually executed; instead packages are built using `autobuild pkg` (with the `-f` option required if the latest version of the package is already installed). That being said, `autobuild` does have the capacity to install BLFS and LFS packages from the development book instructions, too, but I prefer the custom package script approach as it allows me to easily edit the build commands and set the version of the package as the latest upstream stable release. Consequently, `autobuild pkg` always defaults to using the `~/lfs_packaging` package when one is available. 
 
 Most of the build instructions in `build.sh` scripts are based on LFS and BLFS build instructions; some are based on SlackBuilds developed, by other packagers, to provide the package for Slackware. Some are also based on Arch Linux PKGBUILDs. `version=` lines in these scripts typically, as their first port of call, will opt to determine the latest upstream version from the source archive website of the package. Failing this, it will use the tags of its git repository. Failing this, it will use [tox-wtf's Version Aggregator and Tracker](https://github.com/tox-wtf/vat). Failing this, it will use Arch Linux's PKGBUILD for the package. Failing this, it will use the LFS or BLFS development book. If all of these methods fail, it will just print the installed version and write to `~/logs/failed_versioning.log` the time and the name of the package whose upstream versioning failed. 
 
-# [`~/lfs_scripts`](https://github.com/fusion809/lfs_scripts)
+# `~/lfs_scripts`
 My shell profile is defined in `~/lfs_scripts`. Some scripts called for by GNOME and KDE Plasma Executor/Command Output commands are in this repository, too. 
 
 # GNOME
