@@ -3,9 +3,9 @@
 @def tag=["Linux"]
 @def mintoclevel=1
 
-![LFS screenshot](https://fusion809.github.io/images/executor-raujonas.github.io/LFS_screenshot_22-09-2026.png)
+![LFS screenshot](https://fusion809.github.io/images/executor-raujonas.github.io/LFS_screenshot_29-09-2026.png)
 
-**Figure 1: Screenshot of my LFS VM's GNOME session as of 22 September 2026.**
+**Figure 1: Screenshot of my LFS VM's GNOME session as of 29 September 2026.**
 
 I first installed LFS 12.4 systemd edition to a virtual machine on 9 February 2026. Since then, I have upgraded the system to the development systemd branch, and then gradually made it even more bleeding edge than this by upgrading all packages to the latest stable upstream release. Sometimes I need to keep a package back simply because its latest stable release actually depends on pre-release versions of other packages. This was the case for `gnome-control-center` on 12 September, as at this point version `51.0` of the package was out but it depended on version `51.alpha` or later of `gnome-desktop` and out of these versions only `51.alpha` was available at the time. 
 
