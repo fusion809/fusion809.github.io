@@ -2,22 +2,22 @@
 Many of the desktop configuration files in `~/lfs_apps` generate plots of boot times and cycle through wallpapers.
 
 Plotting files:
-* `plotbts.sh` and `plotbts.desktop` &mdash; boot time histogram with linear scaling on both axes; outliers excluded; not including more recent boots. 
-* `plotbtsa.sh` and `plotbtsa.desktop` &mdash; boot time histogram with logarithmic scaling on both axes; outliers included; including more recent boots.
-* `plotbtso.sh` and `plotbtso.desktop` &mdash; boot time histogram with linear scaling on both axes; outliers included; not including more recent boots.
+* [`plotbts.sh`](https://github.com/fusion809/lfs_apps/blob/master/plotbts.sh) and [`plotbts.desktop`](https://github.com/fusion809/lfs_apps/blob/master/plotbts.desktop) &mdash; boot time histogram with linear scaling on both axes; outliers excluded; not including more recent boots. 
+* [`plotbtsa.sh`](https://github.com/fusion809/lfs_apps/blob/master/plotbtsa.sh) and [`plotbtsa.desktop`](https://github.com/fusion809/lfs_apps/blob/master/plotbtsa.desktop) &mdash; boot time histogram with logarithmic scaling on both axes; outliers included; including more recent boots.
+* [`plotbtso.sh`](https://github.com/fusion809/lfs_apps/blob/master/plotbtso.sh) and [`plotbtso.desktop`](https://github.com/fusion809/lfs_apps/blob/master/plotbtso.desktop) &mdash; boot time histogram with linear scaling on both axes; outliers included; not including more recent boots.
 These rely on [`~/lfs_gnuplot`](https://github.com/fusion809/lfs_gnuplot) Gnuplot code.
 
 Wallpaper cycling files:
-* `cycle-wallpaper.sh` and `cycle-wallpaper.desktop` &mdash; moves us forward through the wallpapers in `~/wallpapers`. Keyboard shortcut: Win+W.
-* `cycle-wallpaper-previous.sh` and `cycle-wallpaper-previous.desktop` &mdash; moves us backward through the wallpapers in `~/wallpapers`. Keyboard shortcut: Win+Z.
-* `cycle-wallpaper-shuffle.sh` and `cycle-wallpaper-shuffle.desktop` &mdash; moves us randomly through the wallpapers in `~/wallpapers`. Keyboard shortcut: Win+S.
-* `specify-wallpaper.sh` and `specify-wallpaper.desktop` &mdash; specify the wallpaper (by number) that you want to be set as you desktop background. Keyboard shortcut: Win+N.
+* [`cycle-wallpaper.sh`](https://github.com/fusion809/lfs_apps/blob/master/cycle-wallpaper.sh) and [`cycle-wallpaper.desktop`](https://github.com/fusion809/lfs_apps/blob/master/cycle-wallpaper.desktop) &mdash; moves us forward through the wallpapers in `~/wallpapers`. Keyboard shortcut: Win+W.
+* [`cycle-wallpaper-previous.sh`](https://github.com/fusion809/lfs_apps/blob/master/cycle-wallpaper-previous.sh) and [`cycle-wallpaper-previous.desktop`](https://github.com/fusion809/lfs_apps/blob/master/cycle-wallpaper-previous.desktop) &mdash; moves us backward through the wallpapers in `~/wallpapers`. Keyboard shortcut: Win+Z.
+* [`cycle-wallpaper-shuffle.sh`](https://github.com/fusion809/lfs_apps/blob/master/cycle-wallpaper-shuffle.sh) and [`cycle-wallpaper-shuffle.desktop`](https://github.com/fusion809/lfs_apps/blob/master/cycle-wallpaper-shuffle.desktop) &mdash; moves us randomly through the wallpapers in `~/wallpapers`. Keyboard shortcut: Win+S.
+* [`specify-wallpaper.sh`](https://github.com/fusion809/lfs_apps/blob/master/specify-wallpaper.sh) and [`specify-wallpaper.desktop`](https://github.com/fusion809/lfs_apps/blob/master/specify-wallpaper.desktop) &mdash; specify the wallpaper (by number) that you want to be set as you desktop background. Keyboard shortcut: Win+N.
 
 Some other desktop configuration files in `~/lfs_apps` open up the settings of GNOME extensions, including:
-* `dash-to-dock.desktop` &mdash; for opening the settings for Dash to Dock.
-* `executor.desktop` &mdash; for opening the settings for Executor.
-* `kiwimenu.desktop` &mdash; for opening the settings for KiwiMenu.
-* `user-theme.desktop` &mdash; for opening the user themes extension settings. 
+* [`dash-to-dock.desktop`](https://github.com/fusion809/lfs_apps/blob/master/dash-to-dock.desktop) &mdash; for opening the settings for Dash to Dock.
+* [`executor.desktop`](https://github.com/fusion809/lfs_apps/blob/master/executor.desktop) &mdash; for opening the settings for Executor.
+* [`kiwimenu.desktop`](https://github.com/fusion809/lfs_apps/blob/master/kiwimenu.desktop) &mdash; for opening the settings for KiwiMenu.
+* [`user-theme.desktop`](https://github.com/fusion809/lfs_apps/blob/master/user-theme.desktop) &mdash; for opening the user themes extension settings. 
 
 Other desktop configuration files in `~/lfs_apps` include:
-* `julia.desktop` &mdash; for running Julia installed via `juliaup`.
+* [`julia.desktop`](https://github.com/fusion809/lfs_apps/blob/master/julia.desktop) &mdash; for running Julia installed via `juliaup`.
