@@ -5,4 +5,4 @@ In the screenshot above, `852 [ 735,  2,  86,  29]` means that 852 p
 
 ` 585` refers to number of custom package inventory git repository commits I have published. I include it in Fastfetch output as a way of tracking the versions of custom packages.
 
-There is one systemd service file in [`~/lfs_dotfiles/systemd/user/lfs-download.service`](https://github.com/fusion809/lfs_dotfiles/blob/master/systemd/user/lfs-download.service) to autostart [`~/lfs_scripts/lfs-download.sh`](https://github.com/fusion809/lfs_scripts/blob/master/lfs-downloader.sh). This downloads LFS, BLFS and SFLS HTML files for use by `updates` and `update`. 
+There is one systemd service file in [`~/lfs_dotfiles/systemd/user/lfs-download.service`](https://github.com/fusion809/lfs_dotfiles/blob/master/systemd/user/lfs-download.service) to autostart [`~/lfs_scripts/lfs-download.sh`](https://github.com/fusion809/lfs_scripts/blob/master/lfs-downloader.sh). This downloads LFS, BLFS and SFLS HTML files for use by the `version=` lines of build.sh files in `~/lfs_packaging`. 

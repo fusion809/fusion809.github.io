@@ -1,5 +1,5 @@
 # `~/lfs_apps`
-The desktop configuration files in `~/lfs_apps` generate plots of boot times and cycle through wallpapers.
+Many of the desktop configuration files in `~/lfs_apps` generate plots of boot times and cycle through wallpapers.
 
 Plotting files:
 * `plotbts.sh` and `plotbts.desktop` &mdash; boot time histogram with linear scaling on both axes; outliers excluded; not including more recent boots. 
@@ -12,3 +12,12 @@ Wallpaper cycling files:
 * `cycle-wallpaper-previous.sh` and `cycle-wallpaper-previous.desktop` &mdash; moves us backward through the wallpapers in `~/wallpapers`. Keyboard shortcut: Win+Z.
 * `cycle-wallpaper-shuffle.sh` and `cycle-wallpaper-shuffle.desktop` &mdash; moves us randomly through the wallpapers in `~/wallpapers`. Keyboard shortcut: Win+S.
 * `specify-wallpaper.sh` and `specify-wallpaper.desktop` &mdash; specify the wallpaper (by number) that you want to be set as you desktop background. Keyboard shortcut: Win+N.
+
+Some other desktop configuration files in `~/lfs_apps` open up the settings of GNOME extensions, including:
+* `dash-to-dock.desktop` &mdash; for opening the settings for Dash to Dock.
+* `executor.desktop` &mdash; for opening the settings for Executor.
+* `kiwimenu.desktop` &mdash; for opening the settings for KiwiMenu.
+* `user-theme.desktop` &mdash; for opening the user themes extension settings. 
+
+Other desktop configuration files in `~/lfs_apps` include:
+* `julia.desktop` &mdash; for running Julia installed via `juliaup`.
