@@ -1,0 +1,12 @@
+# GitHub repositories relating to VM and their locations on VM
+* Host system [`NixOS-configs`](https://github.com/fusion809/NixOS-configs/tree/26.05/shell/user/) has shell profile for managing VM, including package management shell functions. Specifically [21-lfs.sh](https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/21-lfs.sh), [lfs-autobuild.sh](https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/lfs-autobuild.sh), [lfs-updates.sh](https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/lfs-updates.sh) and [lfs-vm-bootstrap.sh](https://github.com/fusion809/NixOS-configs/blob/26.05/shell/user/lfs-vm-bootstrap.sh) are the scripts for LFS management. 
+* [`~/build_duration`](https://github.com/fusion809/lfs_package_build_times) &mdash; contains text files that contain the duration, in seconds, of building each package.
+* [`~/lfs_apps`](https://github.com/fusion809/lfs_apps) &mdash; desktop configuration files and shell scripts these desktop files call. 
+* [`~/lfs_dotfiles`](https://github.com/fusion809/lfs_dotfiles) &mdash; Fastfetch, HyFetch and systemd configuration files for LFS VM.
+* [`~/lfs_gnuplot`](https://github.com/fusion809/lfs_gnuplot) &mdash; Gnuplot files for my LFS VM.
+* [`~/lfs_packaging`](https://github.com/fusion809/lfs_packaging) &mdash; which contains packaging scripts for building custom packages.
+* [`~/lfs_scripts`](https://github.com/fusion809/lfs_scripts) &mdash; shell scripts (including VM shell profile and scripts called by Executor and Command Output extensions/widgets) used by LFS system.
+* [`~/logs`](https://github.com/fusion809/lfs_logs) &mdash; assorted log files from LFS system. 
+* [`/usr/share/gnome-shell/extensions/executor@raujonas.github.io`](https://github.com/fusion809/executor-raujonas.github.io) &mdash; customized verison of the [`executor@raujonas.github.io`](https://github.com/raujonas/executor) I use under my GNOME session (which is the main session I boot).
+* [`/var/lib/book-packages`](https://github.com/fusion809/lfs_book_packages) &mdash; package inventories for LFS and BLFS packages. Now empty as all packages are now provided by custom build scripts. 
+* [`/var/lib/custom-packages`](https://github.com/fusion809/lfs_custom_packages) &mdash; package inventories for custom packages (those in `~/lfs_packaging`).

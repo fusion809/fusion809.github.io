@@ -1,0 +1,8 @@
+# `~/lfs_dotfiles`
+I have also customized Fastfetch/HyFetch output so that it accurately prints the number of packages I have installed. The Fastfetch configuration file used is located in [`~/lfs_dotfiles/config.jsonc`](https://github.com/fusion809/lfs_dotfiles/blob/master/config.jsonc). The HyFetch configuration files are also in [`~/lfs_dotfiles/hyfetch.json`](https://github.com/fusion809/lfs_dotfiles/blob/master/hyfetch.json). 
+
+In the screenshot above, `853 [ 735,  3,  86,  29]` means that 853 packages are installed in total. Of them 735 were installed via custom build scripts in [`~/lfs_packaging`](https://github.com/fusion809/lfs_packaging). 3 Julia packages were installed; this package is Julia itself which was installed via `juliaup` (the compilation process of Julia is incredibly complex and even requires its own custom build of LLVM). 86 Python packages were installed via `pip`. 29 R packages were installed. 
+
+` 585` refers to number of custom package inventory git repository commits I have published. I include it in Fastfetch output as a way of tracking the versions of custom packages.
+
+There is one systemd service file in [`~/lfs_dotfiles/systemd/user/lfs-download.service`](https://github.com/fusion809/lfs_dotfiles/blob/master/systemd/user/lfs-download.service) to autostart [`~/lfs_scripts/lfs-download.sh`](https://github.com/fusion809/lfs_scripts/blob/master/lfs-downloader.sh). This downloads LFS, BLFS and SFLS HTML files for use by `updates` and `update`. 

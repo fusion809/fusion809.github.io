@@ -1,0 +1,2 @@
+# `~/lfs_scripts`
+My shell profile is defined in `~/lfs_scripts`. Some scripts called for by GNOME and KDE Plasma Executor/Command Output commands are in this repository, too. One such command defined in the shell profile is `pkgs_table` which prints a table of all packages installed via `~/lfs_packaging` custom packages with the installed size, build duration, package name, package version and package description.

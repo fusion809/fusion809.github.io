@@ -629,6 +629,40 @@ function render_rmPlot(funcs, ids, title)
   write(filepath2, src)
 end
 
+"""
+    lx_includemd(com, _)
+
+Include a Markdown fragment file into the current page during parsing,
+ensuring all headings are properly registered in the Table of Contents (\\toc).
+The path is relative to the site root folder.
+
+Usage in a `.md` file:
+    \\includemd{LFS/_motivations.md}
+"""
+function lx_includemd(com, _)
+    rpath = strip(Franklin.content(com.braces[1]))
+    fpath = isabspath(rpath) ? rpath : joinpath(Franklin.path(:folder), rpath)
+    return read(fpath, String)
+end
+
+"""
+    hfun_include_md(params)
+
+Include a Markdown fragment file into the current page.
+The path is relative to the site root folder.
+Files whose names start with `_` are not rendered as standalone pages by
+Franklin, making them safe to use as pure include fragments.
+
+Usage in a `.md` file:
+    {{include_md LFS/_motivations.md}}
+"""
+function hfun_include_md(params)
+    rpath   = params[1]
+    fpath   = joinpath(Franklin.path(:folder), rpath)
+    content = read(fpath, String)
+    return fd2html(content, internal=true)
+end
+
 function hfun_render_js()
   title = locvar("title")
   type = locvar("type")
