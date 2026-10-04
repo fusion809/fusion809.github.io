@@ -8,15 +8,15 @@
  */
 function f(objectOfInputs, t, vars, dt) {
     var [S, I, R] = vars;
-    var {beta, gamma, delta} = objectOfInputs;
+    var { beta, gamma, delta } = objectOfInputs;
     // Determine N
-    var N = S+I+R;
+    var N = S + I + R;
     // Calculate derivatives
-    var dSdt = - beta * S * I * (1-delta)/N;
-    var dIdt = beta * S * I * (1-delta)/N - gamma * I;
-    var dRdt = gamma*I;
+    var dSdt = - beta * S * I * (1 - delta) / N;
+    var dIdt = beta * S * I * (1 - delta) / N - gamma * I;
+    var dRdt = gamma * I;
     // Put into return value
-    return [dt*dSdt, dt*dIdt, dt*dRdt];
+    return [dt * dSdt, dt * dIdt, dt * dRdt];
 }
 
 /**
@@ -27,11 +27,11 @@ function f(objectOfInputs, t, vars, dt) {
  */
 function generateSIRPhasePlot(solution) {
     // Extract solution data
-    var {vars} = solution;
+    var { vars } = solution;
     var [S, I, R] = vars;
 
     // Generate 3D plot
-    gen3DPlot(S, I, R, "phasePlotSIR", "Phase plot of the solution to the SIR equations.", {xtitle: "Susceptible", ytitle: "Infectious", ztitle: "Recovered"});
+    gen3DPlot(S, I, R, "phasePlotSIR", "Phase plot of the solution to the SIR equations.", { xtitle: "Susceptible", ytitle: "Infectious", ztitle: "Recovered" });
 }
 
 /**
@@ -42,7 +42,7 @@ function generateSIRPhasePlot(solution) {
  */
 function generateSIPhasePlot(solution) {
     // Extract solution data
-    var {vars} = solution;
+    var { vars } = solution;
     var S = vars[0];
     var I = vars[1];
 
@@ -58,10 +58,10 @@ function generateSIPhasePlot(solution) {
  */
 function generateSRPhasePlot(solution) {
     // Extract solution data
-    var {vars} = solution;
+    var { vars } = solution;
     var S = vars[0];
     var R = vars[2];
-    
+
     // Generate 2D plot
     gen2DPlot(S, R, "phasePlotSR", "SR phase plot, x = S and y = R", "S", "R");
 }
@@ -74,12 +74,12 @@ function generateSRPhasePlot(solution) {
  */
 function generateIRPhasePlot(solution) {
     // Extract solution data
-    var {vars} = solution;
+    var { vars } = solution;
     var I = vars[1];
     var R = vars[2];
 
     // Generate 2D plot
-    gen2DPlot(I, R, "phasePlotIR", "IR phase plot, x = I and y = R", "S", "R");
+    gen2DPlot(I, R, "phasePlotIR", "IR phase plot, x = I and y = R", "I", "R");
 }
 
 /**
@@ -104,11 +104,11 @@ function generateTimePlot(solution) {
  * @param objectOfInputs An object containing all the form parameters. 
  * @return               Nothing. Just generates the plots.
  */
-function generatePlots(objectOfInputs=undefined, solution=undefined) {
-    if (objectOfInputs==undefined) {
+function generatePlots(objectOfInputs = undefined, solution = undefined) {
+    if (objectOfInputs == undefined) {
         var objectOfInputs = readInputs();
     }
-    if (solution==undefined) {
+    if (solution == undefined) {
         var solution = solveProblem(RKF45, objectOfInputs);
     }
 
@@ -124,26 +124,26 @@ function generatePlots(objectOfInputs=undefined, solution=undefined) {
  * Generate animation
  * @return nothing. 
  */
-function generateAnimation(objectOfInputs=undefined, solution=undefined) {
-    if (objectOfInputs==undefined) {
+function generateAnimation(objectOfInputs = undefined, solution = undefined) {
+    if (objectOfInputs == undefined) {
         var objectOfInputs = readInputs();
     }
-    if (solution==undefined) {
+    if (solution == undefined) {
         var solution = solveProblem(RKF45, objectOfInputs);
     }
-    animate3D(solution, {varnames: ["Susceptible", "Infectious", "Recovered"], title: "Susceptible, infectious and recovered population phase plot for the SIR infectious disease model."});
+    animate3D(solution, { varnames: ["Susceptible", "Infectious", "Recovered"], title: "Susceptible, infectious and recovered population phase plot for the SIR infectious disease model." });
 }
 
-function generateTable(objectOfInputs=undefined, solution=undefined) {
-    if (objectOfInputs==undefined) {
+function generateTable(objectOfInputs = undefined, solution = undefined) {
+    if (objectOfInputs == undefined) {
         var objectOfInputs = readInputs();
     }
-    if (solution==undefined) {
+    if (solution == undefined) {
         var solution = solveProblem(RKF45, objectOfInputs);
     }
     fillTable(objectOfInputs, ['Susceptible', 'Infectious', 'Recovered'], solution)
 }
 
-function generateTable(objectOfInputs=undefined, solution=undefined) {
+function generateTable(objectOfInputs = undefined, solution = undefined) {
     fillTable(objectOfInputs, ['Susceptible', 'Infectious', 'Recovered'], solution)
 }
