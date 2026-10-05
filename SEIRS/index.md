@@ -36,7 +36,7 @@ Where:
 * $\omega$ is the rate of immunity loss in recovered individuals. 
 * $N$ is the total population.
 
-This model is heavily based on Bjørnstad et al. (2020), with some amendments. Specifically, $\delta$ has been added to account for quarantine effects and $\lambda$ has been accounted for a innate birth rate that may not match the innate death rate of $\mu$. Hence the basic reproduction number $R_0$ (not to be confused with the initial number of recovered individuals) is given by $\dfrac{\beta \sigma}{(\mu+\sigma)(\alpha + \gamma + \mu)}$
+This model is heavily based on [Bjørnstad et al. (2020)](#reference_list), with some amendments. Specifically, $\delta$ has been added to account for quarantine effects and $\lambda$ has been accounted for a innate birth rate that may not match the innate death rate of $\mu$. Hence the basic reproduction number $R_0$ (not to be confused with the initial number of recovered individuals) is given by $\dfrac{\beta \sigma}{(\mu+\sigma)(\alpha + \gamma + \mu)}$.
 
 If you would like to examine a more simple model, without birth and death rates, immunity loss, and incubation periods, then check out the [SIR model solver](/SIR/) webpage.
 
