@@ -1,0 +1,49 @@
+~~~
+<head>
+<script src="/libs/common/generateTableSIR.js"></script>
+</head>
+~~~
+
+@def hassim=true;
+@def title = "SEIRS solver"
+@def params = (alpha=(val=0.01, desc="Death by infection rate."), beta=(val=2, desc="A parameter that pertains to how many contacts there are per person and how easily the disease spreads from an infected person to an uninfected person."), gamma=(val=0.1, desc="A parameter that is a measure of how quickly people recover from the disease."), delta=(val=0.1, desc="A parameter with values from 0 to 1 pertaining to how effective quarantine measures are at slowing the disease outbreak. If \\(\\delta = 0\\), the measures are either non-existent or completely ineffective. If \\(\\delta = 1\\), all infected persons are immediately, as soon as they become infected, quarantined."), lambda=(val=1e-4, desc="Birth rate."), mu=(val=1e-5, desc="Baseline death rate, irrespective of infection."), sigma=(val=0.33, desc="Inverse of incubation period."), omega=(val=0.01, desc="Rate of immunity loss in recovered individuals."), tf=(val=300, desc="End time of simulation."), S0=(val=89, desc="Initial number of susceptible individuals."), E0=(val=0, desc="Initial number of exposed individuals."), I0=(val=1, desc="Initial number of infected individuals."), R0=(val=0, desc="Initial number of recovered individuals."), epsilon=(val=1e-11,desc="Error tolerance for our numerical solution to the SIR equations."))
+@def ids = ["tableOutputs", "phasePlotSIR", "phasePlotSEI", "phasePlotSER", "phasePlotEIR", "phasePlotSI", "phasePlotSR", "phasePlotIR", "timePlot", "phasePlotSIR", "animationSIR", "animationSEI", "animationSER", "animationEIR", "animationSIR", "animationSIR"];
+@def vars=["S", "E", "I", "R"]
+@def funcs = ["fillTable(readInputs(), ['Susceptible', 'Exposed', 'Infectious', 'Recovered'])","removeTable()","generateSIRPhasePlot(solveProblem(RKF45, readInputs()))","removeSIRPhasePlot()","generateSEIPhasePlot(solveProblem(RKF45, readInputs()))","removeSEIPhasePlot()","generateSERPhasePlot(solveProblem(RKF45, readInputs()))","removeSERPhasePlot()","generateEIRPhasePlot(solveProblem(RKF45, readInputs()))","removeEIRPhasePlot()","generateSIPhasePlot(solveProblem(RKF45, readInputs()))","removeSIPhasePlot()","generateSRPhasePlot(solveProblem(RKF45, readInputs()))","removeSRPhasePlot()","generateIRPhasePlot(solveProblem(RKF45, readInputs()))","removeIRPhasePlot()","generateTimePlot(solveProblem(RKF45, readInputs()))","removeTimePlot()","generatePlots(readInputs())","removePlots()","generateAnimationSIR()","removeAnimationSIR()","generateAnimationSEI()","removeAnimationSEI()","generateAnimationSER()","removeAnimationSER()","generateAnimationEIR()","removeAnimationEIR()","generateAnimations()","removeAnimations()","generateAllOutputs()", "removeAllOutputs()"] 
+@def labels = ["Tabulate the solution","Remove the solution table","Generate a \\(S\\), \\(I\\) and \\(R\\) phase plot","Remove \\(S\\), \\(I\\) and \\(R\\) plot","Generate a \\(S\\), \\(E\\) and \\(I\\) phase plot","Remove \\(S\\), \\(E\\) and \\(I\\) plot","Generate a \\(S\\), \\(E\\) and \\(R\\) phase plot","Remove \\(S\\), \\(E\\) and \\(R\\) plot","Generate a \\(E\\), \\(I\\) and \\(R\\) phase plot","Remove \\(E\\), \\(I\\) and \\(R\\) plot","Generate a \\(S\\) and \\(I\\) phase plot","Remove \\(S\\) and \\(I\\) plot","Generate a \\(S\\) and \\(R\\) phase plot","Remove \\(S\\) and \\(R\\) plot","Generate an \\(I\\) and \\(R\\) phase plot","Remove \\(I\\) and \\(R\\) plot","Generate a \\(S\\), \\(E\\), \\(I\\) and \\(R\\) against time plot","Remove time plot","Generate all solution plots","Remove all plots","Generate a \\(S\\), \\(I\\) and \\(R\\) phase plot animation","Remove \\(S\\), \\(I\\) and \\(R\\) animation","Generate a \\(S\\), \\(E\\) and \\(I\\) phase plot animation","Remove \\(S\\), \\(E\\) and \\(I\\) animation","Generate a \\(S\\), \\(E\\) and \\(R\\) phase plot animation","Remove \\(S\\), \\(E\\) and \\(R\\) animation","Generate \\(E\\), \\(I\\) and \\(R\\) phase plot animation","Remove a \\(E\\), \\(I\\) and \\(R\\) phase plot animation","Generate all animations","Remove all animations","Generate all outputs","Remove all outputs"]
+
+This webpage uses the [Runge-Kutta-Fehlberg fourth-order method with fifth-order error checking RKF45](/RKF45/) to approximate the solution to the SEIRS equations:
+
+\begin{aligned}
+\frac{dS}{dt} & = \lambda N + \omega R - \mu S - \frac{\beta I (1-\delta)S}{N} \\
+\frac{dE}{dt} & = \frac{\beta I (1-\delta) S}{N} - (\mu + \sigma ) E \\
+\frac{dI}{dt} & = \sigma E - (\alpha + \gamma +\mu ) I \\
+\frac{dR}{dt} & = \gamma I  - (\mu + \omega) R.
+\end{aligned}
+
+Where:
+* $S$ is the number of susceptible persons.
+* $E$ is the number of exposed persons.
+* $I$ is the number of infectious persons.
+* $R$ is the number of recovered persons.
+* $\alpha$ is the infection mortality rate.
+* $\beta$ is a parameter that pertains to the average number of contacts per person per time and the rate of transmission for the disease. 
+* $\gamma$ is the inverse of the average time a person is infected with the disease.
+* $\delta$ refers to the efficacy of quarantine effects.  
+* $\lambda$ is the birth rate. 
+* $\mu$ is the overall population death rate. 
+* $\sigma$ is the latency rate, which is the inverse of the incubation period.
+* $\omega$ is the rate of immunity loss in recovered individuals. 
+* $N$ is the total population.
+
+This model is heavily based on Bjørnstad et al. (2020), with some amendments. Specifically, $\delta$ has been added to account for quarantine effects and $\lambda$ has been accounted for a innate birth rate that may not match the innate death rate of $\mu$. Hence the basic reproduction number $R_0$ (not to be confused with the initial number of recovered individuals) is given by $\dfrac{\beta \sigma}{(\mu+\sigma)(\alpha + \gamma + \mu)}$
+
+If you would like to examine a more simple model, without birth and death rates, immunity loss, and incubation periods, then check out the [SIR model solver](/SIR/) webpage.
+
+~~~
+    {{ insert template.html}}
+~~~
+
+# Reference list
+
+Bjørnstad ON, Shea K, Krzywinski M, & Altman N (2020). [The SEIRS model for infectious disease dynamics](https://doi.org/10.1038/s41592-020-0856-2). *Nature Methods*, 17(6): 557–558.

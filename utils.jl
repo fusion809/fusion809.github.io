@@ -230,7 +230,7 @@ function hfun_params_render()
     elseif (occursin.(r"Deltat", param_name))
       param_name_latex="\\Delta t"
     elseif (occursin.(r"lambda", param_name))
-      param_name_latex="\\Lambda"
+      param_name_latex="\\lambda"
     elseif (occursin.(r"mu", param_name))
       param_name_latex="\\mu" 
     elseif (occursin.(r"tf", param_name))
