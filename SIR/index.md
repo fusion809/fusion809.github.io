@@ -20,7 +20,7 @@ This webpage uses the [Runge-Kutta-Fehlberg fourth-order method with fifth-order
 \dfrac{dR}{dt} &= \gamma I.
 \end{aligned}
 
-Where $S$ is the number of susceptible persons, $I$ is the number of infected persons and $R$ is the number of recovered persons. $\beta$ is a parameter that pertains to the average number of contacts per person per time and the rate of transmission for the disease. $\gamma$ is the inverse of the average time a person is infected with the disease. Consequently, the basic reproduction number, which is typically represented as $R_0$ (not to be confused with the initial population of recovered individuals), is given by:
+Where $t$ is time and is usually in units of days. $S$ is the number of susceptible persons, $I$ is the number of infected persons and $R$ is the number of recovered persons. $\beta$ is a parameter that pertains to the average number of contacts per person per time and the rate of transmission for the disease. $\gamma$ is the inverse of the average time a person is infected with the disease. Consequently, the basic reproduction number, which is typically represented as $R_0$ (not to be confused with the initial population of recovered individuals), is given by:
 
 \begin{aligned}
 R_0 = \dfrac{\beta(1-\delta)}{\gamma}
