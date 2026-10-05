@@ -30,4 +30,4 @@ My original model had $\gamma I$ multiplied by $1-\delta$, but as quarantine sho
 
 # Reference list
 
-Ridenhour, B, Kowalik, JM, & Shay, DK (2014). [Unraveling $R_0$: Considerations for Public Health Applications](https://doi.org/10.2105/AJPH.2013.301704). *American Journal of Public Health*, 104(2): e32–e41. 
+Ridenhour, B; Kowalik, JM; & Shay, DK (2014). [Unraveling $R_0$: Considerations for Public Health Applications](https://doi.org/10.2105/AJPH.2013.301704). *American Journal of Public Health*, 104(2): e32–e41. 
