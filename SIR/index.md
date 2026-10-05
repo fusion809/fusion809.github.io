@@ -28,8 +28,6 @@ R_0 = \dfrac{\beta(1-\delta)}{\gamma}
 
 ([Ridenhour et al., 2014](#reference_list)). $N$ is the total population.
 
-My original model had $\gamma I$ multiplied by $1-\delta$, but as quarantine should not affect how long it takes for people to recover, it should not affect this term.
-
 If you would like to examine a more realistic model, with birth and death rates, loss of immunity, and incubation periods, then check out the [SEIRS model solver](/SEIRS/) webpage.
 
 ~~~
