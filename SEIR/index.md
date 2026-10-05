@@ -25,6 +25,8 @@ Where $S$ is the number of susceptible persons, $E$ is the number of exposed per
 
 My original model had $\gamma I$ multiplied by $1-\delta$, but as quarantine should not affect how long it takes for people to recover, it should not affect this term.
 
+If you would like to examine a more simple model, without birth and death rates and incubation periods, then check out the [SIR model solver](/SIR/) webpage.
+
 ~~~
     {{ insert template.html}}
 ~~~
