@@ -50,4 +50,4 @@ If you would like to examine a more simple model, without birth and death rates,
 
 # Reference list
 
-Bjørnstad ON, Shea K, Krzywinski M, & Altman N (2020). [The SEIRS model for infectious disease dynamics](https://doi.org/10.1038/s41592-020-0856-2). *Nature Methods*, 17(6): 557–558.
+Bjørnstad ON, Shea K, Krzywinski M, & Altman N (2020). [The SEIRS model for infectious disease dynamics](https://doi.org/10.1038/s41592-020-0856-2). *Nature Methods*, 17(6): 557–558. doi: [10.1038/s41592-020-0856-2](https://doi.org/10.1038/s41592-020-0856-2). PMID [32499633](https://pubmed.ncbi.nlm.nih.gov/32499633/).

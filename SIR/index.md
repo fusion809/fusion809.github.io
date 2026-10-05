@@ -32,4 +32,4 @@ If you would like to examine a more realistic model, with birth and death rates,
 
 # Reference list
 
-Ridenhour, B; Kowalik, JM; & Shay, DK (2014). [Unraveling $R_0$: Considerations for Public Health Applications](https://doi.org/10.2105/AJPH.2013.301704). *American Journal of Public Health*, 104(2): e32–e41. 
+Ridenhour, B; Kowalik, JM; & Shay, DK (2014). [Unraveling $R_0$: Considerations for Public Health Applications](https://pmc.ncbi.nlm.nih.gov/articles/PMC3935673/). *American Journal of Public Health*, 104(2): e32–e41. doi: [10.2105/AJPH.2013.301704](https://doi.org/10.2105/AJPH.2013.301704). PMID [24328646](https://pubmed.ncbi.nlm.nih.gov/24328646/). PMC [3935673](https://pmc.ncbi.nlm.nih.gov/articles/PMC3935673/).
