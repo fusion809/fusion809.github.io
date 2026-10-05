@@ -23,18 +23,18 @@ This webpage uses the [Runge-Kutta-Fehlberg fourth-order method with fifth-order
 
 Where:
 * $S$ is the number of susceptible persons.
-* $E$ is the number of exposed persons.
+* $E$ is the number of exposed persons, that is those that have been exposed to the disease but have not yet become infectious.
 * $I$ is the number of infectious persons.
 * $R$ is the number of recovered persons.
-* $\alpha$ is the infection mortality rate.
+* $\alpha$ is the infection mortality rate. This does not perfectly align with how we usually use the term "mortality rate" as it is not just the rate of death per case of infection it is also per time. So more rapidly lethal infections would have a higher $\alpha$ than their slower counterparts. 
 * $\beta$ is a parameter that pertains to the average number of contacts per person per time and the rate of transmission for the disease. 
-* $\gamma$ is the inverse of the average time a person is infected with the disease.
-* $\delta$ refers to the efficacy of quarantine effects.  
-* $\lambda$ is the birth rate. 
-* $\mu$ is the overall population death rate. 
-* $\sigma$ is the latency rate, which is the inverse of the incubation period.
-* $\omega$ is the rate of immunity loss in recovered individuals. 
-* $N$ is the total population.
+* $\gamma$ is the inverse of the average time a person is infected with the disease. Diseases with faster recovery therefore have larger $\gamma$. 
+* $\delta$ refers to the efficacy of quarantine effects. $\delta=0$ means quarantine measures are completely ineffective. $\delta=1$ means they are completely effective.  
+* $\lambda$ is the birth rate. It is essentially how many new people join the population per time per existing member of the population. 
+* $\mu$ is the overall population death rate. It is essentially how many people die per population per time. 
+* $\sigma$ is the latency rate, which is the inverse of the incubation period. Smaller incubation periods therefore lead to larger $\sigma$. 
+* $\omega$ is the rate of immunity loss in recovered individuals. Like $\lambda$ and $\mu$ it is per population per time, although the population it applies to is the recovered population.  
+* $N=S+E+I+R$ is the total population.
 
 This model is heavily based on [Bjørnstad et al. (2020)](#reference_list), with some amendments. Specifically, $\delta$ has been added to account for quarantine effects and $\lambda$ has been accounted for a innate birth rate that may not match the innate death rate of $\mu$. Hence the basic reproduction number $R_0$ (not to be confused with the initial number of recovered individuals) is given by:
 
