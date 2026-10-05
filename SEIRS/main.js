@@ -16,18 +16,18 @@
  * @return           [dS/dt, dE/dt, dI/dt, dR/dt]
  */
 function f(objectOfInputs, t, vars, dt) {
-    var {a, beta, gamma, delta, lambda, mu} = objectOfInputs;
+    var { alpha, beta, gamma, delta, lambda, mu, sigma, omega } = objectOfInputs;
     var [S, E, I, R] = vars;
     // Determine N
     var N = S + E + I + R;
     // Calculate derivatives
-    var exposure = (beta * S * I * (1-delta))/N;
-    var dSdt = lambda*N - mu * S - exposure;
-    var dEdt = exposure - (mu + a)*E;
-    var dIdt = a*E - (mu + gamma) * I;
-    var dRdt = gamma*I - mu*R;
+    var exposure = (beta * S * I * (1 - delta)) / N;
+    var dSdt = lambda * N + omega * R - mu * S - exposure;
+    var dEdt = exposure - (mu + sigma) * E;
+    var dIdt = sigma * E - (mu + alpha + gamma) * I;
+    var dRdt = gamma * I - (mu + omega) * R;
     // Put into return value
-    return [dt*dSdt, dt*dEdt, dt*dIdt, dt*dRdt];
+    return [dt * dSdt, dt * dEdt, dt * dIdt, dt * dRdt];
 }
 
 /**
@@ -38,46 +38,46 @@ function f(objectOfInputs, t, vars, dt) {
  */
 function generateSIRPhasePlot(solution) {
     // Extract relevant solution values
-    var {vars} = solution;
+    var { vars } = solution;
     var S = vars[0];
     var I = vars[2];
     var R = vars[3];
 
     // Generate 3D phase plot
-    gen3DPlot(S, I, R, "phasePlotSIR", "Phase plot of susceptible, infectious and recovered populations.", {xtitle: "Susceptible", ytitle: "Infectious", ztitle: "Recovered"});
+    gen3DPlot(S, I, R, "phasePlotSIR", "Phase plot of susceptible, infectious and recovered populations.", { xtitle: "Susceptible", ytitle: "Infectious", ztitle: "Recovered" });
 }
 
 function generateEIRPhasePlot(solution) {
     // Extract relevant solution values
-    var {vars} = solution;
+    var { vars } = solution;
     var E = vars[1];
     var I = vars[2];
     var R = vars[3];
 
     // Generate 3D phase plot
-    gen3DPlot(E, I, R, "phasePlotEIR", "Phase plot of exposed, infectious and recovered populations.", {xtitle: "Exposed", ytitle: "Infectious", ztitle: "Recovered"});
+    gen3DPlot(E, I, R, "phasePlotEIR", "Phase plot of exposed, infectious and recovered populations.", { xtitle: "Exposed", ytitle: "Infectious", ztitle: "Recovered" });
 }
 
 function generateSEIPhasePlot(solution) {
     // Extract relevant solution values
-    var {vars} = solution;
+    var { vars } = solution;
     var S = vars[0];
     var E = vars[1];
     var I = vars[2];
 
     // Generate 3D phase plot
-    gen3DPlot(S, E, I, "phasePlotSEI", "Phase plot of susceptible, exposed and infectious populations.", {xtitle: "Susceptible", ytitle: "Exposed", ztitle: "Infectious"});
+    gen3DPlot(S, E, I, "phasePlotSEI", "Phase plot of susceptible, exposed and infectious populations.", { xtitle: "Susceptible", ytitle: "Exposed", ztitle: "Infectious" });
 }
 
 function generateSERPhasePlot(solution) {
     // Extract relevant solution values
-    var {vars} = solution;
+    var { vars } = solution;
     var S = vars[0];
     var E = vars[1];
     var R = vars[3];
 
     // Generate 3D phase plot
-    gen3DPlot(S, E, R, "phasePlotSER", "Phase plot of susceptible, exposed and recovered populations.", {xtitle: "Susceptible", ytitle: "Exposed", ztitle: "Recovered"});
+    gen3DPlot(S, E, R, "phasePlotSER", "Phase plot of susceptible, exposed and recovered populations.", { xtitle: "Susceptible", ytitle: "Exposed", ztitle: "Recovered" });
 }
 /**
  * Generates a SI phase plot
@@ -87,7 +87,7 @@ function generateSERPhasePlot(solution) {
  */
 function generateSIPhasePlot(solution) {
     // Extract relevant solution values
-    var {vars} = solution;
+    var { vars } = solution;
     var S = vars[0];
     var I = vars[2];
 
@@ -103,7 +103,7 @@ function generateSIPhasePlot(solution) {
  */
 function generateSRPhasePlot(solution) {
     // Extract relevant solution variables
-    var {vars} = solution;
+    var { vars } = solution;
     var S = vars[0];
     var R = vars[3];
 
@@ -119,7 +119,7 @@ function generateSRPhasePlot(solution) {
  */
 function generateIRPhasePlot(solution) {
     // Extract relevant solution values
-    var {vars} = solution;
+    var { vars } = solution;
     var I = vars[2];
     var R = vars[3];
 
@@ -165,7 +165,7 @@ function generatePlots(objectOfInputs) {
 };
 
 function generateAnimationBaseSIR(solution) {
-    animate3D(solution, {varnames: ["Susceptible", "Infectious", "Recovered"], nos: [0, 2, 3], IdSuffix: "SIR", title: "Susceptible, infectious and recovered phase plot for the SEIR infectious disease model."});
+    animate3D(solution, { varnames: ["Susceptible", "Infectious", "Recovered"], nos: [0, 2, 3], IdSuffix: "SIR", title: "Susceptible, infectious and recovered phase plot for the SEIR infectious disease model." });
 }
 /**
  * Generate SIR animation
@@ -177,7 +177,7 @@ function generateAnimationSIR() {
 }
 
 function generateAnimationBaseSEI(solution) {
-    animate3D(solution, {view: [0, 0, 0], varnames: ["Susceptible", "Exposed", "Infectious"], IdSuffix: "SEI", title: "Susceptible, exposed and recovered population phase plot for the SEI system."});
+    animate3D(solution, { view: [0, 0, 0], varnames: ["Susceptible", "Exposed", "Infectious"], IdSuffix: "SEI", title: "Susceptible, exposed and recovered population phase plot for the SEI system." });
 }
 /**
  * Generate SEI animation
@@ -189,7 +189,7 @@ function generateAnimationSEI() {
 }
 
 function generateAnimationBaseSER(solution) {
-    animate3D(solution, {varnames: ["Susceptible", "Exposed", "Recovered"], nos: [0, 1, 3], IdSuffix: "SER", title: "Susceptible, exposed and recovered population phase plot for the SEIR infectious disease model."});
+    animate3D(solution, { varnames: ["Susceptible", "Exposed", "Recovered"], nos: [0, 1, 3], IdSuffix: "SER", title: "Susceptible, exposed and recovered population phase plot for the SEIR infectious disease model." });
 }
 /**
  * Generate SER animation
@@ -201,7 +201,7 @@ function generateAnimationSER() {
 }
 
 function generateAnimationBaseEIR(solution) {
-    animate3D(solution, {varnames: ["Exposed", "Infectious", "Recovered"], nos: [1, 2, 3], IdSuffix: "EIR", title: "Exposed, infectious and recovered population phase plot for the SEIR infectious disease model."});
+    animate3D(solution, { varnames: ["Exposed", "Infectious", "Recovered"], nos: [1, 2, 3], IdSuffix: "EIR", title: "Exposed, infectious and recovered population phase plot for the SEIR infectious disease model." });
 }
 
 /**
@@ -213,11 +213,11 @@ function generateAnimationEIR() {
     generateAnimationBaseEIR(solution);
 }
 
-function generateAnimations(objectOfInputs=undefined, solution=undefined) {
-    if (objectOfInputs==undefined) {
+function generateAnimations(objectOfInputs = undefined, solution = undefined) {
+    if (objectOfInputs == undefined) {
         var objectOfInputs = readInputs();
     }
-    if (solution==undefined) {
+    if (solution == undefined) {
         var solution = solveProblem(RKF45, objectOfInputs);
     }
     generateAnimationBaseSIR(solution);
@@ -226,11 +226,11 @@ function generateAnimations(objectOfInputs=undefined, solution=undefined) {
     generateAnimationBaseEIR(solution);
 }
 
-function generateTable(objectOfInputs=undefined, solution=undefined) {
-    if (objectOfInputs==undefined) {
+function generateTable(objectOfInputs = undefined, solution = undefined) {
+    if (objectOfInputs == undefined) {
         var objectOfInputs = readInputs();
     }
-    if (solution==undefined) {
+    if (solution == undefined) {
         var solution = solveProblem(RKF45, objectOfInputs);
     }
     fillTable(objectOfInputs, ['Susceptible', 'Exposed', 'Infectious', 'Recovered'], solution)
