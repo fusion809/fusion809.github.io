@@ -47,7 +47,7 @@ function generateSIPhasePlot(solution) {
     var I = vars[1];
 
     // Generate 2D plot
-    gen2DPlot(S, I, "phasePlotSI", "SI phase plot, x = S and y = I", "S", "I")
+    gen2DPlot(S, I, "phasePlotSI", "Infectious vs susceptible phase plot", "Susceptible", "Infectious")
 }
 
 /**
@@ -63,7 +63,7 @@ function generateSRPhasePlot(solution) {
     var R = vars[2];
 
     // Generate 2D plot
-    gen2DPlot(S, R, "phasePlotSR", "SR phase plot, x = S and y = R", "S", "R");
+    gen2DPlot(S, R, "phasePlotSR", "Recovered vs susceptible phase plot", "Susceptible", "Recovered");
 }
 
 /**
@@ -79,7 +79,7 @@ function generateIRPhasePlot(solution) {
     var R = vars[2];
 
     // Generate 2D plot
-    gen2DPlot(I, R, "phasePlotIR", "IR phase plot, x = I and y = R", "I", "R");
+    gen2DPlot(I, R, "phasePlotIR", "Recovered vs infectious phase plot", "Infectious", "Recovered");
 }
 
 /**
@@ -90,7 +90,7 @@ function generateIRPhasePlot(solution) {
  */
 function generateTimePlot(solution) {
     // Generate time plot
-    genMultPlot(solution, ["S", "I", "R"], "timePlot", "Plot of SIR against time");
+    genMultPlot(solution, ["Susceptible", "Infectious", "Recovered"], "timePlot", "Plot of SIR against time");
 }
 
 /**
