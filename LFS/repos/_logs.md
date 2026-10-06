@@ -9,7 +9,7 @@
 * [`lfs-time.log`](https://github.com/fusion809/lfs_logs/blob/master/lfs-time.log) &mdash; time that the `lfs-downloader.sh` script last ran.
 * [`os_version.log`](https://github.com/fusion809/lfs_logs/blob/master/os_version.log) &mdash; version string of LFS virtual machine `󰌽 r13.1-19,306`.
 * [`packages_no.log`](https://github.com/fusion809/lfs_logs/blob/master/packages_no.log) &mdash; package counts for virtual machine `855 [ 738,  2,  86,  29]`.
-* [`packages_no_long.log`](https://github.com/fusion809/lfs_logs/blob/master/packages_no_long.log) &mdash; longer package counts string `855 [  738 (󰊢 585)  2  86  29]`. 
+* [`packages_no_long.log`](https://github.com/fusion809/lfs_logs/blob/master/packages_no_long.log) &mdash; longer package counts string `855 [  738 (󰊢 601)  2  86  29]`. 
 * [`pkgs_by_alpha.log`](https://github.com/fusion809/lfs_logs/raw/master/pkgs_by_alpha.log), [`pkgs_by_bd.log`](https://github.com/fusion809/lfs_logs/raw/master/pkgs_by_bd.log) and [`pkgs_by_size.log`](https://github.com/fusion809/lfs_logs/raw/master/pkgs_by_size.log) &mdash; contains a table displaying packages with their installed sizes, build times, versions and descriptions &mdash; sorted alphabetically by name, build time and size, respectively.
 * [`updates_duration.log`](https://github.com/fusion809/lfs_logs/blob/master/updates_duration.log) &mdash; contains how long `updates` runs used to update GNOME top panel bar have taken. 
 * [`updates.log`](https://github.com/fusion809/lfs_logs/blob/master/updates.log) &mdash; the output of the most recent run of `updates`.
