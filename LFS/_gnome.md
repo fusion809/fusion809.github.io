@@ -1,7 +1,14 @@
 # GNOME
 GNOME was the first desktop I installed and is the main user interface I use in the virtual machine. My NixOS system uses Hyprland instead, but I have struggled to get Hyprland to actually work in a KVM/QEMU virtual machine, so I decided to just use GNOME in the LFS VM. 
 
-[Dash to Dock](https://github.com/micheleg/dash-to-dock) is enabled and installed, as is [WeatherPanel](https://github.com/attentivecoder/weatherpanel), [Extension List](https://github.com/tuberry/extension-list), [Kiwimenu](https://github.com/kem-a/kiwi-menu), [Show Desktop Button](https://github.com/amivaleo/Show-Desktop-Button) and [Super Into Apps](https://github.com/mikelei8291/super-into-apps). As previously mentioned, I also use my own [own fork](https://github.com/fusion809/executor-raujonas.github.io) of the Executor extension. 
+I have the following extensions running in the above screenshot:
+
+* [ArcMenu](https://gitlab.com/arcmenu/ArcMenu) &mdash; which provides the application menu (denoted by the Tux logo) in the top left corner of the screen.
+* [Dash to Dock](https://github.com/micheleg/dash-to-dock) &mdash; which provides the dock for running applications in the bottom centre of the screen.
+* [Extension List](https://github.com/tuberry/extension-list) &mdash; which provides a list of extensions with settings and on/off button in the GNOME panel.
+* [Executor fork](https://github.com/fusion809/executor-raujonas.github.io) &mdash; see [below](#executor_fork) for details.
+* [Show Desktop Button](https://github.com/amivaleo/Show-Desktop-Button) &mdash; which provides a button to show/hide the desktop in the GNOME panel.
+* [Super Into Apps](https://github.com/mikelei8291/super-into-apps) &mdash; which allows one to show the applications menu by pressing the Super (or Win) button.
 
 ~~~
 <table style="border-collapse: collapse;">

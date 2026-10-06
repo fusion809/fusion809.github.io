@@ -14,10 +14,16 @@ Wallpaper cycling files:
 * [`specify-wallpaper.sh`](https://github.com/fusion809/lfs_apps/blob/master/specify-wallpaper.sh) and [`specify-wallpaper.desktop`](https://github.com/fusion809/lfs_apps/blob/master/specify-wallpaper.desktop) &mdash; specify the wallpaper (by number) that you want to be set as you desktop background. Keyboard shortcut: Win+N.
 
 Some other desktop configuration files in `~/lfs_apps` open up the settings of GNOME extensions, including:
+* [`arcmenu.desktop`](https://github.com/fusion809/lfs_apps/blob/master/arcmenu.desktop) &mdash; for opening the settings for ArcMenu.
 * [`dash-to-dock.desktop`](https://github.com/fusion809/lfs_apps/blob/master/dash-to-dock.desktop) &mdash; for opening the settings for Dash to Dock.
 * [`executor.desktop`](https://github.com/fusion809/lfs_apps/blob/master/executor.desktop) &mdash; for opening the settings for Executor.
-* [`kiwimenu.desktop`](https://github.com/fusion809/lfs_apps/blob/master/kiwimenu.desktop) &mdash; for opening the settings for KiwiMenu.
 * [`user-theme.desktop`](https://github.com/fusion809/lfs_apps/blob/master/user-theme.desktop) &mdash; for opening the user themes extension settings. 
 
+Some desktop configuration files are instead for displaying pkgs tables:
+* [`pkgs_table_alpha.desktop`](https://github.com/fusion809/lfs_apps/blob/master/pkgs_table_alpha.desktop) &mdash; for opening the package table sorted alphabetically.
+* [`pkgs_table_bd.desktop`](https://github.com/fusion809/lfs_apps/blob/master/pkgs_table_bd.desktop) &mdash; for opening the package table sorted by build duration.
+* [`pkgs_table_size.desktop`](https://github.com/fusion809/lfs_apps/blob/master/pkgs_table_size.desktop) &mdash; for opening the package table sorted by package size. 
+Each of these call `pkgs_table_display`, a shell script. 
+
 Other desktop configuration files in `~/lfs_apps` include:
-* [`julia.desktop`](https://github.com/fusion809/lfs_apps/blob/master/julia.desktop) &mdash; for running Julia installed via `juliaup`.
+* [`julia.desktop`](https://github.com/fusion809/lfs_apps/blob/master/julia.desktop) &mdash; for running Julia installed via `juliaup`. Without use now that the `julia` package provides Julia instead.
