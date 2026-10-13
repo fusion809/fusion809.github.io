@@ -26,4 +26,4 @@ Some desktop configuration files are instead for displaying pkgs tables:
 Each of these call `pkgs_table_display`, a shell script. 
 
 Other desktop configuration files in `~/lfs_apps` include:
-* [`julia.desktop`](https://github.com/fusion809/lfs_apps/blob/master/julia.desktop) &mdash; for running Julia installed via `juliaup`. Without use now that the `julia` package provides Julia instead.
+* [`julia.desktop`](https://github.com/fusion809/lfs_apps/blob/master/julia.desktop) &mdash; for running Julia installed via `juliaup`. Without use now that the `julia` package provides Julia and its own desktop configuration file, too. 

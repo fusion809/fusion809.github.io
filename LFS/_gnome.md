@@ -158,7 +158,7 @@ Right click: show log of last update check.
             <b>Tooltip command</b>
         </td>
         <td style="font-size: 16px; padding: 10px;">
-            <a href="https://github.com/fusion809/lfs_scripts/blob/master/left_widget_tooltip_command.sh" target="_blank"><code>~/lfs_scripts/left_widget_tooltip_command.sh</code></a> &mdash; generates a line describing the version of LFS/BLFS installed, along with the number of packages installed via different means, and package inventory commit numbers in a similar format as in the Fastfetch output. Also includes lines indicating how far into the current run of <code>autobuild &lt;package&gt;</code> the system is. 
+            <a href="https://github.com/fusion809/lfs_scripts/blob/master/left_widget_tooltip_command.sh" target="_blank"><code>~/lfs_scripts/left_widget_tooltip_command.sh</code></a> &mdash; generates a line describing the version of LFS/BLFS installed, along with the number of packages installed via different means, and package inventory commit numbers in a similar format as in the Fastfetch output. Also includes lines indicating how far into the current run of <code>autobuild &lt;package&gt;</code> the system is. Finally, if autobuild isn't running, it will print out when autobuild last ran and what package it was last run on. 
         </td>
         <td style="font-size: 16px; padding: 10px;">
             <a href="https://github.com/fusion809/lfs_scripts/blob/master/centre_widget_tooltip_command_wrap.sh" target="_blank"><code>~/lfs_scripts/centre_widget_tooltip_command_wrap.sh</code></a> &mdash; lists selected wallpaper (indicated with <code>></code>) and the 25 wallpapers before and after this one. If there are not 25 wallpapers before the current one, it will show some of the last wallpapers in the collection before the wallpaper numbered 1 to ensure that 51 wallpapers are listed (including the one set as the desktop background). If there are not 25 wallpapers after the current one, it will show some of the first wallpapers in the collection after the final one in the list to ensure that 51 wallpapers are listed in total.
@@ -199,7 +199,7 @@ Right click: show log of last update check.
 </table>
 ~~~
 
-## Installing extensions via my web browser
+## Installing extensions via one's web browser
 BLFS did not provide a `gnome-browser-connector` package, which is required for installing GNOME extensions within one's browser. Manually compiling and installing it was fairly easy, however. That being said, whenever I tried to install an extension using it, I noticed that the extension was not successfully installed despite there being a folder in `~/.local/share/gnome-shell/extensions` for it. As this folder would be completely empty. Why? Well, running strace on GNOME shell revealed the problem was actually that the `gnome-browser-connector` was running `unzip` commands that assumed that Info-ZIP's unzip command was installed, not the `bsdunzip` variety provided by libarchive (which is the only one provided by BLFS or LFS). 
 
 I tried compiling Info-ZIP's unzip, such as by following some [old BLFS instructions](https://www.linuxfromscratch.org/blfs/view/cvs/general/unzip.html) but this failed as Info-ZIP's unzip has not been updated since ~2009 and requires multiple intricate patches to get it to compile. The consolidated patch provided by BLFS was not even sufficient, even after I located the patch (the link provided in the book entry shared is actually dead, so I had to find a link to the patch elsewhere by Googling). 
