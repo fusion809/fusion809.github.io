@@ -3,7 +3,7 @@
 @def tag=["Mathematics", "Physics"]
 @def mintoclevel=1
 
-This article derives the equations of motion of a tricycle going downhill after brake failure. This article definitely does not advocate sabotaging one's brakes, as modelling the descent clearly shows that potentially lethal and uncontrollable speeds are achieved rather quickly. See [this notebook](https://github.com/fusion809/SageMath/blob/master/ChatGPT_playground.ipynb) showing some simulations, conducted with the help of ChatGPT, based on the equations of motion formulated in this document. 
+This article derives the equations of motion of a tricycle going downhill after brake failure. This article definitely does not advocate sabotaging one's brakes, as modelling the descent clearly shows that potentially lethal and uncontrollable speeds are achieved rather quickly. See [this notebook](https://github.com/fusion809/SageMath/blob/master/ChatGPT_playground.ipynb) showing some simulations, conducted with the help of ChatGPT, based on the equations of motion formulated in this article. 
 
 ~~~
 <figure>
