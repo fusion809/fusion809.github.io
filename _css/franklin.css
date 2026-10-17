@@ -21,8 +21,9 @@ figure {
 }
 
 figcaption::before {
-    content: "Figure " counter(figure) ": ";
+    content: "Figure " counter(figure) ":";
     font-weight: bold;
+    margin-right: 0.4em;
 }
 
 figcaption {

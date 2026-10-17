@@ -703,19 +703,9 @@ function hfun_toc(params::Vector{String})::String
     isempty(headers) && return ""
 
     levels = [h[3] for (rs, h) in headers]
-    baselvl = minimum(h[3] for h in values(headers))
-    curlvl = baselvl
-
-    new_levels = [1]
-    curlvl = 1
-    for i in 2:length(levels)
-        if levels[i-1] < levels[i]
-            curlvl += 1
-        else
-            curlvl = levels[i] == baselvl ? 1 : 2
-        end
-        push!(new_levels, curlvl)
-    end
+    unique_levels = sort(unique(levels))
+    level_map = Dict(lvl => i for (i, lvl) in enumerate(unique_levels))
+    new_levels = [level_map[lvl] for lvl in levels]
     open_lists = 0
     curskip = 0
     inner = ""
