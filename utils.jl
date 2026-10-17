@@ -680,3 +680,94 @@ function hfun_render_js()
   end
   return HTML
 end
+
+"""
+Override built-in hfun_toc to resolve equation references and bibliography references in TOC titles.
+"""
+function hfun_toc(params::Vector{String})::String
+    if length(params) != 2
+        throw(Franklin.HTMLFunctionError("I found a {{toc ...}} block and expected 2 parameters but got $(length(params)). Verify."))
+    end
+    isempty(Franklin.PAGE_HEADERS) && return ""
+
+    min = 0
+    max = 100
+    try
+        min = parse(Int, params[1])
+        max = parse(Int, params[2])
+    catch
+        throw(Franklin.HTMLFunctionError("I found a {{toc min max}} but couldn't parse min/max. Verify."))
+    end
+
+    headers = filter(p -> min ≤ p.second[3] ≤ max, Franklin.PAGE_HEADERS)
+    isempty(headers) && return ""
+
+    levels = [h[3] for (rs, h) in headers]
+    baselvl = minimum(h[3] for h in values(headers))
+    curlvl = baselvl
+
+    new_levels = [1]
+    curlvl = 1
+    for i in 2:length(levels)
+        if levels[i-1] < levels[i]
+            curlvl += 1
+        else
+            curlvl = levels[i] == baselvl ? 1 : 2
+        end
+        push!(new_levels, curlvl)
+    end
+    open_lists = 0
+    curskip = 0
+    inner = ""
+
+    for (li, (rs, h)) in enumerate(headers)
+        lvl = h[3]
+        skip = new_levels[li]
+        if skip ≤ curskip
+            inner *= "</li>"
+            for _ in 1:(curskip - skip)
+                inner *= "</ol></li>"
+                open_lists -= 1
+            end
+            inner *= "<li>"
+        else
+            for _ in 1:(skip - curskip)
+                inner *= "<ol><li>"
+                open_lists += 1
+            end
+        end
+
+        title = String(h[1])
+        # Replace {{href EQR ...}} with the equation number from PAGE_EQREFS
+        title = replace(title, r"\{\{\s*href\s+EQR\s+([^\}]+?)\s*\}\}" => (m -> begin
+            mat = match(r"\{\{\s*href\s+EQR\s+([^\}]+?)\s*\}\}", m)
+            if mat !== nothing
+                ref = strip(mat.captures[1])
+                string(get(Franklin.PAGE_EQREFS, ref, m))
+            else
+                m
+            end
+        end))
+        # Replace {{href BIBR ...}} with the citation from PAGE_BIBREFS
+        title = replace(title, r"\{\{\s*href\s+BIBR\s+([^\}]+?)\s*\}\}" => (m -> begin
+            mat = match(r"\{\{\s*href\s+BIBR\s+([^\}]+?)\s*\}\}", m)
+            if mat !== nothing
+                ref = strip(mat.captures[1])
+                string(get(Franklin.PAGE_BIBREFS, ref, m))
+            else
+                m
+            end
+        end))
+        # Strip <span class="eqref"> or <span class="bibref"> tags in the TOC link text
+        title = replace(title, r"<span class=\"(eqref|bibref)\">([\s\S]*?)</span>" => s"\2")
+
+        inner *= Franklin.html_ahref_key(rs, title)
+        curlvl = lvl
+        curskip = skip
+    end
+
+    for _ in 1:open_lists
+        inner *= "</li></ol>"
+    end
+    return "<div class=\"franklin-toc\">" * inner * "</div>"
+end
