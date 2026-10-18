@@ -353,10 +353,6 @@ Multiplying by $e^{-\frac{\rho C_D As}{m}}$ yields:
 \begin{align*}
 u(s) &= 2GMe^{-\frac{\rho C_D As}{m}}\int_0^s e^{\frac{\rho C_D A\sigma}{m}}\dfrac{\sin{\theta(\sigma)}-C_{rr}\cos{\theta(\sigma)}}{\left(r_{\mathrm{summit}} - \int_0^{\sigma} \sin{\theta(\xi)}d\xi\right)^2} d\sigma.
 \end{align*}
-Factorizing out $2GM$ from the integral yields:
-\begin{align}
-	u(s) &= 2GMe^{-\frac{\rho C_D As}{m}}\int_0^s e^{\frac{\rho C_D A\sigma}{m}}\dfrac{\sin{\theta(\sigma)}-C_{rr} \cos{\theta(\sigma)}}{\left(r_{\mathrm{summit}}-\int_0^\sigma \sin{\theta(\xi)} d\xi\right)^2} d \sigma.
-\end{align}
 Square rooting $u$ to obtain velocity yields:
 \begin{align}
     v(s) &= \sqrt{2GMe^{-\frac{\rho C_D As}{m}}\int_0^s e^{\frac{\rho C_D A\sigma}{m}}\dfrac{\sin{\theta(\sigma)}-C_{rr} \cos{\theta(\sigma)}}{\left(r_{\mathrm{summit}}-\int_0^\sigma \sin{\theta(\xi)} d\xi\right)^2} d \sigma}.
