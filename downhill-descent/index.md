@@ -347,7 +347,7 @@ We first seek an integration factor, $I(s)$, so that we can re-write Equation \e
 It should be the exponential of the integral of the coefficient of $u$. Hence:
 \begin{align*}
 I(s)&=e^{\int_0^s \frac{\rho C_D A}{m}ds} \\
-&=e^{\frac{\rho C_D As}{m}}
+&=e^{\frac{\rho C_D As}{m}}.
 \end{align*}
 Therefore Equation \eqref{ddsIunc} becomes:
 \begin{align}
