@@ -156,11 +156,11 @@ The Euler-Lagrange equation with dissipative forces in the $s$ coordinate is:
 \begin{align}
 	\dfrac{d}{dt}\dfrac{\partial L}{\partial \dot{s}} - \dfrac{\partial L}{\partial s} &= Q_s. \label{ELENCF}
 \end{align}
-The left-hand side of Equation \eqref{ELENCF} can also be denoted as $\dfrac{\delta S}{\delta s}$. Where $S$ is the action and is defined by:
+The left-hand side of Equation \eqref{ELENCF} can also be denoted as $\dfrac{\delta S}{\delta s}$, the functional derivative of $S$ with respect to $s$. $S$ is the action and is defined by:
 \begin{align*}
 S=\int_{t_0}^{t_f} L(s, \dot{s}, t) dt
 \end{align*}
-and $\dfrac{\delta S}{\delta s}$ denotes the functional derivative of $S$ with respect to $s$. First, we shall calculate $\dfrac{\partial L}{\partial \dot{s}}$, the canonical momentum:
+where $t_0$ is the starting time and $t_f$ is the finishing time. First, we shall calculate $\dfrac{\partial L}{\partial \dot{s}}$, the canonical momentum:
 \begin{align*}
 	\dfrac{\partial L}{\partial \dot{s}} &= m\dot{s}.
 \end{align*}
@@ -171,6 +171,10 @@ Hence:
 As for the second term in Equation \eqref{ELENCF}, it is:
 \begin{align*}
 	\dfrac{\partial L}{\partial s} &= mg\sin{\theta(s)}.
+\end{align*}
+So the functional derivative is therefore:
+\begin{align*}
+\dfrac{\delta S}{\delta s} &= m\ddot{s} - mg\sin{\theta(s)}.
 \end{align*}
 Hence Equation \eqref{ELENCF} becomes:
 \begin{align*}
@@ -280,7 +284,7 @@ Substituting Equation \eqref{hs} into Equation \eqref{Vnc} yields:
 	V &= GMm\left[\left(r_{\mathrm{summit}} - \int_0^s \sin{\theta(\sigma)}d\sigma\right)^{-1}-r_{\mathrm{summit}}^{-1}\right].
 \end{align*}
 #### Final Lagrangian
-Or, if gravitational acceleration cannot be assumed to be constant:
+The Lagrangian of our system is therefore:
 \begin{align*}
 	L &= \dfrac{m\dot{s}^2}{2} - GMm\left[\left(r_{\mathrm{summit}} - \int_0^s \sin{\theta(\sigma)}d\sigma\right)^{-1}-r_{\mathrm{summit}}^{-1}\right].
 \end{align*}
@@ -298,6 +302,10 @@ The conservative force term of the Euler-Lagrange equation is therefore:
 \begin{align}
 	\dfrac{\partial L}{\partial s} &= \dfrac{GMm\sin{\theta(s)}}{\left(r_{\mathrm{summit}} - \int_0^s \sin{\theta(\sigma)}d\sigma\right)^2}. \label{Fnc}
 \end{align}
+Hence the functional derivative of $S$ with respect to $s$ is therefore:
+\begin{align*}
+	\dfrac{\delta S}{\delta s} &= m\ddot{s} - \dfrac{GMm\sin{\theta(s)}}{\left(r_{\mathrm{summit}} - \int_0^s \sin{\theta(\sigma)}d\sigma\right)^2}.
+\end{align*}
 The time derivative of generalized momentum is the same as above. As for $Q_s$ it is:
 \begin{align}
 	Q_s &= -\dfrac{GMmC_{rr}\cos{\theta(s)}}{\left(r_{\mathrm{summit}} - \int_0^s \sin{\theta(\sigma)}d\sigma\right)^2} - \dfrac{\rho C_D A \dot{s}^2}{2}. \label{Qs}
