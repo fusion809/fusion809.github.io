@@ -207,6 +207,12 @@ The trike starts at the summit with zero velocity, consequently $u(0)=0$ and hen
 	u(s) = 2ge^{-\frac{C_D As}{m}}\int_0^s e^{\frac{C_D A\sigma}{m}}(\sin{\theta(\sigma)}-C_{rr} \cos{\theta(\sigma)})d \sigma.
 \end{align}
 	
+Square rooting we obtain the velocity:
+\begin{align}
+    v(s) &= \sqrt{2ge^{-\frac{C_D As}{m}}\int_0^s e^{\frac{C_D A\sigma}{m}}(\sin{\theta(\sigma)}-C_{rr} \cos{\theta(\sigma)})d \sigma}.
+\end{align}
+We neglected the negative possibility because velocity is positive in the downhill direction, which is the only direction the trike will go when under the action of gravity. 
+
 Below are the velocities achieved in the above model for various $C_D A$ and $C_{rr}$ values when descending Castle Hill. The simulation did not end at 0 metres above sea level; it ended at about 36 metres above sea level, which is approximately at the high end of Gregory Street. $\theta(s)$ values were calculated from QldDem data on elevation. 
 
 ~~~
@@ -290,6 +296,10 @@ Hence:
 Yet again $u(0)=0$ means $C_1=0$ and hence:
 \begin{align}
 	u(s) &= 2GMe^{-\frac{C_D As}{m}}\int_0^s e^{\frac{C_D A\sigma}{m}}\dfrac{\sin{\theta(\sigma)}-C_{rr} \cos{\theta(\sigma)}}{\left(r_{\mathrm{summit}}-\int_0^\sigma \sin{\theta(\xi)} d\xi\right)^2} d \sigma.
+\end{align}
+Square rooting $u$ to obtain velocity yields:
+\begin{align}
+    v(s) &= \sqrt{2GMe^{-\frac{C_D As}{m}}\int_0^s e^{\frac{C_D A\sigma}{m}}\dfrac{\sin{\theta(\sigma)}-C_{rr} \cos{\theta(\sigma)}}{\left(r_{\mathrm{summit}}-\int_0^\sigma \sin{\theta(\xi)} d\xi\right)^2} d \sigma}.
 \end{align}
 Below are the velocities achieved in the above model for various $C_D A$ and $C_{rr}$ values when descending Castle Hill. The simulation did not end at 0 metres above sea level; it ended at about 36 metres above sea level, which is approximately at the high end of Gregory Street. 
 
