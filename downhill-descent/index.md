@@ -289,7 +289,7 @@ Multiplying both sides by 2 yields:
 	\dfrac{du}{ds} &= \dfrac{2GM}{\left(r_{\mathrm{summit}} - \int_0^s \sin{\theta(\sigma)}d\sigma\right)^2} \left[\sin{\theta(s)}-C_{rr}\cos{\theta(s)}\right] - \dfrac{\rho C_D A u}{m}.
 \end{align*}
 ### Solution
-Hence:
+In the denominator, we will use a new dummy variable of integration called $\xi$. Hence:
 \begin{align}
 	u(s) = C_1 e^{-\frac{C_D As}{m}} + 2GMe^{-\frac{C_D As}{m}}\int_0^s e^{\frac{C_D A\sigma}{m}}\dfrac{\sin{\theta(\sigma)}-C_{rr} \cos{\theta(\sigma)}}{\left(r_{\mathrm{summit}}-\int_0^\sigma \sin{\theta(\xi)} d\xi\right)^2} d \sigma.
 \end{align}
