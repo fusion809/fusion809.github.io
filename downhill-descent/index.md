@@ -156,7 +156,11 @@ The Euler-Lagrange equation with dissipative forces in the $s$ coordinate is:
 \begin{align}
 	\dfrac{d}{dt}\dfrac{\partial L}{\partial \dot{s}} - \dfrac{\partial L}{\partial s} &= Q_s. \label{ELENCF}
 \end{align}
-First we shall calculate $\dfrac{\partial L}{\partial \dot{s}}$, the canonical momentum:
+The left-hand side of Equation \eqref{ELENCF} can also be denoted as $\dfrac{\delta S}{\delta s}$, where $S$ is the action and is defined by:
+\begin{align*}
+S=\int_{t_0}^{t_f} L(s, \dot{s}, t) dt.
+\end{align*}
+And $\dfrac{\delta S}{\delta s}$ denotes the functional derivative of $S$ with respect to $s$. First, we shall calculate $\dfrac{\partial L}{\partial \dot{s}}$, the canonical momentum:
 \begin{align*}
 	\dfrac{\partial L}{\partial \dot{s}} &= m\dot{s}.
 \end{align*}
