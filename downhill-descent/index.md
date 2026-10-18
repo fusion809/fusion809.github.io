@@ -208,11 +208,33 @@ Multiplying both sides by 2 yields:
 \begin{align*}
 	\dfrac{du}{ds} &= 2g(\sin{\theta(s)} - C_{rr} \cos{\theta(s)})  - \dfrac{\rho C_D A u}{m}.
 \end{align*}
-### Solution
+Adding the $u$ term to the left-hand side:
 \begin{align}
-	u(s) = C_1 e^{-\frac{C_D As}{m}} + 2ge^{-\frac{C_D As}{m}}\int_0^s e^{\frac{C_D A\sigma}{m}}(\sin{\theta(\sigma)}-C_{rr} \cos{\theta(\sigma)})d \sigma.
+    \dfrac{du}{ds} + \dfrac{\rho C_D A u}{m} &= 2g(\sin{\theta(s)} - C_{rr} \cos{\theta(s)}).\label{usc}
 \end{align}
-The trike starts at the summit with zero velocity, consequently $u(0)=0$ and hence $C_1=0$. This simplifies $u(s)$ to:
+### Solution
+If we find the exponential of the integral of the coefficient of the $u$ term in Equation \eqref{usc}, we should obtain the integration factor we need to solve Equation \eqref{usc}.
+\begin{align}
+    I(s)&=e^{\int_0^s \frac{\rho C_D A}{m}d \sigma} \\
+    &= e^{\frac{\rho C_D As}{m}}.
+\end{align}
+Multiplying Equation \eqref{usc} by our integration factor yields:
+\begin{align*}
+	e^{\frac{\rho C_D As}{m}}\dfrac{du}{ds} + e^{\frac{\rho C_D As}{m}}\dfrac{\rho C_D A u}{m} &= 2ge^{\frac{\rho C_D As}{m}}(\sin{\theta(s)} - C_{rr} \cos{\theta(s)}).
+\end{align*}
+The left-hand side is the derivative of $I(s)u(s)$ with respect to $s$: 
+\begin{align*}
+    \dfrac{d}{ds}\left(e^{\frac{\rho C_D As}{m}}u(s)\right) &= 2ge^{\frac{\rho C_D As}{m}}(\sin{\theta(s)} - C_{rr} \cos{\theta(s)}).
+\end{align*}
+Integrating both sides with respect to $s$ (using the dummy variable of integration $\sigma$) from 0 to $s$ yields:
+\begin{align*}
+e^{\frac{\rho C_D As}{m}}u(s) - e^{0}u(0) &= 2g\int_0^s e^{\frac{\rho C_D A\sigma}{m}}(\sin{\theta(\sigma)} - C_{rr} \cos{\theta(\sigma)})d\sigma.
+\end{align*}
+Since the trike starts at zero velocity $u(0)=0$. Hence we have:
+\begin{align}
+    e^{\frac{\rho C_D As}{m}}u(s) &= 2g\int_0^s e^{\frac{\rho C_D A\sigma}{m}}(\sin{\theta(\sigma)} - C_{rr} \cos{\theta(\sigma)})d\sigma.
+\end{align}
+Multiplying by $e^{-\frac{C_D As}{m}}$ yields:
 \begin{align}
 	u(s) = 2ge^{-\frac{C_D As}{m}}\int_0^s e^{\frac{C_D A\sigma}{m}}(\sin{\theta(\sigma)}-C_{rr} \cos{\theta(\sigma)})d \sigma.
 \end{align}
@@ -281,8 +303,11 @@ Substituting Equations \eqref{Fnc} and \eqref{Qs} into Equation \eqref{ELENCF} y
 	m\ddot{s} - \dfrac{GMm\sin{\theta(s)}}{\left(r_{\mathrm{summit}} - \int_0^s \sin{\theta(\sigma)}d\sigma\right)^2} &= -\dfrac{GMmC_{rr}\cos{\theta(s)}}{\left(r_{\mathrm{summit}} - \int_0^s \sin{\theta(\sigma)}d\sigma\right)^2} - \dfrac{\rho C_D A\dot{s}^2}{2}.
 \end{align*}
 Rearranging and factorizing:
+\begin{align*}
+	m\ddot{s} &= \dfrac{GMm}{\left(r_{\mathrm{summit}} - \int_0^s \sin{\theta(\sigma)}d\sigma\right)^2} \left[\sin{\theta(s)}-C_{rr}\cos{\theta(s)}\right] - \dfrac{\rho C_D A\dot{s}^2}{2}.
+\end{align*}
+Dividing by $m$:
 \begin{align}
-	m\ddot{s} &= \dfrac{GMm}{\left(r_{\mathrm{summit}} - \int_0^s \sin{\theta(\sigma)}d\sigma\right)^2} \left[\sin{\theta(s)}-C_{rr}\cos{\theta(s)}\right] - \dfrac{\rho C_D A\dot{s}^2}{2} \\
 	\ddot{s} &= \dfrac{GM}{\left(r_{\mathrm{summit}} - \int_0^s \sin{\theta(\sigma)}d\sigma\right)^2} \left[\sin{\theta(s)}-C_{rr}\cos{\theta(s)}\right] - \dfrac{\rho C_D A\dot{s}^2}{2m}.\label{eq2}
 \end{align}
 ### Simplification to first order
@@ -298,12 +323,37 @@ Multiplying both sides by 2 yields:
 \begin{align*}
 	\dfrac{du}{ds} &= \dfrac{2GM}{\left(r_{\mathrm{summit}} - \int_0^s \sin{\theta(\sigma)}d\sigma\right)^2} \left[\sin{\theta(s)}-C_{rr}\cos{\theta(s)}\right] - \dfrac{\rho C_D A u}{m}.
 \end{align*}
-### Solution
-In the denominator, we will use a new dummy variable of integration called $\xi$. Hence:
+Adding the $u$ term to the left-hand side:
 \begin{align}
-	u(s) = C_1 e^{-\frac{C_D As}{m}} + 2GMe^{-\frac{C_D As}{m}}\int_0^s e^{\frac{C_D A\sigma}{m}}\dfrac{\sin{\theta(\sigma)}-C_{rr} \cos{\theta(\sigma)}}{\left(r_{\mathrm{summit}}-\int_0^\sigma \sin{\theta(\xi)} d\xi\right)^2} d \sigma.
+	\dfrac{du}{ds} + \dfrac{\rho C_D A}{m}u &= \dfrac{2GM}{\left(r_{\mathrm{summit}} - \int_0^s \sin{\theta(\sigma)}d\sigma\right)^2} \left[\sin{\theta(s)}-C_{rr}\cos{\theta(s)}\right].\label{dudsnc}
 \end{align}
-Yet again $u(0)=0$ means $C_1=0$ and hence:
+### Solution
+We first seek an integration factor, $I(s)$, so that we can re-write Equation \eqref{dudsnc} as:
+\begin{align}
+\dfrac{d}{ds}(I(s)u(s)) &= I(s)\dfrac{2GM}{\left(r_{\mathrm{summit}} - \int_0^s \sin{\theta(\sigma)}d\sigma\right)^2} \left[\sin{\theta(s)}-C_{rr}\cos{\theta(s)}\right].\label{ddsIunc}
+\end{align}
+It should be the exponential of the integral of the coefficient of $u$. Hence:
+\begin{align*}
+I(s)&=e^{\int_0^s \frac{\rho C_D A}{m}ds} \\
+&=e^{\frac{\rho C_D As}{m}}
+\end{align*}
+Therefore Equation \eqref{ddsIunc} becomes:
+\begin{align}
+\dfrac{d}{ds}(e^{\frac{\rho C_D As}{m}}u(s)) &= e^{\frac{\rho C_D As}{m}}\dfrac{2GM}{\left(r_{\mathrm{summit}} - \int_0^s \sin{\theta(\sigma)}d\sigma\right)^2} \left[\sin{\theta(s)}-C_{rr}\cos{\theta(s)}\right].\label{ddsIfunc}
+\end{align}
+Integrating both sides of Equation \eqref{ddsIfunc} from 0 to $s$ with respect to $s$ (calling it a new dummy variable $\sigma$; $\sigma$ in our denominator will be renamed $\xi$) yields:
+\begin{align}
+e^{\frac{\rho C_D As}{m}}u(s)-u(0) &= \int_0^s e^{\frac{\rho C_D A\sigma}{m}}\dfrac{2GM}{\left(r_{\mathrm{summit}} - \int_0^{\sigma} \sin{\theta(\xi)}d\xi\right)^2} \left[\sin{\theta(\sigma)}-C_{rr}\cos{\theta(\sigma)}\right] d\sigma.
+\end{align}
+The trike's initial velocity is assumed to be zero, hence $u(0)=0$:
+\begin{align*}
+e^{\frac{\rho C_D As}{m}}u(s) &= \int_0^s e^{\frac{\rho C_D A\sigma}{m}}\dfrac{2GM}{\left(r_{\mathrm{summit}} - \int_0^{\sigma} \sin{\theta(\xi)}d\xi\right)^2} \left[\sin{\theta(\sigma)}-C_{rr}\cos{\theta(\sigma)}\right] d\sigma.
+\end{align*}
+Multiplying by $e^{-\frac{\rho C_D As}{m}}$ yields:
+\begin{align*}
+u(s) &= e^{-\frac{\rho C_D As}{m}}\int_0^s e^{\frac{\rho C_D A\sigma}{m}}\dfrac{2GM}{\left(r_{\mathrm{summit}} - \int_0^{\sigma} \sin{\theta(\xi)}d\xi\right)^2} \left[\sin{\theta(\sigma)}-C_{rr}\cos{\theta(\sigma)}\right] d\sigma.
+\end{align*}
+Factorizing out $2GM$ from the integral yields:
 \begin{align}
 	u(s) &= 2GMe^{-\frac{C_D As}{m}}\int_0^s e^{\frac{C_D A\sigma}{m}}\dfrac{\sin{\theta(\sigma)}-C_{rr} \cos{\theta(\sigma)}}{\left(r_{\mathrm{summit}}-\int_0^\sigma \sin{\theta(\xi)} d\xi\right)^2} d \sigma.
 \end{align}
