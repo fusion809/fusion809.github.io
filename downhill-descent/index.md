@@ -156,7 +156,7 @@ The Euler-Lagrange equation with dissipative forces in the $s$ coordinate is:
 \begin{align}
 	\dfrac{d}{dt}\dfrac{\partial L}{\partial \dot{s}} - \dfrac{\partial L}{\partial s} &= Q_s. \label{ELENCF}
 \end{align}
-The left-hand side of Equation \eqref{ELENCF} can also be denoted as $\dfrac{\delta S}{\delta s}$. Were $S$ is the action and is defined by:
+The left-hand side of Equation \eqref{ELENCF} can also be denoted as $\dfrac{\delta S}{\delta s}$. Where $S$ is the action and is defined by:
 \begin{align*}
 S=\int_{t_0}^{t_f} L(s, \dot{s}, t) dt
 \end{align*}
