@@ -221,7 +221,11 @@ Adding the $u$ term to the left-hand side:
     \dfrac{du}{ds} + \dfrac{\rho C_D A u}{m} &= 2g(\sin{\theta(s)} - C_{rr} \cos{\theta(s)}).\label{usc}
 \end{align}
 ### Solution
-If we find the exponential of the integral of the coefficient of the $u$ term in Equation \eqref{usc}, we should obtain the integration factor we need to solve Equation \eqref{usc}.
+We first seek an integration factor, $I(s)$, so that we can re-write Equation \eqref{dudsnc} as:
+\begin{align*}
+I(s) \dfrac{du}{ds} + I'(s)\dfrac{du}{ds} &= 2gI(s)(\sin{\theta(s)} - C_{rr} \cos{\theta(s)})
+\end{align*}
+This implies that $I'(s)=I(s)\dfrac{\rho C_D A}{m}$ hence:
 \begin{align*}
     I(s)&=e^{\int_0^s \frac{\rho C_D A}{m}d \sigma} \\
     &= e^{\frac{\rho C_D As}{m}}.
@@ -232,7 +236,7 @@ Multiplying Equation \eqref{usc} by our integration factor yields:
 \end{align*}
 The left-hand side is the derivative of $I(s)u(s)$ with respect to $s$: 
 \begin{align*}
-    \dfrac{d}{ds}\left(e^{\frac{\rho C_D As}{m}}u(s)\right) &= 2ge^{\frac{\rho C_D As}{m}}(\sin{\theta(s)} - C_{rr} \cos{\theta(s)}).
+    \dfrac{d}{ds}\left[e^{\frac{\rho C_D As}{m}}u(s)\right] &= 2ge^{\frac{\rho C_D As}{m}}(\sin{\theta(s)} - C_{rr} \cos{\theta(s)}).
 \end{align*}
 Integrating both sides with respect to $s$ (using the dummy variable of integration $\sigma$) from 0 to $s$ yields:
 \begin{align*}
@@ -341,17 +345,21 @@ Adding the $u$ term to the left-hand side:
 \end{align}
 ### Solution
 We first seek an integration factor, $I(s)$, so that we can re-write Equation \eqref{dudsnc} as:
-\begin{align}
-\dfrac{d}{ds}(I(s)u(s)) &= I(s)\dfrac{2GM}{\left(r_{\mathrm{summit}} - \int_0^s \sin{\theta(\sigma)}d\sigma\right)^2} \left[\sin{\theta(s)}-C_{rr}\cos{\theta(s)}\right].\label{ddsIunc}
-\end{align}
-It should be the exponential of the integral of the coefficient of $u$. Hence:
+\begin{align*}
+I(s) \dfrac{du}{ds} + I'(s)\dfrac{du}{ds} &= I(s)\dfrac{2GM}{\left(r_{\mathrm{summit}} - \int_0^s \sin{\theta(\sigma)}d\sigma\right)^2} \left[\sin{\theta(s)}-C_{rr}\cos{\theta(s)}\right].
+\end{align*}
+Hence $I'(s)$ must equal $I(s)\dfrac{\rho C_D A}{m}$, which therefore implies that 
 \begin{align*}
 I(s)&=e^{\int_0^s \frac{\rho C_D A}{m}ds} \\
 &=e^{\frac{\rho C_D As}{m}}.
 \end{align*}
+We can replace the left-hand side with $\dfrac{d}{ds}\left[I(s)u(s)\right]$ hence:
+\begin{align*}
+\dfrac{d}{ds}\left[I(s)u(s)\right] &= I(s)\dfrac{2GM}{\left(r_{\mathrm{summit}} - \int_0^s \sin{\theta(\sigma)}d\sigma\right)^2} \left[\sin{\theta(s)}-C_{rr}\cos{\theta(s)}\right].\label{ddsIunc}
+\end{align*}
 Therefore Equation \eqref{ddsIunc} becomes:
 \begin{align}
-\dfrac{d}{ds}(e^{\frac{\rho C_D As}{m}}u(s)) &= 2GMe^{\frac{\rho C_D As}{m}}\dfrac{\sin{\theta(s)}-C_{rr}\cos{\theta(s)}}{\left(r_{\mathrm{summit}} - \int_0^s \sin{\theta(\sigma)}d\sigma\right)^2}.\label{ddsIfunc}
+\dfrac{d}{ds}\left[e^{\frac{\rho C_D As}{m}}u(s)\right] &= 2GMe^{\frac{\rho C_D As}{m}}\dfrac{\sin{\theta(s)}-C_{rr}\cos{\theta(s)}}{\left(r_{\mathrm{summit}} - \int_0^s \sin{\theta(\sigma)}d\sigma\right)^2}.\label{ddsIfunc}
 \end{align}
 Integrating both sides of Equation \eqref{ddsIfunc} from 0 to $s$ with respect to $s$ (calling it a new dummy variable $\sigma$; $\sigma$ in our denominator will be renamed $\xi$) yields:
 \begin{align}
