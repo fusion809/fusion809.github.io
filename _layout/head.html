@@ -1,18 +1,27 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  {{if hasmath}} {{insert head_katex.html }}     {{end}}
-  {{if hascode}} {{insert head_highlight.html }}   {{end}}
+  {{if hasmath}} {{insert head_katex.html }} {{end}}
+  {{if hascode}} {{insert head_highlight.html }} {{end}}
   {{insert style.html}}
+  <script src="/libs/common/navPanel.js"></script>
   {{isdef hassim}} {{if hassim}}{{ insert head_solver.html }}{{end}} {{end}}
-  {{isdef title}} <title>{{fill title}}</title>  {{end}}
-  {{isdef SP }}{{ if SP}}{{ insert head_solver_general.html }}<script src="/simplePendulum/common.js"></script>{{ end}}{{end}}
-  {{isdef SP.w}}{{ if SP.w}}<script src="/simplePendulum/wErrorAnalysis.js"></script>{{end}}{{end}}
-  {{isdef SP.wo}}{{ if SP.wo}}<script src="/simplePendulum/woErrorAnalysis.js"></script>{{end}}{{end}}
+  {{isdef title}} <title>{{fill title}}</title> {{end}}
+  {{isdef SP }}{{ if SP}}{{ insert head_solver_general.html }}
+  <script src="/simplePendulum/common.js"></script>{{ end}}{{end}}
+  {{isdef SP.w}}{{ if SP.w}}
+  <script src="/simplePendulum/wErrorAnalysis.js"></script>{{end}}{{end}}
+  {{isdef SP.wo}}{{ if SP.wo}}
+  <script src="/simplePendulum/woErrorAnalysis.js"></script>{{end}}{{end}}
 </head>
-{{isdef SP}}{{ if SP}}<body onload="periodCalc(thetaBounds(readInputs()))">{{ else }}<body>{{ end}} {{end}}
-{{insert sidebar.html}}
+{{isdef SP}}{{ if SP}}
 
-<!-- Content appended here -->
+<body onload="periodCalc(thetaBounds(readInputs()))">{{ else }}
+
+  <body>{{ end}} {{end}}
+    {{insert sidebar.html}}
+
+    <!-- Content appended here -->
