@@ -363,7 +363,7 @@ Therefore Equation \eqref{ddsIunc} becomes:
 \end{align}
 Integrating both sides of Equation \eqref{ddsIfunc} from 0 to $s$ with respect to $s$ (calling it a new dummy variable $\sigma$; $\sigma$ in our denominator will be renamed $\xi$) yields:
 \begin{align}
-e^{\frac{\rho C_D As}{m}}u(s)-u(0) &= 2GM\int_0^s e^{\frac{\rho C_D A\sigma}{m}}\dfrac{\sin{\theta(\sigma)}-C_{rr}\cos{\theta(\sigma)}}{\left(r_{\mathrm{summit}} - \int_0^{\sigma} \sin{\theta(\xi)}d\xi\right)^2} d\sigma.
+e^{\frac{\rho C_D As}{m}}u(s)-e^0 u(0) &= 2GM\int_0^s e^{\frac{\rho C_D A\sigma}{m}}\dfrac{\sin{\theta(\sigma)}-C_{rr}\cos{\theta(\sigma)}}{\left(r_{\mathrm{summit}} - \int_0^{\sigma} \sin{\theta(\xi)}d\xi\right)^2} d\sigma.
 \end{align}
 The trike's initial velocity is assumed to be zero, hence $u(0)=0$:
 \begin{align*}
