@@ -41,7 +41,7 @@ and
 	V=mgh(s). \label{Vc}
 \end{align}
 
-Where $v$ is velocity, $m$ is the mass of the tricycle (in kilograms), $g$ is gravitational acceleration (in metres per second squared ($\mathrm{m}\cdot \mathrm{s}^{-2}$)) and $h(s)$ is the height (in $m$) of the base of the tricycle above sea level. The $mgh$ value for $V$ assumes constant gravitational acceleration. 
+Where: $v$ is velocity; $m$ is the mass of the tricycle (in kilograms), including the mass of anything on it (e.g. its rider); $g$ is gravitational acceleration (in metres per second squared ($\mathrm{m}\cdot \mathrm{s}^{-2}$)); and $h(s)$ is the height (in $m$) of the base of the tricycle above sea level. The $mgh$ value for $V$ assumes constant gravitational acceleration. 
 	
 Alternatively, if gravity is not constant:
 \begin{align*}
