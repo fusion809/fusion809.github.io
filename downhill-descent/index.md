@@ -79,11 +79,10 @@ Substituting:
 \begin{align}
 v=\dot{s} \label{v}
 \end{align}
-where $\dot{s}=\dfrac{ds}{dt}$ into Equation \eqref{T} yields:
+where $\dot{s}=\dfrac{ds}{dt}$ is the trike's velocity in $\mathrm{m}\cdot \mathrm{s}^{-1}$ into Equation \eqref{T} yields:
 \begin{align}
 	T=\dfrac{m\dot{s}^2}{2}. \label{Ts}
 \end{align}
-Where $\dot{s}=\dfrac{ds}{dt}$ is the trike's velocity in $\mathrm{m}\cdot \mathrm{s}^{-1}$.
 	
 #### Potential energy
 The potential energy term will only include the conservative force of gravitation. To compute it, we need to be able to formulate the height of the trike above sea level in terms of $s$. If we have inclination/declination angle data for the hill in question, let us define $\theta(s)$ as the declination angle (positive when downhill) at $s$ metres from the summit. If we form an infinitesimal triangle on the hill/mountain, we will see that $dh = -d s \sin{\theta}$ and hence:
