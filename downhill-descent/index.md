@@ -214,10 +214,10 @@ Adding the $u$ term to the left-hand side:
 \end{align}
 ### Solution
 If we find the exponential of the integral of the coefficient of the $u$ term in Equation \eqref{usc}, we should obtain the integration factor we need to solve Equation \eqref{usc}.
-\begin{align}
+\begin{align*}
     I(s)&=e^{\int_0^s \frac{\rho C_D A}{m}d \sigma} \\
     &= e^{\frac{\rho C_D As}{m}}.
-\end{align}
+\end{align*}
 Multiplying Equation \eqref{usc} by our integration factor yields:
 \begin{align*}
 	e^{\frac{\rho C_D As}{m}}\dfrac{du}{ds} + e^{\frac{\rho C_D As}{m}}\dfrac{\rho C_D A u}{m} &= 2ge^{\frac{\rho C_D As}{m}}(\sin{\theta(s)} - C_{rr} \cos{\theta(s)}).
