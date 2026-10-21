@@ -246,14 +246,14 @@ Since the trike starts at zero velocity $u(0)=0$. Hence we have:
 \begin{align}
     e^{\frac{\rho C_D As}{m}}u(s) &= 2g\int_0^s e^{\frac{\rho C_D A\sigma}{m}}(\sin{\theta(\sigma)} - C_{rr} \cos{\theta(\sigma)})d\sigma.
 \end{align}
-Multiplying by $e^{-\frac{C_D As}{m}}$ yields:
+Multiplying by $e^{-\frac{\rho C_D As}{m}}$ yields:
 \begin{align}
-	u(s) = 2ge^{-\frac{C_D As}{m}}\int_0^s e^{\frac{C_D A\sigma}{m}}(\sin{\theta(\sigma)}-C_{rr} \cos{\theta(\sigma)})d \sigma.
+	u(s) = 2ge^{-\frac{\rho C_D As}{m}}\int_0^s e^{\frac{\rho C_D A\sigma}{m}}(\sin{\theta(\sigma)}-C_{rr} \cos{\theta(\sigma)})d \sigma.
 \end{align}
 	
 Square rooting we obtain the velocity:
 \begin{align}
-    v(s) &= \sqrt{2ge^{-\frac{C_D As}{m}}\int_0^s e^{\frac{C_D A\sigma}{m}}(\sin{\theta(\sigma)}-C_{rr} \cos{\theta(\sigma)})d \sigma}.
+    v(s) &= \sqrt{2ge^{-\frac{\rho C_D As}{m}}\int_0^s e^{\frac{\rho C_D A\sigma}{m}}(\sin{\theta(\sigma)}-C_{rr} \cos{\theta(\sigma)})d \sigma}.
 \end{align}
 We neglected the negative possibility because velocity is positive in the downhill direction, which is the only direction the trike will go when under the action of gravity. 
 
