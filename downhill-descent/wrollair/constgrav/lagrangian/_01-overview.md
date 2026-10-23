@@ -1,0 +1,2 @@
+### Formulating the Lagrangian
+The first step in deriving the equation of motion is to determine the Lagrangian of the system. The Lagrangian contains both the kinetic and potential energy of the system and hence both will be calculated next.
