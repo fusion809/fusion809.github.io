@@ -10,7 +10,7 @@ The problem of the double pendulum has been widely analysed in the mechanics lit
 ~~~
 <figure>
     <img src="/doublePendulum/Double pendulum.svg" width="500px"></img>
-    <figcaption style="font-weight: bold; font-size: 18px;">Figure 1: Diagram of the double pendulum.</b></figcaption>
+    <figcaption style="font-weight: bold; font-size: 18px;">Diagram of the double pendulum.</b></figcaption>
 </figure>
 ~~~
 
