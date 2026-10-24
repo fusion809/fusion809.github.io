@@ -180,7 +180,7 @@ Hence:
     &= \dfrac{\rho C_D Al^2|\dot{\theta}|\dot{\theta}}{2}(-l\sin^2{\theta}-l\cos^2{\theta}) \\
     &= -\dfrac{\rho C_D Al^3|\dot{\theta}|\dot{\theta}}{2}.
 \end{align}
-Hence Equations \eqref{ELENCF}:
+Hence Equations \eqref{ELENCF} become:
 \begin{align}
     ml^2 \ddot{\theta} + mgl\cos{\theta} &= -\dfrac{\rho C_D Al^3|\dot{\theta}|\dot{\theta}}{2}.
 \end{align}
