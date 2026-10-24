@@ -5,7 +5,7 @@
 ~~~
 <figure>
     <img src="/doubleElasticPendulum/Double elastic pendulum.svg" width="500px"></img>
-    <figcaption style="font-weight: bold; font-size: 18px;">Diagram of the double elastic pendulum.</b></figcaption>
+    <figcaption style="font-weight: bold; font-size: 18px;">Diagram of the double elastic pendulum.</figcaption>
 </figure>
 ~~~
 

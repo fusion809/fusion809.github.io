@@ -2,12 +2,12 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="323.89639mm"
+   width="335mm"
    height="275.1593mm"
-   viewBox="0 0 323.89639 275.1593"
+   viewBox="0 0 335 275.1593"
    version="1.1"
    id="svg1"
-   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
    sodipodi:docname="Double elastic pendulum.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -23,14 +23,14 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     inkscape:zoom="0.25"
-     inkscape:cx="802"
-     inkscape:cy="424"
-     inkscape:window-width="1150"
-     inkscape:window-height="1000"
+     inkscape:zoom="0.70710678"
+     inkscape:cx="586.89863"
+     inkscape:cy="608.81894"
+     inkscape:window-width="1918"
+     inkscape:window-height="1011"
      inkscape:window-x="0"
      inkscape:window-y="0"
-     inkscape:window-maximized="0"
+     inkscape:window-maximized="1"
      inkscape:current-layer="layer1" />
   <defs
      id="defs1">
@@ -189,14 +189,14 @@
     <text
        xml:space="preserve"
        style="font-size:21.8722px;font-family:'Cambria Math';-inkscape-font-specification:'Cambria Math';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-dasharray:none"
-       x="38.288036"
-       y="65.206215"
+       x="112.00097"
+       y="77.179893"
        id="text3"><tspan
          sodipodi:role="line"
          id="tspan3"
          style="fill:#000000;fill-opacity:1;stroke-width:1"
-         x="38.288036"
-         y="65.206215">(x<tspan
+         x="112.00097"
+         y="77.179893">(x<tspan
    style="font-size:65%;baseline-shift:sub;fill:#000000;fill-opacity:1"
    id="tspan5">1</tspan>, y<tspan
    style="font-size:65%;baseline-shift:sub;fill:#000000;fill-opacity:1"
@@ -226,18 +226,18 @@
     <text
        xml:space="preserve"
        style="font-size:21.8722px;font-family:'Cambria Math';-inkscape-font-specification:'Cambria Math';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:none;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-dasharray:none"
-       x="36.202522"
-       y="144.75368"
+       x="37.325054"
+       y="140.26355"
        id="text6"><tspan
          sodipodi:role="line"
          id="tspan6"
          style="fill:#000000;fill-opacity:1;stroke-width:1"
-         x="36.202522"
-         y="144.75368">θ<tspan
+         x="37.325054"
+         y="140.26355">θ<tspan
    style="font-size:65%;baseline-shift:sub"
    id="tspan7">1</tspan> </tspan></text>
     <path
-       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-dasharray:1,1;stroke-dashoffset:0"
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-dasharray:1, 1;stroke-dashoffset:0"
        d="M 110.86042,57.943754 H 217.48749"
        id="path7" />
     <path
@@ -248,14 +248,14 @@
     <text
        xml:space="preserve"
        style="font-size:21.8722px;font-family:'Cambria Math';-inkscape-font-specification:'Cambria Math';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:none;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-dasharray:none;stroke-dashoffset:0"
-       x="128.65581"
-       y="49.285591"
+       x="129.02998"
+       y="43.672932"
        id="text8"><tspan
          sodipodi:role="line"
          id="tspan8"
          style="stroke-width:1"
-         x="128.65581"
-         y="49.285591"><tspan
+         x="129.02998"
+         y="43.672932"><tspan
    style="fill:#000000;fill-opacity:1"
    id="tspan10">θ</tspan><tspan
    style="font-size:65%;baseline-shift:sub;fill:#000000;fill-opacity:1"
@@ -263,32 +263,32 @@
     <text
        xml:space="preserve"
        style="font-size:21.8722px;font-family:'Cambria Math';-inkscape-font-specification:'Cambria Math';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-dasharray:none;stroke-dashoffset:0"
-       x="15.765169"
-       y="30.306818"
+       x="6.0365586"
+       y="20.578209"
        id="text11"><tspan
          sodipodi:role="line"
          id="tspan11"
          style="stroke-width:1"
-         x="15.765169"
-         y="30.306818">Mass = m<tspan
+         x="6.0365586"
+         y="20.578209">Mass = m<tspan
    style="font-size:65%;baseline-shift:sub"
    id="tspan12">1</tspan></tspan></text>
     <text
        xml:space="preserve"
        style="font-size:21.8722px;font-family:'Cambria Math';-inkscape-font-specification:'Cambria Math';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-dasharray:none;stroke-dashoffset:0"
-       x="118.66322"
-       y="-70.649536"
+       x="97.70929"
+       y="-81.126503"
        id="text11-6"><tspan
          sodipodi:role="line"
          id="tspan11-8"
          style="stroke-width:1"
-         x="118.66322"
-         y="-70.649536">Mass = m<tspan
+         x="97.70929"
+         y="-81.126503">Mass = m<tspan
    style="font-size:65%;baseline-shift:sub"
    id="tspan13">2</tspan></tspan></text>
     <path
        style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-dasharray:none;stroke-dashoffset:0;marker-end:url(#marker13)"
-       d="M 87.798961,34.503289 105.63218,53.585752"
+       d="M 76.947818,25.89721 105.63218,53.585752"
        id="path12"
        sodipodi:nodetypes="cc" />
     <path
@@ -303,8 +303,9 @@
        sodipodi:nodetypes="cc" />
     <path
        style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-dasharray:none;stroke-dashoffset:0;marker-end:url(#marker13-1)"
-       d="m 175.8899,-64.983088 c 13.81283,9.591862 13.81283,9.591862 13.81283,9.591862"
-       id="path12-2" />
+       d="m 153.81344,-76.956763 35.88929,21.565537"
+       id="path12-2"
+       sodipodi:nodetypes="cc" />
     <text
        xml:space="preserve"
        style="font-size:21.8722px;font-family:'Cambria Math';-inkscape-font-specification:'Cambria Math';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-dasharray:none;stroke-dashoffset:0"

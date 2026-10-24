@@ -11,7 +11,7 @@ In this article, the equations of motion of the triple pendulum will be derived 
 ~~~
 <figure>
     <img src="/triplePendulum/Triple pendulum.svg" width="500px"></img>
-    <figcaption style="font-weight: bold; font-size: 18px;">Diagram of the triple pendulum.</b></figcaption>
+    <figcaption style="font-weight: bold; font-size: 18px;">Diagram of the triple pendulum.</figcaption>
 </figure>
 ~~~
 

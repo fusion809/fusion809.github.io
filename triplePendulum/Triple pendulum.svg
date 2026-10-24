@@ -7,7 +7,7 @@
    viewBox="0 0 429.32058 283.3018"
    version="1.1"
    id="svg1"
-   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
    sodipodi:docname="Triple pendulum.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -23,14 +23,14 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     inkscape:zoom="0.35355339"
-     inkscape:cx="753.77583"
-     inkscape:cy="-19.79899"
-     inkscape:window-width="1150"
-     inkscape:window-height="1000"
-     inkscape:window-x="-7"
+     inkscape:zoom="0.5"
+     inkscape:cx="752"
+     inkscape:cy="834"
+     inkscape:window-width="1081"
+     inkscape:window-height="518"
+     inkscape:window-x="0"
      inkscape:window-y="0"
-     inkscape:window-maximized="0"
+     inkscape:window-maximized="1"
      inkscape:current-layer="layer1"
      showgrid="false" />
   <defs
@@ -153,74 +153,74 @@
     <text
        xml:space="preserve"
        style="font-size:21.8722px;font-family:'Cambria Math';-inkscape-font-specification:'Cambria Math';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;stroke:#000000;stroke-width:1"
-       x="200.9615"
-       y="136.8539"
+       x="199.37401"
+       y="130.50389"
        id="text3-5-2"><tspan
          sodipodi:role="line"
          id="tspan3-1-7"
          style="stroke-width:1"
-         x="200.9615"
-         y="136.8539">l<tspan
+         x="199.37401"
+         y="130.50389">l<tspan
    style="font-size:65%;baseline-shift:sub"
    id="tspan4-7-6">1</tspan></tspan></text>
     <path
        style="fill:#000000;stroke:#000000;stroke-width:1;stroke-dasharray:none;marker-start:url(#Triangle)"
-       d="m 241.43229,137.06125 v 35.6374 11.93517"
+       d="m 241.43229,137.06125 26.45833,37.75407 0.21781,0.31689"
        id="path4"
        sodipodi:nodetypes="ccc" />
     <text
        xml:space="preserve"
        style="font-size:21.8722px;font-family:'Cambria Math';-inkscape-font-specification:'Cambria Math';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;stroke:#000000;stroke-width:1"
-       x="175.22224"
-       y="197.16908"
+       x="209.24162"
+       y="192.61476"
        id="text5"><tspan
          sodipodi:role="line"
          style="font-size:21.8722px;stroke-width:1"
-         x="175.22224"
-         y="197.16908"
+         x="209.24162"
+         y="192.61476"
          id="tspan8">Rod 1 mass=m<tspan
    style="font-size:65%;baseline-shift:sub"
    id="tspan9">1r</tspan></tspan><tspan
          sodipodi:role="line"
          style="font-size:21.8722px;stroke-width:1"
-         x="175.22224"
-         y="224.50934"
+         x="209.24162"
+         y="219.95502"
          id="tspan10" /></text>
     <text
        xml:space="preserve"
        style="font-size:19.7556px;font-family:'Cambria Math';-inkscape-font-specification:'Cambria Math';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;stroke:#000000;stroke-width:1"
-       x="136.08763"
-       y="67.638168"
+       x="119.1543"
+       y="60.759003"
        id="text5-3"><tspan
          sodipodi:role="line"
          style="font-size:21.8722px;stroke-width:1"
-         x="136.08763"
-         y="67.638168"
+         x="119.1543"
+         y="60.759003"
          id="tspan8-2">Rod 2 mass=m<tspan
    style="font-size:65%;baseline-shift:sub"
    id="tspan6">2r</tspan></tspan><tspan
          sodipodi:role="line"
          style="font-size:19.7556px;stroke-width:1"
-         x="136.08763"
-         y="93.067482"
+         x="119.1543"
+         y="86.141396"
          id="tspan10-1" /></text>
     <text
        xml:space="preserve"
        style="font-size:19.7556px;font-family:'Cambria Math';-inkscape-font-specification:'Cambria Math';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;stroke:#000000;stroke-width:1"
-       x="192.2701"
-       y="-13.917019"
+       x="177.45343"
+       y="-25.558685"
        id="text5-3-2"><tspan
          sodipodi:role="line"
          style="font-size:21.8722px;stroke-width:1"
-         x="192.2701"
-         y="-13.917019"
+         x="177.45343"
+         y="-25.558685"
          id="tspan8-2-3">Rod 3 mass=m<tspan
    style="font-size:65%;baseline-shift:sub"
    id="tspan5">3r</tspan></tspan><tspan
          sodipodi:role="line"
          style="font-size:19.7556px;stroke-width:1"
-         x="192.2701"
-         y="11.512297"
+         x="177.45343"
+         y="-0.1762908"
          id="tspan10-1-4" /></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1"
@@ -230,14 +230,14 @@
     <text
        xml:space="preserve"
        style="font-size:21.8722px;font-family:'Cambria Math';-inkscape-font-specification:'Cambria Math';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:none;stroke:#000000;stroke-width:1"
-       x="213.66328"
-       y="163.12109"
+       x="218.55969"
+       y="160.0369"
        id="text11"><tspan
          sodipodi:role="line"
          id="tspan11"
          style="font-size:21.8722px;fill:#000000;fill-opacity:1;stroke-width:1"
-         x="213.66328"
-         y="163.12109">θ<tspan
+         x="218.55969"
+         y="160.0369">θ<tspan
    style="font-size:65%;baseline-shift:sub"
    id="tspan23">1</tspan></tspan></text>
     <text
