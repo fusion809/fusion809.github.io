@@ -170,7 +170,7 @@ Hence:
     &= -\dfrac{\rho C_D Al|\dot{\theta}|}{2} (-l\dot{\theta}\sin{\theta}, l\dot{\theta}\cos{\theta}) \\
     &= \dfrac{\rho C_D Al^2|\dot{\theta}|\dot{\theta}}{2} (\sin{\theta}, -\cos{\theta}).
 \end{align}
-To find the generalized force term, we need to find $\dfrac{\partial \vec{r}}{\partial \theta}$:
+To find the generalized force term, we need to find $\dfrac{\partial \textbf{r}}{\partial \theta}$:
 \begin{align}
     \dfrac{\partial \textbf{r}}{\partial \theta} &= (-l\sin{\theta}, l\cos{\theta}).
 \end{align}
