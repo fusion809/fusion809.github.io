@@ -1,19 +1,23 @@
 @def hassim=false;
-@def title="Explaining partial differentiation and Lagrangian mechanics to Fidello on Discord."
+@def title="Lagrangian mechanics explanation for Fidello."
 @def tag=["Mathematics", "Physics"]
 @def mintoclevel=1
 
+In this article, I explain to Fidello from Foci's Discord server some prerequisite knowledge he needs to effectively derive the equations of motion for a double rigid pendulum. 
+\toc
 # Partial differentiation
-Partial derivatives are just a straightforward extension of derivatives as you understand them already. The key difference is that they are derivatives of multivariable functions instead of single-variable functions. Further, when you differentiate with respect to one variable, all other variables are kept constant.
+Partial derivatives are just a straightforward extension of derivatives as you understand them already. The key difference is that they are derivatives of multivariable functions instead of single-variable functions. Further, when you differentiate with respect to one variable, all other variables are kept constant. If you would like to build a graphical image of what the partial derivative is, well recall that the derivative of a single-variable function is just the gradient of that function. Consequently, it is also the gradient of the tangent line to that function. The partial derivative is similar to that. As when we have a function with more than a single independent variable, we have the freedom to choose which variable or variables we wish to determine our function's gradient with respect to. 
 
-For instance, say $u$ is a function of two variables --- $x$ and $t$. Then its partial derivative with respect to $x$ is formally defined as:
+If you want to visualize this, imagine a surface defined by $z=f(x,y)$ for example. Because a tangent line is two dimensional and we're in three dimensional space, there can be more than one tangent line to a given point. As when constructing the tangent line, we must answer a question: in which direction do we want our line to be tangential to our surface? It could be tangential in the $x$ direction or the $y$ direction, or even in any arbitrary direction in the $x$-$y$ plane. If we want the tangent line in the $x$ direction, we will need the partial derivative with respect to $x$ to get its gradient, whereas if we want the tangent line in the $y$ direction, we will need the partial derivative with respect to $y$ to get its gradient. More generally, for an arbitrary direction in the $x$-$y$ plane we would use the directional derivative as it is called. 
+
+Say $u$ is a function of two variables --- $x$ and $t$. Then its partial derivative with respect to $x$ is formally defined as:
 
 \begin{align*}
     \dfrac{\partial u}{\partial x} &= \lim_{h\rightarrow 0} \dfrac{u(x+h, t)-u(x, t)}{h}.
 \end{align*}
 
 This is analogous to the first principles definition of the derivative you would have learned for standard derivatives. Namely, if we are differentiating $f(x)$:
-\begin{align*}
+\begin{align*}we 
     \dfrac{df}{dx} &= \lim_{h\rightarrow 0}\dfrac{f(x+h) - f(x)}{h}.
 \end{align*}
 The only difference is that now we also have a variable $t$ that our function $u(x,t)$ depends on, but is kept constant when differentiating with respect to $x$.
@@ -150,8 +154,9 @@ So Equations \eqref{ELE} becomes:
 \end{align}
 Dividing by $ml^2$ and taking the second term to the right-hand side yields:
 \begin{align}
-\ddot{\theta} &= -\dfrac{g}{l}\cos{\theta}.
+\ddot{\theta} &= -\dfrac{g}{l}\cos{\theta}.\label{simppen}
 \end{align}
+Technically speaking it is possible to analytically solve Equation \eqref{simppen}, but it requires the use of non-standard functions called elliptic integrals. If you would like to check out numerical solutions to this equation, see [this page](/simplePendulum/woErrorAnalysis).
 
 ## With air resistance
 For the sake of simplicity, we will only consider the air resistance experienced by the pendulum bob itself, not by the rod. The air resistance force vector for the pendulum bob would be:
@@ -187,3 +192,6 @@ Subtracting $\dfrac{g}{l}\cos{\theta}$ from both sides yields:
 \begin{align}
     \ddot{\theta} &= -\dfrac{g}{l}\cos{\theta} -\dfrac{\rho C_D Al|\dot{\theta}|\dot{\theta}}{2m}.
 \end{align}
+This equation cannot be analytically solved, so numerical solutions are necessary. I numerically solve an even more complex version of the single pendulum equation [here](/singlePendulum/).
+
+If you would like to see my derivation of the double rigid pendulum equations, it is [here](/doublePendulum/derivation/).

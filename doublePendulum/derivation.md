@@ -23,11 +23,11 @@ Figure 1 depicts the double pendulum system being analysed. Most physicists trea
 To obtain our equations of motion, we must apply the Euler-Lagrange equations with generalized dissipation force ($Q_i$ which is on the right-hand side of the following equation)[^1]
 	
 \begin{align}
-	\dfrac{d}{dt}\dfrac{\partial \mathcal{L}}{\partial \dot{q_i}} - \dfrac{\partial \mathcal{L}}{\partial q_i} &=  Q_i. \label{ELD}
+	\dfrac{d}{dt}\dfrac{\partial L}{\partial \dot{q_i}} - \dfrac{\partial L}{\partial q_i} &=  Q_i. \label{ELD}
 \end{align}
 	
 Where
-* $\mathcal{L}$ is the Lagrangian &mdash; the difference between the kinetic energy and potential energy of the system. 
+* $L$ is the Lagrangian &mdash; the difference between the kinetic energy and potential energy of the system. 
 * $(q_i)=(\theta_1,\theta_2)$ are the generalized coordinates of the system.
 * $Q_i=\displaystyle \sum_j \vec{F}_{D,j} \cdot \hat{e}_{j,i}$ is the generalized dissipation force.
 * $j=1b,1r,2b,2r$ refers to the moving components of our double pendulum system, namely the two bobs and two rods.
@@ -245,7 +245,7 @@ Next, we must calculate the potential energy. In this problem, there is only one
 Hence the Lagrangian is
 	
 	\begin{align*}
-		\mathcal{L} &= T - V \\
+		L &= T - V \\
 		&= \dfrac{l_1^2 \dot{\theta}_1^2}{2} \left(\dfrac{m_{1r}}{12} + m_{1b} + m_{2b}\right) + \dfrac{l_2^2 \dot{\theta}_2^2}{2} \left(\dfrac{m_{2r}}{12} + m_{2b}\right) + m_{2b}l_1 l_2 \dot{\theta}_1 \dot{\theta}_2 \cos{(\theta_1-\theta_2)} - gl_1 \sin{\theta_1}\left(\dfrac{m_{1r}}{2} \right.\\
 		&\left.+ m_{2r} + m_{1b} + m_{2b}\right) - gl_2 \sin{\theta_2}\left(\dfrac{m_{2r}}{2} + m_{2b}\right).
 	\end{align*}
@@ -256,7 +256,7 @@ Hence the Lagrangian is
 	Calculating the left-hand side terms of Equation \eqref{ELD} with regards to $\theta_1$. First we calculate the generalized momenta canonical to $\theta_1$
 	
 	\begin{align*}
-		p_{\theta_1} &= \dfrac{\partial \mathcal{L}}{\partial \dot{\theta}_1} \\
+		p_{\theta_1} &= \dfrac{\partial L}{\partial \dot{\theta}_1} \\
 		&= \dfrac{m_{1r}l_1^2 \dot{\theta}_1}{12} + (m_{1b}+m_{2b}) l_1^2 \dot{\theta}_1 + m_{2b}l_1 l_2 \dot{\theta}_2 \cos{\left(\theta_1-\theta_2\right)}.
 	\end{align*}
 	
@@ -267,7 +267,7 @@ Hence the Lagrangian is
 	
 	As for the other term in Equation \eqref{ELD}
 	\begin{align*}		
-		F_{\theta_1} &= \dfrac{\partial \mathcal{L}}{\partial \theta_1} \\
+		F_{\theta_1} &= \dfrac{\partial L}{\partial \theta_1} \\
 		&= -m_{2b}l_1l_2\dot{\theta}_1\dot{\theta}_2 \sin{(\theta_1-\theta_2)} - \dfrac{m_{1r}gl_1 \cos{\theta_1}}{2} -m_{2r}gl_1 \cos{\theta_1} -m_{1b}gl_1 \cos{\theta_1} -m_{2b}gl_1 \cos{\theta_1} \\
 		&= -m_{2b}l_1l_2\dot{\theta}_1\dot{\theta}_2 \sin{(\theta_1-\theta_2)} -gl_1\cos{\theta_1}\left(\dfrac{m_{1r}}{2}+m_{2r}+m_{1b} + m_{2b}\right).
 	\end{align*}
@@ -413,11 +413,11 @@ Next, we will derive the equations for $\theta_2$
 	
 ### Left-hand side
 \begin{align*}
-	p_{\theta_2} &= \dfrac{\partial \mathcal{L}}{\partial \dot{\theta}_2} \\
+	p_{\theta_2} &= \dfrac{\partial L}{\partial \dot{\theta}_2} \\
 		&= \dfrac{m_{2r}l_2^2 \dot{\theta}_2}{12} + m_{2b}l_2 \left(l_2 \dot{\theta}_2 + l_1 \dot{\theta}_1\cos{(\theta_1-\theta_2)}\right)\\
 		\dot{p}_{\theta_2} &= \dfrac{m_{2r}l_2^2 \ddot{\theta}_2}{12} + m_{2b}l_2 \left(l_2 \ddot{\theta}_2 + l_1 \ddot{\theta}_1\cos{(\theta_1-\theta_2)}-l_1\dot{\theta}_1(\dot{\theta}_1-\dot{\theta}_2)\sin{(\theta_1-\theta_2)}\right) \\
 		&= l_2^2 \left(\dfrac{m_{2r}}{12} + m_{2b}\right)\ddot{\theta}_2 + m_{2b}l_1l_2\left(\ddot{\theta}_1\cos{(\theta_1-\theta_2)}-\dot{\theta}_1(\dot{\theta}_1-\dot{\theta}_2)\sin{(\theta_1-\theta_2)}\right)\\
-		F_{\theta_2} &= \dfrac{\partial \mathcal{L}}{\partial \theta_2} \\
+		F_{\theta_2} &= \dfrac{\partial L}{\partial \theta_2} \\
 		&= m_{2b} l_1 l_2 \dot{\theta}_1 \dot{\theta}_2 \sin{(\theta_1-\theta_2)}-\dfrac{m_{2r}gl_2 \cos{\theta_2}}{2} - m_{2b}gl_2\cos{\theta_2} \\
 		&= m_{2b} l_1 l_2 \dot{\theta}_1 \dot{\theta}_2 \sin{(\theta_1-\theta_2)}-gl_2\cos{\theta_2}\left(\dfrac{m_{2r}}{2} + m_{2b}\right).
 \end{align*}

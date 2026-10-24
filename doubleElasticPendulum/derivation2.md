@@ -14,7 +14,7 @@ This article focuses on deriving the equations of motion of the coupled elastic 
 We will derive our own equations of motion based on the Euler-Lagrange equation with dissipative forces
 
 \begin{align}
-\dfrac{d}{dt} \dfrac{\partial \mathcal{L}}{\partial \dot{q}_i} - \dfrac{\partial \mathcal{L}}{\partial q_i} &= \sum_j \vec{F}_{D,j} \cdot \dfrac{\partial \vec{r}_j}{\partial q_i}.\label{ELD}
+\dfrac{d}{dt} \dfrac{\partial L}{\partial \dot{q}_i} - \dfrac{\partial L}{\partial q_i} &= \sum_j \vec{F}_{D,j} \cdot \dfrac{\partial \vec{r}_j}{\partial q_i}.\label{ELD}
 \end{align}
         
 Where
@@ -22,12 +22,12 @@ Where
 * $(q_i)$ are the generalized coordinates of the system.
 * $(\dot{q}_i)$ are the first time derivatives of the generalized coordinates of the system.
 * $\vec{r}_j$ is the position vector of component $j$ of the system.
-* $\mathcal{L}$ is the Lagrangian &mdash; the difference between the kinetic and potential energy &mdash; of the system.
-* $p_i = \dfrac{\partial \mathcal{L}}{\partial \dot{q}_i}$ is the generalized momentum canonical to $q_i$.
-* $F_i = \dfrac{\partial \mathcal{L}}{\partial q_i}$ is the generalized force canonical to $q_i$.
+* $L$ is the Lagrangian &mdash; the difference between the kinetic and potential energy &mdash; of the system.
+* $p_i = \dfrac{\partial L}{\partial \dot{q}_i}$ is the generalized momentum canonical to $q_i$.
+* $F_i = \dfrac{\partial L}{\partial q_i}$ is the generalized force canonical to $q_i$.
 * $\vec{F}_{D,j}$ is the dissipative force vector for component $j$.
 * $\hat{e}_{j,i} = \dfrac{\partial \vec{r}_j}{\partial q_i}$ is the generalized basis vector canonical to $q_i$ for component $j$ of the system.
-* The left-hand side of Equation Equation \eqref{ELD} can also be represented as $-\dfrac{\delta \mathcal{L}}{\delta q_i}$, where $\dfrac{\delta \mathcal{L}}{\delta q_i}$ is the functional derivative of the Lagrangian with respect to $q_i$. To simplify things, we will call $-\dfrac{\delta \mathcal{L}}{\delta q_i} = \dfrac{\delta' \mathcal{L}}{\delta' q_i}$
+* The left-hand side of Equation Equation \eqref{ELD} can also be represented as $-\dfrac{\delta L}{\delta q_i}$, where $\dfrac{\delta L}{\delta q_i}$ is the functional derivative of the Lagrangian with respect to $q_i$. To simplify things, we will call $-\dfrac{\delta L}{\delta q_i} = \dfrac{\delta' L}{\delta' q_i}$
 * The right-hand side of Equation Equation \eqref{ELD} is also called the generalized dissipative force and can be represented as $Q_i$.
 
 \tableofcontents
@@ -204,7 +204,7 @@ The potential energy of the system is given by
 Hence the Lagrangian of the system is
 
 \begin{align*}
-	\mathcal{L} &= T - V \\
+	L &= T - V \\
 	&= \dfrac{M_1}{2} |\vec{v}_{1b}|^2 + \dfrac{M_2}{2}|\vec{v}_{2b}^I|^2 + \dfrac{\mu_2}{2}|\Delta \vec{v}_{2,1}^I|^2 - \left(\mu_1 gr_1\sin{\theta_1} + \mu_2 gr_2\sin{\theta_2} + \dfrac{k_1(r_1-l_1)^2+k_2(r_2-l_2)^2}{2}\right) \\
 	&= \dfrac{M_1}{2} |\vec{v}_{1b}|^2 + \dfrac{M_2}{2}|\vec{v}_{2b}^I|^2 + \dfrac{\mu_2}{2}(|\Delta \vec{v}_{2,1}^I|^2 - 2gr_2 \sin{\theta_2}) - \mu_1 gr_1 \sin{\theta_1} - \dfrac{k_1(r_1-l_1)^2+k_2(r_2-l_2)^2}{2}.
 \end{align*}
@@ -328,11 +328,11 @@ As for $\theta_2$ (correct, checked with SymPy)
 It is important to note that $\dfrac{\delta' f(q_i)}{\delta' q_i} = -\dfrac{\partial f}{\partial q_i}$ and of course if a term does not depend on $q_i$ or $\dot{q}_i$ its functional derivative with respect to $q_i$ is zero. Hence
 
 \begin{align*}
-	\delta'_{r_1} \mathcal{L} &= \dfrac{M_1}{2} \delta'_{r_1} |\vec{v}_{1b}|^2 + \dfrac{M_2}{2} \delta'_{r_1}|\vec{v}_{2b}^I|^2 + \dfrac{\mu_2}{2}\delta'_{r_1} |\Delta \vec{v}_{2,1}^I|^2 + \mu_1 g\sin{\theta_1} + k_1(r_1-l_1)
+	\delta'_{r_1} L &= \dfrac{M_1}{2} \delta'_{r_1} |\vec{v}_{1b}|^2 + \dfrac{M_2}{2} \delta'_{r_1}|\vec{v}_{2b}^I|^2 + \dfrac{\mu_2}{2}\delta'_{r_1} |\Delta \vec{v}_{2,1}^I|^2 + \mu_1 g\sin{\theta_1} + k_1(r_1-l_1)
 \end{align*}
 We have deliberately ignored the $m_2gr_2\sin{\theta_2}$ and $-\dfrac{k_2(r_2-l_2)^2}{2}$ as they are independent of $r_1$.
 \begin{align*}
-	\delta'_{r_1} \mathcal{L} &= \dfrac{M_1}{2}(2\ddot{r}_1-2r_1\dot{\theta}_1^2) + \dfrac{M_2}{2} \cdot 0 + \dfrac{\mu_2}{2} \left(2\cos{\Delta}(\ddot{r}_2-r_2\dot{\theta}_2(\dot{\Delta}+\dot{\theta}_1)) - 2\sin{\Delta} (\dot{r}_2(\dot{\Delta}_2+\dot{\theta}_1)+r_2\ddot{\theta}_2)\right) + \mu_1g\sin{\theta_1} + k_1(r_1-l_1) \\
+	\delta'_{r_1} L &= \dfrac{M_1}{2}(2\ddot{r}_1-2r_1\dot{\theta}_1^2) + \dfrac{M_2}{2} \cdot 0 + \dfrac{\mu_2}{2} \left(2\cos{\Delta}(\ddot{r}_2-r_2\dot{\theta}_2(\dot{\Delta}+\dot{\theta}_1)) - 2\sin{\Delta} (\dot{r}_2(\dot{\Delta}_2+\dot{\theta}_1)+r_2\ddot{\theta}_2)\right) + \mu_1g\sin{\theta_1} + k_1(r_1-l_1) \\
 	&= M_1(\ddot{r}_1-r_1\dot{\theta}_1^2) + \mu_2 \left(\cos{\Delta}(\ddot{r}_2-r_2\dot{\theta}_2(\dot{\Delta}+\dot{\theta}_1)) - \sin{\Delta} (\dot{r}_2(\dot{\Delta}_2+\dot{\theta}_1)+r_2\ddot{\theta}_2)\right) + \mu_1g\sin{\theta_1} + k_1(r_1-l_1) \\
 	&= M_1(\ddot{r}_1-r_1\dot{\theta}_1^2) + \mu_2 \left(\cos{\Delta}(\ddot{r}_2-r_2\dot{\theta}_2^2) - \sin{\Delta} (2\dot{r}_2\dot{\theta}_2+r_2\ddot{\theta}_2)\right) + \mu_1g\sin{\theta_1} + k_1(r_1-l_1).
 \end{align*}
@@ -406,7 +406,7 @@ M_1r_1^2 \dot{\theta}_1^2 + \mu_2 r_2 \dot{\theta}_2^2\cos{\Delta} + 2\mu_2 \dot
 As for $r_2$
 
 \begin{align*}
-	\delta'_{r_2} \mathcal{L} &= \dfrac{M_1}{2} \delta'_{r_2} |\vec{v}_{1b}|^2 + \dfrac{M_2}{2} \delta'_{r_2} |\vec{v}_{2b}^I|^2 + \dfrac{\mu_2}{2}(\delta'_{r_2} |\Delta \vec{v}_{2,1}^I|^2+2g\sin{\theta_2}) + k_2(r_2-l_2) \\
+	\delta'_{r_2} L &= \dfrac{M_1}{2} \delta'_{r_2} |\vec{v}_{1b}|^2 + \dfrac{M_2}{2} \delta'_{r_2} |\vec{v}_{2b}^I|^2 + \dfrac{\mu_2}{2}(\delta'_{r_2} |\Delta \vec{v}_{2,1}^I|^2+2g\sin{\theta_2}) + k_2(r_2-l_2) \\
 	&=  \dfrac{M_2}{2} (2(\ddot{r}_2 - r_2\dot{\theta}_2^2)) + \dfrac{\mu_2}{2}(2\cos{\Delta}(\ddot{r}_1 - r_1\dot{\theta}_1^2)+2\sin{\Delta}(r_1\ddot{\theta}_1 + 2\dot{r}_1\dot{\theta}_1)+2g\sin{\theta_2}) + k_2(r_2-l_2) \\
 	&= M_2 (\ddot{r}_2 - r_2\dot{\theta}_2^2) + \mu_2 (\cos{\Delta}(\ddot{r}_1 - r_1\dot{\theta}_1^2)+\sin{\Delta}(r_1\ddot{\theta}_1 + 2\dot{r}_1\dot{\theta}_1)+g\sin{\theta_2}) + k_2(r_2-l_2) \\
 	&= M_2 (\ddot{r}_2 - r_2\dot{\theta}_2^2) + \mu_2 (\cos{\Delta}(\ddot{r}_1 - r_1\dot{\theta}_1^2)+\sin{\Delta}(r_1\ddot{\theta}_1 + 2\dot{r}_1\dot{\theta}_1)+g\sin{\theta_2}) + k_2(r_2-l_2).
@@ -466,7 +466,7 @@ M_2r_2\dot{\theta}_2^2 + \mu_2 (r_1\dot{\theta}_1^2\cos{\Delta}-2\dot{r}_1\dot{\
 As for $\theta_1$
 
 \begin{align*}
-\delta'_{\theta_1} \mathcal{L} &= \dfrac{M_1}{2} \delta'_{\theta_1} |\vec{v}_{1b}|^2 + \dfrac{M_2}{2} \delta'_{\theta_1} |\vec{v}_{2b}^I|^2 + \dfrac{\mu_2}{2}(\delta'_{\theta_1}|\Delta \vec{v}_{2,1}^I|^2) + \mu_1 gr_1 \cos{\theta_1} \\
+\delta'_{\theta_1} L &= \dfrac{M_1}{2} \delta'_{\theta_1} |\vec{v}_{1b}|^2 + \dfrac{M_2}{2} \delta'_{\theta_1} |\vec{v}_{2b}^I|^2 + \dfrac{\mu_2}{2}(\delta'_{\theta_1}|\Delta \vec{v}_{2,1}^I|^2) + \mu_1 gr_1 \cos{\theta_1} \\
 &= \dfrac{M_1}{2} (2r_1^2 \ddot{\theta}_1 + 4r_1\dot{r}_1\dot{\theta}_1) + \dfrac{\mu_2}{2}(2\cos{\Delta}(2r_1\dot{r}_2\dot{\theta}_2+r_1r_2\ddot{\theta}_2) +2\sin{\Delta}(r_1\ddot{r}_2-r_1r_2\dot{\theta}_2^2)) + \mu_1 gr_1 \cos{\theta_1} \\
 &= M_1 (r_1^2 \ddot{\theta}_1 + 2r_1\dot{r}_1\dot{\theta}_1) + \mu_2(\cos{\Delta}(2r_1\dot{r}_2\dot{\theta}_2+r_1r_2\ddot{\theta}_2) +\sin{\Delta}(r_1\ddot{r}_2-r_1r_2\dot{\theta}_2^2)) + \mu_1 gr_1 \cos{\theta_1}.
 \end{align*}
@@ -539,7 +539,7 @@ Hence the corresponding line of our matrix equation is
 As for $\theta_2$
 
 \begin{align*}
-	\delta'_{\theta_2} \mathcal{L} &= \dfrac{M_1}{2} \delta'_{\theta_2} |\vec{v}_{1b}|^2 + \dfrac{M_2}{2} \delta'_{\theta_2} |\vec{v}_{2b}^I|^2 + \dfrac{\mu_2}{2}(\delta'_{\theta_2} |\Delta \vec{v}_{2,1}^I|^2+2gr_2\cos{\theta_2}) \\
+	\delta'_{\theta_2} L &= \dfrac{M_1}{2} \delta'_{\theta_2} |\vec{v}_{1b}|^2 + \dfrac{M_2}{2} \delta'_{\theta_2} |\vec{v}_{2b}^I|^2 + \dfrac{\mu_2}{2}(\delta'_{\theta_2} |\Delta \vec{v}_{2,1}^I|^2+2gr_2\cos{\theta_2}) \\
 	&= \dfrac{M_2}{2}(2r_2^2 \ddot{\theta}_2 + 4r_2 \dot{r}_2 \dot{\theta}_2) + \dfrac{\mu_2}{2}\left(2\cos{\Delta}(2\dot{r}_1r_2\dot{\theta}_1+r_1r_2\ddot{\theta}_1)+2\sin{\Delta}(r_1r_2\dot{\theta}_1^2-\ddot{r}_1r_2)+2gr_2\cos{\theta_2}\right) \\
 	&= M_2(r_2^2 \ddot{\theta}_2 + 2r_2 \dot{r}_2 \dot{\theta}_2) + \mu_2 (\cos{\Delta}(2\dot{r}_1r_2\dot{\theta}_1+r_1r_2\ddot{\theta}_1)+\sin{\Delta}(r_1r_2\dot{\theta}_1^2-\ddot{r}_1r_2)+gr_2\cos{\theta_2}).
 \end{align*}

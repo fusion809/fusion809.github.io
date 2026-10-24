@@ -129,7 +129,7 @@ V &= m_{1b} gy_{1b} + m_{1r}gy_{1r} + m_{2b}gy_{2b} + m_{2r}gy_{2r} + m_{3b}gy_{
 
 ## Lagrangian
 \begin{align*}
-\mathcal{L} &= T - V\\
+L &= T - V\\
 &= \dfrac{M_1 l_1^2 \dot{\theta}_1^2}{2} + \dfrac{M_2 l_2^2 \dot{\theta}_2^2}{2} + \dfrac{M_3 l_3^2 \dot{\theta}_3^2}{2} + \mu_2 l_1l_2 \dot{\theta}_1 \dot{\theta}_2 \cos{\Delta_{21}} + \mu_3 l_3\dot{\theta}_3(l_2\dot{\theta}_2\cos{\Delta_{32}}+l_1\dot{\theta}_1\cos{\Delta_{31}}) - \mu_1 gl_1 \sin{\theta_1} - \mu_2 gl_2\sin{\theta_2} - \mu_3 gl_3\sin{\theta_3} \\
 &= \dfrac{M_1 l_1^2 \dot{\theta}_1^2}{2} + \dfrac{M_2 l_2^2 \dot{\theta}_2^2}{2} + \dfrac{M_3 l_3^2 \dot{\theta}_3^2}{2} + \mu_2 l_2(l_1 \dot{\theta}_1 \dot{\theta}_2 \cos{\Delta_{21}}-g\sin{\theta_2}) + \mu_3 l_3(\dot{\theta}_3(l_2\dot{\theta}_2\cos{\Delta_{32}}+l_1\dot{\theta}_1\cos{\Delta_{31}})-g\sin{\theta_3}) - \mu_1 gl_1 \sin{\theta_1}.
 \end{align*}
@@ -162,16 +162,16 @@ Q_{\theta_3} &= -(b_{3b}+c_{3b}|v_{3b}|)\vec{v}_{3b} \cdot \hat{e}_{3b, \theta_3
 ## Left-hand side of the Euler-Lagrange equations
 ### $\theta_1$
 \begin{align*}
-p_{\theta_1} &= \dfrac{\partial \mathcal{L}}{\partial \dot{\theta}_1} \\
+p_{\theta_1} &= \dfrac{\partial L}{\partial \dot{\theta}_1} \\
 &= M_1 l_1^2 \dot{\theta}_1 + \mu_2 l_1l_2 \dot{\theta}_2\cos{\Delta_{21}} + \mu_3 l_1 l_3\dot{\theta}_3\cos{\Delta_{31}} \\
 \dot{p}_{\theta_1} &=  M_1 l_1^2 \ddot{\theta}_1 + \mu_2 l_1l_2 (\ddot{\theta}_2\cos{\Delta_{21}} - \dot{\theta}_2(\dot{\theta}_2-\theta_1)\sin{\Delta_{21}}) + \mu_3 l_1 l_3(\ddot{\theta}_3\cos{\Delta_{31}} - \dot{\theta}_3(\dot{\theta}_3-\dot{\theta_1})\sin{\Delta_{31}}) \\
-F_{\theta_1} &= \dfrac{\partial \mathcal{L}}{\partial \theta_1} \\
+F_{\theta_1} &= \dfrac{\partial L}{\partial \theta_1} \\
 &= -\mu_2 l_1 l_2 \dot{\theta}_1\dot{\theta}_2\dfrac{\partial \Delta_{21}}{\partial \theta_1}\sin{\Delta_{21}} - \mu_3l_1 l_3\dot{\theta}_1\dot{\theta}_3\dfrac{\partial \Delta_{31}}{\partial \theta_1}\sin{\Delta_{31}} - \mu_1 gl_1\cos{\theta_1} \\
 &= \mu_2 l_1 l_2 \dot{\theta}_1\dot{\theta}_2\sin{\Delta_{21}} + \mu_3l_1 l_3\dot{\theta}_1\dot{\theta}_3\sin{\Delta_{31}} - \mu_1 gl_1\cos{\theta_1}
 \end{align*}
 
 \begin{align*}
-\delta'_{\theta_1} \mathcal{L} &= \dot{p}_{\theta_1} - F_{\theta_1} \\
+\delta'_{\theta_1} L &= \dot{p}_{\theta_1} - F_{\theta_1} \\
 &= M_1 l_1^2 \ddot{\theta}_1 + \mu_2 l_1l_2 (\ddot{\theta}_2\cos{\Delta_{21}} - \dot{\theta}_2(\dot{\theta}_2-\theta_1)\sin{\Delta_{21}}) + \mu_3 l_1 l_3(\ddot{\theta}_3\cos{\Delta_{31}} - \dot{\theta}_3(\dot{\theta}_3-\dot{\theta_1})\sin{\Delta_{31}}) - \mu_2 l_1 l_2 \dot{\theta}_1\dot{\theta}_2\sin{\Delta_{21}} + \mu_3l_1 l_3\dot{\theta}_1\dot{\theta}_3\sin{\Delta_{31}} + \mu_1 gl_1\cos{\theta_1}\\
 &= M_1 l_1^2 \ddot{\theta}_1 + \mu_2 l_1l_2 (\ddot{\theta}_2\cos{\Delta_{21}} - [\dot{\theta}_2(\dot{\theta}_2-\theta_1)+\dot{\theta}_1\dot{\theta}_2]\sin{\Delta_{21}}) + \mu_3 l_1 l_3(\ddot{\theta}_3\cos{\Delta_{31}} - [\dot{\theta}_3(\dot{\theta}_3-\dot{\theta_1})+\dot{\theta}_1\dot{\theta}_3]\sin{\Delta_{31}}) + \mu_1 gl_1\cos{\theta_1} \\
 &= M_1 l_1^2 \ddot{\theta}_1 + \mu_2 l_1l_2 (\ddot{\theta}_2\cos{\Delta_{21}} - \dot{\theta}_2(\dot{\theta}_2-\theta_1)\sin{\Delta_{21}}) + \mu_3 l_1 l_3(\ddot{\theta}_3\cos{\Delta_{31}} - \dot{\theta}_3(\dot{\theta}_3-\dot{\theta_1})\sin{\Delta_{31}}) - \mu_2 l_1 l_2 \dot{\theta}_1\dot{\theta}_2\sin{\Delta_{21}} + \mu_3l_1 l_3\dot{\theta}_1\dot{\theta}_3\sin{\Delta_{31}} + \mu_1 gl_1\cos{\theta_1}\\
@@ -180,30 +180,30 @@ F_{\theta_1} &= \dfrac{\partial \mathcal{L}}{\partial \theta_1} \\
 
 ### $\theta_2$
 \begin{align*}
-p_{\theta_2} &= \dfrac{\partial \mathcal{L}}{\partial \dot{\theta}_2} \\
+p_{\theta_2} &= \dfrac{\partial L}{\partial \dot{\theta}_2} \\
 &= M_2 l_2^2 \dot{\theta}_2 + \mu_2 l_1l_2 \dot{\theta}_1\cos{\Delta_{21}} + \mu_3 l_2l_3 \dot{\theta}_3 \cos{\Delta_{32}}\\
 \dot{p}_{\theta_2} &= M_2 l_2^2 \ddot{\theta}_2 + \mu_2 l_1l_2 (\ddot{\theta}_1\cos{\Delta_{21}} - \dot{\theta}_1 (\dot{\theta}_2-\dot{\theta}_1)\sin{\Delta_{21}})+ \mu_3 l_2l_3 (\ddot{\theta}_3 \cos{\Delta_{32}} -\dot{\theta}_3 (\dot{\theta}_3-\dot{\theta}_2)\sin{\Delta_{32}})\\
 F_{\theta_2} &= -\mu_2 l_2(l_1\dot{\theta}_1\dot{\theta}_2 \dfrac{\partial \Delta_{21}}{\partial \theta_2}\sin{\Delta_{21}}+g\cos{\theta_2}) - \mu_3 l_2l_3\dot{\theta}_2\dot{\theta}_3\dfrac{\partial \Delta_{32}}{\partial \theta_2}\sin{\Delta_{32}}\\
 &= -\mu_2 l_2(l_1\dot{\theta}_1\dot{\theta}_2 \sin{\Delta_{21}}+g\cos{\theta_2}) + \mu_3 l_2l_3\dot{\theta}_2\dot{\theta}_3\sin{\Delta_{32}}\\
-\delta'_{\theta_2} \mathcal{L} &= M_2 l_2^2 \ddot{\theta}_2 + \mu_2 l_1l_2 (\ddot{\theta}_1\cos{\Delta_{21}} - \dot{\theta}_1 (\dot{\theta}_2-\dot{\theta}_1)\sin{\Delta_{21}})+ \mu_3 l_2l_3 (\ddot{\theta}_3 \cos{\Delta_{32}} -\dot{\theta}_3 (\dot{\theta}_3-\dot{\theta}_2)\sin{\Delta_{32}}) + \mu_2 l_2(l_1\dot{\theta}_1\dot{\theta}_2 \sin{\Delta_{21}}+g\cos{\theta_2}) - \mu_3 l_2l_3\dot{\theta}_2\dot{\theta}_3\sin{\Delta_{32}} \\
+\delta'_{\theta_2} L &= M_2 l_2^2 \ddot{\theta}_2 + \mu_2 l_1l_2 (\ddot{\theta}_1\cos{\Delta_{21}} - \dot{\theta}_1 (\dot{\theta}_2-\dot{\theta}_1)\sin{\Delta_{21}})+ \mu_3 l_2l_3 (\ddot{\theta}_3 \cos{\Delta_{32}} -\dot{\theta}_3 (\dot{\theta}_3-\dot{\theta}_2)\sin{\Delta_{32}}) + \mu_2 l_2(l_1\dot{\theta}_1\dot{\theta}_2 \sin{\Delta_{21}}+g\cos{\theta_2}) - \mu_3 l_2l_3\dot{\theta}_2\dot{\theta}_3\sin{\Delta_{32}} \\
 &= M_2 l_2^2 \ddot{\theta}_2 + \mu_2 l_1l_2 (\ddot{\theta}_1\cos{\Delta_{21}} + \dot{\theta}_1^2\sin{\Delta_{21}})+ \mu_3 l_2l_3 (\ddot{\theta}_3 \cos{\Delta_{32}} -\dot{\theta}_3^2\sin{\Delta_{32}}) +\mu_2 l_2g\cos{\theta_2} \\
 &= M_2 l_2^2 \ddot{\theta}_2 + \mu_2 l_2 (l_1(\ddot{\theta}_1\cos{\Delta_{21}} + \dot{\theta}_1^2\sin{\Delta_{21}})+g\cos{\theta_2})+ \mu_3 l_2l_3 (\ddot{\theta}_3 \cos{\Delta_{32}} -\dot{\theta}_3^2\sin{\Delta_{32}}).
 \end{align*}
 
 ### $\theta_3$
 \begin{align*}
-p_{\theta_3} &= \dfrac{\partial \mathcal{L}}{\partial \dot{\theta}_3} \\
+p_{\theta_3} &= \dfrac{\partial L}{\partial \dot{\theta}_3} \\
 &= M_3 l_3^2 \dot{\theta}_3 + \mu_3 l_3(l_2 \dot{\theta}_2\cos{\Delta_{32}}+l_1\dot{\theta}_1\cos{\Delta_{31}}) \\
 \dot{p}_{\theta_3} &= M_3 l_3^2 \ddot{\theta}_3 + \mu_3 l_3(l_2 (\ddot{\theta}_2\cos{\Delta_{32}} - \dot{\theta}_2 (\dot{\theta}_3-\dot{\theta}_2)\sin{\Delta_{32}})+l_1(\ddot{\theta}_1\cos{\Delta_{31}}-\dot{\theta}_1(\dot{\theta}_3-\dot{\theta}_1)\sin{\Delta_{31}})) \\
-F_{\theta_3} &= \dfrac{\partial \mathcal{L}}{\partial \theta_3} \\
+F_{\theta_3} &= \dfrac{\partial L}{\partial \theta_3} \\
 &= -\mu_3 l_3\left[\dot{\theta}_3 (l_2\dot{\theta}_2 \dfrac{\partial \Delta_{32}}{\partial \theta_3}\sin{\Delta_{32}}+l_1\dot{\theta}_1\dfrac{\partial \Delta_{31}}{\partial \theta_3}\sin{\Delta_{31}}) + g\cos{\theta_3}\right] \\
 &= -\mu_3 l_3\left[\dot{\theta}_3 (l_2\dot{\theta}_2 \sin{\Delta_{32}}+l_1\dot{\theta}_1\sin{\Delta_{31}}) + g\cos{\theta_3}\right] \\
-\delta'_{\theta_3} \mathcal{L} &= M_3l_3^2 \ddot{\theta}_3 + \mu_3 l_3(l_2 (\ddot{\theta}_2\cos{\Delta_{32}} - \dot{\theta}_2 (\dot{\theta}_3-\dot{\theta}_2)\sin{\Delta_{32}})+l_1(\ddot{\theta}_1\cos{\Delta_{31}}-\dot{\theta}_1(\dot{\theta}_3-\dot{\theta}_1)\sin{\Delta_{31}})) + \mu_3 l_3\left[\dot{\theta}_3 (l_2\dot{\theta}_2 \sin{\Delta_{32}}+l_1\dot{\theta}_1\sin{\Delta_{31}}) + g\cos{\theta_3}\right]\\
+\delta'_{\theta_3} L &= M_3l_3^2 \ddot{\theta}_3 + \mu_3 l_3(l_2 (\ddot{\theta}_2\cos{\Delta_{32}} - \dot{\theta}_2 (\dot{\theta}_3-\dot{\theta}_2)\sin{\Delta_{32}})+l_1(\ddot{\theta}_1\cos{\Delta_{31}}-\dot{\theta}_1(\dot{\theta}_3-\dot{\theta}_1)\sin{\Delta_{31}})) + \mu_3 l_3\left[\dot{\theta}_3 (l_2\dot{\theta}_2 \sin{\Delta_{32}}+l_1\dot{\theta}_1\sin{\Delta_{31}}) + g\cos{\theta_3}\right]\\
 &= M_3l_3^2 \ddot{\theta}_3 + \mu_3 l_3\left[l_2 (\ddot{\theta}_2\cos{\Delta_{32}} + \dot{\theta}_2^2\sin{\Delta_{32}})+l_1(\ddot{\theta}_1\cos{\Delta_{31}}+\dot{\theta}_1^2\sin{\Delta_{31}})+g\cos{\theta_3}\right].
 \end{align*}
 
 ## Final system
-Hence given our equations of motion are $\delta'_{\theta_i}\mathcal{L} = Q_{\theta_i}$, we could write them in matrix form as (given how long $Q_{\theta_i}$ is, we will not expand on it)
+Hence given our equations of motion are $\delta'_{\theta_i}L = Q_{\theta_i}$, we could write them in matrix form as (given how long $Q_{\theta_i}$ is, we will not expand on it)
 
 \begin{align*}
 \begin{bmatrix}
