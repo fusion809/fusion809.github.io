@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.1"
+   width="490"
+   height="460.73566"
+   viewBox="-0.5 -0.5 490 460.73566"
+   content="&lt;mxfile&gt;&lt;diagram id=&quot;ZWUzVtw3mmUP-9d7ERGA&quot; name=&quot;Page-1&quot;&gt;7Vhdb5swFP01PHYymNDksdC0e1ilbXnYswcGrBqcGach+/W7BhO+Qpqm6dRNjSIFH66v7XOu7aNYOMjKe0nW6YOIKLccFJUWvrUcx3YcBD8a2dWI6zo1kEgWmaAWWLHf1ICmX7JhES16gUoIrti6D4Yiz2moehiRUmz7YbHg/VHXJKEjYBUSPkZ/sEilNTqfoRb/TFmSNiPbyLz5ScLHRIpNbsbLRU7rNxlp0pjQIiWR2HYgvLRwIIVQ9VNWBpRrWhvG6n53E2/3U5Y0V6d0mNUdngjfmFWbealdQwPNoxvNJrRCToqChRb2U5VxAGx4HA9pZkGjHr9mAvdUZFTJHQRsW1YbUtMOoQ0mKSeKPfVVIUbcZJ9uP8JXwWAmDjKFiOcmjylDD6N+ikJsZEhNry5XzySyF4NEisiEqlEieOgsu4UqKQ7L4v3/stjXfTZd50xZ9npOJbqcLNcvkqXa9v+UJsMKP1uTmdNP5MzfTJP5CZpwDneG1mKbMkVXaxLqN1u4tvr6kGJdXyQxKynk92PGeSC4kK2ckxo+UaloeVTFhh00YMcz7Y7K7gGVXTQtaI/BI3QtDtDlcaXXKioF45ocQH9t9C3kByKDs8VBK5IX8POwal/1aG5AneeqqG7zGwjAaF1WoW0nL9G/vBkYplyPXeMj+YBVjRdKikc6UOOAQISzJIcmp7HupmVhcKnfGDhjUaQz+wWUAcuTL1XYrdsi3w3jGhLQPebVdk6hI4UM/lpXbSXBzIcviBKgTzNrBnMNoG23bfjqcKkCkcP0CatKhpJCbWmhJyeFIor8rFaKnq/PC9Se21z5pvawM669+YHaG16a59ReY+w6xVdOqd1Z9UuFD4EdKo9Jf4jmyq/pTV8JoQvyjmSMa5ruiSSZyCODG6eK0WUU8QZnpYvGinhvpYg9UmT3sf8m999frAo8sEe2O64KfMQJvKoqnFf6nFfz9E78kLu4kB9y3X4i7J3mh4BisuuEmdI/fcIIHZ/XwPA1BnAy3ju8jraw6hmfa+ZsPGlP4HDIp/1GbKpNO44CjMpVQSWLB76jGaZBsu3y29iXDPxQaE63biCOq8+FjJAVLC1/PumG9nDNwIdJej+H9Gj7zMaH9OIyRh6a7b9C9c5q/3XDyz8=&lt;/diagram&gt;&lt;/mxfile&gt;"
+   id="svg10"
+   sodipodi:docname="pendulum.svg"
+   inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <sodipodi:namedview
+     id="namedview10"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="3.7606178"
+     inkscape:cx="295.82906"
+     inkscape:cy="122.05441"
+     inkscape:window-width="1218"
+     inkscape:window-height="1038"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg10" />
+  <defs
+     id="defs1">
+    <marker
+       style="overflow:visible"
+       id="ArrowWideHeavy"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Wide, heavy arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         d="m 1,0 -3,3 h -2 l 3,-3 -3,-3 h 2 z"
+         id="path3" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker15"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Triangle arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.5)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         id="path15" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Triangle"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Triangle arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.5)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         id="path135" />
+    </marker>
+  </defs>
+  <g
+     id="g9"
+     transform="translate(617.56366,6.9711648)">
+    <path
+       d="M -397.05441,453.2645 V 19.634497"
+       fill="none"
+       stroke="#000000"
+       stroke-miterlimit="10"
+       pointer-events="stroke"
+       id="path1-2"
+       style="marker-end:url(#marker15)" />
+    <path
+       d="m -618.06366,222.14476 h 453.63"
+       fill="none"
+       stroke="#000000"
+       stroke-miterlimit="10"
+       pointer-events="stroke"
+       id="path3-8"
+       style="marker-end:url(#Triangle)" />
+    <path
+       d="m -396.72895,221.49897 140,-139.999997"
+       fill="none"
+       stroke="#000000"
+       stroke-miterlimit="10"
+       pointer-events="stroke"
+       id="path5" />
+    <circle
+       cx="-256.72894"
+       cy="81.49897"
+       fill="none"
+       stroke="#000000"
+       pointer-events="all"
+       id="ellipse5"
+       r="20" />
+    <g
+       transform="translate(-0.5,-0.5)"
+       id="g5">
+      <switch
+         id="switch5">
+        <foreignObject
+           pointer-events="none"
+           width="100%"
+           height="100%"
+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
+           style="overflow: visible; text-align: left;">
+          <xhtml:div
+             style="display: flex; align-items: unsafe center; justify-content: unsafe flex-start; width: 70px; height: 1px; padding-top: 195px; margin-left: 268px;">
+            <xhtml:div
+               data-drawio-colors="color: rgb(0, 0, 0); "
+               style="box-sizing: border-box; font-size: 0px; text-align: left; max-height: 26px; overflow: hidden;">
+              <xhtml:div
+                 style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                <xhtml:font
+                   style="font-size: 30px;"
+                   face="Comic Sans MS">l</xhtml:font>
+              </xhtml:div>
+            </xhtml:div>
+          </xhtml:div>
+        </foreignObject>
+      </switch>
+    </g>
+    <g
+       transform="translate(-627.30435,-56.621166)"
+       id="g6">
+      <switch
+         id="switch6">
+        <foreignObject
+           pointer-events="none"
+           width="100%"
+           height="100%"
+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
+           style="overflow: visible; text-align: left;">
+          <xhtml:div
+             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 58px; height: 1px; padding-top: 275px; margin-left: 458px;">
+            <xhtml:div
+               data-drawio-colors="color: rgb(0, 0, 0); "
+               style="box-sizing: border-box; font-size: 0px; text-align: center;">
+              <xhtml:div
+                 style="display: inline-block; font-size: 30px; font-family: Garamond; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">x</xhtml:div>
+            </xhtml:div>
+          </xhtml:div>
+        </foreignObject>
+        <text
+           x="474.59006"
+           y="288.5127"
+           fill="#000000"
+           font-family="Garamond"
+           font-size="30px"
+           text-anchor="middle"
+           id="text6"
+           style="font-size:40px"><tspan
+             sodipodi:role="line"
+             id="tspan13"
+             x="474.59006"
+             y="288.5127"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans'">x</tspan></text>
+      </switch>
+    </g>
+    <g
+       transform="translate(-606.78337,-20.709446)"
+       id="g7">
+      <switch
+         id="switch7">
+        <foreignObject
+           pointer-events="none"
+           width="100%"
+           height="100%"
+           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
+           style="overflow: visible; text-align: left;">
+          <xhtml:div
+             style="display: flex; align-items: unsafe center; justify-content: unsafe flex-start; width: 20px; height: 1px; padding-top: 25px; margin-left: 213px;">
+            <xhtml:div
+               data-drawio-colors="color: rgb(0, 0, 0); "
+               style="box-sizing: border-box; font-size: 0px; text-align: left; max-height: 46px; overflow: hidden;">
+              <xhtml:div
+                 style="display: inline-block; font-size: 30px; font-family: Garamond; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">y</xhtml:div>
+            </xhtml:div>
+          </xhtml:div>
+        </foreignObject>
+        <text
+           x="213"
+           y="34"
+           fill="#000000"
+           font-family="Garamond"
+           font-size="30px"
+           id="text7"
+           style="font-size:40px">y</text>
+      </switch>
+    </g>
+    <path
+       d="m -292.56016,221.76489 0.26591,-7.87269 c 0.22505,-6.66287 -4.94688,-13.51183 -7.92688,-19.47183 l -4.6314,-7.65731 c -1.84,-3.68667 -1.98607,-2.52919 -6.37312,-7.54764 l -6.00465,-6.86886 c -4.00854,-4.58546 -9.05556,-6.60411 -9.01441,-6.59297 l -10.79774,-2.92505"
+       fill="none"
+       stroke="#000000"
+       stroke-miterlimit="10"
+       pointer-events="stroke"
+       id="path7"
+       style="marker-end:url(#ArrowWideHeavy)"
+       sodipodi:nodetypes="csccsscc" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans';writing-mode:lr-tb;direction:ltr;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:0"
+       x="-287.15503"
+       y="189.36243"
+       id="text14"><tspan
+         sodipodi:role="line"
+         id="tspan14"
+         x="-287.15503"
+         y="189.36243">θ</tspan></text>
+  </g>
+  <switch
+     id="switch10"
+     transform="translate(30.42608,-7.9200052)">
+    <g
+       requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
+       id="g10" />
+    <a
+       transform="translate(0,-5)"
+       xlink:href="https://www.diagrams.net/doc/faq/svg-export-text-problems"
+       target="_blank"
+       id="a10">
+      <text
+         text-anchor="middle"
+         font-size="10px"
+         x="50%"
+         y="100%"
+         id="text10">Text is not SVG - cannot display</text>
+    </a>
+  </switch>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans';writing-mode:lr-tb;direction:ltr;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:0"
+     x="288.92609"
+     y="136.76891"
+     id="text15"><tspan
+       sodipodi:role="line"
+       id="tspan15"
+       x="288.92609"
+       y="136.76891"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Liberation Serif';-inkscape-font-specification:'Liberation Serif'">l</tspan></text>
+</svg>
