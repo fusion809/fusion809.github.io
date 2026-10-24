@@ -17,7 +17,7 @@ Say $f$ is a function of two variables --- $x$ and $y$. Then its partial derivat
 \end{align*}
 
 This is analogous to the first principles definition of the derivative you would have learned for standard derivatives. Namely, if we are differentiating $f(x)$:
-\begin{align*}we 
+\begin{align*}
     \dfrac{df}{dx} &= \lim_{h\rightarrow 0}\dfrac{f(x+h) - f(x)}{h}.
 \end{align*}
 The only difference is that now we also have a variable $y$ that our function $f(x,y)$ depends on, but is kept constant when differentiating with respect to $x$.
