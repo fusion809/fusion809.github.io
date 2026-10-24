@@ -10,25 +10,25 @@ Partial derivatives are just a straightforward extension of derivatives as you u
 
 If you want to visualize this, imagine a surface defined by $z=f(x,y)$ for example. Because a tangent line is two dimensional and we're in three dimensional space, there can be more than one tangent line to a given point. As when constructing the tangent line, we must answer a question: in which direction do we want our line to be tangential to our surface? It could be tangential in the $x$ direction or the $y$ direction, or even in any arbitrary direction in the $x$-$y$ plane. If we want the tangent line in the $x$ direction, we will need the partial derivative with respect to $x$ to get its gradient, whereas if we want the tangent line in the $y$ direction, we will need the partial derivative with respect to $y$ to get its gradient. More generally, for an arbitrary direction in the $x$-$y$ plane we would use the directional derivative as it is called. 
 
-Say $u$ is a function of two variables --- $x$ and $t$. Then its partial derivative with respect to $x$ is formally defined as:
+Say $f$ is a function of two variables --- $x$ and $y$. Then its partial derivative with respect to $x$ is formally defined as:
 
 \begin{align*}
-    \dfrac{\partial u}{\partial x} &= \lim_{h\rightarrow 0} \dfrac{u(x+h, t)-u(x, t)}{h}.
+    \dfrac{\partial f}{\partial x} &= \lim_{h\rightarrow 0} \dfrac{f(x+h, y)-f(x, y)}{h}.
 \end{align*}
 
 This is analogous to the first principles definition of the derivative you would have learned for standard derivatives. Namely, if we are differentiating $f(x)$:
 \begin{align*}we 
     \dfrac{df}{dx} &= \lim_{h\rightarrow 0}\dfrac{f(x+h) - f(x)}{h}.
 \end{align*}
-The only difference is that now we also have a variable $t$ that our function $u(x,t)$ depends on, but is kept constant when differentiating with respect to $x$.
-Say $u(x,t)=2tx^2$. Then $\dfrac{\partial u}{\partial x}$ would be:
+The only difference is that now we also have a variable $y$ that our function $f(x,y)$ depends on, but is kept constant when differentiating with respect to $x$.
+Say $f(x,y)=2x^2y$. Then $\dfrac{\partial f}{\partial x}$ would be:
 \begin{align*}
-    \dfrac{\partial u}{\partial x} &= \lim_{h\rightarrow 0} \dfrac{2t(x+h)^2 - 2tx^2}{h}.
+    \dfrac{\partial f}{\partial x} &= \lim_{h\rightarrow 0} \dfrac{2(x+h)^2y - 2x^2y}{h}.
 \end{align*}
-Did you notice that $2t$ is a common factor of both terms in our numerator? Let us take it out of our limit altogether, as it is effectively a constant (it doesn't depend on $h$, after all). 
+Did you notice that $2y$ is a common factor of both terms in our numerator? Let us take it out of our limit altogether, as it is effectively a constant (it doesn't depend on $h$, after all). 
 
 \begin{align*}
-\dfrac{\partial u}{\partial x} &= 2t\lim_{h\rightarrow 0} \dfrac{(x+h)^2-x^2}{h}
+\dfrac{\partial f}{\partial x} &= 2y\lim_{h\rightarrow 0} \dfrac{(x+h)^2-x^2}{h}
 \end{align*}
 Using the binomial theorem, we know that
 \begin{align*}
@@ -37,16 +37,16 @@ Using the binomial theorem, we know that
 
 Hence:
 \begin{align*}
-\dfrac{\partial u}{\partial x} &= 2t\lim_{h\rightarrow 0} \dfrac{x^2+2xh + h^2-x^2}{h} \\
-&= 2t\lim_{h\rightarrow 0} \dfrac{2xh + h^2}{h} \\
-&= 2t\lim_{h\rightarrow 0} 2x + h \\
-&= 2t \cdot 2x \\
-&= 4tx.
+\dfrac{\partial f}{\partial x} &= 2y\lim_{h\rightarrow 0} \dfrac{x^2+2xh + h^2-x^2}{h} \\
+&= 2y\lim_{h\rightarrow 0} \dfrac{2xh + h^2}{h} \\
+&= 2y\lim_{h\rightarrow 0} 2x + h \\
+&= 2y \cdot 2x \\
+&= 4xy.
 \end{align*}
-Okay, so that is the long way of finding out partial derivatives. Fortunately, there is also a faster way. Which is that we apply normal differentiation rules, but any variable we are not differentiating with respect to is treated like it's a constant. So for $u(x,t)=2tx^2$ we would treat the $2t$ as just a constant number and only differentiate the $x^2$. Applying the power rule, we see that $\dfrac{d}{dx}x^2 = 2x$ and hence:
+Okay, so that is the long way of finding out partial derivatives. Fortunately, there is also a faster way. Which is that we apply normal differentiation rules, but any variable we are not differentiating with respect to is treated like it's a constant. So for $f(x,y)=2x^2y$ we would treat the $2y$ as just a constant number and only differentiate the $x^2$. Applying the power rule, we see that $\dfrac{d}{dx}x^2 = 2x$ and hence:
 \begin{align*}
-    \dfrac{\partial u}{\partial x} &= 2t \cdot 2x \\
-    &= 4tx.
+    \dfrac{\partial f}{\partial x} &= 2y \cdot 2x \\
+    &= 4xy.
 \end{align*}
 
 # Heat equation example
