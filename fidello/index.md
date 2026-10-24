@@ -163,7 +163,7 @@ For the sake of simplicity, we will only consider the air resistance experienced
 \begin{align}
     \textbf{F}_D &= -\dfrac{\rho C_D A|v|\textbf{v}}{2}.
 \end{align}
-where $\textbf{v}$ is the velocity vector of the bob. It is equal to $(\dot{x}, \dot{y})$.
+Where $\textbf{v}$ is the velocity vector of the bob. It is equal to $(\dot{x}, \dot{y})$.
 Hence:
 \begin{align}
     \textbf{F}_D &= -\dfrac{\rho C_D Al|\dot{\theta}|}{2}(\dot{x}, \dot{y}) \\
