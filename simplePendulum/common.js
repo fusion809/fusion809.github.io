@@ -184,9 +184,11 @@ function generateTimePlot(solution) {
  * @param objectOfInputs  An object that contains all the problem parameters.
  * @return               Nothing. Just populates the table with the solution values. 
  */
-function fillTableSP(objectOfInputs) {
+function fillTableSP(objectOfInputs, varnames=undefined, solution=undefined) {
     // Define all global variables
-    var solution = solveProblemSP(objectOfInputs);
+    if (solution == undefined) {
+        var solution = solveProblemSP(objectOfInputs);
+    }
     var epsilon = objectOfInputs.epsilon;
     var {t, theta, thetaDot} = solution;
     var j = 0;
@@ -243,9 +245,14 @@ function fillTableSP(objectOfInputs) {
  * @param objectOfInputs An object that contains all the problem parameters.
  * @return               Nothing. Just generates the plots.
  */
-function generatePlots(objectOfInputs) {
+function generatePlots(objectOfInputs=undefined, solution=undefined) {
     // Solve problem
-    var solution = solveProblemSP(objectOfInputs);
+    if (objectOfInputs == undefined) {
+        var objectOfInputs = readInputs();
+    }
+    if (solution == undefined) {
+        var solution = solveProblemSP(objectOfInputs);
+    }
 
     // Generate solution plots
     generateTimePlot(solution);
@@ -293,7 +300,7 @@ function generateAnimation(objectOfInputs=undefined, solution=undefined) {
         var objectOfInputs = readInputs();
     }
     if (solution==undefined) {
-        var solution = solveProblem(RKF45, objectOfInputs);
+        var solution = solveProblemSP(objectOfInputs);
     }
     animatePendulum(objectOfInputs, solution, "Simple pendulum");
 }
@@ -303,7 +310,7 @@ function generatePhaseAnimation(objectOfInputs=undefined, solution=undefined) {
         var objectOfInputs = readInputs();
     }
     if (solution==undefined) {
-        var solution = solveProblem(RKF45, objectOfInputs);
+        var solution = solveProblemSP(objectOfInputs);
     }
     solution.vars = [solution.theta, solution.thetaDot];
     animate2D(solution, {varnames: ["θ", "dθ/dt"], IdSuffix: "Phase", title: "Phase plot animation of dθ/dt and θ."});
@@ -318,11 +325,11 @@ function generateAnimations(objectOfInputs=undefined, solution=undefined) {
         var objectOfInputs = readInputs();
     }
     if (solution==undefined) {
-        var solution = solveProblem(RKF45, objectOfInputs);
+        var solution = solveProblemSP(objectOfInputs);
     }
     generateAnimation(objectOfInputs, solution);
     solution.vars = [solution.theta, solution.thetaDot];
-    generatePhaseAnimation(solution);
+    generatePhaseAnimation(objectOfInputs, solution);
 } 
 
 function removeAnimations() {
@@ -335,7 +342,7 @@ function generateTable(objectOfInputs=undefined, solution=undefined) {
         var objectOfInputs = readInputs();
     }
     if (solution==undefined) {
-        var solution = solveProblem(RKF45, objectOfInputs);
+        var solution = solveProblemSP(objectOfInputs);
     }
-    fillTableSP(objectOfInputs, ['θ', 'dθ/dt'], solution)
+    fillTableSP(objectOfInputs, ['θ', 'dθ/dt'], solution);
 }
