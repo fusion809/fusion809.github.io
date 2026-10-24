@@ -175,11 +175,35 @@ function createTOC() {
     addH1ToTOC(tocPanel, tocList, headers);
     addHeadersToTOC(tocList, headers);
     addTablesToTOC(tocList, tables);
-    addContainersToTOC(tocList, containers)
+    addContainersToTOC(tocList, containers);
+}
+
+function numberFiguresAndReferences() {
+    const figures = document.querySelectorAll("figure[id]");
+    const figMap = {};
+
+    figures.forEach((fig, index) => {
+        figMap[fig.id] = index + 1;
+    });
+
+    document.querySelectorAll("a.figref").forEach(link => {
+        const id = link.getAttribute("href")?.replace(/^#/, "");
+        if (id && figMap[id] !== undefined) {
+            link.textContent = figMap[id];
+        }
+    });
+
+    document.querySelectorAll("a.figref-full").forEach(link => {
+        const id = link.getAttribute("href")?.replace(/^#/, "");
+        if (id && figMap[id] !== undefined) {
+            link.textContent = `Figure ${figMap[id]}`;
+        }
+    });
 }
 
 document.addEventListener("DOMContentLoaded", function () {
     createTOC();
+    numberFiguresAndReferences();
     const sectionMap = new Map(); // ID → entry
     const tocLinks = document.querySelectorAll("#toc-list a");
     

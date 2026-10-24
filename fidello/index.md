@@ -3,7 +3,14 @@
 @def tag=["Mathematics", "Physics"]
 @def mintoclevel=1
 
-In this article, I explain to Fidello from Foci's Discord server some prerequisite knowledge he needs to effectively derive the equations of motion for a double rigid pendulum. 
+~~~
+<figure id="dp" style="float: right;">
+<img src="/fidello/Double pendulum.png" width="500px"/>
+<figcaption><a href="/doublePendulum/">Double pendulum animation frame</a>.</figcaption>
+</figure>
+~~~
+In this article, I explain to Fidello from Foci's Discord server some prerequisite knowledge he needs to effectively derive the equations of motion for a double rigid pendulum. In theory, this derivation can be done with Newtonian mechanics with $\textbf{F}=m\mathbf{a}$, but given our second pendulum is in a moving reference frame and Newtonian mechanics does not easily adapt to alternative coordinate systems, like polar coordinates, Lagrangian mechanics is preferable. Lagrangian mechanics also leads nicely into Hamiltonian mechanics and the path integral formulation of quantum mechanics. Figure \figref{dp} shows a frame from the double pendulum animation [this page](/doublePendulum/) does by default.
+
 \toc
 # Partial differentiation
 Partial derivatives are just a straightforward extension of derivatives as you understand them already. The key difference is that they are derivatives of multivariable functions instead of single-variable functions. Further, when you differentiate with respect to one variable, all other variables are kept constant. If you would like to build a graphical image of what the partial derivative is, well recall that the derivative of a single-variable function is just the gradient of that function. Consequently, it is also the gradient of the tangent line to that function. The partial derivative is similar to that. As when we have a function with more than a single independent variable, we have the freedom to choose which variable or variables we wish to determine our function's gradient with respect to. 
@@ -99,13 +106,13 @@ Where $\textbf{F}_j$ represents the vector of the $j$th non-conservative force w
 ## Without air resistance
 
 ~~~
-<figure id="#fig1">
+<figure id="fig1">
 <img src="/fidello/pendulum.svg" width="500px"/>
 <figcaption>Single pendulum.</figcaption>
 </figure>
 ~~~
 
-So to punctuate how one applies Equations \eqref{ELE} and \eqref{ELENCF}, I thought I would give you a nice, simple example: the single pendulum. To apply Equations \eqref{ELE}, we will treat it as a simple pendulum with no friction, a massless rod and no air resistance. The pendulum will consist of a rod with a bob at one end and freely rotating around a central pound. We will define this central point as being the origin in Cartesian coordinates. Say the rod is of fixed length $l$ metres. The pendulum bob will be of mass $m$ kilograms. As you can see in Figure [1](#fig1), we have defined $\theta$ as the angle between the rod and the positive $x$-axis going counter-clockwise. Hence the $x$ and $y$ coordinates of the pendulum bobs are:
+So to punctuate how one applies Equations \eqref{ELE} and \eqref{ELENCF}, I thought I would give you a nice, simple example: the single pendulum. To apply Equations \eqref{ELE}, we will treat it as a simple pendulum with no friction, a massless rod and no air resistance. The pendulum will consist of a rod with a bob at one end and freely rotating around a central pound. We will define this central point as being the origin in Cartesian coordinates. Say the rod is of fixed length $l$ metres. The pendulum bob will be of mass $m$ kilograms. As you can see in Figure \figref{fig1}, we have defined $\theta$ as the angle between the rod and the positive $x$-axis going counter-clockwise. Hence the $x$ and $y$ coordinates of the pendulum bobs are:
 \begin{align}
     x &= l\cos{\theta} \\
     y &= l\sin{\theta}.

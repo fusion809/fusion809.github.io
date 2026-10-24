@@ -26,3 +26,5 @@ For instance:
 -->
 \newcommand{\R}{\mathbb R}
 \newcommand{\scal}[1]{\langle #1 \rangle}
+\newcommand{\figref}[1]{~~~<a class="figref" href="#!#1"></a>~~~}
+\newcommand{\Figref}[1]{~~~<a class="figref-full" href="#!#1"></a>~~~}

@@ -16,6 +16,16 @@ function lx_baz(com, _)
   return uppercase(brace_content)
 end
 
+function lx_figref(com, _)
+  brace_content = strip(Franklin.content(com.braces[1]))
+  return "~~~<a class=\"figref\" href=\"#$brace_content\"></a>~~~"
+end
+
+function lx_Figref(com, _)
+  brace_content = strip(Franklin.content(com.braces[1]))
+  return "~~~<a class=\"figref-full\" href=\"#$brace_content\"></a>~~~"
+end
+
 function add_params_bef(params_val, params_desc, params_list, var_next, var, val, explanation)
   idx = findfirst(==(var_next), params_list);
   insert!(params_val, idx, val);
