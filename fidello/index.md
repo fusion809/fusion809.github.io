@@ -69,9 +69,9 @@ Equation \eqref{heat} therefore essentially says that if we are in a region wher
 
 # Lagrangian mechanics
 Lagrangian mechanics is one of three major formulations of classical mechanics, the others being Newtonian mechanics and Hamiltonian mechanics. Classical mechanics as a whole is a branch of physics most applicable to the situations that humans most often encounter, as it does not account for quantum randomness (hence cannot be applied to very small scales), nor does it account for relativistic effects (which are most relevant when dealing with strong gravitational fields or velocities close to the speed of light). In Lagrangian mechanics, we define a quantity known as the Lagrangian of our physical system:
-\begin{align}
+\begin{align*}
     L &= T - V.
-\end{align}
+\end{align*}
 Where $T$ is kinetic energy and $V$ is potential energy of our entire physical system. It is important to note that only conservative forces contribute to $V$. Lagrangian mechanics **can** account for non-conservative (i.e. dissipative) forces, too, but we will get to how one handles them later. 
 ## Euler-Lagrange equations
 When there are no non-conservative forces, the equations of motion can be derived by first determining our system's Lagrangian and then applying a set of partial differential equations known as the Euler-Lagrange equations to this Lagrangian. The Euler-Lagrange equations are:
@@ -95,70 +95,70 @@ I guess next I should explain how we account for non-conservative forces. Essent
 
 \begin{align}
     Q_i &= \sum_{j=1}^m \textbf{F}_j \cdot \dfrac{\partial \textbf{r}_j}{\partial q_i} \\
-    &= \sum_{j=1}^m \textbf{F}_j \cdot \dfrac{\partial \dot{\textbf{r}}_j}{\partial \dot{q}_i}.
+    &= \sum_{j=1}^m \textbf{F}_j \cdot \dfrac{\partial \dot{\textbf{r}}_j}{\partial \dot{q}_i}.\label{Qi}
 \end{align}
 Where $\textbf{F}_j$ represents the vector of the $j$th non-conservative force we wish to account for in our equations of motion. As you can see by the summation bounds, we have $m$ non-conservative forces we wish to account for. $\textbf{r}_j$ is the position vector for force $j$. $\dot{\textbf{r}}_j$ is the time derivative of the position vector for force $j$. Hence the more generalized form of Equations \eqref{ELE} is:
 \begin{align}
     \hspace{4cm}\dfrac{d}{dt} \dfrac{\partial L}{\partial \dot{q}_i} - \dfrac{\partial L}{\partial q_i} &= \sum_{j=1}^m \textbf{F}_j \cdot \dfrac{\partial \textbf{r}_j}{\partial q_i}, \hspace{2cm} i\in\{1,2,3,...,n\}. \label{ELENCF}
 \end{align}
+The velocity form of Equations \eqref{Qi} can also be used. 
 
 # Single pendulum
-## Without air resistance
-
 ~~~
-<figure id="fig1">
+<figure id="fig1" style="float:right;">
 <img src="/fidello/pendulum.svg" width="500px"/>
 <figcaption>Single pendulum.</figcaption>
 </figure>
 ~~~
-
-So to punctuate how one applies Equations \eqref{ELE} and \eqref{ELENCF}, I thought I would give you a nice, simple example: the single pendulum. To apply Equations \eqref{ELE}, we will treat it as a simple pendulum with no friction, a massless rod and no air resistance. The pendulum will consist of a rod with a bob at one end and freely rotating around a central pound. We will define this central point as being the origin in Cartesian coordinates. Say the rod is of fixed length $l$ metres. The pendulum bob will be of mass $m$ kilograms. As you can see in Figure \figref{fig1}, we have defined $\theta$ as the angle between the rod and the positive $x$-axis going counter-clockwise. Hence the $x$ and $y$ coordinates of the pendulum bobs are:
-\begin{align}
+So to punctuate how one applies Equations \eqref{ELE} and \eqref{ELENCF}, I thought I would give you a nice, simple example: the single pendulum. 
+## Without air resistance
+To apply Equations \eqref{ELE}, we will treat it as a simple pendulum with no friction, a massless rod and no air resistance. The pendulum will consist of a rod with a bob at one end and freely rotating around a central pound. We will define this central point as being the origin in Cartesian coordinates. Say the rod is of fixed length $l$ metres. The pendulum bob will be of mass $m$ kilograms. As you can see in Figure \figref{fig1}, we have defined $\theta$ as the angle between the rod and the positive $x$-axis going counter-clockwise. Hence the $x$ and $y$ coordinates of the pendulum bobs are:
+\begin{align*}
     x &= l\cos{\theta} \\
     y &= l\sin{\theta}.
-\end{align}
+\end{align*}
 Hence: 
-\begin{align}
+\begin{align*}
     \dot{x} &= -l\dot{\theta}\sin{\theta} \\
     \dot{y} &= l\dot{\theta}\cos{\theta}.
-\end{align}
+\end{align*}
 As for velocity squared, it is defined as:
-\begin{align}
+\begin{align*}
     v^2 &= \dot{x}^2+\dot{y}^2 \\
     &= l^2\dot{\theta}^2\sin^2{\theta} + l^2\dot{\theta}^2\cos^2{\theta} \\
     &= l^2\dot{\theta}^2.
-\end{align}
+\end{align*}
 Hence $v=l\dot{\theta}$. The kinetic energy is:
-\begin{align}
+\begin{align*}
     T &= \dfrac{mv^2}{2} \\
     &= \dfrac{ml^2\dot{\theta}^2}{2}.
-\end{align}
+\end{align*}
 As for potential energy, given this bob is moving solely under the force of gravity:
-\begin{align}
+\begin{align*}
     V &= mgy \\
     &= mgl\sin{\theta}.
-\end{align}
+\end{align*}
 Hence:
-\begin{align}
+\begin{align*}
     L &= T - V \\
     &= \dfrac{ml^2\dot{\theta}^2}{2} - mgl\sin{\theta}.
-\end{align}
+\end{align*}
 $\dfrac{\partial L}{\partial \dot{\theta}}$ is hence:
-\begin{align}
+\begin{align*}
     \dfrac{\partial L}{\partial \dot{\theta}} &= ml^2 \dot{\theta}.
-\end{align}
+\end{align*}
 And its time derivative is:
-\begin{align}
+\begin{align*}
     \dfrac{d}{dt}\dfrac{\partial L}{\partial \dot{\theta}} = ml^2 \ddot{\theta}.
-\end{align}
+\end{align*}
 As for the $\dfrac{\partial L}{\partial \theta}$ term it is:
-\begin{align}
+\begin{align*}
     \dfrac{\partial L}{\partial \theta} &= -mgl\cos{\theta}.
-\end{align}
+\end{align*}
 So Equations \eqref{ELE} becomes:
-\begin{align}
+\begin{align*}
     ml^2 \ddot{\theta} + mgl\cos{\theta} &= 0.
-\end{align}
+\end{align*}
 Dividing by $ml^2$ and taking the second term to the right-hand side yields:
 \begin{align}
 \ddot{\theta} &= -\dfrac{g}{l}\cos{\theta}.\label{simppen}
@@ -167,38 +167,38 @@ Technically speaking it is possible to analytically solve Equation \eqref{simppe
 
 ## With air resistance
 For the sake of simplicity, we will only consider the air resistance experienced by the pendulum bob itself, not by the rod. The air resistance force vector for the pendulum bob would be:
-\begin{align}
+\begin{align*}
     \textbf{F}_D &= -\dfrac{\rho C_D A|v|\textbf{v}}{2}.
-\end{align}
+\end{align*}
 Where $\textbf{v}$ is the velocity vector of the bob. It is equal to $(\dot{x}, \dot{y})$.
 Hence:
-\begin{align}
+\begin{align*}
     \textbf{F}_D &= -\dfrac{\rho C_D Al|\dot{\theta}|}{2}(\dot{x}, \dot{y}) \\
     &= -\dfrac{\rho C_D Al|\dot{\theta}|}{2} (-l\dot{\theta}\sin{\theta}, l\dot{\theta}\cos{\theta}) \\
     &= \dfrac{\rho C_D Al^2|\dot{\theta}|\dot{\theta}}{2} (\sin{\theta}, -\cos{\theta}).
-\end{align}
+\end{align*}
 To find the generalized force term, we need to find $\dfrac{\partial \textbf{r}}{\partial \theta}$:
-\begin{align}
+\begin{align*}
     \dfrac{\partial \textbf{r}}{\partial \theta} &= (-l\sin{\theta}, l\cos{\theta}).
-\end{align}
+\end{align*}
 Hence:
-\begin{align}
+\begin{align*}
     Q_{\theta} &= \dfrac{\rho C_D Al^2|\dot{\theta}|\dot{\theta}}{2} (\sin{\theta}, -\cos{\theta}) \cdot (-l\sin{\theta}, l\cos{\theta}) \\
     &= \dfrac{\rho C_D Al^2|\dot{\theta}|\dot{\theta}}{2}(-l\sin^2{\theta}-l\cos^2{\theta}) \\
     &= -\dfrac{\rho C_D Al^3|\dot{\theta}|\dot{\theta}}{2}.
-\end{align}
+\end{align*}
 Hence Equations \eqref{ELENCF} become:
-\begin{align}
+\begin{align*}
     ml^2 \ddot{\theta} + mgl\cos{\theta} &= -\dfrac{\rho C_D Al^3|\dot{\theta}|\dot{\theta}}{2}.
-\end{align}
+\end{align*}
 Dividing by $ml^2$ yields:
-\begin{align}
+\begin{align*}
     \ddot{\theta} + \dfrac{g}{l}\cos{\theta} &= -\dfrac{\rho C_D Al|\dot{\theta}|\dot{\theta}}{2m}.
-\end{align}
+\end{align*}
 Subtracting $\dfrac{g}{l}\cos{\theta}$ from both sides yields:
-\begin{align}
+\begin{align*}
     \ddot{\theta} &= -\dfrac{g}{l}\cos{\theta} -\dfrac{\rho C_D Al|\dot{\theta}|\dot{\theta}}{2m}.
-\end{align}
+\end{align*}
 This equation cannot be analytically solved, so numerical solutions are necessary. I numerically solve an even more complex version of the single pendulum equation [here](/singlePendulum/).
 
 If you would like to see my derivation of the double rigid pendulum equations, it is [here](/doublePendulum/derivation/).
