@@ -1,0 +1,8 @@
+The left-hand side of Equations \eqref{ELE} can also be expressed in terms of the functional derivative of $S$ with respect to $q_i$. Namely:
+\begin{align*}
+\dfrac{\delta S}{\delta q_i} &= \dfrac{\partial L}{\partial q_i} - \dfrac{d}{dt} \dfrac{\partial L}{\partial \dot{q}_i}.
+\end{align*}
+As you can see, this is merely the negative of the left-hand side of Equations \eqref{ELE}. Hence Equations \eqref{ELE} can be written as:
+\begin{align*}
+\dfrac{\delta S}{\delta q_i} &= 0.
+\end{align*}

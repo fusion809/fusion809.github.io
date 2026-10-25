@@ -92,13 +92,20 @@ The derivation of Equations \eqref{ELE} requires knowledge of a field of mathema
 \end{align}
 One interesting property of the action is that nature consistently sets it to its stationary point, and this is regardless of context. Regardless of whether we're examining the motion of planets with Newton's second law, or studying the behaviour of black holes with general relativity, or checking out the behaviour of subatomic particles, there is always an action that is at its stationary point. Traditionally, this stationary point is typically thought of as a minimum (hence why this is also known as the principle of **least** action), but strictly speaking it is not always a minimum. When you use the calculus of variations to find the stationary point of Equation \eqref{act}, Equations \eqref{ELE} pop out. 
 
+## Terminology
+In Equation \eqref{ELE}:
+\begin{align*}
+p_i =\dfrac{\partial L}{\partial \dot{q}_i}
+\end{align*}
+is known as the canonical (or generalized) momentum. This is not that relevant at this stage of your learning, but if you later learn Hamiltonian mechanics, it becomes very relevant. 
+
 ## Non-conservative forces
 I guess next I should explain how we account for non-conservative forces. Essentially we replace the $0$ in Equations \eqref{ELE} with:
 
 \begin{align}
     Q_i &= \sum_{j=1}^m \textbf{F}_j \cdot \dfrac{\partial \textbf{r}_j}{\partial q_i}. \label{Qir}
 \end{align}
-Where $\textbf{F}_j$ represents the vector of the $j$th non-conservative force we wish to account for in our equations of motion. As you can see by the summation bounds, we have $m$ non-conservative forces we wish to account for. $\textbf{r}_j$ is the position vector for force $j$. Alternatively, to calculate $Q_i$ we can use velocities instead of positions:
+Where $\textbf{F}_j$ represents the vector of the $j$th non-conservative force we wish to account for in our equations of motion. As you can see by the summation bounds, we have $m$ non-conservative forces we wish to account for. $\textbf{r}_j$ is the position vector for force $j$. $\textbf{F}_j\cdot\dfrac{\partial \textbf{r}_j}{\partial q_i}$ denotes the dot product between $\textbf{F}_j$ and $\dfrac{\partial \textbf{r}_j}{\partial q_i}$. Alternatively, to calculate $Q_i$ we can use velocities instead of positions:
 \begin{align}
     Q_i &= \sum_{j=1}^m \textbf{F}_j \cdot \dfrac{\partial \dot{\textbf{r}}_j}{\partial \dot{q}_i}.\label{Qirdot}
 \end{align}
