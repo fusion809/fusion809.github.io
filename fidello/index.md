@@ -90,7 +90,7 @@ The derivation of Equations \eqref{ELE} requires knowledge of a field of mathema
 \begin{align}
     S &= \int_{t_0}^{t_f} L(q_i, \dot{q}_i, t) dt. \label{act}
 \end{align}
-One interesting property of the action is that nature consistently sets it to its stationary point, and this is regardless of context. Regardless of whether we're examining the motion of planets with Newton's second law, or studying the behaviour of black holes with general relativity, or checking out the behaviour of subatomic particles, there is always an action that is at its stationary point. Traditionally, this stationary point is typically thought of as a minimum (hence why this is also known as the principle of **least** action), but strictly speaking it is not always a minimum. When you use the calculus of variations to find the minimum of Equation \eqref{act}, Equations \eqref{ELE} pops out. 
+One interesting property of the action is that nature consistently sets it to its stationary point, and this is regardless of context. Regardless of whether we're examining the motion of planets with Newton's second law, or studying the behaviour of black holes with general relativity, or checking out the behaviour of subatomic particles, there is always an action that is at its stationary point. Traditionally, this stationary point is typically thought of as a minimum (hence why this is also known as the principle of **least** action), but strictly speaking it is not always a minimum. When you use the calculus of variations to find the stationary point of Equation \eqref{act}, Equations \eqref{ELE} pop out. 
 
 ## Non-conservative forces
 I guess next I should explain how we account for non-conservative forces. Essentially we replace the $0$ in Equations \eqref{ELE} with:
