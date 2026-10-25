@@ -179,7 +179,8 @@ Hence:
 \end{align*}
 To find the generalized force term, we need to find $\dfrac{\partial \textbf{r}}{\partial \theta}$:
 \begin{align*}
-    \dfrac{\partial \textbf{r}}{\partial \theta} &= (-l\sin{\theta}, l\cos{\theta}).
+    \dfrac{\partial \textbf{r}}{\partial \theta} &= \left(\dfrac{\partial x}{\partial \theta}, \dfrac{\partial y}{\partial \theta}\right) \\
+    &= (-l\sin{\theta}, l\cos{\theta}).
 \end{align*}
 Hence:
 \begin{align*}
