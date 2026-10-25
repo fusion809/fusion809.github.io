@@ -184,7 +184,8 @@ To find the generalized force term, we need to find $\dfrac{\partial \textbf{r}}
 \end{align*}
 Hence:
 \begin{align*}
-    Q_{\theta} &= \dfrac{\rho C_D Al^2|\dot{\theta}|\dot{\theta}}{2} (\sin{\theta}, -\cos{\theta}) \cdot (-l\sin{\theta}, l\cos{\theta}) \\
+    Q_{\theta} &= \textbf{F}_D \cdot \dfrac{\partial \textbf{r}}{\partial \theta} \\
+    &= \dfrac{\rho C_D Al^2|\dot{\theta}|\dot{\theta}}{2} (\sin{\theta}, -\cos{\theta}) \cdot (-l\sin{\theta}, l\cos{\theta}) \\
     &= \dfrac{\rho C_D Al^2|\dot{\theta}|\dot{\theta}}{2}(-l\sin^2{\theta}-l\cos^2{\theta}) \\
     &= -\dfrac{\rho C_D Al^3|\dot{\theta}|\dot{\theta}}{2}.
 \end{align*}
