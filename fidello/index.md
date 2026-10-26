@@ -74,7 +74,7 @@ Lagrangian mechanics is one of three major formulations of classical mechanics, 
 \end{align*}
 Where $T$ is kinetic energy and $V$ is potential energy of our entire physical system. It is important to note that only conservative forces contribute to $V$. Lagrangian mechanics **can** account for non-conservative (i.e. dissipative) forces, too, but we will get to how one handles them later. 
 
-The distinction between conservative and non-conservative forces is whether the energy they subtract from kinetic energy is added to potential energy. If all losses in kinetic energy caused by the force are balanced by an increase in potential energy, then the force is conservative. Otherwise, it is non-conservative. For instance, air resistance is non-conservative because it simply causes your system to lose kinetic energy &mdash; it does not cause any corresponding gain in potential energy.
+The distinction between conservative and non-conservative forces is whether they change the net energy of your system. For instance, gravity doesn't because any increase in kinetic energy it causes is balanced by a corresponding reduction in potential energy. Likewise, any loss of kinetic energy caused by gravity is balanced by an increase in potential energy. Consequently, it is a conservative force. Air resistance, however, is a non-conservative force because the losses it causes in kinetic energy are not balanced by increases in potential energy. 
 ## Euler-Lagrange equations
 When there are no non-conservative forces, the equations of motion can be derived by first determining our system's Lagrangian and then applying a set of partial differential equations known as the Euler-Lagrange equations to this Lagrangian. The Euler-Lagrange equations are:
 \begin{align}
