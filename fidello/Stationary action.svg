@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="172.27733mm"
-   height="171.38788mm"
-   viewBox="0 0 172.27733 171.38788"
+   width="171.60783mm"
+   height="172.36314mm"
+   viewBox="0 0 171.60784 172.36315"
    version="1.1"
    id="svg1"
    inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
@@ -24,8 +24,8 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      inkscape:zoom="0.89089842"
-     inkscape:cx="262.65621"
-     inkscape:cy="279.49314"
+     inkscape:cx="723.98826"
+     inkscape:cy="379.3923"
      inkscape:window-width="1920"
      inkscape:window-height="1080"
      inkscape:window-x="0"
@@ -77,7 +77,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-18.592449,-37.175703)">
+     transform="translate(-18.79213,-36.487339)">
     <path
        style="fill:#000000;stroke:#000000;stroke-width:1;marker-end:url(#Triangle)"
        d="m 25.540697,200.16779 c 0,-149.680367 0,-150.274335 0,-150.274335"
@@ -101,18 +101,20 @@
     <text
        xml:space="preserve"
        style="font-size:10.5833px;font-family:'Liberation Serif';-inkscape-font-specification:'Liberation Serif';writing-mode:lr-tb;direction:ltr;fill:#000000;stroke:#000000;stroke-width:1"
-       x="62.663799"
-       y="61.475864"
+       x="54.051239"
+       y="60.584911"
        id="text6"><tspan
          sodipodi:role="line"
          id="tspan6"
-         style="stroke-width:1"
-         x="62.663799"
-         y="61.475864"><tspan
-   style="font-weight:bold"
-   id="tspan8">q</tspan>(t<tspan
-   style="font-size:65%;baseline-shift:sub"
-   id="tspan7">0</tspan>)</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'NotoSansM Nerd Font';-inkscape-font-specification:'NotoSansM Nerd Font Bold';stroke-width:1"
+         x="54.051239"
+         y="60.584911">q<tspan
+   style="font-weight:normal"
+   id="tspan80">(t</tspan><tspan
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:65%;font-family:'NotoSansM Nerd Font';-inkscape-font-specification:'NotoSansM Nerd Font Bold';baseline-shift:sub"
+   id="tspan7">0</tspan><tspan
+   style="font-weight:normal"
+   id="tspan81">)</tspan></tspan></text>
     <text
        xml:space="preserve"
        style="font-size:10.5833px;font-family:'Liberation Serif';-inkscape-font-specification:'Liberation Serif';writing-mode:lr-tb;direction:ltr;fill:#000000;stroke:#000000;stroke-width:1"
@@ -121,23 +123,27 @@
        id="text6-7"><tspan
          sodipodi:role="line"
          id="tspan6-0"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Liberation Serif';-inkscape-font-specification:'Liberation Serif Bold';stroke-width:1"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'NotoSansM Nerd Font';-inkscape-font-specification:'NotoSansM Nerd Font Bold';stroke-width:1"
          x="140.64076"
-         y="158.18578">q(t<tspan
-   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:65%;font-family:'Liberation Serif';-inkscape-font-specification:'Liberation Serif Bold';baseline-shift:sub"
-   id="tspan9">f</tspan>)</tspan></text>
+         y="158.18578">q<tspan
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'NotoSansM Nerd Font';-inkscape-font-specification:'NotoSansM Nerd Font'"
+   id="tspan78">(t</tspan><tspan
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:65%;font-family:'NotoSansM Nerd Font';-inkscape-font-specification:'NotoSansM Nerd Font';baseline-shift:sub"
+   id="tspan9">f</tspan><tspan
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'NotoSansM Nerd Font';-inkscape-font-specification:'NotoSansM Nerd Font'"
+   id="tspan79">)</tspan></tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.5833px;font-family:'Liberation Serif';-inkscape-font-specification:'Liberation Serif Bold';writing-mode:lr-tb;direction:ltr;fill:#000000;stroke:#000000;stroke-width:1"
-       x="182.05171"
+       x="179.97282"
        y="205.8105"
        id="text10"><tspan
          sodipodi:role="line"
          id="tspan10"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Liberation Serif';-inkscape-font-specification:'Liberation Serif';stroke-width:1"
-         x="182.05171"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'NotoSansM Nerd Font';-inkscape-font-specification:'NotoSansM Nerd Font';stroke-width:1"
+         x="179.97282"
          y="205.8105">q<tspan
-   style="font-size:65%;baseline-shift:sub"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:65%;font-family:'NotoSansM Nerd Font';-inkscape-font-specification:'NotoSansM Nerd Font';baseline-shift:sub"
    id="tspan11">1</tspan></tspan></text>
     <text
        xml:space="preserve"
@@ -153,10 +159,10 @@
        id="text12"><tspan
          sodipodi:role="line"
          id="tspan12"
-         style="stroke-width:1"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'NotoSansM Nerd Font';-inkscape-font-specification:'NotoSansM Nerd Font';stroke-width:1"
          x="18.710045"
          y="42.765816">q<tspan
-   style="font-size:65%;baseline-shift:sub"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:65%;font-family:'NotoSansM Nerd Font';-inkscape-font-specification:'NotoSansM Nerd Font';baseline-shift:sub"
    id="tspan13">2</tspan></tspan></text>
     <path
        style="fill:#000000;stroke:#000000;stroke-width:1"
