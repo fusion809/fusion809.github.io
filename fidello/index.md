@@ -32,7 +32,7 @@ Say $f(x,y)=2x^2y$. Then $\dfrac{\partial f}{\partial x}$ would be:
 \begin{align*}
     \dfrac{\partial f}{\partial x} &= \lim_{h\rightarrow 0} \dfrac{2(x+h)^2y - 2x^2y}{h}.
 \end{align*}
-Did you notice that $2y$ is a common factor of both terms in our numerator? Let us take it out of our limit altogether, as it is effectively a constant (it doesn't depend on $h$, after all). 
+Did you notice that $2y$ is a common factor of both terms in our numerator? Let us take it out of our limit altogether, as it is effectively a constant (it does not depend on $h$, after all). 
 
 \begin{align*}
 \dfrac{\partial f}{\partial x} &= 2y\lim_{h\rightarrow 0} \dfrac{(x+h)^2-x^2}{h}
@@ -50,7 +50,7 @@ Hence:
 &= 2y \cdot 2x \\
 &= 4xy.
 \end{align*}
-Okay, so that is the long way of finding out partial derivatives. Fortunately, there is also a faster way. Which is that we apply normal differentiation rules, but any variable we are not differentiating with respect to is treated like it's a constant. So for $f(x,y)=2x^2y$ we would treat the $2y$ as just a constant number and only differentiate the $x^2$. Applying the power rule, we see that $\dfrac{d}{dx}x^2 = 2x$ and hence:
+Okay, so that is the long way of finding out partial derivatives. Fortunately, there is also a faster way. Which is that we apply normal differentiation rules, but any variable we are not differentiating with respect to is treated like it is a constant. So for $f(x,y)=2x^2y$ we would treat the $2y$ as just a constant number and only differentiate the $x^2$. Applying the power rule, we see that $\dfrac{d}{dx}x^2 = 2x$ and hence:
 \begin{align*}
     \dfrac{\partial f}{\partial x} &= 2y \cdot 2x \\
     &= 4xy.
@@ -65,7 +65,7 @@ Where $u(x,t)$ is a function describing the temperature of the one-dimensional o
 
 Do you remember from your maths class that the second derivative of a function is its concavity? So if the second derivative is negative, that means our function is concave down &mdash; it is leading to some sort of maximum. Whereas if it is positive, the function is concave up, which means it is going up from some minimum. We have the second derivative with respect to space on the right-hand side of Equation \eqref{heat}, so it essentially returns positive if we have a localized colder area and neighbouring hotter points. Whereas it returns negative if we have a really hot point surrounded by cooler points. The left-hand side of Equation \eqref{heat}, however, represents the rate of change of our function in time.
 
-Equation \eqref{heat} therefore essentially says that if we are in a region where there's a really cold point surrounded by hotter points, the temperature will increase in the short-term for that colder point. Whereas the equation says that the temperature will decrease in a hotter region surrounded by colder points. If you've ever brought something hot out of the oven, or put something of room temperature into the fridge or freezer, this should make intuitive sense to you. 
+Equation \eqref{heat} therefore essentially says that if we are in a region where there is a really cold point surrounded by hotter points, the temperature will increase in the short-term for that colder point. Whereas the equation says that the temperature will decrease in a hotter region surrounded by colder points. If you've ever brought something hot out of the oven, or put something of room temperature into the fridge or freezer, this should make intuitive sense to you. 
 
 # Lagrangian mechanics
 Lagrangian mechanics is one of three major formulations of classical mechanics with the others being Newtonian mechanics and Hamiltonian mechanics. Classical mechanics as a whole is a branch of physics most applicable to the situations that humans most often encounter, as it does not account for quantum randomness (hence cannot be applied to very small scales), nor does it account for relativistic effects (which are most relevant when dealing with strong gravitational fields or velocities close to the speed of light). In Lagrangian mechanics, we define a quantity known as the Lagrangian of our physical system:
@@ -74,7 +74,7 @@ Lagrangian mechanics is one of three major formulations of classical mechanics w
 \end{align*}
 Where $T$ is kinetic energy and $V$ is potential energy of our entire physical system. It is important to note that only conservative forces contribute to $V$. Lagrangian mechanics **can** account for non-conservative (i.e. dissipative) forces, too, but we will get to how one handles them later. 
 
-The distinction between conservative and non-conservative forces is whether they change the net energy of your system. For instance, gravity doesn't because any increase in kinetic energy it causes is balanced by a corresponding reduction in potential energy. Likewise, any loss of kinetic energy caused by gravity is balanced by an increase in potential energy. Consequently, it is a conservative force. Air resistance, however, is a non-conservative force because the losses it causes in kinetic energy are not balanced by increases in potential energy. 
+The distinction between conservative and non-conservative forces is whether they change the net energy of your system. For instance, gravity does not because any increase in kinetic energy it causes is balanced by a corresponding reduction in potential energy. Likewise, any loss of kinetic energy caused by gravity is balanced by an increase in potential energy. Consequently, it is a conservative force. Air resistance, however, is a non-conservative force because the losses it causes in kinetic energy are not balanced by increases in potential energy. 
 ## Euler-Lagrange equations
 When there are no non-conservative forces, the equations of motion can be derived by first determining our system's Lagrangian and then applying a set of partial differential equations known as the Euler-Lagrange equations to this Lagrangian. The Euler-Lagrange equations are:
 \begin{align}
@@ -86,11 +86,47 @@ Next, I should explain what "degrees of freedom" are. They are also known as gen
 
 Likewise, when we study the simple pendulum &mdash; which is a problem in which we have an idealized rigid pendulum whose rod has zero mass, zero friction and for which there is absolutely no air resistance &mdash; typically we only consider a single degree of freedom, which is the angle our pendulum's rod makes with either the negative $y$ axis or the positive $x$ axis, depending on the preferences of whoever is setting up the problem. 
 ## Derivation of Equations \eqref{ELE}
-The derivation of Equations \eqref{ELE} requires knowledge of a field of mathematics known as the calculus of variations as well as a physics principle known as the stationary action principle. If you are interested in learning more, I'd suggest you check out Veritasium's video on this topic ([https://www.youtube.com/watch?v=Q10_srZ-pbs](https://www.youtube.com/watch?v=Q10_srZ-pbs)). In short, I will say that there's a quantity known as the action, which is denoted as $S$, that is defined as:
+~~~
+<figure id="stationary-action" style="float: right;">
+<img src="/fidello/Stationary%20action.svg" width="400px"/>
+<figcaption>Some of the paths a system could take.</figcaption>
+</figure>
+~~~
+The derivation of Equations \eqref{ELE} requires knowledge of a field of mathematics known as the calculus of variations as well as a physics principle known as the stationary action principle. If you are interested in learning more, I would suggest you check out Veritasium's video on this topic ([https://www.youtube.com/watch?v=Q10_srZ-pbs](https://www.youtube.com/watch?v=Q10_srZ-pbs)). 
+
+There is a quantity known as the action, which is denoted as $S$, that is defined as:
 \begin{align}
     S &= \int_{t_0}^{t_f} L(q_i, \dot{q}_i, t) dt. \label{act}
 \end{align}
-One interesting property of the action is that nature consistently sets it to its stationary point, and this is regardless of context. Regardless of whether we're examining the motion of planets with Newton's second law, or studying the behaviour of black holes with general relativity, or checking out the behaviour of subatomic particles, there is always an action that is at its stationary point. Traditionally, this stationary point is typically thought of as a minimum (hence why this is also known as the principle of **least** action), but strictly speaking it is not always a minimum. When you use the calculus of variations to find the stationary point of Equation \eqref{act}, Equations \eqref{ELE} pop out. 
+
+One interesting property of the action is that nature consistently sets it to its stationary point, and this is regardless of context. Regardless of whether we are examining the motion of planets with Newton's second law, or studying the behaviour of black holes with general relativity, or checking out the behaviour of subatomic particles, there is always an action that is at its stationary point. Traditionally, this stationary point is typically thought of as a minimum (hence why this is also known as the principle of **least** action), but strictly speaking it is not always a minimum. When you use the calculus of variations to find the stationary point of Equation \eqref{act}, Equations \eqref{ELE} pop out. 
+
+I will also provide you my own derivation of Equations \eqref{ELE} using the principle of stationary action. Of all the paths that an object could explore, the one that it actually explores is the one that sets the action to its stationary point. Figure \figref{stationary-action} provides some example paths that we examine when applying the principle of stationary action. In the terminology of the calculus of variations, we can express the fact the action is at its stationary point as:
+\begin{align}
+\delta S &= 0.\label{deltaS}
+\end{align}
+This is analogous to saying, in regular calculus, that our function's first derivative is zero. 
+
+Say we add a group of functions $\delta q_i$ to $q_i$, adjusting the path our object takes. Crucially, however, the end times of our path will be unchanged. Then the action becomes (which we will denote as $S'$ where $'$ here refers to a transformation, not a derivative):
+\begin{align}
+S' &= \int_{t_0}^{t_f} L(q_i+\delta q_i, \dot{q}_i+\delta \dot{q}_i, t) dt \\
+&\approx \int_{t_0}^{t_f} L(q_i, \dot{q}_i, t) + \sum_{i=1}^n\dfrac{\partial L}{\partial q_i} \delta q_i + \dfrac{\partial L}{\partial \dot{q}_i}\delta \dot{q}_i dt.
+\end{align}
+
+Next we shall apply integration by parts to $\dfrac{\partial L}{\partial \dot{q}_i}\delta \dot{q}_i$:
+\begin{align}
+S' &\approx \int_{t_0}^{t_f} L(q_i, \dot{q}_i, t) + \sum_{i=1}^n\dfrac{\partial L}{\partial q_i} \delta q_i dt + \left[\sum_{i=1}^n\dfrac{\partial L}{\partial \dot{q}_i}\delta q_i\right]_{t_0}^{t_f} - \int_{t_0}^{t_f} \sum_{i=1}^n\dfrac{d}{dt} \dfrac{\partial L}{\partial \dot{q}_i}\delta q_i dt.
+\end{align}
+At the end points of our path, $\delta q_i$ should be zero, as the endpoints are fixed. Hence the term $\left[\dfrac{\partial L}{\partial \dot{q}_i}\delta q_i\right]_{t_0}^{t_f}$ should evaluate to zero. Our expression then simplifies to:
+\begin{align}
+S' &\approx \int_{t_0}^{t_f} L(q_i, \dot{q}_i, t) + \sum_{i=1}^n\dfrac{\partial L}{\partial q_i} \delta q_i dt + \left[\sum_{i=1}^n\dfrac{\partial L}{\partial \dot{q}_i}\delta q_i\right]_{t_0}^{t_f} - \int_{t_0}^{t_f} \sum_{i=1}^n\dfrac{d}{dt} \dfrac{\partial L}{\partial \dot{q}_i}\delta q_i dt \\
+&\approx \int_{t_0}^{t_f} L(q_i, \dot{q}_i, t) + \sum_{i=1}^n\delta q_i \left(\dfrac{\partial L}{\partial q_i} - \dfrac{d}{dt} \dfrac{\partial L}{\partial \dot{q}_i}\right) dt.
+\end{align}
+We will denote this first order approximation to change in $S$ as $\delta S$ and it is:
+\begin{align}
+\delta S &= \int_{t_0}^{t_f} \sum_{i=1}^n\delta q_i \left(\dfrac{\partial L}{\partial q_i} - \dfrac{d}{dt} \dfrac{\partial L}{\partial \dot{q}_i}\right) dt.
+\end{align}
+This will be zero irrespective of $\delta q_i$ if and only if Equations \eqref{ELE} hold.
 
 ## Terminology
 In Equation \eqref{ELE}:
