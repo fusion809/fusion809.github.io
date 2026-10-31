@@ -267,7 +267,7 @@ and
 \dot{\theta} &= \dfrac{\partial H}{\partial p_{\theta}} \nonumber\\
 &= \dfrac{p_{\theta}}{ml^2}.\label{thetadotsimp}
 \end{align}
-As we can see, Hamiltonian mechanics yields a series of first-order ordinary differential equations (ODEs) instead of second-order ODEs, which Lagrangian mechanics and Newtonian mechanics yield. That being said, if you rewrite Equation \eqref{thetadotsimp} to make $p_{\theta}$ its subject and substitute it into Equation \eqref{pdotthetasimp} and rearrange it to make $\ddot{\theta}$ the subject, you will obtain Equation \eqref{simppen}.
+As we can see, Hamiltonian mechanics yields a series of first-order ordinary differential equations (ODEs) instead of second-order ODEs. Which is important because Lagrangian mechanics and Newtonian mechanics both yield second-order ODE systems. That being said, if you rewrite Equation \eqref{thetadotsimp} to make $p_{\theta}$ its subject and substitute it into Equation \eqref{pdotthetasimp} and rearrange it to make $\ddot{\theta}$ the subject, you will obtain Equation \eqref{simppen}.
 
 ## Poisson brackets
 Poisson brackets provide us an elegant and powerful way to rewrite Hamilton's equations. If we have $n$ degrees of freedom and two functions $f$ and $g$ that depend on $p_i$ and $q_i$:[^1] 
