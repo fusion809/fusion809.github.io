@@ -366,11 +366,11 @@ $\epsilon$ should not matter, so we will divide both sides by it:
 \begin{align}
 \dfrac{d}{dt} \sum_{i=1}^n p_i \dot{q}_i &= 0.
 \end{align}
-$L$ doesn not change, so $\dfrac{dL}{dt}=0$, too. Hence:
+$L$ does not change, so $\dfrac{dL}{dt}=0$, too. Hence:
 \begin{align}
 \dfrac{d}{dt} \left(\sum_{i=1}^n p_i \dot{q}_i - L\right) &= 0.\label{constE}
 \end{align}
-Interestingly, $\displaystyle\sum_{i=1}^n p_i \dot{q}_i$ is twice the kinetic energy of our system. Hence if we substitute Equation \eqref{L} into Equation \eqref{constE} we obtain:
+Interestingly, $\displaystyle\sum_{i=1}^n p_i \dot{q}_i$ is twice the kinetic energy of our system. Hence if we substitute Equation \eqref{L} into Equation \eqref{constE}, we obtain:
 \begin{align}
 \dfrac{d}{dt} \left(2T-(T-V)\right) &= 0 \nonumber\\
 \dfrac{d}{dt} \left(T+V\right) &= 0.\label{constE2}
