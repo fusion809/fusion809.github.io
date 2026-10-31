@@ -97,7 +97,7 @@ In Equation \eqref{ELE}:
 \begin{align}
 p_i =\dfrac{\partial L}{\partial \dot{q}_i}\label{canmom}
 \end{align}
-is known as the canonical (or generalized) momentum. This is not that relevant at this stage of your learning, but if you later learn Hamiltonian mechanics, it becomes very relevant. 
+is known as the canonical (or generalized) momentum. It becomes especially relevant later when we cover Hamiltonian mechanics.
 
 ## Non-conservative forces
 I guess next I should explain how we account for non-conservative forces. Essentially we replace the $0$ in Equations \eqref{ELE} with:
@@ -343,7 +343,7 @@ Interestingly, the right-hand side is equal to the Poisson bracket of $f$ with $
 Hence commuting with the Hamiltonian under the Poisson bracket is a sufficient condition for a quantity that does not explicitly depend on time to have a zero time derivative and hence be conserved. 
 
 # Noether's theorem
-Noether's theorem essentially states that for every continuous symmetry in the Lagrangian, there is a corresponding conservation law. For instance, time translation symmetry of the Lagrangian yields the conservation of energy. We will assume our Lagrangian does not explicitly depend on $t$. That is, $t$ itself does not appear directly in our Lagrangian. The only time dependence $L$ has on $t$ is through the dependence of $q_i$ and $\dot{q}_i$ on time. If the Lagrangian did explicitly depend on time, we would expect it not to have time translation symmetry. Say we increase time according to the transformation: $t\rightarrow t+\epsilon$. 
+Noether's theorem essentially states that for every continuous symmetry in the Lagrangian, there is a corresponding conservation law. For instance, time translation symmetry of the Lagrangian yields the conservation of energy. To show this, we will assume our Lagrangian does not explicitly depend on $t$. That is, $t$ itself does not appear directly in our Lagrangian. The only time dependence $L$ has on $t$ is through the dependence of $q_i$ and $\dot{q}_i$ on time. If the Lagrangian did explicitly depend on time, we would expect it not to have time translation symmetry. Say we increase time according to the transformation: $t\rightarrow t+\epsilon$. 
 
 \begin{align}
 L(q_i(t+\epsilon), \dot{q}_i(t+\epsilon)) &\approx L(q_i(t), \dot{q}_i(t)) + \dfrac{dL}{dt} \epsilon \\
@@ -357,11 +357,11 @@ We will call the left-hand side of Equation \eqref{diffL} $\Delta L$, hence Equa
 \begin{align}
 \Delta L &\approx \sum_{i=1}^n \dfrac{\partial L}{\partial q_i} \dfrac{dq_i}{dt} \epsilon + \dfrac{\partial L}{\partial \dot{q}_i} \dfrac{d\dot{q}_i}{dt} \epsilon. \label{DeltaL1}
 \end{align}
-The Euler-Lagrange equations yield that:
+Rearranging Equations \eqref{ELE} yields that:
 \begin{align}
 \dfrac{\partial L}{\partial q_i} = \dfrac{d}{dt}\left(\dfrac{\partial L}{\partial \dot{q}_i}\right). \label{ELEnh}
 \end{align}
-If you are wondering what about if we have non-conservative forces? Would that not mean Equations \eqref{ELEnh} would not hold as there would be a generalized force term? Yes and in that event the Lagrangian would indeed change in time and conservation of energy would not hold, as our system would be losing energy to those non-conservative forces. 
+If you are wondering what about if we have non-conservative forces? Would that not mean Equations \eqref{ELEnh} would not hold as there would be a missing generalized force term? Yes and in that event the Lagrangian would indeed change in time and conservation of energy would not hold, as our system would be losing energy to those non-conservative forces. 
 
 Substituting Equations \eqref{ELEnh} into Equation \eqref{DeltaL1} yields:
 \begin{align}
@@ -369,22 +369,22 @@ Substituting Equations \eqref{ELEnh} into Equation \eqref{DeltaL1} yields:
 \end{align}
 Substituting Equations \eqref{canmom} into Equation \eqref{DeltaL2} yields:
 \begin{align}
-\Delta L &\approx \epsilon\sum_{i=1}^n \left(\dfrac{dp_i}{dt} \dot{q}_i + p_i \ddot{q}_i\right)\\
+\Delta L &\approx \epsilon\sum_{i=1}^n \left(\dfrac{dp_i}{dt} \dot{q}_i + p_i \ddot{q}_i\right)\nonumber\\
 &= \epsilon\sum_{i=1}^n \left(\dot{p}_i \dot{q}_i + p_i \ddot{q}_i\right). \label{DeltaL3}
 \end{align}
 We can rewrite the bracketed expression on the right-hand side of Equation \eqref{DeltaL3} using the product rule of differentiation as:
-\begin{align}
+\begin{align*}
 \Delta L &\approx \epsilon\sum_{i=1}^n \dfrac{d}{dt}\left(p_i \dot{q}_i\right) \\
 &= \epsilon\dfrac{d}{dt}\sum_{i=1}^n p_i \dot{q}_i.
-\end{align}
-Hence if $L$ does not change in time, we get:
+\end{align*}
+If $L$ does not change in time, $\Delta L=0$, and hence:
 \begin{align}
-\epsilon \dfrac{d}{dt} \sum_{i=1}^n p_i \dot{q}_i &= 0.
+\epsilon \dfrac{d}{dt} \sum_{i=1}^n p_i \dot{q}_i &= 0. \label{epsdTdt}
 \end{align}
-Dividing both sides by $\epsilon$ yields:
-\begin{align}
+Dividing both sides of Equations \eqref{epsdTdt} by $\epsilon$ yields:
+\begin{align*}
 \dfrac{d}{dt} \sum_{i=1}^n p_i \dot{q}_i &= 0.
-\end{align}
+\end{align*}
 $L$ does not change, so $\dfrac{dL}{dt}=0$, too. Hence:
 \begin{align}
 \dfrac{d}{dt} \left(\sum_{i=1}^n p_i \dot{q}_i - L\right) &= 0.\label{constE}
