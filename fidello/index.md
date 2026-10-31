@@ -377,7 +377,7 @@ Hence if $L$ does not change in time, we get:
 \begin{align}
 \epsilon \dfrac{d}{dt} \sum_{i=1}^n p_i \dot{q}_i &= 0.
 \end{align}
-$\epsilon$ should not matter, so we will divide both sides by it:
+Dividing both sides by $\epsilon$ yields:
 \begin{align}
 \dfrac{d}{dt} \sum_{i=1}^n p_i \dot{q}_i &= 0.
 \end{align}
