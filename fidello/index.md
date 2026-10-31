@@ -177,6 +177,8 @@ Dividing by $ml^2$ and taking the second term to the right-hand side yields:
 \begin{align}
 \ddot{\theta} &= -\dfrac{g}{l}\cos{\theta}.\label{simppen}
 \end{align}
+Equation \eqref{simppen} has, as its highest order derivative, a second-order derivative. It also only involves ordinary derivatives (not partial derivatives). Hence it is a second-order ordinary differential equation (ODE). Second-order ODEs are typically obtained in both Newtonian and Lagrangian mechanics. The number of second-order ODEs obtained for a given system depends on the number of degrees of freedom of the system. 
+
 Technically speaking it is possible to analytically solve Equation \eqref{simppen}, but it requires the use of non-standard functions called elliptic integrals. If you would like to check out numerical solutions to this equation, see [this page](/simplePendulum/woErrorAnalysis).
 
 ## With air resistance
@@ -229,17 +231,18 @@ Which is the total energy of our system. Another difference from Lagrangian mech
 \dot{p}_i &= -\dfrac{\partial H}{\partial q_i} \label{Heq1}\\
 \dot{q}_i &= \dfrac{\partial H}{\partial p_i}.\label{Heq2}
 \end{align}
-Equations \eqref{Heq1} and \eqref{Heq2} are often called Hamilton's equations. To account for non-conservative forces, we merely add the generalized force terms for them to the right-hand side of Equation \eqref{Heq1}. In other words:
+Equations \eqref{Heq1} and \eqref{Heq2} are often called Hamilton's equations. To account for non-conservative forces, we merely add the corresponding generalized force terms to the right-hand side of Equation \eqref{Heq1}. In other words:
 \begin{align}
 \dot{p}_i &= -\dfrac{\partial H}{\partial q_i} + Q_i. \label{HNConseq1}
 \end{align}
 This creates a new kind of space that we can visualize our solution on that has dimensions $q_i$ and $p_i$. This type of space is known as phase space. 
-## Example: simple pendulum
+# Example: simple pendulum
+The Hamiltonian for the simple pendulum is:
 \begin{align}
-H &= \dfrac{ml^2 \dot{\theta}^2}{2} + mgl\sin{\theta}. \label{Hsimp}
+H &= T + V \\
+&= \dfrac{ml^2 \dot{\theta}^2}{2} + mgl\sin{\theta}. \label{Hsimp}
 \end{align}
 Problem is, however, that this is written in terms of $q_i$ and $\dot{q}_i$ not $q_i$ and $p_i$. 
-
 \begin{align*}
 p_{\theta} &= \dfrac{\partial L}{\partial \dot{\theta}}
 \end{align*}
@@ -256,23 +259,20 @@ Substituting Equation \eqref{thetadotsimp} into Equation \eqref{Hsimp} yields:
 H &= \dfrac{ml^2}{2} \left( \dfrac{p_{\theta}}{ml^2} \right)^2 + mgl\sin{\theta} \\
 &= \dfrac{ml^2}{2} \dfrac{p_{\theta}^2}{m^2l^4} + mgl\sin{\theta}.
 \end{align*}
-So our final Hamiltonian is:
+Cancelling out common factors in the numerator and denominator of the kinetic energy term yields:
 \begin{align}
 H &= \dfrac{p_{\theta}^2}{2ml^2} + mgl\sin{\theta}. \label{Hsimpf}
 \end{align}
 Hence the equations of motion are:
 \begin{align}
 \dot{p}_{\theta} &= -\dfrac{\partial H}{\partial \theta} \nonumber \\
- &= - mgl\cos{\theta}\label{pdotthetasimp}
-\end{align}
-and
-\begin{align}
+ &= - mgl\cos{\theta}\label{pdotthetasimp}\\
 \dot{\theta} &= \dfrac{\partial H}{\partial p_{\theta}} \nonumber\\
 &= \dfrac{p_{\theta}}{ml^2}.\label{thetadotsimp}
 \end{align}
 As we can see, Hamiltonian mechanics yields a series of first-order ordinary differential equations (ODEs) instead of second-order ODEs. Which is important because Lagrangian mechanics and Newtonian mechanics both yield second-order ODE systems. That being said, if you rewrite Equation \eqref{thetadotsimp} to make $p_{\theta}$ its subject and substitute it into Equation \eqref{pdotthetasimp} and rearrange it to make $\ddot{\theta}$ the subject, you will obtain Equation \eqref{simppen}.
 
-## Poisson brackets
+# Poisson brackets
 Poisson brackets provide us an elegant and powerful way to rewrite Hamilton's equations. If we have $n$ degrees of freedom and two functions $f$ and $g$ that depend on $p_i$ and $q_i$:[^1] 
 
 \begin{align}
