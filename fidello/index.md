@@ -328,7 +328,7 @@ Further:
 \end{align}
 The quality of two functions, say $f$ and $g$, having a Poisson bracket that equals zero is phrased as $f$ and $g$  **commuting** under the Poisson bracket. 
 
-If a function $f(q_i, p_i)$ is not explicitly dependent on $t$ and only depends on $t$ indirectly through $q_i$ and $p_i$ then, via the chain rule:
+If a function $f(q_i, p_i)$ is not explicitly dependent on $t$ and only depends on $t$ indirectly through $q_i$ and $p_i$, then, via the chain rule:
 \begin{align}
 \dfrac{df}{dt} &= \sum_{i=1}^n \dfrac{\partial f}{\partial q_i}\dfrac{d q_i}{dt} + \dfrac{\partial f}{\partial p_i}\dfrac{dp_i}{dt}.
 \end{align}
