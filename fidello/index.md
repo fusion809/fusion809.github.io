@@ -100,8 +100,7 @@ p_i =\dfrac{\partial L}{\partial \dot{q}_i}\label{canmom}
 is known as the canonical (or generalized) momentum. It becomes especially relevant later when we cover Hamiltonian mechanics.
 
 ## Non-conservative forces
-I guess next I should explain how we account for non-conservative forces. Essentially we replace the $0$ in Equations \eqref{ELE} with:
-
+I guess next I should explain how we account for non-conservative forces. Essentially we replace the $0$ in Equations \eqref{ELE} with the generalized force $Q_i$. It is defined as:
 \begin{align}
     Q_i &= \sum_{j=1}^m \textbf{F}_j \cdot \dfrac{\partial \textbf{r}_j}{\partial q_i}. \label{Qir}
 \end{align}
