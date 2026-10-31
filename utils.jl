@@ -1,4 +1,5 @@
 using SHA
+import Franklin
 function hfun_bar(vname)
   val = Meta.parse(vname[1])
   return round(sqrt(val), digits=2)
@@ -771,3 +772,142 @@ function hfun_toc(params::Vector{String})::String
     end
     return "<div class=\"franklin-toc\">" * inner * "</div>"
 end
+
+# ==============================================================================
+# Multi-line numbered \begin{align} support
+# ==============================================================================
+
+# Map \begin{align} to \[ \begin{_franklin_align_} ... \end{_franklin_align_} \]
+# We use the unique marker _franklin_align_ so we can detect numbered align blocks
+# without matching \begin{aligned} (which is what align* produces).
+for (i, p) in enumerate(Franklin.LX_INTERNAL_ENVIRONMENTS)
+    if p.first == "align"
+        Franklin.LX_INTERNAL_ENVIRONMENTS[i] = "align" => Franklin.LxDef("align", 0, raw"\[\begin{_franklin_align_}" => raw"\end{_franklin_align_}\]")
+    end
+end
+Franklin.GLOBAL_LXDEFS["align"] = Franklin.LxDef("align", 0, raw"\[\begin{_franklin_align_}" => raw"\end{_franklin_align_}\]")
+
+"""
+Split LaTeX content on `\\\\` outside of nested environments (like pmatrix, bmatrix, etc.)
+and curly braces.
+"""
+# Override Franklin's convert_math_block directly inside module Franklin
+Core.eval(Franklin, quote
+    function split_align_lines(s::AbstractString)
+        lines = String[]
+        buf = IOBuffer()
+        i = firstindex(s)
+        n = lastindex(s)
+        brace_depth = 0
+        env_depth = 0
+
+        while i <= n
+            if s[i] == '\\'
+                rem = SubString(s, i)
+                if startswith(rem, "\\\\") && brace_depth == 0 && env_depth == 0
+                    push!(lines, String(take!(buf)))
+                    i = nextind(s, i, 2)
+                    continue
+                elseif startswith(rem, r"^\\begin\{")
+                    m = match(r"^\\begin\{[^}]+\}", rem)
+                    env_depth += 1
+                    write(buf, m.match)
+                    i = nextind(s, i, ncodeunits(m.match))
+                    continue
+                elseif startswith(rem, r"^\\end\{")
+                    m = match(r"^\\end\{[^}]+\}", rem)
+                    env_depth = max(0, env_depth - 1)
+                    write(buf, m.match)
+                    i = nextind(s, i, ncodeunits(m.match))
+                    continue
+                else
+                    if i < n && (s[nextind(s, i)] == '{' || s[nextind(s, i)] == '}')
+                        write(buf, s[i])
+                        write(buf, s[nextind(s, i)])
+                        i = nextind(s, i, 2)
+                        continue
+                    end
+                end
+            elseif s[i] == '{'
+                brace_depth += 1
+            elseif s[i] == '}'
+                brace_depth = max(0, brace_depth - 1)
+            end
+
+            write(buf, s[i])
+            i = nextind(s, i)
+        end
+
+        rem = String(take!(buf))
+        if !isempty(strip(rem))
+            push!(lines, rem)
+        end
+        return lines
+    end
+
+    function convert_math_block(β::OCBlock, lxdefs::Vector{LxDef})::String
+        pm = get(MATH_BLOCKS_PARENS, β.name) do
+            throw(MathBlockError("Unrecognised math block name."))
+        end
+
+        inner = chop(β.ss, head=pm[1], tail=pm[2])
+        htmls = IOBuffer()
+
+        aligned_match = match(r"^\s*\\begin\{_franklin_align_\}([\s\S]*)\\end\{_franklin_align_\}\s*$", inner)
+
+        if β.name ∉ [:MATH_A, :MATH_I] && !isnothing(aligned_match)
+            body = aligned_match.captures[1]
+            lines = split_align_lines(body)
+            new_lines = String[]
+            last_num = PAGE_EQREFS[PAGE_EQREFS_COUNTER]
+
+            for line in lines
+                trimmed = strip(line)
+                if isempty(trimmed)
+                    continue
+                end
+
+                is_unnumbered = occursin(r"\\(nonumber|notag)", line)
+                line_clean = replace(line, r"\\(nonumber|notag)" => "")
+
+                if is_unnumbered
+                    push!(new_lines, strip(line_clean) * " \\notag")
+                else
+                    PAGE_EQREFS[PAGE_EQREFS_COUNTER] += 1
+                    curnum = PAGE_EQREFS[PAGE_EQREFS_COUNTER]
+                    last_num = curnum
+
+                    m_lbl = match(MATH_LABEL_PAT, line_clean)
+                    if !isnothing(m_lbl)
+                        name = refstring(m_lbl.captures[1])
+                        write(htmls, "<a id=\"$name\" class=\"anchor\"></a>")
+                        line_clean = replace(line_clean, MATH_LABEL_PAT => "")
+                        PAGE_EQREFS[name] = curnum
+                    end
+
+                    push!(new_lines, strip(line_clean) * " \\tag{$curnum}")
+                end
+            end
+
+            write(htmls, "<div class=\"nonumber\" style=\"counter-reset: eqnum $last_num;\">\\[\\begin{align}\n" * join(new_lines, " \\\\\n") * "\n\\end{align}\\]</div>")
+            return String(take!(htmls))
+        end
+
+        if β.name ∉ [:MATH_A, :MATH_I]
+            PAGE_EQREFS[PAGE_EQREFS_COUNTER] += 1
+            matched = match(MATH_LABEL_PAT, inner)
+            if !isnothing(matched)
+                name = refstring(matched.captures[1])
+                write(htmls, "<a id=\"$name\" class=\"anchor\"></a>")
+                inner = replace(inner, MATH_LABEL_PAT => "")
+                PAGE_EQREFS[name] = PAGE_EQREFS[PAGE_EQREFS_COUNTER]
+            end
+        end
+
+        inner = replace(inner, r"\\begin\{_franklin_align_\}" => raw"\begin{align}")
+        inner = replace(inner, r"\\end\{_franklin_align_\}" => raw"\end{align}")
+
+        write(htmls, pm[3], convert_md_math(inner, lxdefs, from(β)), pm[4])
+        return String(take!(htmls))
+    end
+end)

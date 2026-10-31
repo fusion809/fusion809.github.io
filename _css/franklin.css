@@ -420,9 +420,27 @@ body {
     padding-right: 5px;
 }
 
+.katex-display:has(.katex-tag)::after {
+    counter-increment: none;
+    content: "";
+}
+
 .nonumber .katex-display::after {
     counter-increment: none;
     content: "";
+}
+
+.nonumber .katex-display > .katex {
+    display: block;
+}
+
+.nonumber .katex-display > .katex > .katex-html {
+    display: block;
+    position: relative;
+}
+
+.katex-display > .katex > .katex-html > .katex-tag {
+    padding-right: 5px;
 }
 
 /* ==================================================================

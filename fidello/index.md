@@ -227,12 +227,10 @@ H &= T + V.
 \end{align*}
 Which is the total energy of our system. Another difference from Lagrangian mechanics is that we define $H$ in terms of $p_i$ and $q_i$ instead of $q_i$ and $\dot{q}_i$. The equations of motion with no non-conservative forces are:
 \begin{align}
-\dot{p}_i &= -\dfrac{\partial H}{\partial q_i}. \label{Heq1}
-\end{align}
-\begin{align}
+\dot{p}_i &= -\dfrac{\partial H}{\partial q_i} \label{Heq1}\\
 \dot{q}_i &= \dfrac{\partial H}{\partial p_i}.\label{Heq2}
 \end{align}
-To account for non-conservative forces, we merely add the generalized force terms for them to the right-hand side of Equation \eqref{Heq1}. 
+Equations \eqref{Heq1} and \eqref{Heq2} are often called Hamilton's equations. To account for non-conservative forces, we merely add the generalized force terms for them to the right-hand side of Equation \eqref{Heq1}. 
 ## Example: simple pendulum
 \begin{align}
 H &= \dfrac{ml^2 \dot{\theta}^2}{2} + mgl\sin{\theta}. \label{Hsimp}
@@ -260,18 +258,55 @@ So our final Hamiltonian is:
 H &= \dfrac{p_{\theta}^2}{2ml^2} + mgl\sin{\theta}. \label{Hsimpf}
 \end{align}
 Hence the equations of motion are:
-\begin{align*}
-\dot{p}_{\theta} &= -\dfrac{\partial H}{\partial \theta}
-\end{align*}
 \begin{align}
-\dot{p}_{\theta} &= - mgl\cos{\theta}\label{pdotthetasimp}
+\dot{p}_{\theta} &= -\dfrac{\partial H}{\partial \theta} \nonumber \\
+ &= - mgl\cos{\theta}\label{pdotthetasimp}
 \end{align}
 and
-\begin{align*}
-\dot{\theta} &= \dfrac{\partial H}{\partial p_{\theta}}
-\end{align*}
-hence:
 \begin{align}
-\dot{\theta} &= \dfrac{p_{\theta}}{ml^2}.\label{thetadotsimp}
+\dot{\theta} &= \dfrac{\partial H}{\partial p_{\theta}} \nonumber\\
+&= \dfrac{p_{\theta}}{ml^2}.\label{thetadotsimp}
 \end{align}
 As we can see, Hamiltonian mechanics yields a series of first-order ordinary differential equations (ODEs) instead of second-order ODEs, which Lagrangian mechanics and Newtonian mechanics yield. That being said, if you rewrite Equation \eqref{thetadotsimp} to make $p_{\theta}$ its subject and substitute it into Equation \eqref{pdotthetasimp} and rearrange it to make $\ddot{\theta}$ the subject, you will obtain Equation \eqref{simppen}.
+
+## Poisson brackets
+Poisson brackets provide us an elegant and powerful way to rewrite Hamilton's equations. If we have $n$ degrees of freedom and two functions $f$ and $g$ that depend on $p_i$ and $q_i$:[^1] 
+
+\begin{align}
+\{f, g\} &= \sum_{i=1}^n \left( \dfrac{\partial f}{\partial q_i} \dfrac{\partial g}{\partial p_i} - \dfrac{\partial f}{\partial p_i}\dfrac{\partial g}{\partial q_i} \right). \label{Poissonfg}
+\end{align}
+
+Consequently:
+
+\begin{align}
+\dot{q}_k &= \{q_k, H\}\label{qdotk}\\
+\dot{p}_k &= -\{p_k, H\}. \label{pdotk}
+\end{align}
+
+We can establish Equations \eqref{qdotk} with
+\begin{align}
+\{q_k, H\} &= \sum_{i=1}^n \left(\dfrac{\partial q_k}{\partial q_i}\dfrac{\partial H}{\partial p_i} - \dfrac{\partial q_k}{\partial p_i}\dfrac{\partial H}{\partial q_i}\right).\label{qkHPoisson}
+\end{align}
+$\dfrac{\partial q_k}{\partial q_i}=\delta_{ik}$, where $\delta_{ik}$ is the Kronecker delta function which is is equal to one if $i=k$ and zero otherwise. As for $\dfrac{\partial q_k}{\partial p_i}$ it is zero. Hence Equation \eqref{qkHPoisson} becomes:
+\begin{align}
+\{q_k, H\} &= \sum_{i=1}^n \delta_{ik} \dfrac{\partial H}{\partial p_i}.
+\end{align}
+Summing over $i$ yields only one term, thanks to the Kronecker delta, namely the $i=k$ term, as all other terms have a zero multiplier:
+\begin{align}
+    \{q_k, H\} &= \dfrac{\partial H}{\partial p_k}.\label{QkHPoisson}
+\end{align}
+Thanks to Hamilton's equations, we know the right-hand side of Equation \eqref{QkHPoisson} is equal to $\dot{q}_k$.
+
+We can establish Equations \eqref{pdotk} with:
+\begin{align}
+\{p_k, H\} &= \sum_{i=1}^n \left(\dfrac{\partial p_k}{\partial q_i}\dfrac{\partial H}{\partial p_i} - \dfrac{\partial p_k}{\partial p_i}\dfrac{\partial H}{\partial q_i}\right)
+\end{align}
+$\dfrac{\partial p_k}{\partial q_i}$ is zero and $\dfrac{\partial p_k}{\partial p_i}$ is $\delta_{ik}$. Hence:
+\begin{align}
+\{p_k, H\} &= \sum_{i=1}^n \left(-\delta_{ik} \dfrac{\partial H}{\partial q_i}\right) \\
+&= -\dfrac{\partial H}{\partial q_k}. \label{pkHR}
+\end{align}
+According to Hamilton's equations, the right-hand side of Equations \eqref{pkHR} should equal $\dot{p}_k$.
+
+# Reference list
+[^1]: Cline D. (2026). [15.2: Poisson bracket Representation of Hamiltonian Mechanics](https://phys.libretexts.org/Bookshelves/Classical_Mechanics/Variational_Principles_in_Classical_Mechanics_(Cline)/15%3A_Advanced_Hamiltonian_Mechanics/15.02%3A_Poisson_bracket_Representation_of_Hamiltonian_Mechanics). In *Variational Principles in Classical Mechanics*. LibreTexts.
