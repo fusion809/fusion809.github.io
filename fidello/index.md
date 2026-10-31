@@ -70,7 +70,7 @@ Equation \eqref{heat} therefore essentially says that if we are in a region wher
 # Lagrangian mechanics
 Lagrangian mechanics is one of three major formulations of classical mechanics with the others being Newtonian mechanics and Hamiltonian mechanics. Classical mechanics as a whole is a branch of physics most applicable to the situations that humans most often encounter, as it does not account for quantum randomness (hence cannot be applied to very small scales), nor does it account for relativistic effects (which are most relevant when dealing with strong gravitational fields or velocities close to the speed of light). In Lagrangian mechanics, we define a quantity known as the Lagrangian of our physical system:
 \begin{align*}
-    L &= T - V.
+    L &= T - V. \label{L}
 \end{align*}
 Where $T$ is kinetic energy and $V$ is potential energy of our entire physical system. It is important to note that only conservative forces contribute to $V$. Lagrangian mechanics **can** account for non-conservative (i.e. dissipative) forces, too, but we will get to how one handles them later. 
 
@@ -222,15 +222,19 @@ If you would like to see my derivation of the double rigid pendulum equations, i
 
 # Hamiltonian mechanics
 In Hamiltonian mechanics, we define the Hamiltonian as:
-\begin{align*}
-H &= T + V.
-\end{align*}
+\begin{align}
+H &= T + V.\label{H}
+\end{align}
 Which is the total energy of our system. Another difference from Lagrangian mechanics is that we define $H$ in terms of $p_i$ and $q_i$ instead of $q_i$ and $\dot{q}_i$. The equations of motion with no non-conservative forces are:
 \begin{align}
 \dot{p}_i &= -\dfrac{\partial H}{\partial q_i} \label{Heq1}\\
 \dot{q}_i &= \dfrac{\partial H}{\partial p_i}.\label{Heq2}
 \end{align}
-Equations \eqref{Heq1} and \eqref{Heq2} are often called Hamilton's equations. To account for non-conservative forces, we merely add the generalized force terms for them to the right-hand side of Equation \eqref{Heq1}. 
+Equations \eqref{Heq1} and \eqref{Heq2} are often called Hamilton's equations. To account for non-conservative forces, we merely add the generalized force terms for them to the right-hand side of Equation \eqref{Heq1}. In other words:
+\begin{align}
+\dot{p}_i &= -\dfrac{\partial H}{\partial q_i} + Q_i. \label{HNConseq1}
+\end{align}
+This creates a new kind of space that we can visualize our solution on that has dimensions $q_i$ and $p_i$. This type of space is known as phase space. 
 ## Example: simple pendulum
 \begin{align}
 H &= \dfrac{ml^2 \dot{\theta}^2}{2} + mgl\sin{\theta}. \label{Hsimp}
@@ -287,7 +291,7 @@ We can establish Equations \eqref{qdotk} with
 \begin{align}
 \{q_k, H\} &= \sum_{i=1}^n \left(\dfrac{\partial q_k}{\partial q_i}\dfrac{\partial H}{\partial p_i} - \dfrac{\partial q_k}{\partial p_i}\dfrac{\partial H}{\partial q_i}\right).\label{qkHPoisson}
 \end{align}
-$\dfrac{\partial q_k}{\partial q_i}=\delta_{ik}$, where $\delta_{ik}$ is the Kronecker delta function which is is equal to one if $i=k$ and zero otherwise. As for $\dfrac{\partial q_k}{\partial p_i}$ it is zero. Hence Equation \eqref{qkHPoisson} becomes:
+$\dfrac{\partial q_k}{\partial q_i}=\delta_{ik}$, where $\delta_{ik}$ is the Kronecker delta function which is is equal to one if $i=k$ and zero otherwise. This equation holds because we assume our degrees of freedom or coordinates are independent of each other. For instance, $y$ is independent of $x$ in Cartesian coordinates and $\theta$ is independent of $r$ in polar coordinates. As for $\dfrac{\partial q_k}{\partial p_i}$ it is zero. Hence Equation \eqref{qkHPoisson} becomes:
 \begin{align}
 \{q_k, H\} &= \sum_{i=1}^n \delta_{ik} \dfrac{\partial H}{\partial p_i}.
 \end{align}
@@ -307,6 +311,75 @@ $\dfrac{\partial p_k}{\partial q_i}$ is zero and $\dfrac{\partial p_k}{\partial 
 &= -\dfrac{\partial H}{\partial q_k}. \label{pkHR}
 \end{align}
 According to Hamilton's equations, the right-hand side of Equations \eqref{pkHR} should equal $\dot{p}_k$.
+
+Poisson brackets also have several interesting properties, such as antisymmetry:
+\begin{align}
+\{A, B\} &= -\{B, A\}. \label{asym}
+\end{align}
+Further:
+\begin{align}
+\{q_k, p_k\} &= \sum_{i=1}^n \left( \dfrac{\partial q_k}{\partial q_i} \dfrac{\partial p_k}{\partial p_i} - \dfrac{\partial q_k}{\partial p_i} \dfrac{\partial p_k}{\partial q_i} \right) \nonumber\\
+&= \sum_{i=1}^n \delta_{ik}\delta_{ik} \nonumber\\
+&= 1 \label{qkpk} \\
+\{q_j, q_k\} &= \sum_{i=1}^n \left( \dfrac{\partial q_j}{\partial q_i} \dfrac{\partial q_k}{\partial p_i} - \dfrac{\partial q_j}{\partial p_i} \dfrac{\partial q_k}{\partial q_i} \right) \nonumber\\
+&= 0 \label{qjqk}\\
+\{p_j, p_k\} &= \sum_{i=1}^n \left(\dfrac{\partial p_j}{\partial q_i}\dfrac{\partial p_k}{\partial p_i} - \dfrac{\partial p_j}{\partial p_i}\dfrac{\partial p_k}{\partial q_i}\right) \nonumber\\
+&= 0. \label{pjpk}
+\end{align}
+The quality of two functions, say $f$ and $g$, having a Poisson bracket that equals zero is phrased as $f$ and $g$  **commuting** under the Poisson bracket. 
+
+If a function $f(q_i, p_i)$ is not explicitly dependent on $t$ and only depends on $t$ indirectly through $q_i$ and $p_i$ then, via the chain rule:
+\begin{align}
+\dfrac{df}{dt} &= \sum_{i=1}^n \dfrac{\partial f}{\partial q_i}\dfrac{d q_i}{dt} + \dfrac{\partial f}{\partial p_i}\dfrac{dp_i}{dt}.
+\end{align}
+We can use Hamilton's equations to replace $\dfrac{dq_i}{dt}$ and $\dfrac{dp_i}{dt}$:
+\begin{align}
+\dfrac{df}{dt} &= \sum_{i=1}^n \dfrac{\partial f}{\partial q_i}\dfrac{\partial H}{\partial p_i} - \dfrac{\partial f}{\partial p_i}\dfrac{\partial H}{\partial q_i}.
+\end{align}
+Interestingly, the right-hand side is equal to the Poisson bracket of $f$ with $H$, in other words:
+\begin{align}
+\dfrac{df}{dt} &= \{f, H\}.
+\end{align}
+Hence commuting with the Hamiltonian under the Poisson bracket is a sufficient condition for a quantity that does not explicitly depend on time to have a zero time derivative and hence be conserved. 
+
+# Noether's theorem
+Noether's theorem essentially states that for every continuous symmetry in the Lagrangian, there is a corresponding conservation law. For instance, time translation symmetry of the Lagrangian yields the conservation of energy. Say we increase time according to the transformation: $t\rightarrow t+\epsilon$. 
+
+\begin{align}
+L(q_i(t+\epsilon), \dot{q}_i(t+\epsilon), t+\epsilon) &\approx L(q_i, p_i, t) + \sum_{i=1}^n\dfrac{\partial L}{\partial q_i} \dfrac{dq_i}{dt} \epsilon + \dfrac{\partial L}{\partial \dot{q}_i} \dfrac{d\dot{q}_i}{dt} \epsilon \nonumber\\
+L(q_i(t+\epsilon), \dot{q}_i(t+\epsilon), t+\epsilon) - L(q_i, \dot{q}_i, t) &\approx \sum_{i=1}^n\dfrac{\partial L}{\partial q_i} \dfrac{dq_i}{dt} \epsilon + \dfrac{\partial L}{\partial \dot{q}_i} \dfrac{d\dot{q}_i}{dt} \epsilon. \label{diffL}
+\end{align}
+We will call the left-hand side of Equation \eqref{diffL} $\Delta L$:
+\begin{align}
+\Delta L &\approx \sum_{i=1}^n \dfrac{\partial L}{\partial q_i} \dfrac{dq_i}{dt} \epsilon + \dfrac{\partial L}{\partial \dot{q}_i} \dfrac{d\dot{q}_i}{dt} \epsilon \\
+&= \sum_{i=1}^n \epsilon\left(\dfrac{d}{dt}\dfrac{\partial L}{\partial \dot{q}_i}\dot{q}_i + \dfrac{\partial L}{\partial \dot{q}_i}\ddot{q}_i\right)\\
+&= \epsilon\sum_{i=1}^n \left(\dfrac{dp_i}{dt} \dot{q}_i + p_i \ddot{q}_i\right)\\
+&= \epsilon\sum_{i=1}^n \left(\dot{p}_i \dot{q}_i + p_i \ddot{q}_i\right)\\
+&= \epsilon\sum_{i=1}^n \dfrac{d}{dt}\left(p_i \dot{q}_i\right) \\
+&= \epsilon\dfrac{d}{dt}\sum_{i=1}^n p_i \dot{q}_i.
+\end{align}
+Hence if $L$ does not change in time, we get:
+\begin{align}
+\epsilon \dfrac{d}{dt} \sum_{i=1}^n p_i \dot{q}_i &= 0.
+\end{align}
+$\epsilon$ should not matter, so we will divide both sides by it:
+\begin{align}
+\dfrac{d}{dt} \sum_{i=1}^n p_i \dot{q}_i &= 0.
+\end{align}
+$L$ doesn not change, so $\dfrac{dL}{dt}=0$, too. Hence:
+\begin{align}
+\dfrac{d}{dt} \left(\sum_{i=1}^n p_i \dot{q}_i - L\right) &= 0.\label{constE}
+\end{align}
+Interestingly, $\displaystyle\sum_{i=1}^n p_i \dot{q}_i$ is twice the kinetic energy of our system. Hence if we substitute Equation \eqref{L} into Equation \eqref{constE} we obtain:
+\begin{align}
+\dfrac{d}{dt} \left(2T-(T-V)\right) &= 0 \nonumber\\
+\dfrac{d}{dt} \left(T+V\right) &= 0.\label{constE2}
+\end{align}
+Hence substituting Equation \eqref{H} into Equation \eqref{constE2} yields:
+\begin{align}
+\dfrac{dH}{dt} &= 0.\label{constE3}
+\end{align}
+In other words, we obtain that the Hamiltonian &mdash; the total energy of the system &mdash; does not change, hence it is conserved.
 
 # Reference list
 [^1]: Cline D. (2026). [15.2: Poisson bracket Representation of Hamiltonian Mechanics](https://phys.libretexts.org/Bookshelves/Classical_Mechanics/Variational_Principles_in_Classical_Mechanics_(Cline)/15%3A_Advanced_Hamiltonian_Mechanics/15.02%3A_Poisson_bracket_Representation_of_Hamiltonian_Mechanics). In *Variational Principles in Classical Mechanics*. LibreTexts.
