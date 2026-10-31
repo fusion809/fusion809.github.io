@@ -9,7 +9,7 @@
 <figcaption>Double pendulum animation frame.</figcaption>
 </figure>
 ~~~
-In this article, I explain to Fidello from Foci's Discord server some prerequisite knowledge he needs to effectively derive the equations of motion for a double rigid pendulum. In theory, this derivation can be done with Newtonian mechanics with $\textbf{F}=m\mathbf{a}$, but given our second pendulum is in a moving reference frame and Newtonian mechanics does not easily adapt to alternative coordinate systems, like polar coordinates, Lagrangian mechanics makes the equations of motion easier to derive. Lagrangian mechanics also leads nicely into Hamiltonian mechanics and the path integral formulation of quantum mechanics. Figure \figref{dp} shows a frame from the double pendulum animation [this page](/doublePendulum/) does by default.
+In this article, I explain to Fidello from Foci's Discord server some prerequisite knowledge he needs to effectively derive the equations of motion for a double rigid pendulum and then cover Hamiltonian mechanics. In theory, this derivation can be done with Newtonian mechanics with $\textbf{F}=m\mathbf{a}$, but given our second pendulum is in a moving reference frame and Newtonian mechanics does not easily adapt to alternative coordinate systems, like polar coordinates, Lagrangian mechanics makes the equations of motion easier to derive. Lagrangian mechanics also leads nicely into Hamiltonian mechanics and the path integral formulation of quantum mechanics. Figure \figref{dp} shows a frame from the double pendulum animation [this page](/doublePendulum/) does by default.
 
 \toc
 # Partial differentiation
@@ -219,3 +219,59 @@ Subtracting $\dfrac{g}{l}\cos{\theta}$ from both sides yields:
 This equation cannot be analytically solved, so numerical solutions are necessary. I numerically solve an even more complex version of the single pendulum equation [here](/singlePendulum/).
 
 If you would like to see my derivation of the double rigid pendulum equations, it is [here](/doublePendulum/derivation/).
+
+# Hamiltonian mechanics
+In Hamiltonian mechanics, we define the Hamiltonian as:
+\begin{align*}
+H &= T + V.
+\end{align*}
+Which is the total energy of our system. Another difference from Lagrangian mechanics is that we define $H$ in terms of $p_i$ and $q_i$ instead of $q_i$ and $\dot{q}_i$. The equations of motion with no non-conservative forces are:
+\begin{align}
+\dot{p}_i &= -\dfrac{\partial H}{\partial q_i}. \label{Heq1}
+\end{align}
+\begin{align}
+\dot{q}_i &= \dfrac{\partial H}{\partial p_i}.\label{Heq2}
+\end{align}
+To account for non-conservative forces, we merely add the generalized force terms for them to the right-hand side of Equation \eqref{Heq1}. 
+## Example: simple pendulum
+\begin{align}
+H &= \dfrac{ml^2 \dot{\theta}^2}{2} + mgl\sin{\theta}. \label{Hsimp}
+\end{align}
+Problem is, however, that this is written in terms of $q_i$ and $\dot{q}_i$ not $q_i$ and $p_i$. 
+
+\begin{align*}
+p_{\theta} &= \dfrac{\partial L}{\partial \dot{\theta}}
+\end{align*}
+and so:
+\begin{align}
+p_{\theta} &= ml^2\dot{\theta}. \label{pthetasimp}
+\end{align}
+Rewriting Equation \eqref{pthetasimp} with $\dot{\theta}$ as its subject:
+\begin{align}
+\dot{\theta} &= \dfrac{p_{\theta}}{ml^2}. \label{thetadotsimp}
+\end{align}
+Substituting Equation \eqref{thetadotsimp} into Equation \eqref{Hsimp} yields:
+\begin{align*}
+H &= \dfrac{ml^2}{2} \left( \dfrac{p_{\theta}}{ml^2} \right)^2 + mgl\sin{\theta} \\
+&= \dfrac{ml^2}{2} \dfrac{p_{\theta}^2}{m^2l^4} + mgl\sin{\theta}.
+\end{align*}
+So our final Hamiltonian is:
+\begin{align}
+H &= \dfrac{p_{\theta}^2}{2ml^2} + mgl\sin{\theta}. \label{Hsimpf}
+\end{align}
+Hence the equations of motion are:
+\begin{align*}
+\dot{p}_{\theta} &= -\dfrac{\partial H}{\partial \theta}
+\end{align*}
+\begin{align}
+\dot{p}_{\theta} &= - mgl\cos{\theta}\label{pdotthetasimp}
+\end{align}
+and
+\begin{align*}
+\dot{\theta} &= \dfrac{\partial H}{\partial p_{\theta}}
+\end{align*}
+hence:
+\begin{align}
+\dot{\theta} &= \dfrac{p_{\theta}}{ml^2}.\label{thetadotsimp}
+\end{align}
+As we can see, Hamiltonian mechanics yields a series of first-order ordinary differential equations (ODEs) instead of second-order ODEs, which Lagrangian mechanics and Newtonian mechanics yield. That being said, if you rewrite Equation \eqref{thetadotsimp} to make $p_{\theta}$ its subject and substitute it into Equation \eqref{pdotthetasimp} and rearrange it to make $\ddot{\theta}$ the subject, you will obtain Equation \eqref{simppen}.
