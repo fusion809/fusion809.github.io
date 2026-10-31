@@ -8,6 +8,12 @@
     <priority>0.5</priority>
 </url>
 <url>
+    <loc>https://fusion809.github.io/fidello/_06-poisson-bracket/index.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
     <loc>https://fusion809.github.io/downhill-descent/index.html</loc>
     <lastmod>2026-10-31</lastmod>
     <changefreq>monthly</changefreq>
@@ -33,6 +39,24 @@
 </url>
 <url>
     <loc>https://fusion809.github.io/RKF45/index.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://fusion809.github.io/fidello/_04d-terminology/index.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://fusion809.github.io/fidello/_04fiii-w-air-resistance/index.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://fusion809.github.io/fidello/_05a-hamiltonian-mechanics/index.html</loc>
     <lastmod>2026-10-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -182,6 +206,12 @@
     <priority>0.5</priority>
 </url>
 <url>
+    <loc>https://fusion809.github.io/fidello/_02-partial-differentiation/index.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
     <loc>https://fusion809.github.io/doublePendulum/derivation/index.html</loc>
     <lastmod>2026-10-31</lastmod>
     <changefreq>monthly</changefreq>
@@ -278,13 +308,31 @@
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>https://fusion809.github.io/singlePendulum/index.html</loc>
+    <loc>https://fusion809.github.io/fidello/_04b-euler-lagrange-equations/index.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://fusion809.github.io/fidello/_04c-stationary-action-principle/index.html</loc>
     <lastmod>2026-10-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
     <loc>https://fusion809.github.io/doubleElasticPendulum/derivation2/index.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://fusion809.github.io/fidello/_07-noethers-theorem/index.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://fusion809.github.io/singlePendulum/index.html</loc>
     <lastmod>2026-10-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -308,6 +356,18 @@
     <priority>0.5</priority>
 </url>
 <url>
+    <loc>https://fusion809.github.io/fidello/_04a-lagrangian-intro/index.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://fusion809.github.io/fidello/_04fii-wo-air-resistance/index.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
     <loc>https://fusion809.github.io/downhill-descent/_01-intro/index.html</loc>
     <lastmod>2026-10-31</lastmod>
     <changefreq>monthly</changefreq>
@@ -315,6 +375,12 @@
 </url>
 <url>
     <loc>https://fusion809.github.io/LFS/_motivations/index.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://fusion809.github.io/fidello/_04e-non-conservative-forces/index.html</loc>
     <lastmod>2026-10-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -368,6 +434,12 @@
     <priority>0.5</priority>
 </url>
 <url>
+    <loc>https://fusion809.github.io/fidello/_03-heat-equation/index.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
     <loc>https://fusion809.github.io/LFS/repos/_dotfiles/index.html</loc>
     <lastmod>2026-10-31</lastmod>
     <changefreq>monthly</changefreq>
@@ -399,6 +471,18 @@
 </url>
 <url>
     <loc>https://fusion809.github.io/downhill-descent/wrollair/nconstgrav/lagrangian/_03-conclusion/index.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://fusion809.github.io/fidello/_01-introduction/index.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://fusion809.github.io/fidello/_05b-simple-pendulum/index.html</loc>
     <lastmod>2026-10-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -453,6 +537,12 @@
 </url>
 <url>
     <loc>https://fusion809.github.io/LFS/repos/_build_duration/index.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://fusion809.github.io/fidello/_04fi-single-pendulum/index.html</loc>
     <lastmod>2026-10-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
