@@ -343,21 +343,25 @@ Interestingly, the right-hand side is equal to the Poisson bracket of $f$ with $
 Hence commuting with the Hamiltonian under the Poisson bracket is a sufficient condition for a quantity that does not explicitly depend on time to have a zero time derivative and hence be conserved. 
 
 # Noether's theorem
-Noether's theorem essentially states that for every continuous symmetry in the Lagrangian, there is a corresponding conservation law. For instance, time translation symmetry of the Lagrangian yields the conservation of energy. Say we increase time according to the transformation: $t\rightarrow t+\epsilon$. 
+Noether's theorem essentially states that for every continuous symmetry in the Lagrangian, there is a corresponding conservation law. For instance, time translation symmetry of the Lagrangian yields the conservation of energy. We will assume our Lagrangian does not explicitly depend on $t$. That is, $t$ itself does not appear directly in our Lagrangian. The only time dependence $L$ has on $t$ is through the dependence of $q_i$ and $\dot{q}_i$ on time. If the Lagrangian did explicitly depend on time, we would expect it not to have time translation symmetry. Say we increase time according to the transformation: $t\rightarrow t+\epsilon$. 
 
 \begin{align}
-L(q_i(t+\epsilon), \dot{q}_i(t+\epsilon), t+\epsilon) &\approx L(q_i, p_i, t) + \sum_{i=1}^n\dfrac{\partial L}{\partial q_i} \dfrac{dq_i}{dt} \epsilon + \dfrac{\partial L}{\partial \dot{q}_i} \dfrac{d\dot{q}_i}{dt} \epsilon \nonumber\\
-L(q_i(t+\epsilon), \dot{q}_i(t+\epsilon), t+\epsilon) - L(q_i, \dot{q}_i, t) &\approx \sum_{i=1}^n\dfrac{\partial L}{\partial q_i} \dfrac{dq_i}{dt} \epsilon + \dfrac{\partial L}{\partial \dot{q}_i} \dfrac{d\dot{q}_i}{dt} \epsilon. \label{diffL}
+L(q_i(t+\epsilon), \dot{q}_i(t+\epsilon)) &\approx L(q_i(t), \dot{q}_i(t)) + \dfrac{dL}{dt} \epsilon \\
+&= L(q_i(t), \dot{q}_i(t)) + \sum_{i=1}^n\dfrac{\partial L}{\partial q_i} \dfrac{dq_i}{dt} \epsilon + \dfrac{\partial L}{\partial \dot{q}_i} \dfrac{d\dot{q}_i}{dt} \epsilon \label{Lshift}..
+\end{align}
+Subtracting $L(q_i(t), \dot{q}_i(t))$ from both sides of Equation \eqref{Lshift} yields:
+\begin{align}
+L(q_i(t+\epsilon), \dot{q}_i(t+\epsilon)) - L(q_i(t), \dot{q}_i(t)) &\approx \sum_{i=1}^n\dfrac{\partial L}{\partial q_i} \dfrac{dq_i}{dt} \epsilon + \dfrac{\partial L}{\partial \dot{q}_i} \dfrac{d\dot{q}_i}{dt} \epsilon. \label{diffL}
 \end{align}
 We will call the left-hand side of Equation \eqref{diffL} $\Delta L$, hence Equation \eqref{diffL} becomes:
 \begin{align}
 \Delta L &\approx \sum_{i=1}^n \dfrac{\partial L}{\partial q_i} \dfrac{dq_i}{dt} \epsilon + \dfrac{\partial L}{\partial \dot{q}_i} \dfrac{d\dot{q}_i}{dt} \epsilon. \label{DeltaL1}
 \end{align}
-The Euler-Lagrange equation yields that:
+The Euler-Lagrange equations yield that:
 \begin{align}
 \dfrac{\partial L}{\partial q_i} = \dfrac{d}{dt}\left(\dfrac{\partial L}{\partial \dot{q}_i}\right). \label{ELEnh}
 \end{align}
-If you are wondering what about if we have non-conservative forces? Wouldn't that mean Equations \eqref{ELEnh} would not hold as there would be a generalized force term? Yes and in that event the Lagrangian would indeed change in time and conservation of energy would not hold, as our system would be losing energy to those non-conservative forces. 
+If you are wondering what about if we have non-conservative forces? Would that not mean Equations \eqref{ELEnh} would not hold as there would be a generalized force term? Yes and in that event the Lagrangian would indeed change in time and conservation of energy would not hold, as our system would be losing energy to those non-conservative forces. 
 
 Substituting Equations \eqref{ELEnh} into Equation \eqref{DeltaL1} yields:
 \begin{align}
