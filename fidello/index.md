@@ -339,7 +339,7 @@ Interestingly, the right-hand side is equal to the Poisson bracket of $f$ with $
 \begin{align}
 \dfrac{df}{dt} &= \{f, H\}.
 \end{align}
-Hence commuting with the Hamiltonian under the Poisson bracket is a sufficient condition for a quantity that does not explicitly depend on time to have a zero time derivative and hence be conserved. 
+Hence commuting with the Hamiltonian under the Poisson bracket is a sufficient condition for a quantity that does not explicitly depend on time to have a zero time derivative. A zero time derivative means the quantity is static over time which means it is conserved. 
 
 # Noether's theorem
 Noether's theorem essentially states that for every continuous symmetry in the Lagrangian, there is a corresponding conservation law. For instance, time translation symmetry of the Lagrangian yields the conservation of energy. To show this, we will assume our Lagrangian does not explicitly depend on $t$. That is, $t$ itself does not appear directly in our Lagrangian. The only time dependence $L$ has on $t$ is through the dependence of $q_i$ and $\dot{q}_i$ on time. If the Lagrangian did explicitly depend on time, we would expect it not to have time translation symmetry. Say we increase time according to the transformation: $t\rightarrow t+\epsilon$. 
