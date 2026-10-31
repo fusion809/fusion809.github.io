@@ -1,5 +1,5 @@
 @def hassim=false;
-@def title="Lagrangian mechanics explanation for Fidello."
+@def title="Advanced classical mechanics explanation for Fidello."
 @def tag=["Mathematics", "Physics"]
 @def mintoclevel=1
 
@@ -94,9 +94,9 @@ One interesting property of the action is that nature consistently sets it to it
 
 ## Terminology
 In Equation \eqref{ELE}:
-\begin{align*}
-p_i =\dfrac{\partial L}{\partial \dot{q}_i}
-\end{align*}
+\begin{align}
+p_i =\dfrac{\partial L}{\partial \dot{q}_i}\label{canmom}
+\end{align}
 is known as the canonical (or generalized) momentum. This is not that relevant at this stage of your learning, but if you later learn Hamiltonian mechanics, it becomes very relevant. 
 
 ## Non-conservative forces
@@ -349,13 +349,28 @@ Noether's theorem essentially states that for every continuous symmetry in the L
 L(q_i(t+\epsilon), \dot{q}_i(t+\epsilon), t+\epsilon) &\approx L(q_i, p_i, t) + \sum_{i=1}^n\dfrac{\partial L}{\partial q_i} \dfrac{dq_i}{dt} \epsilon + \dfrac{\partial L}{\partial \dot{q}_i} \dfrac{d\dot{q}_i}{dt} \epsilon \nonumber\\
 L(q_i(t+\epsilon), \dot{q}_i(t+\epsilon), t+\epsilon) - L(q_i, \dot{q}_i, t) &\approx \sum_{i=1}^n\dfrac{\partial L}{\partial q_i} \dfrac{dq_i}{dt} \epsilon + \dfrac{\partial L}{\partial \dot{q}_i} \dfrac{d\dot{q}_i}{dt} \epsilon. \label{diffL}
 \end{align}
-We will call the left-hand side of Equation \eqref{diffL} $\Delta L$:
+We will call the left-hand side of Equation \eqref{diffL} $\Delta L$, hence Equation \eqref{diffL} becomes:
 \begin{align}
-\Delta L &\approx \sum_{i=1}^n \dfrac{\partial L}{\partial q_i} \dfrac{dq_i}{dt} \epsilon + \dfrac{\partial L}{\partial \dot{q}_i} \dfrac{d\dot{q}_i}{dt} \epsilon \\
-&= \sum_{i=1}^n \epsilon\left(\dfrac{d}{dt}\dfrac{\partial L}{\partial \dot{q}_i}\dot{q}_i + \dfrac{\partial L}{\partial \dot{q}_i}\ddot{q}_i\right)\\
-&= \epsilon\sum_{i=1}^n \left(\dfrac{dp_i}{dt} \dot{q}_i + p_i \ddot{q}_i\right)\\
-&= \epsilon\sum_{i=1}^n \left(\dot{p}_i \dot{q}_i + p_i \ddot{q}_i\right)\\
-&= \epsilon\sum_{i=1}^n \dfrac{d}{dt}\left(p_i \dot{q}_i\right) \\
+\Delta L &\approx \sum_{i=1}^n \dfrac{\partial L}{\partial q_i} \dfrac{dq_i}{dt} \epsilon + \dfrac{\partial L}{\partial \dot{q}_i} \dfrac{d\dot{q}_i}{dt} \epsilon. \label{DeltaL1}
+\end{align}
+The Euler-Lagrange equation yields that:
+\begin{align}
+\dfrac{\partial L}{\partial q_i} = \dfrac{d}{dt}\left(\dfrac{\partial L}{\partial \dot{q}_i}\right). \label{ELEnh}
+\end{align}
+If you are wondering what about if we have non-conservative forces? Wouldn't that mean Equations \eqref{ELEnh} would not hold as there would be a generalized force term? Yes and in that event the Lagrangian would indeed change in time and conservation of energy would not hold, as our system would be losing energy to those non-conservative forces. 
+
+Substituting Equations \eqref{ELEnh} into Equation \eqref{DeltaL1} yields:
+\begin{align}
+\Delta L &\approx \sum_{i=1}^n \epsilon\left(\dfrac{d}{dt}\dfrac{\partial L}{\partial \dot{q}_i}\dot{q}_i + \dfrac{\partial L}{\partial \dot{q}_i}\ddot{q}_i\right). \label{DeltaL2}
+\end{align}
+Substituting Equations \eqref{canmom} into Equation \eqref{DeltaL2} yields:
+\begin{align}
+\Delta L &\approx \epsilon\sum_{i=1}^n \left(\dfrac{dp_i}{dt} \dot{q}_i + p_i \ddot{q}_i\right)\\
+&= \epsilon\sum_{i=1}^n \left(\dot{p}_i \dot{q}_i + p_i \ddot{q}_i\right). \label{DeltaL3}
+\end{align}
+We can rewrite the bracketed expression on the right-hand side of Equation \eqref{DeltaL3} using the product rule of differentiation as:
+\begin{align}
+\Delta L &\approx \epsilon\sum_{i=1}^n \dfrac{d}{dt}\left(p_i \dot{q}_i\right) \\
 &= \epsilon\dfrac{d}{dt}\sum_{i=1}^n p_i \dot{q}_i.
 \end{align}
 Hence if $L$ does not change in time, we get:
@@ -370,7 +385,7 @@ $L$ does not change, so $\dfrac{dL}{dt}=0$, too. Hence:
 \begin{align}
 \dfrac{d}{dt} \left(\sum_{i=1}^n p_i \dot{q}_i - L\right) &= 0.\label{constE}
 \end{align}
-Interestingly, $\displaystyle\sum_{i=1}^n p_i \dot{q}_i$ is twice the kinetic energy of our system. Hence if we substitute Equation \eqref{L} into Equation \eqref{constE}, we obtain:
+Interestingly, $\displaystyle\sum_{i=1}^n p_i \dot{q}_i=2T$, that is it is twice the kinetic energy of our system. Hence if we substitute Equation \eqref{L} into Equation \eqref{constE}, we obtain:
 \begin{align}
 \dfrac{d}{dt} \left(2T-(T-V)\right) &= 0 \nonumber\\
 \dfrac{d}{dt} \left(T+V\right) &= 0.\label{constE2}
