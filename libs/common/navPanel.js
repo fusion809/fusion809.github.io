@@ -9,39 +9,36 @@ function toggleTOC() {
 }
 
 function addH1ToTOC(tocPanel, tocList, headers) {
-    var i = 0;
-    headers.forEach(h => {
-        if (!h.id) h.id = h.textContent.trim().replace(/\s+/g, "-").toLowerCase();
-        let label = h.textContent.trim();
-        if (!label) return;
-        if (h.tagName === "H1") {
-            var text = '<span id="h1_toc">' + label + '</span>'
-        } else {
-            return;
-        }
-        if (i == 0) {
-            tocPanel.insertAdjacentHTML("afterbegin", `<a href="#${h.id}">${text}</a>`);
-        } else {
-            const li = document.createElement("li");
-            var text = label;
-            li.innerHTML = `<a href="#${h.id}">${text}</a>`;
-            tocList.appendChild(li);
-        }
-        i++;
-    });
+    const allHeaders = headers || tocList;
+    if (!allHeaders || !allHeaders.length) return;
+    const titleH1 = allHeaders.find(h => h.tagName === "H1" || h.closest(".header"));
+    if (!titleH1) return;
+    if (!titleH1.id) titleH1.id = titleH1.textContent.trim().replace(/\s+/g, "-").toLowerCase();
+    let label = titleH1.textContent.trim();
+    if (!label) return;
+    var text = '<span id="h1_toc">' + label + '</span>';
+    tocPanel.insertAdjacentHTML("afterbegin", `<a href="#${titleH1.id}">${text}</a>`);
 }
+
 function addHeadersToTOC(tocList, headers) {
+    let titleH1Skipped = false;
     headers.forEach(h => {
         if (!h.id) h.id = h.textContent.trim().replace(/\s+/g, "-").toLowerCase();
-        const li = document.createElement("li");
         let label = h.textContent.trim();
         if (!label) return;
-        if (h.tagName === "H1") {
+
+        // Skip the very first H1 (the page title), as it is rendered at the top of the navigation panel
+        if (!titleH1Skipped && (h.tagName === "H1" || h.closest(".header"))) {
+            titleH1Skipped = true;
             return;
-        } else {
-            var text = label;
         }
-        li.innerHTML = `<a href="#${h.id}">${text}</a>`;
+
+        const match = h.tagName.match(/^H(\d)$/i);
+        const level = match ? parseInt(match[1], 10) : 1;
+        const prefix = level > 1 ? "-".repeat(level - 1) : "";
+
+        const li = document.createElement("li");
+        li.innerHTML = `<a href="#${h.id}">${prefix}${label}</a>`;
         tocList.appendChild(li);
     });
 }
@@ -49,6 +46,7 @@ function addHeadersToTOC(tocList, headers) {
 function addTablesToTOC(tocList, tables) {
     tables.forEach(table => {
         const id = table.id;
+        if (!id || table.classList.contains("fndef") || id.startsWith("fndef") || id.startsWith("fn:")) return;
         const suffix = id;
         const infoEl = document.getElementById("info" + suffix);
         var label;
@@ -65,7 +63,6 @@ function addTablesToTOC(tocList, tables) {
             suff = suff + ".";
             label = suff.charAt(0).toUpperCase() + suff.slice(1)
         }
-        if (!table.id) return;
         const li = document.createElement("li");
         li.innerHTML = `<a href="#${id}">${label.replace(/container/gi, "animation").trim()}</a>`;
 
@@ -120,7 +117,7 @@ function generateContLabel(id, content) {
         label = "Phase plot of R vs I."
     } else if (/phasePlot/.test(content)) {
         let suff = rawSuffix.replace(/phasePlot/, "").replace(/([A-Z])/g, (match) => ' ' + match.toLowerCase()).trim();
-        if (suff) {    
+        if (suff) {
             suff = suff.replace(/\s([a-zA-Z]*\d)$/, ' vs $1').replace(/\s([a-zA-Z]*)$/, ' vs $1');
             suff = suff.replace(/([a-zA-Z])(\d)$/g, '$1<sub>$2</sub>');
             suff = suff.replace(/d([a-zA-Z0-9]*)/, "d$1/dt")
@@ -170,7 +167,7 @@ function createTOC() {
     tocPanel.innerHTML = '<ul id="toc-list" style="list-style: none; padding-left: 0;"></ul>';
     const headers = [...document.querySelectorAll('h1, h2, h3:not(div.page-foot h3):not(div[id^="container"] h3), h4:not(div.page-foot h4), h5')];
     const containers = [...document.querySelectorAll("div[id^='container']")];
-    const tables = [...document.querySelectorAll("table")];
+    const tables = [...document.querySelectorAll("table:not(.fndef):not([id^='fndef'])")];
     const tocList = document.getElementById("toc-list");
     addH1ToTOC(tocPanel, tocList, headers);
     addHeadersToTOC(tocList, headers);
@@ -206,46 +203,46 @@ document.addEventListener("DOMContentLoaded", function () {
     numberFiguresAndReferences();
     const sectionMap = new Map(); // ID → entry
     const tocLinks = document.querySelectorAll("#toc-list a");
-    
+
     const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        const id = entry.target.getAttribute("id");
-        if (!id) return;
+        entries.forEach(entry => {
+            const id = entry.target.getAttribute("id");
+            if (!id) return;
 
-        if (entry.isIntersecting) {
-            sectionMap.set(id, entry);
-        } else {
-            sectionMap.delete(id);
+            if (entry.isIntersecting) {
+                sectionMap.set(id, entry);
+            } else {
+                sectionMap.delete(id);
+            }
+        });
+
+        let bestId = null;
+        let bestRatio = 0;
+        let bestTop = Infinity;
+
+        sectionMap.forEach((entry, id) => {
+            const ratio = entry.intersectionRatio;
+            const top = entry.boundingClientRect.top;
+
+            // Prefer highest visible ratio, break ties with top position
+            if (ratio > bestRatio || (ratio === bestRatio && top < bestTop)) {
+                bestRatio = ratio;
+                bestTop = top;
+                bestId = id;
+            }
+        });
+
+        tocLinks.forEach(link => link.classList.remove("active"));
+        if (bestId) {
+            const activeLink = document.querySelector(`#toc-list a[href="#${bestId}"]`);
+            if (activeLink) activeLink.classList.add("active");
         }
-    });
-
-    let bestId = null;
-    let bestRatio = 0;
-    let bestTop = Infinity;
-
-    sectionMap.forEach((entry, id) => {
-        const ratio = entry.intersectionRatio;
-        const top = entry.boundingClientRect.top;
-
-        // Prefer highest visible ratio, break ties with top position
-        if (ratio > bestRatio || (ratio === bestRatio && top < bestTop)) {
-            bestRatio = ratio;
-            bestTop = top;
-            bestId = id;
-        }
-    });
-
-    tocLinks.forEach(link => link.classList.remove("active"));
-    if (bestId) {
-        const activeLink = document.querySelector(`#toc-list a[href="#${bestId}"]`);
-        if (activeLink) activeLink.classList.add("active");
-    }
     }, {
         threshold: [0.1, 0.25, 0.5, 0.75], // tracks how much is visible
         rootMargin: "0px 0px -30% 0px" // helps delay early triggering
     });
 
-    document.querySelectorAll("div[id^='container'], a[id^='anchor-'], h1, h2, h3, h4, h5, table").forEach(container => {
+    document.querySelectorAll("div[id^='container'], a[id^='anchor-'], h1, h2, h3, h4, h5, table:not(.fndef):not([id^='fndef'])").forEach(container => {
         observer.observe(container);
     });
 });
