@@ -60,7 +60,7 @@ Kinetic energy is a homogeneous function, in terms of $\dot{q}_i$, of second ord
 \begin{align}
 T &= \sum_{i=1}^n \sum_{j=1}^n a_{ij} \dot{q}_i \dot{q}_j.
 \end{align}
-Hence:
+Here also $a_{ij}$ refers to coefficients that do not depend on $\dot{q}_i$. Hence:
 \begin{align}
 \sum_{i=1}^n \dot{q}_i \dfrac{\partial T}{\partial \dot{q}_i} &= 2T. \label{ETheoremKin}
 \end{align}
