@@ -3,7 +3,7 @@ Noether's theorem essentially states that for every continuous symmetry in the L
 
 \begin{align}
 L(q_i(t+\epsilon), \dot{q}_i(t+\epsilon)) &\approx L(q_i(t), \dot{q}_i(t)) + \dfrac{dL}{dt} \epsilon \\
-&= L(q_i(t), \dot{q}_i(t)) + \sum_{i=1}^n\dfrac{\partial L}{\partial q_i} \dfrac{dq_i}{dt} \epsilon + \dfrac{\partial L}{\partial \dot{q}_i} \dfrac{d\dot{q}_i}{dt} \epsilon \label{Lshift}..
+&= L(q_i(t), \dot{q}_i(t)) + \sum_{i=1}^n\dfrac{\partial L}{\partial q_i} \dfrac{dq_i}{dt} \epsilon + \dfrac{\partial L}{\partial \dot{q}_i} \dfrac{d\dot{q}_i}{dt} \epsilon \label{Lshift}.
 \end{align}
 Subtracting $L(q_i(t), \dot{q}_i(t))$ from both sides of Equation \eqref{Lshift} yields:
 \begin{align}
@@ -45,7 +45,39 @@ $L$ does not change, so $\dfrac{dL}{dt}=0$, too. Hence:
 \begin{align}
 \dfrac{d}{dt} \left(\sum_{i=1}^n p_i \dot{q}_i - L\right) &= 0.\label{constE}
 \end{align}
-Interestingly, $\displaystyle\sum_{i=1}^n p_i \dot{q}_i=2T$, that is it is twice the kinetic energy of our system. Hence if we substitute Equation \eqref{L} into Equation \eqref{constE}, we obtain:
+Interestingly, $\displaystyle\sum_{i=1}^n p_i \dot{q}_i=2T$, that is it is twice the kinetic energy of our system. We can establish this identity using Euler's theorem for homogeneous functions. 
+
+Say we have a homogeneous function $f$ of degree $m$ of the form:
+\begin{align*}
+f = a_{m+1,1,1,...,1} x_1^m + a_{m,2,1,...,1}x_1^{m-1}x_2 + a_{m-1,2,2,...,1}x_1^{m-2}x_2 x_3 + ... + a_{1,m+1,1,...,1}x_2^m  + ... + a_{1, 1, 1, ..., m+1}x_n^m
+\end{align*}
+where $a_{i,j,k,...,}$ are coefficients that do not depend on our variables. In other words, $f$ is a polynomial function of $x_i$ ($i\in\{1, 2, 3, ..., n\}$) with a maximum total power of $m$. 
+Then Euler's theorem states that:
+\begin{align}
+\sum_{i=1}^n x_i \dfrac{\partial f}{\partial x_i} &= mf. 
+\end{align}
+Kinetic energy is a homogeneous function, in terms of $\dot{q}_i$, of second order, specifically it can be written as:
+\begin{align}
+T &= \sum_{i=1}^n \sum_{j=1}^n a_{ij} \dot{q}_i \dot{q}_j.
+\end{align}
+Hence:
+\begin{align}
+\sum_{i=1}^n \dot{q}_i \dfrac{\partial T}{\partial \dot{q}_i} &= 2T. \label{ETheoremKin}
+\end{align}
+Potential energy is independent of $\dot{q}_i$ and hence:
+\begin{align}
+\dfrac{\partial L}{\partial \dot{q}_i}&=\dfrac{\partial T}{\partial \dot{q}_i}.\label{LdotqTdotqequiv}
+\end{align}
+Plugging Equations \eqref{LdotqTdotqequiv} into Equations \eqref{ETheoremKin} gives:
+\begin{align}
+\sum_{i=1}^n \dot{q}_i \dfrac{\partial L}{\partial \dot{q}_i} &= 2T. \label{LETheoremKin}
+\end{align}
+Substituting Equations \eqref{canmom} into Equations \eqref{LETheoremKin} we get:
+\begin{align}
+\sum_{i=1}^n p_i \dot{q}_i &= 2T
+\end{align}
+
+Hence if we substitute Equation \eqref{L} into Equation \eqref{constE}, we obtain:
 \begin{align}
 \dfrac{d}{dt} \left(2T-(T-V)\right) &= 0 \nonumber\\
 \dfrac{d}{dt} \left(T+V\right) &= 0.\label{constE2}
