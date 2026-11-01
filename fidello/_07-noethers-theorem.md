@@ -52,7 +52,7 @@ Say we have a homogeneous function $f$ of degree $m$ of the form:
 f = a_{m+1,1,1,...,1} x_1^m + a_{m,2,1,...,1}x_1^{m-1}x_2 + a_{m-1,2,2,...,1}x_1^{m-2}x_2 x_3 + ... + a_{1,m+1,1,...,1}x_2^m  + ... + a_{1, 1, 1, ..., m+1}x_n^m
 \end{align*}
 where $a_{i,j,k,...,}$ are coefficients that do not depend on our variables. In other words, $f$ is a polynomial function of $x_i$ ($i\in\{1, 2, 3, ..., n\}$) with a maximum total power of $m$. 
-Then Euler's theorem states that:
+Then Euler's theorem states that:[^2]
 \begin{align}
 \sum_{i=1}^n x_i \dfrac{\partial f}{\partial x_i} &= mf. 
 \end{align}

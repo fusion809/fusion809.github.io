@@ -22,4 +22,5 @@
 \includemd{fidello/_07-noethers-theorem.md}
 
 # Reference list
-[^1]: Cline D. (2026). [15.2: Poisson bracket Representation of Hamiltonian Mechanics](https://phys.libretexts.org/Bookshelves/Classical_Mechanics/Variational_Principles_in_Classical_Mechanics_(Cline)/15%3A_Advanced_Hamiltonian_Mechanics/15.02%3A_Poisson_bracket_Representation_of_Hamiltonian_Mechanics). In *Variational Principles in Classical Mechanics*. LibreTexts.
+[^1]: Cline D (2026). [15.2: Poisson bracket Representation of Hamiltonian Mechanics](https://phys.libretexts.org/Bookshelves/Classical_Mechanics/Variational_Principles_in_Classical_Mechanics_(Cline)/15%3A_Advanced_Hamiltonian_Mechanics/15.02%3A_Poisson_bracket_Representation_of_Hamiltonian_Mechanics). In *Variational Principles in Classical Mechanics*. LibreTexts.
+[^2]: Tatum J (2026). [2.6: Euler’s Theorem for Homogeneous Functions](https://phys.libretexts.org/Bookshelves/Thermodynamics_and_Statistical_Mechanics/Heat_and_Thermodynamics_(Tatum)/02%3A_Partial_Derivatives/2.06%3A_Euler's_Theorem_for_Homogeneous_Functions). In *Heat and Thermodynamics*. LibreTexts. 
