@@ -5,9 +5,9 @@ H &= T + V.\label{H}
 \end{align}
 Which is the total energy of our system. I should say that this is *usually* the form of the Hamiltonian, more generally it is defined as:
 \begin{align}
-H &= \sum_{i=1}^n p_i \dot{q}_i - L. \label{HLeq}
+H &\triangleq \sum_{i=1}^n p_i \dot{q}_i - L. \label{HLeq}
 \end{align}
-Equation \eqref{HLeg} is called the Legendre transformation of the Lagrangian. Another difference from Lagrangian mechanics is that we define $H$ in terms of $p_i$ and $q_i$ instead of $q_i$ and $\dot{q}_i$. The equations of motion with no non-conservative forces are:
+Equation \eqref{HLeq} is called the Legendre transformation of the Lagrangian. Another difference from Lagrangian mechanics is that we define $H$ in terms of $p_i$ and $q_i$ instead of $q_i$ and $\dot{q}_i$. The equations of motion with no non-conservative forces are:
 \begin{align}
 \dot{p}_i &= -\dfrac{\partial H}{\partial q_i} \label{Heq1}\\
 \dot{q}_i &= \dfrac{\partial H}{\partial p_i}.\label{Heq2}
