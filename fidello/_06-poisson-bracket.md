@@ -2,20 +2,24 @@
 Poisson brackets provide us an elegant and powerful way to rewrite Hamilton's equations. If we have $n$ degrees of freedom and two functions $f$ and $g$ that depend on $p_i$ and $q_i$:[^1] 
 
 \begin{align}
-\{f, g\} &= \sum_{i=1}^n \left( \dfrac{\partial f}{\partial q_i} \dfrac{\partial g}{\partial p_i} - \dfrac{\partial f}{\partial p_i}\dfrac{\partial g}{\partial q_i} \right). \label{Poissonfg}
+\{f, g\} &\triangleq \sum_{i=1}^n \left( \dfrac{\partial f}{\partial q_i} \dfrac{\partial g}{\partial p_i} - \dfrac{\partial f}{\partial p_i}\dfrac{\partial g}{\partial q_i} \right). \label{Poissonfg}
 \end{align}
 
 Poisson brackets also have several interesting properties, such as antisymmetry:
 \begin{align}
 \{A, B\} &= -\{B, A\}. \label{asym}
 \end{align}
+Consequently:
+\begin{align}
+\{A,A\} &= 0.
+\end{align}
 Further, assuming each of the coordinates of the phase space are independent, it follows that:
 \begin{align}
-\{q_k, p_k\} &= \sum_{i=1}^n \left( \dfrac{\partial q_k}{\partial q_i} \dfrac{\partial p_k}{\partial p_i} - \dfrac{\partial q_k}{\partial p_i} \dfrac{\partial p_k}{\partial q_i} \right) \nonumber\\
-&= \sum_{i=1}^n \delta_{ik}\delta_{ik} \nonumber\\
-&= 1. \label{qkpk}
+\{q_j, p_k\} &= \sum_{i=1}^n \left( \dfrac{\partial q_j}{\partial q_i} \dfrac{\partial p_k}{\partial p_i} - \dfrac{\partial q_j}{\partial p_i} \dfrac{\partial p_k}{\partial q_i} \right) \nonumber\\
+&= \sum_{i=1}^n \delta_{jk}\delta_{ik} \nonumber\\
+&= \delta_{ij}. \label{qjpk}
 \end{align}
-Where $\delta_{ik}$ is the Kronecker delta function. It is equal to zero if $i\neq k$ and one if $i=k$. 
+Above we used $\delta_{ik}$ to denote the Kronecker delta function. It is equal to one if its arguments are equal and zero otherwise. 
 \begin{align}
 \{q_j, q_k\} &= \sum_{i=1}^n \left( \dfrac{\partial q_j}{\partial q_i} \dfrac{\partial q_k}{\partial p_i} - \dfrac{\partial q_j}{\partial p_i} \dfrac{\partial q_k}{\partial q_i} \right) \nonumber\\
 &= 0 \label{qjqk}\\
