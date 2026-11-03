@@ -64,7 +64,7 @@ Here also $a_{ij}$ refers to coefficients that do not depend on $\dot{q}_i$. Hen
 \begin{align}
 \sum_{i=1}^n \dot{q}_i \dfrac{\partial T}{\partial \dot{q}_i} &= 2T. \label{ETheoremKin}
 \end{align}
-Potential energy is independent of $\dot{q}_i$ and hence:
+If we assume that potential energy is independent of $\dot{q}_i$, then:
 \begin{align}
 \dfrac{\partial L}{\partial \dot{q}_i}&=\dfrac{\partial T}{\partial \dot{q}_i}.\label{LdotqTdotqequiv}
 \end{align}
@@ -86,4 +86,4 @@ Hence substituting Equation \eqref{H} into Equation \eqref{constE2} yields:
 \begin{align}
 \dfrac{dH}{dt} &= 0.\label{constE3}
 \end{align}
-In other words, we obtain that the Hamiltonian &mdash; the total energy of the system &mdash; does not change, hence it is conserved.
+So we see that Equations \eqref{H} and \eqref{HLeq} are equivalent if and only if potential energy is independent of generalized velocity. We also obtain that the Hamiltonian &mdash; which is the total energy of the system if potential energy is independent of generalized velocity &mdash; does not change when the Lagrangian is time symmetric, hence it is conserved.
