@@ -787,6 +787,15 @@ for (i, p) in enumerate(Franklin.LX_INTERNAL_ENVIRONMENTS)
 end
 Franklin.GLOBAL_LXDEFS["align"] = Franklin.LxDef("align", 0, raw"\[\begin{_franklin_align_}" => raw"\end{_franklin_align_}\]")
 
+# Redefine \nonumber to take 0 arguments (like in standard LaTeX/KaTeX), so Franklin does not
+# expect \nonumber{...} with 1 argument inside math blocks.
+for (i, p) in enumerate(Franklin.LX_INTERNAL_COMMANDS)
+    if p.first == "nonumber"
+        Franklin.LX_INTERNAL_COMMANDS[i] = "nonumber" => Franklin.LxDef("nonumber", 0, raw"\notag")
+    end
+end
+Franklin.GLOBAL_LXDEFS["nonumber"] = Franklin.LxDef("nonumber", 0, raw"\notag")
+
 """
 Split LaTeX content on `\\\\` outside of nested environments (like pmatrix, bmatrix, etc.)
 and curly braces.

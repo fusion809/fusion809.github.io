@@ -45,7 +45,7 @@ $L$ does not change, so $\dfrac{dL}{dt}=0$, too. Hence:
 \begin{align}
 \dfrac{d}{dt} \left(\sum_{i=1}^n p_i \dot{q}_i - L\right) &= 0.\label{constE}
 \end{align}
-Interestingly, $\displaystyle\sum_{i=1}^n p_i \dot{q}_i=2T$, that is it is twice the kinetic energy of our system. We can establish this identity using Euler's theorem for homogeneous functions. 
+We could now use Equation \eqref{HLeq} to simplify Equation \eqref{constE}, but I would like to use this as an opportunity to show you how Equations \eqref{H} and \eqref{HLeq} are usually equivalent. Interestingly, $\displaystyle\sum_{i=1}^n p_i \dot{q}_i=2T$, that is it is twice the kinetic energy of our system. We can establish this identity using Euler's theorem for homogeneous functions. 
 
 Say we have a homogeneous function $f$ of degree $m$ of the form:
 \begin{align*}
