@@ -1017,23 +1017,27 @@ Core.eval(Franklin, quote
         return parents
     end
 
-    # Skip standalone processing of fragments starting with '_'
+    # Override process_file_err to suppress standalone rendering of _*.md fragments.
+    # Without this, Franklin writes an HTML file for every fragment on disk, which
+    # causes LiveServer to broadcast a reload to ALL connected browsers -- even those
+    # viewing the parent page that includes the fragment.  Skipping the write means
+    # only the parent page rebuild (done in the fd_loop wrapper below) triggers a reload.
     function process_file_err(case::Symbol, fpair::Pair{String, String},
                               head::AS="", pgfoot::AS="", foot::AS="",
                               t::Float64=0.0)::Nothing
         inp = joinpath(fpair...)
 
-        layout_p = try path(:layout) catch; "" end
+        layout_p = try path(:layout)   catch; "" end
         lit_p    = try path(:literate) catch; "" end
-        rss_p    = try path(:rss) catch; "" end
+        rss_p    = try path(:rss)      catch; "" end
 
         if (!isempty(layout_p) && startswith(inp, layout_p)) ||
-           (!isempty(lit_p)    && startswith(inp, lit_p)) ||
-           (!isempty(rss_p)    && startswith(inp, rss_p)) ||
+           (!isempty(lit_p)    && startswith(inp, lit_p))    ||
+           (!isempty(rss_p)    && startswith(inp, rss_p))    ||
            endswith(inp, "config.md") ||
-           endswith(inp, "utils.jl") ||
+           endswith(inp, "utils.jl")  ||
            (case == :md && startswith(fpair.second, "_"))
-
+            # Skip: infra / literate / rss / fragment files don't need a standalone page.
             @goto end_copyblock
         end
 
@@ -1045,9 +1049,9 @@ Core.eval(Franklin, quote
             FD_ENV[:SOURCE] = get_rpath(inp)
             set_cur_rpath(joinpath(fpair...))
             set_page_env()
-            raw_html = read(inp, String)
-            cond_add = globvar(:generate_sitemap)::Bool && FD_ENV[:FULL_PASS]::Bool
-            cond_add && add_sitemap_item(html=true)
+            raw_html  = read(inp, String)
+            cond_add  = globvar(:generate_sitemap)::Bool && FD_ENV[:FULL_PASS]::Bool
+            cond_add  && add_sitemap_item(html=true)
             proc_html = convert_html(raw_html) |> postprocess_page
             write(outp, proc_html)
         else
@@ -1057,116 +1061,62 @@ Core.eval(Franklin, quote
             @label end_copyblock
         end
         FD_ENV[:SOURCE] = ""
-        FD_ENV[:FULL_PASS] || FD_ENV[:SILENT_MODE] || rprint("→ page updated [✓]")
+        FD_ENV[:FULL_PASS] || FD_ENV[:SILENT_MODE] || rprint("\u2192 page updated [\u2713]")
         return nothing
     end
 
-    function fd_loop(
-                cycle_counter::Int,
-                ::LiveServer.FileWatcher,
-                watched_files::NamedTuple
-                )::Nothing
-        verb = FD_ENV[:VERB]
-        if mod(cycle_counter, 30) == 0
-            for d ∈ watched_files, (fpair, _) ∈ d
-                fpath = joinpath(fpair...)
-                if !isfile(fpath)
-                    delete!(d, fpair)
-                    rp = splitext(get_rpath(fpath))[1]
-                    haskey(ALL_PAGE_VARS, rp) && delete!(ALL_PAGE_VARS, rp)
-                end
-            end
-            scan_input_dir!(watched_files..., verb; in_loop=true)
-        else
-            layout = path(:layout)
-            for (case, dict) ∈ pairs(watched_files), (fpair, t) ∈ dict
-                fpath = joinpath(fpair...)
-                cur_t = mtime(fpath)
-                cur_t <= t && continue
-
-                fmsg = rpad("→ file $(fpath[length(FOLDER_PATH[])+1:end]) was modified ", 30)
-                verb && print(fmsg)
-                dict[fpair] = cur_t
-
-                if haskey(watched_files[:infra], fpair) && splitext(fpair.second)[2] != ".css"
-                    verb && println("→ full pass...")
-                    start = time()
-                    fd_fullpass(watched_files)
-                    if verb
-                        print_final(rpad("✔ full pass...", 15), start)
-                        println("")
-                    end
-                elseif haskey(watched_files[:literate], fpair)
-                    fmsg = fmsg * rpad("→ updating... ", 15)
-                    verb && print("\r" * fmsg)
-                    start = time()
-                    literate_path = splitext(unixify(joinpath(fpair...)))[1]
-                    head   = read(joinpath(layout, "head.html"),      String)
-                    pgfoot = read(joinpath(layout, "page_foot.html"), String)
-                    foot   = read(joinpath(layout, "foot.html"),      String)
-                    for mdfpair in keys(watched_files.md)
-                        content = read(joinpath(mdfpair...), String)
-                        for m in eachmatch(r"\{(.*?)(\.jl)?\}", content)
-                            if endswith(literate_path, m.captures[1])
-                                process_file(:md, mdfpair, head, pgfoot, foot, cur_t)
-                                break
-                            end
-                        end
-                    end
-                    verb && print_final(fmsg, start)
-                else
-                    head   = read(joinpath(layout, "head.html"),      String)
-                    pgfoot = read(joinpath(layout, "page_foot.html"), String)
-                    foot   = read(joinpath(layout, "foot.html"),      String)
-
-                    rel_fpath = case == :md ? norm_site_rpath(get_rpath(fpath)) : ""
-                    parent_pages = isempty(rel_fpath) ? Set{String}() : get_parent_pages(rel_fpath)
-                    is_fragment = (case == :md) && startswith(fpair.second, "_")
-
-                    if !is_fragment
-                        fmsg_cur = fmsg * rpad("→ updating... ", 15)
-                        verb && print("\r" * fmsg_cur)
-                        start = time()
-                        process_file(case, fpair, head, pgfoot, foot, cur_t)
-                        verb && print_final(fmsg_cur, start)
-                    end
-
-                    if !isempty(parent_pages)
-                        for parent_rp in parent_pages
-                            parent_full = joinpath(path(:folder), parent_rp)
-                            isfile(parent_full) || continue
-                            parent_dir, parent_file = splitdir(parent_full)
-                            parent_fpair = parent_dir => parent_file
-
-                            p_msg = rpad("→ rebuilding $(parent_rp)... ", 30)
-                            verb && print("\n" * p_msg)
-                            start = time()
-                            process_file(:md, parent_fpair, head, pgfoot, foot, cur_t)
-                            if haskey(watched_files.md, parent_fpair)
-                                watched_files.md[parent_fpair] = cur_t
-                            end
-                            verb && print_final(p_msg, start)
-                        end
-                    end
-                end
-            end
-        end
-        return nothing
+     # Wrap fd_loop once to rebuild parent pages when an included fragment changes.
+    # Only wrap once; guard against re-wrapping on each process_utils reload.
+    if !isdefined(Franklin, :_fd_loop_fragment_wrapped)
+        const _fd_loop_fragment_wrapped = Ref(false)
     end
 
-    # Override fd_fullpass to call scan_md_includes! after each full pass
-    # so that MD_INCLUDED_IN is populated with paths known.
-    let _orig_fd_fullpass = fd_fullpass
-        function fd_fullpass(watched_files::NamedTuple, join_to_prepath::String="")::Int
-            result = _orig_fd_fullpass(watched_files, join_to_prepath)
-            try
-                scan_md_includes!()
-            catch
+    if !_fd_loop_fragment_wrapped[]
+        _fd_loop_fragment_wrapped[] = true
+        let _orig_fd_loop = fd_loop
+            function fd_loop(cycle_counter::Int,
+                             fw::LiveServer.FileWatcher,
+                             watched_files::NamedTuple)::Nothing
+                # Snapshot changed fragment files BEFORE running normal loop.
+                changed_frags = String[]
+                if mod(cycle_counter, 30) != 0
+                    for (fpair, t) in watched_files.md
+                        startswith(fpair.second, "_") || continue
+                        fpath = joinpath(fpair...)
+                        mtime(fpath) > t || continue
+                        rp = try norm_site_rpath(get_rpath(fpath)) catch; "" end
+                        isempty(rp) || push!(changed_frags, rp)
+                    end
+                end
+
+                # Run normal Franklin file-watch loop.
+                _orig_fd_loop(cycle_counter, fw, watched_files)
+
+                isempty(changed_frags) && return nothing
+
+                # Rebuild parent pages of changed fragments.
+                layout = path(:layout)
+                head   = read(joinpath(layout, "head.html"),      String)
+                pgfoot = read(joinpath(layout, "page_foot.html"), String)
+                foot   = read(joinpath(layout, "foot.html"),      String)
+
+                for frag_rp in changed_frags
+                    for parent_rp in get_parent_pages(frag_rp)
+                        parent_full = joinpath(path(:folder), parent_rp)
+                        isfile(parent_full) || continue
+                        parent_dir, parent_file = splitdir(parent_full)
+                        parent_fpair = parent_dir => parent_file
+                        rprint("\u2192 rebuilding $(parent_rp) (included fragment changed)")
+                        process_file(:md, parent_fpair, head, pgfoot, foot, 0.0)
+                        # Use the parent's ACTUAL disk mtime so the loop
+                        # doesn't re-trigger a rebuild on the next iteration.
+                        if haskey(watched_files.md, parent_fpair)
+                            watched_files.md[parent_fpair] = mtime(parent_full)
+                        end
+                    end
+                end
+                return nothing
             end
-            return result
         end
     end
 end)
-
-# scan_md_includes! is called automatically at the start of each full pass
-# via the fd_fullpass override above. No need to call it here.

@@ -2,7 +2,7 @@
 Poisson brackets provide us an elegant and powerful way to rewrite Hamilton's equations. If we have $n$ degrees of freedom and two functions $f$ and $g$ that depend on $p_i$ and $q_i$:[^1] 
 
 \begin{align}
-\{f, g\} &\triangleq \sum_{i=1}^n \left( \dfrac{\partial f}{\partial q_i} \dfrac{\partial g}{\partial p_i} - \dfrac{\partial f}{\partial p_i}\dfrac{\partial g}{\partial q_i} \right). \label{Poissonfg}
+\{f, g\} &\stackrel{\text{def}}{=} \sum_{i=1}^n \left( \dfrac{\partial f}{\partial q_i} \dfrac{\partial g}{\partial p_i} - \dfrac{\partial f}{\partial p_i}\dfrac{\partial g}{\partial q_i} \right). \label{Poissonfg}
 \end{align}
 
 Poisson brackets also have several interesting properties, such as antisymmetry:
