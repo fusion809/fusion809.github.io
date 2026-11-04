@@ -906,7 +906,7 @@ Core.eval(Franklin, quote
                 end
             end
 
-            write(htmls, "~~~<div class=\"nonumber\" style=\"counter-reset: eqnum $last_num;\">\\[\\begin{align}\n" * join(new_lines, " \\\\\n") * "\n\\end{align}\\]</div>~~~")
+            write(htmls, "<div class=\"nonumber\" style=\"counter-reset: eqnum $last_num;\">\\[\\begin{align}\n" * join(new_lines, " \\\\\n") * "\n\\end{align}\\]</div>")
             return String(take!(htmls))
         end
 
@@ -921,8 +921,8 @@ Core.eval(Franklin, quote
             end
         end
 
-        inner = replace(inner, r"\\begin\{_franklin_align_\}" => raw"\begin{aligned}")
-        inner = replace(inner, r"\\end\{_franklin_align_\}" => raw"\end{aligned}")
+        inner = replace(inner, r"\\begin\{_franklin_align_\}" => raw"\begin{align}")
+        inner = replace(inner, r"\\end\{_franklin_align_\}" => raw"\end{align}")
 
         write(htmls, pm[3], convert_md_math(inner, lxdefs, from(β)), pm[4])
         return String(take!(htmls))
