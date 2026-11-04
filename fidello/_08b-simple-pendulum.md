@@ -11,7 +11,7 @@ Substituting into Equation \eqref{HJE} yields:
 \dfrac{\left(\dfrac{\partial S}{\partial \theta}\right)^2}{2ml^2}+mgl\sin{\theta} + \dfrac{\partial S}{\partial t} &= 0.
 \end{align*}
 
-Substituting Equation \eqref{HJE} yields:
+Substituting Equation \eqref{SWE} yields:
 
 \begin{align*}
 \dfrac{\left(\dfrac{dW}{d\theta}\right)^2}{2ml^2}+mgl\sin{\theta} -E &= 0.
