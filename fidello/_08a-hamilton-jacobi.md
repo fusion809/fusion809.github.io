@@ -1,5 +1,5 @@
 # Hamilton-Jacobi equation
-There is a final simulation of classical mechanics that I should probably cover. It is based around the so called Hamilton-Jacobi equation which is of the form:
+There is a final formulation of classical mechanics that I should probably cover. It is based around the so called Hamilton-Jacobi equation which is of the form:
 \begin{align}
 \dfrac{\partial S}{\partial t} + H\left(q_i, \dfrac{\partial S}{\partial q_i}, t\right) &= 0.\label{HJE}
 \end{align}
