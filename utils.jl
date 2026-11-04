@@ -653,6 +653,10 @@ Usage in a `.md` file:
 function lx_includemd(com, _)
     rpath = strip(Franklin.content(com.braces[1]))
     fpath = isabspath(rpath) ? rpath : joinpath(Franklin.path(:folder), rpath)
+    cur_p = get(Franklin.FD_ENV, :CUR_PATH, "")
+    if !isempty(cur_p)
+        Franklin.register_md_dependency(cur_p, rpath)
+    end
     return read(fpath, String)
 end
 
@@ -668,8 +672,12 @@ Usage in a `.md` file:
     {{include_md LFS/_motivations.md}}
 """
 function hfun_include_md(params)
-    rpath   = params[1]
+    rpath   = strip(params[1])
     fpath   = joinpath(Franklin.path(:folder), rpath)
+    cur_p   = get(Franklin.FD_ENV, :CUR_PATH, "")
+    if !isempty(cur_p)
+        Franklin.register_md_dependency(cur_p, rpath)
+    end
     content = read(fpath, String)
     return fd2html(content, internal=true)
 end
@@ -898,7 +906,7 @@ Core.eval(Franklin, quote
                 end
             end
 
-            write(htmls, "<div class=\"nonumber\" style=\"counter-reset: eqnum $last_num;\">\\[\\begin{align}\n" * join(new_lines, " \\\\\n") * "\n\\end{align}\\]</div>")
+            write(htmls, "~~~<div class=\"nonumber\" style=\"counter-reset: eqnum $last_num;\">\\[\\begin{align}\n" * join(new_lines, " \\\\\n") * "\n\\end{align}\\]</div>~~~")
             return String(take!(htmls))
         end
 
@@ -913,10 +921,252 @@ Core.eval(Franklin, quote
             end
         end
 
-        inner = replace(inner, r"\\begin\{_franklin_align_\}" => raw"\begin{align}")
-        inner = replace(inner, r"\\end\{_franklin_align_\}" => raw"\end{align}")
+        inner = replace(inner, r"\\begin\{_franklin_align_\}" => raw"\begin{aligned}")
+        inner = replace(inner, r"\\end\{_franklin_align_\}" => raw"\end{aligned}")
 
         write(htmls, pm[3], convert_md_math(inner, lxdefs, from(β)), pm[4])
         return String(take!(htmls))
     end
+
+    # ==============================================================================
+    # Included Markdown dependency tracking and automatic rebuilding
+    # ==============================================================================
+
+    if !isdefined(Franklin, :MD_INCLUDED_IN)
+        const MD_INCLUDED_IN = Dict{String, Set{String}}()
+    end
+
+    function norm_site_rpath(p::AbstractString)
+        s = replace(strip(p), '\\' => '/')
+        s = lstrip(s, '/')
+        if startswith(s, "./")
+            s = s[3:end]
+        end
+        return normpath(s)
+    end
+
+    function register_md_dependency(parent_rpath::AbstractString, child_rpath::AbstractString)
+        parent_norm = norm_site_rpath(parent_rpath)
+        child_norm  = norm_site_rpath(child_rpath)
+        if isempty(parent_norm) || isempty(child_norm) || parent_norm == child_norm
+            return
+        end
+        s = get!(MD_INCLUDED_IN, child_norm) do
+            Set{String}()
+        end
+        push!(s, parent_norm)
+    end
+
+    function scan_md_includes!()
+        root = try path(:folder) catch; pwd() end
+        site_dir = try path(:site) catch; joinpath(root, "__site") end
+        for (dir, _, files) in walkdir(root)
+            if (!isempty(site_dir) && startswith(dir, site_dir)) || occursin(".git", dir) || occursin("node_modules", dir)
+                continue
+            end
+            for file in files
+                if endswith(file, ".md")
+                    fpath = joinpath(dir, file)
+                    rel_parent = norm_site_rpath(relpath(fpath, root))
+                    content = try
+                        read(fpath, String)
+                    catch
+                        ""
+                    end
+                    for m in eachmatch(Regex("\\\\includemd\\{([^}]+)\\}"), content)
+                        register_md_dependency(rel_parent, strip(m.captures[1]))
+                    end
+                    for m in eachmatch(Regex("\\{\\{include_md\\s+([^}]+)\\}\\}"), content)
+                        register_md_dependency(rel_parent, strip(m.captures[1]))
+                    end
+                end
+            end
+        end
+    end
+
+    function get_parent_pages(child_rpath::AbstractString)
+        norm_child = norm_site_rpath(child_rpath)
+        parents = Set{String}()
+        queue = [norm_child]
+        visited = Set{String}([norm_child])
+
+        while !isempty(queue)
+            curr = popfirst!(queue)
+
+            matching_parents = Set{String}()
+            if haskey(MD_INCLUDED_IN, curr)
+                union!(matching_parents, MD_INCLUDED_IN[curr])
+            end
+            for (k, ps) in MD_INCLUDED_IN
+                if k == curr || normpath(k) == normpath(curr) || endswith(curr, "/" * k) || endswith(k, "/" * curr)
+                    union!(matching_parents, ps)
+                end
+            end
+
+            for p in matching_parents
+                if p ∉ visited
+                    push!(visited, p)
+                    push!(queue, p)
+                    _, pf = splitdir(p)
+                    if !startswith(pf, "_")
+                        push!(parents, p)
+                    end
+                end
+            end
+        end
+        return parents
+    end
+
+    # Skip standalone processing of fragments starting with '_'
+    function process_file_err(case::Symbol, fpair::Pair{String, String},
+                              head::AS="", pgfoot::AS="", foot::AS="",
+                              t::Float64=0.0)::Nothing
+        inp = joinpath(fpair...)
+
+        layout_p = try path(:layout) catch; "" end
+        lit_p    = try path(:literate) catch; "" end
+        rss_p    = try path(:rss) catch; "" end
+
+        if (!isempty(layout_p) && startswith(inp, layout_p)) ||
+           (!isempty(lit_p)    && startswith(inp, lit_p)) ||
+           (!isempty(rss_p)    && startswith(inp, rss_p)) ||
+           endswith(inp, "config.md") ||
+           endswith(inp, "utils.jl") ||
+           (case == :md && startswith(fpair.second, "_"))
+
+            @goto end_copyblock
+        end
+
+        outp = form_output_path(fpair.first, fpair.second, case)
+        if case == :md
+            FD_ENV[:SOURCE] = get_rpath(inp)
+            convert_and_write(fpair..., head, pgfoot, foot, outp)
+        elseif case == :html
+            FD_ENV[:SOURCE] = get_rpath(inp)
+            set_cur_rpath(joinpath(fpair...))
+            set_page_env()
+            raw_html = read(inp, String)
+            cond_add = globvar(:generate_sitemap)::Bool && FD_ENV[:FULL_PASS]::Bool
+            cond_add && add_sitemap_item(html=true)
+            proc_html = convert_html(raw_html) |> postprocess_page
+            write(outp, proc_html)
+        else
+            if !isfile(outp) || (mtime(outp) < t && !filecmp(inp, outp))
+                cp(inp, outp, force=true)
+            end
+            @label end_copyblock
+        end
+        FD_ENV[:SOURCE] = ""
+        FD_ENV[:FULL_PASS] || FD_ENV[:SILENT_MODE] || rprint("→ page updated [✓]")
+        return nothing
+    end
+
+    function fd_loop(
+                cycle_counter::Int,
+                ::LiveServer.FileWatcher,
+                watched_files::NamedTuple
+                )::Nothing
+        verb = FD_ENV[:VERB]
+        if mod(cycle_counter, 30) == 0
+            for d ∈ watched_files, (fpair, _) ∈ d
+                fpath = joinpath(fpair...)
+                if !isfile(fpath)
+                    delete!(d, fpair)
+                    rp = splitext(get_rpath(fpath))[1]
+                    haskey(ALL_PAGE_VARS, rp) && delete!(ALL_PAGE_VARS, rp)
+                end
+            end
+            scan_input_dir!(watched_files..., verb; in_loop=true)
+        else
+            layout = path(:layout)
+            for (case, dict) ∈ pairs(watched_files), (fpair, t) ∈ dict
+                fpath = joinpath(fpair...)
+                cur_t = mtime(fpath)
+                cur_t <= t && continue
+
+                fmsg = rpad("→ file $(fpath[length(FOLDER_PATH[])+1:end]) was modified ", 30)
+                verb && print(fmsg)
+                dict[fpair] = cur_t
+
+                if haskey(watched_files[:infra], fpair) && splitext(fpair.second)[2] != ".css"
+                    verb && println("→ full pass...")
+                    start = time()
+                    fd_fullpass(watched_files)
+                    if verb
+                        print_final(rpad("✔ full pass...", 15), start)
+                        println("")
+                    end
+                elseif haskey(watched_files[:literate], fpair)
+                    fmsg = fmsg * rpad("→ updating... ", 15)
+                    verb && print("\r" * fmsg)
+                    start = time()
+                    literate_path = splitext(unixify(joinpath(fpair...)))[1]
+                    head   = read(joinpath(layout, "head.html"),      String)
+                    pgfoot = read(joinpath(layout, "page_foot.html"), String)
+                    foot   = read(joinpath(layout, "foot.html"),      String)
+                    for mdfpair in keys(watched_files.md)
+                        content = read(joinpath(mdfpair...), String)
+                        for m in eachmatch(r"\{(.*?)(\.jl)?\}", content)
+                            if endswith(literate_path, m.captures[1])
+                                process_file(:md, mdfpair, head, pgfoot, foot, cur_t)
+                                break
+                            end
+                        end
+                    end
+                    verb && print_final(fmsg, start)
+                else
+                    head   = read(joinpath(layout, "head.html"),      String)
+                    pgfoot = read(joinpath(layout, "page_foot.html"), String)
+                    foot   = read(joinpath(layout, "foot.html"),      String)
+
+                    rel_fpath = case == :md ? norm_site_rpath(get_rpath(fpath)) : ""
+                    parent_pages = isempty(rel_fpath) ? Set{String}() : get_parent_pages(rel_fpath)
+                    is_fragment = (case == :md) && startswith(fpair.second, "_")
+
+                    if !is_fragment
+                        fmsg_cur = fmsg * rpad("→ updating... ", 15)
+                        verb && print("\r" * fmsg_cur)
+                        start = time()
+                        process_file(case, fpair, head, pgfoot, foot, cur_t)
+                        verb && print_final(fmsg_cur, start)
+                    end
+
+                    if !isempty(parent_pages)
+                        for parent_rp in parent_pages
+                            parent_full = joinpath(path(:folder), parent_rp)
+                            isfile(parent_full) || continue
+                            parent_dir, parent_file = splitdir(parent_full)
+                            parent_fpair = parent_dir => parent_file
+
+                            p_msg = rpad("→ rebuilding $(parent_rp)... ", 30)
+                            verb && print("\n" * p_msg)
+                            start = time()
+                            process_file(:md, parent_fpair, head, pgfoot, foot, cur_t)
+                            if haskey(watched_files.md, parent_fpair)
+                                watched_files.md[parent_fpair] = cur_t
+                            end
+                            verb && print_final(p_msg, start)
+                        end
+                    end
+                end
+            end
+        end
+        return nothing
+    end
+
+    # Override fd_fullpass to call scan_md_includes! after each full pass
+    # so that MD_INCLUDED_IN is populated with paths known.
+    let _orig_fd_fullpass = fd_fullpass
+        function fd_fullpass(watched_files::NamedTuple, join_to_prepath::String="")::Int
+            result = _orig_fd_fullpass(watched_files, join_to_prepath)
+            try
+                scan_md_includes!()
+            catch
+            end
+            return result
+        end
+    end
 end)
+
+# scan_md_includes! is called automatically at the start of each full pass
+# via the fd_fullpass override above. No need to call it here.

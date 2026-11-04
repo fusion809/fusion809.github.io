@@ -4,7 +4,7 @@ The Hamiltonian for the simple pendulum is:
 H &= T + V \\
 &= \dfrac{ml^2 \dot{\theta}^2}{2} + mgl\sin{\theta}. \label{Hsimp}
 \end{align}
-Problem is, however, that this is written in terms of $q_i$ and $\dot{q}_i$ not $q_i$ and $p_i$. First we need to determine what our canonical momentum is. Equations \eqref{canmom} yields:
+We can use Equation \eqref{H} to determine our Hamiltonian here because our potential energy, $V$, is independent of the generalized velocities. Problem is, however, that this is written in terms of $q_i$ and $\dot{q}_i$ not $q_i$ and $p_i$. First we need to determine what our canonical momentum is. Equations \eqref{canmom} yields:
 \begin{align}
 p_{\theta} &= \dfrac{\partial L}{\partial \dot{\theta}} \nonumber \\
 p_{\theta} &= ml^2\dot{\theta}. \label{pthetasimp}

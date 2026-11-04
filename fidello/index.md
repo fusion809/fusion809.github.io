@@ -20,6 +20,9 @@
 \includemd{fidello/_05b-simple-pendulum.md} 
 \includemd{fidello/_06-poisson-bracket.md}
 \includemd{fidello/_07-noethers-theorem.md}
+\includemd{fidello/_08a-hamilton-jacobi.md}
+\includemd{fidello/_08b-simple-pendulum.md}
+\includemd{fidello/_09-connections.md }
 
 # Reference list
 [^1]: Cline D (2026). [15.2: Poisson bracket Representation of Hamiltonian Mechanics](https://phys.libretexts.org/Bookshelves/Classical_Mechanics/Variational_Principles_in_Classical_Mechanics_(Cline)/15%3A_Advanced_Hamiltonian_Mechanics/15.02%3A_Poisson_bracket_Representation_of_Hamiltonian_Mechanics). In *Variational Principles in Classical Mechanics*. LibreTexts.

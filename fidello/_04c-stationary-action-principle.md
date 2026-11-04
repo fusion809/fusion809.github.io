@@ -5,20 +5,20 @@
 <figcaption>Some of the paths a system could take.</figcaption>
 </figure>
 ~~~
-The derivation of Equations \eqref{ELE} requires knowledge of a field of mathematics known as the calculus of variations as well as a physics principle known as the stationary action principle. If you are interested in learning more, I would suggest you check out Veritasium's video on this topic ([https://www.youtube.com/watch?v=Q10_srZ-pbs](https://www.youtube.com/watch?v=Q10_srZ-pbs)). 
+The derivation of Equations \eqref{ELE} requires knowledge of a field of mathematics known as the calculus of variations as well as a physics principle known as the stationary action principle. I will provide my own derivation here; although, I would suggest checking out Veritasium's video on this topic ([https://www.youtube.com/watch?v=Q10_srZ-pbs](https://www.youtube.com/watch?v=Q10_srZ-pbs)) as it provides a more accessible introduction to this topic.
 
-There is a quantity known as the action, which is denoted as $S$, that is defined as:
+There is a quantity known as the action &mdash; which is denoted as $S$ &mdash; that is defined as:
 \begin{align}
-    S &= \int_{t_0}^{t_f} L(q_i, \dot{q}_i, t) dt. \label{act}
+    S &\stackrel{\text{def}}{=} \int_{t_0}^{t_f} L(q_i, \dot{q}_i, t) dt. \label{act}
 \end{align}
 
-One interesting property of the action is that nature consistently sets it to its stationary point, and this is regardless of context. Regardless of whether we are examining the motion of planets with Newton's second law, or studying the behaviour of black holes with general relativity, or checking out the behaviour of subatomic particles, there is always an action that is at its stationary point. Traditionally, this stationary point is typically thought of as a minimum (hence why this is also known as the principle of **least** action), but strictly speaking it is not always a minimum. When you use the calculus of variations to find the stationary point of Equation \eqref{act}, Equations \eqref{ELE} pop out. 
+One interesting property of the action is that nature consistently sets it to its stationary point, and this is regardless of context. Regardless of whether we are examining the motion of planets with Newton's second law, or studying the behaviour of black holes with general relativity, or checking out the behaviour of subatomic particles, there is always an action that is at its stationary point. Traditionally, this stationary point is typically thought of as a minimum (hence why this is also known as the principle of **least** action), but strictly speaking it is not always a minimum. 
 
-I will also provide you my own derivation of Equations \eqref{ELE} using the principle of stationary action. Of all the paths that an object could explore, the one that it actually explores is the one that sets the action to its stationary point. Figure \figref{stationary-action} provides some example paths that we examine when applying the principle of stationary action. In the terminology of the calculus of variations, we can express the fact the action is at its stationary point as:
+Of all the paths that an object could explore, the one that it actually explores is the one that sets the action to its stationary point. Figure \figref{stationary-action} provides some example paths that we examine when applying the principle of stationary action. In the terminology of the calculus of variations, we can express the fact the action is at its stationary point as:
 \begin{align}
 \delta S &= 0.\label{deltaS}
 \end{align}
-This is analogous to saying, in regular calculus, that our function's first derivative is zero. 
+This is analogous to saying, in regular calculus, that our function's first derivative is zero. Which, as you may remember from your maths classes, is an equation we can solve to find the stationary point(s) of our function. 
 
 Say we add functions $\delta q_i$ to $q_i$, thereby adjusting the path our object takes. Crucially, however, the end times and end points of our path will be unchanged. The new, adjusted action we will denote by $S'$ and it is:
 \begin{align*}
@@ -43,4 +43,4 @@ We can denote this first-order approximation to how much $S$ changes as $\delta 
 \begin{align}
 \delta S &= \int_{t_0}^{t_f} \sum_{i=1}^n\delta q_i \left(\dfrac{\partial L}{\partial q_i} - \dfrac{d}{dt} \dfrac{\partial L}{\partial \dot{q}_i}\right) dt. \label{deltaSELE}
 \end{align}
-Equation \eqref{deltaSELE} will be zero irrespective of $\delta q_i$ if and only if Equations \eqref{ELE} hold.
+Hence $\delta S$ will equal zero irrespective of $\delta q_i$ if and only if Equations \eqref{ELE} hold. Hence from setting $\delta S=0$ we get the Euler-Lagrange equations. 
