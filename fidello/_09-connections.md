@@ -2,10 +2,10 @@
 ## Special relativity
 In special relativity, we can make relativistic corrections to kinetic energy in our Lagrangian and Hamiltonians. Namely, we can define it as:
 
-\begin{align}
-T &= \dfrac{mc^2}{\sqrt{1-\dfrac{v^2}{c^2}}} - mc^2.
-\end{align}
-As the $mc^2$ term is constant with respect to our generalized coordinates, generalized velocities and time. 
+\begin{align*}
+T &= \dfrac{mc^2}{\sqrt{1-\dfrac{v^2}{c^2}}} - mc^2 \\
+&= mc^2\left(\dfrac{1}{\sqrt{1-\dfrac{v^2}{c^2}}}-1\right).
+\end{align*}
 
 ## General relativity
 In general relativity, we can use the Einstein-Hilbert action to derive the Einstein field equations (EFE). The EFE are a series of partial differential equations that can be used to calculate the components of the metric tensor, $g_{\mu\nu}$. The metric tensor is a type of matrix with sixteen total components that allow us to define proper time in curved spacetime. It has sixteen components because $\mu$ and $\nu$ can take on four different values each, corresponding to the four dimensions of spacetime (e.g. in Cartesian coordinates they are $t$, $x$, $y$ and $z$), so that gives us $4\times 4=16$ combinations of possible $\mu$ and $\nu$ values. Proper time is analogous to distance in spacetime and is the time that passes locally for an observer. 
