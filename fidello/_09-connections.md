@@ -10,7 +10,7 @@ As the $mc^2$ term is constant with respect to our generalized coordinates, gene
 ## General relativity
 In general relativity, we can use the Einstein-Hilbert action to derive the Einstein field equations (EFE). The EFE are a series of partial differential equations that can be used to calculate the components of the metric tensor, $g_{\mu\nu}$. The metric tensor is a type of matrix with sixteen total components that allow us to define proper time in curved spacetime. It has sixteen components because $\mu$ and $\nu$ can take on four different values each, corresponding to the four dimensions of spacetime (e.g. in Cartesian coordinates they are $t$, $x$, $y$ and $z$), so that gives us $4\times 4=16$ combinations of possible $\mu$ and $\nu$ values. Proper time is analogous to distance in spacetime and is the time that passes locally for an observer. 
 
-I should mention, in case you are unfamiliar, that in relativity, the passage of time itself is relative. Objects travelling close to the speed of light or in powerful gravitational fields have time travel substantially slower than those at lower velocities and in weaker gravitational fields. 
+I should mention, in case you are unfamiliar, that in relativity, the passage of time itself is relative. Objects travelling close to the speed of light or in powerful gravitational fields have time pass substantially slower for them than those at lower velocities and in weaker gravitational fields. 
 
 The Einstein-Hilbert action is:
 \begin{align}
