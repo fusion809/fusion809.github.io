@@ -12,7 +12,7 @@ One major difference you may notice between the classical action and the Einstei
 Another application of action in general relativity is that it can be used to calculate the path an object will take in curved spacetime. As the path the object follows will be the path that maximizes its proper time. The action for this calculation is:
 
 \begin{align}
-S &= \int_{\lambda_0}^{\lambda_f} \sqrt{\Big| g_{\mu\nu} \dfrac{dx^{\mu}}{d\lambda} \dfrac{dx^{\nu}}{d\lambda}\Big|}d\lambda.
+S &= -mc \int_{\lambda_0}^{\lambda_f} \sqrt{\Big| g_{\mu\nu} \dfrac{dx^{\mu}}{d\lambda} \dfrac{dx^{\nu}}{d\lambda}\Big|}d\lambda.
 \end{align}
 
-Where $\lambda$ is an arbitrary parameter. Often we choose it to be proper time. Setting $\delta S=0$ yields the geodesic equations which are a series of ordinary differential equations that maximize proper time. 
+Why the $-mc$ coefficient? Well, the negative sign is to ensure that minimizing $S$ corresponds to maximizing the proper time. As for the $mc$, it is to get our units right. See the integral itself is in units of metres. $m$ is in units of kilograms and $c$ is in units of metres per second. Consequently our units overall are $\mathrm{kg} \cdot \mathrm{m}^2 \cdot \mathrm{s}^{-1}$. Action is in units of $\mathrm{J}\cdot \mathrm{s}$, where J denotes Joules, the SI standard units of energy. Joules are, in turn, defined as $\mathrm{kg}\cdot \mathrm{m}^2 \cdot \mathrm{s}^{-2}$. So $\mathrm{J}\cdot \mathrm{s}$ is $\mathrm{kg}\cdot \mathrm{m}^2 \cdot \mathrm{s}^{-1}$, which matches the units of our $S$. I should also explain that in this integral, $\lambda$ is an arbitrary parameter. Often we choose it to be proper time. Setting $\delta S=0$ yields the geodesic equations which are a series of ordinary differential equations that maximize proper time. 
