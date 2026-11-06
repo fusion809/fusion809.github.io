@@ -27,13 +27,13 @@ S &= \int_{\lambda_0}^{\lambda_f} \sqrt{\Big| g_{\mu\nu} \dfrac{dx^{\mu}}{d\lamb
 Where $\lambda$ is an arbitrary parameter. Often we choose it to be proper time. Setting $\delta S=0$ yields the geodesic equations which are a series of ordinary differential equations that maximize proper time. 
 
 ## Quantum mechanics
-We have seen in this article that there are multiple different formulations of classical mechanics. Similarly, there are multiple different formulations of quantum mechanics. One formulation of quantum mechanics is the path-integral formulation developed by Richard Feynmann. In it, we expect our particle or wave to explore all possible paths and we integrate and sum over all those paths in order to compute the probability amplitude of our particle. The exploration of all possible paths is a consequence of the randomness of quantum mechanics. Specifically, we compute the integral:
+We have seen in this article that there are multiple different formulations of classical mechanics. Similarly, there are multiple different formulations of quantum mechanics. One formulation of quantum mechanics is the path-integral formulation developed by Richard Feynmann. In it, we expect our particle or wave to explore all possible paths and we integrate (or sum) over all those paths in order to compute the probability amplitude of our particle. The exploration of all possible paths is a consequence of the randomness of quantum mechanics. Specifically, we compute the integral:
 
 \begin{align}
 K(\mathbf{x}_f, t_f; \mathbf{x}_i, t_i) &= \int_{\mathbf{x}(t_i)=\mathbf{x}_i}^{\mathbf{x}(t_f)=\mathbf{x}_f} e^{\frac{iS(\mathbf{x})}{\hbar}} \mathcal{D}\mathbf{x}.
 \end{align}
 
-Where $K$ is the propagator, which specifies the probability amplitude for travelling from $\mathbf{x}_i$ at time $t_i$ to $\mathbf{x}_f$ at time $t_f$. $S$ is the action of the particle, $\hbar$ is the reduced Planck's constant, $i$ is the imaginary number and $\mathcal{D}\mathbf{x}$ refers to the fact we are integrating and summing over all possible paths. The probability amplitude is a quantity that, if you take the absolute value of, and square this quantity you get the probability of the particle travelling from $\mathbf{x}_i$ at time $t_i$ to $\mathbf{x}_f$ at time $t_f$. 
+Where $K$ is the propagator, which specifies the probability amplitude for travelling from $\mathbf{x}_i$ at time $t_i$ to $\mathbf{x}_f$ at time $t_f$. $S$ is the action of the particle, $\hbar$ is the reduced Planck's constant, $i$ is the imaginary number and $\mathcal{D}\mathbf{x}$ refers to the fact we are integrating over all possible paths. The probability amplitude is a quantity that, if you take the absolute value of, and square this quantity you get the probability of the particle travelling from $\mathbf{x}_i$ at time $t_i$ to $\mathbf{x}_f$ at time $t_f$. 
 
 One major strength of the path-integral formulation of quantum mechanics is that it provides an explanation for how quantum mechanics gives rise to classical mechanics on larger scales. 
 
