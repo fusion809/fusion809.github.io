@@ -1,17 +1,17 @@
 # Noether's theorem
-Noether's theorem essentially states that for every continuous symmetry in the Lagrangian, there is a corresponding conservation law. For instance, time translation symmetry of the Lagrangian yields the conservation of energy. To show this, we will assume our Lagrangian does not explicitly depend on $t$. That is, $t$ itself does not appear directly in our Lagrangian. The only time dependence $L$ has on $t$ is through the dependence of $q_i$ and $\dot{q}_i$ on time. If the Lagrangian did explicitly depend on time, we would expect it not to have time translation symmetry. Say we increase time according to the transformation: $t\rightarrow t+\epsilon$. 
+Noether's theorem essentially states that for every continuous symmetry in the Lagrangian, there is a corresponding conservation law. For instance, time translation symmetry of the Lagrangian yields the conservation of energy. To show this, we will assume our Lagrangian does not explicitly depend on $t$. That is, $t$ itself does not appear directly in our Lagrangian. The only time dependence $L$ has on $t$ is through the dependence of $q_i$ and $\dot{q}_i$ on time. If the Lagrangian did explicitly depend on time, we would expect it not to have time translation symmetry. Say we increase time according to the transformation: $t\rightarrow t+\epsilon$ where $\epsilon$ is an infinitesimal change in $t$. 
 
 \begin{align}
-L(q_i(t+\epsilon), \dot{q}_i(t+\epsilon)) &\approx L(q_i(t), \dot{q}_i(t)) + \dfrac{dL}{dt} \epsilon \\
+L(q_i(t+\epsilon), \dot{q}_i(t+\epsilon)) &= L(q_i(t), \dot{q}_i(t)) + \dfrac{dL}{dt} \epsilon \\
 &= L(q_i(t), \dot{q}_i(t)) + \sum_{i=1}^n\dfrac{\partial L}{\partial q_i} \dfrac{dq_i}{dt} \epsilon + \dfrac{\partial L}{\partial \dot{q}_i} \dfrac{d\dot{q}_i}{dt} \epsilon \label{Lshift}.
 \end{align}
 Subtracting $L(q_i(t), \dot{q}_i(t))$ from both sides of Equation \eqref{Lshift} yields:
 \begin{align}
-L(q_i(t+\epsilon), \dot{q}_i(t+\epsilon)) - L(q_i(t), \dot{q}_i(t)) &\approx \sum_{i=1}^n\dfrac{\partial L}{\partial q_i} \dfrac{dq_i}{dt} \epsilon + \dfrac{\partial L}{\partial \dot{q}_i} \dfrac{d\dot{q}_i}{dt} \epsilon. \label{diffL}
+L(q_i(t+\epsilon), \dot{q}_i(t+\epsilon)) - L(q_i(t), \dot{q}_i(t)) &= \sum_{i=1}^n\dfrac{\partial L}{\partial q_i} \dfrac{dq_i}{dt} \epsilon + \dfrac{\partial L}{\partial \dot{q}_i} \dfrac{d\dot{q}_i}{dt} \epsilon. \label{diffL}
 \end{align}
-We will call the left-hand side of Equation \eqref{diffL} $\Delta L$, hence Equation \eqref{diffL} becomes:
+We will call the left-hand side of Equation \eqref{diffL} $dL$, hence Equation \eqref{diffL} becomes:
 \begin{align}
-\Delta L &\approx \sum_{i=1}^n \dfrac{\partial L}{\partial q_i} \dfrac{dq_i}{dt} \epsilon + \dfrac{\partial L}{\partial \dot{q}_i} \dfrac{d\dot{q}_i}{dt} \epsilon. \label{DeltaL1}
+dL &= \sum_{i=1}^n \dfrac{\partial L}{\partial q_i} \dfrac{dq_i}{dt} \epsilon + \dfrac{\partial L}{\partial \dot{q}_i} \dfrac{d\dot{q}_i}{dt} \epsilon. \label{DeltaL1}
 \end{align}
 Rearranging Equations \eqref{ELE} yields that:
 \begin{align}
@@ -21,16 +21,16 @@ If you are wondering what about if we have non-conservative forces? Would that n
 
 Substituting Equations \eqref{ELEnh} into Equation \eqref{DeltaL1} yields:
 \begin{align}
-\Delta L &\approx \sum_{i=1}^n \epsilon\left(\dfrac{d}{dt}\dfrac{\partial L}{\partial \dot{q}_i}\dot{q}_i + \dfrac{\partial L}{\partial \dot{q}_i}\ddot{q}_i\right). \label{DeltaL2}
+dL &= \sum_{i=1}^n \epsilon\left(\dfrac{d}{dt}\dfrac{\partial L}{\partial \dot{q}_i}\dot{q}_i + \dfrac{\partial L}{\partial \dot{q}_i}\ddot{q}_i\right). \label{DeltaL2}
 \end{align}
 Substituting Equations \eqref{canmom} into Equation \eqref{DeltaL2} yields:
 \begin{align}
-\Delta L &\approx \epsilon\sum_{i=1}^n \left(\dfrac{dp_i}{dt} \dot{q}_i + p_i \ddot{q}_i\right)\nonumber\\
+dL &= \epsilon\sum_{i=1}^n \left(\dfrac{dp_i}{dt} \dot{q}_i + p_i \ddot{q}_i\right)\nonumber\\
 &= \epsilon\sum_{i=1}^n \left(\dot{p}_i \dot{q}_i + p_i \ddot{q}_i\right). \label{DeltaL3}
 \end{align}
 We can rewrite the bracketed expression on the right-hand side of Equation \eqref{DeltaL3} using the product rule of differentiation as:
 \begin{align*}
-\Delta L &\approx \epsilon\sum_{i=1}^n \dfrac{d}{dt}\left(p_i \dot{q}_i\right) \\
+dL &= \epsilon\sum_{i=1}^n \dfrac{d}{dt}\left(p_i \dot{q}_i\right) \\
 &= \epsilon\dfrac{d}{dt}\sum_{i=1}^n p_i \dot{q}_i.
 \end{align*}
 If $L$ does not change in time, $\Delta L=0$, and hence:
