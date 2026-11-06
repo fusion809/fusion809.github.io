@@ -16,9 +16,9 @@ The Einstein-Hilbert action is:
 \begin{align}
 S &= \dfrac{c^4}{16\pi G} \int_{\mathbb{R}^4} R \sqrt{\left|\det{g_{\mu\nu}}\right|} d^4 x.
 \end{align}
-One major difference you may notice between the classical action and the Einstein-Hilbert action is that the classical action is integrated over time whereas the Einstein-Hilbert action is integrated over spacetime. $R$ is the Ricci scalar which is calculated based on $g_{\mu\nu}$. 
+One major difference you may notice between the classical action and the Einstein-Hilbert action is that the classical action is integrated over time whereas the Einstein-Hilbert action is integrated over spacetime (that is what the $d^x$ and $\mathbb{R}^4$ is about). $R$ is the Ricci scalar which is calculated based on $g_{\mu\nu}$. 
 
-Another application of action in general relativity is that it can be used to calculate the path an object will take in curve spacetime. As the path the object follows will be the path that maximizes its proper time. The action for this calculation is:
+Another application of action in general relativity is that it can be used to calculate the path an object will take in curved spacetime. As the path the object follows will be the path that maximizes its proper time. The action for this calculation is:
 
 \begin{align}
 S &= \int_{\lambda_0}^{\lambda_f} \sqrt{\Big| g_{\mu\nu} \dfrac{dx^{\mu}}{d\lambda} \dfrac{dx^{\nu}}{d\lambda}\Big|}d\lambda.
