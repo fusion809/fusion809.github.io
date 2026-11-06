@@ -87,3 +87,5 @@ Hence substituting Equation \eqref{H} into Equation \eqref{constE2} yields:
 \dfrac{dH}{dt} &= 0.\label{constE3}
 \end{align}
 So we see that Equations \eqref{H} and \eqref{HLeq} are equivalent if and only if potential energy is independent of generalized velocity. We also obtain that the Hamiltonian &mdash; which is the total energy of the system if potential energy is independent of generalized velocity &mdash; does not change when the Lagrangian is time symmetric, hence it is conserved.
+
+I should also mention that the Hamiltonian formulation of Noether's theorem uses Equation \eqref{dfdt}. As if a quantity that does not explictly depend on time commutes with the Hamiltonian under the Poisson bracket, this means it does not change over time and hence is conserved. 

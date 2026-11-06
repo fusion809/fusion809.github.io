@@ -38,7 +38,7 @@ We can use Hamilton's equations to replace $\dfrac{dq_i}{dt}$ and $\dfrac{dp_i}{
 \end{align}
 Interestingly, the right-hand side is equal to the Poisson bracket of $f$ with $H$, in other words:
 \begin{align}
-\dfrac{df}{dt} &= \{f, H\}.
+\dfrac{df}{dt} &= \{f, H\}.\label{dfdt}
 \end{align}
 Hence commuting with the Hamiltonian under the Poisson bracket is a sufficient condition for a quantity that does not explicitly depend on time to have a zero time derivative. A zero time derivative means the quantity is static over time which means it is conserved.
 
