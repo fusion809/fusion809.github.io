@@ -1,32 +1,34 @@
 @def hassim=false;
-@def title="Advanced classical mechanics explanation for Fidello."
+@def title="Advanced classical mechanics and beyond: explanation for Fidello."
 @def tag=["Mathematics", "Physics"]
 @def mintoclevel=1
 
 \includemd{fidello/_01-introduction.md}
 
 \toc
-\includemd{fidello/_02-partial-differentiation.md}
-\includemd{fidello/_03-heat-equation.md}
-\includemd{fidello/_04a-lagrangian-intro.md}
-\includemd{fidello/_04b-euler-lagrange-equations.md}
-\includemd{fidello/_04c-stationary-action-principle.md}
-\includemd{fidello/_04d-terminology.md}
-\includemd{fidello/_04e-non-conservative-forces.md}
-\includemd{fidello/_04fi-single-pendulum.md}
-\includemd{fidello/_04fii-wo-air-resistance.md}
-\includemd{fidello/_04fiii-w-air-resistance.md}
-\includemd{fidello/_05a-hamiltonian-mechanics.md}
-\includemd{fidello/_05b-simple-pendulum.md} 
-\includemd{fidello/_06-poisson-bracket.md}
-\includemd{fidello/_07-noethers-theorem.md}
-\includemd{fidello/_08a-hamilton-jacobi.md}
-\includemd{fidello/_08b-simple-pendulum.md}
-\includemd{fidello/_09a-connections.md}
-\includemd{fidello/_09b-special-relativity.md}
-\includemd{fidello/_09c-general-relativity.md}
-\includemd{fidello/_09d-quantum-mechanics.md}
-\includemd{fidello/_09e-quantum-field-theory.md}
+\includemd{fidello/_02-prerequisite-mathematics.md}
+\includemd{fidello/_02a-maclaurin-taylor-series.md}
+\includemd{fidello/_02b-complex-numbers.md}
+\includemd{fidello/_02c-partial-derivatives.md}
+\includemd{fidello/_03a-lagrangian-intro.md}
+\includemd{fidello/_03b-euler-lagrange-equations.md}
+\includemd{fidello/_03c-stationary-action-principle.md}
+\includemd{fidello/_03d-terminology.md}
+\includemd{fidello/_03e-non-conservative-forces.md}
+\includemd{fidello/_03fi-single-pendulum.md}
+\includemd{fidello/_03fii-wo-air-resistance.md}
+\includemd{fidello/_03fiii-w-air-resistance.md}
+\includemd{fidello/_04a-hamiltonian-mechanics.md}
+\includemd{fidello/_04b-simple-pendulum.md} 
+\includemd{fidello/_05-poisson-bracket.md}
+\includemd{fidello/_06-noethers-theorem.md}
+\includemd{fidello/_07a-hamilton-jacobi.md}
+\includemd{fidello/_07b-simple-pendulum.md}
+\includemd{fidello/_08a-connections.md}
+\includemd{fidello/_08b-special-relativity.md}
+\includemd{fidello/_08c-general-relativity.md}
+\includemd{fidello/_08d-quantum-mechanics.md}
+\includemd{fidello/_08e-quantum-field-theory.md}
 
 # Reference list
 [^1]: Cline D (2026). [15.2: Poisson bracket Representation of Hamiltonian Mechanics](https://phys.libretexts.org/Bookshelves/Classical_Mechanics/Variational_Principles_in_Classical_Mechanics_(Cline)/15%3A_Advanced_Hamiltonian_Mechanics/15.02%3A_Poisson_bracket_Representation_of_Hamiltonian_Mechanics). In *Variational Principles in Classical Mechanics*. LibreTexts.
