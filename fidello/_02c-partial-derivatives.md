@@ -6,7 +6,7 @@ If you want to visualize this, imagine a surface defined by $z=f(x,y)$ for examp
 Say $f$ is a function of two variables &mdash; $x$ and $y$. Then its partial derivative with respect to $x$ is formally defined as:
 
 \begin{align*}
-    \dfrac{\partial f}{\partial x} &= \lim_{h\rightarrow 0} \dfrac{f(x+h, y)-f(x, y)}{h}.
+    \dfrac{\partial f}{\partial x} &\stackrel{\text{def}}{=} \lim_{h\rightarrow 0} \dfrac{f(x+h, y)-f(x, y)}{h}.
 \end{align*}
 
 This is analogous to the first principles definition of the derivative you would have learned for standard derivatives. Namely, if we are differentiating $f(x)$:
