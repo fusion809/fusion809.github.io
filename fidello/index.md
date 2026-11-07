@@ -1,5 +1,5 @@
 @def hassim=false;
-@def title="Advanced classical mechanics and beyond: explanation for Fidello."
+@def title="Advanced classical mechanics and beyond: an explanation for Fidello."
 @def tag=["Mathematics", "Physics"]
 @def mintoclevel=1
 
@@ -27,7 +27,9 @@
 \includemd{fidello/_08a-connections.md}
 \includemd{fidello/_08b-special-relativity.md}
 \includemd{fidello/_08c-general-relativity.md}
-\includemd{fidello/_08d-quantum-mechanics.md}
+\includemd{fidello/_08di-quantum-mechanics.md}
+\includemd{fidello/_08dii-path-integral-formulation.md}
+\includemd{fidello/_08diii-operator-formalism.md}
 \includemd{fidello/_08e-quantum-field-theory.md}
 
 # Reference list
