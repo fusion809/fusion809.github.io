@@ -785,24 +785,75 @@ end
 # Multi-line numbered \begin{align} support
 # ==============================================================================
 
-# Map \begin{align} to \[ \begin{_franklin_align_} ... \end{_franklin_align_} \]
-# We use the unique marker _franklin_align_ so we can detect numbered align blocks
-# without matching \begin{aligned} (which is what align* produces).
-for (i, p) in enumerate(Franklin.LX_INTERNAL_ENVIRONMENTS)
-    if p.first == "align"
-        Franklin.LX_INTERNAL_ENVIRONMENTS[i] = "align" => Franklin.LxDef("align", 0, raw"\[\begin{_franklin_align_}" => raw"\end{_franklin_align_}\]")
-    end
-end
-Franklin.GLOBAL_LXDEFS["align"] = Franklin.LxDef("align", 0, raw"\[\begin{_franklin_align_}" => raw"\end{_franklin_align_}\]")
+# Use a zero-argument environment definition; Franklin's utility-environment
+# parser otherwise incorrectly requires an argument after `\begin{align}`.
+# `\def` is a zero-argument notation macro here, not TeX's definition primitive.
+def_macro = Franklin.LxDef(raw"\def", 0, SubString(raw"\stackrel{\text{def}}{=}"))
+filter!(p -> p.first != raw"\def", Franklin.LX_INTERNAL_COMMANDS)
+push!(Franklin.LX_INTERNAL_COMMANDS, raw"\def" => def_macro)
+Franklin.GLOBAL_LXDEFS[raw"\def"] = def_macro
 
-# Redefine \nonumber to take 0 arguments (like in standard LaTeX/KaTeX), so Franklin does not
-# expect \nonumber{...} with 1 argument inside math blocks.
-for (i, p) in enumerate(Franklin.LX_INTERNAL_COMMANDS)
-    if p.first == "nonumber"
-        Franklin.LX_INTERNAL_COMMANDS[i] = "nonumber" => Franklin.LxDef("nonumber", 0, raw"\notag")
+align_def = Franklin.LxDef("align", 0, "" => "")
+filter!(p -> p.first != "align", Franklin.LX_INTERNAL_ENVIRONMENTS)
+push!(Franklin.LX_INTERNAL_ENVIRONMENTS, "align" => align_def)
+Franklin.GLOBAL_LXDEFS["align"] = align_def
+align_star_def = Franklin.LxDef("align*", 0, "" => "")
+filter!(p -> p.first != "align*", Franklin.LX_INTERNAL_ENVIRONMENTS)
+push!(Franklin.LX_INTERNAL_ENVIRONMENTS, "align*" => align_star_def)
+Franklin.GLOBAL_LXDEFS["align*"] = align_star_def
+
+function render_align_environment(com, numbered::Bool)
+    rows = Franklin.split_align_lines(Franklin.content(com))
+    html = IOBuffer()
+    anchors = IOBuffer()
+    tagged_rows = String[]
+
+    for row in rows
+        line = strip(row)
+        isempty(line) && continue
+
+        unnumbered = !numbered || occursin(r"\\(nonumber|notag)", line)
+        line = replace(line, r"\\(nonumber|notag)(?:\{\})?" => "")
+        line = replace(line, r"\\def(?![A-Za-z])" => raw"\stackrel{\text{def}}{=}")
+
+        label_match = match(r"\\label\{([^}]+)\}", line)
+        number = nothing
+        if !unnumbered
+            Franklin.PAGE_EQREFS[Franklin.PAGE_EQREFS_COUNTER] += 1
+            number = Franklin.PAGE_EQREFS[Franklin.PAGE_EQREFS_COUNTER]
+        end
+        if !isnothing(label_match)
+            label = Franklin.refstring(label_match.captures[1])
+            if !isnothing(number)
+                Franklin.PAGE_EQREFS[label] = number
+            end
+            write(anchors, "<a id=\"$label\" class=\"anchor\"></a>")
+            line = replace(line, label_match.match => "")
+        end
+
+        tag = isnothing(number) ? (numbered ? "\\notag" : "") : "\\tag{$number}"
+        push!(tagged_rows, strip(line) * " " * tag)
     end
+
+    write(html, String(take!(anchors)))
+    env = numbered ? "align" : "aligned"
+    class = numbered ? "nonumber numbered-align" : "nonumber"
+    display = "\\[\\begin{$env}\n" * join(tagged_rows, " " * "\\\\" * "\n") * "\n\\end{$env}\\]"
+    write(html, "<div class=\"$class\">" * display * "</div>")
+    return String(take!(html))
 end
-Franklin.GLOBAL_LXDEFS["nonumber"] = Franklin.LxDef("nonumber", 0, raw"\notag")
+
+env_align(com, _) = render_align_environment(com, true)
+env_align_star(com, _) = render_align_environment(com, false)
+
+Core.eval(Franklin, quote
+    function env_align(com, lxdefs)
+        return getfield(utils_module(), :env_align)(com, lxdefs)
+    end
+    function var"env_align*"(com, lxdefs)
+        return getfield(utils_module(), :env_align_star)(com, lxdefs)
+    end
+end)
 
 """
 Split LaTeX content on `\\\\` outside of nested environments (like pmatrix, bmatrix, etc.)
@@ -862,7 +913,7 @@ Core.eval(Franklin, quote
         return lines
     end
 
-    function convert_math_block(β::OCBlock, lxdefs::Vector{LxDef})::String
+    function convert_math_block_with_alignment(β::OCBlock, lxdefs::Vector{LxDef})::String
         pm = get(MATH_BLOCKS_PARENS, β.name) do
             throw(MathBlockError("Unrecognised math block name."))
         end
@@ -870,11 +921,25 @@ Core.eval(Franklin, quote
         inner = chop(β.ss, head=pm[1], tail=pm[2])
         htmls = IOBuffer()
 
-        aligned_match = match(r"^\s*\\begin\{_franklin_align_\}([\s\S]*)\\end\{_franklin_align_\}\s*$", inner)
+        # Franklin may wrap the display in an internal MATH_I block. Extract
+        # the unique environment from the original block instead of relying on
+        # a regex over Franklin's chopped or wrapped math string.
+        source = String(β.ss)
+        align_begin = raw"\begin{_franklin_align_}"
+        align_end = raw"\end{_franklin_align_}"
+        begin_range = findfirst(align_begin, source)
+        end_range = isnothing(begin_range) ? nothing :
+            findnext(align_end, source, nextind(source, last(begin_range)))
+        align_body = if isnothing(begin_range) || isnothing(end_range)
+            nothing
+        else
+            body_start = nextind(source, last(begin_range))
+            body_end = prevind(source, first(end_range))
+            body_start > body_end ? "" : source[body_start:body_end]
+        end
 
-        if β.name ∉ [:MATH_A, :MATH_I] && !isnothing(aligned_match)
-            body = aligned_match.captures[1]
-            lines = split_align_lines(body)
+        if β.name != :MATH_A && !isnothing(align_body)
+            lines = split_align_lines(align_body)
             new_lines = String[]
             last_num = PAGE_EQREFS[PAGE_EQREFS_COUNTER]
 
@@ -885,7 +950,7 @@ Core.eval(Franklin, quote
                 end
 
                 is_unnumbered = occursin(r"\\(nonumber|notag)", line)
-                line_clean = replace(line, r"\\(nonumber|notag)" => "")
+                line_clean = replace(line, r"\\(nonumber|notag)(?:\{\})?" => "")
 
                 if is_unnumbered
                     push!(new_lines, strip(line_clean) * " \\notag")
@@ -926,6 +991,16 @@ Core.eval(Franklin, quote
 
         write(htmls, pm[3], convert_md_math(inner, lxdefs, from(β)), pm[4])
         return String(take!(htmls))
+    end
+
+    # Route math blocks through the site converter explicitly. This specialized
+    # method prevents Franklin's precompiled generic block converter from
+    # bypassing the per-line align handling above.
+    function convert_block(β::OCBlock, lxdefs::Vector{LxDef})::String
+        if β.name ∈ MATH_BLOCKS_NAMES
+            return convert_math_block_with_alignment(β, lxdefs)
+        end
+        return invoke(convert_block, Tuple{AbstractBlock,Vector{LxDef}}, β, lxdefs)
     end
 
     # ==============================================================================
@@ -983,6 +1058,8 @@ Core.eval(Franklin, quote
             end
         end
     end
+
+    scan_md_includes!()
 
     function get_parent_pages(child_rpath::AbstractString)
         norm_child = norm_site_rpath(child_rpath)
@@ -1070,6 +1147,15 @@ Core.eval(Franklin, quote
     if !isdefined(Franklin, :_fd_loop_fragment_wrapped)
         const _fd_loop_fragment_wrapped = Ref(false)
     end
+    if !isdefined(Franklin, :_fd_loop_content_hashes)
+        const _fd_loop_content_hashes = Dict{String,UInt}()
+    end
+    if !isdefined(Franklin, :_fd_loop_hashes_initialized)
+        const _fd_loop_hashes_initialized = Ref(false)
+    end
+    if !isdefined(Franklin, :_fd_loop_pending_hashes)
+        const _fd_loop_pending_hashes = Dict{String,Tuple{UInt,Float64,Float64}}()
+    end
 
     if !_fd_loop_fragment_wrapped[]
         _fd_loop_fragment_wrapped[] = true
@@ -1077,20 +1163,72 @@ Core.eval(Franklin, quote
             function fd_loop(cycle_counter::Int,
                              fw::LiveServer.FileWatcher,
                              watched_files::NamedTuple)::Nothing
+                if !_fd_loop_hashes_initialized[]
+                    _orig_fd_loop(cycle_counter, fw, watched_files)
+                    for (_, dict) in pairs(watched_files), (fpair, _) in dict
+                        fpath = joinpath(fpair...)
+                        isfile(fpath) || continue
+                        _fd_loop_content_hashes[fpath] = hash(read(fpath))
+                    end
+                    _fd_loop_hashes_initialized[] = true
+                    return nothing
+                end
+
+                # Ignore timestamp-only touches. Some editors, sync tools, and
+                # generated-file hooks update mtimes without changing source;
+                # Franklin otherwise rebuilds and LiveServer reloads on each one.
+                for (_, dict) in pairs(watched_files), (fpair, t) in dict
+                    fpath = joinpath(fpair...)
+                    isfile(fpath) || continue
+                    cur_t = mtime(fpath)
+                    (cur_t > t || haskey(_fd_loop_pending_hashes, fpath)) || continue
+                    content_hash = hash(read(fpath))
+                    previous = get(_fd_loop_content_hashes, fpath, content_hash)
+                    if content_hash == previous
+                        dict[fpair] = cur_t
+                        delete!(_fd_loop_pending_hashes, fpath)
+                        continue
+                    end
+
+                    now_t = time()
+                    if haskey(_fd_loop_pending_hashes, fpath)
+                        pending_hash, pending_since, original_mtime = _fd_loop_pending_hashes[fpath]
+                        if content_hash == pending_hash && now_t - pending_since >= 0.5
+                            _fd_loop_content_hashes[fpath] = content_hash
+                            delete!(_fd_loop_pending_hashes, fpath)
+                            dict[fpair] = original_mtime
+                        else
+                            _fd_loop_pending_hashes[fpath] = (content_hash, now_t, original_mtime)
+                            dict[fpair] = cur_t
+                        end
+                    else
+                        _fd_loop_pending_hashes[fpath] = (content_hash, now_t, t)
+                        dict[fpair] = cur_t
+                    end
+                end
+
                 # Snapshot changed fragment files BEFORE running normal loop.
                 changed_frags = String[]
-                if mod(cycle_counter, 30) != 0
-                    for (fpair, t) in watched_files.md
-                        startswith(fpair.second, "_") || continue
-                        fpath = joinpath(fpair...)
-                        mtime(fpath) > t || continue
-                        rp = try norm_site_rpath(get_rpath(fpath)) catch; "" end
-                        isempty(rp) || push!(changed_frags, rp)
-                    end
+                for (fpair, t) in watched_files.md
+                    startswith(fpair.second, "_") || continue
+                    fpath = joinpath(fpair...)
+                    mtime(fpath) > t || continue
+                    rp = try norm_site_rpath(relpath(fpath, path(:folder))) catch; "" end
+                    isempty(rp) || push!(changed_frags, rp)
                 end
 
                 # Run normal Franklin file-watch loop.
                 _orig_fd_loop(cycle_counter, fw, watched_files)
+
+                # The native loop skips change processing during its periodic
+                # directory scan; consume fragment mtimes here either way.
+                changed_frag_set = Set(changed_frags)
+                for (fpair, _) in watched_files.md
+                    startswith(fpair.second, "_") || continue
+                    fpath = joinpath(fpair...)
+                    rp = try norm_site_rpath(relpath(fpath, path(:folder))) catch; "" end
+                    rp in changed_frag_set && (watched_files.md[fpair] = mtime(fpath))
+                end
 
                 isempty(changed_frags) && return nothing
 
@@ -1100,19 +1238,22 @@ Core.eval(Franklin, quote
                 pgfoot = read(joinpath(layout, "page_foot.html"), String)
                 foot   = read(joinpath(layout, "foot.html"),      String)
 
+                parents_to_rebuild = Set{String}()
+                scan_md_includes!()
                 for frag_rp in changed_frags
-                    for parent_rp in get_parent_pages(frag_rp)
-                        parent_full = joinpath(path(:folder), parent_rp)
-                        isfile(parent_full) || continue
-                        parent_dir, parent_file = splitdir(parent_full)
-                        parent_fpair = parent_dir => parent_file
-                        rprint("\u2192 rebuilding $(parent_rp) (included fragment changed)")
-                        process_file(:md, parent_fpair, head, pgfoot, foot, 0.0)
-                        # Use the parent's ACTUAL disk mtime so the loop
-                        # doesn't re-trigger a rebuild on the next iteration.
-                        if haskey(watched_files.md, parent_fpair)
-                            watched_files.md[parent_fpair] = mtime(parent_full)
-                        end
+                    union!(parents_to_rebuild, get_parent_pages(frag_rp))
+                end
+                for parent_rp in sort!(collect(parents_to_rebuild))
+                    parent_full = joinpath(path(:folder), parent_rp)
+                    isfile(parent_full) || continue
+                    parent_dir, parent_file = splitdir(parent_full)
+                    parent_fpair = parent_dir => parent_file
+                    rprint("\u2192 rebuilding $(parent_rp) (included fragment changed)")
+                    process_file(:md, parent_fpair, head, pgfoot, foot, 0.0)
+                    # Use the parent's ACTUAL disk mtime so the loop
+                    # doesn't re-trigger a rebuild on the next iteration.
+                    if haskey(watched_files.md, parent_fpair)
+                        watched_files.md[parent_fpair] = mtime(parent_full)
                     end
                 end
                 return nothing

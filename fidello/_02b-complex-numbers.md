@@ -18,7 +18,7 @@ Why is this the case? Replacing $x$ with $iz$ in Equation \eqref{ex} yields:
 \begin{align*}
 e^{iz} &= \sum_{n=0}^{\infty} \dfrac{(iz)^n}{n!}.
 \end{align*}
-You may be thinking, so what? Well, powers of $i$ have interesting properties. Namely, $i^0=1$, $i^1=i$, $i^2=-1$, $i^3=-i$ and $i^4=1$. Generally, $i^{4n}$ (where $n$ is an integer) is equal to $1$, $i^{4n+1}$ is $i$, $i^{4n+2}$ is $-1$ and $i^{4n+3}$ is $-i$. Focusing on even powers, we find that $i^{2n}=(-1)^n$. Whereas odd powers yields $i^{2n+1}=(-1)^n i$. Consequently:
+You may be thinking, so what? Well, powers of $i$ have interesting properties. Namely, $i^0=1$, $i^1=i$, $i^2=-1$, $i^3=-i$ and $i^4=1$. Generally, $i^{4n}$ (where $n$ is an integer) is equal to $1$, $i^{4n+1}$ is $i$, $i^{4n+2}$ is $-1$ and $i^{4n+3}$ is $-i$. Focusing on even powers, we find that $i^{2n}=(-1)^n$ (where makes sense as $i^2=-1$ and $i^{2n}=(i^2)^n$). Whereas odd powers yields $i^{2n+1}=(-1)^n i$. Consequently:
 \begin{align*}
 e^{iz} &= \sum_{n=0}^{\infty} \dfrac{(-1)^n z^{2n}}{(2n)!} + \dfrac{(-1)^n iz^{2n+1}}{(2n+1)!} \\
 &= \sum_{n=0}^{\infty} \dfrac{(-1)^n z^{2n}}{(2n)!} + \sum_{n=0}^{\infty} \dfrac{(-1)^n iz^{2n+1}}{(2n+1)!} \\
@@ -30,11 +30,15 @@ e^{iz} &= \cos{z} + i\sin{z}.
 \end{align*}
 An interesting thing to note that $e^{iz}$ is that its modulus is one. How do I know this? Well, the modulus is defined as just the length of the complex number's vector in the complex plane, right? So for $e^{iz}$ that would be:
 \begin{align*}
-l &= \sqrt{\cos{z}^2+\sin^2{z}}
+l &= \sqrt{\cos{z}^2+\sin^2{z}}\\
 &= \sqrt{1} \\
 &= 1.
 \end{align*}
-Here I used the trigonometric identity that $\cos^2{z}+\sin^2{z}=1$ for all values of $z$. Okay, so getting back to how $l$ and $\theta$ can uniquely define a complex number. Well, interestingly you can write any complex number in the form $le^{i\theta}$. Why? Well, recall that $e^{i\theta}$ is just $\cos{\theta}+i\sin{\theta}$. Looking at Figure \figref{complex} we can clearly see that the $x$ component of our vector is just $l\cos{\theta}$, right? And we can also see that the $y$ component is just $l\sin{\theta}$ and if we expand our $le^{i\theta}$ we get:
+Here I used the trigonometric identity:
+\begin{align}
+\cos^2{z}+\sin^2{z}=1 \hspace{0.1cm} \forall z \in \mathbb{R}.
+\end{align}
+Where $\mathbb{R}$ is the set of real numbers. Okay, so getting back to how $l$ and $\theta$ can uniquely define a complex number. Well, interestingly you can write any complex number in the form $le^{i\theta}$. Why? Well, recall that $e^{i\theta}$ is just $\cos{\theta}+i\sin{\theta}$. Looking at Figure \figref{complex} we can clearly see that the $x$ component of our vector is just $l\cos{\theta}$, right? And we can also see that the $y$ component is just $l\sin{\theta}$ and if we expand our $le^{i\theta}$ we get:
 \begin{align*}
 le^{i\theta} &= l\cos{\theta} + i\sin{\theta}.
 \end{align*}

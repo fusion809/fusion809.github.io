@@ -410,6 +410,22 @@ body {
     display: inline-block;
 }
 
+.numbered-align .katex-display,
+.numbered-align .katex-display > .katex,
+.numbered-align .katex-display > .katex > .katex-html {
+    width: 100%;
+}
+
+.numbered-align .katex-display > .katex > .katex-html > .katex-tag {
+    right: 0;
+}
+
+.numbered-align .katex-display::after {
+    display: none !important;
+    counter-increment: none !important;
+    content: none !important;
+}
+
 /* overwrite katex settings */
 
 .katex-display::after {

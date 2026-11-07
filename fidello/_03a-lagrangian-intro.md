@@ -1,7 +1,7 @@
 # Lagrangian mechanics
 Lagrangian mechanics is one of three major formulations of classical mechanics with the others being Newtonian mechanics and Hamiltonian mechanics. Classical mechanics as a whole is a branch of physics most applicable to the situations that humans most often encounter, as it does not account for quantum randomness (hence cannot be applied to very small scales), nor does it account for relativistic effects (which are most relevant when dealing with strong gravitational fields or velocities close to the speed of light). In Lagrangian mechanics, we define a quantity known as the Lagrangian of our physical system:
 \begin{align}
-    L &\stackrel{\text{def}}{=} T - V. \label{L}
+    L &\def T - V. \label{L}
 \end{align}
 Where $T$ is kinetic energy and $V$ is potential energy of our entire physical system. It is important to note that only conservative forces contribute to $V$. Lagrangian mechanics **can** account for non-conservative (i.e. dissipative) forces, too, but we will get to how one handles them later. 
 

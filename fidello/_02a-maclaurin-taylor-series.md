@@ -21,7 +21,7 @@ Now, I know this probably seems pretty abstract to you right now. But let us try
 \begin{align}
 e^x &= \sum_{n=0}^{\infty} \dfrac{x^n}{n!} \label{ex}
 \end{align}
-is the Maclaurin series of $e^x$. Okay, let us try our hand at another function's Maclaurin series. How about $\cos{x}$? We know the first derivative of $\cos{x}$ is $-\sin{x}$. Hence the second derivative is $-\cos{x}$. The third derivative would be $\sin{x}$. Fourth derivative would be $\cos{x}$. Fifth derivative would be $-\sin{x}$ and six derivative would be $-\cos{x}$. Well, I have noticed a pattern here! Seems to me like $(-1)^{\lfloor\frac{n+1}{2}\rfloor}$ (where $\lfloor ... \rfloor$ rounds down decimals, e.g. it would take 3.6 and return 3) will recreate the sign of this function. If $n$ is even, the trigonometric function will be $\cos{x}$ and if it is odd it will be $\sin{x}$. Evaluating these functions at $x=0$, we see that if $n$ is even we will get $1$ from the trigonometric function and 0 if $n$ is odd. Hence:
+is the Maclaurin series of $e^x$. Okay, let us try our hand at another function's Maclaurin series. How about $\cos{x}$? We know the first derivative of $\cos{x}$ is $-\sin{x}$. Hence the second derivative is $-\cos{x}$. The third derivative would be $\sin{x}$. Fourth derivative would be $\cos{x}$. Fifth derivative would be $-\sin{x}$ and sixth derivative would be $-\cos{x}$. Well, I have noticed a pattern here! Seems to me like $(-1)^{\lfloor\frac{n+1}{2}\rfloor}$ (where $\lfloor ... \rfloor$ rounds down decimals, e.g. it would take 3.6 and return 3) will recreate the sign of this function. If $n$ is even, the trigonometric function will be $\cos{x}$ and if it is odd it will be $\sin{x}$. Evaluating these functions at $x=0$, we see that if $n$ is even we will get $1$ from the trigonometric function and 0 if $n$ is odd. Hence:
 
 \begin{align*}
 \dfrac{d^nf}{dx^n}\Big|_{x=0} &= \begin{cases}
@@ -29,11 +29,11 @@ is the Maclaurin series of $e^x$. Okay, let us try our hand at another function'
 0 & n \hspace{0.1cm}\mathrm{odd}.
 \end{cases}
 \end{align*}
-So our sum will essentially just be over even numbers. One way we can denote a sum over even numbers is by replacing $n$ with $2n$ and summing over all numbers. As $2$ times any integer is always an even number. In this even our $(-1)^{\lfloor\frac{n+1}{2}\rfloor}$ becomes:
+So our sum will essentially just be over even numbers. One way we can denote a sum over even numbers is by replacing $n$ with $2n$ and summing over all numbers. As $2$ times any integer is always an even number. In this event, our $(-1)^{\lfloor\frac{n+1}{2}\rfloor}$ becomes:
 
 \begin{align}
 (-1)^{\lfloor\frac{2n+1}{2}\rfloor} &=(-1)^{\lfloor\frac{2n+1}{2}\rfloor} \nonumber \\
-&= (-1)^{\lfloor{n+\frac{1}{2}\rfloor}} \nonumber \\
+&= (-1)^{\lfloor n+\frac{1}{2}\rfloor} \nonumber \\
 &= (-1)^{n}. \label{neg1fl}
 \end{align}
 We arrived at Equation \eqref{neg1fl} simply because $n$ is an integer so adding a half to it should make no difference when we are rounding down. Consequently, our Maclaurin series becomes:
@@ -69,13 +69,13 @@ f''(x) &= -\dfrac{3(1-x)^{-5/2}}{4} \cdot -1 \\
 f^{(3)}(x) &= -\dfrac{15(1-x)^{-7/2}}{8} \cdot -1 \\
 &= \dfrac{15(1-x)^{-7/2}}{8}
 \end{align*}
-Where $f^{(3)}(x)$ denotes the 3rd derivative of $f$ with respect to $x$. Hence:
+Where $f^{(3)}(x)$ denotes the 3rd derivative of $f$ with respect to $x$. Note how for the first derivative the coefficient is just $\dfrac{1}{2}$, for the second derivative it is $\dfrac{3}{4}$ and for the third it is $\dfrac{15}{8}$. Seems to me that the denominator is just $2^n$ where $n$ is the order of the derivative and the numerator of the coefficient is $(2n-1) \times (2n-3) \times (2n-5)\times ... \times 1$. Hence:
 \begin{align*}
-\dfrac{d^nf}{dx^n} &= \dfrac{\left(\prod_{i=1}^n 2i-1\right)(1-x)^{-(2n+1)/2}}{2^{n}} \hspace{0.1cm}\forall n\in \mathbb{Z}^{+}.
+\dfrac{d^nf}{dx^n} &= \dfrac{\left(\displaystyle \prod_{i=1}^n 2i-1\right)(1-x)^{-(2n+1)/2}}{2^{n}} \hspace{0.1cm}\forall n\in \mathbb{Z}^{+}.
 \end{align*}
-$\prod_{i=1}^n 2i-1$ is a way of writing a multi-term product that is somewhat analogous to the summation notation $\sum_{i=1}^n 2i-1$. In this sum, we add up 2i-1 for $i=1$, $i=2$, $i=3$, and so forth, all the way up until $i=n$. Whereas in the product $\prod_{i=1}^n 2i-1$ we would multiply 2i-1 for $i=1$, $i=2$, $i=3$, and so forth up until $i=n$. For instance if $n=3$:
+$\displaystyle \prod_{i=1}^n 2i-1$ is a way of writing a multi-term product that is somewhat analogous to the summation notation $\sum_{i=1}^n 2i-1$. In this sum, we add up 2i-1 for $i=1$, $i=2$, $i=3$, and so forth, all the way up until $i=n$. Whereas in the product $\displaystyle \prod_{i=1}^n 2i-1$ we would multiply 2i-1 for $i=1$, $i=2$, $i=3$, and so forth up until $i=n$. Likewise $\mathbb{Z}^{+}$ denotes the set of all positive integers (so $\{1, 2, 3, ...\}$). For instance if $n=3$:
 \begin{align*}
-\prod_{i=1}^3 2i-1 &= (2(1)-1) \times (2(2)-1) \times (2(3)-1) \\
+\displaystyle \prod_{i=1}^3 2i-1 &= (2(1)-1) \times (2(2)-1) \times (2(3)-1) \\
 &= 1 \times 3 \times 5 \\
 &= 15.
 \end{align*}
@@ -84,13 +84,13 @@ Substituting in $x=0$ into $f(x)$ and our derivatives yields:
 \begin{align*}
 f(0) &= 1 \\
 f'(0) &= \dfrac{1}{2} \\
-\dfrac{d^nf}{dx^n}\Big|_{x=0} &= \dfrac{\prod_{i=1}^n 2i-1}{2^{n}}.
+\dfrac{d^nf}{dx^n}\Big|_{x=0} &= \dfrac{\displaystyle \prod_{i=1}^n 2i-1}{2^{n}}.
 \end{align*}
 
 In this case, $x=\dfrac{v^2}{c^2}$ and hence:
 \begin{align*}
-T(v) &= mc^2 \left(1 + \sum_{n=1}^{\infty} \dfrac{\left(\prod_{i=1}^n 2i-1\right)\left(\dfrac{v^2}{c^2}\right)^n}{2^{n}n!}-1\right)\\
-&= mc^2 \sum_{n=1}^{\infty} \dfrac{\left(\prod_{i=1}^n 2i-1\right)\left(\dfrac{v^2}{c^2}\right)^n}{2^{n}n!}.
+T(v) &= mc^2 \left(1 + \sum_{n=1}^{\infty} \dfrac{\left(\displaystyle \prod_{i=1}^n 2i-1\right)\left(\dfrac{v^2}{c^2}\right)^n}{2^{n}n!}-1\right)\\
+&= mc^2 \sum_{n=1}^{\infty} \dfrac{\left(\displaystyle \prod_{i=1}^n 2i-1\right)\left(\dfrac{v^2}{c^2}\right)^n}{2^{n}n!}.
 \end{align*}
 Hence the first few terms of our Maclaurin series are:
 \begin{align*}
