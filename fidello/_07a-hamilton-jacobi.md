@@ -8,3 +8,5 @@ Where $S$ is the action, which is also called Hamilton's principal function. In 
 S(q_i, t) &= W(q_i)-Et.\label{SWE}
 \end{align}
 Where $W$ is called Hamilton's characteristic function or the abbreviated action and $E$ is the constant energy. 
+
+This approach to mechanics actually lead directly to the Schrödinger equation. Schrödinger actually derived his equation from the Hamilton-Jacobi equation. Why? Well, out of the formulations of classical mechanics, the Hamilton-Jacobi equation allows us to describe mechanical systems in a way that is analogous to light waves. The wave-particle duality &mdash; the idea that every quantum particle, including electrons and photons, exhibit both wave and particle properties &mdash; is a fundamental part of quantum mechanics and hence the Hamilton-Jacobi equation provides a particularly natural starting point for the development of the central equation of quantum mechanics. For an explanation for how we can describe a mechanical system in a way analogous to light waves, I suggest you check out [this excellent video](https://www.youtube.com/watch?v=mkpKR_8z6GU) by Abide by Reason. 
