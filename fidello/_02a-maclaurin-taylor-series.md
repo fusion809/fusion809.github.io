@@ -14,7 +14,7 @@ f(x) &= \sum_{n=0}^{\infty} \dfrac{d^n f}{dx^n}\Big|_{x=0} \dfrac{x^n}{n!} \labe
 &= f(0) + \sum_{n=1}^{\infty} \dfrac{d^n f}{dx^n}\Big|_{x=0} \dfrac{x^n}{n!}. \label{Maclaurinfirstterm}
 \end{align}
 
-Why do these equations hold? Well, try taking the $n$th derivative of Equations \eqref{Taylor} and \eqref{Maclaurin} and substituting $x=a$ and $x=0$, respectively. You'll find that you get $\dfrac{d^n f}{dx^n}\Big|_{x=a}$ and $\dfrac{d^n f}{dx^n}\Big|_{x=0}$, respectively. Consequently, our series matches our original function in its $n$th derivative for $n\in \mathbb{Z}^{+}$. Likewise, if you substitute in $x=a$ and $x=0$ into the Taylor and Maclaurin series, respectively, you should get $f(a)$ and $f(0)$, respectively. So we see that this is like a polynomial of infinite order that matches our original function for its value and derivatives value at one point. It turns out that this means it contains enough information to match our original function at all other points, too.  
+Why do these equations hold? Well, try taking the $n$th derivative of Equations \eqref{Taylor} and \eqref{Maclaurin} and substituting $x=a$ and $x=0$, respectively. You'll find that you get $\dfrac{d^n f}{dx^n}\Big|_{x=a}$ and $\dfrac{d^n f}{dx^n}\Big|_{x=0}$, respectively. Consequently, our series matches our original function in its $n$th derivative for $n\in \mathbb{Z}^{+}$. Likewise, if you substitute in $x=a$ and $x=0$ into the Taylor and Maclaurin series, respectively, you should get $f(a)$ and $f(0)$, respectively. So we see that this is like a polynomial of infinite order that matches our original function for its value and derivatives value at one point. It turns out that this means it contains enough information to match our original function at other points, too.
 
 There are exceptions where Taylor series do not accurately compute the function they pertain to. For instance, points where the function is undefined can mess things up. As an example, $\ln{(x+1)}$'s Maclaurin series will only approximate $f(x)$ well for $-1 < x < 1$ as at $x=-1$ the function is undefined. Beyond these points it will fail to converge (meaning it will not equal some finite number as terms for higher $n$ will not get rapidly smaller as $n$ gets bigger).
 
@@ -48,5 +48,29 @@ So here is some homework for you: try constructing the Maclaurin series for $\si
 \begin{align*}
 \sin{x} &= \sum_{n=0}^{\infty} \dfrac{(-1)^nx^{2n+1}}{(2n+1)!}.
 \end{align*}
+
+As another example, we will find the Maclaurin series for $\ln{(x+1)}$ so we can see why it only converges for $|x| < -1$ where $|x|$ is the absolute value of $x$. The first derivative is $\dfrac{1}{x+1}$. Second derivative is $-\dfrac{1}{(x+1)^2}$. Third derivative is $\dfrac{2}{(x+1)^3}$. Fourth derivative is $-\dfrac{6}{(x+1)^4}$. So it seems to me that the pattern is that the numerator is $(-1)^{n-1} (n-1)!$ and the denominator is $(x+1)^n$. Hence:
+\begin{align}
+\dfrac{d^n}{dx^n} \ln{(x+1)} &= \dfrac{(-1)^{n-1}(n-1)!}{(x+1)^n}, \hspace{0.1cm} n \geq 1.
+\end{align}
+And:
+\begin{align}
+\dfrac{d^n}{dx^n} \ln{(x+1)} \Big|_{x=0} &= (-1)^{n-1}(n-1)!, \hspace{0.1cm} n \geq 1.
+\end{align}
+Hence our Maclaurin series is:
+\begin{align}
+\ln{(x+1)} &= \ln{1} + \sum_{n=1}^{\infty} \dfrac{(-1)^{n-1}(n-1)! x^n}{n!} \\
+&= \sum_{n=1}^{\infty} \dfrac{(-1)^{n-1}x^n}{n}.
+\end{align}
+If $|x|>1$, we would expect the power of $x$ in our numerator to potentially grow faster than $n$ and hence our terms could become progressively larger as $n\rightarrow \infty$. As for if $x=\pm 1$, well our numerator would be smaller than our denominator, but our denominator would grow rather slowly. If $x=1$, we get:
+\begin{align}
+\ln{2} &= \sum_{n=1}^{\infty} \dfrac{(-1)^{n-1}}{n}.
+\end{align}
+Which is actually true. As this sum does, indeed, equal $\ln{2}$. If $x=-1$ then we get:
+\begin{align}
+\ln{0} &= \sum_{n=1}^{\infty} \dfrac{(-1)^{n-1} (-1)^{n}}{n} \\
+&= -\sum_{n=1}^{\infty} \dfrac{1}{n}.
+\end{align}
+This sum does not converge, hence it actually equals $\infty$. Hence why $|x| < 1$ is a requirement for this Maclaurin series to converge, although it does also convert for $x=1$. 
 
 Maclaurin and Taylor series have broad applications in physics. One application they have is in helping us connect more general and robust laws of physics to older approximations. For more on this, see the section on [the classical limit of special relativity's kinetic energy](#classical_limit_of_special_relativitys_kinetic_energy).
