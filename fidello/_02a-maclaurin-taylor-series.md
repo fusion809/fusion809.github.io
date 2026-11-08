@@ -1,5 +1,5 @@
 ## Maclaurin and Taylor series
-If we have a function $f(x)$, it is usually possible to write an infinite sum (or series) that equals $f(x)$ using $f(x)$'s derivatives. Namely:
+If we have a function $f(x)$, it is usually possible to write an infinite sum (or series) that equals $f(x)$ using $f(x)$'s derivatives.Namely:
 
 \begin{align}
 f(x) &= \sum_{n=0}^{\infty} \dfrac{d^n f}{dx^n}\Big|_{x=a} \dfrac{(x-a)^n}{n!} \label{Taylor} \\
@@ -15,6 +15,8 @@ f(x) &= \sum_{n=0}^{\infty} \dfrac{d^n f}{dx^n}\Big|_{x=0} \dfrac{x^n}{n!} \labe
 \end{align}
 
 Why do these equations hold? Well, try taking the $n$th derivative of Equations \eqref{Taylor} and \eqref{Maclaurin} and substituting $x=a$ and $x=0$, respectively. You'll find that you get $\dfrac{d^n f}{dx^n}\Big|_{x=a}$ and $\dfrac{d^n f}{dx^n}\Big|_{x=0}$, respectively. Consequently, our series matches our original function in its $n$th derivative for $n\in \mathbb{Z}^{+}$. Likewise, if you substitute in $x=a$ and $x=0$ into the Taylor and Maclaurin series, respectively, you should get $f(a)$ and $f(0)$, respectively. So we see that this is like a polynomial of infinite order that matches our original function for its value and derivatives value at one point. It turns out that this means it contains enough information to match our original function at all other points, too.  
+
+There are exceptions where Taylor series do not accurately compute the function they pertain to. For instance, points where the function is undefined can mess things up. As an example, $\ln{x+1}$'s Maclaurin series will only approximate $f(x)$ well for $-1 < x < 1$. Beyond these points it will fail to converge (meaning it will not equal some finite number as terms for higher $n$ will not get rapidly smaller as $n$ gets bigger).
 
 Now, I know this probably seems pretty abstract to you right now. But let us try to figure out the Maclaurin series for some example functions for which the $n$th derivative is fairly easy to calculate. Say, for instance, we calculate the Maclaurin series for $e^x$. Why $e^x$? Because the $n$th derivative of $e^x$ is just $e^x$, and evaluating this at $x=0$ yields 1. Hence:
 
