@@ -49,7 +49,7 @@ So here is some homework for you: try constructing the Maclaurin series for $\si
 \sin{x} &= \sum_{n=0}^{\infty} \dfrac{(-1)^nx^{2n+1}}{(2n+1)!}.
 \end{align*}
 
-As another example, we will find the Maclaurin series for $\ln{(x+1)}$ so we can see why it only converges for $|x| < -1$ where $|x|$ is the absolute value of $x$. The first derivative is $\dfrac{1}{x+1}$. Second derivative is $-\dfrac{1}{(x+1)^2}$. Third derivative is $\dfrac{2}{(x+1)^3}$. Fourth derivative is $-\dfrac{6}{(x+1)^4}$. So it seems to me that the pattern is that the numerator is $(-1)^{n-1} (n-1)!$ and the denominator is $(x+1)^n$. Hence:
+As another example, we will find the Maclaurin series for $\ln{(x+1)}$ so we can see why it only converges well for $|x| < -1$ where $|x|$ is the absolute value of $x$. The first derivative is $\dfrac{1}{x+1}$. Second derivative is $-\dfrac{1}{(x+1)^2}$. Third derivative is $\dfrac{2}{(x+1)^3}$. Fourth derivative is $-\dfrac{6}{(x+1)^4}$. So it seems to me that the pattern is that the numerator is $(-1)^{n-1} (n-1)!$ and the denominator is $(x+1)^n$. Hence:
 \begin{align}
 \dfrac{d^n}{dx^n} \ln{(x+1)} &= \dfrac{(-1)^{n-1}(n-1)!}{(x+1)^n}, \hspace{0.1cm} n \geq 1.
 \end{align}
@@ -62,11 +62,11 @@ Hence our Maclaurin series is:
 \ln{(x+1)} &= \ln{1} + \sum_{n=1}^{\infty} \dfrac{(-1)^{n-1}(n-1)! x^n}{n!} \\
 &= \sum_{n=1}^{\infty} \dfrac{(-1)^{n-1}x^n}{n}.
 \end{align}
-If $|x|>1$, we would expect the power of $x$ in our numerator to potentially grow faster than $n$ and hence our terms could become progressively larger as $n\rightarrow \infty$. As for if $x=\pm 1$, well our numerator would be smaller than our denominator, but our denominator would grow rather slowly. If $x=1$, we get:
+If $|x|>1$, we would expect the power of $x$ in our numerator to potentially grow faster than $n$ and hence our terms could become progressively larger as $n\rightarrow \infty$. As for if $x=\pm 1$, well our numerator would be smaller than our denominator, but our denominator would grow rather slowly, which means we would have to calculate a lot of terms to figure out what value it ends up equalling, assuming it does converge. If $x=1$, we get:
 \begin{align}
 \ln{2} &= \sum_{n=1}^{\infty} \dfrac{(-1)^{n-1}}{n}.
 \end{align}
-Which is actually true. As this sum does, indeed, equal $\ln{2}$. If $x=-1$, then we get:
+Which is actually true. As this sum does, indeed, equal $\ln{2}$. But because the denominator grows very slowly, we would need a lot of terms in the series in order to get a good approximation for what it equals. If $x=-1$, then we get:
 \begin{align}
 \ln{0} &= \sum_{n=1}^{\infty} \dfrac{(-1)^{n-1} (-1)^{n}}{n} \\
 &= -\sum_{n=1}^{\infty} \dfrac{1}{n}.
