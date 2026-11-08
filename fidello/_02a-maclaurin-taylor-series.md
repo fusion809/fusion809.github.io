@@ -11,10 +11,10 @@ Where we are using $\dfrac{d^n f}{dx^n}\Big|_{x=a}$ to denote the $n$th derivati
 If $a=0$, then we get the Maclaurin series:
 \begin{align}
 f(x) &= \sum_{n=0}^{\infty} \dfrac{d^n f}{dx^n}\Big|_{x=0} \dfrac{x^n}{n!} \label{Maclaurin} \\
-&= f(0) + \sum_{n=1}^{\infty} \dfrac{d^n}{dx^n}\Big|_{x=0} \dfrac{x^n}{n!}. \label{Maclaurinfirstterm}
+&= f(0) + \sum_{n=1}^{\infty} \dfrac{d^n f}{dx^n}\Big|_{x=0} \dfrac{x^n}{n!}. \label{Maclaurinfirstterm}
 \end{align}
 
-Why do these equations hold? Well, try taking the $n$th derivative of Equations \eqref{Taylor} and \eqref{Maclaurin} and substituting $x=a$ and $x=0$, respectively. You'll find that you get $\dfrac{d^n f}{dx^n}\Big|_{x=a}$ and $\dfrac{d^n f}{dx^n}\Big|_{x=0}$, respectively. Consequently, our series matches our original function in its $n$th derivative for $n\in \mathbb{Z}^{+}$. Likewise, if you substitute in $x=a$ and $x=0$, respectively, into these series, you should get $f(a)$ and $f(0)$, respectively. So we see that this is like a polynomial of infinite order that matches our original function for its value and derivatives value at one point. It turns out that this means it contains enough information to match our original function at all other points, too.  
+Why do these equations hold? Well, try taking the $n$th derivative of Equations \eqref{Taylor} and \eqref{Maclaurin} and substituting $x=a$ and $x=0$, respectively. You'll find that you get $\dfrac{d^n f}{dx^n}\Big|_{x=a}$ and $\dfrac{d^n f}{dx^n}\Big|_{x=0}$, respectively. Consequently, our series matches our original function in its $n$th derivative for $n\in \mathbb{Z}^{+}$. Likewise, if you substitute in $x=a$ and $x=0$ into the Taylor and Maclaurin series, respectively, you should get $f(a)$ and $f(0)$, respectively. So we see that this is like a polynomial of infinite order that matches our original function for its value and derivatives value at one point. It turns out that this means it contains enough information to match our original function at all other points, too.  
 
 Now, I know this probably seems pretty abstract to you right now. But let us try to figure out the Maclaurin series for some example functions for which the $n$th derivative is fairly easy to calculate. Say, for instance, we calculate the Maclaurin series for $e^x$. Why $e^x$? Because the $n$th derivative of $e^x$ is just $e^x$, and evaluating this at $x=0$ yields 1. Hence:
 
