@@ -71,6 +71,6 @@ Which is actually true. As this sum does, indeed, equal $\ln{2}$. If $x=-1$, the
 \ln{0} &= \sum_{n=1}^{\infty} \dfrac{(-1)^{n-1} (-1)^{n}}{n} \\
 &= -\sum_{n=1}^{\infty} \dfrac{1}{n}.
 \end{align}
-This sum does not converge, hence it actually equals $\infty$. Hence why $|x| < 1$ is a requirement for this Maclaurin series to converge, although it does also convert for $x=1$. 
+This sum does not converge, hence it actually equals $\infty$. Hence why $|x| < 1$ is a requirement for this Maclaurin series to converge, although it does also converge for $x=1$. 
 
 Maclaurin and Taylor series have broad applications in physics. One application they have is in helping us connect more general and robust laws of physics to older approximations. For more on this, see the section on [the classical limit of special relativity's kinetic energy](#classical_limit_of_special_relativitys_kinetic_energy).
