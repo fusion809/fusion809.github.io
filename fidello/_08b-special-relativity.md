@@ -41,7 +41,7 @@ f'(0) &= \dfrac{1}{2} \\
 \dfrac{d^nf}{dx^n}\Big|_{x=0} &= \dfrac{\displaystyle \prod_{i=1}^n 2i-1}{2^{n}}.
 \end{align*}
 
-In this case, $x=\dfrac{v^2}{c^2}$ and hence:
+In this case, $x=\dfrac{v^2}{c^2}$, and we need to multiply by $mc^2$ and subtract $mc^2$ to obtain a Maclaurin series for $T(v)$ and hence:
 \begin{align*}
 T(v) &= mc^2 \left(1 + \sum_{n=1}^{\infty} \dfrac{\left(\displaystyle \prod_{i=1}^n 2i-1\right)\left(\dfrac{v^2}{c^2}\right)^n}{2^{n}n!}-1\right)\\
 &= mc^2 \sum_{n=1}^{\infty} \dfrac{\left(\displaystyle \prod_{i=1}^n 2i-1\right)\left(\dfrac{v^2}{c^2}\right)^n}{2^{n}n!}.
