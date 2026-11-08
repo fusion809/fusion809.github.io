@@ -66,7 +66,7 @@ If $|x|>1$, we would expect the power of $x$ in our numerator to potentially gro
 \begin{align}
 \ln{2} &= \sum_{n=1}^{\infty} \dfrac{(-1)^{n-1}}{n}.
 \end{align}
-Which is actually true. As this sum does, indeed, equal $\ln{2}$. If $x=-1$ then we get:
+Which is actually true. As this sum does, indeed, equal $\ln{2}$. If $x=-1$, then we get:
 \begin{align}
 \ln{0} &= \sum_{n=1}^{\infty} \dfrac{(-1)^{n-1} (-1)^{n}}{n} \\
 &= -\sum_{n=1}^{\infty} \dfrac{1}{n}.
