@@ -25,7 +25,8 @@
 \includemd{fidello/_07a-hamilton-jacobi.md}
 \includemd{fidello/_07b-simple-pendulum.md}
 \includemd{fidello/_08a-connections.md}
-\includemd{fidello/_08b-special-relativity.md}
+\includemd{fidello/_08bi-special-relativity.md}
+\includemd{fidello/_08bii-classical-limit-special-relativity.md}
 \includemd{fidello/_08c-general-relativity.md}
 \includemd{fidello/_08di-quantum-mechanics.md}
 \includemd{fidello/_08dii-path-integral-formulation.md}

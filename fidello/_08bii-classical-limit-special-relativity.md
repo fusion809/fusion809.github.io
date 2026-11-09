@@ -1,11 +1,3 @@
-## Special relativity
-As previously mentioned, in special relativity we can make relativistic corrections to kinetic energy in our Lagrangian and Hamiltonians. Namely, we can define it as:
-
-\begin{align*}
-T(v) &= \dfrac{mc^2}{\sqrt{1-\dfrac{v^2}{c^2}}} - mc^2 \\
-&= mc^2\left(\dfrac{1}{\sqrt{1-\dfrac{v^2}{c^2}}}-1\right).
-\end{align*}
-
 ### Classical limit of special relativity's kinetic energy
 Using the Maclaurin series, we are going to show that $T(v)$ is well approximated by $T=\dfrac{mv^2}{2}$ when $v << c$. To make things simpler for ourselves, we will consider the Maclaurin series of the function:
 
@@ -27,7 +19,7 @@ Where $f^{(3)}(x)$ denotes the 3rd derivative of $f$ with respect to $x$. Note h
 \begin{align*}
 \dfrac{d^nf}{dx^n} &= \dfrac{\left(\displaystyle \prod_{i=1}^n 2i-1\right)(1-x)^{-(2n+1)/2}}{2^{n}} \hspace{0.1cm}\forall n\in \mathbb{Z}^{+}.
 \end{align*}
-$\displaystyle \prod_{i=1}^n 2i-1$ is a way of writing a multi-term product that is somewhat analogous to the summation notation $\displaystyle \sum_{i=1}^n 2i-1$. In this sum, we add up 2i-1 for $i=1$, $i=2$, $i=3$, and so forth, all the way up until $i=n$. Whereas in the product $\displaystyle \prod_{i=1}^n 2i-1$ we would multiply 2i-1 for $i=1$, $i=2$, $i=3$, and so forth up until $i=n$. Likewise $\mathbb{Z}^{+}$ denotes the set of all positive integers (so $\{1, 2, 3, ...\}$). For instance if $n=3$:
+$\displaystyle \prod_{i=1}^n 2i-1$ is a way of writing a multi-term product that is somewhat analogous to the summation notation $\displaystyle \sum_{i=1}^n 2i-1$. In this sum, we add up $2i-1$ for $i=1$, $i=2$, $i=3$, and so forth, all the way up until $i=n$. Whereas in the product $\displaystyle \prod_{i=1}^n 2i-1$ we would multiply $2i-1$ for $i=1$, $i=2$, $i=3$, and so forth up until $i=n$. Likewise $\mathbb{Z}^{+}$ denotes the set of all positive integers (so $\{1, 2, 3, ...\}$). For instance if $n=3$:
 \begin{align*}
 \displaystyle \prod_{i=1}^3 2i-1 &= (2(1)-1) \times (2(2)-1) \times (2(3)-1) \\
 &= 1 \times 3 \times 5 \\
