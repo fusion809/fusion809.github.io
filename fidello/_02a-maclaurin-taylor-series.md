@@ -6,7 +6,7 @@ f(x) &= \sum_{n=0}^{\infty} \dfrac{d^n f}{dx^n}\Big|_{x=a} \dfrac{(x-a)^n}{n!} \
 &= f(a) + \sum_{n=1}^{\infty}\dfrac{d^n f}{dx^n}\Big|_{x=a} \dfrac{(x-a)^n}{n!} \label{Taylorfirstterm}. \\
 \end{align}
 
-Where we are using $\dfrac{d^n f}{dx^n}\Big|_{x=a}$ to denote the $n$th derivative of $f(x)$ evaluated at $x=a$ and $n!$ denotes the factorial of $n$. If you are unfamiliar, well $n!=n\times (n-1) \times (n-2) \times(n-3) ... \times 1$. For instance, $5!=5\times 4 \times 3 \times 2 \times 1=120$. As for $a$ it is an arbitrary number we get to choose. Equation \eqref{Taylor} is known as the Taylor series of $f(x)$. 
+Where we are using $\dfrac{d^n f}{dx^n}\Big|_{x=a}$ to denote the $n$th derivative of $f(x)$ evaluated at $x=a$ and $n!$ denotes the factorial of $n$. If you are unfamiliar, well $n!=n\times (n-1) \times (n-2) \times(n-3) \times ... \times 1$. For instance, $5!=5\times 4 \times 3 \times 2 \times 1=120$. As for $a$ it is an arbitrary number we get to choose. Equation \eqref{Taylor} is known as the Taylor series of $f(x)$. 
 
 If $a=0$, then we get the Maclaurin series:
 \begin{align}
