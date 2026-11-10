@@ -16,7 +16,7 @@ The equations of motion with no non-conservative forces are:
 \dot{p}_i &= -\dfrac{\partial H}{\partial q_i} \label{Heq1}\\
 \dot{q}_i &= \dfrac{\partial H}{\partial p_i}.\label{Heq2}
 \end{align}
-We can derive these equations of motion by considering an infinitesimal change our path and its effect on $H$, which we will denote as $dH$:
+We can derive these equations of motion by considering an infinitesimal change to our path and its effect on $H$, which we will denote as $dH$:
 \begin{align}
 dH &= \sum_{i=1}^n d(p_i\dot{q}_i) - dL \label{dH1}\\
 &= \sum_{i=1}^n dp_i \dot{q}_i + p_i d\dot{q}_i - dL \label{dH2}\\
