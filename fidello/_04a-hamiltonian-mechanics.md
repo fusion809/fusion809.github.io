@@ -41,7 +41,9 @@ Equating like terms in the right-hand sides of Equations \eqref{dH3} and \eqref{
 \dot{p}_i &= -\dfrac{\partial H}{\partial q_i} \\
 \dot{q}_i &= \dfrac{\partial H}{\partial p_i}.
 \end{align*}
-Which are Equations \eqref{Heq1} and \eqref{Heq2}, which are known as Hamilton's equations. To account for non-conservative forces, we merely add the corresponding generalized force terms to the right-hand side of Equation \eqref{Heq1}. In other words:
+Which are Equations \eqref{Heq1} and \eqref{Heq2}, which are known as Hamilton's equations. I should mention this is not the only way to derive Hamilton's equations; it is also possible to derive them directly from the stationary action principle, for instance. 
+
+To account for non-conservative forces, we merely add the corresponding generalized force terms to the right-hand side of Equation \eqref{Heq1}. In other words:
 \begin{align}
 \dot{p}_i &= -\dfrac{\partial H}{\partial q_i} + Q_i. \label{HNConseq1}
 \end{align}
