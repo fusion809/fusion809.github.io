@@ -30,7 +30,7 @@ e^{iz} &= \cos{z} + i\sin{z}.
 \end{align*}
 An interesting thing to note that $e^{iz}$ is that its modulus is one. How do I know this? Well, the modulus is defined as just the length of the complex number's vector in the complex plane, right? So for $e^{iz}$ that would be:
 \begin{align*}
-l &= \sqrt{\cos{z}^2+\sin^2{z}}\\
+l &= \sqrt{\cos^2{z}+\sin^2{z}}\\
 &= \sqrt{1} \\
 &= 1.
 \end{align*}
