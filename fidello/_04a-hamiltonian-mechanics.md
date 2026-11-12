@@ -32,10 +32,11 @@ Next we can use Equations \eqref{ELE} to simplify our $\dfrac{\partial L}{\parti
 \begin{align}
 dH &= \sum_{i=1}^n \dot{q}_i dp_i - \dot{p}_i dq_i. \label{dH3}
 \end{align}
-We can also write $dH$ as:
+Assuming our Hamiltonian does not explicitly depend on $t$, we can also write $dH$ as:
 \begin{align}
 dH &= \sum_{i=1}^n \dfrac{\partial H}{\partial q_i} dq_i + \dfrac{\partial H}{\partial p_i}dp_i. \label{dH4}
 \end{align}
+As this is just the change in $H$ caused directly by the change in $q_i$ plus the change in $H$ that is directly caused by the change in $p_i$. 
 Equating like terms in the right-hand sides of Equations \eqref{dH3} and \eqref{dH4} yields:
 \begin{align*}
 \dot{p}_i &= -\dfrac{\partial H}{\partial q_i} \\
