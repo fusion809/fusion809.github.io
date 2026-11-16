@@ -32,7 +32,7 @@ S' &\approx \int_{t_0}^{t_f} L(q_i, \dot{q}_i, t) + \sum_{i=1}^n\dfrac{\partial 
 \end{align*}
 At the end times of our path, $\delta q_i$ should be zero, as the endpoints are fixed. Hence the term $\left[\dfrac{\partial L}{\partial \dot{q}_i}\delta q_i\right]_{t_0}^{t_f}$ should evaluate to zero. Our expression then simplifies to:
 \begin{align*}
-S' &\approx \int_{t_0}^{t_f} L(q_i, \dot{q}_i, t) + \sum_{i=1}^n\dfrac{\partial L}{\partial q_i} \delta q_i dt + \left[\sum_{i=1}^n\dfrac{\partial L}{\partial \dot{q}_i}\delta q_i\right]_{t_0}^{t_f} - \int_{t_0}^{t_f} \sum_{i=1}^n\dfrac{d}{dt} \dfrac{\partial L}{\partial \dot{q}_i}\delta q_i dt \\
+S' &\approx \int_{t_0}^{t_f} L(q_i, \dot{q}_i, t) + \sum_{i=1}^n\dfrac{\partial L}{\partial q_i} \delta q_i dt - \int_{t_0}^{t_f} \sum_{i=1}^n\dfrac{d}{dt} \dfrac{\partial L}{\partial \dot{q}_i}\delta q_i dt \\
 &\approx \int_{t_0}^{t_f} L(q_i, \dot{q}_i, t) + \sum_{i=1}^n\delta q_i \left(\dfrac{\partial L}{\partial q_i} - \dfrac{d}{dt} \dfrac{\partial L}{\partial \dot{q}_i}\right) dt.
 \end{align*}
 The first of these terms is present in $S$, too. Hence:
