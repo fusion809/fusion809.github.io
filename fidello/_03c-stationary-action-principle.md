@@ -39,7 +39,7 @@ The first of these terms is present in $S$, too. Hence:
 \begin{align*}
 S' - S &\approx \int_{t_0}^{t_f}\sum_{i=1}^n\delta q_i \left(\dfrac{\partial L}{\partial q_i} - \dfrac{d}{dt} \dfrac{\partial L}{\partial \dot{q}_i}\right) dt.
 \end{align*}
-We can denote this first-order approximation to how much $S$ changes as $\delta S$. It is a first-order approximation as the highest power of $\delta q_i$ and $\delta \dot{q}_i$ it depends on. First order also describes the highest order derivatives of $L$ with respect to $q_i$ and $\dot{q}_i$ that our approximation depends upon. Hence:
+We can denote this first-order approximation to how much $S$ changes as $\delta S$. It is a first-order approximation as this is the highest power of $\delta q_i$ and $\delta \dot{q}_i$ it depends on. First order also describes the highest order derivatives of $L$ with respect to $q_i$ and $\dot{q}_i$ that our approximation depends upon. Hence:
 \begin{align}
 \delta S &= \int_{t_0}^{t_f} \sum_{i=1}^n\delta q_i \left(\dfrac{\partial L}{\partial q_i} - \dfrac{d}{dt} \dfrac{\partial L}{\partial \dot{q}_i}\right) dt. \label{deltaSELE}
 \end{align}
