@@ -10,7 +10,7 @@ In this example, we are modelling the motion of a moving mass around a mass cent
 x &= r\cos{\theta} \\
 y &= r\sin{\theta}.
 \end{align*}
-Their time derivatives are:
+Their time derivatives are, by the product and chain rules:
 \begin{align*}
 \dot{x} &= \dot{r} \cos{\theta} - r\dot{\theta}\sin{\theta} \\
 \dot{y} &= \dot{r}\sin{\theta} + r\dot{\theta}\cos{\theta}.
