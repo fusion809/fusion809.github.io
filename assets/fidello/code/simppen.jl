@@ -16,6 +16,6 @@ sol = solve(prob, saveat=0.01)
 
 plot(sol.t, sol[1, :], label=false)
 xlabel!(L"t\;(\mathrm{seconds})")
-ylabel!(L"\theta\;(\mathrm{rad})")
+ylabel!(L"\theta\;(\mathrm{radians})")
 title!("Dampened pendulum")
 savefig("Dampened_pendulum_theta.svg")
