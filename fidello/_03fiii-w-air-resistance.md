@@ -34,7 +34,7 @@ Subtracting $\dfrac{g}{l}\cos{\theta}$ from both sides yields:
 \begin{align*}
     \ddot{\theta} &= -\dfrac{g}{l}\cos{\theta} -\dfrac{\rho C_D Al|\dot{\theta}|\dot{\theta}}{2m}.
 \end{align*}
-This equation cannot be analytically solved, so numerical solutions are necessary. There is a numerical solver for an even more complex version of the dampened single pendulum [here](/singlePendulum/). Below is some Julia code for numerically solving the dampened single pendulum problem with $\theta_0=0$ and $\dot{\theta}_0=0$.
+This equation cannot be analytically solved, so numerical solutions are necessary. There is a numerical solver for an even more complex version of the dampened single pendulum [here](/singlePendulum/). Below is some Julia code for numerically solving the dampened single pendulum problem with $\theta_0=0$, $\dot{\theta}_0=0$, $g=9.81\mathrm{m}\cdot \mathrm{s}^{-2}$, $l=1\mathrm{m}$ and $m=1\mathrm{kg}$. 
 
 ```julia:./code/simppen
 using DifferentialEquations, Plots, LaTeXStrings
