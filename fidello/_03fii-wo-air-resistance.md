@@ -83,11 +83,11 @@ Now we want to make our differential equation as simple as possible, so we will 
 \end{align}
 What function if double differentiated yields the original function back with $-\dfrac{g}{l}$ coefficient and a constant term? The answer is:
 \begin{align*}
-\theta(t) &= C_1 \cos{\sqrt{\dfrac{g}{l}}t} + C_2 \sin{\sqrt{\dfrac{g}{l}}t} + C_3.
+\theta(t) &= C_1 \cos{\left(\sqrt{\dfrac{g}{l}}t\right)} + C_2 \sin{\left(\sqrt{\dfrac{g}{l}}t\right)} + C_3.
 \end{align*}
 Where $C_1$ and $C_2$ are constants that depend on our initial conditions (similarly to the arbitrary constants of integration you get when using indefinite integrals) and $C_3$ is a constant we will work out next, right after differentiating $\theta(t)$ for later use:
 \begin{align*}
-\dot{\theta}(t) &= -\sqrt{\dfrac{g}{l}}C_1\sin{\sqrt{\dfrac{g}{l}}t} + \sqrt{\dfrac{g}{l}}C_2 \cos{\sqrt{\dfrac{g}{l}}t}.
+\dot{\theta}(t) &= -\sqrt{\dfrac{g}{l}}C_1\sin{\left(\sqrt{\dfrac{g}{l}}t\right)} + \sqrt{\dfrac{g}{l}}C_2 \cos{\left(\sqrt{\dfrac{g}{l}}t\right)}.
 \end{align*}
 $C_3$ is a constant, so double differentiating it will remove it. Hence we know that $C_3$ only enters Equation \eqref{simppenlin} via the $\theta$ term on the right-hand side. So we need to impose the condition that:
 \begin{align*}
@@ -121,6 +121,6 @@ C_2 &= \sqrt{\dfrac{l}{g}} \dot{\theta}_0.
 \end{align*}
 Hence:
 \begin{align*}
-\theta(t) &= \left(\theta_0 + \dfrac{\pi}{2}\right)\cos{\sqrt{\dfrac{g}{l}}t} + \dot{\theta}_0 \sqrt{\dfrac{l}{g}} \sin{\sqrt{\dfrac{g}{l}}t} -\dfrac{\pi}{2}.
+\theta(t) &= \left(\theta_0 + \dfrac{\pi}{2}\right)\cos{\left(\sqrt{\dfrac{g}{l}}t\right)} + \dot{\theta}_0 \sqrt{\dfrac{l}{g}} \sin{\left(\sqrt{\dfrac{g}{l}}t\right)} -\dfrac{\pi}{2}.
 \end{align*}
 So we can see $\theta(t)$ is approximated, when it deviates only slightly from $\theta=-\dfrac{\pi}{2}$, quite well by sine and cosine functions. More general solutions can be achieved using numerical solution techniques; for those, see [this page](/simplePendulum/woErrorAnalysis).
