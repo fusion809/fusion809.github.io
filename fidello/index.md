@@ -18,6 +18,7 @@
 \includemd{fidello/_03fi-single-pendulum.md}
 \includemd{fidello/_03fii-wo-air-resistance.md}
 \includemd{fidello/_03fiii-w-air-resistance.md}
+\includemd{fidello/_03g-two-body-problem.md}
 \includemd{fidello/_04a-hamiltonian-mechanics.md}
 \includemd{fidello/_04b-simple-pendulum.md} 
 \includemd{fidello/_05-poisson-bracket.md}
