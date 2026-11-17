@@ -1,7 +1,7 @@
 ## Example: gravitational two-body problem
 ~~~
 <figure id="two-body" style="float: right;">
-<img src="/fidello/Gravitational_two_body_problem.svg" width="300px">
+<img src="/fidello/Gravitational_two_body_problem.svg" width="400px" />
 <figcaption>A system consisting of two bodies in gravitational motion around each other.</figcaption>
 </figure>
 ~~~
@@ -18,9 +18,15 @@ Their time derivatives are:
 Hence velocity squared is:
 \begin{align*}
 v^2 &= \dot{x}^2 + \dot{y}^2 \\
-&= (\dot{r} \cos{\theta} - r\dot{\theta}\sin{\theta})^2 + (\dot{r}\sin{\theta} + r\dot{\theta}\cos{\theta})^2 \\
-&= \dot{r}^2 \cos^2{\theta} + r^2 \dot{\theta}^2 \sin^2{\theta} - 2r\dot{r}\dot{\theta}\cos{\theta}\sin{\theta} + \dot{r}^2 \sin^2{\theta} + r^2 \dot{\theta}^2 \cos^2{\theta} + 2r\dot{r} \dot{\theta}\sin{\theta}\cos{\theta} \\
-&= \dot{r}^2 (\cos^2{\theta}+\sin^2{\theta}) + r^2 \dot{\theta}^2 (\sin^2{\theta}+\cos^2{\theta}) \\
+&= (\dot{r} \cos{\theta} - r\dot{\theta}\sin{\theta})^2 + (\dot{r}\sin{\theta} + r\dot{\theta}\cos{\theta})^2
+\end{align*}
+Using the binomial theorem, we expand these two brackets to:
+\begin{align*}
+v^2 &= \dot{r}^2 \cos^2{\theta} + r^2 \dot{\theta}^2 \sin^2{\theta} - 2r\dot{r}\dot{\theta}\cos{\theta}\sin{\theta} + \dot{r}^2 \sin^2{\theta} + r^2 \dot{\theta}^2 \cos^2{\theta} + 2r\dot{r} \dot{\theta}\sin{\theta}\cos{\theta}
+\end{align*}
+The $2r\dot{r}\dot{\theta}\sin{\theta}\cos{\theta}$ terms have opposite signs and hence cancel each other out:
+\begin{align*}
+v^2 &= \dot{r}^2 (\cos^2{\theta}+\sin^2{\theta}) + r^2 \dot{\theta}^2 (\sin^2{\theta}+\cos^2{\theta}) \\
 &= \dot{r}^2 + r^2 \dot{\theta}^2.
 \end{align*}
 This gives the kinetic energy:

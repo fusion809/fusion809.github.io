@@ -123,4 +123,35 @@ Hence:
 \begin{align*}
 \theta(t) &= \left(\theta_0 + \dfrac{\pi}{2}\right)\cos{\left(\sqrt{\dfrac{g}{l}}t\right)} + \dot{\theta}_0 \sqrt{\dfrac{l}{g}} \sin{\left(\sqrt{\dfrac{g}{l}}t\right)} -\dfrac{\pi}{2}.
 \end{align*}
-So we can see $\theta(t)$ is approximated, when it deviates only slightly from $\theta=-\dfrac{\pi}{2}$, quite well by sine and cosine functions. More general solutions can be achieved using numerical solution techniques; for those, see [this page](/simplePendulum/woErrorAnalysis).
+So we can see $\theta(t)$ is approximated, when it deviates only slightly from $\theta=-\dfrac{\pi}{2}$, quite well by sine and cosine functions. More generally, we can use numerical techniques to approximate our solution. Below is some Julia code that numerically approximates the solution for $\theta_0=\dot{\theta}_0=0$. These initial conditions means the pendulum starts stationary on the positive $x$-axis. Then gravity pulls it down and up towards the negative $x$-axis (at $\theta=-\pi$) and then back down and towards the positive $x$-axis ($\theta=0$) and over and over. 
+```julia:./code/simppen
+using DifferentialEquations, Plots, LaTeXStrings
+
+g, l = 9.81, 1.0
+
+function pendulum!(du, u, p, t)
+    du[1] = u[2]
+    du[2] = -(g/l)*cos(u[1])
+end
+
+tspan = (0.0, 10.0)
+u0 = [0.0, 0.0]  # θ₀ = 0, θ̇₀ = 0
+
+prob = ODEProblem(pendulum!, u0, tspan)
+sol = solve(prob, saveat=0.01)
+
+plot(sol.t, sol[1, :], label=false)
+xlabel!(L"t\;(\mathrm{seconds})")
+ylabel!(L"\theta\;(\mathrm{rad})")
+title!("Simple pendulum plot")
+savefig("Simple_pendulum_theta.svg")
+```
+
+~~~
+<figure id="simppen" style="float: right; width: 100%">
+<img src="/Simple_pendulum_theta.svg" width="100%" />
+<figcaption>Simple pendulum angle plot.</figcaption>
+</figure>
+~~~
+
+If you would like to try some of your own initial conditions and calculate the solution numerically for these conditions, see [this page](/simplePendulum/woErrorAnalysis).
