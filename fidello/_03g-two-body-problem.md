@@ -137,4 +137,6 @@ Hence:
 \begin{align*}
 r(\theta) &= \dfrac{1}{\mu\left(1+e\cos{(\theta-\theta_0)}\right)}.
 \end{align*}
-This is the equation for a conic section (parabola, hyperbola or ellipse) with $e$ as its eccentricity and $\theta_0$ is the angle at which the moving mass is closest to the central mass. If $0 \leq e < 1$, it is an ellipse; if $e=1$, it is a parabola; and if $e>1$, it is a hyperbola.
+This is the equation for a conic section (parabola, hyperbola or ellipse) with $e$ as its eccentricity and $\theta_0$ is the angle at which the moving mass is closest to the central mass. If $0 \leq e < 1$, it is an ellipse ($e=0$ makes it a perfect circle); if $e=1$, it is a parabola; and if $e>1$, it is a hyperbola. 
+
+So this establishes to us that Lagrangian mechanics predicts that an object in orbit around a larger, central mass, will move in a conic section orbit. For Earth in orbit around the Sun, this conic section has an $e$ value that is almost $0$, which makes it an ellipse. Similarly, for the Moon's orbit around the Earth, $e$ is also almost $0$. For all the planets in the solar system, their $e$ values are between $0$ and $1$. 
