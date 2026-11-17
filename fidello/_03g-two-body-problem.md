@@ -20,6 +20,7 @@ Hence velocity squared is:
 v^2 &= \dot{x}^2 + \dot{y}^2 \\
 &= (\dot{r} \cos{\theta} - r\dot{\theta}\sin{\theta})^2 + (\dot{r}\sin{\theta} + r\dot{\theta}\cos{\theta})^2 \\
 &= \dot{r}^2 \cos^2{\theta} + r^2 \dot{\theta}^2 \sin^2{\theta} - 2r\dot{r}\dot{\theta}\cos{\theta}\sin{\theta} + \dot{r}^2 \sin^2{\theta} + r^2 \dot{\theta}^2 \cos^2{\theta} + 2r\dot{r} \dot{\theta}\sin{\theta}\cos{\theta} \\
+&= \dot{r}^2 (\cos^2{\theta}+\sin^2{\theta}) + r^2 \dot{\theta}^2 (\sin^2{\theta}+\cos^2{\theta}) \\
 &= \dot{r}^2 + r^2 \dot{\theta}^2.
 \end{align*}
 This gives the kinetic energy:
