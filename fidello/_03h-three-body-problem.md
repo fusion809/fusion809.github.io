@@ -1,6 +1,6 @@
 ### Gravitational three-body problem
 ~~~
-<figure id="threebody" style="float: right; width: 100%">
+<figure id="threebody" style="float: right;">
 <img src="/fidello/Gravitational_three_body_problem.svg" width="500px"/>
 <figcaption>Gravitational three-body problem.</figcaption>
 </figure>
