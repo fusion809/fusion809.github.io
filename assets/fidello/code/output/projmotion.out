@@ -1,0 +1,2 @@
+ArgumentError: Package DifferentialEquations not found in current path.
+- Run `import Pkg; Pkg.add("DifferentialEquations")` to install the DifferentialEquations package.
