@@ -11,7 +11,7 @@ $\dot{\textbf{r}}_j$ is the time derivative of the position vector (that is, the
 \begin{align}
     \hspace{4cm}\dfrac{d}{dt} \dfrac{\partial L}{\partial \dot{q}_i} - \dfrac{\partial L}{\partial q_i} &= \sum_{j=1}^m \textbf{F}_j \cdot \dfrac{\partial \textbf{r}_j}{\partial q_i}, \hspace{2cm} i\in\{1,2,3,...,n\}. \label{ELENCF}
 \end{align}
-The velocity-based definition of $Q_i$ can also be used, which yields:
+The velocity-based definition of the covariant basis vectors can also be used, which yields:
 \begin{align}
     \hspace{4cm}\dfrac{d}{dt} \dfrac{\partial L}{\partial \dot{q}_i} - \dfrac{\partial L}{\partial q_i} &= \sum_{j=1}^m \textbf{F}_j \cdot \dfrac{\partial \dot{\textbf{r}}_j}{\partial \dot{q}_i}, \hspace{2cm} i\in\{1,2,3,...,n\}. \label{ELENCFrdot}
 \end{align}
