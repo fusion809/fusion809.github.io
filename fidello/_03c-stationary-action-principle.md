@@ -18,14 +18,16 @@ Of all the paths that an object could explore, the one that it actually explores
 \begin{align}
 \delta S &= 0.\label{deltaS}
 \end{align}
-This is analogous to saying, in regular calculus, that our function's first derivative is zero. Which, as you may remember from your maths classes, is an equation we can solve to find the stationary point(s) of our function. 
+This is analogous to saying, in regular calculus, that our function's first derivative is zero. Which, as you may remember from your maths classes, is an equation we can solve to find the stationary point(s) of our function. The difference is that $S$ is not a function that takes some value of an independent variable (e.g. $x$) and returns a value, instead $S$ is a *functional*. Which means that it takes a function as its input and returns a value. In this case, the function it takes as its input are the $q_i(t)$ that specify our path.
 
 Say we add functions $\delta q_i$ to $q_i$, thereby adjusting the path our object takes. Crucially, however, the end times and end points of our path will be unchanged. The new, adjusted action we will denote by $S'$ and it is:
 \begin{align*}
-S' &= \int_{t_0}^{t_f} L(q_i+\delta q_i, \dot{q}_i+\delta \dot{q}_i, t) dt \\
-&\approx \int_{t_0}^{t_f} L(q_i, \dot{q}_i, t) + \sum_{i=1}^n\dfrac{\partial L}{\partial q_i} \delta q_i + \dfrac{\partial L}{\partial \dot{q}_i}\delta \dot{q}_i dt.
+S' &= \int_{t_0}^{t_f} L(q_i+\delta q_i, \dot{q}_i+\delta \dot{q}_i, t) dt
 \end{align*}
-
+We will expand $L$ using the first couple of terms of its Taylor series around $a=q_i$ and $a=\dot{q}_i$ (we have multiple $a$s as our function depends on multiple variables):
+\begin{align*}
+S' &\approx \int_{t_0}^{t_f} L(q_i, \dot{q}_i, t) + \sum_{i=1}^n\dfrac{\partial L}{\partial q_i} \delta q_i + \dfrac{\partial L}{\partial \dot{q}_i}\delta \dot{q}_i dt.
+\end{align*}
 Next, we will apply integration by parts to the $\dfrac{\partial L}{\partial \dot{q}_i}\delta \dot{q}_i$ term:
 \begin{align*}
 S' &\approx \int_{t_0}^{t_f} L(q_i, \dot{q}_i, t) + \sum_{i=1}^n\dfrac{\partial L}{\partial q_i} \delta q_i dt + \left[\sum_{i=1}^n\dfrac{\partial L}{\partial \dot{q}_i}\delta q_i\right]_{t_0}^{t_f} - \int_{t_0}^{t_f} \sum_{i=1}^n\dfrac{d}{dt} \dfrac{\partial L}{\partial \dot{q}_i}\delta q_i dt.
