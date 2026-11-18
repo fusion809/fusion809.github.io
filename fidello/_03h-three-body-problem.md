@@ -475,7 +475,7 @@ The above Julia code produces the animation below.
 
 ~~~
 <figure id="threebodyan" style="float: right; width: 100%">
-<img src="/three_star_system.gif" width="500px"/>
+<img src="/three_star_system.gif" width="800px"/>
 <figcaption>A three star system simulation.</figcaption>
 </figure>
 ~~~
