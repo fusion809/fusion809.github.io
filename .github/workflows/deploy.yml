@@ -33,10 +33,17 @@ jobs:
     #   The last line should be `optimize()` though you may want to give it
     #   specific arguments, see the documentation or ?optimize in the REPL.
     - run: julia -e '
-            using Pkg; Pkg.add([Pkg.PackageSpec(url="https://github.com/fusion809/FunctionIntegrator.jl", rev="v0.6.1"), Pkg.PackageSpec(name="NodeJS"), Pkg.PackageSpec(name="Franklin"), Pkg.PackageSpec(name="PyPlot"), Pkg.PackageSpec(name="Interpolations"), Pkg.PackageSpec(name="StaticArrays"), Pkg.PackageSpec(name="FFTW"), Pkg.PackageSpec(name="Plots"), Pkg.PackageSpec(name="DifferentialEquations"), Pkg.PackageSpec(name="LaTeXStrings"), Pkg.PackageSpec(name="PlotlyJS")]);
+            using Pkg; Pkg.activate("."); Pkg.add([Pkg.PackageSpec(url="https://github.com/fusion809/FunctionIntegrator.jl", rev="v0.6.1"), Pkg.PackageSpec(name="NodeJS"), Pkg.PackageSpec(name="Franklin"), Pkg.PackageSpec(name="PyPlot"), Pkg.PackageSpec(name="Interpolations"), Pkg.PackageSpec(name="StaticArrays"), Pkg.PackageSpec(name="FFTW"), Pkg.PackageSpec(name="Plots"), Pkg.PackageSpec(name="DifferentialEquations"), Pkg.PackageSpec(name="LaTeXStrings"), Pkg.PackageSpec(name="PlotlyJS")]);
             using NodeJS; run(`$(npm_cmd()) install highlight.js`);
             using Franklin;
-            Pkg.activate("."); Pkg.instantiate();
+            Pkg.instantiate();
+            for file in ["fidello/_01-introduction.md", "fidello/_03fii-wo-air-resistance.md", "fidello/_03fiii-w-air-resistance.md", "fidello/_04c-projectile-motion.md"]
+                content = read(file, String);
+                code = match(r"```julia:[^\n]*\n(.*?)\n```"s, content);
+                isnothing(code) && error("No Julia code block found in $file");
+                occursin(r"gif\(anim", code.captures[1]) || error("No GIF generation code found in $file");
+                include_string(Main, code.captures[1], file);
+            end
             include("deploy.jl")'
       env:
           # Allows the use of unicode characters in Plots.jl
