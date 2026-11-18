@@ -30,8 +30,8 @@ anim = @animate for i in eachindex(sol.t)
         ylims=(-1.1l, 1.1l),
         aspect_ratio=:equal,
         label=false,
-        xlabel=L"x\ (\mathrm{m})",
-        ylabel=L"y\ (\mathrm{m})",
+        xlabel=L"x\ (\mathrm{metres})",
+        ylabel=L"y\ (\mathrm{metres})",
         title="Dampened pendulum",
     )
     scatter!([x[i]], [y[i]]; markersize=8, label=false)
