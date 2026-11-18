@@ -21,6 +21,7 @@
 \includemd{fidello/_03g-two-body-problem.md}
 \includemd{fidello/_04a-hamiltonian-mechanics.md}
 \includemd{fidello/_04b-simple-pendulum.md} 
+\includemd{fidello/_04c-projectile-motion.md}
 \includemd{fidello/_05-poisson-bracket.md}
 \includemd{fidello/_06-noethers-theorem.md}
 \includemd{fidello/_07a-hamilton-jacobi.md}
