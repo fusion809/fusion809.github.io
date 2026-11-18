@@ -1,5 +1,5 @@
 # This file was generated, do not modify it. # hide
-using DifferentialEquations, Printf
+using DifferentialEquations
 using Plots
 
 # ------------------------------------------------------------
@@ -122,7 +122,7 @@ anim = @animate for i in eachindex(sol.t)
         aspect_ratio=:equal,
         xlabel="x (m)",
         ylabel="y (m)",
-        title="Double pendulum — t = $(@sprintf("%.2f", sol.t[i])) s"
+        title="Double pendulum"
     )
 
     scatter!(
