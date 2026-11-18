@@ -23,17 +23,35 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
-     inkscape:zoom="1.8803089"
-     inkscape:cx="339.57186"
-     inkscape:cy="109.02464"
-     inkscape:window-width="1920"
-     inkscape:window-height="1080"
+     inkscape:zoom="3.7606178"
+     inkscape:cx="295.82906"
+     inkscape:cy="122.05441"
+     inkscape:window-width="1218"
+     inkscape:window-height="1038"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g9" />
+     inkscape:current-layer="svg10" />
   <defs
      id="defs1">
+    <marker
+       style="overflow:visible"
+       id="ArrowWideHeavy"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Wide, heavy arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         d="m 1,0 -3,3 h -2 l 3,-3 -3,-3 h 2 z"
+         id="path3" />
+    </marker>
     <marker
        style="overflow:visible"
        id="marker15"
@@ -106,8 +124,7 @@
        stroke="#000000"
        pointer-events="all"
        id="ellipse5"
-       r="20"
-       style="fill:#000000;fill-opacity:1" />
+       r="20" />
     <g
        transform="translate(-0.5,-0.5)"
        id="g5">
@@ -203,6 +220,15 @@
            style="font-size:40px">y</text>
       </switch>
     </g>
+    <path
+       d="m -292.56016,221.76489 0.26591,-7.87269 c 0.22505,-6.66287 -4.94688,-13.51183 -7.92688,-19.47183 l -4.6314,-7.65731 c -1.84,-3.68667 -1.98607,-2.52919 -6.37312,-7.54764 l -6.00465,-6.86886 c -4.00854,-4.58546 -9.05556,-6.60411 -9.01441,-6.59297 l -10.79774,-2.92505"
+       fill="none"
+       stroke="#000000"
+       stroke-miterlimit="10"
+       pointer-events="stroke"
+       id="path7"
+       style="marker-end:url(#ArrowWideHeavy)"
+       sodipodi:nodetypes="csccsscc" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans';writing-mode:lr-tb;direction:ltr;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:0"
@@ -213,11 +239,6 @@
          id="tspan14"
          x="-287.15503"
          y="189.36243">θ</tspan></text>
-    <path
-       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:square;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#marker15);marker-end:url(#marker15)"
-       d="m -339.06897,168.28447 c 24.8578,5.94642 43.88669,11.497 40.60138,51.01765"
-       id="path1"
-       sodipodi:nodetypes="cc" />
   </g>
   <switch
      id="switch10"
