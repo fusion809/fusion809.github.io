@@ -1,4 +1,4 @@
-## Example: projectile motion
+### Projectile motion
 Let us analyse what happens when a projectile is fired into the air. Let $x$ represent the horizontal direction and $y$ represent the vertical direction.
 
 \begin{align*}

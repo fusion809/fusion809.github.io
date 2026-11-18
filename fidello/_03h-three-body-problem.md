@@ -1,4 +1,4 @@
-## Example: gravitational three-body problem
+### Gravitational three-body problem
 ~~~
 <figure id="threebody" style="float: right; width: 100%">
 <img src="/fidello/Gravitational_three_body_problem.svg" width="500px"/>
@@ -80,9 +80,9 @@ m_2 \ddot{r}_2 &= m_2 r_2 \dot{\theta}_2^2 - \dfrac{GMm_2}{r_2^2} - \dfrac{Gm_1 
 \end{align*}
 As for the $\theta_1$ Euler-Lagrange equation, it is:
 \begin{align*}
-2m_1 r_1\dot{r}_1 \dot{\theta}_1 + m_1 r_1^2 \ddot{\theta}_1 &= -\dfrac{Gm_1 m_2 r_1r_2\sin{(\theta_2-\theta_1)}}{r_{12}^3}
+2m_1 r_1\dot{r}_1 \dot{\theta}_1 + m_1 r_1^2 \ddot{\theta}_1 &= -\dfrac{Gm_1 m_2 r_1r_2\sin{(\theta_2-\theta_1)}}{r_{12}^3}.
 \end{align*}
-divide both sides by $m_1r_1^2$:
+Divide both sides by $m_1r_1^2$:
 \begin{align*}
 \dfrac{2\dot{r}_1 \dot{\theta}_1}{r_1} + \ddot{\theta}_1 &= -\dfrac{Gm_2 r_2\sin{(\theta_2-\theta_1)}}{r_1 r_{12}^3} \\
 \ddot{\theta}_1 &= -\dfrac{2\dot{r}_1 \dot{\theta}_1}{r_1} -\dfrac{Gm_2 r_2\sin{(\theta_2-\theta_1)}}{r_1 r_{12}^3}.

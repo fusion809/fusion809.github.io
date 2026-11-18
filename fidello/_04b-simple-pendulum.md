@@ -1,4 +1,5 @@
-## Example: simple pendulum
+## Examples
+### Simple pendulum
 The Hamiltonian for the simple pendulum is:
 \begin{align}
 H &= T + V \\

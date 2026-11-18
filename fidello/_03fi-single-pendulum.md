@@ -1,4 +1,5 @@
-## Example: single pendulum
+## Examples
+### Single pendulum
 ~~~
 <figure id="fig1" style="float:right;">
 <img src="/fidello/pendulum.svg" width="500px"/>

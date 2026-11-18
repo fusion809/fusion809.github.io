@@ -1,4 +1,4 @@
-## Example: gravitational two-body problem
+### Gravitational two-body problem
 ~~~
 <figure id="two-body" style="float: right;">
 <img src="/fidello/Gravitational_two_body_problem.svg" width="400px" />

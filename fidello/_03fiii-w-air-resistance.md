@@ -1,4 +1,4 @@
-### With air resistance
+#### With air resistance
 For the sake of simplicity, we will only consider the air resistance experienced by the pendulum bob itself, not by the rod. The air resistance force vector for the pendulum bob would be:
 \begin{align*}
     \textbf{F}_D &= -\dfrac{\rho C_D A|v|\textbf{v}}{2}.
