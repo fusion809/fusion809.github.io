@@ -22,8 +22,11 @@ Hence the difference in $x$ is $r_2\cos{\theta_2} - r_1\cos{\theta_1}$ and the d
 \begin{align*}
 r_{12}^2 &= (r_2\cos{\theta_2} - r_1\cos{\theta_1})^2 + (r_2\sin{\theta_2} - r_1\sin{\theta_1})^2 \\
 &= r_2^2 \cos^2{\theta_2} + r_1^2 \cos^2{\theta_1} -2r_1 r_2 \cos{\theta_1}\cos{\theta_2} + r_2^2 \sin^2{\theta_2} + r_1^2\sin^2{\theta_1}-2r_1r_2 \sin{\theta_1}\sin{\theta_2} \\
-&= r_1^2 + r_2^2 - 2r_1 r_2 \cos{(\theta_2-\theta_1)}\\
-\therefore r_{12} &= \sqrt{r_1^2 + r_2^2 - 2r_1 r_2 \cos{(\theta_2-\theta_1)}}.
+&= r_1^2 + r_2^2 - 2r_1 r_2 \cos{(\theta_2-\theta_1)}.
+\end{align*}
+Square-rooting yields:
+\begin{align*}
+r_{12} &= \sqrt{r_1^2 + r_2^2 - 2r_1 r_2 \cos{(\theta_2-\theta_1)}}.
 \end{align*}
 We deliberately ignored the negative possibility as $r_{12}$ is defined such that it must be non-negative. Hence the gravitational potential energy of our system:
 \begin{align*}
@@ -47,7 +50,7 @@ We will calculate $\dfrac{\partial r_{12}}{\partial q_i}$ as this will come in h
 \dfrac{\partial r_{12}}{\partial \theta_2} &= \dfrac{2r_1r_2\sin{(\theta_2-\theta_1)}}{2r_{12}}\\
 &= \dfrac{r_1r_2\sin{(\theta_2-\theta_1)}}{r_{12}}.
 \end{align*}
-The momentum canonical to $r_1$ is:
+The canonical momentums are:
 \begin{align*}
 p_{r_1} &= \dfrac{\partial L}{\partial \dot{r}_1} \\
 &= m_1 \dot{r}_1 \\
