@@ -1,3 +1,7 @@
-UndefVarError: `unwrap` not defined in `Main.FD_SANDBOX_6751168331264318849`
-Suggestion: check for spelling errors or missing imports.
-Hint: a global variable of this name also exists in FunctionWrappersWrappers.
+Approximate revolutions of star 1: 2.65
+Approximate revolutions of star 2: 3.68
+Minimum star-star separation: 1.636
+
+Simulation finished.
+Final simulation time: 100.00
+Number of frames: 401

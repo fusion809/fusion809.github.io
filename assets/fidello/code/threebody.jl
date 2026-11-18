@@ -240,13 +240,6 @@ separation = sqrt.(
 # Estimate number of angular revolutions
 # ------------------------------------------------------------
 
-θ₁_unwrapped = unwrap(sol[3, :])
-θ₂_unwrapped = unwrap(sol[4, :])
-
-# ------------------------------------------------------------
-# Estimate number of angular revolutions
-# ------------------------------------------------------------
-
 orbits₁ = (sol[3, end] - sol[3, 1]) / (2π)
 orbits₂ = (sol[4, end] - sol[4, 1]) / (2π)
 
@@ -302,7 +295,7 @@ anim = @animate for i in eachindex(sol.t)
     plot(
         x₁[1:i],
         y₁[1:i],
-        linewidth=1.5,
+        linewidth=1,
         label=false,
         xlims=(xmin, xmax),
         ylims=(ymin, ymax),
@@ -315,7 +308,7 @@ anim = @animate for i in eachindex(sol.t)
     plot!(
         x₂[1:i],
         y₂[1:i],
-        linewidth=1.5,
+        linewidth=1,
         label=false
     )
 
@@ -327,7 +320,7 @@ anim = @animate for i in eachindex(sol.t)
     scatter!(
         [0.0],
         [0.0],
-        markersize=5,
+        markersize=2,
         label=false
     )
 

@@ -450,13 +450,6 @@ separation = sqrt.(
 <span class=hljs-comment ># Estimate number of angular revolutions</span>
 <span class=hljs-comment ># ------------------------------------------------------------</span>
 
-θ₁_unwrapped = unwrap(sol[<span class=hljs-number >3</span>, :])
-θ₂_unwrapped = unwrap(sol[<span class=hljs-number >4</span>, :])
-
-<span class=hljs-comment ># ------------------------------------------------------------</span>
-<span class=hljs-comment ># Estimate number of angular revolutions</span>
-<span class=hljs-comment ># ------------------------------------------------------------</span>
-
 orbits₁ = (sol[<span class=hljs-number >3</span>, <span class=hljs-keyword >end</span>] - sol[<span class=hljs-number >3</span>, <span class=hljs-number >1</span>]) / (<span class=hljs-number >2</span><span class=hljs-literal >π</span>)
 orbits₂ = (sol[<span class=hljs-number >4</span>, <span class=hljs-keyword >end</span>] - sol[<span class=hljs-number >4</span>, <span class=hljs-number >1</span>]) / (<span class=hljs-number >2</span><span class=hljs-literal >π</span>)
 
@@ -512,7 +505,7 @@ anim = <span class=hljs-meta >@animate</span> <span class=hljs-keyword >for</spa
     plot(
         x₁[<span class=hljs-number >1</span>:i],
         y₁[<span class=hljs-number >1</span>:i],
-        linewidth=<span class=hljs-number >1.5</span>,
+        linewidth=<span class=hljs-number >1</span>,
         label=<span class=hljs-literal >false</span>,
         xlims=(xmin, xmax),
         ylims=(ymin, ymax),
@@ -525,7 +518,7 @@ anim = <span class=hljs-meta >@animate</span> <span class=hljs-keyword >for</spa
     plot!(
         x₂[<span class=hljs-number >1</span>:i],
         y₂[<span class=hljs-number >1</span>:i],
-        linewidth=<span class=hljs-number >1.5</span>,
+        linewidth=<span class=hljs-number >1</span>,
         label=<span class=hljs-literal >false</span>
     )
 
@@ -537,7 +530,7 @@ anim = <span class=hljs-meta >@animate</span> <span class=hljs-keyword >for</spa
     scatter!(
         [<span class=hljs-number >0.0</span>],
         [<span class=hljs-number >0.0</span>],
-        markersize=<span class=hljs-number >5</span>,
+        markersize=<span class=hljs-number >2</span>,
         label=<span class=hljs-literal >false</span>
     )
 
