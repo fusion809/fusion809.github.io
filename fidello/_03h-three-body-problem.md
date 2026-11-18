@@ -5,11 +5,13 @@
 <figcaption>Gravitational three-body problem.</figcaption>
 </figure>
 ~~~
-I thought a good example for you would be the gravitational three-body problem. As like the double pendulum problem, it exhibits chaos. Further, it is the premise of a popular scifi series, The Three Body Problem. Our axes are selected such that the mass $M$ is centred at the origin. Consequently, the central mass does not move on our axes. So only the two other masses contribute to our kinetic energy:
+I thought a good example for you would be the gravitational three-body problem. As like the double pendulum problem, it exhibits chaos. Further, it is the premise of a popular scifi Netflix series *3 Body Problem*, which is based on a novel called *Remembrance of Earth's Past*. As you can see in Figure \figref{threebody}, our axes are selected such that the mass $M$ is centred at the origin. Consequently, the central mass does not move on our axes. So only the two other masses contribute to our system's kinetic energy:
 \begin{align*}
 T &= \dfrac{m_1}{2}(\dot{r}_1^2 + r_1^2 \dot{\theta}_1^2) + \dfrac{m_2}{2}(\dot{r}_2^2+r_2^2\dot{\theta}_2^2).
 \end{align*}
-To calculate the potential energy, we will need to calculate $r_{12}$, the distance between the masses $m_1$ and $m_2$. To calculate this, we will start with the $x$ and $y$ coordinates for the two masses:
+I omitted the calculation of the velocity of the two moving bodies as they are identical to the velocity calculation for the [two-body problem](#example_gravitational_two-body_problem).
+
+To calculate the potential energy, we will need to calculate $r_{12}$, the distance between the masses $m_1$ and $m_2$. To calculate this, we will start with the $x$ and $y$ coordinates for the two moving masses:
 \begin{align*}
 x_1 &= r_1\cos{\theta_1}\\
 y_1 &= r_1 \sin{\theta_1} \\
@@ -20,13 +22,15 @@ Hence the difference in $x$ is $r_2\cos{\theta_2} - r_1\cos{\theta_1}$ and the d
 \begin{align*}
 r_{12}^2 &= (r_2\cos{\theta_2} - r_1\cos{\theta_1})^2 + (r_2\sin{\theta_2} - r_1\sin{\theta_1})^2 \\
 &= r_2^2 \cos^2{\theta_2} + r_1^2 \cos^2{\theta_1} -2r_1 r_2 \cos{\theta_1}\cos{\theta_2} + r_2^2 \sin^2{\theta_2} + r_1^2\sin^2{\theta_1}-2r_1r_2 \sin{\theta_1}\sin{\theta_2} \\
-&= r_1^2 + r_2^2 - 2r_1 r_2 \cos{(\theta_2-\theta_1)} \\
+&= r_1^2 + r_2^2 - 2r_1 r_2 \cos{(\theta_2-\theta_1)}\\
 \therefore r_{12} &= \sqrt{r_1^2 + r_2^2 - 2r_1 r_2 \cos{(\theta_2-\theta_1)}}.
 \end{align*}
-Hence the gravitational potential energy of our system:
+We deliberately ignored the negative possibility as $r_{12}$ is defined such that it must be non-negative. Hence the gravitational potential energy of our system:
 \begin{align*}
 V &= -\dfrac{GMm_1}{r_1} - \dfrac{GMm_2}{r_2} - \dfrac{Gm_1m_2}{r_{12}}.
 \end{align*}
+The first of these terms is the potential energy for the gravitational attraction between the central mass and $m_1$. The second is the potential energy for the gravitational attraction between the central mass and $m_2$. The third is the potential energy for the gravitational attraction between $m_1$ and $m_2$. 
+
 Hence the Lagrangian is:
 \begin{align}
 L &= T - V \\
@@ -89,6 +93,8 @@ Dividing both sides by $m_2r_2^2$:
 \dfrac{2\dot{r}_2 \dot{\theta}_2}{r_2} + \ddot{\theta}_2 &= \dfrac{Gm_1 r_1\sin{(\theta_2-\theta_1)}}{r_2 r_{12}^3} \\
 \ddot{\theta}_2 &= -\dfrac{2\dot{r}_2 \dot{\theta}_2}{r_2} +\dfrac{Gm_1 r_1\sin{(\theta_2-\theta_1)}}{r_2 r_{12}^3}.
 \end{align*}
+
+This system of ordinary differential equations cannot be analytically solved, unlike the equations we obtained for the two-body problem. Consequently, we are forced to resort to numerical methods to solve this system. Below is Julia code to numerically solve the system for a made-up example of the three-body problem.
 
 ```julia:./code/threebody
 using DifferentialEquations
@@ -464,7 +470,7 @@ println(
 println("Number of frames: ", length(sol.t))
 ```
 
-The above Julia code produces the animation below.
+The above Julia code produces the animation in Figure \figref{threebodyan}. As you can see, one of the bodies in orbit gets ejected from the system as a result of the gravitational effect of the other moving body. This other moving body is moved into a highly eccentric, elliptical orbit. 
 
 ~~~
 <figure id="threebodyan" style="float: right; width: 100%">
