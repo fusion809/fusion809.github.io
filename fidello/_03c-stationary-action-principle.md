@@ -5,7 +5,7 @@
 <figcaption>Some of the paths a system could take.</figcaption>
 </figure>
 ~~~
-The derivation of Equations \eqref{ELE} requires knowledge of a field of mathematics known as the calculus of variations as well as a physics principle known as the stationary action principle. I will provide my own derivation here; although, I would suggest checking out Veritasium's video on this topic ([https://www.youtube.com/watch?v=Q10_srZ-pbs](https://www.youtube.com/watch?v=Q10_srZ-pbs)) as it provides a more accessible introduction to this topic.
+The derivation of Equations \eqref{ELE} requires knowledge of a field of mathematics known as the calculus of variations as well as a physics principle known as the stationary action principle. I will provide my own derivation here; although, I would suggest checking out [Veritasium's video on this topic](https://www.youtube.com/watch?v=Q10_srZ-pbs) as it provides a more accessible introduction to this topic.
 
 There is a quantity known as the action &mdash; which is denoted as $S$ &mdash; that is defined as:
 \begin{align}
