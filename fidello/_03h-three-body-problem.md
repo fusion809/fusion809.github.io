@@ -96,10 +96,10 @@ using Plots
 using Printf
 
 # ============================================================
-# Three-star gravitational system
+# Three-body gravitational system
 #
-# Star M is fixed at the origin.
-# Stars m₁ and m₂ orbit M while also perturbing one another.
+# Body M is fixed at the origin.
+# Bodies m₁ and m₂ orbit M while also perturbing one another.
 #
 # Unlike a strongly hierarchical system, the masses here are
 # comparable enough for the mutual interaction to produce
@@ -147,7 +147,7 @@ r₂₀ = a₂ * (1 - e₂)
 # Initial angular positions
 # ------------------------------------------------------------
 
-# Start on opposite sides of the central star. A small
+# Start on opposite sides of the central body. A small
 # asymmetry is introduced so that the system does not remain
 # artificially symmetric.
 
@@ -201,7 +201,7 @@ u₀ = [
 # Equations of motion
 # ------------------------------------------------------------
 
-function three_star!(du, u, p, t)
+function three_body!(du, u, p, t)
 
     r₁, r₂, θ₁, θ₂, ṙ₁, ṙ₂, θ̇₁, θ̇₂ = u
 
@@ -255,7 +255,7 @@ function three_star!(du, u, p, t)
 end
 
 # ------------------------------------------------------------
-# Stop if the two orbiting stars get extremely close
+# Stop if the two orbiting bodies get extremely close
 # ------------------------------------------------------------
 
 minimum_separation = 1.6
@@ -295,7 +295,7 @@ separation_callback = ContinuousCallback(
 tspan = (0.0, 100.0)
 
 prob = ODEProblem(
-    three_star!,
+    three_body!,
     u₀,
     tspan
 )
@@ -320,7 +320,7 @@ x₂ = sol[2, :] .* cos.(sol[4, :])
 y₂ = sol[2, :] .* sin.(sol[4, :])
 
 # ------------------------------------------------------------
-# Calculate star-star separation
+# Calculate body-body separation
 # ------------------------------------------------------------
 
 separation = sqrt.(
@@ -336,17 +336,17 @@ orbits₁ = (sol[3, end] - sol[3, 1]) / (2π)
 orbits₂ = (sol[4, end] - sol[4, 1]) / (2π)
 
 println(
-    "Approximate revolutions of star 1: ",
+    "Approximate revolutions of body 1: ",
     @sprintf("%.2f", orbits₁)
 )
 
 println(
-    "Approximate revolutions of star 2: ",
+    "Approximate revolutions of body 2: ",
     @sprintf("%.2f", orbits₂)
 )
 
 println(
-    "Minimum star-star separation: ",
+    "Minimum body-body separation: ",
     @sprintf("%.3f", minimum(separation))
 )
 
@@ -394,7 +394,7 @@ anim = @animate for i in eachindex(sol.t)
         aspect_ratio=:equal,
         xlabel="x",
         ylabel="y",
-        title="Three-star system — t = $(@sprintf("%.2f", sol.t[i]))"
+        title="Three-body system — t = $(@sprintf("%.2f", sol.t[i]))"
     )
 
     plot!(
@@ -404,7 +404,7 @@ anim = @animate for i in eachindex(sol.t)
         label=false
     )
 
-    # Central star.
+    # Central body.
     #
     # Small markers are used deliberately so that the plotted
     # marker size does not imply a physical stellar radius.
@@ -416,7 +416,7 @@ anim = @animate for i in eachindex(sol.t)
         label=false
     )
 
-    # Star 1
+    # body 1
 
     scatter!(
         [x₁[i]],
@@ -425,7 +425,7 @@ anim = @animate for i in eachindex(sol.t)
         label=false
     )
 
-    # Star 2
+    # body 2
 
     scatter!(
         [x₂[i]],
@@ -447,7 +447,7 @@ end
 
 gif(
     anim,
-    "three_star_system.gif",
+    "three_body_system.gif",
     fps=fps
 )
 
@@ -468,7 +468,7 @@ The above Julia code produces the animation below.
 
 ~~~
 <figure id="threebodyan" style="float: right; width: 100%">
-<img src="/three_star_system.gif" width="800px"/>
-<figcaption>A three star system simulation.</figcaption>
+<img src="/three_body_system.gif" width="800px"/>
+<figcaption>A three body system simulation.</figcaption>
 </figure>
 ~~~
