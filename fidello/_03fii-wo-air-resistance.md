@@ -166,21 +166,17 @@ end
 
 gif(anim, "Simple_pendulum.gif"; fps=fps)
 ```
-Figure \figref{simppen} shows the plot of $\theta$ vs $t$ produced by the above code. 
+Figure \figref{simppen} shows the plot of $\theta$ vs $t$ produced by the above code. Figure \figref{simppenan} contains an animation of the simple pendulum simulated by the above Julia code.
+
 ~~~
-<figure id="simppen" style="float: right;">
+<figure id="simppen" style="float: left;">
 <img src="/Simple_pendulum_theta.svg" width="900px" />
 <figcaption>Simple pendulum angle plot.</figcaption>
 </figure>
-~~~
-
-Figure \figref{simppenan} contains an animation of the simple pendulum simulated by the above Julia code.
-
-~~~
 <figure id="simppenan" style="float: right;">
 <img src="/Simple_pendulum.gif" width="900px" />
 <figcaption>Simple pendulum animation.</figcaption>
 </figure>
+<p style="clear: both;">If you would like to try some of your own initial conditions and calculate the solution numerically for these conditions, see <a href="/simplePendulum/woErrorAnalysis">this page</a>.</p>
 ~~~
 
-If you would like to try some of your own initial conditions and calculate the solution numerically for these conditions, see [this page](/simplePendulum/woErrorAnalysis).

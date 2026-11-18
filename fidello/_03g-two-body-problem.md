@@ -1,7 +1,7 @@
 ### Gravitational two-body problem
 ~~~
 <figure id="two-body" style="float: right;">
-<img src="/fidello/Gravitational_two_body_problem.svg" width="400px" />
+<img src="/fidello/Gravitational_two_body_problem.svg" width="500px" />
 <figcaption>A system consisting of two bodies in gravitational motion around each other.</figcaption>
 </figure>
 ~~~

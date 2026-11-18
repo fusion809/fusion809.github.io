@@ -77,17 +77,12 @@ end
 
 gif(anim, "Dampened_pendulum.gif"; fps=fps)
 ```
-Figure \figref{damppen} shows the plot produced by the above Julia code. As you can see over time the maximum and minimum angle the pendulum forms gets closer and closer towards $-\dfrac{\pi}{2}$.
+Figure \figref{damppen} shows the plot produced by the above Julia code. As you can see over time the maximum and minimum angle the pendulum forms gets closer and closer towards $-\dfrac{\pi}{2}$. Figure \figref{damppenan} shows the animation produced by the above Julia code. 
 ~~~
 <figure id="damppen" style="float: left;">
 <img src="/Dampened_pendulum_theta.svg" width="900px" />
 <figcaption>Dampened pendulum angle plot.</figcaption>
 </figure>
-~~~
-
-Figure \figref{damppenan} shows the animation produced by the above Julia code. 
-
-~~~
 <figure id="damppenan" style="float: right;">
 <img src="/Dampened_pendulum.gif" width="900px" />
 <figcaption>Dampened pendulum animation.</figcaption>

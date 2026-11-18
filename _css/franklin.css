@@ -187,10 +187,12 @@ h6 {
 
 .franklin-content h3 {
     text-indent: 4%;
+    clear: both;
 }
 
 .franklin-content h4 {
     text-indent: 6%;
+    clear: both;
 }
 
 .franklin-content h1 a {
