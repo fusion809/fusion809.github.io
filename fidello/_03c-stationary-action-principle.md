@@ -18,7 +18,7 @@ Of all the paths that an object could explore, the one that it actually explores
 \begin{align}
 \delta S &= 0.\label{deltaS}
 \end{align}
-This is analogous to saying, in regular calculus, that our function's first derivative is zero. Which, as you may remember from your maths classes, is an equation we can solve to find the stationary point(s) of our function. The difference is that $S$ is not a function that takes some value of an independent variable (e.g. $x$) and returns a value, instead $S$ is a *functional*. Which means that it takes a function as its input and returns a value. In this case, the function it takes as its input are the $q_i(t)$ that specify our path.
+This is analogous to saying, in regular calculus, that our function's first derivative is zero. Which, as you may remember from your maths classes, is an equation we can solve to find the stationary point(s) of our function. The difference is that $S$ is not a function that takes some value of an independent variable (e.g. $x$) and returns a value, instead $S$ is a *functional*. Which means that it takes a function as its input and returns a value. In this case, the function it takes as its input are the $q_i(t)$ that specify our path. This is what distinguishes calculus of variations from regular calculus. In calculus of variations, we are working with functionals, whereas in regular calculus we are working with functions. 
 
 Say we add functions $\delta q_i$ to $q_i$, thereby adjusting the path our object takes. Crucially, however, the end times and end points of our path will be unchanged. The new, adjusted action we will denote by $S'$ and it is:
 \begin{align*}
