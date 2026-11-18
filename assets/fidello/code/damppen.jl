@@ -27,7 +27,7 @@ anim = @animate for i in eachindex(sol.t)
     plot(
         [0, x[i]], [0, y[i]];
         xlims=(-1.1l, 1.1l),
-        ylims=(-1.1l, 1.1l),
+        ylims=(-1.1l, 0.05l),
         aspect_ratio=:equal,
         label=false,
         xlabel=L"x\ (\mathrm{metres})",
