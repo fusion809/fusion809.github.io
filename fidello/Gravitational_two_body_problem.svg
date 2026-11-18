@@ -23,11 +23,11 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     inkscape:zoom="0.76099206"
-     inkscape:cx="270.69928"
-     inkscape:cy="271.35631"
-     inkscape:window-width="1918"
-     inkscape:window-height="1011"
+     inkscape:zoom="1.0762053"
+     inkscape:cx="573.31069"
+     inkscape:cy="311.2789"
+     inkscape:window-width="1920"
+     inkscape:window-height="1080"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
@@ -174,8 +174,8 @@
          x="170.71193"
          y="115.08277">ϴ</tspan></text>
     <path
-       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:square;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       d="m 151.93708,86.920529 c 21.39264,20.271371 16.05956,39.729731 15.99338,39.983441"
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:square;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Triangle);marker-end:url(#Triangle)"
+       d="m 153.76241,88.65894 c 21.39264,20.27137 13.71271,35.3837 13.64653,35.63741"
        id="path15"
        sodipodi:nodetypes="cc" />
   </g>
