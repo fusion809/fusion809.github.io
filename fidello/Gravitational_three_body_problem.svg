@@ -25,9 +25,9 @@
      inkscape:document-units="mm"
      inkscape:zoom="0.76099206"
      inkscape:cx="693.17412"
-     inkscape:cy="509.86077"
+     inkscape:cy="509.20374"
      inkscape:window-width="1918"
-     inkscape:window-height="1038"
+     inkscape:window-height="1011"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
@@ -98,25 +98,6 @@
          d="M 5.77,0 -2.88,5 V -5 Z"
          id="path10-9" />
     </marker>
-    <marker
-       style="overflow:visible"
-       id="Triangle-2"
-       refX="0"
-       refY="0"
-       orient="auto-start-reverse"
-       inkscape:stockid="Triangle arrow"
-       markerWidth="1"
-       markerHeight="1"
-       viewBox="0 0 1 1"
-       inkscape:isstock="true"
-       inkscape:collect="always"
-       preserveAspectRatio="xMidYMid">
-      <path
-         transform="scale(0.5)"
-         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
-         d="M 5.77,0 -2.88,5 V -5 Z"
-         id="path135-8" />
-    </marker>
   </defs>
   <g
      inkscape:label="Layer 1"
@@ -150,11 +131,11 @@
        cy="51.478813"
        r="8.5890846" />
     <path
-       style="fill:#00009b;fill-opacity:1;stroke:#00009b;stroke-width:2;stroke-linecap:square;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Triangle)"
+       style="fill:#00009b;fill-opacity:1;stroke:#00009b;stroke-width:3;stroke-linecap:square;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:"
        d="M 111.95364,126.55629 C 186.7053,51.804635 186.7053,51.804635 186.7053,51.804635"
        id="path12" />
     <path
-       style="fill:#009b9b;fill-opacity:1;stroke:#009b9b;stroke-width:2;stroke-linecap:square;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Triangle-2)"
+       style="fill:#009b9b;fill-opacity:1;stroke:#009b9b;stroke-width:3;stroke-linecap:square;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:"
        d="M 110.01257,126.84457 C 35.26091,52.092916 35.26091,52.092916 35.26091,52.092916"
        id="path12-3" />
     <text
@@ -268,8 +249,8 @@
    style="font-size:65%;baseline-shift:sub;fill:#009b9b;fill-opacity:1;stroke:#009b9b;stroke-opacity:1"
    id="tspan5">2</tspan></tspan></text>
     <path
-       style="fill:#000000;fill-opacity:1;stroke:#9b009b;stroke-width:2.95103;stroke-linecap:square;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       d="m 36.291159,51.530382 149.417681,0.003"
+       style="fill:#000000;fill-opacity:1;stroke:#9b009b;stroke-width:2.997;stroke-linecap:square;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       d="m 36.314067,51.55329 149.371863,0.0031"
        id="path5"
        sodipodi:nodetypes="cc" />
     <text
