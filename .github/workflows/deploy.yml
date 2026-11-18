@@ -44,7 +44,7 @@ jobs:
                 isnothing(code) && error("No Julia code block found in $file");
                 occursin(r"gif\(anim", code.captures[1]) || error("No GIF generation code found in $file");
                 include_string(Main, code.captures[1], file);
-            end, ["fidello/_01-introduction.md", "fidello/_03fii-wo-air-resistance.md", "fidello/_03fiii-w-air-resistance.md", "fidello/_04c-projectile-motion.md"]);
+            end, ["fidello/_01-introduction.md", "fidello/_03fii-wo-air-resistance.md", "fidello/03h-three-body-problem.md", "fidello/_03fiii-w-air-resistance.md", "fidello/_04c-projectile-motion.md"]);
             include("deploy.jl")'
       env:
           # Allows the use of unicode characters in Plots.jl
