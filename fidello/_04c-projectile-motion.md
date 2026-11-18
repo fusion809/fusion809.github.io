@@ -46,6 +46,8 @@ Hence our equations of motion are:
 &= -mg -\dfrac{\rho C_D A p_y\sqrt{p_x^2+p_y^2}}{2m^2}.
 \end{align*}
 
+Below is Julia code for implementing an animation based on the above system of ordinary differential equations. 
+
 ```julia:./code/projmotion
 using DifferentialEquations
 using Plots
@@ -136,10 +138,11 @@ end
 
 gif(anim, "projectile_motion.gif", fps=fps)
 ```
+Below is an animation of projectile motion created using the above Julia code.
 
 ~~~
 <figure id="projectile_motion.gif" style="float: right; width: 100%">
 <img src="/projectile_motion.gif" width="500px" />
-
+<figcaption>Projectile motion animation</figcaption>
 </figure>
 ~~~
