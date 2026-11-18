@@ -48,7 +48,7 @@ Hence our equations of motion are:
 
 ```julia:./code/projmotion
 using DifferentialEquations
-using Plots, Printf
+using Plots
 using LaTeXStrings
 
 # Constants
@@ -119,7 +119,7 @@ anim = @animate for i in eachindex(sol.t)
         sol[2, 1:i],
         xlabel=L"x\;(\mathrm{m})",
         ylabel=L"y\;(\mathrm{m})",
-        title="Projectile motion — t = $(@sprintf("%.2f", sol.t[i])) s",
+        title="Projectile motion",
         label=false,
         aspect_ratio=:equal,
         xlims=(xmin, xmax),
