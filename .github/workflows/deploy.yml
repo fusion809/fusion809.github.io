@@ -33,7 +33,7 @@ jobs:
     #   The last line should be `optimize()` though you may want to give it
     #   specific arguments, see the documentation or ?optimize in the REPL.
     - run: julia -e '
-            using Pkg; Pkg.add(["NodeJS", "Franklin", "PyPlot", 
+            using Pkg; Pkg.add(["NodeJS", PackageSpec(url="https://github.com/fusion809/FunctionIntegrator.jl", rev="v0.6.1"), "PyPlot", 
             "FunctionIntegrator", "Interpolations", "StaticArrays", 
             "FFTW", "Plots", "DifferentialEquations", "LaTeXStrings", 
             "PlotlyJS"]);
