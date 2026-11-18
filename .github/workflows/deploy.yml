@@ -37,13 +37,13 @@ jobs:
             using NodeJS; run(`$(npm_cmd()) install highlight.js`);
             using Franklin;
             Pkg.instantiate();
-            for file in ["fidello/_01-introduction.md", "fidello/_03fii-wo-air-resistance.md", "fidello/_03fiii-w-air-resistance.md", "fidello/_04c-projectile-motion.md"]
+            foreach(file -> begin
                 content = read(file, String);
                 code = match(r"```julia:[^\n]*\n(.*?)\n```"s, content);
                 isnothing(code) && error("No Julia code block found in $file");
                 occursin(r"gif\(anim", code.captures[1]) || error("No GIF generation code found in $file");
                 include_string(Main, code.captures[1], file);
-            end
+            end, ["fidello/_01-introduction.md", "fidello/_03fii-wo-air-resistance.md", "fidello/_03fiii-w-air-resistance.md", "fidello/_04c-projectile-motion.md"]);
             include("deploy.jl")'
       env:
           # Allows the use of unicode characters in Plots.jl
