@@ -128,6 +128,7 @@ So we can see $\theta(t)$ is approximated, when it deviates only slightly from $
 using DifferentialEquations, Plots, LaTeXStrings
 
 g, l = 9.81, 1.0
+fps = 30
 
 function pendulum!(du, u, p, t)
     du[1] = u[2]
@@ -138,19 +139,47 @@ tspan = (0.0, 10.0)
 u0 = [0.0, 0.0]  # θ₀ = 0, θ̇₀ = 0
 
 prob = ODEProblem(pendulum!, u0, tspan)
-sol = solve(prob, saveat=0.01)
+sol = solve(prob, saveat=1/fps)
 
 plot(sol.t, sol[1, :], label=false)
 xlabel!(L"t\;(\mathrm{seconds})")
 ylabel!(L"\theta\;(\mathrm{radians})")
 title!("Simple pendulum plot")
 savefig("Simple_pendulum_theta.svg")
-```
+# Animate with θ measured counterclockwise from the positive x-axis
+x = l .* cos.(sol[1, :])
+y = l .* sin.(sol[1, :])
 
+anim = @animate for i in eachindex(sol.t)
+    plot(
+        [0, x[i]], [0, y[i]];
+        xlims=(-1.1l, 1.1l),
+        ylims=(-1.1l, 1.1l),
+        aspect_ratio=:equal,
+        label=false,
+        xlabel=L"x\ (\mathrm{m})",
+        ylabel=L"y\ (\mathrm{m})",
+        title="Simple pendulum",
+    )
+    scatter!([x[i]], [y[i]]; markersize=8, label=false)
+end
+
+gif(anim, "Simple_pendulum.gif"; fps=fps)
+```
+Figure \figref{simppen} shows the plot of $\theta$ vs $t$ produced by the above code. 
 ~~~
 <figure id="simppen" style="float: right; width: 100%">
 <img src="/Simple_pendulum_theta.svg" width="100%" />
 <figcaption>Simple pendulum angle plot.</figcaption>
+</figure>
+~~~
+
+Figure \figref{simppenan} contains an animation of the simple pendulum simulated by the above Julia code.
+
+~~~
+<figure id="simppenan" style="float: right; width: 100%">
+<img src="/Simple_pendulum.gif" width="100%" />
+<figcaption>Simple pendulum animation.</figcaption>
 </figure>
 ~~~
 
