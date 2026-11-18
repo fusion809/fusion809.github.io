@@ -195,7 +195,7 @@ separation_callback = ContinuousCallback(
 # ------------------------------------------------------------
 # Integrate
 #
-# 200 time units gives the system ample time to undergo
+# 100 time units gives the system ample time to undergo
 # several orbital periods and develop strongly perturbed
 # trajectories.
 # ------------------------------------------------------------
