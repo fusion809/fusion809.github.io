@@ -475,6 +475,6 @@ The above Julia code produces the animation in Figure \figref{threebodyan}. As y
 ~~~
 <figure id="threebodyan" style="float: right; width: 100%">
 <img src="/three_body_system.gif" width="800px"/>
-<figcaption>A three body system simulation.</figcaption>
+<figcaption>A three-body system simulation.</figcaption>
 </figure>
 ~~~
