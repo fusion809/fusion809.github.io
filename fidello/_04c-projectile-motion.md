@@ -119,8 +119,8 @@ anim = @animate for i in eachindex(sol.t)
     plot(
         sol[1, 1:i],
         sol[2, 1:i],
-        xlabel=L"x\;(\mathrm{m})",
-        ylabel=L"y\;(\mathrm{m})",
+        xlabel=L"x\;(\mathrm{metres})",
+        ylabel=L"y\;(\mathrm{metres})",
         title="Projectile motion",
         label=false,
         aspect_ratio=:equal,

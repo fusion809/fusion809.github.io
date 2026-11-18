@@ -128,8 +128,8 @@ anim = @animate for i in eachindex(sol.t)
         xlims=(xmin, xmax),
         ylims=(ymin, ymax),
         aspect_ratio=:equal,
-        xlabel=L"x\ (\mathrm{m})",
-        ylabel=L"y\ (\mathrm{m})",
+        xlabel=L"x\ (\mathrm{metres})",
+        ylabel=L"y\ (\mathrm{metres})",
         title="Double pendulum"
     )
 
