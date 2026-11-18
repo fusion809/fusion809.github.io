@@ -63,10 +63,14 @@ p_{\theta_2} &= \dfrac{\partial L}{\partial \dot{\theta}_2} \\
 \end{align*}
 As for the spatial derivatives of $L$:
 \begin{align*}
-\dfrac{\partial L}{\partial r_1} &= m_1 r_1 \dot{\theta}_1^2 - \dfrac{GMm_1}{r_1^2} - \dfrac{Gm_1 m_2( r_1-r_2 \cos{(\theta_2-\theta_1)})}{r_{12}^3}\\
-\dfrac{\partial L}{\partial r_2} &= m_2 r_2 \dot{\theta}_2^2 - \dfrac{GMm_2}{r_2^2} - \dfrac{Gm_1 m_2( r_2-r_1 \cos{(\theta_2-\theta_1)})}{r_{12}^3}\\
-\dfrac{\partial L}{\partial \theta_1} &= -\dfrac{Gm_1 m_2 r_1r_2\sin{(\theta_2-\theta_1)}}{r_{12}^3}\\
-\dfrac{\partial L}{\partial \theta_2} &= \dfrac{Gm_1 m_2r_1r_2\sin{(\theta_2-\theta_1)}}{r_{12}^3}.
+\dfrac{\partial L}{\partial r_1} &= m_1 r_1 \dot{\theta}_1^2 - \dfrac{GMm_1}{r_1^2}  - \dfrac{Gm_1 m_2}{r_{12}^2} \cdot \dfrac{\partial r_{12}}{\partial r_1} \\
+&= m_1 r_1 \dot{\theta}_1^2 - \dfrac{GMm_1}{r_1^2}- \dfrac{Gm_1 m_2( r_1-r_2 \cos{(\theta_2-\theta_1)})}{r_{12}^3}\\
+\dfrac{\partial L}{\partial r_2} &= m_2 r_2 \dot{\theta}_2^2 - \dfrac{GMm_2}{r_2^2} - \dfrac{Gm_1 m_2}{r_{12}^2} \cdot \dfrac{\partial r_{12}}{\partial r_2} \\
+&= m_2 r_2 \dot{\theta}_2^2 - \dfrac{GMm_2}{r_2^2} - \dfrac{Gm_1 m_2( r_2-r_1 \cos{(\theta_2-\theta_1)})}{r_{12}^3}\\
+\dfrac{\partial L}{\partial \theta_1} &= - \dfrac{Gm_1 m_2}{r_{12}^2} \cdot \dfrac{\partial r_{12}}{\partial \theta_1} \\
+&= -\dfrac{Gm_1 m_2 r_1r_2\sin{(\theta_2-\theta_1)}}{r_{12}^3}\\
+\dfrac{\partial L}{\partial \theta_2} &= - \dfrac{Gm_1 m_2}{r_{12}^2} \cdot \dfrac{\partial r_{12}}{\partial \theta_2} \\
+&= \dfrac{Gm_1 m_2r_1r_2\sin{(\theta_2-\theta_1)}}{r_{12}^3}.
 \end{align*}
 Hence the $r_1$ Euler-Lagrange equation is:
 \begin{align*}
