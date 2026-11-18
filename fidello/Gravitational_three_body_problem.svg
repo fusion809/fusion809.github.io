@@ -3,8 +3,8 @@
 
 <svg
    width="255.84056mm"
-   height="253.03873mm"
-   viewBox="0 0 255.84056 253.03873"
+   height="286.65463mm"
+   viewBox="0 0 255.84056 286.65464"
    version="1.1"
    id="svg1"
    inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
@@ -25,7 +25,7 @@
      inkscape:document-units="mm"
      inkscape:zoom="0.76099206"
      inkscape:cx="203.68149"
-     inkscape:cy="198.4252"
+     inkscape:cy="325.89039"
      inkscape:window-width="1081"
      inkscape:window-height="1038"
      inkscape:window-x="0"
@@ -122,7 +122,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,0.28947973)">
+     transform="translate(0,34.011868)">
     <path
        style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:3.19969;stroke-linecap:square;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker10)"
        d="m 110.99969,251.04291 c 0,-273.296928 0,-273.692439 0,-273.692439"
@@ -180,10 +180,10 @@
        id="text12-8"><tspan
          sodipodi:role="line"
          id="tspan12-4"
-         style="font-size:31.75px;stroke-width:1;stroke:#009b9b;stroke-opacity:1;fill:#009b9b;fill-opacity:1"
+         style="font-size:31.75px;fill:#009b9b;fill-opacity:1;stroke:#009b9b;stroke-width:1;stroke-opacity:1"
          x="24.974958"
          y="90.595741">r<tspan
-   style="font-size:65%;baseline-shift:sub;stroke:#009b9b;stroke-opacity:1;fill:#009b9b;fill-opacity:1"
+   style="font-size:65%;baseline-shift:sub;fill:#009b9b;fill-opacity:1;stroke:#009b9b;stroke-opacity:1"
    id="tspan1-5">2</tspan></tspan></text>
     <text
        xml:space="preserve"
@@ -228,10 +228,10 @@
        id="text15-6"><tspan
          sodipodi:role="line"
          id="tspan15-1"
-         style="stroke-width:1;stroke:#009b9b;stroke-opacity:1;fill:#009b9b;fill-opacity:1"
+         style="fill:#009b9b;fill-opacity:1;stroke:#009b9b;stroke-width:1;stroke-opacity:1"
          x="137.1093"
          y="156.14114">ϴ<tspan
-   style="font-size:65%;baseline-shift:sub;stroke:#009b9b;stroke-opacity:1;fill:#009b9b;fill-opacity:1"
+   style="font-size:65%;baseline-shift:sub;fill:#009b9b;fill-opacity:1;stroke:#009b9b;stroke-opacity:1"
    id="tspan2-5">2</tspan></tspan></text>
     <path
        style="fill:none;fill-opacity:1;stroke:#00009b;stroke-width:1;stroke-linecap:square;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
