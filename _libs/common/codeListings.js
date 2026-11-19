@@ -31,6 +31,9 @@
         button.textContent = pre.hidden ? "Show code" : "Hide code";
         button.setAttribute("aria-expanded", String(!pre.hidden));
       });
+      listingElement.addEventListener("code-listing:reveal", function () {
+        if (pre.hidden) button.click();
+      });
       var parent = pre.parentNode;
       parent.insertBefore(listingElement, pre);
       listingElement.appendChild(button);
@@ -50,6 +53,9 @@
         if (ref.getAttribute("data-label") === listing.label) {
           ref.href = "#" + listing.label;
           ref.textContent = "Code listing " + number;
+          ref.addEventListener("click", function () {
+            listing.element.dispatchEvent(new Event("code-listing:reveal"));
+          });
         }
       });
     });
