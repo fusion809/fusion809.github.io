@@ -42,12 +42,12 @@ jobs:
                 content = read(file, String);
                 code = match(r"```julia:[^\n]*\n(.*?)\n```"s, content);
                 isnothing(code) && error("No Julia code block found in $file");
-                occursin(r"gif\s*\(", code.captures[1]) || error("No GIF generation code found in $file");
-                include_string(Main, code.captures[1], file);
-            end, ["fidello/_01-introduction.md", "fidello/_03fii-wo-air-resistance.md", "fidello/_03h-three-body-problem.md", "fidello/_03fiii-w-air-resistance.md", "fidello/_04c-projectile-motion.md"]);
-            nbody_code = read("fidello/code/nbody.jl", String);
-            occursin(r"gif\\s*\\(", nbody_code) || error("No GIF generation code found in fidello/code/nbody.jl");
-            include_string(Main, nbody_code, "fidello/code/nbody.jl");
+                code_text = strip(code.captures[1]);
+                source = match(r"^\\juliacode\{([^}]+)\}$", code_text);
+                isnothing(source) || (code_text = read(strip(source.captures[1]), String));
+                occursin(r"gif\s*\(", code_text) || error("No GIF generation code found in $file");
+                include_string(Main, code_text, file);
+            end, ["fidello/_01-introduction.md", "fidello/_03fii-wo-air-resistance.md", "fidello/_03h-three-body-problem.md", "fidello/_03i-n-body-problem.md", "fidello/_03fiii-w-air-resistance.md", "fidello/_04c-projectile-motion.md"]);
             include("deploy.jl")'
       env:
           # Allows the use of unicode characters in Plots.jl
