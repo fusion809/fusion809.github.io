@@ -1,4 +1,4 @@
-using DifferentialEquations
+using DifferentialEquations, LaTeXStrings
 using Plots
 
 # ------------------------------------------------------------

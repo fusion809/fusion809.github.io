@@ -1033,8 +1033,8 @@ Core.eval(Franklin, quote
         if β.name ∈ MATH_BLOCKS_NAMES
             return convert_math_block_with_alignment(β, lxdefs)
         elseif β.name == :CODE_BLOCK_LANG
-            lang, _, _ = parse_fenced_block(β.ss)
-            if lang == "julia"
+            lang, rpath, code = parse_fenced_block(β.ss)
+            if lang == "julia" && !isnothing(rpath) && occursin(r"^\\juliacode\{[^}]+\}$", strip(code))
                 return convert_juliacode_block(β, lxdefs)
             end
         end
