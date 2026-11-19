@@ -2,7 +2,7 @@
 using DifferentialEquations
 using Plots, Measures, Colors
 using Printf
-
+ENV["GKSwstype"] = "100"
 # ============================================================
 # Three-body gravitational system
 #

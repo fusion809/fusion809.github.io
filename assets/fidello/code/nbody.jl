@@ -2,6 +2,7 @@
 using DifferentialEquations
 using Plots, Measures, Colors
 using Printf, LaTeXStrings
+ENV["GKSwstype"] = "100"
 
 # ============================================================
 # N-body gravitational system with a fixed central mass

@@ -1,6 +1,6 @@
 # This file was generated, do not modify it. # hide
 using DifferentialEquations, Plots, LaTeXStrings
-
+ENV["GKSwstype"] = "100"
 g, m, l = 9.81, 1.0, 1.0
 
 function pendulum!(du, u, p, t)

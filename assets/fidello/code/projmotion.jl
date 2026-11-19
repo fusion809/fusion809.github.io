@@ -2,6 +2,7 @@
 using DifferentialEquations
 using Plots
 using LaTeXStrings
+ENV["GKSwstype"] = "100"
 
 # Constants
 g = 9.81
