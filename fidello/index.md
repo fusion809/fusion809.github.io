@@ -20,6 +20,7 @@
 \includemd{fidello/_03fiii-w-air-resistance.md}
 \includemd{fidello/_03g-two-body-problem.md}
 \includemd{fidello/_03h-three-body-problem.md}
+\includemd{fidello/_03i-n-body-problem.md}
 \includemd{fidello/_04a-hamiltonian-mechanics.md}
 \includemd{fidello/_04b-simple-pendulum.md} 
 \includemd{fidello/_04c-projectile-motion.md}

@@ -67,10 +67,10 @@ As for the spatial derivatives of $L$:
 &= m_1 r_1 \dot{\theta}_1^2 - \dfrac{GMm_1}{r_1^2}- \dfrac{Gm_1 m_2( r_1-r_2 \cos{(\theta_2-\theta_1)})}{r_{12}^3}\\
 \dfrac{\partial L}{\partial r_2} &= m_2 r_2 \dot{\theta}_2^2 - \dfrac{GMm_2}{r_2^2} - \dfrac{Gm_1 m_2}{r_{12}^2} \cdot \dfrac{\partial r_{12}}{\partial r_2} \\
 &= m_2 r_2 \dot{\theta}_2^2 - \dfrac{GMm_2}{r_2^2} - \dfrac{Gm_1 m_2( r_2-r_1 \cos{(\theta_2-\theta_1)})}{r_{12}^3}\\
-\dfrac{\partial L}{\partial \theta_1} &= - \dfrac{Gm_1 m_2}{r_{12}^2} \cdot \dfrac{\partial r_{12}}{\partial \theta_1} \\
+\dfrac{\partial L}{\partial \theta_1} &= - \dfrac{Gm_1 m_2}{r_{12}^2} \cdot -\dfrac{\partial r_{12}}{\partial \theta_1} \\
 &= -\dfrac{Gm_1 m_2 r_1r_2\sin{(\theta_2-\theta_1)}}{r_{12}^3}\\
 \dfrac{\partial L}{\partial \theta_2} &= - \dfrac{Gm_1 m_2}{r_{12}^2} \cdot \dfrac{\partial r_{12}}{\partial \theta_2} \\
-&= \dfrac{Gm_1 m_2r_1r_2\sin{(\theta_2-\theta_1)}}{r_{12}^3}.
+&= -\dfrac{Gm_1 m_2r_1r_2\sin{(\theta_2-\theta_1)}}{r_{12}^3}.
 \end{align*}
 Hence the $r_1$ Euler-Lagrange equation is:
 \begin{align*}
@@ -84,12 +84,12 @@ m_2 \ddot{r}_2 &= m_2 r_2 \dot{\theta}_2^2 - \dfrac{GMm_2}{r_2^2} - \dfrac{Gm_1 
 \end{align*}
 As for the $\theta_1$ Euler-Lagrange equation, it is:
 \begin{align*}
-2m_1 r_1\dot{r}_1 \dot{\theta}_1 + m_1 r_1^2 \ddot{\theta}_1 &= -\dfrac{Gm_1 m_2 r_1r_2\sin{(\theta_2-\theta_1)}}{r_{12}^3}.
+2m_1 r_1\dot{r}_1 \dot{\theta}_1 + m_1 r_1^2 \ddot{\theta}_1 &= \dfrac{Gm_1 m_2 r_1r_2\sin{(\theta_2-\theta_1)}}{r_{12}^3}.
 \end{align*}
 Divide both sides by $m_1r_1^2$:
 \begin{align*}
-\dfrac{2\dot{r}_1 \dot{\theta}_1}{r_1} + \ddot{\theta}_1 &= -\dfrac{Gm_2 r_2\sin{(\theta_2-\theta_1)}}{r_1 r_{12}^3} \\
-\ddot{\theta}_1 &= -\dfrac{2\dot{r}_1 \dot{\theta}_1}{r_1} -\dfrac{Gm_2 r_2\sin{(\theta_2-\theta_1)}}{r_1 r_{12}^3}.
+\dfrac{2\dot{r}_1 \dot{\theta}_1}{r_1} + \ddot{\theta}_1 &= \dfrac{Gm_2 r_2\sin{(\theta_2-\theta_1)}}{r_1 r_{12}^3} \\
+\ddot{\theta}_1 &= -\dfrac{2\dot{r}_1 \dot{\theta}_1}{r_1} + \dfrac{Gm_2 r_2\sin{(\theta_2-\theta_1)}}{r_1 r_{12}^3}.
 \end{align*}
 As for $\theta_2$:
 \begin{align*}
@@ -97,8 +97,8 @@ As for $\theta_2$:
 \end{align*}
 Dividing both sides by $m_2r_2^2$:
 \begin{align*}
-\dfrac{2\dot{r}_2 \dot{\theta}_2}{r_2} + \ddot{\theta}_2 &= \dfrac{Gm_1 r_1\sin{(\theta_2-\theta_1)}}{r_2 r_{12}^3} \\
-\ddot{\theta}_2 &= -\dfrac{2\dot{r}_2 \dot{\theta}_2}{r_2} +\dfrac{Gm_1 r_1\sin{(\theta_2-\theta_1)}}{r_2 r_{12}^3}.
+\dfrac{2\dot{r}_2 \dot{\theta}_2}{r_2} + \ddot{\theta}_2 &= -\dfrac{Gm_1 r_1\sin{(\theta_2-\theta_1)}}{r_2 r_{12}^3} \\
+\ddot{\theta}_2 &= -\dfrac{2\dot{r}_2 \dot{\theta}_2}{r_2} -\dfrac{Gm_1 r_1\sin{(\theta_2-\theta_1)}}{r_2 r_{12}^3}.
 \end{align*}
 
 This system of ordinary differential equations cannot be analytically solved, unlike the equations we obtained for the two-body problem. Consequently, we are forced to resort to numerical methods to solve this system. Below is Julia code to numerically solve the system for a made-up example of the three-body problem.
@@ -246,11 +246,11 @@ function three_body!(du, u, p, t)
     # --------------------------------------------------------
 
     θ̈₁ =
-        -2*ṙ₁*θ̇₁/r₁ -
+        -2*ṙ₁*θ̇₁/r₁ +
         G*m₂*r₂*sin(Δθ)/(r₁*r₁₂^3)
 
     θ̈₂ =
-        -2*ṙ₂*θ̇₂/r₂ +
+        -2*ṙ₂*θ̇₂/r₂ -
         G*m₁*r₁*sin(Δθ)/(r₂*r₁₂^3)
 
     # --------------------------------------------------------
@@ -435,7 +435,7 @@ gif(
 )
 ```
 
-The above Julia code produces the animation in Figure \figref{threebodyan}. As you can see, the orbits majorly and seemingly unpredictably change over time. This is pretty typical in the three-body problem: either the orbits are fairly stable and unchanging (like the orbits of the planets in the Solar System), or they are unstable and prone to objects being ejected from the system or colliding with one another. 
+The above Julia code produces the animation in Figure \figref{threebodyan}. As you can see, the orbits majorly and seemingly unpredictably change over time. This is pretty typical in the three-body problem: either the orbits are fairly stable and unchanging, or they are unstable and prone to objects being ejected from the system or colliding with one another. 
 
 ~~~
 <figure id="threebodyan" style="float: right; width: 100%">
