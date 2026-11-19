@@ -33,7 +33,7 @@ jobs:
     #   The last line should be `optimize()` though you may want to give it
     #   specific arguments, see the documentation or ?optimize in the REPL.
     - run: julia -e '
-            using Pkg; Pkg.activate("."); Pkg.add([Pkg.PackageSpec(url="https://github.com/fusion809/FunctionIntegrator.jl", rev="v0.6.1"), Pkg.PackageSpec(name="NodeJS"), Pkg.PackageSpec(name="Franklin"), Pkg.PackageSpec(name="PyPlot"), Pkg.PackageSpec(name="Interpolations"), Pkg.PackageSpec(name="StaticArrays"), Pkg.PackageSpec(name="FFTW"), Pkg.PackageSpec(name="Plots"), Pkg.PackageSpec(name="Colors"), Pkg.PackageSpec(name="DifferentialEquations"), Pkg.PackageSpec(name="LaTeXStrings"), Pkg.PackageSpec(name="PlotlyJS")]);
+            using Pkg; Pkg.activate("."); Pkg.add([Pkg.PackageSpec(url="https://github.com/fusion809/FunctionIntegrator.jl", rev="v0.6.1"), Pkg.PackageSpec(name="NodeJS"), Pkg.PackageSpec(name="Franklin"), Pkg.PackageSpec(name="PyPlot"), Pkg.PackageSpec(name="Interpolations"), Pkg.PackageSpec(name="StaticArrays"), Pkg.PackageSpec(name="FFTW"), Pkg.PackageSpec(name="Plots"), Pkg.PackageSpec(name="Colors"), Pkg.PackageSpec(name="Measures"), Pkg.PackageSpec(name="DifferentialEquations"), Pkg.PackageSpec(name="LaTeXStrings"), Pkg.PackageSpec(name="PlotlyJS")]);
             using NodeJS; run(`$(npm_cmd()) install highlight.js`);
             using Franklin;
             Pkg.instantiate();

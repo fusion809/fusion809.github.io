@@ -105,7 +105,7 @@ This system of ordinary differential equations cannot be analytically solved, un
 
 ```julia:./code/threebody
 using DifferentialEquations
-using Plots, Colors
+using Plots, Measures, Colors
 using Printf
 
 # ============================================================
@@ -129,20 +129,24 @@ using Printf
 # Parameters
 # ------------------------------------------------------------
 
-G = 1.0
-
-M  = 3.0
-m₁ = 1.5
-m₂ = 1.5
-a₁ = 4.0
-e₁ = 0.15
-
-a₂ = 5.0
-e₂ = 0.10
-
-tspan = (0.0, 600.0)
-
-fps = 60
+G              = 1.0
+M              = 3.0
+m₁             = 1.5
+m₂             = 1.5
+a₁             = 4.0
+e₁             = 0.15
+a₂             = 5.0
+e₂             = 0.10
+tspan          = (0.0, 580.0)
+abstol         = 1e-11
+reltol         = 1e-11
+fps            = 60
+marksize       = 10
+stepsize       = 25/fps
+legendfontsize = 24
+guidefontsize  = 24
+tickfontsize   = 20
+titlefontsize  = 30
 
 # ------------------------------------------------------------
 # Initial approximate Keplerian orbits
@@ -281,9 +285,9 @@ prob = ODEProblem(
 sol = solve(
     prob,
     Vern8(),
-    saveat=15/fps,
-    abstol=1e-10,
-    reltol=1e-10
+    saveat=stepsize,
+    abstol=abstol,
+    reltol=reltol
 )
 
 # ------------------------------------------------------------
@@ -353,10 +357,19 @@ anim = @animate for i in eachindex(sol.t)
         xlims=(xmin, xmax),
         ylims=(ymin, ymax),
         aspect_ratio=:equal,
-        xlabel="x",
-        ylabel="y",
+        xlabel=L"x",
+        ylabel=L"y",
         title="Three-body system — t = $(@sprintf("%.2f", sol.t[i]))",
-        legend=:topleft
+        guidefontsize=guidefontsize,
+        tickfontsize=tickfontsize,
+        titlefontsize=titlefontsize,
+        legend=:topleft,
+        legendfontsize=legendfontsize,
+        left_margin=2Plots.mm,
+        right_margin=2Plots.mm,
+        top_margin=2Plots.mm,
+        bottom_margin=2Plots.mm,
+        size=(1600, 1600)
     )
 
     plot!(
@@ -374,7 +387,7 @@ anim = @animate for i in eachindex(sol.t)
         [0.0],
         [0.0],
         markershape=:circle,
-        markersize=2,
+        markersize=marksize,
         color=Mcol,
         markerstrokecolor=Mcol,
         label="M"
@@ -386,7 +399,7 @@ anim = @animate for i in eachindex(sol.t)
         [x₁[i]],
         [y₁[i]],
         markershape=:circle,
-        markersize=1,
+        markersize=round(marksize/2),
         color=m1col,
         markerstrokecolor=m1outcol,
         label="m₁"
@@ -398,7 +411,7 @@ anim = @animate for i in eachindex(sol.t)
         [x₂[i]],
         [y₂[i]],
         markershape=:circle,
-        markersize=1,
+        markersize=round(marksize/2),
         color=m2col,
         markerstrokecolor=m2outcol,
         label="m₂"
@@ -422,7 +435,7 @@ gif(
 )
 ```
 
-The above Julia code produces the animation in Figure \figref{threebodyan}. As you can see, one of the bodies in orbit gets ejected from the system as a result of the gravitational effect of the other moving body. This other moving body is moved into a highly eccentric, elliptical orbit. 
+The above Julia code produces the animation in Figure \figref{threebodyan}. As you can see, the orbits majorly and seemingly unpredictably change over time. This is pretty typical in the three-body problem: either the orbits are fairly stable and unchanging (like the orbits of the planets in the Solar System), or they are unstable and prone to objects being ejected from the system or colliding with one another. 
 
 ~~~
 <figure id="threebodyan" style="float: right; width: 100%">
