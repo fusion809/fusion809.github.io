@@ -16,8 +16,8 @@ Consequently:
 Further, assuming each of the coordinates of the phase space are independent, it follows that:
 \begin{align}
 \{q_j, p_k\} &= \sum_{i=1}^n \left( \dfrac{\partial q_j}{\partial q_i} \dfrac{\partial p_k}{\partial p_i} - \dfrac{\partial q_j}{\partial p_i} \dfrac{\partial p_k}{\partial q_i} \right) \nonumber\\
-&= \sum_{i=1}^n \delta_{jk}\delta_{ik} \nonumber\\
-&= \delta_{ij}. \label{qjpk}
+&= \sum_{i=1}^n \delta_{ij}\delta_{ik} \nonumber\\
+&= \delta_{jk}. \label{qjpk}
 \end{align}
 Above we used $\delta_{ik}$ to denote the Kronecker delta function. It is equal to one if its arguments are equal and zero otherwise. 
 \begin{align}
