@@ -1,182 +1,182 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/libs/katex/katex.min.css"> <link rel=stylesheet  href="/libs/highlight/github.min.css"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/pure.css"> <!--<link rel=stylesheet  href="/css/side-menu.css">--> <!--The width specified in frankin content under @media determines how wide the website is--> <style> .franklin-content{padding:0px;} @media (min-width: 940px) { .franklin-content {width: 100%; margin: 0px; padding-left: 1px} } </style> <link rel=icon  href="/assets/favicon.png"> <script src="/libs/common/navPanel.js"></script> <title>Heat equation numerical solution</title> <div id=layout > <div id=main > <div class=header > <h1>Heat equation numerical solution</h1> </div> <div id=toc-toggle > <button onclick="toggleTOC()">Navigation</button> </div> <nav id=toc-panel > </nav> <div class=franklin-content ><p>An attempt was made to create a 1D heat equation numerical solver webpage and add it to this website. The equation in question, for those unfamiliar is</p> <span class=katex-display ><span class=katex ><span class=katex-mathml ><math xmlns="http://www.w3.org/1998/Math/MathML" display=block ><semantics><mtable rowspacing=0.25em  columnalign="right left" columnspacing=0em ><mtr><mtd><mstyle scriptlevel=0  displaystyle=true ><mstyle scriptlevel=0  displaystyle=true ><mfrac><mrow><mi mathvariant=normal >∂</mi><mi>u</mi></mrow><mrow><mi mathvariant=normal >∂</mi><mi>t</mi></mrow></mfrac></mstyle></mstyle></mtd><mtd><mstyle scriptlevel=0  displaystyle=true ><mrow><mrow></mrow><mo>=</mo><mstyle scriptlevel=0  displaystyle=true ><mfrac><mrow><msup><mi mathvariant=normal >∂</mi><mn>2</mn></msup><mi>u</mi></mrow><mrow><mi mathvariant=normal >∂</mi><msup><mi>x</mi><mn>2</mn></msup></mrow></mfrac></mstyle><mi mathvariant=normal >.</mi></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned} \dfrac{\partial u}{\partial t} &amp;= \dfrac{\partial^2 u}{\partial x^2}. \end{aligned}</annotation></semantics></math></span><span class=katex-html  aria-hidden=true ><span class=katex-base ><span class=katex-strut  style="height:2.1771em;vertical-align:-0.8386em;"></span><span class=mord ><span class=mtable ><span class=col-align-r ><span class="vlist-t vlist-t2"><span class=vlist-r ><span class=vlist  style="height:1.3386em;"><span style="top:-3.3386em;"><span class=pstrut  style="height:3.4911em;"></span><span class=mord ><span class=mord ><span class="mopen nulldelimiter"></span><span class=mfrac ><span class="vlist-t vlist-t2"><span class=vlist-r ><span class=vlist  style="height:1.3714em;"><span style="top:-2.314em;"><span class=pstrut  style="height:3em;"></span><span class=mord ><span class=mord  style="margin-right:0.0556em;">∂</span><span class="mord mathnormal">t</span></span></span><span style="top:-3.23em;"><span class=pstrut  style="height:3em;"></span><span class=frac-line  style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class=pstrut  style="height:3em;"></span><span class=mord ><span class=mord  style="margin-right:0.0556em;">∂</span><span class="mord mathnormal">u</span></span></span></span><span class=vlist-s >​</span></span><span class=vlist-r ><span class=vlist  style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span><span class=vlist-s >​</span></span><span class=vlist-r ><span class=vlist  style="height:0.8386em;"><span></span></span></span></span></span><span class=col-align-l ><span class="vlist-t vlist-t2"><span class=vlist-r ><span class=vlist  style="height:1.3386em;"><span style="top:-3.3386em;"><span class=pstrut  style="height:3.4911em;"></span><span class=mord ><span class=mord ></span><span class=mspace  style="margin-right:0.2778em;"></span><span class=mrel >=</span><span class=mspace  style="margin-right:0.2778em;"></span><span class=mord ><span class="mopen nulldelimiter"></span><span class=mfrac ><span class="vlist-t vlist-t2"><span class=vlist-r ><span class=vlist  style="height:1.4911em;"><span style="top:-2.314em;"><span class=pstrut  style="height:3em;"></span><span class=mord ><span class=mord  style="margin-right:0.0556em;">∂</span><span class=mord ><span class="mord mathnormal">x</span><span class=msupsub ><span class=vlist-t ><span class=vlist-r ><span class=vlist  style="height:0.7401em;"><span style="top:-2.989em;margin-right:0.05em;"><span class=pstrut  style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class=pstrut  style="height:3em;"></span><span class=frac-line  style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class=pstrut  style="height:3em;"></span><span class=mord ><span class=mord ><span class=mord  style="margin-right:0.0556em;">∂</span><span class=msupsub ><span class=vlist-t ><span class=vlist-r ><span class=vlist  style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class=pstrut  style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord mathnormal">u</span></span></span></span><span class=vlist-s >​</span></span><span class=vlist-r ><span class=vlist  style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class=mord >.</span></span></span></span><span class=vlist-s >​</span></span><span class=vlist-r ><span class=vlist  style="height:0.8386em;"><span></span></span></span></span></span></span></span></span></span></span></span> <p>Yes, I do know it has an exact solution in the form of an infinite series, but I wanted to numerically approximate its solution for a webpage. This attempt was abandoned, however, as it proved too computationally expensive for a webpage. The numerical integration technique I attempted involved approximating spatial derivatives from grid point values using fast Fourier transforms &#40;FFTs&#41; and their inverses &#40;IFFTs&#41;, then integrating in time using the <a href="/RKF45/">Runge–Kutta–Fehlberg 4th-order method with 5th-order error checking &#40;RKF45&#41;</a>. The calculations took too long and froze the JavaScript console when run there. </p> <p>In fairness, RKF45 already takes a few seconds to solve the <a href="/doubleElasticPendulum/">double elastic pendulum &#40;DEP&#41;</a> and <a href="/triplePendulum/">triple pendulum &#40;TP&#41;</a> ordinary differential equations &#40;ODEs&#41;. It is therefore not surprising that increasing the complexity by orders of magnitude—by adding an FFT and IFFT to every system evaluation and having more than 100 ODEs in the system &#40;one for each grid point&#41;—was simply too much for a webpage to handle. </p> <p>These webpages—the DEP and TP solver pages—take longer to apply RKF45 than the other solver pages because they obtain the equations to be integrated by solving a linear system of equations at each step. The matrices have 4 rows and columns for DEP, and 3 for TP. Math.js’ <code>lusolve</code> function is used to solve these linear systems; it employs the LU decomposition method, which is <span class=katex ><span class=katex-mathml ><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy=false >(</mo><msup><mi>N</mi><mn>3</mn></msup><mo stretchy=false >)</mo></mrow><annotation encoding="application/x-tex">O(N^3)</annotation></semantics></math></span><span class=katex-html  aria-hidden=true ><span class=katex-base ><span class=katex-strut  style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">O</span><span class=mopen >(</span><span class=mord ><span class="mord mathnormal" style="margin-right:0.109em;">N</span><span class=msupsub ><span class=vlist-t ><span class=vlist-r ><span class=vlist  style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class=pstrut  style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class=mclose >)</span></span></span></span> &#40;keeping in mind there are also <span class=katex ><span class=katex-mathml ><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>N</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">N^2</annotation></semantics></math></span><span class=katex-html  aria-hidden=true ><span class=katex-base ><span class=katex-strut  style="height:0.8141em;"></span><span class=mord ><span class="mord mathnormal" style="margin-right:0.109em;">N</span><span class=msupsub ><span class=vlist-t ><span class=vlist-r ><span class=vlist  style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class=pstrut  style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span> terms that we typically ignore in Big-O notation and the <span class=katex ><span class=katex-mathml ><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>N</mi><mn>3</mn></msup></mrow><annotation encoding="application/x-tex">N^3</annotation></semantics></math></span><span class=katex-html  aria-hidden=true ><span class=katex-base ><span class=katex-strut  style="height:0.8141em;"></span><span class=mord ><span class="mord mathnormal" style="margin-right:0.109em;">N</span><span class=msupsub ><span class=vlist-t ><span class=vlist-r ><span class=vlist  style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class=pstrut  style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span> has a coefficient of <span class=katex ><span class=katex-mathml ><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle scriptlevel=0  displaystyle=true ><mfrac><mn>2</mn><mn>3</mn></mfrac></mstyle></mrow><annotation encoding="application/x-tex">\dfrac{2}{3}</annotation></semantics></math></span><span class=katex-html  aria-hidden=true ><span class=katex-base ><span class=katex-strut  style="height:2.0074em;vertical-align:-0.686em;"></span><span class=mord ><span class="mopen nulldelimiter"></span><span class=mfrac ><span class="vlist-t vlist-t2"><span class=vlist-r ><span class=vlist  style="height:1.3214em;"><span style="top:-2.314em;"><span class=pstrut  style="height:3em;"></span><span class=mord ><span class=mord >3</span></span></span><span style="top:-3.23em;"><span class=pstrut  style="height:3em;"></span><span class=frac-line  style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class=pstrut  style="height:3em;"></span><span class=mord ><span class=mord >2</span></span></span></span><span class=vlist-s >​</span></span><span class=vlist-r ><span class=vlist  style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>&#41;. For DEP, this corresponds to roughly 75 operations per function call, and for TP, about 36. FFT is <span class=katex ><span class=katex-mathml ><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy=false >(</mo><mi>N</mi><mi>log</mi><mo>⁡</mo><mi>N</mi><mo stretchy=false >)</mo></mrow><annotation encoding="application/x-tex">O(N \log N)</annotation></semantics></math></span><span class=katex-html  aria-hidden=true ><span class=katex-base ><span class=katex-strut  style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">O</span><span class=mopen >(</span><span class="mord mathnormal" style="margin-right:0.109em;">N</span><span class=mspace  style="margin-right:0.1667em;"></span><span class=mop >lo<span style="margin-right:0.0139em;">g</span></span><span class=mspace  style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.109em;">N</span><span class=mclose >)</span></span></span></span> and in reality it is about <span class=katex ><span class=katex-mathml ><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>5</mn><mi>N</mi><msub><mrow><mi>log</mi><mo>⁡</mo></mrow><mn>2</mn></msub><mi>N</mi></mrow><annotation encoding="application/x-tex">5N\log_2 N</annotation></semantics></math></span><span class=katex-html  aria-hidden=true ><span class=katex-base ><span class=katex-strut  style="height:0.9386em;vertical-align:-0.2441em;"></span><span class=mord >5</span><span class="mord mathnormal" style="margin-right:0.109em;">N</span><span class=mspace  style="margin-right:0.1667em;"></span><span class=mop ><span class=mop >lo<span style="margin-right:0.0139em;">g</span></span><span class=msupsub ><span class="vlist-t vlist-t2"><span class=vlist-r ><span class=vlist  style="height:0.207em;"><span style="top:-2.4559em;margin-right:0.05em;"><span class=pstrut  style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class=vlist-s >​</span></span><span class=vlist-r ><span class=vlist  style="height:0.2441em;"><span></span></span></span></span></span></span><span class=mspace  style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.109em;">N</span></span></span></span> operations, as is its inverse. So for <span class=katex ><span class=katex-mathml ><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>&gt;</mo><mn>100</mn></mrow><annotation encoding="application/x-tex">N &gt; 100</annotation></semantics></math></span><span class=katex-html  aria-hidden=true ><span class=katex-base ><span class=katex-strut  style="height:0.7224em;vertical-align:-0.0391em;"></span><span class="mord mathnormal" style="margin-right:0.109em;">N</span><span class=mspace  style="margin-right:0.2778em;"></span><span class=mrel >&gt;</span><span class=mspace  style="margin-right:0.2778em;"></span></span><span class=katex-base ><span class=katex-strut  style="height:0.6444em;"></span><span class=mord >100</span></span></span></span>, we would potentially be looking at over 6,643 operations &#40;<span class=katex ><span class=katex-mathml ><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>10</mn><mo>×</mo><mn>100</mn><mo>×</mo><msub><mrow><mi>log</mi><mo>⁡</mo></mrow><mn>2</mn></msub><mn>100</mn></mrow><annotation encoding="application/x-tex">10\times 100 \times \log_2 100</annotation></semantics></math></span><span class=katex-html  aria-hidden=true ><span class=katex-base ><span class=katex-strut  style="height:0.7278em;vertical-align:-0.0833em;"></span><span class=mord >10</span><span class=mspace  style="margin-right:0.2222em;"></span><span class=mbin >×</span><span class=mspace  style="margin-right:0.2222em;"></span></span><span class=katex-base ><span class=katex-strut  style="height:0.7278em;vertical-align:-0.0833em;"></span><span class=mord >100</span><span class=mspace  style="margin-right:0.2222em;"></span><span class=mbin >×</span><span class=mspace  style="margin-right:0.2222em;"></span></span><span class=katex-base ><span class=katex-strut  style="height:0.9386em;vertical-align:-0.2441em;"></span><span class=mop ><span class=mop >lo<span style="margin-right:0.0139em;">g</span></span><span class=msupsub ><span class="vlist-t vlist-t2"><span class=vlist-r ><span class=vlist  style="height:0.207em;"><span style="top:-2.4559em;margin-right:0.05em;"><span class=pstrut  style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class=vlist-s >​</span></span><span class=vlist-r ><span class=vlist  style="height:0.2441em;"><span></span></span></span></span></span></span><span class=mspace  style="margin-right:0.1667em;"></span><span class=mord >100</span></span></span></span>&#41; per function call. If you also factor in that the arrays are also &gt;100-elements long, further increasing the operations needed to be performed, it is not surprising that this would be too computationally complex for a webpage to handle. </p> <p>Due to these limitations, the best I can offer to people on this website is the below Julia implementation of this solution. It is sadly not interactive, so you cannot customize the parameters of the problem for yourself, but you can at least see how the solution works. Interestingly, this implementation fails, due to the step size becoming too small, if the tolerance type is set to relative instead of absolute. </p> <pre><code class="julia hljs"><span class=hljs-keyword >using</span> FFTW, StaticArrays, Plots, Interpolations
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/libs/katex/katex.min.css"> <link rel=stylesheet  href="/libs/highlight/github.min.css"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/pure.css"> <!--<link rel=stylesheet  href="/css/side-menu.css">--> <!--The width specified in frankin content under @media determines how wide the website is--> <style> .franklin-content{padding:0px;} @media (min-width: 940px) { .franklin-content {width: 100%; margin: 0px; padding-left: 1px} } </style> <link rel=icon  href="/assets/favicon.png"> <script src="/libs/common/navPanel.js"></script> <title>Heat equation numerical solution</title> <div id=layout > <div id=main > <div class=header > <h1>Heat equation numerical solution</h1> </div> <div id=toc-toggle > <button onclick="toggleTOC()">Navigation</button> </div> <nav id=toc-panel > </nav> <div class=franklin-content ><p>An attempt was made to create a 1D heat equation numerical solver webpage and add it to this website. The equation in question, for those unfamiliar is</p> \[\begin{aligned} \dfrac{\partial u}{\partial t} &= \dfrac{\partial^2 u}{\partial x^2}. \end{aligned}\] <p>Yes, I do know it has an exact solution in the form of an infinite series, but I wanted to numerically approximate its solution for a webpage. This attempt was abandoned, however, as it proved too computationally expensive for a webpage. The numerical integration technique I attempted involved approximating spatial derivatives from grid point values using fast Fourier transforms &#40;FFTs&#41; and their inverses &#40;IFFTs&#41;, then integrating in time using the <a href="/RKF45/">Runge–Kutta–Fehlberg 4th-order method with 5th-order error checking &#40;RKF45&#41;</a>. The calculations took too long and froze the JavaScript console when run there. </p> <p>In fairness, RKF45 already takes a few seconds to solve the <a href="/doubleElasticPendulum/">double elastic pendulum &#40;DEP&#41;</a> and <a href="/triplePendulum/">triple pendulum &#40;TP&#41;</a> ordinary differential equations &#40;ODEs&#41;. It is therefore not surprising that increasing the complexity by orders of magnitude—by adding an FFT and IFFT to every system evaluation and having more than 100 ODEs in the system &#40;one for each grid point&#41;—was simply too much for a webpage to handle. </p> <p>These webpages—the DEP and TP solver pages—take longer to apply RKF45 than the other solver pages because they obtain the equations to be integrated by solving a linear system of equations at each step. The matrices have 4 rows and columns for DEP, and 3 for TP. Math.js’ <code>lusolve</code> function is used to solve these linear systems; it employs the LU decomposition method, which is \(O(N^3)\) &#40;keeping in mind there are also \(N^2\) terms that we typically ignore in Big-O notation and the \(N^3\) has a coefficient of \(\dfrac{2}{3}\)&#41;. For DEP, this corresponds to roughly 75 operations per function call, and for TP, about 36. FFT is \(O(N \log N)\) and in reality it is about \(5N\log_2 N\) operations, as is its inverse. So for \(N > 100\), we would potentially be looking at over 6,643 operations &#40;\(10\times 100 \times \log_2 100\)&#41; per function call. If you also factor in that the arrays are also &gt;100-elements long, further increasing the operations needed to be performed, it is not surprising that this would be too computationally complex for a webpage to handle. </p> <p>Due to these limitations, the best I can offer to people on this website is the below Julia implementation of this solution. It is sadly not interactive, so you cannot customize the parameters of the problem for yourself, but you can at least see how the solution works. Interestingly, this implementation fails, due to the step size becoming too small, if the tolerance type is set to relative instead of absolute. </p> <pre><code class=language-julia >using FFTW, StaticArrays, Plots, Interpolations
 
-<span class=hljs-string >&quot;&quot;&quot;
-    RKF45(f::Function, params, t0::Number, tf::Number, conds::Vector, epsilon, dtInitial, tolType=&quot;absolute&quot;, dtMin=(tf-t0)/1e8)
+&quot;&quot;&quot;
+    RKF45&#40;f::Function, params, t0::Number, tf::Number, conds::Vector, epsilon, dtInitial, tolType&#61;&quot;absolute&quot;, dtMin&#61;&#40;tf-t0&#41;/1e8&#41;
 
 f should be a function that returns the RHS of the ODE being solved expressed as a system of first-order ODEs
-in an array of the form `[dx1/dt, dx2/dt, dx3/dt, dx4/dt, ..., dxn/dt]`. Its arguments should be: params 
-(an object containing problem parameters), t (a Float64) and `vars::Vector` (a column vector of the form 
-`[element1; element2; element3; ...; elementn]`).
+in an array of the form &#96;&#91;dx1/dt, dx2/dt, dx3/dt, dx4/dt, ..., dxn/dt&#93;&#96;. Its arguments should be: params 
+&#40;an object containing problem parameters&#41;, t &#40;a Float64&#41; and &#96;vars::Vector&#96; &#40;a column vector of the form 
+&#96;&#91;element1; element2; element3; ...; elementn&#93;&#96;&#41;.
 
-`params` should be a named tuple containing parameter values. For the simple
+&#96;params&#96; should be a named tuple containing parameter values. For the simple
 pendulum problem with pendulum length 1 metre, for example, it can be written
 as:
 
-`params = (g = 9.81, l = 1.0)`.
+&#96;params &#61; &#40;g &#61; 9.81, l &#61; 1.0&#41;&#96;.
 
-`t0` is the value of t (the independent variable) at the beginning of the integration.
+&#96;t0&#96; is the value of t &#40;the independent variable&#41; at the beginning of the integration.
 
-`tf` is the value of t at the end of the integration.
+&#96;tf&#96; is the value of t at the end of the integration.
 
-`conds` is an SVector containing initial conditions. For the simple pendulum
-problem, for example, the following code may be used (where theta0 and
-thetaDot0) have been defined elsewhere:
+&#96;conds&#96; is an SVector containing initial conditions. For the simple pendulum
+problem, for example, the following code may be used &#40;where theta0 and
+thetaDot0&#41; have been defined elsewhere:
 
-`conds = @SVector [theta0, thetaDot0]`.
+&#96;conds &#61; @SVector &#91;theta0, thetaDot0&#93;&#96;.
 
-`epsilon` is the error tolerance for the problem.
+&#96;epsilon&#96; is the error tolerance for the problem.
 
-`dtInitial` is the initial guess for the step size.
+&#96;dtInitial&#96; is the initial guess for the step size.
 
-`tolType` is the type of tolerance used. Either &quot;absolute&quot; or &quot;relative&quot;.
+&#96;tolType&#96; is the type of tolerance used. Either &quot;absolute&quot; or &quot;relative&quot;.
 
-`dtMin` is the minimum step size allowed. Default is (tf-t0)/1e8.
-&quot;&quot;&quot;</span>
-<span class=hljs-keyword >function</span> RKF45(f::<span class=hljs-built_in >Function</span>, params::<span class=hljs-built_in >NamedTuple</span>, t0::<span class=hljs-built_in >Float64</span>, tf::<span class=hljs-built_in >Float64</span>, conds::SVector, epsilon::<span class=hljs-built_in >Float64</span>, dtInitial::<span class=hljs-built_in >Float64</span>, tolType::<span class=hljs-built_in >String</span> = <span class=hljs-string >&quot;absolute&quot;</span>, dtMin::<span class=hljs-built_in >Float64</span> = (tf-t0)/<span class=hljs-number >1e8</span>)
-    <span class=hljs-comment ># Initialize relevant variables</span>
-    dt = dtInitial;
-    t = <span class=hljs-built_in >Float64</span>[t0];
-    vars = [conds];
-    i = <span class=hljs-number >1</span>;
-    ti = t0;
+&#96;dtMin&#96; is the minimum step size allowed. Default is &#40;tf-t0&#41;/1e8.
+&quot;&quot;&quot;
+function RKF45&#40;f::Function, params::NamedTuple, t0::Float64, tf::Float64, conds::SVector, epsilon::Float64, dtInitial::Float64, tolType::String &#61; &quot;absolute&quot;, dtMin::Float64 &#61; &#40;tf-t0&#41;/1e8&#41;
+    # Initialize relevant variables
+    dt &#61; dtInitial;
+    t &#61; Float64&#91;t0&#93;;
+    vars &#61; &#91;conds&#93;;
+    i &#61; 1;
+    ti &#61; t0;
 
-    <span class=hljs-comment ># Loop over t under the solution for tf has been found</span>
-    <span class=hljs-keyword >while</span> ( ti &lt; tf )
-        varsi =  vars[i];
-        dt = minimum((dt, tf-ti));
+    # Loop over t under the solution for tf has been found
+    while &#40; ti &lt; tf &#41;
+        varsi &#61;  vars&#91;i&#93;;
+        dt &#61; minimum&#40;&#40;dt, tf-ti&#41;&#41;;
 
-        <span class=hljs-comment ># RKF45 approximators</span>
-        K1 = dt*f(params, ti, varsi);
-        K2 = dt*f(params, ti + dt/<span class=hljs-number >4</span>, varsi + K1/<span class=hljs-number >4</span>);
-        K3 = dt*f(params, ti + <span class=hljs-number >3</span>*dt/<span class=hljs-number >8</span>, varsi + <span class=hljs-number >3</span>*K1/<span class=hljs-number >32</span> + <span class=hljs-number >9</span>*K2/<span class=hljs-number >32</span>);
-        K4 = dt*f(params, ti + <span class=hljs-number >12</span>*dt/<span class=hljs-number >13</span>, varsi + <span class=hljs-number >1932</span>*K1/<span class=hljs-number >2197</span> - <span class=hljs-number >7200</span>*K2/<span class=hljs-number >2197</span> + <span class=hljs-number >7296</span>*K3/<span class=hljs-number >2197</span>);
-        K5 = dt*f(params, ti + dt, varsi + <span class=hljs-number >439</span>*K1/<span class=hljs-number >216</span> - <span class=hljs-number >8</span>*K2 + <span class=hljs-number >3680</span>*K3/<span class=hljs-number >513</span> - <span class=hljs-number >845</span>*K4/<span class=hljs-number >4104</span>);
-        K6 = dt*f(params, ti + dt/<span class=hljs-number >2</span>, varsi - <span class=hljs-number >8</span>*K1/<span class=hljs-number >27</span> + <span class=hljs-number >2</span>*K2 - <span class=hljs-number >3544</span>*K3/<span class=hljs-number >2565</span> + <span class=hljs-number >1859</span>*K4/<span class=hljs-number >4104</span> - <span class=hljs-number >11</span>*K5/<span class=hljs-number >40</span>);
+        # RKF45 approximators
+        K1 &#61; dt*f&#40;params, ti, varsi&#41;;
+        K2 &#61; dt*f&#40;params, ti &#43; dt/4, varsi &#43; K1/4&#41;;
+        K3 &#61; dt*f&#40;params, ti &#43; 3*dt/8, varsi &#43; 3*K1/32 &#43; 9*K2/32&#41;;
+        K4 &#61; dt*f&#40;params, ti &#43; 12*dt/13, varsi &#43; 1932*K1/2197 - 7200*K2/2197 &#43; 7296*K3/2197&#41;;
+        K5 &#61; dt*f&#40;params, ti &#43; dt, varsi &#43; 439*K1/216 - 8*K2 &#43; 3680*K3/513 - 845*K4/4104&#41;;
+        K6 &#61; dt*f&#40;params, ti &#43; dt/2, varsi - 8*K1/27 &#43; 2*K2 - 3544*K3/2565 &#43; 1859*K4/4104 - 11*K5/40&#41;;
 
-        <span class=hljs-comment ># 4/5th order approximations to next step value</span>
-        vars1 = varsi + <span class=hljs-number >25</span>*K1/<span class=hljs-number >216</span> + <span class=hljs-number >1408</span>*K3/<span class=hljs-number >2565</span> + <span class=hljs-number >2197</span>*K4/<span class=hljs-number >4104</span> - K5/<span class=hljs-number >5</span>;
-        vars2 = varsi + <span class=hljs-number >16</span>*K1/<span class=hljs-number >135</span> + <span class=hljs-number >6656</span>*K3/<span class=hljs-number >12825</span> + <span class=hljs-number >28561</span>*K4/<span class=hljs-number >56430</span> - <span class=hljs-number >9</span>*K5/<span class=hljs-number >50</span> + <span class=hljs-number >2</span>*K6/<span class=hljs-number >55</span>;
+        # 4/5th order approximations to next step value
+        vars1 &#61; varsi &#43; 25*K1/216 &#43; 1408*K3/2565 &#43; 2197*K4/4104 - K5/5;
+        vars2 &#61; varsi &#43; 16*K1/135 &#43; 6656*K3/12825 &#43; 28561*K4/56430 - 9*K5/50 &#43; 2*K6/55;
 
-        <span class=hljs-comment ># Determine if error is small enough to move on to next step</span>
-        <span class=hljs-keyword >if</span> (tolType <span class=hljs-keyword >in</span> [<span class=hljs-string >&quot;relative&quot;</span>, <span class=hljs-string >&quot;rel&quot;</span>, <span class=hljs-string >&quot;R&quot;</span>, <span class=hljs-string >&quot;r&quot;</span>, <span class=hljs-string >&quot;Rel&quot;</span>, <span class=hljs-string >&quot;Relative&quot;</span>])
-            R = maximum(abs.(vars2 - vars1)./abs.(vars1))/dt;
-        <span class=hljs-keyword >elseif</span> (tolType <span class=hljs-keyword >in</span> [<span class=hljs-string >&quot;absolute&quot;</span>, <span class=hljs-string >&quot;abs&quot;</span>, <span class=hljs-string >&quot;A&quot;</span>, <span class=hljs-string >&quot;a&quot;</span>, <span class=hljs-string >&quot;Abs&quot;</span>, <span class=hljs-string >&quot;Absolute&quot;</span>])
-            R = maximum(abs.(vars2 - vars1))/dt;
-        <span class=hljs-keyword >else</span>
-            error(<span class=hljs-string >&quot;tolType is set to an invalid value (<span class=hljs-variable >$tolType</span>), so exiting...&quot;</span>)
-        <span class=hljs-keyword >end</span>
-        s = (epsilon/(<span class=hljs-number >2</span>*R))^(<span class=hljs-number >0.25</span>);
-        <span class=hljs-keyword >if</span> (R &lt;= epsilon)
-            Base.push!(t, ti+dt);
-            StaticArrays.push!(vars, vars1);
-            i += <span class=hljs-number >1</span>;
-            ti = t[i];
-        <span class=hljs-keyword >end</span>
-        dt *= s;
-        <span class=hljs-keyword >if</span> (dt &lt; dtMin)
-            <span class=hljs-meta >@warn</span>(<span class=hljs-string >&quot;dt has reached <span class=hljs-variable >$dt</span> at t=<span class=hljs-variable >$ti</span> which is less than dtMin=<span class=hljs-variable >$dtMin</span>&quot;</span>)
-            <span class=hljs-keyword >if</span> (tolType <span class=hljs-keyword >in</span> [<span class=hljs-string >&quot;absolute&quot;</span>, <span class=hljs-string >&quot;abs&quot;</span>, <span class=hljs-string >&quot;A&quot;</span>, <span class=hljs-string >&quot;a&quot;</span>, <span class=hljs-string >&quot;Abs&quot;</span>, <span class=hljs-string >&quot;Absolute&quot;</span>])
-                tolType = <span class=hljs-string >&quot;relative&quot;</span>;
-                <span class=hljs-meta >@warn</span>(<span class=hljs-string >&quot;As you are using an absolute tolerance type, we will switch to relative tolerance to see if this fixes the problem...&quot;</span>)
-            <span class=hljs-keyword >elseif</span> (tolType <span class=hljs-keyword >in</span> [<span class=hljs-string >&quot;relative&quot;</span>, <span class=hljs-string >&quot;rel&quot;</span>, <span class=hljs-string >&quot;R&quot;</span>, <span class=hljs-string >&quot;r&quot;</span>, <span class=hljs-string >&quot;Rel&quot;</span>, <span class=hljs-string >&quot;Relative&quot;</span>])
-                <span class=hljs-meta >@warn</span>(<span class=hljs-string >&quot;Breaking out of loop as tolerance type is already set to relative.&quot;</span>)
-                <span class=hljs-keyword >break</span>
-            <span class=hljs-keyword >else</span>
-                error(<span class=hljs-string >&quot;tolType is set to an invalid value (<span class=hljs-variable >$tolType</span>), so exiting...&quot;</span>)
-            <span class=hljs-keyword >end</span>
-        <span class=hljs-keyword >end</span>
-    <span class=hljs-keyword >end</span>
+        # Determine if error is small enough to move on to next step
+        if &#40;tolType in &#91;&quot;relative&quot;, &quot;rel&quot;, &quot;R&quot;, &quot;r&quot;, &quot;Rel&quot;, &quot;Relative&quot;&#93;&#41;
+            R &#61; maximum&#40;abs.&#40;vars2 - vars1&#41;./abs.&#40;vars1&#41;&#41;/dt;
+        elseif &#40;tolType in &#91;&quot;absolute&quot;, &quot;abs&quot;, &quot;A&quot;, &quot;a&quot;, &quot;Abs&quot;, &quot;Absolute&quot;&#93;&#41;
+            R &#61; maximum&#40;abs.&#40;vars2 - vars1&#41;&#41;/dt;
+        else
+            error&#40;&quot;tolType is set to an invalid value &#40;&#36;tolType&#41;, so exiting...&quot;&#41;
+        end
+        s &#61; &#40;epsilon/&#40;2*R&#41;&#41;^&#40;0.25&#41;;
+        if &#40;R &lt;&#61; epsilon&#41;
+            Base.push&#33;&#40;t, ti&#43;dt&#41;;
+            StaticArrays.push&#33;&#40;vars, vars1&#41;;
+            i &#43;&#61; 1;
+            ti &#61; t&#91;i&#93;;
+        end
+        dt *&#61; s;
+        if &#40;dt &lt; dtMin&#41;
+            @warn&#40;&quot;dt has reached &#36;dt at t&#61;&#36;ti which is less than dtMin&#61;&#36;dtMin&quot;&#41;
+            if &#40;tolType in &#91;&quot;absolute&quot;, &quot;abs&quot;, &quot;A&quot;, &quot;a&quot;, &quot;Abs&quot;, &quot;Absolute&quot;&#93;&#41;
+                tolType &#61; &quot;relative&quot;;
+                @warn&#40;&quot;As you are using an absolute tolerance type, we will switch to relative tolerance to see if this fixes the problem...&quot;&#41;
+            elseif &#40;tolType in &#91;&quot;relative&quot;, &quot;rel&quot;, &quot;R&quot;, &quot;r&quot;, &quot;Rel&quot;, &quot;Relative&quot;&#93;&#41;
+                @warn&#40;&quot;Breaking out of loop as tolerance type is already set to relative.&quot;&#41;
+                break
+            else
+                error&#40;&quot;tolType is set to an invalid value &#40;&#36;tolType&#41;, so exiting...&quot;&#41;
+            end
+        end
+    end
 
-    <span class=hljs-comment ># Transpose and enter into NamedTuple</span>
-    vars = transpose(reduce(hcat, vars));
-    <span class=hljs-keyword >return</span> t, vars;
-<span class=hljs-keyword >end</span>
-<span class=hljs-keyword >function</span> heat(params, t, u::SVector)
-    α = params.α
+    # Transpose and enter into NamedTuple
+    vars &#61; transpose&#40;reduce&#40;hcat, vars&#41;&#41;;
+    return t, vars;
+end
+function heat&#40;params, t, u::SVector&#41;
+    α &#61; params.α
 
-    <span class=hljs-comment ># Wavenumbers</span>
-    k = params.k
+    # Wavenumbers
+    k &#61; params.k
 
-    <span class=hljs-comment ># FFT of u</span>
-    u_hat = fft(collect(u))  <span class=hljs-comment ># convert to Vector for FFTW</span>
+    # FFT of u
+    u_hat &#61; fft&#40;collect&#40;u&#41;&#41;  # convert to Vector for FFTW
 
-    <span class=hljs-comment ># Second derivative in Fourier space: -(k^2) * u_hat</span>
-    uxx_hat = - (k .^ <span class=hljs-number >2</span>) .* u_hat
+    # Second derivative in Fourier space: -&#40;k^2&#41; * u_hat
+    uxx_hat &#61; - &#40;k .^ 2&#41; .* u_hat
 
-    <span class=hljs-comment ># Back to real space</span>
-    u_xx = real(ifft(uxx_hat))
+    # Back to real space
+    u_xx &#61; real&#40;ifft&#40;uxx_hat&#41;&#41;
 
-    <span class=hljs-comment ># Return du/dt as SVector for RKF45</span>
-    <span class=hljs-keyword >return</span> SVector{length(u_xx)}(α .* u_xx)
-<span class=hljs-keyword >end</span>
+    # Return du/dt as SVector for RKF45
+    return SVector&#123;length&#40;u_xx&#41;&#125;&#40;α .* u_xx&#41;
+end
 
-N = <span class=hljs-number >128</span>                <span class=hljs-comment ># number of grid points</span>
-T = <span class=hljs-number >2</span><span class=hljs-literal >π</span>                 <span class=hljs-comment ># period</span>
-L = T                  <span class=hljs-comment ># domain length</span>
-dx = L / N
-α = <span class=hljs-number >0.01</span>               <span class=hljs-comment ># thermal diffusivity</span>
-<span class=hljs-comment ># Wavenumbers for FFT (assumes N even)</span>
-k = vcat(<span class=hljs-number >0</span>:N÷<span class=hljs-number >2</span>-<span class=hljs-number >1</span>, <span class=hljs-number >0</span>, -N÷<span class=hljs-number >2</span>+<span class=hljs-number >1</span>:-<span class=hljs-number >1</span>) .* (<span class=hljs-number >2</span><span class=hljs-literal >π</span>/L)
+N &#61; 128                # number of grid points
+T &#61; 2π                 # period
+L &#61; T                  # domain length
+dx &#61; L / N
+α &#61; 0.01               # thermal diffusivity
+# Wavenumbers for FFT &#40;assumes N even&#41;
+k &#61; vcat&#40;0:N÷2-1, 0, -N÷2&#43;1:-1&#41; .* &#40;2π/L&#41;
 
-<span class=hljs-comment ># Initial condition</span>
-x = dx .* (<span class=hljs-number >0</span>:N-<span class=hljs-number >1</span>)
-u0 = <span class=hljs-number >10</span> * (<span class=hljs-number >2</span> .- cos.(<span class=hljs-number >2</span>*<span class=hljs-literal >pi</span>/T * x))
+# Initial condition
+x &#61; dx .* &#40;0:N-1&#41;
+u0 &#61; 10 * &#40;2 .- cos.&#40;2*pi/T * x&#41;&#41;
 
-params = (α=α, L=L, k=k)
-conds = SVector{length(u0)}(u0)
-t0 = <span class=hljs-number >0.0</span>
-tf = <span class=hljs-number >300.0</span>
-epsilon = <span class=hljs-number >1e-9</span>
-dtInitial = <span class=hljs-number >1e-3</span>
+params &#61; &#40;α&#61;α, L&#61;L, k&#61;k&#41;
+conds &#61; SVector&#123;length&#40;u0&#41;&#125;&#40;u0&#41;
+t0 &#61; 0.0
+tf &#61; 300.0
+epsilon &#61; 1e-9
+dtInitial &#61; 1e-3
 
-t_vals, u_vals = RKF45(heat, params, t0, tf, conds, epsilon, dtInitial)
-Umat = <span class=hljs-built_in >Matrix</span>(u_vals)&#x27;;
-plotlyjs()  <span class=hljs-comment ># use PlotlyJS for 3D plotting</span>
+t_vals, u_vals &#61; RKF45&#40;heat, params, t0, tf, conds, epsilon, dtInitial&#41;
+Umat &#61; Matrix&#40;u_vals&#41;&#39;;
+plotlyjs&#40;&#41;  # use PlotlyJS for 3D plotting
 
-<span class=hljs-comment ># Create grids for x and t matching Umat dimensions</span>
-X = repeat(x, <span class=hljs-number >1</span>, length(t_vals))           <span class=hljs-comment ># N × nt</span>
-T = repeat(t_vals&#x27;, length(x), <span class=hljs-number >1</span>)          <span class=hljs-comment ># N × nt (t_vals&#x27; transposed to row vector)</span>
+# Create grids for x and t matching Umat dimensions
+X &#61; repeat&#40;x, 1, length&#40;t_vals&#41;&#41;           # N × nt
+T &#61; repeat&#40;t_vals&#39;, length&#40;x&#41;, 1&#41;          # N × nt &#40;t_vals&#39; transposed to row vector&#41;
 
-<span class=hljs-comment ># Surface plot</span>
-surface(X, T, Umat, xlabel=<span class=hljs-string >&quot;x&quot;</span>, ylabel=<span class=hljs-string >&quot;t&quot;</span>, zlabel=<span class=hljs-string >&quot;u(x,t)&quot;</span>,
-        title=<span class=hljs-string >&quot;Heat equation&quot;</span>, legend=<span class=hljs-literal >false</span>)
-savefig(joinpath(<span class=hljs-meta >@OUTPUT</span>, <span class=hljs-string >&quot;heatEquation.svg&quot;</span>))
+# Surface plot
+surface&#40;X, T, Umat, xlabel&#61;&quot;x&quot;, ylabel&#61;&quot;t&quot;, zlabel&#61;&quot;u&#40;x,t&#41;&quot;,
+        title&#61;&quot;Heat equation&quot;, legend&#61;false&#41;
+savefig&#40;joinpath&#40;@OUTPUT, &quot;heatEquation.svg&quot;&#41;&#41;
 
-<span class=hljs-comment ># Animate</span>
-nt_uniform = <span class=hljs-built_in >Int64</span>(round((tf-t0)*<span class=hljs-number >30</span>));
-t_uniform = range(t_vals[<span class=hljs-number >1</span>], t_vals[<span class=hljs-keyword >end</span>], length=nt_uniform)  <span class=hljs-comment ># e.g., 300 frames</span>
+# Animate
+nt_uniform &#61; Int64&#40;round&#40;&#40;tf-t0&#41;*30&#41;&#41;;
+t_uniform &#61; range&#40;t_vals&#91;1&#93;, t_vals&#91;end&#93;, length&#61;nt_uniform&#41;  # e.g., 300 frames
 
-U_interp = zeros(size(Umat, <span class=hljs-number >1</span>), length(t_uniform))
+U_interp &#61; zeros&#40;size&#40;Umat, 1&#41;, length&#40;t_uniform&#41;&#41;
 
-<span class=hljs-keyword >for</span> i <span class=hljs-keyword >in</span> <span class=hljs-number >1</span>:size(Umat, <span class=hljs-number >1</span>)
-    itp = LinearInterpolation(t_vals, Umat[i, :])
-    U_interp[i, :] = itp.(t_uniform)
-<span class=hljs-keyword >end</span>
+for i in 1:size&#40;Umat, 1&#41;
+    itp &#61; LinearInterpolation&#40;t_vals, Umat&#91;i, :&#93;&#41;
+    U_interp&#91;i, :&#93; &#61; itp.&#40;t_uniform&#41;
+end
 
-<span class=hljs-keyword >function</span> fixed_decimals(x; digits=<span class=hljs-number >3</span>)
-    s = <span class=hljs-string >&quot;t = &quot;</span> * string(round(x, digits=digits))
-    <span class=hljs-comment ># Check if decimal part exists</span>
-    <span class=hljs-keyword >if</span> !occursin(<span class=hljs-string >&#x27;.&#x27;</span>, s)
-        <span class=hljs-comment ># Add decimal point and zeros if missing</span>
-        s *= <span class=hljs-string >&quot;.&quot;</span> * <span class=hljs-string >&quot;0&quot;</span>^digits
-    <span class=hljs-keyword >else</span>
-        parts = split(s, <span class=hljs-string >&#x27;.&#x27;</span>)
-        decimals = parts[<span class=hljs-number >2</span>]
-        zeros_needed = digits - length(decimals)
-        s *= <span class=hljs-string >&quot;0&quot;</span>^max(<span class=hljs-number >0</span>, zeros_needed)
-    <span class=hljs-keyword >end</span>
-    <span class=hljs-keyword >return</span> s
-<span class=hljs-keyword >end</span>
+function fixed_decimals&#40;x; digits&#61;3&#41;
+    s &#61; &quot;t &#61; &quot; * string&#40;round&#40;x, digits&#61;digits&#41;&#41;
+    # Check if decimal part exists
+    if &#33;occursin&#40;&#39;.&#39;, s&#41;
+        # Add decimal point and zeros if missing
+        s *&#61; &quot;.&quot; * &quot;0&quot;^digits
+    else
+        parts &#61; split&#40;s, &#39;.&#39;&#41;
+        decimals &#61; parts&#91;2&#93;
+        zeros_needed &#61; digits - length&#40;decimals&#41;
+        s *&#61; &quot;0&quot;^max&#40;0, zeros_needed&#41;
+    end
+    return s
+end
 
-ymin, ymax = extrema(U_interp)
-anim = <span class=hljs-meta >@animate</span> <span class=hljs-keyword >for</span> i <span class=hljs-keyword >in</span> <span class=hljs-number >1</span>:nt_uniform
-    plot(x, U_interp[:, i],
-         ylim = (ymin, ymax),
-         xlabel = <span class=hljs-string >&quot;x&quot;</span>,
-         ylabel = <span class=hljs-string >&quot;u(x, t)&quot;</span>,
-         title = fixed_decimals(t_uniform[i]),
-         legend = <span class=hljs-literal >false</span>)
-<span class=hljs-keyword >end</span>
+ymin, ymax &#61; extrema&#40;U_interp&#41;
+anim &#61; @animate for i in 1:nt_uniform
+    plot&#40;x, U_interp&#91;:, i&#93;,
+         ylim &#61; &#40;ymin, ymax&#41;,
+         xlabel &#61; &quot;x&quot;,
+         ylabel &#61; &quot;u&#40;x, t&#41;&quot;,
+         title &#61; fixed_decimals&#40;t_uniform&#91;i&#93;&#41;,
+         legend &#61; false&#41;
+end
 
-Deltat = t_uniform[<span class=hljs-number >2</span>]-t_uniform[<span class=hljs-number >1</span>];
-mp4(anim, joinpath(<span class=hljs-meta >@OUTPUT</span>, <span class=hljs-string >&quot;heat.mp4&quot;</span>), fps = <span class=hljs-number >1</span>/Deltat)</code></pre> <img src="/assets/heatEqAttempt/code/output/heatEquation.svg" alt=""> <video width=800  controls> <source src="/assets/heatEqAttempt/code/output/heat.mp4" type="video/mp4"> Your browser does not support the video tag. </video> <div class=page-foot > <div class=copyright > &copy; Brenton Horne. I do not claim to be infallible, so feel free to open <a href="https://github.com/fusion809/fusion809.github.io/issues/new">issues</a> or <a href="https://github.com/fusion809/fusion809.github.io/pulls">pull requests</a> on GitHub if you notice flaws or things that can be improved. <br/>I favour Oxford spelling, so if you notice I generally use different spelling to Australian spelling, that is probably why. <br/><a href="/">Homepage</a>. Source code: <a href="https://github.com/fusion809/fusion809.github.io">https://github.com/fusion809/fusion809.github.io</a>. <br/>Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a>. <br/> <button type='button' class='collapsible'>Show content pages list</button> <div class='content'><p> <h3 style="text-indent: 0%">Mathematical solver and related pages</h3> <h4 style="text-indent: 0%; margin-inline-start: 0px;">Partial differential equation solver (non-interactive)</h4> <a href="/heatEqAttempt/" style="font-weight: bold;">Heat equation solver</a> <h4 style="text-indent: 0%; margin-inline-start: 0px;">Ordinary differential equation solvers (interactive)</h4> <ul class=flexcols > <li><a href="/Chen/">Chen system solver</a> <li><a href="/coupledDuffing/">Coupled Duffing equations solver</a> <li><a href="/doubleElasticPendulum/">Double elastic pendulum solver</a> <li><a href="/doublePendulum/">Double pendulum solver</a> <li><a href="/Duffing/">Duffing equations solver</a> <li><a href="/elasticPendulum/">Elastic pendulum solver</a> <li><a href="/Lorenz/">Lorenz equations solver</a> <li><a href="/LotkaVolterra/">Lotka-Volterra equations solver</a> <li><a href="/projectile/">Projectile motion solver</a> <li><a href="/Rabinovich-Fabrikant/">Rabinovich-Fabrikant equations solver</a> <li><a href="/Rossler/">R&ouml;ssler system solver</a> <li><a href="/SEIRS/">SEIRS system solver</a> <li><a href="/simplePendulum/wErrorAnalysis">Simple pendulum simulator with error analysis</a> <li><a href="/simplePendulum/woErrorAnalysis">Simple pendulum simulator without error analysis</a> <li><a href="/singlePendulum/">Single pendulum: solver/equations derivation</a> <li><a href="/SIR/">SIR system solver</a> <li><a href="/triplePendulum/">Triple pendulum solver</a> </ul> <div style="text-indent: 0%;"><a href="/simplex/" style="font-weight: bold;">Simplex linear programme solver</a> (interactive)</div> <div class=clearfix ><h3 style="text-indent: 0%">Complex analysis pages</h3> <ul class=flexcols > <li><a href="/complexAnalysis/circleR2RedditInt/">Contour integration with a pole on the contour itself</a> <li><a href="/complexAnalysis/x2cosmxoverx4pa4sq/">Evaluating <span class=katex ><span class=katex-mathml ><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle scriptlevel=0  displaystyle=true ><msubsup><mo>∫</mo><mrow><mo>−</mo><mi mathvariant=normal >∞</mi></mrow><mi mathvariant=normal >∞</mi></msubsup><mstyle scriptlevel=0  displaystyle=true ><mfrac><mrow><msup><mi>x</mi><mn>2</mn></msup><mi>cos</mi><mo>⁡</mo><mrow><mi>m</mi><mi>x</mi></mrow></mrow><mrow><mo stretchy=false >(</mo><msup><mi>x</mi><mn>4</mn></msup><mo>+</mo><msup><mi>a</mi><mn>4</mn></msup><msup><mo stretchy=false >)</mo><mn>2</mn></msup></mrow></mfrac></mstyle><mi>d</mi><mi>x</mi></mstyle></mrow><annotation encoding="application/x-tex">\displaystyle \int_{-\infty}^{\infty} \dfrac{x^2\cos{mx}}{(x^4+a^4)^2} dx</annotation></semantics></math></span><span class=katex-html  aria-hidden=true ><span class=katex-base ><span class=katex-strut  style="height:2.4614em;vertical-align:-0.9703em;"></span><span class=mop ><span class="mop op-symbol large-op" style="margin-right:0.4445em;position:relative;top:-0.0011em;">∫</span><span class=msupsub ><span class="vlist-t vlist-t2"><span class=vlist-r ><span class=vlist  style="height:1.4143em;"><span style="top:-1.7881em;margin-left:-0.4445em;margin-right:0.05em;"><span class=pstrut  style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">∞</span></span></span></span><span style="top:-3.8129em;margin-right:0.05em;"><span class=pstrut  style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">∞</span></span></span></span></span><span class=vlist-s >​</span></span><span class=vlist-r ><span class=vlist  style="height:0.9703em;"><span></span></span></span></span></span></span><span class=mspace  style="margin-right:0.1667em;"></span><span class=mord ><span class="mopen nulldelimiter"></span><span class=mfrac ><span class="vlist-t vlist-t2"><span class=vlist-r ><span class=vlist  style="height:1.4911em;"><span style="top:-2.314em;"><span class=pstrut  style="height:3em;"></span><span class=mord ><span class=mopen >(</span><span class=mord ><span class="mord mathnormal">x</span><span class=msupsub ><span class=vlist-t ><span class=vlist-r ><span class=vlist  style="height:0.7401em;"><span style="top:-2.989em;margin-right:0.05em;"><span class=pstrut  style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span><span class=mspace  style="margin-right:0.2222em;"></span><span class=mbin >+</span><span class=mspace  style="margin-right:0.2222em;"></span><span class=mord ><span class="mord mathnormal">a</span><span class=msupsub ><span class=vlist-t ><span class=vlist-r ><span class=vlist  style="height:0.7401em;"><span style="top:-2.989em;margin-right:0.05em;"><span class=pstrut  style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span></span></span></span></span></span><span class=mclose ><span class=mclose >)</span><span class=msupsub ><span class=vlist-t ><span class=vlist-r ><span class=vlist  style="height:0.7401em;"><span style="top:-2.989em;margin-right:0.05em;"><span class=pstrut  style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class=pstrut  style="height:3em;"></span><span class=frac-line  style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class=pstrut  style="height:3em;"></span><span class=mord ><span class=mord ><span class="mord mathnormal">x</span><span class=msupsub ><span class=vlist-t ><span class=vlist-r ><span class=vlist  style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class=pstrut  style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class=mspace  style="margin-right:0.1667em;"></span><span class=mop >cos</span><span class=mspace  style="margin-right:0.1667em;"></span><span class=mord ><span class="mord mathnormal">m</span><span class="mord mathnormal">x</span></span></span></span></span><span class=vlist-s >​</span></span><span class=vlist-r ><span class=vlist  style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord mathnormal">d</span><span class="mord mathnormal">x</span></span></span></span> using contour integration</a> <li><a href="/complexAnalysis/sinxoverxtimesx8plusa8/">Evaluating <span class=katex ><span class=katex-mathml ><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle scriptlevel=0  displaystyle=true ><msubsup><mo>∫</mo><mrow><mo>−</mo><mi mathvariant=normal >∞</mi></mrow><mi mathvariant=normal >∞</mi></msubsup><mstyle scriptlevel=0  displaystyle=true ><mfrac><mrow><mi>sin</mi><mo>⁡</mo><mrow><mi>m</mi><mi>x</mi></mrow></mrow><mrow><mi>x</mi><mo stretchy=false >(</mo><msup><mi>x</mi><mn>8</mn></msup><mo>+</mo><msup><mi>a</mi><mn>8</mn></msup><mo stretchy=false >)</mo></mrow></mfrac></mstyle><mi>d</mi><mi>x</mi></mstyle></mrow><annotation encoding="application/x-tex">\displaystyle \int_{-\infty}^{\infty} \dfrac{\sin{mx}}{x(x^8+a^8)} dx</annotation></semantics></math></span><span class=katex-html  aria-hidden=true ><span class=katex-base ><span class=katex-strut  style="height:2.3846em;vertical-align:-0.9703em;"></span><span class=mop ><span class="mop op-symbol large-op" style="margin-right:0.4445em;position:relative;top:-0.0011em;">∫</span><span class=msupsub ><span class="vlist-t vlist-t2"><span class=vlist-r ><span class=vlist  style="height:1.4143em;"><span style="top:-1.7881em;margin-left:-0.4445em;margin-right:0.05em;"><span class=pstrut  style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">∞</span></span></span></span><span style="top:-3.8129em;margin-right:0.05em;"><span class=pstrut  style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">∞</span></span></span></span></span><span class=vlist-s >​</span></span><span class=vlist-r ><span class=vlist  style="height:0.9703em;"><span></span></span></span></span></span></span><span class=mspace  style="margin-right:0.1667em;"></span><span class=mord ><span class="mopen nulldelimiter"></span><span class=mfrac ><span class="vlist-t vlist-t2"><span class=vlist-r ><span class=vlist  style="height:1.3449em;"><span style="top:-2.314em;"><span class=pstrut  style="height:3em;"></span><span class=mord ><span class="mord mathnormal">x</span><span class=mopen >(</span><span class=mord ><span class="mord mathnormal">x</span><span class=msupsub ><span class=vlist-t ><span class=vlist-r ><span class=vlist  style="height:0.7401em;"><span style="top:-2.989em;margin-right:0.05em;"><span class=pstrut  style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">8</span></span></span></span></span></span></span></span><span class=mspace  style="margin-right:0.2222em;"></span><span class=mbin >+</span><span class=mspace  style="margin-right:0.2222em;"></span><span class=mord ><span class="mord mathnormal">a</span><span class=msupsub ><span class=vlist-t ><span class=vlist-r ><span class=vlist  style="height:0.7401em;"><span style="top:-2.989em;margin-right:0.05em;"><span class=pstrut  style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">8</span></span></span></span></span></span></span></span><span class=mclose >)</span></span></span><span style="top:-3.23em;"><span class=pstrut  style="height:3em;"></span><span class=frac-line  style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class=pstrut  style="height:3em;"></span><span class=mord ><span class=mop >sin</span><span class=mspace  style="margin-right:0.1667em;"></span><span class=mord ><span class="mord mathnormal">m</span><span class="mord mathnormal">x</span></span></span></span></span><span class=vlist-s >​</span></span><span class=vlist-r ><span class=vlist  style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord mathnormal">d</span><span class="mord mathnormal">x</span></span></span></span> using contour integration</a> </ul> </div> <div class=clearfix ><h3 style="text-indent: 0%">Numerical mathematics</h3> <ul class=flexcols > <li><a href="/sqrt/">Root finding without a calculator</a> <li><a href="/RKF45/">Runge-Kutta-Fehlberg 4/5th-order method</a> </ul> </div> <div class=clearfix > <h3 style="text-indent: 0%">Lagrangian mechanics pages</h3> <ul class=flexcols > <li><a href="/doubleElasticPendulum/derivation/">Double elastic pendulum with dissipation.</a> <li><a href="/doublePendulum/derivation/">Double pendulum with dissipation and massive rods.</a> <li><a href="/fidello/">Advanced classical mechanics and beyond: an explanation for Fidello.</a> <li><a href="/downhill-descent/">Modelling downhill descent with particular reference to Castle Hill.</a> <li><a href="/triplePendulum/derivation/">Derivation of the equations of motion of the triple pendulum.</a> </ul> </div> <div class=clearfix  style="width: 100%;"><h3 style="text-indent: 0%">Other mathematics</h3> <ul class=flexcols > <li><a href="/FunctionIntegrator/">FunctionIntegrator.jl package description page</a> <li><a href="/STV+/">Proposed electoral system: single transferable vote plus</a> </ul> </div> <div class=clearfix ><h3 style="text-indent: 0%">Education, my personal opinion largely</h3> <ul class=flexcols > <li><a href="/advice_for_wannabe_PhD_students/">Advice for undergraduate students wishing to study a PhD.</a> <li><a href="/PhD_entry_article/">Meeting the entry requirements of Australian PhD programmes</a> <li><a href="/Australian_education_system/">The Australian education system with a particular focus on the Queensland education system</a> </ul> </div> <div class=clearfix ><h3 style="text-indent: 0%">Linux</h3> <ul> <li><a href="/Linux/Linux-distros-comparison/">Linux distributions: identifying the ideal use cases.</a> <li><a href="/LFS/">Linux From Scratch (LFS) virtual machine (VM)</a> </ul> </div> </p></div> <script> var coll = document.getElementsByClassName("collapsible"); var i; for (i = 0; i < coll.length; i++) { coll[i].addEventListener("click", function () { this.classList.toggle("active"); var content = this.nextElementSibling; if (content.style.display === "block") { content.style.display = "none"; } else { content.style.display = "block"; } }); } </script> <br/>Last modified: November 19, 2026. </div> </div> </div> </div> </div> <script src="/libs/pure/ui.min.js"></script>
+Deltat &#61; t_uniform&#91;2&#93;-t_uniform&#91;1&#93;;
+mp4&#40;anim, joinpath&#40;@OUTPUT, &quot;heat.mp4&quot;&#41;, fps &#61; 1/Deltat&#41;</code></pre> <img src="/assets/heatEqAttempt/code/output/heatEquation.svg" alt=""> <video width=800  controls> <source src="/assets/heatEqAttempt/code/output/heat.mp4" type="video/mp4"> Your browser does not support the video tag. </video> <div class=page-foot > <div class=copyright > &copy; Brenton Horne. I do not claim to be infallible, so feel free to open <a href="https://github.com/fusion809/fusion809.github.io/issues/new">issues</a> or <a href="https://github.com/fusion809/fusion809.github.io/pulls">pull requests</a> on GitHub if you notice flaws or things that can be improved. <br/>I favour Oxford spelling, so if you notice I generally use different spelling to Australian spelling, that is probably why. <br/><a href="/">Homepage</a>. Source code: <a href="https://github.com/fusion809/fusion809.github.io">https://github.com/fusion809/fusion809.github.io</a>. <br/>Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a>. <br/> <button type='button' class='collapsible'>Show content pages list</button> <div class='content'><p> <h3 style="text-indent: 0%">Mathematical solver and related pages</h3> <h4 style="text-indent: 0%; margin-inline-start: 0px;">Partial differential equation solver (non-interactive)</h4> <a href="/heatEqAttempt/" style="font-weight: bold;">Heat equation solver</a> <h4 style="text-indent: 0%; margin-inline-start: 0px;">Ordinary differential equation solvers (interactive)</h4> <ul class=flexcols > <li><a href="/Chen/">Chen system solver</a> <li><a href="/coupledDuffing/">Coupled Duffing equations solver</a> <li><a href="/doubleElasticPendulum/">Double elastic pendulum solver</a> <li><a href="/doublePendulum/">Double pendulum solver</a> <li><a href="/Duffing/">Duffing equations solver</a> <li><a href="/elasticPendulum/">Elastic pendulum solver</a> <li><a href="/Lorenz/">Lorenz equations solver</a> <li><a href="/LotkaVolterra/">Lotka-Volterra equations solver</a> <li><a href="/projectile/">Projectile motion solver</a> <li><a href="/Rabinovich-Fabrikant/">Rabinovich-Fabrikant equations solver</a> <li><a href="/Rossler/">R&ouml;ssler system solver</a> <li><a href="/SEIRS/">SEIRS system solver</a> <li><a href="/simplePendulum/wErrorAnalysis">Simple pendulum simulator with error analysis</a> <li><a href="/simplePendulum/woErrorAnalysis">Simple pendulum simulator without error analysis</a> <li><a href="/singlePendulum/">Single pendulum: solver/equations derivation</a> <li><a href="/SIR/">SIR system solver</a> <li><a href="/triplePendulum/">Triple pendulum solver</a> </ul> <div style="text-indent: 0%;"><a href="/simplex/" style="font-weight: bold;">Simplex linear programme solver</a> (interactive)</div> <div class=clearfix ><h3 style="text-indent: 0%">Complex analysis pages</h3> <ul class=flexcols > <li><a href="/complexAnalysis/circleR2RedditInt/">Contour integration with a pole on the contour itself</a> <li><a href="/complexAnalysis/x2cosmxoverx4pa4sq/">Evaluating \(\displaystyle \int_{-\infty}^{\infty} \dfrac{x^2\cos{mx}}{(x^4+a^4)^2} dx\) using contour integration</a> <li><a href="/complexAnalysis/sinxoverxtimesx8plusa8/">Evaluating \(\displaystyle \int_{-\infty}^{\infty} \dfrac{\sin{mx}}{x(x^8+a^8)} dx\) using contour integration</a> </ul> </div> <div class=clearfix ><h3 style="text-indent: 0%">Numerical mathematics</h3> <ul class=flexcols > <li><a href="/sqrt/">Root finding without a calculator</a> <li><a href="/RKF45/">Runge-Kutta-Fehlberg 4/5th-order method</a> </ul> </div> <div class=clearfix > <h3 style="text-indent: 0%">Lagrangian mechanics pages</h3> <ul class=flexcols > <li><a href="/doubleElasticPendulum/derivation/">Double elastic pendulum with dissipation.</a> <li><a href="/doublePendulum/derivation/">Double pendulum with dissipation and massive rods.</a> <li><a href="/fidello/">Advanced classical mechanics and beyond: an explanation for Fidello.</a> <li><a href="/downhill-descent/">Modelling downhill descent with particular reference to Castle Hill.</a> <li><a href="/triplePendulum/derivation/">Derivation of the equations of motion of the triple pendulum.</a> </ul> </div> <div class=clearfix  style="width: 100%;"><h3 style="text-indent: 0%">Other mathematics</h3> <ul class=flexcols > <li><a href="/FunctionIntegrator/">FunctionIntegrator.jl package description page</a> <li><a href="/STV+/">Proposed electoral system: single transferable vote plus</a> </ul> </div> <div class=clearfix ><h3 style="text-indent: 0%">Education, my personal opinion largely</h3> <ul class=flexcols > <li><a href="/advice_for_wannabe_PhD_students/">Advice for undergraduate students wishing to study a PhD.</a> <li><a href="/PhD_entry_article/">Meeting the entry requirements of Australian PhD programmes</a> <li><a href="/Australian_education_system/">The Australian education system with a particular focus on the Queensland education system</a> </ul> </div> <div class=clearfix ><h3 style="text-indent: 0%">Linux</h3> <ul> <li><a href="/Linux/Linux-distros-comparison/">Linux distributions: identifying the ideal use cases.</a> <li><a href="/LFS/">Linux From Scratch (LFS) virtual machine (VM)</a> </ul> </div> </p></div> <script> var coll = document.getElementsByClassName("collapsible"); var i; for (i = 0; i < coll.length; i++) { coll[i].addEventListener("click", function () { this.classList.toggle("active"); var content = this.nextElementSibling; if (content.style.display === "block") { content.style.display = "none"; } else { content.style.display = "block"; } }); } </script> <br/>Last modified: November 19, 2026. </div> </div> </div> </div> </div> <script src="/libs/pure/ui.min.js"></script> <script src="/libs/katex/katex.min.js"></script> <script src="/libs/katex/auto-render.min.js"></script> <script>renderMathInElement(document.body, { throwOnError: false })</script> <script src="/libs/highlight/highlight.pack.js"></script> <script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: ' '});</script>

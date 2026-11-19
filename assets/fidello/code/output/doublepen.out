@@ -1,4 +1,0 @@
-LoadError: UndefVarError: `@L_str` not defined in `Main.FD_SANDBOX_6751168331264318849`
-Suggestion: check for spelling errors or missing imports.
-Hint: a global variable of this name also exists in LaTeXStrings.
-in expression starting at none:12

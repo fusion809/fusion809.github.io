@@ -34,7 +34,7 @@ e = [0.15, 0.10, 0.01]
 
 # Simulation settings
 
-tspan = (0.0, 300.0)
+tspan = (0.0, 280.0)
 
 abstol = 1e-11
 reltol = 1e-11

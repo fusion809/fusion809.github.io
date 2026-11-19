@@ -52,4 +52,4 @@ function eager_generate_js()
 end
 
 eager_generate_js()
-optimize()
+optimize(prerender=false)

@@ -1,7 +1,7 @@
 # This file was generated, do not modify it. # hide
 using DifferentialEquations
 using Plots, Measures, Colors
-using Printf
+using Printf, LaTeXStrings
 ENV["GKSwstype"] = "100"
 # ============================================================
 # Three-body gravitational system
@@ -32,7 +32,7 @@ a₁             = 4.0
 e₁             = 0.15
 a₂             = 5.0
 e₂             = 0.10
-tspan          = (0.0, 580.0)
+tspan          = (0.0, 280.0)
 abstol         = 1e-11
 reltol         = 1e-11
 fps            = 60
