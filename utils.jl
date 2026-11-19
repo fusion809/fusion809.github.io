@@ -657,6 +657,27 @@ function lx_includemd(com, _)
     if !isempty(cur_p)
         Franklin.register_md_dependency(cur_p, rpath)
     end
+    content = read(fpath, String)
+    return replace(content, r"\\juliacode\{([^}]+)\}" => m -> begin
+        source_path = strip(match(r"\\juliacode\{([^}]+)\}", m).captures[1])
+        source_file = isabspath(source_path) ? source_path : joinpath(Franklin.path(:folder), source_path)
+        read(source_file, String)
+    end)
+end
+
+"""
+    lx_juliacode(com, _)
+
+Insert a Julia source file into the surrounding fenced code block. The path is
+relative to the site root, like `\\includemd`.
+"""
+function lx_juliacode(com, _)
+    rpath = strip(Franklin.content(com.braces[1]))
+    fpath = isabspath(rpath) ? rpath : joinpath(Franklin.path(:folder), rpath)
+    cur_p = get(Franklin.FD_ENV, :CUR_PATH, "")
+    if !isempty(cur_p)
+        Franklin.register_md_dependency(cur_p, rpath)
+    end
     return read(fpath, String)
 end
 
@@ -996,9 +1017,26 @@ Core.eval(Franklin, quote
     # Route math blocks through the site converter explicitly. This specialized
     # method prevents Franklin's precompiled generic block converter from
     # bypassing the per-line align handling above.
+    function convert_juliacode_block(β::OCBlock, lxdefs::Vector{LxDef})
+        lang, rpath, code = parse_fenced_block(β.ss)
+        include_match = match(r"\\juliacode\{([^}]+)\}", code)
+        if !isnothing(include_match)
+            source_path = strip(include_match.captures[1])
+            full_path = isabspath(source_path) ? source_path : joinpath(Franklin.path(:folder), source_path)
+            code = replace(code, include_match.match => read(full_path, String))
+        end
+        fenced = "```$(lang):$(rpath)\n$(code)\n```"
+        return resolve_code_block(SubString(fenced))
+    end
+
     function convert_block(β::OCBlock, lxdefs::Vector{LxDef})::String
         if β.name ∈ MATH_BLOCKS_NAMES
             return convert_math_block_with_alignment(β, lxdefs)
+        elseif β.name == :CODE_BLOCK_LANG
+            lang, _, _ = parse_fenced_block(β.ss)
+            if lang == "julia"
+                return convert_juliacode_block(β, lxdefs)
+            end
         end
         return invoke(convert_block, Tuple{AbstractBlock,Vector{LxDef}}, β, lxdefs)
     end
@@ -1049,6 +1087,9 @@ Core.eval(Franklin, quote
                         ""
                     end
                     for m in eachmatch(Regex("\\\\includemd\\{([^}]+)\\}"), content)
+                        register_md_dependency(rel_parent, strip(m.captures[1]))
+                    end
+                    for m in eachmatch(Regex("\\\\juliacode\\{([^}]+)\\}"), content)
                         register_md_dependency(rel_parent, strip(m.captures[1]))
                     end
                     for m in eachmatch(Regex("\\{\\{include_md\\s+([^}]+)\\}\\}"), content)

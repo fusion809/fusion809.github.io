@@ -125,46 +125,7 @@ Hence:
 \end{align*}
 So we can see $\theta(t)$ is approximated, when it deviates only slightly from $\theta=-\dfrac{\pi}{2}$, quite well by sine and cosine functions. More generally, we can use numerical techniques to approximate our solution. Below is some Julia code that numerically approximates the solution for $\theta_0=\dot{\theta}_0=0$, $g=9.81\mathrm{m}\cdot \mathrm{s}^{-2}$, $l=1\mathrm{m}$ and $m=1\mathrm{kg}$. These initial conditions means the pendulum starts stationary on the positive $x$-axis. Then gravity pulls it down and up towards the negative $x$-axis (at $\theta=-\pi$) and then back down and towards the positive $x$-axis ($\theta=0$) and over and over. 
 ```julia:./code/simppen
-using DifferentialEquations, Plots, LaTeXStrings
-ENV["GKSwstype"] = "100"
-g, l = 9.81, 1.0
-fps = 30
-
-function pendulum!(du, u, p, t)
-    du[1] = u[2]
-    du[2] = -(g/l)*cos(u[1])
-end
-
-tspan = (0.0, 10.0)
-u0 = [0.0, 0.0]  # θ₀ = 0, θ̇₀ = 0
-
-prob = ODEProblem(pendulum!, u0, tspan)
-sol = solve(prob, saveat=1/fps)
-
-plot(sol.t, sol[1, :], label=false)
-xlabel!(L"t\;(\mathrm{seconds})")
-ylabel!(L"\theta\;(\mathrm{radians})")
-title!("Simple pendulum plot")
-savefig("Simple_pendulum_theta.svg")
-# Animate with θ measured counterclockwise from the positive x-axis
-x = l .* cos.(sol[1, :])
-y = l .* sin.(sol[1, :])
-
-anim = @animate for i in eachindex(sol.t)
-    plot(
-        [0, x[i]], [0, y[i]];
-        xlims=(-1.1l, 1.1l),
-        ylims=(-1.1l, 1.1l),
-        aspect_ratio=:equal,
-        label=false,
-        xlabel=L"x\ (\mathrm{metres})",
-        ylabel=L"y\ (\mathrm{metres})",
-        title="Simple pendulum",
-    )
-    scatter!([x[i]], [y[i]]; markersize=8, label=false)
-end
-
-gif(anim, "Simple_pendulum.gif"; fps=fps)
+\juliacode{fidello/code/simppen.jl}
 ```
 Figure \figref{simppen} shows the plot of $\theta$ vs $t$ produced by the above code. Figure \figref{simppenan} contains an animation of the simple pendulum simulated by the above Julia code.
 

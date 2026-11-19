@@ -45,6 +45,9 @@ jobs:
                 occursin(r"gif\s*\(", code.captures[1]) || error("No GIF generation code found in $file");
                 include_string(Main, code.captures[1], file);
             end, ["fidello/_01-introduction.md", "fidello/_03fii-wo-air-resistance.md", "fidello/_03h-three-body-problem.md", "fidello/_03fiii-w-air-resistance.md", "fidello/_04c-projectile-motion.md"]);
+            nbody_code = read("fidello/code/nbody.jl", String);
+            occursin(r"gif\\s*\\(", nbody_code) || error("No GIF generation code found in fidello/code/nbody.jl");
+            include_string(Main, nbody_code, "fidello/code/nbody.jl");
             include("deploy.jl")'
       env:
           # Allows the use of unicode characters in Plots.jl
