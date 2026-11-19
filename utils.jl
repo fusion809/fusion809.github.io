@@ -1020,11 +1020,14 @@ Core.eval(Franklin, quote
     function convert_juliacode_block(β::OCBlock, lxdefs::Vector{LxDef})
         lang, rpath, code = parse_fenced_block(β.ss)
         include_match = match(r"\\juliacode\{([^}]+)\}", code)
-        if !isnothing(include_match)
-            source_path = strip(include_match.captures[1])
-            full_path = isabspath(source_path) ? source_path : joinpath(Franklin.path(:folder), source_path)
-            code = replace(code, include_match.match => read(full_path, String))
+        if lang != "julia" || isnothing(rpath) || isnothing(include_match) || strip(code) != include_match.match
+            return invoke(convert_block, Tuple{AbstractBlock,Vector{LxDef}}, β, lxdefs)
         end
+
+        source_path = strip(include_match.captures[1])
+        full_path = isabspath(source_path) ? source_path : joinpath(Franklin.path(:folder), source_path)
+        code = read(full_path, String)
+
         fenced = "```$(lang):$(rpath)\n$(code)\n```"
         return resolve_code_block(SubString(fenced))
     end
