@@ -25,6 +25,7 @@ Parts of this repository that are my own, namely:
 * [downhill-descent/](downhill-descent/)
 * [Duffing/](Duffing/)
 * [elasticPendulum/](/elasticPendulum/)
+* [fidello/](/fidello/)
 * [FunctionIntegrator.md](FunctionIntegrator.md)
 * [heatEqAttempt.md](heatEqAttempt.md)
 * [heatEquation/](heatEquation/)
