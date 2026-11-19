@@ -7,25 +7,32 @@ T &= \sum_{i=1}^{n-1} \dfrac{m_i(\dot{r}_i^2+r_i^2\dot{\theta}_i^2)}{2}.
 \end{align*}
 Where $m_i$ is the $i$th moving body. As for potential energy, well there will be terms for the interaction between each of the $n$ bodies. For interactions between the central mass and the moving bodies, these will simply be of the form $-\dfrac{GMm_i}{r_i}$. As for the interactions between the moving bodies, their potential energy terms will be of the form $-\dfrac{Gm_i m_j}{r_{ij}}$ where $r_{ij}$ is the distance between masses $i$ and $j$. Hence:
 \begin{align*}
-x_i &= r_i \cos{\theta_i},\hspace{0.2cm}x_j &= r_j \cos{\theta_j} \\
-y_i &= r_i \sin{\theta_i},\hspace{0.2cm}y_j &= r_j \sin{\theta_j}.
+x_i &= r_i \cos{\theta_i},\hspace{0.2cm}x_j &&= r_j \cos{\theta_j} \\
+y_i &= r_i \sin{\theta_i},\hspace{0.2cm}y_j &&= r_j \sin{\theta_j}.
 \end{align*}
 Let us define the change in $x$ between masses $i$ and $j$ as $\Delta x_{ij}$ and the corresponding change in $y$ is $\Delta y_{ij}$. 
 \begin{align*}
 \Delta x_{ij} &= r_j \cos{\theta_j} - r_i \cos{\theta_i} \\
 \Delta x_{ij}^2 &= r_j^2 \cos^2{\theta_j} + r_i^2\cos^2{\theta_i} - 2r_ir_j \cos{\theta_i}\cos{\theta_j} \\
 \Delta y_{ij} &= r_j \sin{\theta_j} - r_i \sin{\theta_i} \\
-\Delta y_{ij}^2 &= r_j^2 \sin^2{\theta_j} + r_i^2\sin^2{\theta_i} - 2r_ir_j \sin{\theta_i}\sin{\theta_j} \\
-\therefore r_{ij}^2 &= \Delta x_{ij}^2 + \Delta y_{ij}^2 \\
+\Delta y_{ij}^2 &= r_j^2 \sin^2{\theta_j} + r_i^2\sin^2{\theta_i} - 2r_ir_j \sin{\theta_i}\sin{\theta_j}
+\end{align*}
+Hence the squared distance between $m_i$ and $m_j$ is, by the Pythagorean theorem:
+\begin{align*}
+r_{ij}^2 &= \Delta x_{ij}^2 + \Delta y_{ij}^2 \\
 &= r_j^2 \cos^2{\theta_j} + r_i^2\cos^2{\theta_i} - 2r_ir_j \cos{\theta_i}\cos{\theta_j} + r_j^2 \sin^2{\theta_j} + r_i^2\sin^2{\theta_i} - 2r_ir_j \sin{\theta_i}\sin{\theta_j} \\
 &= r_i^2 (\cos^2{\theta_i}+\sin^2{\theta_i}) + r_j^2 (\cos^2{\theta_j}+\sin^2{\theta_j}) - 2r_i r_j (\cos{\theta_i}\cos{\theta_j} + \sin{\theta_i}\sin{\theta_j}) \\
-&= r_i^2 + r_j^2 - 2r_i r_j \cos{(\theta_j-\theta_i)} \\
-\therefore r_{ij} &= \sqrt{r_i^2 + r_j^2 - 2r_i r_j \cos{(\theta_j-\theta_i)}}.
+&= r_i^2 + r_j^2 - 2r_i r_j \cos{(\theta_j-\theta_i)}.
 \end{align*}
-As we can see, $r_{ij} = r_{ji}$ due to cosine being an event function. Hence the potential energy is:
+Square rooting yields:
+\begin{align*}
+r_{ij} &= \sqrt{r_i^2 + r_j^2 - 2r_i r_j \cos{(\theta_j-\theta_i)}}.
+\end{align*}
+As we can see, $r_{ij} = r_{ji}$ due to cosine being an even function. Hence the potential energy is:
 \begin{align*}
 V &= -\sum_{i=1}^{n-1} \left(\dfrac{GMm_i}{r_i} - \sum_{j>i}^{n-1} \dfrac{Gm_i m_j}{r_{ij}}\right).
 \end{align*}
+Why the $j>i$ on the second sum? Well, to ensure we do not count the same terms but with a different order of their indices (e.g. $\dfrac{Gm_1 m_2}{r_{12}}$ and $\dfrac{Gm_2 m_1}{r_{21}}$ are equivalent despite the different order of indices) twice. 
 Hence:
 \begin{align*}
 L &= \sum_{i=1}^{n-1} \left(\dfrac{m_i (\dot{r}_i^2 + r_i^2 \dot{\theta}_i^2)}{2} + \dfrac{GMm_i}{r_i} + \sum_{j>i}^{n-1} \dfrac{Gm_i m_j}{r_{ij}}\right)
