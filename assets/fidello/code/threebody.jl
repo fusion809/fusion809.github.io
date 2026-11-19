@@ -177,7 +177,7 @@ prob = ODEProblem(
     tspan
 )
 
-sol = solve(
+solut = solve(
     prob,
     Vern8(),
     saveat=stepsize,
@@ -189,11 +189,11 @@ sol = solve(
 # Convert polar coordinates to Cartesian coordinates
 # ------------------------------------------------------------
 
-x₁ = sol[1, :] .* cos.(sol[3, :])
-y₁ = sol[1, :] .* sin.(sol[3, :])
+x₁ = solut[1, :] .* cos.(solut[3, :])
+y₁ = solut[1, :] .* sin.(solut[3, :])
 
-x₂ = sol[2, :] .* cos.(sol[4, :])
-y₂ = sol[2, :] .* sin.(sol[4, :])
+x₂ = solut[2, :] .* cos.(solut[4, :])
+y₂ = solut[2, :] .* sin.(solut[4, :])
 
 # ------------------------------------------------------------
 # Calculate body-body separation
@@ -241,7 +241,7 @@ m2col = RGB24(0, 155/255, 155/255)
 m2outcol = RGB24(190/255, 255/255, 255/255)
 Mcol  = RGB24(65/255, 130/255, 65/255)
 
-anim = @animate for i in eachindex(sol.t)
+anim = @animate for i in eachindex(solut.t)
 
     p = plot(
         x₁[1:i],
@@ -254,7 +254,7 @@ anim = @animate for i in eachindex(sol.t)
         aspect_ratio=:equal,
         xlabel=L"x",
         ylabel=L"y",
-        title="Three-body system — t = $(@sprintf("%.2f", sol.t[i]))",
+        title="Three-body system — t = $(@sprintf("%.2f", solut.t[i]))",
         guidefontsize=guidefontsize,
         tickfontsize=tickfontsize,
         titlefontsize=titlefontsize,

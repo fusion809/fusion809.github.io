@@ -387,7 +387,7 @@ prob = ODEProblem(
     tspan
 )
 
-sol = solve(
+solut = solve(
     prob,
     Vern8(),
     saveat=stepsize,
@@ -399,11 +399,11 @@ sol = solve(
 <span class=hljs-comment ># Convert polar coordinates to Cartesian coordinates</span>
 <span class=hljs-comment ># ------------------------------------------------------------</span>
 
-x₁ = sol[<span class=hljs-number >1</span>, :] .* cos.(sol[<span class=hljs-number >3</span>, :])
-y₁ = sol[<span class=hljs-number >1</span>, :] .* sin.(sol[<span class=hljs-number >3</span>, :])
+x₁ = solut[<span class=hljs-number >1</span>, :] .* cos.(solut[<span class=hljs-number >3</span>, :])
+y₁ = solut[<span class=hljs-number >1</span>, :] .* sin.(solut[<span class=hljs-number >3</span>, :])
 
-x₂ = sol[<span class=hljs-number >2</span>, :] .* cos.(sol[<span class=hljs-number >4</span>, :])
-y₂ = sol[<span class=hljs-number >2</span>, :] .* sin.(sol[<span class=hljs-number >4</span>, :])
+x₂ = solut[<span class=hljs-number >2</span>, :] .* cos.(solut[<span class=hljs-number >4</span>, :])
+y₂ = solut[<span class=hljs-number >2</span>, :] .* sin.(solut[<span class=hljs-number >4</span>, :])
 
 <span class=hljs-comment ># ------------------------------------------------------------</span>
 <span class=hljs-comment ># Calculate body-body separation</span>
@@ -451,7 +451,7 @@ m2col = RGB24(<span class=hljs-number >0</span>, <span class=hljs-number >155</s
 m2outcol = RGB24(<span class=hljs-number >190</span>/<span class=hljs-number >255</span>, <span class=hljs-number >255</span>/<span class=hljs-number >255</span>, <span class=hljs-number >255</span>/<span class=hljs-number >255</span>)
 Mcol  = RGB24(<span class=hljs-number >65</span>/<span class=hljs-number >255</span>, <span class=hljs-number >130</span>/<span class=hljs-number >255</span>, <span class=hljs-number >65</span>/<span class=hljs-number >255</span>)
 
-anim = <span class=hljs-meta >@animate</span> <span class=hljs-keyword >for</span> i <span class=hljs-keyword >in</span> eachindex(sol.t)
+anim = <span class=hljs-meta >@animate</span> <span class=hljs-keyword >for</span> i <span class=hljs-keyword >in</span> eachindex(solut.t)
 
     p = plot(
         x₁[<span class=hljs-number >1</span>:i],
@@ -464,7 +464,7 @@ anim = <span class=hljs-meta >@animate</span> <span class=hljs-keyword >for</spa
         aspect_ratio=:equal,
         xlabel=<span class=hljs-string >L&quot;x&quot;</span>,
         ylabel=<span class=hljs-string >L&quot;y&quot;</span>,
-        title=<span class=hljs-string >&quot;Three-body system — t = <span class=hljs-subst >$(<span class=hljs-meta >@sprintf</span>(<span class=hljs-string >&quot;%.2f&quot;</span>, sol.t[i])</span>)&quot;</span>,
+        title=<span class=hljs-string >&quot;Three-body system — t = <span class=hljs-subst >$(<span class=hljs-meta >@sprintf</span>(<span class=hljs-string >&quot;%.2f&quot;</span>, solut.t[i])</span>)&quot;</span>,
         guidefontsize=guidefontsize,
         tickfontsize=tickfontsize,
         titlefontsize=titlefontsize,
