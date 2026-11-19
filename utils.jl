@@ -1021,7 +1021,7 @@ Core.eval(Franklin, quote
         lang, rpath, code = parse_fenced_block(β.ss)
         include_match = match(r"\\juliacode\{([^}]+)\}", code)
         if lang != "julia" || isnothing(rpath) || isnothing(include_match)
-            return invoke(convert_block, Tuple{AbstractBlock,Vector{LxDef}}, β, lxdefs)
+            return convert_block_default(β, lxdefs)
         end
 
         source_path = strip(include_match.captures[1])
@@ -1032,16 +1032,45 @@ Core.eval(Franklin, quote
         return resolve_code_block(SubString(fenced))
     end
 
-    function convert_block(β::OCBlock, lxdefs::Vector{LxDef})::String
-        if β.name ∈ MATH_BLOCKS_NAMES
+    function convert_block_default(β::AbstractBlock, lxdefs::Vector{LxDef})::String
+        β isa HTML_SPCH && return ifelse(isempty(β.r), β.ss, β.r)
+        βn = β.name
+        βn ∈ MD_HEADER && return convert_header(β, lxdefs)
+        βn == :CODE_INLINE && return html_code_inline(stent(β) |> htmlesc)
+        βn == :CODE_BLOCK_LANG && return resolve_code_block(β.ss)
+        βn == :CODE_BLOCK! && return resolve_code_block(β.ss; shortcut=true)
+        βn == :CODE_REPL && return resolve_code_block(β.ss; repl=true)
+        βn == :CODE_PKG && return resolve_code_block(β.ss; pkg=true)
+        βn == :CODE_HELP && return resolve_code_block(β.ss; help=true)
+        βn == :CODE_SHELL && return resolve_code_block(β.ss; shell=true)
+        βn == :CODE_BLOCK && return html_code(stent(β), "{{fill lang}}")
+        βn == :CODE_BLOCK_IND && return convert_indented_code_block(β.ss)
+        βn == :ESCAPE && return chop(β.ss, head=3, tail=3)
+        βn == :FOOTNOTE_REF && return convert_footnote_ref(β)
+        βn == :FOOTNOTE_DEF && return convert_footnote_def(β, lxdefs)
+        βn == :LINK_DEF && return ""
+        βn == :DOUBLE_BRACE && return β.ss
+        βn == :HORIZONTAL_RULE && return "<hr />"
+        βn ∈ MATH_BLOCKS_NAMES && return convert_math_block(β, lxdefs)
+        if βn == :DIV
+            raw_cont = stent(β)
+            cont = convert_md(raw_cont, lxdefs; isrecursive=true, has_mddefs=false, nostripp=true) |> simplify_ps
+            divname = chop(otok(β).ss, head=2, tail=0)
+            return html_div(replace(divname, "," => " "), cont)
+        end
+        return ""
+    end
+
+    function convert_block(β::AbstractBlock, lxdefs::Vector{LxDef})::AS
+        if β isa OCBlock && β.name ∈ MATH_BLOCKS_NAMES
             return convert_math_block_with_alignment(β, lxdefs)
-        elseif startswith(β.ss, "```") && occursin(r"\\juliacode\{[^}]+\}", β.ss)
+        elseif β isa OCBlock && startswith(β.ss, "```") && occursin(r"\\juliacode\{[^}]+\}", β.ss)
             lang, rpath, code = parse_fenced_block(β.ss)
             if lang == "julia" && !isnothing(rpath) && occursin(r"\\juliacode\{[^}]+\}", code)
                 return convert_juliacode_block(β, lxdefs)
             end
         end
-        return invoke(convert_block, Tuple{AbstractBlock,Vector{LxDef}}, β, lxdefs)
+        return convert_block_default(β, lxdefs)
     end
 
     # ==============================================================================

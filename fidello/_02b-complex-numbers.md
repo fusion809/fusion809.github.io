@@ -2,7 +2,7 @@
 Complex numbers are numbers that involve both a real and an imaginary part. That is, they are of the form $a+bi$ where $a$ and $b$ are both real numbers and $i$ is the imaginary number. $a$ is called the real part of the number and $b$ is called the imaginary part of the number. Importantly, $a$ and $b$ can be zero, consequently all real numbers are technically complex numbers. We can display complex numbers in the complex plane (also known as the Argand plane) as vectors. Specifically, the $y$ component of this vector is the imaginary part of our number and the $x$ component is the real part of the number. 
 
 ~~~
-<figure id="complex">
+<figure id="complex" style="float: right;">
 <img src="Complex plane.svg" width="300px" float="right">
 <figcaption>Number 2+3i displayed in the complex plane.</figcaption>
 </figure>
