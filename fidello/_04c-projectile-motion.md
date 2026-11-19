@@ -1,6 +1,5 @@
 ### Projectile motion
-Let us analyse what happens when a projectile is fired into the air. Let $x$ represent the horizontal direction and $y$ represent the vertical direction.
-
+Let us analyse what happens when a projectile is fired into the air. Let $x$ represent the horizontal direction and $y$ represent the vertical direction. Our potential energy here would be $mgy$, hence it is independent of the generalized velocities and we can use the $H=T+V$ definition of the Hamiltonian.
 \begin{align*}
 H &= \dfrac{m}{2}(\dot{x}^2+\dot{y}^2) + mgy.
 \end{align*}
