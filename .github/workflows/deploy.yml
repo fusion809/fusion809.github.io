@@ -16,7 +16,7 @@ jobs:
     - name: Install python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.8'
+        python-version: '3.15'
     # NOTE: Here you can install dependencies such as matplotlib if you use
     # packages such as PyPlot.
     - run: pip install matplotlib
