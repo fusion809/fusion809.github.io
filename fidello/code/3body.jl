@@ -31,6 +31,8 @@ a₁             = 5.0
 e₁             = 0.15
 a₂             = 5.0
 e₂             = 0.10
+θ₁₀            = 0.0
+θ₂₀            = π - 0.15
 tspan          = (0.0, 200.0)
 abstol         = 1e-11
 reltol         = 1e-11
@@ -50,17 +52,6 @@ titlefontsize  = 30
 
 r₁₀ = a₁ * (1 - e₁)
 r₂₀ = a₂ * (1 - e₂)
-
-# ------------------------------------------------------------
-# Initial angular positions
-# ------------------------------------------------------------
-
-# Start on opposite sides of the central body. A small
-# asymmetry is introduced so that the system does not remain
-# artificially symmetric.
-
-θ₁₀ = 0.0
-θ₂₀ = π + 0.15
 
 # ------------------------------------------------------------
 # Initial Keplerian periapsis velocities

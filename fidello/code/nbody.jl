@@ -19,41 +19,39 @@ ENV["GKSwstype"] = "100"
 # ------------------------------------------------------------
 # Parameters
 # ------------------------------------------------------------
-
-G = 1.0
-M = 3.0
-
 # Add or remove entries to change the number of orbiting bodies.
 # All parameter vectors must have the same length.
-
-masses = [1.5, 1.5, 0.01]
-
-a = [4.0, 5.0, 10.0]
-e = [0.15, 0.10, 0.01]
-
-# Simulation settings
-
-tspan = (0.0, 250.0)
-
-abstol = 1e-11
-reltol = 1e-11
-
-fps = 60
-stepsize = 8/fps
-
-marksize = 10
-
+G              = 1.0
+M              = 3.0
+masses         = [2, 2.0, 0.01]
+N              = length(masses)
+# Initial conditions
+## Semi-major axes
+a              = [5.0, 6.0, 10.0]
+## Eccentricities
+e              = [0.30, 0.05, 0.01]
+## Initial angular positions
+θ₀             = [
+    2π*(k-1)/N + sin(2π*(k-1)/N) * 0.1
+    for k in 1:N
+]
+# Frames per second of animation
+fps            = 60
+# Solution params
+tspan          = (0.0, 250.0)
+abstol         = 1e-11
+reltol         = 1e-11
+stepsize       = 8/fps
+# Animation params
+marksize       = 10
 legendfontsize = 24
-guidefontsize = 24
-tickfontsize = 20
-titlefontsize = 30
+guidefontsize  = 24
+tickfontsize   = 20
+titlefontsize  = 30
 
 # ------------------------------------------------------------
 # Validate parameters
 # ------------------------------------------------------------
-
-N = length(masses)
-
 @assert N >= 1 "At least one orbiting body is required."
 @assert length(a) == N "The semimajor axis vector must have N entries."
 @assert length(e) == N "The eccentricity vector must have N entries."
@@ -68,16 +66,6 @@ N = length(masses)
 # Periapsis distances
 
 r₀ = a .* (1 .- e)
-
-# Initial angular positions.
-#
-# Bodies are approximately evenly distributed around M.
-# A small perturbation breaks exact rotational symmetry.
-
-θ₀ = [
-    2π*(k-1)/N + 0.15*sin(sqrt(2)*k)
-    for k in 1:N
-]
 
 # Initial Keplerian periapsis velocities
 
