@@ -33,13 +33,13 @@ e = [0.15, 0.10, 0.01]
 
 # Simulation settings
 
-tspan = (0.0, 200.0)
+tspan = (0.0, 250.0)
 
 abstol = 1e-11
 reltol = 1e-11
 
 fps = 60
-stepsize = 30/fps
+stepsize = 10/fps
 
 marksize = 10
 
