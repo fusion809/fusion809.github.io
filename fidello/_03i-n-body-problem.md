@@ -39,8 +39,8 @@ L &= \sum_{i=1}^{n-1} \left(\dfrac{m_i (\dot{r}_i^2 + r_i^2 \dot{\theta}_i^2)}{2
 \end{align*}
 Next we will calculate $\dfrac{\partial r_{ij}}{\partial q_k}$:
 \begin{align*}
-\dfrac{\partial r_{ij}}{\partial r_k} &= \dfrac{2r_i \delta{ik} + 2r_j \delta_{jk} - 2(\delta_{ik}r_j + r_i \delta_{jk})\cos{(\theta_j-\theta_i)}}{2r_{ij}} \\
-&= \dfrac{r_i \delta{ik} + r_j \delta_{jk} - (\delta_{ik}r_j + r_i \delta_{jk})\cos{(\theta_j-\theta_i)}}{r_{ij}} \\
+\dfrac{\partial r_{ij}}{\partial r_k} &= \dfrac{2r_i \delta_{ik} + 2r_j \delta_{jk} - 2(\delta_{ik}r_j + r_i \delta_{jk})\cos{(\theta_j-\theta_i)}}{2r_{ij}} \\
+&= \dfrac{r_i \delta_{ik} + r_j \delta_{jk} - (\delta_{ik}r_j + r_i \delta_{jk})\cos{(\theta_j-\theta_i)}}{r_{ij}} \\
 \dfrac{\partial r_{ij}}{\partial \theta_k} &= \dfrac{2r_i r_j\sin{(\theta_j-\theta_i)}(\delta_{jk}-\delta_{ik})}{2r_{ij}} \\
 &= \dfrac{r_i r_j\sin{(\theta_j-\theta_i)}(\delta_{jk}-\delta_{ik})}{r_{ij}}.
 \end{align*}
