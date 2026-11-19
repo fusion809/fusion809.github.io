@@ -103,11 +103,12 @@ Dividing both sides by $m_2r_2^2$:
 
 This system of ordinary differential equations cannot be analytically solved, unlike the equations we obtained for the two-body problem. Consequently, we are forced to resort to numerical methods to solve this system. Below is Julia code to numerically solve the system for a made-up example of the three-body problem.
 
+\codelisting{threebody}{Three-body problem simulation code.}
 ```julia:./code/threebody
 \juliacode{fidello/code/3body.jl}
 ```
 
-The above Julia code produces the animation in Figure \figref{threebodyan}. As you can see, the orbits majorly and seemingly unpredictably change over time. This is pretty typical in the three-body problem: either the orbits are fairly stable and unchanging, or they are unstable and prone to objects being ejected from the system or colliding with one another. 
+\coderef{threebody} produces the animation in Figure \figref{threebodyan}. As you can see, the orbits majorly and seemingly unpredictably change over time. This is pretty typical in the three-body problem: either the orbits are fairly stable and unchanging, or they are unstable and prone to objects being ejected from the system or colliding with one another. 
 
 ~~~
 <figure id="threebodyan" style="float: right; width: 100%">

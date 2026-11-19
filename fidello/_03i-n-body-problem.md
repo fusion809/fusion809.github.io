@@ -13,9 +13,12 @@ y_i &= r_i \sin{\theta_i},\hspace{0.2cm}y_j &&= r_j \sin{\theta_j}.
 Let us define the change in $x$ between masses $i$ and $j$ as $\Delta x_{ij}$ and the corresponding change in $y$ is $\Delta y_{ij}$. 
 \begin{align*}
 \Delta x_{ij} &= r_j \cos{\theta_j} - r_i \cos{\theta_i} \\
+\Delta y_{ij} &= r_j \sin{\theta_j} - r_i \sin{\theta_i}.
+\end{align*}
+Hence their squares would be:
+\begin{align*}
 \Delta x_{ij}^2 &= r_j^2 \cos^2{\theta_j} + r_i^2\cos^2{\theta_i} - 2r_ir_j \cos{\theta_i}\cos{\theta_j} \\
-\Delta y_{ij} &= r_j \sin{\theta_j} - r_i \sin{\theta_i} \\
-\Delta y_{ij}^2 &= r_j^2 \sin^2{\theta_j} + r_i^2\sin^2{\theta_i} - 2r_ir_j \sin{\theta_i}\sin{\theta_j}
+\Delta y_{ij}^2 &= r_j^2 \sin^2{\theta_j} + r_i^2\sin^2{\theta_i} - 2r_ir_j \sin{\theta_i}\sin{\theta_j}.
 \end{align*}
 Hence the squared distance between $m_i$ and $m_j$ is, by the Pythagorean theorem:
 \begin{align*}
@@ -50,19 +53,19 @@ p_{r_k} &= \dfrac{\partial L}{\partial \dot{r}_k} \\
 &= \sum_{i=1}^{n-1} \left(\dfrac{m_i (2\dot{r}_i \delta_{ik})}{2}\right) \\
 &= m_k \dot{r}_k.
 \end{align*}
-Hence:
+Hence its time derivative is:
 \begin{align*}
 \dot{p}_{r_k} &= m_k \ddot{r}_k.
 \end{align*}
 As for the canonical momentum for $\theta_k$, it is:
 \begin{align*}
-p_{r_k} &= \dfrac{\partial L}{\partial \dot{\theta}_k} \\
+p_{\theta_k} &= \dfrac{\partial L}{\partial \dot{\theta}_k} \\
 &= \sum_{i=1}^{n-1} \left(\dfrac{m_i (2r_i^2 \dot{\theta}_i \delta_{ik})}{2}\right) \\
 &= m_k r_k^2 \dot{\theta}_k.
 \end{align*}
 Differentiating with respect to $t$ yields:
 \begin{align*}
-\dot{p}_{r_k} &= 2m_k r_k \dot{r_k} \dot{\theta}_k + m r_k^2 \ddot{\theta}_k.
+\dot{p}_{\theta_k} &= 2m_k r_k \dot{r_k} \dot{\theta}_k + m r_k^2 \ddot{\theta}_k.
 \end{align*}
 As for $\dfrac{\partial L}{\partial q_k}$:
 \begin{align*}
@@ -97,7 +100,10 @@ As for $\theta_k$, the canonical momentum and its time derivative are:
 \begin{align*}
 p_{\theta_k} &= \dfrac{\partial L}{\partial \dot{\theta}_k} \\
 &= \sum_{i=1}^{n-1} \left(\dfrac{2m_i r_i^2 \dot{\theta}_i \delta_{ik}}{2}\right) \\
-&= m_k r_k^2 \dot{\theta}_k \\
+&= m_k r_k^2 \dot{\theta}_k.
+\end{align*}
+Hence the time derivative of $p_{\theta_k}$ is:
+\begin{align*}
 \dot{p}_{\theta_k} &= 2m_kr_k \dot{r}_k \dot{\theta}_k + mr_k^2 \ddot{\theta}_k.
 \end{align*}
 As for the other component of Equations \eqref{ELE}:
@@ -109,22 +115,44 @@ As for the other component of Equations \eqref{ELE}:
 \end{align*}
 Hence the Euler-Lagrange equations for $\theta_k$ can be expressed as:
 \begin{align*}
-2m_kr_k \dot{r}_k \dot{\theta}_k + mr_k^2 \ddot{\theta}_k &= \sum_{i=1}^{n-1} \dfrac{Gm_i m_kr_i r_k\sin{(\theta_i-\theta_k)}}{r_{ik}^3}.
+2m_kr_k \dot{r}_k \dot{\theta}_k + mr_k^2 \ddot{\theta}_k &= \sum_{\substack{i=1\\i\neq k}}^{n-1} \dfrac{Gm_i m_kr_i r_k\sin{(\theta_i-\theta_k)}}{r_{ik}^3}.
 \end{align*}
 Dividing both sides by $mr_k^2$ yields:
 \begin{align*}
-\dfrac{2\dot{r}_k\dot{\theta}_k}{r_k} + \ddot{\theta}_k &= \sum_{i=1}^{n-1} \dfrac{Gm_i r_i \sin{(\theta_i-\theta_k)}}{r_k r_{ik}^3}.
+\dfrac{2\dot{r}_k\dot{\theta}_k}{r_k} + \ddot{\theta}_k &= \sum_{\substack{i=1\\i\neq k}}^{n-1} \dfrac{Gm_i r_i \sin{(\theta_i-\theta_k)}}{r_k r_{ik}^3}.
 \end{align*}
 Moving the first term on the left-hand side to the right-hand side yields:
 \begin{align*}
-\ddot{\theta}_k &= -\dfrac{2\dot{r}_k\dot{\theta}_k}{r_k} + \sum_{i=1}^{n-1} \dfrac{Gm_i r_i \sin{(\theta_i-\theta_k)}}{r_k r_{ik}^3}.
+\ddot{\theta}_k &= -\dfrac{2\dot{r}_k\dot{\theta}_k}{r_k} + \sum_{\substack{i=1\\i\neq k}}^{n-1} \dfrac{Gm_i r_i \sin{(\theta_i-\theta_k)}}{r_k r_{ik}^3}.
 \end{align*}
 
+An important verification of our working is that if $n=3$, do we get the same equations as we obtained in [gravitational three-body problem](#gravitational_three-body_problem). If $n=3$, we get for $\ddot{r}_1$:
+
+\begin{align*}
+\ddot{r}_1 &= r_1\dot{\theta}_1^2 - \dfrac{GM}{r_1^2} - \dfrac{Gm_2(r_1 - r_2\cos{(\theta_1-\theta_2)})}{r_{12}^3} \\
+&= r_1\dot{\theta}_1^2 - \dfrac{GM}{r_1^2} - \dfrac{Gm_2(r_1 - r_2\cos{(\theta_2-\theta_1)})}{r_{12}^3}.
+\end{align*}
+This matches our equation for $\ddot{r}_1$ for the three-body problem. As for $\ddot{r}_2$:
+\begin{align*}
+\ddot{r}_2 &= r_2\dot{\theta}_2^2 - \dfrac{GM}{r_2^2} - \dfrac{Gm_2(r_2 - r_1\cos{(\theta_2-\theta_1)})}{r_{12}^3}.
+\end{align*}
+Which also matches our three-body system equation for $\ddot{r}_2$. As for $\ddot{\theta}_1$:
+\begin{align*}
+\ddot{\theta}_1 &= -\dfrac{2\dot{r}_1\dot{\theta}_1}{r_1} + \dfrac{Gm_2r_2 \sin{(\theta_2-\theta_1)}}{r_1 r_{12}^3}.
+\end{align*}
+Which also matches our three-body system equation for $\ddot{\theta}_1$. As for $\ddot{\theta}_2$:
+\begin{align*}
+\ddot{\theta}_2 &= -\dfrac{2\dot{r}_2\dot{\theta}_2}{r_2} + \dfrac{Gm_1r_1 \sin{(\theta_1-\theta_2)}}{r_2 r_{12}^3} \\
+&= -\dfrac{2\dot{r}_2\dot{\theta}_2}{r_2} - \dfrac{Gm_1r_1 \sin{(\theta_2-\theta_1)}}{r_2 r_{12}^3}.
+\end{align*}
+Which also matches our three-body system equation for $\ddot{\theta}_2$.
+
+\codelisting{nbody}{N-body problem simulation code.}
 ```julia:./code/nbody
 \juliacode{fidello/code/nbody.jl}
 ```
 
-The above Julia code produces the animation in Figure \figref{nbodyan}. As you can see, the orbits majorly and seemingly unpredictably change over time. This is pretty typical in the $n$-body problem: either the orbits are fairly stable and unchanging (like the orbits of the planets in the Solar System), or they are unstable and prone to objects being ejected from the system or colliding with one another. 
+\coderef{nbody} produces the animation in Figure \figref{nbodyan}. As you can see, the orbits majorly and seemingly unpredictably change over time. This is pretty typical in the $n$-body problem: either the orbits are fairly stable and unchanging (like the orbits of the planets in the Solar System), or they are unstable and prone to objects being ejected from the system or colliding with one another. 
 
 ~~~
 <figure id="nbodyan" style="float: right; width: 100%">

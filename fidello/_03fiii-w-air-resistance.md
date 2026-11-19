@@ -36,10 +36,11 @@ Subtracting $\dfrac{g}{l}\cos{\theta}$ from both sides yields:
 \end{align*}
 This equation cannot be analytically solved, so numerical solutions are necessary. There is a numerical solver for an even more complex version of the dampened single pendulum [here](/singlePendulum/). Below is some Julia code for numerically solving the dampened single pendulum problem with $\theta_0=0$, $\dot{\theta}_0=0$, $g=9.81\mathrm{m}\cdot \mathrm{s}^{-2}$, $l=1\mathrm{m}$, $m=1\mathrm{kg}$, $\rho=2.0 \mathrm{kg}\cdot \mathrm{m}^{-3}$, $C_D=0.01$ (dimensionless) and $A=5.0\mathrm{m}^2$. 
 
+\codelisting{damppen}{Single pendulum with air resistance simulation code.}
 ```julia:./code/damppen
 \juliacode{fidello/code/damppen.jl}
 ```
-Figure \figref{damppen} shows the plot produced by the above Julia code. As you can see over time the maximum and minimum angle the pendulum forms gets closer and closer towards $-\dfrac{\pi}{2}$. Figure \figref{damppenan} shows the animation produced by the above Julia code. 
+Figure \figref{damppen} shows the plot produced by \coderef{damppen}. As you can see over time the maximum and minimum angle the pendulum forms gets closer and closer towards $-\dfrac{\pi}{2}$. Figure \figref{damppenan} shows the animation produced by the above Julia code. 
 ~~~
 <figure id="damppen" style="float: left;">
 <img src="/Dampened_pendulum_theta.svg" width="900px" />

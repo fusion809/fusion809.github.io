@@ -47,3 +47,19 @@ Parts of this repository that are my own, namely:
 * [triplePendulum/](triplePendulum/)
 
 are licensed under [GNU GPLv3](LICENCE). The rest is likely licensed under [this licence](https://github.com/tlienart/FranklinTemplates.jl/blob/master/LICENSE.md), except for files in [\_libs/katex](_libs/katex/), which are licensed under [KaTeX's MIT licence](https://github.com/KaTeX/KaTeX/blob/master/LICENSE) and a few files which clearly mention their licensing details at their top.
+# Numbered code listings
+
+Add a listing annotation immediately before a fenced code block. The first
+argument is its label and the second is the caption. Labels are page-local and
+can be referenced with `\coderef{label}`:
+
+````markdown
+\codelisting{example}{A short description of the example}
+```julia:./code/example
+println("This block still runs through Franklin's Julia evaluator")
+```
+````
+
+The rendered listing starts collapsed. Its button reveals the code, and its
+caption is numbered in page order. A label can be referenced as
+`\coderef{example}`.

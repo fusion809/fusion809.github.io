@@ -124,6 +124,7 @@ Hence:
 \theta(t) &= \left(\theta_0 + \dfrac{\pi}{2}\right)\cos{\left(\sqrt{\dfrac{g}{l}}t\right)} + \dot{\theta}_0 \sqrt{\dfrac{l}{g}} \sin{\left(\sqrt{\dfrac{g}{l}}t\right)} -\dfrac{\pi}{2}.
 \end{align*}
 So we can see $\theta(t)$ is approximated, when it deviates only slightly from $\theta=-\dfrac{\pi}{2}$, quite well by sine and cosine functions. More generally, we can use numerical techniques to approximate our solution. Below is some Julia code that numerically approximates the solution for $\theta_0=\dot{\theta}_0=0$, $g=9.81\mathrm{m}\cdot \mathrm{s}^{-2}$, $l=1\mathrm{m}$ and $m=1\mathrm{kg}$. These initial conditions means the pendulum starts stationary on the positive $x$-axis. Then gravity pulls it down and up towards the negative $x$-axis (at $\theta=-\pi$) and then back down and towards the positive $x$-axis ($\theta=0$) and over and over. 
+\codelisting{simppen}{Simple pendulum simulation code.}
 ```julia:./code/simppen
 \juliacode{fidello/code/simppen.jl}
 ```

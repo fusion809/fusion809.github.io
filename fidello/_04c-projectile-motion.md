@@ -47,6 +47,7 @@ Hence our equations of motion are:
 
 Below is Julia code for implementing an animation based on the above system of ordinary differential equations. 
 
+\codelisting{projmotion}{Projectile motion simulation code.}
 ```julia:./code/projmotion
 \juliacode{fidello/code/projmotion.jl}
 ```

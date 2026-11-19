@@ -490,6 +490,12 @@ code {
     font-weight: bold;
 }
 
+.code-listing { margin: 1.25em 0; }
+.code-listing-toggle { cursor: pointer; font: inherit; margin-bottom: .4em; }
+.code-listing pre { margin-top: .4em; }
+.code-listing-caption { margin-top: .45em; font-size: .95em; font-weight: 700; }
+.code-listing-label { font-weight: 600; }
+
 .hljs-meta {
     color: rgb(25, 179, 51);
 }
