@@ -439,7 +439,7 @@ anim = @animate for frame in eachindex(solut.t)
             markersize=round(marksize/2),
             color=bodycolors[k],
             markerstrokecolor=bodycolors[k],
-            label="m$k"
+            label=latexstring("m_{$k}")
         )
 
     end
