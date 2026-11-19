@@ -30,7 +30,7 @@ r_{ij} &= \sqrt{r_i^2 + r_j^2 - 2r_i r_j \cos{(\theta_j-\theta_i)}}.
 \end{align*}
 As we can see, $r_{ij} = r_{ji}$ due to cosine being an even function. Hence the potential energy is:
 \begin{align*}
-V &= -\sum_{i=1}^{n-1} \left(\dfrac{GMm_i}{r_i} - \sum_{j>i}^{n-1} \dfrac{Gm_i m_j}{r_{ij}}\right).
+V &= -\sum_{i=1}^{n-1} \left(\dfrac{GMm_i}{r_i} + \sum_{j>i}^{n-1} \dfrac{Gm_i m_j}{r_{ij}}\right).
 \end{align*}
 Why the $j>i$ on the second sum? Well, to ensure we do not count the same terms but with a different order of their indices (e.g. $\dfrac{Gm_1 m_2}{r_{12}}$ and $\dfrac{Gm_2 m_1}{r_{21}}$ are equivalent despite the different order of indices) twice. 
 Hence:
