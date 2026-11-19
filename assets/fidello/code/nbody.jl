@@ -24,22 +24,23 @@ ENV["GKSwstype"] = "100"
 # All parameter vectors must have the same length.
 G              = 1.0
 M              = 3.0
-masses         = [2, 2.0, 0.01]
+masses         = [1.5, 2.0, 0.01]
 N              = length(masses)
 # Initial conditions
 ## Semi-major axes
-a              = [5.0, 6.0, 10.0]
+a              = [5.0, 5.0, 15.0]
 ## Eccentricities
-e              = [0.30, 0.05, 0.01]
+e              = [0.20, 0.05, 0.01]
 ## Initial angular positions
 θ₀             = [
-    2π*(k-1)/N + sin(2π*(k-1)/N) * 0.1
-    for k in 1:N
+    0.0
+    π - 0.15
+    π/3 + 0.06
 ]
 # Frames per second of animation
 fps            = 60
 # Solution params
-tspan          = (0.0, 250.0)
+tspan          = (0.0, 60.0)
 abstol         = 1e-11
 reltol         = 1e-11
 stepsize       = 8/fps
