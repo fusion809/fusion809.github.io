@@ -38,7 +38,7 @@ This equation cannot be analytically solved, so numerical solutions are necessar
 
 ```julia:./code/damppen
 using DifferentialEquations, Plots, LaTeXStrings
-
+ENV["GKSwstype"] = "100"
 rho, Cd, A, g, m, l = 2.0, 0.01, 5.0, 9.81, 1.0, 1.0
 fps = 30
 function pendulum!(du, u, p, t)

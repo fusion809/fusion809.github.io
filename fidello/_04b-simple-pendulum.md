@@ -35,7 +35,7 @@ As we can see, Hamiltonian mechanics yields a series of first-order ordinary dif
 Below is Julia code for solving Equations \eqref{pdotthetasimp} and \eqref{thetadotsimp} with $-\dfrac{\pi}{2} + 0.1 \leq \theta_0 \leq \dfrac{\pi}{2}-0.1$ and $-0.1 \leq p_{\theta_0} \leq 0.1$ and producing a phase plot for the solutions. For all the solutions the gravitational acceleration ($g$) was assumed to be 9.81$\mathrm{m}\cdot \mathrm{s}^{-2}$, $l$ was assumed to be $1$m and $m$ was assumed to be $1$kg. 
 ```julia:./code/phase_plot
 using DifferentialEquations, Plots, LaTeXStrings
-
+ENV["GKSwstype"] = "100"
 g, m, l = 9.81, 1.0, 1.0
 
 function pendulum!(du, u, p, t)

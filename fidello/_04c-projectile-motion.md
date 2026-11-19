@@ -51,6 +51,7 @@ Below is Julia code for implementing an animation based on the above system of o
 using DifferentialEquations
 using Plots
 using LaTeXStrings
+ENV["GKSwstype"] = "100"
 
 # Constants
 g = 9.81

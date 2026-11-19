@@ -114,6 +114,7 @@ Moving the first term on the left-hand side to the right-hand side yields:
 using DifferentialEquations
 using Plots, Measures, Colors
 using Printf, LaTeXStrings
+ENV["GKSwstype"] = "100"
 
 # ============================================================
 # N-body gravitational system with a fixed central mass
