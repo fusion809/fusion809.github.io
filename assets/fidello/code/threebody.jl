@@ -1,6 +1,6 @@
 # This file was generated, do not modify it. # hide
 using DifferentialEquations
-using Plots
+using Plots, Measures, Colors
 using Printf
 
 # ============================================================
@@ -24,27 +24,28 @@ using Printf
 # Parameters
 # ------------------------------------------------------------
 
-G = 1.0
-
-M  = 5.0
-m₁ = 1.0
-m₂ = 1.0
-
-fps = 60
+G              = 1.0
+M              = 3.0
+m₁             = 1.5
+m₂             = 1.5
+a₁             = 4.0
+e₁             = 0.15
+a₂             = 5.0
+e₂             = 0.10
+tspan          = (0.0, 580.0)
+abstol         = 1e-11
+reltol         = 1e-11
+fps            = 60
+marksize       = 10
+stepsize       = 25/fps
+legendfontsize = 24
+guidefontsize  = 24
+tickfontsize   = 20
+titlefontsize  = 30
 
 # ------------------------------------------------------------
 # Initial approximate Keplerian orbits
 # ------------------------------------------------------------
-
-# The two orbits are deliberately much less hierarchical than
-# in the previous version. This makes the mutual perturbation
-# strong enough to destroy the simple Keplerian behaviour.
-
-a₁ = 5.0
-e₁ = 0.40
-
-a₂ = 9.0
-e₂ = 0.40
 
 # Periapsis distances
 
@@ -163,44 +164,12 @@ function three_body!(du, u, p, t)
 end
 
 # ------------------------------------------------------------
-# Stop if the two orbiting bodies get extremely close
-# ------------------------------------------------------------
-
-minimum_separation = 1.6
-
-function separation_condition(u, t, integrator)
-
-    r₁ = u[1]
-    r₂ = u[2]
-    θ₁ = u[3]
-    θ₂ = u[4]
-
-    sqrt(
-        r₁^2 +
-        r₂^2 -
-        2*r₁*r₂*cos(θ₂ - θ₁)
-    ) - minimum_separation
-end
-
-function stop_simulation!(integrator)
-    terminate!(integrator)
-end
-
-separation_callback = ContinuousCallback(
-    separation_condition,
-    stop_simulation!,
-    nothing
-)
-
-# ------------------------------------------------------------
 # Integrate
 #
 # 100 time units gives the system ample time to undergo
 # several orbital periods and develop strongly perturbed
 # trajectories.
 # ------------------------------------------------------------
-
-tspan = (0.0, 100.0)
 
 prob = ODEProblem(
     three_body!,
@@ -211,10 +180,9 @@ prob = ODEProblem(
 sol = solve(
     prob,
     Vern8(),
-    callback=separation_callback,
-    saveat=15/fps,
-    abstol=1e-10,
-    reltol=1e-10
+    saveat=stepsize,
+    abstol=abstol,
+    reltol=reltol
 )
 
 # ------------------------------------------------------------
@@ -235,29 +203,6 @@ separation = sqrt.(
     (x₂ .- x₁).^2 +
     (y₂ .- y₁).^2
 )
-
-# ------------------------------------------------------------
-# Estimate number of angular revolutions
-# ------------------------------------------------------------
-
-orbits₁ = (sol[3, end] - sol[3, 1]) / (2π)
-orbits₂ = (sol[4, end] - sol[4, 1]) / (2π)
-
-println(
-    "Approximate revolutions of body 1: ",
-    @sprintf("%.2f", orbits₁)
-)
-
-println(
-    "Approximate revolutions of body 2: ",
-    @sprintf("%.2f", orbits₂)
-)
-
-println(
-    "Minimum body-body separation: ",
-    @sprintf("%.3f", minimum(separation))
-)
-
 # ------------------------------------------------------------
 # Plot limits
 # ------------------------------------------------------------
@@ -290,56 +235,81 @@ ymax = yc + span/2 + margin
 # Animation
 # ------------------------------------------------------------
 
+m1col = RGB24(0, 0, 155/255)
+m1outcol = RGB24(190/255, 190/255, 255/255)
+m2col = RGB24(0, 155/255, 155/255)
+m2outcol = RGB24(190/255, 255/255, 255/255)
+Mcol  = RGB24(65/255, 130/255, 65/255)
+
 anim = @animate for i in eachindex(sol.t)
 
-    plot(
+    p = plot(
         x₁[1:i],
         y₁[1:i],
         linewidth=1,
+        color=m1col,
         label=false,
         xlims=(xmin, xmax),
         ylims=(ymin, ymax),
         aspect_ratio=:equal,
-        xlabel="x",
-        ylabel="y",
-        title="Three-body system — t = $(@sprintf("%.2f", sol.t[i]))"
+        xlabel=L"x",
+        ylabel=L"y",
+        title="Three-body system — t = $(@sprintf("%.2f", sol.t[i]))",
+        guidefontsize=guidefontsize,
+        tickfontsize=tickfontsize,
+        titlefontsize=titlefontsize,
+        legend=:topleft,
+        legendfontsize=legendfontsize,
+        left_margin=2Plots.mm,
+        right_margin=2Plots.mm,
+        top_margin=2Plots.mm,
+        bottom_margin=2Plots.mm,
+        size=(1600, 1600)
     )
 
     plot!(
+        p,
         x₂[1:i],
         y₂[1:i],
         linewidth=1,
+        color=m2col,
         label=false
     )
 
-    # Central body.
-    #
-    # Small markers are used deliberately so that the plotted
-    # marker size does not imply a physical stellar radius.
-
+    # Central body
     scatter!(
+        p,
         [0.0],
         [0.0],
-        markersize=2,
-        label=false
+        markershape=:circle,
+        markersize=marksize,
+        color=Mcol,
+        markerstrokecolor=Mcol,
+        label="M"
     )
 
-    # body 1
-
+    # Body 1
     scatter!(
+        p,
         [x₁[i]],
         [y₁[i]],
-        markersize=2,
-        label=false
+        markershape=:circle,
+        markersize=round(marksize/2),
+        color=m1col,
+        markerstrokecolor=m1outcol,
+        label="m₁"
     )
 
-    # body 2
-
+    # Body 2
     scatter!(
+        p,
         [x₂[i]],
         [y₂[i]],
-        markersize=2,
-        label=false
+        markershape=:circle,
+        markersize=round(marksize/2),
+        color=m2col,
+        markerstrokecolor=m2outcol,
+        label="m₂"
     )
 end
 
@@ -358,15 +328,3 @@ gif(
     "three_body_system.gif",
     fps=fps
 )
-
-# ------------------------------------------------------------
-# Summary
-# ------------------------------------------------------------
-
-println()
-println("Simulation finished.")
-println(
-    "Final simulation time: ",
-    @sprintf("%.2f", sol.t[end])
-)
-println("Number of frames: ", length(sol.t))
