@@ -8,13 +8,21 @@ function toggleTOC() {
     toc.style.display = (toc.style.display === "none" || toc.style.display === "") ? "block" : "none";
 }
 
+function headingText(heading) {
+    const clone = heading.cloneNode(true);
+    // KaTeX includes both visible HTML and MathML in each formula. The
+    // MathML duplicates the visible text when read with textContent.
+    clone.querySelectorAll(".katex-mathml").forEach(mathml => mathml.remove());
+    return clone.textContent.trim();
+}
+
 function addH1ToTOC(tocPanel, tocList, headers) {
     const allHeaders = headers || tocList;
     if (!allHeaders || !allHeaders.length) return;
     const titleH1 = allHeaders.find(h => h.tagName === "H1" || h.closest(".header"));
     if (!titleH1) return;
-    if (!titleH1.id) titleH1.id = titleH1.textContent.trim().replace(/\s+/g, "-").toLowerCase();
-    let label = titleH1.textContent.trim();
+    if (!titleH1.id) titleH1.id = headingText(titleH1).replace(/\s+/g, "-").toLowerCase();
+    let label = headingText(titleH1);
     if (!label) return;
     var text = '<span id="h1_toc">' + label + '</span>';
     tocPanel.insertAdjacentHTML("afterbegin", `<a href="#${titleH1.id}">${text}</a>`);
@@ -23,8 +31,8 @@ function addH1ToTOC(tocPanel, tocList, headers) {
 function addHeadersToTOC(tocList, headers) {
     let titleH1Skipped = false;
     headers.forEach(h => {
-        if (!h.id) h.id = h.textContent.trim().replace(/\s+/g, "-").toLowerCase();
-        let label = h.textContent.trim();
+        if (!h.id) h.id = headingText(h).replace(/\s+/g, "-").toLowerCase();
+        let label = headingText(h);
         if (!label) return;
 
         // Skip the very first H1 (the page title), as it is rendered at the top of the navigation panel
