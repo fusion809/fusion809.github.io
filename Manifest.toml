@@ -522,10 +522,10 @@ uuid = "4e289a0a-7415-4d19-859d-a7e5c4648b56"
 version = "1.0.7"
 
 [[deps.EnzymeCore]]
-git-tree-sha1 = "d88c803e26799193db42e47f6e1e28eeb0322e4d"
+git-tree-sha1 = "63b801155bed4327c7a06cb4dcfab73c7fa79be1"
 registries = "General"
 uuid = "f151be2c-9106-41f4-ab19-57ee4f262869"
-version = "0.8.27"
+version = "0.8.28"
 weakdeps = ["Adapt", "ChainRulesCore"]
 
     [deps.EnzymeCore.extensions]
@@ -695,10 +695,10 @@ version = "0.8.6"
 
 [[deps.Fontconfig_jll]]
 deps = ["Artifacts", "Bzip2_jll", "Expat_jll", "FreeType2_jll", "JLLWrappers", "Libdl", "Libuuid_jll", "Zlib_jll"]
-git-tree-sha1 = "e1e9ba3a8f5d71e6ae698f138a1362aeabb42e9f"
+git-tree-sha1 = "8de1957ed91ce3a9b03882a5759c151929a9aa06"
 registries = "General"
 uuid = "a3f928ae-7b40-5064-980b-68af3947d34b"
-version = "2.18.3+0"
+version = "2.18.4+0"
 
 [[deps.Format]]
 git-tree-sha1 = "9c68794ef81b08086aeb32eeaf33531668d5f5fc"
@@ -2318,10 +2318,10 @@ version = "1.8.0"
 
 [[deps.StatsBase]]
 deps = ["AliasTables", "DataAPI", "DataStructures", "IrrationalConstants", "LinearAlgebra", "LogExpFunctions", "Missings", "Printf", "Random", "SortingAlgorithms", "SparseArrays", "Statistics", "StatsAPI"]
-git-tree-sha1 = "adb9da019510162e67a4493fc235c23203d8b09e"
+git-tree-sha1 = "85faad09701372d7cbd37f3d1acdc06986d495dc"
 registries = "General"
 uuid = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
-version = "0.34.13"
+version = "0.34.14"
 
 [[deps.StringManipulation]]
 deps = ["PrecompileTools", "StyledStrings"]
