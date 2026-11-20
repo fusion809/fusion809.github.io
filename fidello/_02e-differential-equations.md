@@ -116,18 +116,18 @@ u' &= -y.
 \end{align*}
 How would we numerically integrate this system? We could apply RKF45 to determine $y_{n+1}$ (where $y_0$ and $y'_0$ will be our initial conditions) using this scheme:
 \begin{align*}
-k_1 &= hy'_0
-l_1 &= -hy_0 \\
-k_2 &= h\left(y'_0+\dfrac{l_1}{4}\right) \\
-l_2 &= -h\left(y_0+\dfrac{k_1}{4}\right) \\
-k_3 &= h\left(y'_0+\dfrac{3l_1}{32}+\dfrac{9l_2}{32}\right) \\
-l_3 &= -h\left(y_0+\dfrac{3k_1}{32}+\dfrac{9k_2}{32}\right) \\
-k_4 &= h\left(y'_0+\dfrac{1932l_1}{2197}-\dfrac{7200l_2}{2197}+\dfrac{7296l_3}{2197}\right) \\
-l_4 &= -h\left(y_0+\dfrac{1932k_1}{2197}-\dfrac{7200k_2}{2197}+\dfrac{7296k_3}{2197}\right) \\
-k_5 &= h\left(y'_0+\dfrac{439l_1}{216}-8l_2+\dfrac{3680l_3}{513}-\dfrac{845l_4}{4104}\right) \\
-l_5 &= -h\left(y_0+\dfrac{439k_1}{216}-8k_2+\dfrac{3680k_3}{513}-\dfrac{845k_4}{4104}\right) \\
-k_6 &= h\left(y'_0-\dfrac{8l_1}{27}+2l_2-\dfrac{3544l_3}{2565}+\dfrac{1859l_4}{4104}-\dfrac{11l_5}{40}\right) \\
-l_6 &= -h\left(y_0-\dfrac{8k_1}{27}+2k_2-\dfrac{3544k_3}{2565}+\dfrac{1859k_4}{4104}-\dfrac{11k_5}{40}\right) \\
+k_1 &= hu_n
+l_1 &= -hy_n \\
+k_2 &= h\left(u_n+\dfrac{l_1}{4}\right) \\
+l_2 &= -h\left(y_n+\dfrac{k_1}{4}\right) \\
+k_3 &= h\left(u_n+\dfrac{3l_1}{32}+\dfrac{9l_2}{32}\right) \\
+l_3 &= -h\left(y_n+\dfrac{3k_1}{32}+\dfrac{9k_2}{32}\right) \\
+k_4 &= h\left(u_n+\dfrac{1932l_1}{2197}-\dfrac{7200l_2}{2197}+\dfrac{7296l_3}{2197}\right) \\
+l_4 &= -h\left(y_n+\dfrac{1932k_1}{2197}-\dfrac{7200k_2}{2197}+\dfrac{7296k_3}{2197}\right) \\
+k_5 &= h\left(u_n+\dfrac{439l_1}{216}-8l_2+\dfrac{3680l_3}{513}-\dfrac{845l_4}{4104}\right) \\
+l_5 &= -h\left(y_n+\dfrac{439k_1}{216}-8k_2+\dfrac{3680k_3}{513}-\dfrac{845k_4}{4104}\right) \\
+k_6 &= h\left(u_n-\dfrac{8l_1}{27}+2l_2-\dfrac{3544l_3}{2565}+\dfrac{1859l_4}{4104}-\dfrac{11l_5}{40}\right) \\
+l_6 &= -h\left(y_n-\dfrac{8k_1}{27}+2k_2-\dfrac{3544k_3}{2565}+\dfrac{1859k_4}{4104}-\dfrac{11k_5}{40}\right) \\
 u_{4,n+1} &= u_{n} + \dfrac{25l_1}{216} + \dfrac{1408l_3}{2565} + \dfrac{2197l_4}{4104} - \dfrac{l_5}{5}\\
 u_{5,n+1} &= u_{n} + \dfrac{16l_1}{135} + \dfrac{6656l_3}{12825} + \dfrac{28561l_4}{56430} - \dfrac{9l_5}{50} + \dfrac{2l_6}{55}\\
 y_{4,n+1} &= y_{n} + \dfrac{25k_1}{216} + \dfrac{1408k_3}{2565} + \dfrac{2197k_4}{4104} - \dfrac{k_5}{5}\\
