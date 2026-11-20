@@ -828,6 +828,8 @@ function render_align_environment(com, numbered::Bool)
     html = IOBuffer()
     anchors = IOBuffer()
     tagged_rows = String[]
+    has_secondary_alignment = any(occursin("&&", row) for row in rows)
+    alignment_pairs = maximum((count("&&", row) + 1 for row in rows); init=1)
 
     for row in rows
         line = strip(row)
@@ -857,9 +859,14 @@ function render_align_environment(com, numbered::Bool)
     end
 
     write(html, String(take!(anchors)))
-    env = numbered ? "align" : "aligned"
+    env = has_secondary_alignment ? (numbered ? "alignat" : "alignedat") :
+          (numbered ? "align" : "aligned")
     class = numbered ? "nonumber numbered-align" : "nonumber"
-    display = "\\[\\begin{$env}\n" * join(tagged_rows, " " * "\\\\" * "\n") * "\n\\end{$env}\\]"
+    display = if has_secondary_alignment
+        "\\[\\begin{$env}{$alignment_pairs}\n" * join(tagged_rows, " " * "\\\\" * "\n") * "\n\\end{$env}\\]"
+    else
+        "\\[\\begin{$env}\n" * join(tagged_rows, " " * "\\\\" * "\n") * "\n\\end{$env}\\]"
+    end
     write(html, "<div class=\"$class\">" * display * "</div>")
     return String(take!(html))
 end
@@ -963,6 +970,8 @@ Core.eval(Franklin, quote
             lines = split_align_lines(align_body)
             new_lines = String[]
             last_num = PAGE_EQREFS[PAGE_EQREFS_COUNTER]
+            has_secondary_alignment = any(occursin("&&", line) for line in lines)
+            alignment_pairs = maximum((count("&&", line) + 1 for line in lines); init=1)
 
             for line in lines
                 trimmed = strip(line)
@@ -992,7 +1001,9 @@ Core.eval(Franklin, quote
                 end
             end
 
-            write(htmls, "<div class=\"nonumber\" style=\"counter-reset: eqnum $last_num;\">\\[\\begin{align}\n" * join(new_lines, " \\\\\n") * "\n\\end{align}\\]</div>")
+            env = has_secondary_alignment ? "alignat" : "align"
+            begin_env = has_secondary_alignment ? "\\begin{$env}{$alignment_pairs}" : "\\begin{$env}"
+            write(htmls, "<div class=\"nonumber\" style=\"counter-reset: eqnum $last_num;\">\\[$begin_env\n" * join(new_lines, " \\\\\n") * "\n\\end{$env}\\]</div>")
             return String(take!(htmls))
         end
 

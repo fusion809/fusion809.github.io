@@ -40,10 +40,14 @@ Hence:
 \begin{align*}
 L &= \sum_{i=1}^{n-1} \left(\dfrac{m_i (\dot{r}_i^2 + r_i^2 \dot{\theta}_i^2)}{2} + \dfrac{GMm_i}{r_i} + \sum_{j>i}^{n-1} \dfrac{Gm_i m_j}{r_{ij}}\right)
 \end{align*}
-Next we will calculate $\dfrac{\partial r_{ij}}{\partial q_k}$:
+Next we will calculate $\dfrac{\partial r_{ij}}{\partial q_k}$. For $q_k=r_k$:
 \begin{align*}
 \dfrac{\partial r_{ij}}{\partial r_k} &= \dfrac{2r_i \delta_{ik} + 2r_j \delta_{jk} - 2(\delta_{ik}r_j + r_i \delta_{jk})\cos{(\theta_j-\theta_i)}}{2r_{ij}} \\
 &= \dfrac{r_i \delta_{ik} + r_j \delta_{jk} - (\delta_{ik}r_j + r_i \delta_{jk})\cos{(\theta_j-\theta_i)}}{r_{ij}} \\
+&= \dfrac{\delta_{ik}(r_i - r_j\cos{(\theta_j-\theta_i)}) +  \delta_{jk}(r_j -r_i \cos{(\theta_j-\theta_i)})}{r_{ij}}.
+\end{align*}
+As for $q_k=\theta_k$:
+\begin{align*}
 \dfrac{\partial r_{ij}}{\partial \theta_k} &= \dfrac{2r_i r_j\sin{(\theta_j-\theta_i)}(\delta_{jk}-\delta_{ik})}{2r_{ij}} \\
 &= \dfrac{r_i r_j\sin{(\theta_j-\theta_i)}(\delta_{jk}-\delta_{ik})}{r_{ij}}.
 \end{align*}
@@ -69,12 +73,9 @@ Differentiating with respect to $t$ yields:
 \end{align*}
 As for $\dfrac{\partial L}{\partial q_k}$:
 \begin{align*}
-\dfrac{\partial L}{\partial r_k} &= \sum_{i=1}^{n-1} \left(\dfrac{m_i (2r_i\delta_{ik} \dot{\theta}_i^2)}{2} - \dfrac{GMm_i\delta_{ik}}{r_i^2} - \sum_{j>i}^{n-1} \dfrac{Gm_i m_j\left(r_i \delta_{ik} + r_j \delta_{jk} - (\delta_{ik}r_j + r_i \delta_{jk})\cos{(\theta_j-\theta_i)}\right)}{r_{ij}^3}\right)\\
-&= m_k r_k \dot{\theta}_k^2 - \dfrac{GMm_k}{r_k^2} - \sum_{i=1}^{n-1}\sum_{j>i}^{n-1} \dfrac{Gm_i m_j\left(r_i \delta_{ik} + r_j \delta_{jk} - (\delta_{ik}r_j + r_i \delta_{jk})\cos{(\theta_j-\theta_i)}\right)}{r_{ij}^3}.
-\end{align*}
-Let us work on the final double sum. Factoring out the Kronecker deltas with like indices:
-\begin{align*}
-\sum_{i=1}^{n-1}\sum_{j>i}^{n-1} \dfrac{Gm_i m_j\left(r_i \delta_{ik} + r_j \delta_{jk} - (\delta_{ik}r_j + r_i \delta_{jk})\cos{(\theta_j-\theta_i)}\right)}{r_{ij}^3} &= \sum_{i=1}^{n-1}\sum_{j>i}^{n-1} \dfrac{Gm_i m_j\left[\delta_{ik}(r_i - r_j \cos{(\theta_j-\theta_i)} )+ \delta_{jk}(r_j -r_i \cos{(\theta_j-\theta_i)})\right]}{r_{ij}^3}.
+\dfrac{\partial L}{\partial r_k} &= \sum_{i=1}^{n-1} \left(\dfrac{m_i (2r_i\delta_{ik} \dot{\theta}_i^2)}{2} - \dfrac{GMm_i\delta_{ik}}{r_i^2} - \sum_{j>i}^{n-1} \dfrac{Gm_i m_j\left(\delta_{ik}(r_i - r_j\cos{(\theta_j-\theta_i)}) +  \delta_{jk}(r_j -r_i \cos{(\theta_j-\theta_i)})\right)}{r_{ij}^3}\right)\\
+&= \sum_{i=1}^{n-1} \left(m_i \delta_{ik} \left[r_i \dot{\theta}_i^2 - \dfrac{GM}{r_i^2}\right] - \sum_{j>i}^{n-1} \dfrac{Gm_i m_j\left(\delta_{ik}(r_i - r_j\cos{(\theta_j-\theta_i)}) +  \delta_{jk}(r_j -r_i \cos{(\theta_j-\theta_i)})\right)}{r_{ij}^3}\right)\\
+&= m_k r_k \dot{\theta}_k^2 - \dfrac{GMm_k}{r_k^2} - \sum_{i=1}^{n-1}\sum_{j>i}^{n-1} \dfrac{Gm_i m_j\left(\delta_{ik}(r_i - r_j\cos{(\theta_j-\theta_i)}) +  \delta_{jk}(r_j -r_i \cos{(\theta_j-\theta_i)})\right)}{r_{ij}^3}.
 \end{align*}
 The $\delta_{ik}$ imposes that $i=k$. Since $j>i$ we get $j=k+1, k+2, k+3, ...,  n-1$. So we are left only with the $j$ sum for terms multiplied by $\delta_{ik}$. As for $\delta_{jk}$, it imposes that $j=k$ which then requires, given $j>i$, that $i=1,2,3,...,k-1$. 
 \begin{align*}
@@ -126,26 +127,26 @@ Moving the first term on the left-hand side to the right-hand side yields:
 \ddot{\theta}_k &= -\dfrac{2\dot{r}_k\dot{\theta}_k}{r_k} + \sum_{\substack{i=1\\i\neq k}}^{n-1} \dfrac{Gm_i r_i \sin{(\theta_i-\theta_k)}}{r_k r_{ik}^3}.
 \end{align*}
 
-An important verification of our working is that if $n=3$, do we get the same equations as we obtained in [gravitational three-body problem](#gravitational_three-body_problem). If $n=3$, we get for $\ddot{r}_1$:
+An important verification of our working is that if $n=3$, we should get the same equations as we obtained in [gravitational three-body problem](#gravitational_three-body_problem). If $n=3$, we get for $\ddot{r}_1$:
 
 \begin{align*}
 \ddot{r}_1 &= r_1\dot{\theta}_1^2 - \dfrac{GM}{r_1^2} - \dfrac{Gm_2(r_1 - r_2\cos{(\theta_1-\theta_2)})}{r_{12}^3} \\
 &= r_1\dot{\theta}_1^2 - \dfrac{GM}{r_1^2} - \dfrac{Gm_2(r_1 - r_2\cos{(\theta_2-\theta_1)})}{r_{12}^3}.
 \end{align*}
-This matches our equation for $\ddot{r}_1$ for the three-body problem. As for $\ddot{r}_2$:
+This matches Equation \eqref{d2r1}. As for $\ddot{r}_2$:
 \begin{align*}
 \ddot{r}_2 &= r_2\dot{\theta}_2^2 - \dfrac{GM}{r_2^2} - \dfrac{Gm_2(r_2 - r_1\cos{(\theta_2-\theta_1)})}{r_{12}^3}.
 \end{align*}
-Which also matches our three-body system equation for $\ddot{r}_2$. As for $\ddot{\theta}_1$:
+Which matches Equation \eqref{d2r2}. As for $\ddot{\theta}_1$:
 \begin{align*}
 \ddot{\theta}_1 &= -\dfrac{2\dot{r}_1\dot{\theta}_1}{r_1} + \dfrac{Gm_2r_2 \sin{(\theta_2-\theta_1)}}{r_1 r_{12}^3}.
 \end{align*}
-Which also matches our three-body system equation for $\ddot{\theta}_1$. As for $\ddot{\theta}_2$:
+Which matches Equation \eqref{d2theta1}. As for $\ddot{\theta}_2$:
 \begin{align*}
 \ddot{\theta}_2 &= -\dfrac{2\dot{r}_2\dot{\theta}_2}{r_2} + \dfrac{Gm_1r_1 \sin{(\theta_1-\theta_2)}}{r_2 r_{12}^3} \\
 &= -\dfrac{2\dot{r}_2\dot{\theta}_2}{r_2} - \dfrac{Gm_1r_1 \sin{(\theta_2-\theta_1)}}{r_2 r_{12}^3}.
 \end{align*}
-Which also matches our three-body system equation for $\ddot{\theta}_2$.
+Which matches Equation \eqref{d2theta2}. Hence our $n$-body problem equations match our three-body problem equations when $n=3$. 
 
 \codelisting{nbody}{N-body problem simulation code.}
 ```julia:./code/nbody

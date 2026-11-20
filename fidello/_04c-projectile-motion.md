@@ -5,8 +5,8 @@ H &= \dfrac{m}{2}(\dot{x}^2+\dot{y}^2) + mgy.
 \end{align*}
 As for our canonical momentum:
 \begin{align*}
-p_x &= m\dot{x} \hspace{0.2cm}\implies \dot{x} = \dfrac{p_x}{m}\\
-p_y &= m\dot{y} \hspace{0.2cm}\implies \dot{y} = \dfrac{p_y}{m}.
+p_x &= m\dot{x} \hspace{0.2cm}\implies \dot{x} &&= \dfrac{p_x}{m}\\
+p_y &= m\dot{y} \hspace{0.2cm}\implies \dot{y} &&= \dfrac{p_y}{m}.
 \end{align*}
 Hence our Hamiltonian can be rewritten as:
 \begin{align*}
@@ -33,19 +33,22 @@ Q_y &= -\dfrac{\rho C_D A\sqrt{\dot{x}^2+\dot{y}^2}}{2} (\dot{x}, \dot{y}) \cdot
 &= -\dfrac{\rho C_D A\dfrac{p_y}{m}\sqrt{\dfrac{p_x^2}{m^2}+\dfrac{p_y^2}{m^2}}}{2}\\
 &= -\dfrac{\rho C_D A p_y\sqrt{p_x^2+p_y^2}}{2m^2}.
 \end{align*}
-Hence our equations of motion are:
+Our equations of motion are:
 \begin{align*}
 \dot{x} &= \dfrac{\partial H}{\partial p_x} \\
-&= \dfrac{p_x}{m} \\
 \dot{y} &= \dfrac{\partial H}{\partial p_y} \\
-&= \dfrac{p_y}{m} \\
 \dot{p}_x &= -\dfrac{\partial H}{\partial x} + Q_x \\
-&= -\dfrac{\rho C_D A p_x\sqrt{p_x^2+p_y^2}}{2m^2}\\
-\dot{p}_y &= -\dfrac{\partial H}{\partial y} + Q_y \\
-&= -mg -\dfrac{\rho C_D A p_y\sqrt{p_x^2+p_y^2}}{2m^2}.
+\dot{p}_y &= -\dfrac{\partial H}{\partial y} + Q_y.
 \end{align*}
+Hence for projectile motion they become:
+\begin{align}
+\dot{x} &= \dfrac{p_x}{m} \label{dxpm}\\
+\dot{y} &= \dfrac{p_y}{m} \label{dypm}\\
+\dot{p}_x &= -\dfrac{\rho C_D A p_x\sqrt{p_x^2+p_y^2}}{2m^2} \label{dpxpm}\\
+\dot{p}_y &= -mg -\dfrac{\rho C_D A p_y\sqrt{p_x^2+p_y^2}}{2m^2}.\label{dpypm}
+\end{align}
 
-Below is Julia code for implementing an animation based on the above system of ordinary differential equations. 
+\coderef{projmotion} is Julia code for implementing an animation based on Equations \eqref{dxpm}, \eqref{dypm}, \eqref{dpxpm} and \eqref{dpypm}.
 
 \codelisting{projmotion}{Projectile motion simulation code.}
 ```julia:./code/projmotion
