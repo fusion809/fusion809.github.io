@@ -79,7 +79,7 @@ As for $\dfrac{\partial L}{\partial q_k}$:
 \end{align*}
 The $\delta_{ik}$ imposes that $i=k$. Since $j>i$ we get $j=k+1, k+2, k+3, ...,  n-1$. So we are left only with the $j$ sum for terms multiplied by $\delta_{ik}$. As for $\delta_{jk}$, it imposes that $j=k$ which then requires, given $j>i$, that $i=1,2,3,...,k-1$. 
 \begin{align*}
-\sum_{i=1}^{n-1}\sum_{j>i}^{n-1} \dfrac{Gm_i m_j\left[\delta_{ik}(r_i - r_j \cos{(\theta_j-\theta_i)} )+ \delta_{jk}(r_j -r_i \cos{(\theta_j-\theta_i)})\right]}{r_{ij}^3} &= \sum_{j=k+1}^{n-1} \dfrac{Gm_{k}m_j (r_k-r_j\cos{(\theta_j-\theta_k)})}{r_{kj}^3} + \sum_{i=1}^{k-1} \dfrac{Gm_{i}m_k (r_k-r_i\cos{(\theta_k-\theta_i)})}{r_{ik}^3}.
+\sum_{i=1}^{n-1}\sum_{j>i}^{n-1} \dfrac{Gm_i m_j\left[\delta_{ik}(r_i - r_j \cos{(\theta_j-\theta_i)} )+ \delta_{jk}(r_j -r_i \cos{(\theta_j-\theta_i)})\right]}{r_{ij}^3} &= \sum_{j=k+1}^{n-1} \dfrac{Gm_{k}m_j (r_k-r_j\cos{(\theta_j-\theta_k)})}{r_{kj}^3} + \\ &\sum_{i=1}^{k-1} \dfrac{Gm_{i}m_k (r_k-r_i\cos{(\theta_k-\theta_i)})}{r_{ik}^3}.
 \end{align*}
 We can combine these sums into one, as $r_{ij}=r_{ji}$ and $\cos{(\theta_j-\theta_i)}=\cos{(\theta_i-\theta_j)}$:
 \begin{align*}

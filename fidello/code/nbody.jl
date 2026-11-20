@@ -281,7 +281,7 @@ anim = @animate for frame in eachindex(solut.t)
         aspect_ratio=:equal,
         xlabel=L"x",
         ylabel=L"y",
-        title="N-body system — t = $(@sprintf("%.2f", solut.t[frame]))",
+        title="$N-body system — t = $(@sprintf("%.2f", solut.t[frame]))",
         guidefontsize=guidefontsize,
         tickfontsize=tickfontsize,
         titlefontsize=titlefontsize,
