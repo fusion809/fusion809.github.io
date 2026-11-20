@@ -16,12 +16,12 @@ To find the generalized force term, we need to find $\dfrac{\partial \textbf{r}}
     &= (-l\sin{\theta}, l\cos{\theta}).
 \end{align*}
 Hence:
-\begin{align*}
-    Q_{\theta} &= \textbf{F}_D \cdot \dfrac{\partial \textbf{r}}{\partial \theta} \\
-    &= \dfrac{\rho C_D Al^2|\dot{\theta}|\dot{\theta}}{2} (\sin{\theta}, -\cos{\theta}) \cdot (-l\sin{\theta}, l\cos{\theta}) \\
-    &= \dfrac{\rho C_D Al^2|\dot{\theta}|\dot{\theta}}{2}(-l\sin^2{\theta}-l\cos^2{\theta}) \\
-    &= -\dfrac{\rho C_D Al^3|\dot{\theta}|\dot{\theta}}{2}.
-\end{align*}
+\begin{align}
+    Q_{\theta} &= \textbf{F}_D \cdot \dfrac{\partial \textbf{r}}{\partial \theta} \nonumber \\
+    &= \dfrac{\rho C_D Al^2|\dot{\theta}|\dot{\theta}}{2} (\sin{\theta}, -\cos{\theta}) \cdot (-l\sin{\theta}, l\cos{\theta}) \nonumber \\
+    &= \dfrac{\rho C_D Al^2|\dot{\theta}|\dot{\theta}}{2}(-l\sin^2{\theta}-l\cos^2{\theta}) \nonumber \\
+    &= -\dfrac{\rho C_D Al^3|\dot{\theta}|\dot{\theta}}{2}. \label{Qtheta}
+\end{align}
 Hence Equations \eqref{ELENCF} become:
 \begin{align*}
     ml^2 \ddot{\theta} + mgl\cos{\theta} &= -\dfrac{\rho C_D Al^3|\dot{\theta}|\dot{\theta}}{2}.

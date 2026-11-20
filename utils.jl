@@ -1084,6 +1084,36 @@ Core.eval(Franklin, quote
         return convert_block_default(β, lxdefs)
     end
 
+    # `convert_inter_html` is precompiled by Franklin and can retain its
+    # original `convert_block` call after the site's converter is installed.
+    # Override the insertion loop and use latest-world dispatch so included
+    # Julia source blocks reach the site converter before Franklin evaluates
+    # their literal `\\juliacode{...}` contents.
+    function convert_inter_html(ihtml::AS,
+                                blocks::Vector{<:AbstractBlock},
+                                lxdefs::Vector{LxDef})::String
+        allmatches = collect(eachmatch(INSERT_PAT, ihtml))
+        isempty(allmatches) && return ihtml
+
+        strlen = lastindex(ihtml)
+        htmls = IOBuffer()
+        head = 1
+        for (i, m) in enumerate(allmatches)
+            leftp = !isnothing(m.captures[1])
+            lefts = length(m.captures[2]) > 1 ? " " : ""
+            rightp = !isnothing(m.captures[3])
+            prev = prevind(ihtml, m.offset)
+            write(htmls, subs(ihtml, head:prev))
+            leftp && !rightp && write(htmls, "<p>")
+            write(htmls, lefts)
+            write(htmls, Base.invokelatest(convert_block, blocks[i], lxdefs))
+            rightp && !leftp && write(htmls, "</p>")
+            head = nextind(ihtml, m.offset, length(m.match))
+        end
+        head <= strlen && write(htmls, subs(ihtml, head:strlen))
+        return String(take!(htmls))
+    end
+
     # ==============================================================================
     # Included Markdown dependency tracking and automatic rebuilding
     # ==============================================================================
