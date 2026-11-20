@@ -160,7 +160,7 @@ As for $G$ and the masses, they are the same as for the three-body problem simul
 \begin{align*}
 m_3 &= 0.01.
 \end{align*}
-As for the initial angles they are the same as for the three-body problem simulation, except:
+This relatively small $m_3$ was chosen to represent potentially a planet in this system whereas the other masses are potentially stars. Why did I choose this? Because this system reminds me of the Netflix series *3 Body Problem*. As for the initial angles they are the same as for the three-body problem simulation, except:
 \begin{align*}
 \theta_3(t_0) &= \dfrac{\pi}{3} + 0.06.
 \end{align*}

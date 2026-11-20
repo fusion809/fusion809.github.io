@@ -93,7 +93,7 @@ y_{n+1} &= y_n + \dfrac{25k_1}{216} + \dfrac{1408k_3}{2565} + \dfrac{2197k_4}{41
 \mathrm{TE} &= |y_{n+1} - z_{n+1}| \\
 s &= \left(\dfrac{\epsilon}{2\mathrm{TE}}\right)^{1/5}.
 \end{align*}
-Here $\epsilon$ is the maximum absolute error in our approximation we are willing to accept. $\mathrm{TE}$ is our approximation of the truncation error as our estimate for $y(x_0+h)$ is fourth-order and $z$ is the fifth-order estimate. If $\mathrm{TE} \geq \epsilon$, then we rescale $h$ using $h=h\cdot s$ and repeat the approximation again. If not, then we accept our approximation to the next $y$ value and rescale $h$ using $h=h\cdot s$. This method is very efficient and is the numerical technique I use for integrating ordinary differential equations in all of my JavaScript-based ordinary differential equations solver webpages. 
+Here $\epsilon$ is the maximum absolute error in our approximation we are willing to accept. $\mathrm{TE}$ is our approximation of the truncation error as our estimate for $y_{n+1}$ is fourth-order and $z_{n+1}$ is the fifth-order estimate. If $\mathrm{TE} \geq \epsilon$, then we rescale $h$ using $h=h\cdot s$ and repeat the approximation again. If not, then we accept our approximation to the next $y$ value and rescale $h$ using $h=h\cdot s$. This method is very efficient and is the numerical technique I use for integrating ordinary differential equations in all of my JavaScript-based ordinary differential equations solver webpages. 
 
 \codelisting{RKF45}{Runge-Kutta-Fehlberg fourth/fifth-order method solution to $y'=y, y(0)=1$.}
 ```julia:./code/RKF45
