@@ -1,7 +1,7 @@
 # This file was generated, do not modify it. # hide
 using DifferentialEquations, LaTeXStrings
 using Plots
-
+ENV["GKSwstype"] = "100"
 # ------------------------------------------------------------
 # Parameters
 # ------------------------------------------------------------

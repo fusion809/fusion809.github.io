@@ -15,7 +15,9 @@
     markers.forEach(function (marker) {
       var pre = nextPre(marker);
       if (!pre) return;
-      var caption = marker.textContent || "";
+      var captionNodes = Array.prototype.map.call(marker.childNodes, function (node) {
+        return node.cloneNode(true);
+      });
       var label = marker.getAttribute("data-label") || "";
       var listingElement = document.createElement("div");
       listingElement.className = "code-listing";
@@ -40,14 +42,26 @@
       listingElement.appendChild(pre);
       var listingCaption = document.createElement("div");
       listingCaption.className = "code-listing-caption";
-      listings.push({ element: listingElement, caption: listingCaption, text: caption, label: label });
+      listings.push({ element: listingElement, caption: listingCaption, nodes: captionNodes, label: label });
       listingElement.appendChild(listingCaption);
       marker.remove();
     });
 
     listings.forEach(function (listing, index) {
       var number = index + 1;
-      listing.caption.textContent = "Code Listing " + number + ": " + listing.text;
+      listing.caption.appendChild(document.createTextNode("Code Listing " + number + ": "));
+      listing.nodes.forEach(function (node) { listing.caption.appendChild(node); });
+      if (typeof renderMathInElement === "function") {
+        renderMathInElement(listing.caption, {
+          throwOnError: false,
+          delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "$", right: "$", display: false },
+            { left: "\\(", right: "\\)", display: false },
+            { left: "\\[", right: "\\]", display: true }
+          ]
+        });
+      }
       if (listing.label) listing.element.id = listing.label;
       document.querySelectorAll(".code-listing-ref").forEach(function (ref) {
         if (ref.getAttribute("data-label") === listing.label) {
