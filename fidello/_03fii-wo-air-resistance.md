@@ -93,9 +93,9 @@ $C_3$ is a constant, so double differentiating it will remove it. Hence we know 
 \begin{align*}
 -\dfrac{g}{l}C_3 - \dfrac{g\pi}{2l} &= 0
 \end{align*}
-to ensure that the left-hand side and right-hand sides of Equation \eqref{simppenlin} match. Multiplying $-\dfrac{l}{g}$ yields:
+to ensure that the left-hand side and right-hand sides of Equation \eqref{simppenlin} match. Multiplying by $-\dfrac{l}{g}$ yields:
 \begin{align*}
-C_3 + \dfrac{\pi}{2} &= 0
+C_3 + \dfrac{\pi}{2} &= 0.
 \end{align*}
 Subtracting $\dfrac{\pi}{2}$ yields:
 \begin{align*}
