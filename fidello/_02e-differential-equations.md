@@ -9,12 +9,15 @@ Our aim would be to determine what $y$ is.
 
 I also showed you this equation to clarify some of the terminology we use with regards to differential equations. So why is this equation *linear*? Well, it is because there is no term that is nonlinear in $y$ or its derivative(s). For instance, if the equation was $y'=y^2$, that would make it nonlinear because the right-hand side is nonlinear in $y$. Why is it an *ordinary* differential equation? Because there are only ordinary derivatives, not partial derivatives. Why is it *homogeneous*? Because there are no terms that do not involve $y$ or its derivative(s). Why is it first-order? Because the highest order derivative in the equation is the first derivative. 
 
-In this example, there would be a few ways we could solve this differential equation. As luckily each of the adjectives we used to describe it, implies it should be easy to solve. One option is we could divide both sides by $y$ and integrate on $x$:
+In this example, there would be a few ways we could solve this differential equation. As luckily each of the adjectives we used to describe it implies it should be easy to solve. One option is we could divide both sides by $y$ and integrate on $x$:
 \begin{align*}
 \int \dfrac{\dfrac{dy}{dx}}{y} dx &= \int dx \\
 \int \dfrac{dy}{y} &= \int dx \\
-\ln{y} &= x + C \\
-\therefore y &= e^{x+C}.
+\ln{y} &= x + C
+\end{align*}
+Exponentiating both sides yields:
+\begin{align*}
+y &= e^{x+C}.
 \end{align*}
 Note that we have one unknown constant, $C$. This is actually a result of our equation being a first-order ordinary differential equation. $n$th-order ordinary differential equations give us $n$ unknown constants and we need to use any initial conditions or other conditions we are given to solve for them. For instance, if $y(0)=1$, then we can substitute this into our solution to find $C$.
 \begin{align*}
@@ -43,6 +46,6 @@ y(2h) &\approx y(h) + hy'(h) \\
 &\approx (1+h) + h(1+h) \\
 &= 1 + 2h + h^2.
 \end{align*}
-And continue on from there. This method, where we truncate the Taylor series at the first two terms and numerically approximate our solution by applying this approximation at each step is called Euler's method. As we ignore so many terms in the Taylor series, this method is said to be rather inaccurate. Specifically, we call it a first-order method. 
+And continue on from there. This method, where we truncate the Taylor series at the first two terms and numerically approximate our solution by applying this approximation at each step, is called Euler's method. As we ignore so many terms in the Taylor series, this method is said to be rather inaccurate. Specifically, we call it a first-order method. 
 
-Other schemes for numerical integration of ordinary differential equations also exist. Among the most popular are the Runge-Kutta family of methods, such as the Runge-Kutta fourth-order method. These methods also derive, ultimately, from the Taylor series expansion of our function but they are derived from it in more convoluted ways.
+Other schemes for numerical integration of ordinary differential equations also exist. Among the most popular are the Runge-Kutta family of methods, such as the Runge-Kutta fourth-order method. These methods do not utilize higher-order derivatives, but they use clever tricks for approximating the solution to higher-order accuracy using only first-order derivatives.
