@@ -55,7 +55,7 @@ while x[end] < b
     err = abs(y5-y4);
 
     # Accept or reject the step
-    if err <= atol
+    if err < atol
         push!(x, xi+hs)
         push!(yRKF45, y5)
         push!(error, err)
