@@ -24,8 +24,10 @@
 \includemd{fidello/_03h-three-body-problem.md}
 \includemd{fidello/_03i-n-body-problem.md}
 \includemd{fidello/_04a-hamiltonian-mechanics.md}
-\includemd{fidello/_04b-simple-pendulum.md} 
-\includemd{fidello/_04c-projectile-motion.md}
+\includemd{fidello/_04b-examples.md}
+\includemd{fidello/_04bi-simple-pendulum.md} 
+\includemd{fidello/_04bii-dampened-pendulum.md}
+\includemd{fidello/_04biii-projectile-motion.md}
 \includemd{fidello/_05-poisson-bracket.md}
 \includemd{fidello/_06-noethers-theorem.md}
 \includemd{fidello/_07a-hamilton-jacobi.md}

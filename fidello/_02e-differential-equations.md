@@ -1,13 +1,13 @@
 ## Differential equations
 As this article involves a lot of differential equations, I thought I should cover a little on how we categorize and solve differential equations. 
 
-Differential equations are equations that involve the derivatives of a function and typically the aim in solving them is to determine the original function they pertain to. For instance, say you had the linear, homogeneous, first-order ordinary differential equation:
+Differential equations are equations that involve the derivatives of a function and typically the aim in solving them is to determine the original function they pertain to. For instance, say you had the uncoupled, linear, homogeneous, first-order ordinary differential equation:
 \begin{align*}
 y' &= y.
 \end{align*}
 Our aim would be to determine what $y$ is. 
 
-I also showed you this equation to clarify some of the terminology we use with regards to differential equations. So why is this equation *linear*? Well, it is because there is no term that is nonlinear in $y$ or its derivative(s). For instance, if the equation was $y'=y^2$, that would make it nonlinear because the right-hand side is nonlinear in $y$. Why is it an *ordinary* differential equation? Because there are only ordinary derivatives, not partial derivatives. Why is it *homogeneous*? Because there are no terms that do not involve $y$ or its derivative(s). Why is it first-order? Because the highest order derivative in the equation is the first derivative. 
+I also showed you this equation to clarify some of the terminology we use with regards to differential equations. So why is this equation *uncoupled*? Because it is a single equation and not a series of differential equations we need to solve simultaneously. Why is this equation *linear*? Well, it is because there is no term that is nonlinear in $y$ or its derivative(s). For instance, if the equation was $y'=y^2$, that would make it nonlinear because the right-hand side is nonlinear in $y$. Why is it an *ordinary* differential equation (ODE)? Because there are only ordinary derivatives, not partial derivatives. Why is it *homogeneous*? Because there are no terms that do not involve $y$ or its derivative(s). Why is it *first order*? Because the highest order derivative in the equation is the first derivative. 
 
 In this example, there would be a few ways we could solve this differential equation. As luckily each of the adjectives we used to describe it implies it should be easy to solve. One option is we could divide both sides by $y$ and integrate on $x$:
 \begin{align*}
@@ -79,7 +79,7 @@ In Code Listing \coderef{differential}, I have implemented both Euler's method a
 
 \output{./code/differential}
 
-An arguably better method for numerically solving ordinary differential equations is the Runge-Kutta-Fehlberg fourth/fifth-order method, as it adapts our step size $h$ to ensure that the error in our solution never exceeds a certain threshold. In this method, we use:
+An arguably better method for numerically solving ordinary differential equations is the Runge-Kutta-Fehlberg fourth/fifth-order method (RKF45), as it adapts our step size $h$ to ensure that the error in our solution never exceeds a certain threshold. In this method, we use:
 
 \begin{align*}
 k_1 &= hf(x_n, y_n) \\
@@ -105,3 +105,40 @@ Here $\epsilon$ is the maximum absolute error in our approximation we are willin
 As you can see RKF45 achieved more accuracy than both Euler's method and the Runge-Kutta fourth-order method, while using an, on average, larger step size. Also notice how we set the error tolerance of $10^{-5}$ and none of our errors exceeded this threshold. Its main drawback is that because it is an adaptive method, the number of steps is unknown until you actually compute the solution and this can make implementation in code a little more challenging. As instead of dealing with vectors or arrays (containing your solution) of a set, predictable size, you will need to append new entries to the end of your solution vector/array at each step.
 
 Further, the adaptive stepsize means that if you were hoping for an evenly spaced set of $x$ values, you may be disappointed by this method. That being said, it is straight forward to fix this issue as you can use interpolation to find the $y$ values on an evenly spaced $x$ grid. 
+
+An interesting feature of higher-order ODEs is that we can rewrite them as a coupled system of first-order ODEs. Say, for instance, have the second-order ODE:
+
+\begin{align*}
+y'' = -y.
+\end{align*}
+Cosine and sine functions both satisfy this equation. The solution would be:
+\begin{align*}
+y &= C_1 \cos{x} + C_2 \sin{x}.
+\end{align*}
+So we would need two conditions to uniquely determine $y$. We could rewrite our second-order ODE as the system:
+\begin{align*}
+u &= y' \\
+u' &= -y.
+\end{align*}
+How would we numerically integrate this system? We could apply RKF45 to determine $y_{n+1}$ (where $y_0$ and $y'_0$ will be our initial conditions) using this scheme:
+\begin{align*}
+k_1 &= hy'_0
+l_1 &= -hy_0 \\
+k_2 &= h\left(y'_0+\dfrac{l_1}{4}\right) \\
+l_2 &= -h\left(y_0+\dfrac{k_1}{4}\right) \\
+k_3 &= h\left(y'_0+\dfrac{3l_1}{32}+\dfrac{9l_2}{32}\right) \\
+l_3 &= -h\left(y_0+\dfrac{3k_1}{32}+\dfrac{9k_2}{32}\right) \\
+k_4 &= h\left(y'_0+\dfrac{1932l_1}{2197}-\dfrac{7200l_2}{2197}+\dfrac{7296l_3}{2197}\right) \\
+l_4 &= -h\left(y_0+\dfrac{1932k_1}{2197}-\dfrac{7200k_2}{2197}+\dfrac{7296k_3}{2197}\right) \\
+k_5 &= h\left(y'_0+\dfrac{439l_1}{216}-8l_2+\dfrac{3680l_3}{513}-\dfrac{845l_4}{4104}\right) \\
+l_5 &= -h\left(y_0+\dfrac{439k_1}{216}-8k_2+\dfrac{3680k_3}{513}-\dfrac{845k_4}{4104}\right) \\
+k_6 &= h\left(y'_0-\dfrac{8l_1}{27}+2l_2-\dfrac{3544l_3}{2565}+\dfrac{1859l_4}{4104}-\dfrac{11l_5}{40}\right) \\
+l_6 &= -h\left(y_0-\dfrac{8k_1}{27}+2k_2-\dfrac{3544k_3}{2565}+\dfrac{1859k_4}{4104}-\dfrac{11k_5}{40}\right) \\
+u_{4,n+1} &= u_{n} + \dfrac{25l_1}{216} + \dfrac{1408l_3}{2565} + \dfrac{2197l_4}{4104} - \dfrac{l_5}{5}\\
+u_{5,n+1} &= u_{n} + \dfrac{16l_1}{135} + \dfrac{6656l_3}{12825} + \dfrac{28561l_4}{56430} - \dfrac{9l_5}{50} + \dfrac{2l_6}{55}\\
+y_{4,n+1} &= y_{n} + \dfrac{25k_1}{216} + \dfrac{1408k_3}{2565} + \dfrac{2197k_4}{4104} - \dfrac{k_5}{5}\\
+y_{5,n+1} &= y_{n} + \dfrac{16k_1}{135} + \dfrac{6656k_3}{12825} + \dfrac{28561k_4}{56430} - \dfrac{9k_5}{50} + \dfrac{2k_6}{55}\\
+\mathrm{TE} &= \max_{f \in \{u, y\}} \Big|f_{5,n+1}-f_{4,n+1}\Big|\\
+s &= \dfrac{\epsilon}{2\mathrm{TE}}^{1/5}.
+\end{align*}
+I should clarify that we are maximizing over the error estimates in our two functions $u$ and $y$ to calculate $\mathrm{TE}$. So whichever error estimate is bigger out of those for $u$ and $y$, we choose for $\mathrm{TE}$. If $\mathrm{TE} < \epsilon$, we continue onto the next step with our new $y_n$ being the old $y_{5,n+1}$ and the new $u_n$ being the old $u_{5,n+1}$ and obtain our new $h$ by multiplying it by $s$. If $TE \geq \epsilon$, we multiply $h$ by $s$ and repeat the above calculations again.
