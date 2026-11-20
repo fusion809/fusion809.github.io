@@ -102,6 +102,6 @@ Here $\epsilon$ is the maximum absolute error in our approximation we are willin
 
 \output{./code/RKF45}
 
-As you can see RKF45 achieved more accuracy than both Euler's method and the Runge-Kutta fourth-order method, while using an, on average, larger step size. Its main drawback is that because it is an adaptive method, the number of steps is unknown until you actually compute the solution and this can make implementation in code a little more challenging. As instead of dealing with vectors or arrays (containing your solution) of a set, predictable size, you will need to append new entries to the end of your solution vector/array. 
+As you can see RKF45 achieved more accuracy than both Euler's method and the Runge-Kutta fourth-order method, while using an, on average, larger step size. Also notice how we set the error tolerance of $10^{-5}$ and none of our errors exceeded this threshold. Its main drawback is that because it is an adaptive method, the number of steps is unknown until you actually compute the solution and this can make implementation in code a little more challenging. As instead of dealing with vectors or arrays (containing your solution) of a set, predictable size, you will need to append new entries to the end of your solution vector/array at each step.
 
 Further, the adaptive stepsize means that if you were hoping for an evenly spaced set of $x$ values, you may be disappointed by this method. That being said, it is straight forward to fix this issue as you can use interpolation to find the $y$ values on an evenly spaced $x$ grid. 
