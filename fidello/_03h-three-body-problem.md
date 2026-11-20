@@ -119,7 +119,29 @@ Dividing both sides by $m_2r_2^2$:
 Equations \eqref{d2r1}, \eqref{d2r2}, \eqref{d2theta1} and \eqref{d2theta2} cannot be analytically solved, unlike the equations we obtained for the two-body problem. Consequently, we are forced to resort to numerical methods to solve this system. 
 
 #### Simulation
-Code Listing \coderef{threebody} is Julia code to numerically solve the system for a made-up example of the three-body problem. It produces the animation in Figure \figref{threebodyan}. 
+Code Listing \coderef{threebody} is Julia code to numerically solve the system for a made-up example of the three-body problem. We assume each of the orbits start out elliptical and $a$ is their semi-major axis and $e$ is their eccentricity. These parts of the initial conditions are:
+\begin{align*}
+a_1 &= 5,\hspace{0.2cm} a_2 &&= 5\\
+e_1 &= 0.15,\hspace{0.2cm} e_2 &&= 0.10.
+\end{align*}
+We will start the simulation with each of the moving masses at their periapsis. Which is when they are at their closest point to the central mass. From this, we get the following initial conditions:
+\begin{align}
+r_i(t_0) &= a_i(1-e_i) \label{rit0}\\
+\dot{r}_i(t_0) &= 0 \label{drit0}\\
+v_i(t_0) &= \sqrt{\dfrac{GM(1+e_i)}{r_i(t_0)}} \label{vit0}\\
+\dot{\theta}_i(t_0) &= \dfrac{v_i(t_0)}{r_i(t_0)}.\label{thetait0}
+\end{align}
+As for $G$ and the masses:
+\begin{align*}
+G &= 1, \hspace{0.2cm} M &&= 3, \hspace{0.2cm} m_1 &&&= 1.5, \\
+m_2 &= 2.0.
+\end{align*}
+As for the initial angles they are, in units of radians:
+\begin{align*}
+\theta_1(t_0) &= 0, \hspace{0.2cm} \theta_2(t_0) &&= \pi - 0.15.
+\end{align*}
+
+It produces the animation in Figure \figref{threebodyan}. 
 
 \codelisting{threebody}{Three-body problem simulation code.}
 ```julia:./code/threebody

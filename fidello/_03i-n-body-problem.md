@@ -155,19 +155,14 @@ Code Listing \coderef{nbody} produces the animation in Figure \figref{nbodyan}. 
 a_1 &= 5,\hspace{0.2cm} a_2 &&= 5, \hspace{0.2cm} a_3 &&&= 10 \\
 e_1 &= 0.20,\hspace{0.2cm} e_2 &&= 0.05, \hspace{0.2cm} e_3 &&&= 0.01.
 \end{align*}
-We will each of the moving masses are at their periapsis, which is when they are at their closest point to the central mass. From this, we get the following initial conditions:
+We will start each of the moving masses at their periapsis. From this, we get the initial conditions Equations \eqref{rit0}, \eqref{drit0}, \eqref{vit0}, and \eqref{thetait0}.
+As for $G$ and the masses, they are the same as for the three-body problem simulation, except:
 \begin{align*}
-r_i(t_0) &= a_i(1-e_i), \hspace{0.2cm}\dot{r}_i(t_0) &&= 0, v_i(t_0) &&&= \sqrt{\dfrac{GM(1+e_i)}{r_i(t_0)}} \\
-\dot{\theta}_i(t_0) &= \dfrac{v_i(t_0)}{r_i(t_0)}.
+m_3 &= 0.01.
 \end{align*}
-As for $G$ and the masses:
+As for the initial angles they are the same as for the three-body problem simulation, except:
 \begin{align*}
-G &= 1, \hspace{0.2cm} M &&= 3, \hspace{0.2cm} m_1 &&&= 1.5, \\
-m_2 &= 2.0, \hspace{0.2cm} m_3 &&= 0.01.
-\end{align*}
-As for the initial angles they are, in units of radians:
-\begin{align*}
-\theta_1(t_0) &= 0, \hspace{0.2cm} \theta_2(t_0) &&= \pi - 0.15, \hspace{0.2cm} \theta_3(t_0) &&&= \dfrac{\pi}{3} + 0.06.
+\theta_3(t_0) &= \dfrac{\pi}{3} + 0.06.
 \end{align*}
 The lack of most units is deliberate, as we are not analysing a real system. The numbers were chosen just to make the system's behaviour interesting. 
 
