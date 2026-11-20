@@ -30,7 +30,8 @@ Hence:
 y &= e^x.
 \end{align*}
 
-In this article, however, we will encounter that have no exact solutions and for which numerical solutions are necessary. Numerical solutions are actually quite interesting, because they typically involve applications of the Taylor series that we just covered. For instance, say we wanted to numerically integrate the differential equation $y'=y$ with initial condition $y(0)=1$. Then if we wanted to approximate $y(h)$ for some small $h$, we could use the Maclaurin series of $y$:
+### Numerical solution techniques
+In this article, however, we will encounter differential equations that have no exact solutions and for which numerical solutions are necessary. Numerical solutions are actually quite interesting, because they typically involve applications of the Taylor series that we have covered. For instance, say we wanted to numerically integrate the differential equation $y'=y$ with initial condition $y(0)=1$. Then if we wanted to approximate $y(h)$ for some small $h$, we could use the Maclaurin series of $y$:
 \begin{align*}
 y(h) &= y(0) + hy'(0) + \dfrac{h^2}{2}y''(0) + \dfrac{h^3}{6}y'''(0) + ... \\
 \end{align*}
