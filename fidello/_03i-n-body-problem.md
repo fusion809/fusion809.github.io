@@ -136,7 +136,7 @@ An important verification of our working is that if $n=3$, we should get the sam
 \end{align*}
 This matches Equation \eqref{d2r1}. As for $\ddot{r}_2$:
 \begin{align*}
-\ddot{r}_2 &= r_2\dot{\theta}_2^2 - \dfrac{GM}{r_2^2} - \dfrac{Gm_2(r_2 - r_1\cos{(\theta_2-\theta_1)})}{r_{12}^3}.
+\ddot{r}_2 &= r_2\dot{\theta}_2^2 - \dfrac{GM}{r_2^2} - \dfrac{Gm_1(r_2 - r_1\cos{(\theta_2-\theta_1)})}{r_{12}^3}.
 \end{align*}
 Which matches Equation \eqref{d2r2}. As for $\ddot{\theta}_1$:
 \begin{align*}
