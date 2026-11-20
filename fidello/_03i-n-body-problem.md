@@ -94,9 +94,9 @@ Hence the $r_k$ equation of motion is:
 m_k\ddot{r}_k &= m_k r_k \dot{\theta}_k^2 - \dfrac{GMm_k}{r_k^2} - \sum_{\substack{i=1 \\ i\neq k}}^{n-1} \dfrac{Gm_{i}m_k (r_k-r_i\cos{(\theta_k-\theta_i)})}{r_{ik}^3}.
 \end{align*}
 Dividing by $m_k$ yields:
-\begin{align*}
-\ddot{r}_k &= r_k \dot{\theta}_k^2 - \dfrac{GM}{r_k^2} - \sum_{\substack{i=1 \\ i\neq k}}^{n-1} \dfrac{Gm_{i} (r_k-r_i\cos{(\theta_k-\theta_i)})}{r_{ik}^3}.
-\end{align*}
+\begin{align}
+\ddot{r}_k &= r_k \dot{\theta}_k^2 - \dfrac{GM}{r_k^2} - \sum_{\substack{i=1 \\ i\neq k}}^{n-1} \dfrac{Gm_{i} (r_k-r_i\cos{(\theta_k-\theta_i)})}{r_{ik}^3}. \label{d2rk}
+\end{align}
 As for $\theta_k$, the canonical momentum and its time derivative are:
 \begin{align*}
 p_{\theta_k} &= \dfrac{\partial L}{\partial \dot{\theta}_k} \\
@@ -123,9 +123,9 @@ Dividing both sides by $mr_k^2$ yields:
 \dfrac{2\dot{r}_k\dot{\theta}_k}{r_k} + \ddot{\theta}_k &= \sum_{\substack{i=1\\i\neq k}}^{n-1} \dfrac{Gm_i r_i \sin{(\theta_i-\theta_k)}}{r_k r_{ik}^3}.
 \end{align*}
 Moving the first term on the left-hand side to the right-hand side yields:
-\begin{align*}
-\ddot{\theta}_k &= -\dfrac{2\dot{r}_k\dot{\theta}_k}{r_k} + \sum_{\substack{i=1\\i\neq k}}^{n-1} \dfrac{Gm_i r_i \sin{(\theta_i-\theta_k)}}{r_k r_{ik}^3}.
-\end{align*}
+\begin{align}
+\ddot{\theta}_k &= -\dfrac{2\dot{r}_k\dot{\theta}_k}{r_k} + \sum_{\substack{i=1\\i\neq k}}^{n-1} \dfrac{Gm_i r_i \sin{(\theta_i-\theta_k)}}{r_k r_{ik}^3}. \label{d2thetak}
+\end{align}
 
 #### Three-body problem comparison
 An important verification of our working is that if $n=3$, we should get the same equations as we obtained in [gravitational three-body problem](#gravitational_three-body_problem). If $n=3$, we get for $\ddot{r}_1$:
@@ -150,12 +150,33 @@ Which matches Equation \eqref{d2theta1}. As for $\ddot{\theta}_2$:
 Which matches Equation \eqref{d2theta2}. Hence our $n$-body problem equations match our three-body problem equations when $n=3$. 
 
 #### Simulation
+Code Listing \coderef{nbody} produces the animation in Figure \figref{nbodyan}. It solves Equations \eqref{d2rk} and \eqref{d2thetak} for $n=4$ with the following initial conditions. We assume each of the orbits start out elliptical and $a$ is their semi-major axis and $e$ is their eccentricity. These parts of the initial conditions are:
+\begin{align*}
+a_1 &= 5,\hspace{0.2cm} a_2 &&= 5, \hspace{0.2cm} a_3 &&&= 10 \\
+e_1 &= 0.20,\hspace{0.2cm} e_2 &&= 0.05, \hspace{0.2cm} e_3 &&&= 0.01.
+\end{align*}
+We will each of the moving masses are at their periapsis, which is when they are at their closest point to the central mass. From this, we get the following initial conditions:
+\begin{align*}
+r_i(t_0) &= a_i(1-e_i), \hspace{0.2cm}\dot{r}_i(t_0) &&= 0, v_i(t_0) &&&= \sqrt{\dfrac{GM(1+e_i)}{r_i(t_0)}} \\
+\dot{\theta}_i(t_0) &= \dfrac{v_i(t_0)}{r_i(t_0)}.
+\end{align*}
+As for $G$ and the masses:
+\begin{align*}
+G &= 1, \hspace{0.2cm} M &&= 3, \hspace{0.2cm} m_1 &&&= 1.5, \\
+m_2 &= 2.0, \hspace{0.2cm} m_3 &&= 0.01.
+\end{align*}
+As for the initial angles they are, in units of radians:
+\begin{align*}
+\theta_1(t_0) &= 0, \hspace{0.2cm} \theta_2(t_0) &&= \pi - 0.15, \hspace{0.2cm} \theta_3(t_0) &&&= \dfrac{\pi}{3} + 0.06.
+\end{align*}
+The lack of most units is deliberate, as we are not analysing a real system. The numbers were chosen just to make the system's behaviour interesting. 
+
 \codelisting{nbody}{N-body problem simulation code.}
 ```julia:./code/nbody
 \juliacode{fidello/code/nbody.jl}
 ```
 
-Code Listing \coderef{nbody} produces the animation in Figure \figref{nbodyan}. As you can see, the orbits majorly and seemingly unpredictably change over time. This is pretty typical in the $n$-body problem: either the orbits are fairly stable and unchanging (like the orbits of the planets in the Solar System), or they are unstable and prone to objects being ejected from the system or colliding with one another. 
+As you can see, the orbits majorly and seemingly unpredictably change over time. This is pretty typical in the $n$-body problem: either the orbits are fairly stable and unchanging (like the orbits of the planets in the Solar System), or they are unstable and prone to objects being ejected from the system or colliding with one another. 
 
 ~~~
 <figure id="nbodyan" style="float: right; width: 100%">

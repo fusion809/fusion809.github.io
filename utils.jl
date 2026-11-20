@@ -823,13 +823,44 @@ filter!(p -> p.first != "align*", Franklin.LX_INTERNAL_ENVIRONMENTS)
 push!(Franklin.LX_INTERNAL_ENVIRONMENTS, "align*" => align_star_def)
 Franklin.GLOBAL_LXDEFS["align*"] = align_star_def
 
+function normalize_align_pair_markers(s::AbstractString)
+    line = String(s)
+    runs = Tuple{Int,Int,Int}[] # marker offset, marker length, comma split point
+    for m in eachmatch(r"&{2,}(?==)", line)
+        prefix_end = prevind(line, m.offset)
+        prefix = prefix_end < firstindex(line) ? "" : SubString(line, firstindex(line), prefix_end)
+        comma = findlast(',', prefix)
+        isnothing(comma) && continue
+        push!(runs, (m.offset, length(m.match), nextind(line, comma)))
+    end
+    isempty(runs) && return line
+
+    starts = Dict(run[1] => run for run in runs)
+    insertions = Set(run[3] for run in runs)
+    out = IOBuffer()
+    i = firstindex(line)
+    while i <= lastindex(line)
+        i in insertions && write(out, '&')
+        if haskey(starts, i)
+            _, marker_length, _ = starts[i]
+            write(out, '&')
+            i = nextind(line, i, marker_length)
+        else
+            write(out, line[i])
+            i = nextind(line, i)
+        end
+    end
+    return String(take!(out))
+end
+
 function render_align_environment(com, numbered::Bool)
     rows = Franklin.split_align_lines(Franklin.content(com))
+    rows = normalize_align_pair_markers.(rows)
     html = IOBuffer()
     anchors = IOBuffer()
     tagged_rows = String[]
-    has_secondary_alignment = any(occursin("&&", row) for row in rows)
-    alignment_pairs = maximum((count("&&", row) + 1 for row in rows); init=1)
+    alignment_pairs = maximum((cld(count(==('&'), row) + 1, 2) for row in rows); init=1)
+    has_secondary_alignment = alignment_pairs > 1
 
     for row in rows
         line = strip(row)
@@ -967,11 +998,11 @@ Core.eval(Franklin, quote
         end
 
         if β.name != :MATH_A && !isnothing(align_body)
-            lines = split_align_lines(align_body)
+            lines = getfield(utils_module(), :normalize_align_pair_markers).(split_align_lines(align_body))
             new_lines = String[]
             last_num = PAGE_EQREFS[PAGE_EQREFS_COUNTER]
-            has_secondary_alignment = any(occursin("&&", line) for line in lines)
-            alignment_pairs = maximum((count("&&", line) + 1 for line in lines); init=1)
+            alignment_pairs = maximum((cld(count(==('&'), line) + 1, 2) for line in lines); init=1)
+            has_secondary_alignment = alignment_pairs > 1
 
             for line in lines
                 trimmed = strip(line)
