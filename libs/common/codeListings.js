@@ -47,7 +47,7 @@
 
     listings.forEach(function (listing, index) {
       var number = index + 1;
-      listing.caption.textContent = "Code listing " + number + ": " + listing.text;
+      listing.caption.textContent = "Code Listing " + number + ": " + listing.text;
       if (listing.label) listing.element.id = listing.label;
       document.querySelectorAll(".code-listing-ref").forEach(function (ref) {
         if (ref.getAttribute("data-label") === listing.label) {
