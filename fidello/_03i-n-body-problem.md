@@ -127,6 +127,7 @@ Moving the first term on the left-hand side to the right-hand side yields:
 \ddot{\theta}_k &= -\dfrac{2\dot{r}_k\dot{\theta}_k}{r_k} + \sum_{\substack{i=1\\i\neq k}}^{n-1} \dfrac{Gm_i r_i \sin{(\theta_i-\theta_k)}}{r_k r_{ik}^3}.
 \end{align*}
 
+#### Three-body problem comparison
 An important verification of our working is that if $n=3$, we should get the same equations as we obtained in [gravitational three-body problem](#gravitational_three-body_problem). If $n=3$, we get for $\ddot{r}_1$:
 
 \begin{align*}
@@ -148,6 +149,7 @@ Which matches Equation \eqref{d2theta1}. As for $\ddot{\theta}_2$:
 \end{align*}
 Which matches Equation \eqref{d2theta2}. Hence our $n$-body problem equations match our three-body problem equations when $n=3$. 
 
+#### Simulation
 \codelisting{nbody}{N-body problem simulation code.}
 ```julia:./code/nbody
 \juliacode{fidello/code/nbody.jl}

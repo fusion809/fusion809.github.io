@@ -116,14 +116,17 @@ Dividing both sides by $m_2r_2^2$:
 \ddot{\theta}_2 &= -\dfrac{2\dot{r}_2 \dot{\theta}_2}{r_2} -\dfrac{Gm_1 r_1\sin{(\theta_2-\theta_1)}}{r_2 r_{12}^3}.\label{d2theta2}
 \end{align}
 
-Equations \eqref{d2r1}, \eqref{d2r2}, \eqref{d2theta1} and \eqref{d2theta2} cannot be analytically solved, unlike the equations we obtained for the two-body problem. Consequently, we are forced to resort to numerical methods to solve this system. Below is Julia code to numerically solve the system for a made-up example of the three-body problem.
+Equations \eqref{d2r1}, \eqref{d2r2}, \eqref{d2theta1} and \eqref{d2theta2} cannot be analytically solved, unlike the equations we obtained for the two-body problem. Consequently, we are forced to resort to numerical methods to solve this system. 
+
+#### Simulation
+Code Listing \coderef{threebody} is Julia code to numerically solve the system for a made-up example of the three-body problem. It produces the animation in Figure \figref{threebodyan}. 
 
 \codelisting{threebody}{Three-body problem simulation code.}
 ```julia:./code/threebody
 \juliacode{fidello/code/3body.jl}
 ```
 
-Code Listing \coderef{threebody} produces the animation in Figure \figref{threebodyan}. As you can see, the orbits majorly and seemingly unpredictably change over time. This is pretty typical in the three-body problem: either the orbits are fairly stable and unchanging, or they are unstable and prone to objects being ejected from the system or colliding with one another. 
+As you can see, the orbits majorly and seemingly unpredictably change over time. This is pretty typical in the three-body problem: either the orbits are fairly stable and unchanging, or they are unstable and prone to objects being ejected from the system or colliding with one another. 
 
 ~~~
 <figure id="threebodyan" style="float: right; width: 100%">
