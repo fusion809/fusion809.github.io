@@ -47,15 +47,6 @@ Parts of this repository that are my own, namely:
 * [triplePendulum/](triplePendulum/)
 
 are licensed under [GNU GPLv3](LICENCE). The rest is likely licensed under [this licence](https://github.com/tlienart/FranklinTemplates.jl/blob/master/LICENSE.md), except for files in [\_libs/katex](_libs/katex/), which are licensed under [KaTeX's MIT licence](https://github.com/KaTeX/KaTeX/blob/master/LICENSE) and a few files which clearly mention their licensing details at their top.
-# Numbered code listings
 
-Use `\codelisting` with a label, caption, Franklin output path, and Julia script
-path. Labels are page-local and can be referenced with `\coderef{label}`:
-
-````markdown
-\codelisting{example}{A short description of the example}{./code/example}{code/example.jl}
-````
-
-The rendered listing starts collapsed. Its button reveals the code, and its
-caption is numbered in page order. A label can be referenced as
-`\coderef{example}`.
+## AI-assisted improvements
+Using AI, I've added several additional features not in Franklin itself. For instance, there are macros for producing a code listing, referencing code listing, including figures, referencing figures and multiple aligned and numbered equations are possible in a single `\begin{align}` block. 
