@@ -28,5 +28,5 @@ For instance:
 \newcommand{\scal}[1]{\langle #1 \rangle}
 \newcommand{\figref}[1]{~~~<a class="figref" href="#!#1"></a>~~~}
 \newcommand{\Figref}[1]{~~~<a class="figref-full" href="#!#1"></a>~~~}
-\newcommand{\figure}[5]{~~~<figure id="#1" style="float: #2;"><img src="#4" width="#3"/><figcaption>#5</figcaption></figure>~~~}
-\newcommand{\coderef}[1]{~~~<span class="code-listing-ref" data-label="#1"><a class="code-listing-number" href="#"></a></span>~~~}
+\newcommand{\figure}[5]{~~~<figure id="!#1" style="float: !#2;"><img src="!#4" width="!#3"/><figcaption>#5</figcaption></figure>~~~}
+\newcommand{\coderef}[1]{~~~<span class="code-listing-ref" data-label="!#1"><a class="code-listing-number" href="#"></a></span>~~~}
