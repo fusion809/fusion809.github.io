@@ -40,11 +40,9 @@ jobs:
             using DifferentialEquations, Plots, LaTeXStrings;
             foreach(file -> begin
                 content = read(file, String);
-                code = match(r"```julia:[^\n]*\n(.*?)\n```"s, content);
-                isnothing(code) && error("No Julia code block found in $file");
-                code_text = strip(code.captures[1]);
-                source = match(r"^\\juliacode\{([^}]+)\}$", code_text);
-                isnothing(source) || (code_text = read(strip(source.captures[1]), String));
+                listing = match(r"\\codelisting\{[^}]*\}\{[^}]*\}\{[^}]*\}\{([^}]+)\}", content);
+                isnothing(listing) && error("No four-argument Julia code listing found in $file");
+                code_text = read(strip(listing.captures[1]), String);
                 occursin(r"gif\s*\(", code_text) || error("No GIF generation code found in $file");
                 include_string(Main, code_text, file);
             end, ["fidello/_01-introduction.md", "fidello/_03fii-wo-air-resistance.md", "fidello/_03h-three-body-problem.md", "fidello/_03i-n-body-problem.md", "fidello/_03fiii-w-air-resistance.md", "fidello/_04c-projectile-motion.md"]);
