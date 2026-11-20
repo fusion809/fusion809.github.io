@@ -116,7 +116,7 @@ u' &= -y.
 \end{align*}
 How would we numerically integrate this system? We could apply RKF45 to determine $y_{n+1}$ (where $y_0$ and $y'_0$ will be our initial conditions) using this scheme:
 \begin{align*}
-k_1 &= hu_n
+k_1 &= hu_n\\
 l_1 &= -hy_n \\
 k_2 &= h\left(u_n+\dfrac{l_1}{4}\right) \\
 l_2 &= -h\left(y_n+\dfrac{k_1}{4}\right) \\
