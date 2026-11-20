@@ -1,9 +1,9 @@
 # Hamiltonian mechanics
-In Hamiltonian mechanics, we define the Hamiltonian as:
+In Hamiltonian mechanics, we can *usually* define the Hamiltonian as:
 \begin{align}
 H &= T + V.\label{H}
 \end{align}
-Which is the total energy of our system. I should say that this is *usually* the form of the Hamiltonian, more generally it is defined as:
+Which is the total energy of our system. More generally we define the Hamiltonian as:
 \begin{align}
 H &\stackrel{\text{def}}{=} \sum_{i=1}^n p_i \dot{q}_i - L. \label{HLeq}
 \end{align}
