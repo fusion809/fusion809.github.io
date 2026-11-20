@@ -3,8 +3,8 @@ As this article involves a lot of differential equations, I thought I should cov
 
 Differential equations are equations that involve the derivatives of a function and typically the aim in solving them is to determine the original function they pertain to. For instance, say you had the linear, homogeneous, first-order ordinary differential equation:
 \begin{align*}
-y' &= y
-\end{align*}.
+y' &= y.
+\end{align*}
 Our aim would be to determine what $y$ is. 
 
 I also showed you this equation to clarify some of the terminology we use with regards to differential equations. So why is this equation *linear*? Well, it is because there is no term that is nonlinear in $y$ or its derivative(s). For instance, if the equation was $y'=y^2$, that would make it nonlinear because the right-hand side is nonlinear in $y$. Why is it an *ordinary* differential equation? Because there are only ordinary derivatives, not partial derivatives. Why is it *homogeneous*? Because there are no terms that do not involve $y$ or its derivative(s). Why is it first-order? Because the highest order derivative in the equation is the first derivative. 
