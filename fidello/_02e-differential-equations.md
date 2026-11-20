@@ -63,8 +63,8 @@ y' &= f(x,y)
 using:
 \begin{align*}
 k_1 &= hf(x_0, y_0) \\
-k_2 &= hf(x_0 + \dfrac{h}{2}, y_0 + \dfrac{k_1}{2}) \\
-k_3 &= hf(x_0 + \dfrac{h}{2}, y_0 + \dfrac{k_2}{2}) \\
+k_2 &= hf\left(x_0 + \dfrac{h}{2}, y_0 + \dfrac{k_1}{2}\right) \\
+k_3 &= hf\left(x_0 + \dfrac{h}{2}, y_0 + \dfrac{k_2}{2}\right) \\
 k_4 &= hf(x_0 + h, y_0 + k_3) \\
 y(x_0+h) &= y_0 + \dfrac{1}{6}(k_1 + 2k_2 + 2k_3 + k_4).
 \end{align*}
@@ -83,11 +83,11 @@ An arguably better method for numerically solving ordinary differential equation
 
 \begin{align*}
 k_1 &= hf(x_n, y_n) \\
-k_2 &= hf(x_n + \dfrac{h}{4}, y_n + \dfrac{k_1}{4}) \\
-k_3 &= hf(x_n + \dfrac{3h}{8}, y_n + \dfrac{3k_1}{32} + \dfrac{9k_2}{32}) \\
-k_4 &= hf(x_n + \dfrac{12h}{13}, y_n + \dfrac{1932k_1}{2197} - \dfrac{7200k_2}{2197} + \dfrac{7296k_3}{2197}) \\
-k_5 &= hf(x_n + h, y_n + \dfrac{439k_1}{216} - 8k_2 + \dfrac{3680k_3}{513} - \dfrac{845k_4}{4104}) \\
-k_6 &= hf(x_n + \dfrac{h}{2}, y_n - \dfrac{8k_1}{27} + 2k_2 - \dfrac{3544k_3}{2565} + \dfrac{1859k_4}{4104} - \dfrac{11k_5}{40}) \\
+k_2 &= hf\left(x_n + \dfrac{h}{4}, y_n + \dfrac{k_1}{4}\right) \\
+k_3 &= hf\left(x_n + \dfrac{3h}{8}, y_n + \dfrac{3k_1}{32} + \dfrac{9k_2}{32}\right) \\
+k_4 &= hf\left(x_n + \dfrac{12h}{13}, y_n + \dfrac{1932k_1}{2197} - \dfrac{7200k_2}{2197} + \dfrac{7296k_3}{2197}\right) \\
+k_5 &= hf\left(x_n + h, y_n + \dfrac{439k_1}{216} - 8k_2 + \dfrac{3680k_3}{513} - \dfrac{845k_4}{4104}\right) \\
+k_6 &= hf\left(x_n + \dfrac{h}{2}, y_n - \dfrac{8k_1}{27} + 2k_2 - \dfrac{3544k_3}{2565} + \dfrac{1859k_4}{4104} - \dfrac{11k_5}{40}\right) \\
 z_{n+1} &= y_n + \dfrac{16k_1}{135} + \dfrac{6656k_3}{12825} + \dfrac{28561k_4}{56430} - \dfrac{9k_5}{50} + \dfrac{2k_6}{55} \\
 y_{n+1} &= y_n + \dfrac{25k_1}{216} + \dfrac{1408k_3}{2565} + \dfrac{2197k_4}{4104} - \dfrac{k_5}{5} \\
 \mathrm{TE} &= |y_{n+1} - z_{n+1}| \\
