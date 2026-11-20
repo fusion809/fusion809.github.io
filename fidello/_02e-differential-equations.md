@@ -133,6 +133,6 @@ u_{5,n+1} &= u_{n} + \dfrac{16l_1}{135} + \dfrac{6656l_3}{12825} + \dfrac{28561l
 y_{4,n+1} &= y_{n} + \dfrac{25k_1}{216} + \dfrac{1408k_3}{2565} + \dfrac{2197k_4}{4104} - \dfrac{k_5}{5}\\
 y_{5,n+1} &= y_{n} + \dfrac{16k_1}{135} + \dfrac{6656k_3}{12825} + \dfrac{28561k_4}{56430} - \dfrac{9k_5}{50} + \dfrac{2k_6}{55}\\
 \mathrm{TE} &= \max_{f \in \{u, y\}} \Big|f_{5,n+1}-f_{4,n+1}\Big|\\
-s &= \dfrac{\epsilon}{2\mathrm{TE}}^{1/5}.
+s &= \left(\dfrac{\epsilon}{2\mathrm{TE}}\right)^{1/5}.
 \end{align*}
 I should clarify that we are maximizing over the error estimates in our two functions $u$ and $y$ to calculate $\mathrm{TE}$. So whichever error estimate is bigger out of those for $u$ and $y$, we choose for $\mathrm{TE}$. If $\mathrm{TE} < \epsilon$, we continue onto the next step with our new $y_n$ being the old $y_{5,n+1}$ and the new $u_n$ being the old $u_{5,n+1}$ and obtain our new $h$ by multiplying it by $s$. If $TE \geq \epsilon$, we multiply $h$ by $s$ and repeat the above calculations again.
