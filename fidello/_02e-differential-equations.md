@@ -96,7 +96,9 @@ Here $\epsilon$ is the maximum absolute error in our approximation we are willin
 
 \output{./code/RKF45}
 
-As you can see RKF45 achieved more accuracy than both Euler's method and the Runge-Kutta fourth-order method, while using an, on average, larger step size. Also notice how we set the error tolerance of $10^{-5}$ and none of our errors exceeded this threshold. Its main drawback is that because it is an adaptive method, the number of steps is unknown until you actually compute the solution and this can make implementation in code a little more challenging. As instead of dealing with vectors or arrays (containing your solution) of a set, predictable size, you will need to append new entries to the end of your solution vector/array at each step.
+As you can see RKF45 achieved more accuracy than both Euler's method and the Runge-Kutta fourth-order method, while using an, on average, larger step size. Also notice how we set the error tolerance of $10^{-5}$ and none of our errors exceeded this threshold. This is not always the case, however, as this error tolerance is purely local. This means that it is the maximum error we are willing to accept in each individual step of our solution. As these errors accumulate over multiple steps, it is possible for our solution to eventually deviate enough from the exact solution to exceed this threshold. 
+
+Its main drawback is that because it is an adaptive method, the number of steps is unknown until you actually compute the solution and this can make implementation in code a little more challenging. As instead of dealing with vectors or arrays (containing your solution) of a set, predictable size, you will need to append new entries to the end of your solution vector/array at each step.
 
 Further, the adaptive stepsize means that if you were hoping for an evenly spaced set of $x$ values, you may be disappointed by this method. That being said, it is straight forward to fix this issue as you can use interpolation to find the $y$ values on an evenly spaced $x$ grid. 
 
@@ -136,3 +138,10 @@ y_{5,n+1} &= y_{n} + \dfrac{16k_1}{135} + \dfrac{6656k_3}{12825} + \dfrac{28561k
 s &= \left(\dfrac{\epsilon}{2\mathrm{TE}}\right)^{1/5}.
 \end{align*}
 I should clarify that we are maximizing over the error estimates in our two functions $u$ and $y$ to calculate $\mathrm{TE}$. So whichever error estimate is bigger out of those for $u$ and $y$, we choose for $\mathrm{TE}$. If $\mathrm{TE} < \epsilon$, we continue onto the next step with our new $y_n$ being the old $y_{5,n+1}$ and the new $u_n$ being the old $u_{5,n+1}$ and obtain our new $h$ by multiplying it by $s$. If $TE \geq \epsilon$, we multiply $h$ by $s$ and repeat the above calculations again.
+
+So we will use the initial conditions $y(0)=0$ and $y'(0)=1$. This gives the solution $y(x)=\sin{x}$. 
+
+\codelisting{RKF45coup}{Runge-Kutta-Fehlberg 4/5th-order method solution to $y''=-y$ with $y(0)=0$ and $y'(0)=1$}{./code/RKF45coup}{fidello/code/RKF45coup.jl}
+\output{./code/RKF45coup}
+
+In Code Listing \coderef{RKF45coup}, we used $\epsilon=10^{-8}$ as our error tolerance. You may notice that our maximum errors in the output table do indeed exceed this. This is possible as our truncation error estimate is solely for that step, it is not the cumulative error for all steps up until the point we are in our calculation. 
