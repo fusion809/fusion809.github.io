@@ -40,7 +40,7 @@ This equation cannot be analytically solved, so numerical solutions are necessar
 ```julia:./code/damppen
 \juliacode{fidello/code/damppen.jl}
 ```
-Figure \figref{damppen} shows the plot produced by \coderef{damppen}. As you can see over time the maximum and minimum angle the pendulum forms gets closer and closer towards $-\dfrac{\pi}{2}$. Figure \figref{damppenan} shows the animation produced by the above Julia code. 
+Figure \figref{damppen} shows the plot produced by Code Listing \coderef{damppen}. As you can see over time the maximum and minimum angle the pendulum forms gets closer and closer towards $-\dfrac{\pi}{2}$. Figure \figref{damppenan} shows the animation produced by the above Julia code. 
 ~~~
 <figure id="damppen" style="float: left;">
 <img src="/Dampened_pendulum_theta.svg" width="900px" />

@@ -153,7 +153,7 @@ Which matches Equation \eqref{d2theta2}. Hence our $n$-body problem equations ma
 \juliacode{fidello/code/nbody.jl}
 ```
 
-\coderef{nbody} produces the animation in Figure \figref{nbodyan}. As you can see, the orbits majorly and seemingly unpredictably change over time. This is pretty typical in the $n$-body problem: either the orbits are fairly stable and unchanging (like the orbits of the planets in the Solar System), or they are unstable and prone to objects being ejected from the system or colliding with one another. 
+Code Listing \coderef{nbody} produces the animation in Figure \figref{nbodyan}. As you can see, the orbits majorly and seemingly unpredictably change over time. This is pretty typical in the $n$-body problem: either the orbits are fairly stable and unchanging (like the orbits of the planets in the Solar System), or they are unstable and prone to objects being ejected from the system or colliding with one another. 
 
 ~~~
 <figure id="nbodyan" style="float: right; width: 100%">

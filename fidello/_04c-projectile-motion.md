@@ -48,7 +48,7 @@ Hence for projectile motion they become:
 \dot{p}_y &= -mg -\dfrac{\rho C_D A p_y\sqrt{p_x^2+p_y^2}}{2m^2}.\label{dpypm}
 \end{align}
 
-\coderef{projmotion} is Julia code for implementing an animation based on Equations \eqref{dxpm}, \eqref{dypm}, \eqref{dpxpm} and \eqref{dpypm}.
+Code Listing \coderef{projmotion} is Julia code for implementing an animation based on Equations \eqref{dxpm}, \eqref{dypm}, \eqref{dpxpm} and \eqref{dpypm}.
 
 \codelisting{projmotion}{Projectile motion simulation code.}
 ```julia:./code/projmotion

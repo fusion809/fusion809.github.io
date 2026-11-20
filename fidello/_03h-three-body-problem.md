@@ -123,7 +123,7 @@ Equations \eqref{d2r1}, \eqref{d2r2}, \eqref{d2theta1} and \eqref{d2theta2} cann
 \juliacode{fidello/code/3body.jl}
 ```
 
-\coderef{threebody} produces the animation in Figure \figref{threebodyan}. As you can see, the orbits majorly and seemingly unpredictably change over time. This is pretty typical in the three-body problem: either the orbits are fairly stable and unchanging, or they are unstable and prone to objects being ejected from the system or colliding with one another. 
+Code Listing \coderef{threebody} produces the animation in Figure \figref{threebodyan}. As you can see, the orbits majorly and seemingly unpredictably change over time. This is pretty typical in the three-body problem: either the orbits are fairly stable and unchanging, or they are unstable and prone to objects being ejected from the system or colliding with one another. 
 
 ~~~
 <figure id="threebodyan" style="float: right; width: 100%">

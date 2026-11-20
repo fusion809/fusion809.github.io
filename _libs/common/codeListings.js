@@ -47,13 +47,15 @@
 
     listings.forEach(function (listing, index) {
       var number = index + 1;
-      listing.caption.textContent = "Code listing " + number + ": " + listing.text;
+      listing.caption.textContent = "Code Listing " + number + ": " + listing.text;
       if (listing.label) listing.element.id = listing.label;
       document.querySelectorAll(".code-listing-ref").forEach(function (ref) {
         if (ref.getAttribute("data-label") === listing.label) {
-          ref.href = "#" + listing.label;
-          ref.textContent = "Code listing " + number;
-          ref.addEventListener("click", function () {
+          var numberLink = ref.querySelector(".code-listing-number");
+          if (!numberLink) return;
+          numberLink.href = "#" + listing.label;
+          numberLink.textContent = number;
+          numberLink.addEventListener("click", function () {
             listing.element.dispatchEvent(new Event("code-listing:reveal"));
           });
         }

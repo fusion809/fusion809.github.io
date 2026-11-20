@@ -128,7 +128,7 @@ So we can see $\theta(t)$ is approximated, when it deviates only slightly from $
 ```julia:./code/simppen
 \juliacode{fidello/code/simppen.jl}
 ```
-Figure \figref{simppen} shows the plot of $\theta$ vs $t$ produced by the above code. Figure \figref{simppenan} contains an animation of the simple pendulum simulated by the above Julia code.
+Figure \figref{simppen} shows the plot of $\theta$ vs $t$ produced by Code Listing \coderef{simppen}. Figure \figref{simppenan} contains an animation of the simple pendulum simulated by the above Julia code.
 
 ~~~
 <figure id="simppen" style="float: left;">

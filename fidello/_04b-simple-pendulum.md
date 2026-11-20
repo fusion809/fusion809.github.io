@@ -32,7 +32,7 @@ Hence the equations of motion are:
 \end{align}
 As we can see, Hamiltonian mechanics yields a series of first-order ordinary differential equations (ODEs) instead of second-order ODEs. Which is important because Lagrangian mechanics and Newtonian mechanics both yield second-order ODE systems. That being said, if you rewrite Equation \eqref{thetadotsimp} to make $p_{\theta}$ its subject and substitute it into Equation \eqref{pdotthetasimp} and rearrange it to make $\ddot{\theta}$ the subject, you will obtain Equation \eqref{simppen}.
 
-\coderef{phaseplot} is Julia code for solving Equations \eqref{pdotthetasimp} and \eqref{thetadotsimp} with $-\dfrac{\pi}{2} + 0.1 \leq \theta_0 \leq \dfrac{\pi}{2}-0.1$ and $-0.1 \leq p_{\theta_0} \leq 0.1$ and producing a phase plot for the solutions. For all the solutions the gravitational acceleration ($g$) was assumed to be 9.81$\mathrm{m}\cdot \mathrm{s}^{-2}$, $l$ was assumed to be $1$m and $m$ was assumed to be $1$kg. 
+Code Listing \coderef{phaseplot} is Julia code for solving Equations \eqref{pdotthetasimp} and \eqref{thetadotsimp} with $-\dfrac{\pi}{2} + 0.1 \leq \theta_0 \leq \dfrac{\pi}{2}-0.1$ and $-0.1 \leq p_{\theta_0} \leq 0.1$ and producing a phase plot for the solutions. For all the solutions the gravitational acceleration ($g$) was assumed to be 9.81$\mathrm{m}\cdot \mathrm{s}^{-2}$, $l$ was assumed to be $1$m and $m$ was assumed to be $1$kg. 
 \codelisting{phaseplot}{Phase plot for the simple pendulum.}
 ```julia:./code/phaseplot
 \juliacode{fidello/code/phaseplot.jl}

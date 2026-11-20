@@ -29,4 +29,4 @@ For instance:
 \newcommand{\figref}[1]{~~~<a class="figref" href="#!#1"></a>~~~}
 \newcommand{\Figref}[1]{~~~<a class="figref-full" href="#!#1"></a>~~~}
 \newcommand{\codelisting}[2]{~~~<span class="code-listing-marker" data-label="#1">#2</span>~~~}
-\newcommand{\coderef}[1]{~~~<a class="code-listing-ref" data-label="#1" href="#"></a>~~~}
+\newcommand{\coderef}[1]{~~~<span class="code-listing-ref" data-label="#1"><a class="code-listing-number" href="#"></a></span>~~~}
