@@ -55,7 +55,6 @@ while x[end] < b
 
     # Accept or reject the step
     if err <= atol
-        println("Step accepted: xi = $xi, yi = $yi, err = $err")
         push!(x, xi+hs)
         push!(yRKF45, y5)
         push!(error, err)
@@ -69,7 +68,6 @@ while x[end] < b
     end
 
     global h = h*s
-    println("xi = $xi, yi = $yi, err = $err, s=$s, h = $h")
     if h < eps(max(abs(xi), 1.0))
         Base.error("Step size became too small.")
     end
