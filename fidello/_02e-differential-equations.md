@@ -49,3 +49,59 @@ y(2h) &\approx y(h) + hy'(h) \\
 And continue on from there. This method, where we truncate the Taylor series at the first two terms and numerically approximate our solution by applying this approximation at each step, is called Euler's method. As we ignore so many terms in the Taylor series, this method is said to be rather inaccurate. Specifically, we call it a first-order method. 
 
 Other schemes for numerical integration of ordinary differential equations also exist. Among the most popular are the Runge-Kutta family of methods, such as the Runge-Kutta fourth-order method. These methods do not utilize higher-order derivatives, but they use clever tricks for approximating the solution to higher-order accuracy using only first-order derivatives.
+
+To illustrate how we use these methods, let us try to solve the differential equation:
+
+\begin{align*}
+y' &= y, \hspace{0.2cm} y(0)=1.
+\end{align*}
+
+So our starting point is going to be $x=0$. We will call this point $x_0$; the value of $y$ at $x_0$ we will call $y_0$. The fourth-order Runge-Kutta method, says that we should approximate $y$ at $x_0+h$ for the differential equation:
+\begin{align*}
+y' &= f(x,y)
+\end{align*}
+using:
+\begin{align*}
+k_1 &= hf(x_0, y_0) \\
+k_2 &= hf(x_0 + \dfrac{h}{2}, y_0 + \dfrac{k_1}{2}) \\
+k_3 &= hf(x_0 + \dfrac{h}{2}, y_0 + \dfrac{k_2}{2}) \\
+k_4 &= hf(x_0 + h, y_0 + k_3) \\
+y(x_0+h) &= y_0 + \dfrac{1}{6}(k_1 + 2k_2 + 2k_3 + k_4).
+\end{align*}
+And we should repeat this process for all subsequent points we wish to approximate $y(x)$ at. That is why, when we write numerical integration schemes like this we usually use $x_n$ to denote the $n$th $x$ value for which we are approximating $y$. 
+
+In Code Listing \coderef{differential}, I have implemented both Euler's method and the Runge-Kutta fourth-order method to solve this differential equation. The results are displayed, along with the exact solution, in a table below the code. Here we used $h=0.2$ and continued the approximation for five steps, until $x=1$. As you can see, the Runge-Kutta fourth-order method is much more accurate than Euler's method.
+
+\codelisting{differential}{Differential equation solution code.}
+```julia:./code/differential
+\juliacode{fidello/code/differential.jl}
+```
+
+\output{./code/differential}
+
+An arguably better method for numerically solving ordinary differential equations is the Runge-Kutta-Fehlberg fourth/fifth-order method, as it adapts our step size $h$ to ensure that the error in our solution never exceeds a certain threshold. In this method, we use:
+
+\begin{align*}
+k_1 &= hf(x_n, y_n) \\
+k_2 &= hf(x_n + \dfrac{h}{4}, y_n + \dfrac{k_1}{4}) \\
+k_3 &= hf(x_n + \dfrac{3h}{8}, y_n + \dfrac{3k_1}{32} + \dfrac{9k_2}{32}) \\
+k_4 &= hf(x_n + \dfrac{12h}{13}, y_n + \dfrac{1932k_1}{2197} - \dfrac{7200k_2}{2197} + \dfrac{7296k_3}{2197}) \\
+k_5 &= hf(x_n + h, y_n + \dfrac{439k_1}{216} - 8k_2 + \dfrac{3680k_3}{513} - \dfrac{845k_4}{4104}) \\
+k_6 &= hf(x_n + \dfrac{h}{2}, y_n - \dfrac{8k_1}{27} + 2k_2 - \dfrac{3544k_3}{2565} + \dfrac{1859k_4}{4104} - \dfrac{11k_5}{40}) \\
+z_{n+1} &= y_n + \dfrac{16k_1}{135} + \dfrac{6656k_3}{12825} + \dfrac{28561k_4}{56430} - \dfrac{9k_5}{50} + \dfrac{2k_6}{55} \\
+y_{n+1} &= y_n + \dfrac{25k_1}{216} + \dfrac{1408k_3}{2565} + \dfrac{2197k_4}{4104} - \dfrac{k_5}{5} \\
+\mathrm{TE} &= |y_{n+1} - z_{n+1}| \\
+s &= \left(\dfrac{\epsilon}{2\mathrm{TE}}\right)^{1/5}.
+\end{align*}
+Here $\epsilon$ is the maximum absolute error in our approximation we are willing to accept. $\mathrm{TE}$ is our approximation of the truncation error as our estimate for $y(x_0+h)$ is fourth-order and $z$ is the fifth-order estimate. If $\mathrm{TE} \geq \epsilon$, then we rescale $h$ using $h=h\cdot s$ and repeat the approximation again. If not, then we accept our approximation to the next $y$ value and rescale $h$ using $h=h\cdot s$. This method is very efficient and is the numerical technique I use for integrating ordinary differential equations in all of my JavaScript-based ordinary differential equations solver webpages. 
+
+\codelisting{RKF45}{Runge-Kutta-Fehlberg fourth/fifth-order method solution to $y'=y, y(0)=1$.}
+```julia:./code/RKF45
+\juliacode{fidello/code/RKF45.jl}
+```
+
+\output{./code/RKF45}
+
+As you can see RKF45 achieved more accuracy than both Euler's method and the Runge-Kutta fourth-order method, while using an, on average, larger step size. Its main drawback is that because it is an adaptive method, the number of steps is unknown until you actually compute the solution and this can make implementation in code a little more challenging. As instead of dealing with vectors or arrays (containing your solution) of a set, predictable size, you will need to append new entries to the end of your solution vector/array. 
+
+Further, the adaptive stepsize means that if you were hoping for an evenly spaced set of $x$ values, you may be disappointed by this method. That being said, it is straight forward to fix this issue as you can use interpolation to find the $y$ values on an evenly spaced $x$ grid. 
