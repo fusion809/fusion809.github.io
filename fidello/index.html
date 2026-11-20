@@ -892,7 +892,7 @@ ics &#61; &#91;&#40;θ₀, pθ₀&#41; for θ₀ in range&#40;-π/2&#43;0.1, π/
 
 plot&#40;&#41;
 for u₀ in ics
-    sol &#61; solve&#40;ODEProblem&#40;pendulum&#33;, collect&#40;u₀&#41;, tspan&#41;&#41;
+    local sol &#61; solve&#40;ODEProblem&#40;pendulum&#33;, collect&#40;u₀&#41;, tspan&#41;&#41;
     plot&#33;&#40;sol, idxs&#61;&#40;1, 2&#41;, label&#61;false&#41;
 end
 

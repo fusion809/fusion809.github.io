@@ -13,7 +13,7 @@ ics = [(θ₀, pθ₀) for θ₀ in range(-π/2+0.1, π/2-0.1, length=9), pθ₀
 
 plot()
 for u₀ in ics
-    sol = solve(ODEProblem(pendulum!, collect(u₀), tspan))
+    local sol = solve(ODEProblem(pendulum!, collect(u₀), tspan))
     plot!(sol, idxs=(1, 2), label=false)
 end
 
