@@ -1,12 +1,7 @@
 ## Complex numbers
 Complex numbers are numbers that involve both a real and an imaginary part. That is, they are of the form $a+bi$ where $a$ and $b$ are both real numbers and $i$ is the imaginary number. $a$ is called the real part of the number and $b$ is called the imaginary part of the number. Importantly, $a$ and $b$ can be zero, consequently all real numbers are technically complex numbers. We can display complex numbers in the complex plane (also known as the Argand plane) as vectors. Specifically, the $y$ component of this vector is the imaginary part of our number and the $x$ component is the real part of the number. 
 
-~~~
-<figure id="complex" style="float: right;">
-<img src="Complex plane.svg" width="300px" float="right">
-<figcaption>Number 2+3i displayed in the complex plane.</figcaption>
-</figure>
-~~~
+\figure{complex}{right}{300px}{Complex_plane.svg}{Number 2+3i displayed in the complex plane.}
 
 Figure \figref{complex} shows the number $2+3i$ displayed in the complex plane. The length of the vector, $l$, can be calculated using the Pythagorean theorem as $l=\sqrt{2^2+3^2}=\sqrt{13}$. $l$ can also be called the modulus of our complex number. As for $\theta$, the angle from the positive $x$-axis measure counterclockwise it can be found using the definition of the tangent function as $\theta =\tan^{-1}{\dfrac{3}{2}}$. Note also that $3=l\sin{\theta}$ and $2=l\cos{\theta}$ by the definition of these trigonometric functions. 
 

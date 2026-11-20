@@ -166,16 +166,8 @@ This relatively small $m_3$ was chosen to represent potentially a planet in this
 \end{align*}
 The lack of most units is deliberate, as we are not analysing a real system. The numbers were chosen just to make the system's behaviour interesting. 
 
-\codelisting{nbody}{N-body problem simulation code.}
-```julia:./code/nbody
-\juliacode{fidello/code/nbody.jl}
-```
+\codelisting{nbody}{N-body problem simulation code.}{./code/nbody}{fidello/code/nbody.jl}
 
 As you can see, the orbits majorly and seemingly unpredictably change over time. This is pretty typical in the $n$-body problem: either the orbits are fairly stable and unchanging (like the orbits of the planets in the Solar System), or they are unstable and prone to objects being ejected from the system or colliding with one another. 
 
-~~~
-<figure id="nbodyan" style="float: right; width: 100%">
-<img src="/n_body_system.gif" width="800px"/>
-<figcaption>A four-body system simulation.</figcaption>
-</figure>
-~~~
+\figure{nbodyan}{right}{800px}{/n_body_system.gif}{Four-body system simulation for the above parameters.}

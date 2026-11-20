@@ -1,10 +1,5 @@
 ### Gravitational two-body problem
-~~~
-<figure id="two-body" style="float: right;">
-<img src="/fidello/Gravitational_two_body_problem.svg" width="500px" />
-<figcaption>A system consisting of two bodies in gravitational motion around each other.</figcaption>
-</figure>
-~~~
+\figure{two-body}{right}{500px}{/fidello/Gravitational_two_body_system.svg}{A system consisting of two bodies in gravitational motion around each other.}
 In this example, we are modelling the motion of a moving mass around a mass centred at the origin. The relationship between these polar coordinates and our Cartesian coordinates are, for our moving mass:
 \begin{align*}
 x &= r\cos{\theta} \\

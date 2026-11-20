@@ -124,21 +124,12 @@ Hence:
 \theta(t) &= \left(\theta_0 + \dfrac{\pi}{2}\right)\cos{\left(\sqrt{\dfrac{g}{l}}t\right)} + \dot{\theta}_0 \sqrt{\dfrac{l}{g}} \sin{\left(\sqrt{\dfrac{g}{l}}t\right)} -\dfrac{\pi}{2}.
 \end{align*}
 So we can see $\theta(t)$ is approximated, when it deviates only slightly from $\theta=-\dfrac{\pi}{2}$, quite well by sine and cosine functions. More generally, we can use numerical techniques to approximate our solution. Below is some Julia code that numerically approximates the solution for $\theta_0=\dot{\theta}_0=0$, $g=9.81\mathrm{m}\cdot \mathrm{s}^{-2}$, $l=1\mathrm{m}$ and $m=1\mathrm{kg}$. These initial conditions means the pendulum starts stationary on the positive $x$-axis. Then gravity pulls it down and up towards the negative $x$-axis (at $\theta=-\pi$) and then back down and towards the positive $x$-axis ($\theta=0$) and over and over. 
-\codelisting{simppen}{Simple pendulum simulation code.}
-```julia:./code/simppen
-\juliacode{fidello/code/simppen.jl}
-```
+\codelisting{simppen}{Simple pendulum simulation code.}{./code/simppen}{fidello/code/simppen.jl}
 Figure \figref{simppen} shows the plot of $\theta$ vs $t$ produced by Code Listing \coderef{simppen}. Figure \figref{simppenan} contains an animation of the simple pendulum simulated by the above Julia code.
 
+\figure{simppen}{left}{900px}{/Simple_pendulum_theta.svg}{Simple pendulum angle plot.}
+\figure{simppenan}{right}{900px}{/Simple_pendulum.gif}{Simple pendulum animation.}
 ~~~
-<figure id="simppen" style="float: left;">
-<img src="/Simple_pendulum_theta.svg" width="900px" />
-<figcaption>Simple pendulum angle plot.</figcaption>
-</figure>
-<figure id="simppenan" style="float: right;">
-<img src="/Simple_pendulum.gif" width="900px" />
-<figcaption>Simple pendulum animation.</figcaption>
-</figure>
 <p style="clear: both;">If you would like to try some of your own initial conditions and calculate the solution numerically for these conditions, see <a href="/simplePendulum/woErrorAnalysis">this page</a>.</p>
 ~~~
 

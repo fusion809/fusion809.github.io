@@ -8,7 +8,4 @@ In this article, I explain to Fidello from Foci's Discord server some prerequisi
 
 Figure \figref{dp} shows an animation of the double rigid pendulum. [This page](/doublePendulum/) does interactive simulations of this system if you would like to specify the parameter values yourself. \coderef{doublepen} is the Julia code used to generate the above double pendulum animation. I will mention that the Julia code included in this article was largely generated with the help of ChatGPT.
 
-\codelisting{doublepen}{Double pendulum simulation code.}
-```julia:./code/doublepen
-\juliacode{fidello/code/doublepen.jl}
-```
+\codelisting{doublepen}{Double pendulum simulation code.}{./code/doublepen}{fidello/code/doublepen.jl}

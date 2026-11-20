@@ -50,15 +50,7 @@ Hence for projectile motion they become:
 
 Code Listing \coderef{projmotion} is Julia code for implementing an animation based on Equations \eqref{dxpm}, \eqref{dypm}, \eqref{dpxpm} and \eqref{dpypm}.
 
-\codelisting{projmotion}{Projectile motion simulation code.}
-```julia:./code/projmotion
-\juliacode{fidello/code/projmotion.jl}
-```
+\codelisting{projmotion}{Projectile motion simulation code.}{./code/projmotion}{fidello/code/projmotion.jl}
 Below is an animation of projectile motion created using the above Julia code.
 
-~~~
-<figure id="projectile_motion.gif" style="float: right; width: 100%">
-<img src="/projectile_motion.gif" width="500px" />
-<figcaption>Projectile motion animation</figcaption>
-</figure>
-~~~
+\figure{projectile_motion}{right}{500px}{/projectile_motion.gif}{Projectile motion animation.}

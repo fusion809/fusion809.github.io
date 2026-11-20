@@ -1,5 +1,8 @@
 using SHA
 import Franklin
+
+# Keep GR headless during Franklin's build-time evaluation of code listings.
+ENV["GKSwstype"] = "100"
 function hfun_bar(vname)
   val = Meta.parse(vname[1])
   return round(sqrt(val), digits=2)
@@ -679,6 +682,34 @@ function lx_juliacode(com, _)
         Franklin.register_md_dependency(cur_p, rpath)
     end
     return read(fpath, String)
+end
+
+function lx_codelisting(com, lxdefs)
+    label = strip(Franklin.content(com.braces[1]))
+    caption = Franklin.content(com.braces[2])
+    rpath = strip(Franklin.content(com.braces[3]))
+    source_path = strip(Franklin.content(com.braces[4]))
+    source_file = isabspath(source_path) ? source_path : joinpath(Franklin.path(:folder), source_path)
+
+    cur_p = get(Franklin.FD_ENV, :CUR_PATH, "")
+    if !isempty(cur_p)
+        Franklin.register_md_dependency(cur_p, source_path)
+    end
+
+    source = read(source_file, String)
+    fenced = "```julia:$(rpath)\n$(source)\n```"
+    code_html = Franklin.resolve_code_block(SubString(fenced))
+    marker = "<span class=\"code-listing-marker\" data-label=\"$(label)\">$(caption)</span>"
+    return marker * "\n" * code_html
+end
+
+filter!(p -> p.first != raw"\codelisting", Franklin.LX_INTERNAL_COMMANDS)
+push!(Franklin.LX_INTERNAL_COMMANDS,
+      raw"\codelisting" => Franklin.LxDef(raw"\codelisting", 4, Franklin.subs("")))
+Franklin.GLOBAL_LXDEFS[raw"\codelisting"] = Franklin.LxDef(raw"\codelisting", 4, Franklin.subs(""))
+@eval Franklin function lx_codelisting(com, lxdefs)
+    helper = getproperty(Franklin.utils_module(), :lx_codelisting)
+    return Base.invokelatest(helper, com, lxdefs)
 end
 
 """

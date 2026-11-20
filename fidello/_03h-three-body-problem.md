@@ -1,10 +1,6 @@
 ### Gravitational three-body problem
-~~~
-<figure id="threebody" style="float: right;">
-<img src="/fidello/Gravitational_three_body_problem.svg" width="500px"/>
-<figcaption>Gravitational three-body problem.</figcaption>
-</figure>
-~~~
+\figure{threebody}{right}{500px}{/fidello/Gravitational_three_body_problem.svg}{Gravitational three-body problem.}
+
 I thought a good example for you would be the gravitational three-body problem. As like the double pendulum problem, it exhibits chaos. Further, it is the premise of a popular scifi Netflix series *3 Body Problem*, which is based on a novel called *Remembrance of Earth's Past*. As you can see in Figure \figref{threebody}, our axes are selected such that the mass $M$ is centred at the origin. Consequently, the central mass does not move on our axes. So only the two other masses contribute to our system's kinetic energy:
 \begin{align*}
 T &= \dfrac{m_1}{2}(\dot{r}_1^2 + r_1^2 \dot{\theta}_1^2) + \dfrac{m_2}{2}(\dot{r}_2^2+r_2^2\dot{\theta}_2^2).
@@ -143,16 +139,8 @@ As for the initial angles they are, in units of radians:
 
 It produces the animation in Figure \figref{threebodyan}. 
 
-\codelisting{threebody}{Three-body problem simulation code.}
-```julia:./code/threebody
-\juliacode{fidello/code/3body.jl}
-```
+\codelisting{threebody}{Three-body problem simulation code.}{./code/threebody}{fidello/code/3body.jl}
 
 As you can see, the orbits majorly and seemingly unpredictably change over time. This is pretty typical in the three-body problem: either the orbits are fairly stable and unchanging, or they are unstable and prone to objects being ejected from the system or colliding with one another. 
 
-~~~
-<figure id="threebodyan" style="float: right; width: 100%">
-<img src="/three_body_system.gif" width="800px"/>
-<figcaption>A three-body system simulation.</figcaption>
-</figure>
-~~~
+\figure{threebodyan}{right}{800px}{/three_body_system.gif}{Three-body system simulation for the above parameters.}

@@ -1,6 +1,6 @@
 using DifferentialEquations, LaTeXStrings
 using Plots
-
+ENV["GKSwstype"] = "100"
 # ------------------------------------------------------------
 # Parameters
 # ------------------------------------------------------------
