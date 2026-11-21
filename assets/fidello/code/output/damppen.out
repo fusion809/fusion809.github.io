@@ -1,8 +1,0 @@
-UndefVarError: `plot` not defined in `Main.FD_SANDBOX_6751168331264318849`
-Hint: It looks like two or more modules export different bindings with this name, resulting in ambiguity. Try explicitly importing it from a particular module, or qualifying the name with the module it should come from.
-Hint: a global variable of this name also exists in RecipesBase.
-    - Also exported by Plots.
-Hint: a global variable of this name also exists in Makie.
-    - Also exported by GLMakie (loaded but not imported in Main).
-Hint: a global variable of this name also exists in GR.jlgr.
-    - Also exported by GR.

@@ -143,7 +143,7 @@ for package in &#40;&quot;FFTW&quot;, &quot;GLMakie&quot;&#41;
 end
 
 using FFTW
-using GLMakie
+import GLMakie
 using Printf
 
 # &#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;
@@ -353,22 +353,22 @@ GLMakie.activate&#33;&#40;&#41;
 deltaT &#61; max.&#40;T .- T_ROOM, 0.0&#41;
 deltaT .&#61; ifelse.&#40;deltaT .&gt;&#61; VISUAL_THRESHOLD, deltaT, 0.0&#41;
 
-deltaT_obs &#61; Observable&#40;copy&#40;deltaT&#41;&#41;
+deltaT_obs &#61; GLMakie.Observable&#40;copy&#40;deltaT&#41;&#41;
 
 # Original colour map.
 heat_colormap &#61; &#91;
-    RGBAf&#40;0.0, 0.0, 0.0, 0.0&#41;,
-    RGBAf&#40;0.05, 0.10, 0.80, 1.0&#41;,
-    RGBAf&#40;0.0, 0.65, 1.0, 1.0&#41;,
-    RGBAf&#40;0.0, 0.90, 0.45, 1.0&#41;,
-    RGBAf&#40;1.0, 0.90, 0.0, 1.0&#41;,
-    RGBAf&#40;1.0, 0.35, 0.0, 1.0&#41;,
-    RGBAf&#40;0.85, 0.0, 0.0, 1.0&#41;
+    GLMakie.RGBAf&#40;0.0, 0.0, 0.0, 0.0&#41;,
+    GLMakie.RGBAf&#40;0.05, 0.10, 0.80, 1.0&#41;,
+    GLMakie.RGBAf&#40;0.0, 0.65, 1.0, 1.0&#41;,
+    GLMakie.RGBAf&#40;0.0, 0.90, 0.45, 1.0&#41;,
+    GLMakie.RGBAf&#40;1.0, 0.90, 0.0, 1.0&#41;,
+    GLMakie.RGBAf&#40;1.0, 0.35, 0.0, 1.0&#41;,
+    GLMakie.RGBAf&#40;0.85, 0.0, 0.0, 1.0&#41;
 &#93;
 
-fig &#61; Figure&#40;size &#61; &#40;1100, 900&#41;&#41;
+fig &#61; GLMakie.Figure&#40;size &#61; &#40;1100, 900&#41;&#41;
 
-ax &#61; Axis3&#40;
+ax &#61; GLMakie.Axis3&#40;
     fig&#91;1,1&#93;,
     xlabel &#61; &quot;x &#40;m&#41;&quot;,
     ylabel &#61; &quot;y &#40;m&#41;&quot;,
@@ -377,7 +377,7 @@ ax &#61; Axis3&#40;
     aspect &#61; :data
 &#41;
 
-volume&#33;&#40;
+GLMakie.volume&#33;&#40;
     ax,
     &#40;-LX/2, LX/2&#41;,
     &#40;-LY/2, LY/2&#41;,
@@ -389,7 +389,7 @@ volume&#33;&#40;
 &#41;
 
 # Display actual temperatures on the colourbar.
-Colorbar&#40;
+GLMakie.Colorbar&#40;
     fig&#91;1,2&#93;,
     colormap &#61; heat_colormap,
     limits &#61; &#40;0.0, T_BALL - T_ROOM&#41;,
@@ -398,10 +398,10 @@ Colorbar&#40;
         &#91;&quot;20&quot;, &quot;25&quot;, &quot;30&quot;, &quot;35&quot;, &quot;40&quot;, &quot;45&quot;, &quot;50&quot;&#93;
     &#41;,
     label &#61; &quot;Temperature &#40;°C&#41;&quot;,
-    height &#61; Relative&#40;0.75&#41;
+    height &#61; GLMakie.Relative&#40;0.75&#41;
 &#41;
 
-time_label &#61; Label&#40;
+time_label &#61; GLMakie.Label&#40;
     fig&#91;2,1:2&#93;,
     &quot;Simulation time: 0.0 s | Maximum temperature: 50.0 °C&quot;,
     fontsize &#61; 20
@@ -443,7 +443,7 @@ output_times &#61; range&#40;
 # Generate the animated GIF
 # &#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;
 
-record&#40;
+GLMakie.record&#40;
     fig,
     GIF_FILE,
     1:NUMBER_OF_FRAMES;
@@ -476,7 +476,7 @@ record&#40;
 
     # Update the volume-rendering observable.
     copyto&#33;&#40;deltaT_obs&#91;&#93;, deltaT&#41;
-    notify&#40;deltaT_obs&#41;
+    GLMakie.notify&#40;deltaT_obs&#41;
 
     # Calculate maximum physical temperature.
     maximum_temperature &#61; maximum&#40;T&#41;
