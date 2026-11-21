@@ -19,7 +19,7 @@ using Printf
 # ============================================================
 
 const T_ROOM = 20.0
-const T_BALL = 50.0
+const T_BALL = 100.0
 
 const ALPHA = 1.0e-5
 const RADIUS = 0.10
@@ -32,7 +32,7 @@ const NX = 64
 const NY = 64
 const NZ = 64
 
-const SIMULATION_TIME = 3600.0
+const SIMULATION_TIME = 1800.0
 
 const NUMBER_OF_FRAMES = 600
 const FRAME_RATE = 20
