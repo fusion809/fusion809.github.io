@@ -34,35 +34,40 @@ jobs:
     #   Julia packages which may be required to successfully build your site.
     #   The last line should be `optimize()` though you may want to give it
     #   specific arguments, see the documentation or ?optimize in the REPL.
-    - run: xvfb-run -a julia -e '
-            using Pkg; Pkg.activate("."); Pkg.add([Pkg.PackageSpec(url="https://github.com/fusion809/FunctionIntegrator.jl", rev="v0.6.1"), Pkg.PackageSpec(name="NodeJS"), Pkg.PackageSpec(name="Franklin"), Pkg.PackageSpec(name="PyPlot"), Pkg.PackageSpec(name="Interpolations"), Pkg.PackageSpec(name="DataFrames"), Pkg.PackageSpec(name="StaticArrays"), Pkg.PackageSpec(name="FFTW"), Pkg.PackageSpec(name="Plots"), Pkg.PackageSpec(name="GLMakie"),Pkg.PackageSpec(name="Colors"), Pkg.PackageSpec(name="Measures"), Pkg.PackageSpec(name="DifferentialEquations"), Pkg.PackageSpec(name="Printf"), Pkg.PackageSpec(name="LaTeXStrings"), Pkg.PackageSpec(name="PlotlyJS")]);
-            using NodeJS; run(`$(npm_cmd()) install highlight.js`);
-            using Franklin;
-            Pkg.instantiate();
-            using DifferentialEquations, Plots, LaTeXStrings;
-            gif_scripts = Tuple{String,String}[];
-            for (root, dirs, files) in walkdir(".")
-                filter!(dir -> !(dir in [".git", "__site", "node_modules"]), dirs);
-                for name in files
-                    endswith(name, ".md") || continue;
-                    md_file = joinpath(root, name);
-                    content = read(md_file, String);
-                    for source_match in eachmatch(r"fidello/code/[^\s{}]+\.jl", content)
-                        source_file = source_match.match;
-                        isfile(source_file) || continue;
-                        code_text = read(source_file, String);
-                        occursin(r"(?i)\bgif\s*\(|\.gif\b", code_text) || continue;
-                        push!(gif_scripts, (md_file, source_file));
-                    end
+    - run: |
+        xvfb-run -a julia -e '
+        using Pkg
+        Pkg.activate(".")
+        Pkg.add([Pkg.PackageSpec(url="https://github.com/fusion809/FunctionIntegrator.jl", rev="v0.6.1"), Pkg.PackageSpec(name="NodeJS"), Pkg.PackageSpec(name="Franklin"), Pkg.PackageSpec(name="PyPlot"), Pkg.PackageSpec(name="Interpolations"), Pkg.PackageSpec(name="DataFrames"), Pkg.PackageSpec(name="StaticArrays"), Pkg.PackageSpec(name="FFTW"), Pkg.PackageSpec(name="Plots"), Pkg.PackageSpec(name="GLMakie"), Pkg.PackageSpec(name="Colors"), Pkg.PackageSpec(name="Measures"), Pkg.PackageSpec(name="DifferentialEquations"), Pkg.PackageSpec(name="Printf"), Pkg.PackageSpec(name="LaTeXStrings"), Pkg.PackageSpec(name="PlotlyJS")])
+        using NodeJS
+        run(`$(npm_cmd()) install highlight.js`)
+        using Franklin
+        Pkg.instantiate()
+        using DifferentialEquations, Plots, LaTeXStrings
+
+        gif_scripts = Tuple{String,String}[]
+        for (root, dirs, files) in walkdir(".")
+            filter!(dir -> !(dir in [".git", "__site", "node_modules"]), dirs)
+            for name in files
+                endswith(name, ".md") || continue
+                md_file = joinpath(root, name)
+                content = read(md_file, String)
+                for source_match in eachmatch(r"fidello/code/[^\s{}]+\.jl", content)
+                    source_file = source_match.match
+                    isfile(source_file) || continue
+                    code_text = read(source_file, String)
+                    occursin(r"(?i)\bgif\s*\(|\.gif\b", code_text) || continue
+                    push!(gif_scripts, (md_file, source_file))
                 end
             end
-            sort!(unique!(gif_scripts));
-            isempty(gif_scripts) && error("No GIF-generating Julia listings found in Markdown files");
-            foreach(script -> begin
-                md_file, source_file = script;
-                include_string(Main, read(source_file, String), md_file);
-            end, gif_scripts);
-            include("deploy.jl")'
+        end
+        sort!(unique!(gif_scripts))
+        isempty(gif_scripts) && error("No GIF-generating Julia listings found in Markdown files")
+        foreach(gif_scripts) do script
+            md_file, source_file = script
+            include_string(Main, read(source_file, String), md_file)
+        end
+        include("deploy.jl")'
       env:
           # Allows the use of unicode characters in Plots.jl
           GKS_ENCODING: "utf8"
