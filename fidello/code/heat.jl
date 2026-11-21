@@ -11,7 +11,7 @@ for package in ("FFTW", "GLMakie")
 end
 
 using FFTW
-using GLMakie
+import GLMakie
 using Printf
 
 # ============================================================
@@ -221,22 +221,22 @@ GLMakie.activate!()
 deltaT = max.(T .- T_ROOM, 0.0)
 deltaT .= ifelse.(deltaT .>= VISUAL_THRESHOLD, deltaT, 0.0)
 
-deltaT_obs = Observable(copy(deltaT))
+deltaT_obs = GLMakie.Observable(copy(deltaT))
 
 # Original colour map.
 heat_colormap = [
-    RGBAf(0.0, 0.0, 0.0, 0.0),
-    RGBAf(0.05, 0.10, 0.80, 1.0),
-    RGBAf(0.0, 0.65, 1.0, 1.0),
-    RGBAf(0.0, 0.90, 0.45, 1.0),
-    RGBAf(1.0, 0.90, 0.0, 1.0),
-    RGBAf(1.0, 0.35, 0.0, 1.0),
-    RGBAf(0.85, 0.0, 0.0, 1.0)
+    GLMakie.RGBAf(0.0, 0.0, 0.0, 0.0),
+    GLMakie.RGBAf(0.05, 0.10, 0.80, 1.0),
+    GLMakie.RGBAf(0.0, 0.65, 1.0, 1.0),
+    GLMakie.RGBAf(0.0, 0.90, 0.45, 1.0),
+    GLMakie.RGBAf(1.0, 0.90, 0.0, 1.0),
+    GLMakie.RGBAf(1.0, 0.35, 0.0, 1.0),
+    GLMakie.RGBAf(0.85, 0.0, 0.0, 1.0)
 ]
 
-fig = Figure(size = (1100, 900))
+fig = GLMakie.Figure(size = (1100, 900))
 
-ax = Axis3(
+ax = GLMakie.Axis3(
     fig[1,1],
     xlabel = "x (m)",
     ylabel = "y (m)",
@@ -245,7 +245,7 @@ ax = Axis3(
     aspect = :data
 )
 
-volume!(
+GLMakie.volume!(
     ax,
     (-LX/2, LX/2),
     (-LY/2, LY/2),
@@ -257,7 +257,7 @@ volume!(
 )
 
 # Display actual temperatures on the colourbar.
-Colorbar(
+GLMakie.Colorbar(
     fig[1,2],
     colormap = heat_colormap,
     limits = (0.0, T_BALL - T_ROOM),
@@ -266,10 +266,10 @@ Colorbar(
         ["20", "25", "30", "35", "40", "45", "50"]
     ),
     label = "Temperature (°C)",
-    height = Relative(0.75)
+    height = GLMakie.Relative(0.75)
 )
 
-time_label = Label(
+time_label = GLMakie.Label(
     fig[2,1:2],
     "Simulation time: 0.0 s | Maximum temperature: 50.0 °C",
     fontsize = 20
@@ -311,7 +311,7 @@ output_times = range(
 # Generate the animated GIF
 # ============================================================
 
-record(
+GLMakie.record(
     fig,
     GIF_FILE,
     1:NUMBER_OF_FRAMES;
@@ -344,7 +344,7 @@ record(
 
     # Update the volume-rendering observable.
     copyto!(deltaT_obs[], deltaT)
-    notify(deltaT_obs)
+    GLMakie.notify(deltaT_obs)
 
     # Calculate maximum physical temperature.
     maximum_temperature = maximum(T)
