@@ -1,5 +1,5 @@
 @def hassim=false;
-@def title="Advanced classical mechanics and beyond: an explanation for Fidello."
+@def title="An introduction to university physics for Fidello."
 @def tag=["Mathematics", "Physics"]
 @def mintoclevel=1
 
