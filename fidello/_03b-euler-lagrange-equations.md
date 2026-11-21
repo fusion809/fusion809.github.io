@@ -8,3 +8,9 @@ $q_i$ are the $n$ degrees of freedom (or generalized coordinates) of our problem
 Next, I should explain what "degrees of freedom" are. They are essentially our variables of interest. For simpler problems, the degrees of freedom in our problem are often the spatial dimensions of our problem. For instance, if we were to study an object in free fall and we were to try to simplify our problem as much as possible and not consider any movement in the horizontal directions then $n$ could be 1 and $q_1$ would just be the height of the object above ground level.
 
 Likewise, when we study the simple pendulum &mdash; which is a problem in which we have an idealized rigid pendulum whose rod has zero mass, zero friction and for which there is absolutely no air resistance &mdash; typically we only consider a single degree of freedom, which is the angle our pendulum's rod makes with either the negative $y$ axis or the positive $x$ axis, depending on the preferences of whoever is setting up the problem. 
+
+Of course, the Euler-Lagrange equations can also be written as:
+\begin{align*}
+\dfrac{d}{dt}\dfrac{\partial L}{\partial \dot{q}_i} &= \dfrac{\partial L}{\partial q_i}.
+\end{align*}
+Which is usually the form I use when I apply them to specific problems as usually the highest order time derivatives will be on the left-hand side of this equation.
