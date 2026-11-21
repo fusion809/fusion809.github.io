@@ -13,16 +13,11 @@ We will call the left-hand side of Equation \eqref{diffL} $dL$, hence Equation \
 \begin{align}
 dL &= \sum_{i=1}^n \dfrac{\partial L}{\partial q_i} \dfrac{dq_i}{dt} dt + \dfrac{\partial L}{\partial \dot{q}_i} \dfrac{d\dot{q}_i}{dt} dt. \label{DeltaL1}
 \end{align}
-Rearranging Equations \eqref{ELE} yields that:
-\begin{align}
-\dfrac{\partial L}{\partial q_i} = \dfrac{d}{dt}\left(\dfrac{\partial L}{\partial \dot{q}_i}\right). \label{ELEnh}
-\end{align}
-If you are wondering what about if we have non-conservative forces? Would that not mean Equations \eqref{ELEnh} would not hold as there would be a missing generalized force term? Yes and in that event the Lagrangian would indeed change in time and conservation of energy would not hold, as our system would be losing energy to those non-conservative forces. 
-
-Substituting Equations \eqref{ELEnh} into Equation \eqref{DeltaL1} yields:
+We will substitute Equations \eqref{ELER} into Equation \eqref{DeltaL1}, which yields:
 \begin{align}
 dL &= \sum_{i=1}^n dt\left(\dfrac{d}{dt}\dfrac{\partial L}{\partial \dot{q}_i}\dot{q}_i + \dfrac{\partial L}{\partial \dot{q}_i}\ddot{q}_i\right). \label{DeltaL2}
 \end{align}
+If you are wondering what about if we have non-conservative forces? Would that not mean Equations \eqref{ELER} would not hold as there would be a missing generalized force term? Yes and in that event the Lagrangian would indeed change in time and conservation of energy would not hold, as our system would be losing energy to those non-conservative forces. 
 Substituting Equations \eqref{canmom} into Equation \eqref{DeltaL2} yields:
 \begin{align}
 dL &= dt\sum_{i=1}^n \left(\dfrac{dp_i}{dt} \dot{q}_i + p_i \ddot{q}_i\right)\nonumber\\

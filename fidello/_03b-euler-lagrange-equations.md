@@ -10,7 +10,7 @@ Next, I should explain what "degrees of freedom" are. They are essentially our v
 Likewise, when we study the simple pendulum &mdash; which is a problem in which we have an idealized rigid pendulum whose rod has zero mass, zero friction and for which there is absolutely no air resistance &mdash; typically we only consider a single degree of freedom, which is the angle our pendulum's rod makes with either the negative $y$ axis or the positive $x$ axis, depending on the preferences of whoever is setting up the problem. 
 
 Of course, the Euler-Lagrange equations can also be written as:
-\begin{align*}
-\dfrac{d}{dt}\dfrac{\partial L}{\partial \dot{q}_i} &= \dfrac{\partial L}{\partial q_i}.
-\end{align*}
+\begin{align}
+\dfrac{d}{dt}\dfrac{\partial L}{\partial \dot{q}_i} &= \dfrac{\partial L}{\partial q_i}.\label{ELER}
+\end{align}
 Which is usually the form I use when I apply them to specific problems as usually the highest order time derivatives will be on the left-hand side of this equation.
