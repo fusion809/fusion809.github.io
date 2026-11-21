@@ -10,6 +10,7 @@
 \includemd{fidello/_02a-maclaurin-taylor-series.md}
 \includemd{fidello/_02b-complex-numbers.md}
 \includemd{fidello/_02c-partial-derivatives.md}
+\includemd{fidello/_02ci-heat-equation.md}
 \includemd{fidello/_02d-product-notation.md}
 \includemd{fidello/_02e-differential-equations.md}
 \includemd{fidello/_03a-lagrangian-intro.md}
