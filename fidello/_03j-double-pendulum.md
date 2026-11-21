@@ -62,7 +62,7 @@ m_2 l_2^2 \ddot{\theta}_2 + m_2 l_1 l_2\ddot{\theta}_1 \cos{(\theta_2-\theta_1)}
 &= -m_2 l_1l_2 \dot{\theta}_1^2\sin{(\theta_2-\theta_1)} - m_2 gl_2\cos{\theta_2}.
 \end{align*}
 Ideally, we want one equation for $\ddot{\theta}_1$ (and $\ddot{\theta}_1$ alone) and another $\ddot{\theta}_2$. So let us put our system into matrix form:
-\begin{align*}
+\begin{align}
 \begin{bmatrix}
 (m_1+m_2)l_1^2 & m_2 l_1 l_2 \cos{(\theta_2-\theta_1)} \\
 m_2 l_1l_2 \cos{(\theta_2-\theta_1)} & m_2 l_2^2
@@ -72,11 +72,11 @@ m_2 l_1l_2 \cos{(\theta_2-\theta_1)} & m_2 l_2^2
 \end{bmatrix} &= \begin{bmatrix}
 m_2 l_1l_2 \dot{\theta}_2^2\sin{(\theta_2-\theta_1)} - (m_1+m_2)gl_1\cos{\theta_1} \\
 -m_2 l_1l_2 \dot{\theta}_1^2\sin{(\theta_2-\theta_1)} - m_2 gl_2\cos{\theta_2}
-\end{bmatrix}.
-\end{align*}
-Inverting the square matrix on the left, which we will call $A$, we get:
+\end{bmatrix}. \label{Axb}
+\end{align}
+Inverting the square matrix on the left of Equation \eqref{Axb}, which we will call $\mathbf{A}$, we get:
 \begin{align*}
-A^{-1} &= \dfrac{1}{(m_1+m_2)l_1^2 \cdot m_2 l_2^2 - (m_2 l_1 l_2 \cos{(\theta_2-\theta_1)})^2} \begin{bmatrix}
+\mathbf{A}^{-1} &= \dfrac{1}{(m_1+m_2)l_1^2 \cdot m_2 l_2^2 - (m_2 l_1 l_2 \cos{(\theta_2-\theta_1)})^2} \begin{bmatrix}
 m_2 l_2^2 & -m_2 l_1 l_2 \cos{(\theta_2-\theta_1)}\\
 -m_2 l_1l_2 \cos{(\theta_2-\theta_1)} & (m_1+m_2)l_1^2 
 \end{bmatrix} \\
@@ -93,8 +93,9 @@ m_2 l_2^2 & -m_2 l_1 l_2 \cos{(\theta_2-\theta_1)}\\
 -m_2 l_1l_2 \cos{(\theta_2-\theta_1)} & (m_1+m_2)l_1^2 
 \end{bmatrix}.
 \end{align*}
-Hence the solution to this system of equations is:
+We will call the right-hand side of Equation \eqref{Axb} $\mathbf{b}$. Hence the solution to this system of equations is:
 \begin{align*}
+\ddot{\boldsymbol{\theta}} &= \mathbf{A}^{-1}\mathbf{b} \\
 \begin{bmatrix}
 \ddot{\theta_1} \\
 \ddot{\theta_2}
@@ -132,5 +133,5 @@ m_2^2l_1 l_2^2 \sin{(\theta_2-\theta_1)} \left[l_2 \dot{\theta}_2^2 + l_1 \dot{\
 &= \dfrac{1}{(m_1+m_2\sin^2{(\theta_2-\theta_1)})l_1 l_2} \begin{bmatrix}
 l_2 \sin{(\theta_2-\theta_1)} \left[l_2 \dot{\theta}_2^2 + l_1 \dot{\theta}_1^2 \cos{(\theta_2-\theta_1)}\right]- m_1 g l_2\cos{\theta_1} - m_2 g l_2 \sin{\theta_2}\sin{(\theta_2-\theta_1)}  \\
 -l_1\sin{(\theta_2-\theta_1)}\left[m_2 l_2 \dot{\theta}_2^2 \cos{(\theta_2-\theta_1)}+(m_1+m_2)l_1 \dot{\theta}_1^2\right] + (m_1+m_2)gl_1 \sin{\theta_1}\sin{(\theta_2-\theta_1)}
-\end{bmatrix} \\
+\end{bmatrix}.
 \end{align*}
