@@ -9,6 +9,7 @@
 \includemd{fidello/_02-prerequisite-mathematics.md}
 \includemd{fidello/_02a-maclaurin-taylor-series.md}
 \includemd{fidello/_02b-complex-numbers.md}
+\includemd{fidello/_02bi-complex-analysis.md}
 \includemd{fidello/_02c-partial-derivatives.md}
 \includemd{fidello/_02ci-heat-equation.md}
 \includemd{fidello/_02d-product-notation.md}
