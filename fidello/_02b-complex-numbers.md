@@ -42,7 +42,7 @@ Hence $le^{i\theta} = x+iy$. For instance, for the complex number $2+3i$ we can 
 2+3i &= \sqrt{13}e^{i\tan^{-1}{\frac{3}{2}}}.
 \end{align*}
 ### Complex analysis
-\figure{contour}{right}{700px}{/_assets/Infinite%20semicircle.svg}{An example of a curve we might calculate the contour integral of in complex analysis.}
+\figure{contour}{right}{700px}{/assets/Infinite%20semicircle.svg}{An example of a curve we might calculate the contour integral of in complex analysis.}
 I have definitely not covered everything within the field of complex numbers. There's a field of maths known as complex analysis where we combine calculus and complex numbers. In it, we learn, among other things, how to integrate along curves (or contours) in the complex plane and that there is an extension of Taylor series to the complex plane called the Laurent series. In it, we write:
 \begin{align}
 f(z) &= \sum_{n=-\infty}^{\infty} a_n (z-z_0)^n
