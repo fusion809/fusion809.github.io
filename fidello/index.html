@@ -153,7 +153,7 @@ using Printf
 const T_ROOM &#61; 20.0
 const T_BALL &#61; 100.0
 
-const ALPHA &#61; 1.0e-5
+const ALPHA &#61; 1e-5
 const RADIUS &#61; 0.10
 
 const LX &#61; 1.0
@@ -169,34 +169,20 @@ const SIMULATION_TIME &#61; 1800.0
 const NUMBER_OF_FRAMES &#61; 600
 const FRAME_RATE &#61; 20
 
-const GIF_FILE &#61; &quot;heat_equation_3d.gif&quot;
+const OUTPUT_FILE &#61; &quot;heat_equation_3d.gif&quot;
 
-# Only display regions at least this many degrees
-# above room temperature.
-#
-# This affects visualisation only.
-const VISUAL_THRESHOLD &#61; 1.0
-
-# Width of the smooth transition at the edge of the
-# initially hot sphere, measured in grid cells.
-#
-# A wider transition substantially reduces high-frequency
-# Fourier components and therefore reduces Gibbs oscillations.
+# Smooth transition between the hot region and room temperature.
 const TRANSITION_CELLS &#61; 6.0
 
-# Adaptive RKF45 tolerances.
-const RELTOL &#61; 1.0e-7
-const ABSTOL &#61; 1.0e-6
+# RKF45 tolerances.
+const RELTOL &#61; 1e-7
+const ABSTOL &#61; 1e-6
 
 const INITIAL_DT &#61; 0.05
 const MAX_DT &#61; 2.0
-const MIN_DT &#61; 1.0e-9
+const MIN_DT &#61; 1e-9
 
-# Conservative fraction of the RKF45 negative-real-axis
-# stability limit used for the diffusion timestep.
-#
-# This is deliberately conservative because the heat equation
-# is a stiff system when represented spectrally.
+# Conservative explicit-RK stability restriction.
 const STABILITY_FACTOR &#61; 0.50
 
 # &#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;
@@ -207,20 +193,54 @@ dx &#61; LX / NX
 dy &#61; LY / NY
 dz &#61; LZ / NZ
 
-x &#61; collect&#40;&#40;0:NX-1&#41; .* dx .- LX/2&#41;
-y &#61; collect&#40;&#40;0:NY-1&#41; .* dy .- LY/2&#41;
-z &#61; collect&#40;&#40;0:NZ-1&#41; .* dz .- LZ/2&#41;
+x &#61; collect&#40;&#40;0:NX-1&#41; .* dx .- LX / 2&#41;
+y &#61; collect&#40;&#40;0:NY-1&#41; .* dy .- LY / 2&#41;
+z &#61; collect&#40;&#40;0:NZ-1&#41; .* dz .- LZ / 2&#41;
 
-const TRANSITION_WIDTH &#61;
-    TRANSITION_CELLS * max&#40;dx, dy, dz&#41;
+# &#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;
+# Smooth initial hot sphere
+# &#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;
+
+const TRANSITION_WIDTH &#61; TRANSITION_CELLS * max&#40;dx, dy, dz&#41;
+
+function smootherstep&#40;s&#41;
+    return s^3 * &#40;10.0 &#43; s * &#40;-15.0 &#43; 6.0 * s&#41;&#41;
+end
+
+function initial_temperature&#40;r&#41;
+    inner_radius &#61; RADIUS - TRANSITION_WIDTH / 2
+    outer_radius &#61; RADIUS &#43; TRANSITION_WIDTH / 2
+
+    if r &lt;&#61; inner_radius
+        return T_BALL
+    elseif r &gt;&#61; outer_radius
+        return T_ROOM
+    else
+        s &#61; &#40;r - inner_radius&#41; / TRANSITION_WIDTH
+        weight &#61; 1.0 - smootherstep&#40;s&#41;
+
+        return T_ROOM &#43; &#40;T_BALL - T_ROOM&#41; * weight
+    end
+end
+
+T &#61; Array&#123;Float64&#125;&#40;undef, NX, NY, NZ&#41;
+
+for k in 1:NZ
+    for j in 1:NY
+        for i in 1:NX
+            r &#61; sqrt&#40;x&#91;i&#93;^2 &#43; y&#91;j&#93;^2 &#43; z&#91;k&#93;^2&#41;
+            T&#91;i, j, k&#93; &#61; initial_temperature&#40;r&#41;
+        end
+    end
+end
 
 # &#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;
 # Fourier spectral Laplacian
 # &#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;
 
-kx &#61; 2π .* FFTW.fftfreq&#40;NX, 1/dx&#41;
-ky &#61; 2π .* FFTW.fftfreq&#40;NY, 1/dy&#41;
-kz &#61; 2π .* FFTW.fftfreq&#40;NZ, 1/dz&#41;
+kx &#61; 2π .* FFTW.fftfreq&#40;NX, 1 / dx&#41;
+ky &#61; 2π .* FFTW.fftfreq&#40;NY, 1 / dy&#41;
+kz &#61; 2π .* FFTW.fftfreq&#40;NZ, 1 / dz&#41;
 
 KX &#61; reshape&#40;kx, NX, 1, 1&#41;
 KY &#61; reshape&#40;ky, 1, NY, 1&#41;
@@ -232,193 +252,107 @@ lambda &#61; -ALPHA .* &#40;
     KZ.^2
 &#41;
 
-# Largest magnitude eigenvalue of the discrete Fourier
-# representation of the Laplacian.
-lambda_max_abs &#61; maximum&#40;abs.&#40;lambda&#41;&#41;
-
-# Conservative timestep based on the fastest Fourier mode.
-#
-# RKF45 has a finite stability region on the negative real axis.
-# Using a conservative factor here prevents the adaptive error
-# controller from taking an apparently accurate but unstable
-# timestep for rapidly decaying high-frequency modes.
-dt_stability &#61; STABILITY_FACTOR / lambda_max_abs
-
-# &#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;
-# Smooth initial spherical temperature distribution
-# &#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;
-
-# Quintic smootherstep:
-#
-# f&#40;s&#41; &#61; 6s^5 - 15s^4 &#43; 10s^3
-#
-# f&#40;0&#41; &#61; 0
-# f&#40;1&#41; &#61; 1
-#
-# The first and second derivatives vanish at both endpoints.
-
-function smootherstep&#40;s&#41;
-
-    return s^3 * &#40;
-        10.0 &#43;
-        s * &#40;
-            -15.0 &#43;
-            6.0*s
-        &#41;
-    &#41;
-end
-
-function initial_temperature&#40;r&#41;
-
-    inner_radius &#61;
-        RADIUS - TRANSITION_WIDTH / 2
-
-    outer_radius &#61;
-        RADIUS &#43; TRANSITION_WIDTH / 2
-
-    if r &lt;&#61; inner_radius
-
-        return T_BALL
-
-    elseif r &gt;&#61; outer_radius
-
-        return T_ROOM
-
-    else
-
-        s &#61; &#40;
-            r - inner_radius
-        &#41; / TRANSITION_WIDTH
-
-        weight &#61; 1.0 - smootherstep&#40;s&#41;
-
-        return T_ROOM &#43;
-               &#40;T_BALL - T_ROOM&#41; * weight
-    end
-end
-
-T &#61; Array&#123;Float64&#125;&#40;undef, NX, NY, NZ&#41;
-
-for k in 1:NZ, j in 1:NY, i in 1:NX
-
-    r &#61; sqrt&#40;
-        x&#91;i&#93;^2 &#43;
-        y&#91;j&#93;^2 &#43;
-        z&#91;k&#93;^2
-    &#41;
-
-    T&#91;i,j,k&#93; &#61; initial_temperature&#40;r&#41;
-end
-
-# &#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;
-# Heat equation right-hand side
-# &#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;
-
 function heat_rhs&#40;u, lambda&#41;
-
-    return real.&#40;
-        ifft&#40;
-            lambda .* fft&#40;u&#41;
-        &#41;
-    &#41;
+    return real.&#40;ifft&#40;lambda .* fft&#40;u&#41;&#41;&#41;
 end
 
 # &#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;
-# Runge–Kutta–Fehlberg 4&#40;5&#41;
+# RKF45
 # &#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;
 
 function rkf45_step&#40;u, h, lambda&#41;
 
-    k1 &#61; heat_rhs&#40;
-        u,
-        lambda
-    &#41;
+    k1 &#61; heat_rhs&#40;u, lambda&#41;
 
     k2 &#61; heat_rhs&#40;
-        u .&#43;
-        h .* &#40;1/4&#41; .* k1,
+        u .&#43; h .* &#40;1 / 4&#41; .* k1,
         lambda
     &#41;
 
     k3 &#61; heat_rhs&#40;
-        u .&#43;
-        h .* &#40;
-            &#40;3/32&#41; .* k1 .&#43;
-            &#40;9/32&#41; .* k2
+        u .&#43; h .* &#40;
+            &#40;3 / 32&#41; .* k1 .&#43;
+            &#40;9 / 32&#41; .* k2
         &#41;,
         lambda
     &#41;
 
     k4 &#61; heat_rhs&#40;
-        u .&#43;
-        h .* &#40;
-            &#40;1932/2197&#41; .* k1 .-
-            &#40;7200/2197&#41; .* k2 .&#43;
-            &#40;7296/2197&#41; .* k3
+        u .&#43; h .* &#40;
+            &#40;1932 / 2197&#41; .* k1 .-
+            &#40;7200 / 2197&#41; .* k2 .&#43;
+            &#40;7296 / 2197&#41; .* k3
         &#41;,
         lambda
     &#41;
 
     k5 &#61; heat_rhs&#40;
-        u .&#43;
-        h .* &#40;
-            &#40;439/216&#41; .* k1 .-
+        u .&#43; h .* &#40;
+            &#40;439 / 216&#41; .* k1 .-
             8 .* k2 .&#43;
-            &#40;3680/513&#41; .* k3 .-
-            &#40;845/4104&#41; .* k4
+            &#40;3680 / 513&#41; .* k3 .-
+            &#40;845 / 4104&#41; .* k4
         &#41;,
         lambda
     &#41;
 
     k6 &#61; heat_rhs&#40;
-        u .&#43;
-        h .* &#40;
-            -&#40;8/27&#41; .* k1 .&#43;
+        u .&#43; h .* &#40;
+            -&#40;8 / 27&#41; .* k1 .&#43;
             2 .* k2 .-
-            &#40;3544/2565&#41; .* k3 .&#43;
-            &#40;1859/4104&#41; .* k4 .-
-            &#40;11/40&#41; .* k5
+            &#40;3544 / 2565&#41; .* k3 .&#43;
+            &#40;1859 / 4104&#41; .* k4 .-
+            &#40;11 / 40&#41; .* k5
         &#41;,
         lambda
     &#41;
 
-    u4 &#61; u .&#43;
-        h .* &#40;
-            &#40;25/216&#41; .* k1 .&#43;
-            &#40;1408/2565&#41; .* k3 .&#43;
-            &#40;2197/4104&#41; .* k4 .-
-            &#40;1/5&#41; .* k5
-        &#41;
+    # Fourth-order estimate.
+    u4 &#61; u .&#43; h .* &#40;
+        &#40;25 / 216&#41; .* k1 .&#43;
+        &#40;1408 / 2565&#41; .* k3 .&#43;
+        &#40;2197 / 4104&#41; .* k4 .-
+        &#40;1 / 5&#41; .* k5
+    &#41;
 
-    u5 &#61; u .&#43;
-        h .* &#40;
-            &#40;16/135&#41; .* k1 .&#43;
-            &#40;6656/12825&#41; .* k3 .&#43;
-            &#40;28561/56430&#41; .* k4 .-
-            &#40;9/50&#41; .* k5 .&#43;
-            &#40;2/55&#41; .* k6
-        &#41;
+    # Fifth-order estimate.
+    u5 &#61; u .&#43; h .* &#40;
+        &#40;16 / 135&#41; .* k1 .&#43;
+        &#40;6656 / 12825&#41; .* k3 .&#43;
+        &#40;28561 / 56430&#41; .* k4 .-
+        &#40;9 / 50&#41; .* k5 .&#43;
+        &#40;2 / 55&#41; .* k6
+    &#41;
 
     return u5, u4
 end
 
 # &#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;
-# Adaptive integration
+# Stable timestep restriction
 # &#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;
 
-function integrate_to&#33;&#40;
-    u,
-    t,
-    target,
-    h,
-    lambda,
+lambda_max_abs &#61; maximum&#40;abs.&#40;lambda&#41;&#41;
+
+dt_stability &#61; STABILITY_FACTOR / lambda_max_abs
+
+@printf&#40;
+    &quot;Maximum |lambda| &#61; &#37;.8f s^-1\n&quot;,
+    lambda_max_abs
+&#41;
+
+@printf&#40;
+    &quot;RKF45 stability timestep limit &#61; &#37;.8f s\n&quot;,
     dt_stability
 &#41;
 
+# &#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;
+# Adaptive integration
+# &#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;
+
+function integrate_to&#33;&#40;u, t, target, h, lambda&#41;
+
     while t &lt; target
 
-        # Apply both the requested maximum timestep and
-        # the diffusion stability restriction.
         h &#61; min&#40;
             h,
             MAX_DT,
@@ -427,47 +361,37 @@ function integrate_to&#33;&#40;
         &#41;
 
         if h &lt; MIN_DT
-
             error&#40;
                 &quot;RKF45 timestep fell below MIN_DT at t &#61; &#36;t&quot;
             &#41;
         end
 
-        u5, u4 &#61; rkf45_step&#40;
-            u,
-            h,
-            lambda
-        &#41;
+        u5, u4 &#61; rkf45_step&#40;u, h, lambda&#41;
 
         scale &#61;
             ABSTOL .&#43;
-            RELTOL .* max.&#40;
-                abs.&#40;u&#41;,
-                abs.&#40;u5&#41;
+            RELTOL .* max.&#40;abs.&#40;u&#41;, abs.&#40;u5&#41;&#41;
+
+        error_norm &#61;
+            maximum&#40;
+                abs.&#40;u5 .- u4&#41; ./ scale
             &#41;
 
-        error_norm &#61; maximum&#40;
-            abs.&#40;u5 .- u4&#41; ./ scale
-        &#41;
-
         if error_norm &lt;&#61; 1.0
-
             u .&#61; u5
             t &#43;&#61; h
         end
 
-        factor &#61; if error_norm &#61;&#61; 0.0
-
-            5.0
-
-        else
-
-            clamp&#40;
-                0.9 * error_norm^&#40;-0.2&#41;,
-                0.2,
+        factor &#61;
+            if error_norm &#61;&#61; 0.0
                 5.0
-            &#41;
-        end
+            else
+                clamp&#40;
+                    0.9 * error_norm^&#40;-0.2&#41;,
+                    0.2,
+                    5.0
+                &#41;
+            end
 
         h &#61; min&#40;
             MAX_DT,
@@ -480,286 +404,142 @@ function integrate_to&#33;&#40;
 end
 
 # &#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;
-# Three-dimensional visualisation
+# GLMakie visualisation
 # &#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;
 
 GLMakie.activate&#33;&#40;&#41;
 
-# Temperature excess above room temperature.
-#
-# The threshold is applied only to the rendered field.
-# T itself is never modified.
-
-deltaT &#61; max.&#40;
-    T .- T_ROOM,
-    0.0
-&#41;
-
-deltaT .&#61; ifelse.&#40;
-    deltaT .&gt;&#61; VISUAL_THRESHOLD,
-    deltaT,
-    0.0
-&#41;
-
-deltaT_obs &#61;
-    GLMakie.Observable&#40;
-        copy&#40;deltaT&#41;
-    &#41;
-
-# Original colour map.
-heat_colormap &#61; &#91;
-
-    GLMakie.RGBAf&#40;
-        0.0, 0.0, 0.0, 0.0
-    &#41;,
-
-    GLMakie.RGBAf&#40;
-        0.05, 0.10, 0.80, 1.0
-    &#41;,
-
-    GLMakie.RGBAf&#40;
-        0.0, 0.65, 1.0, 1.0
-    &#41;,
-
-    GLMakie.RGBAf&#40;
-        0.0, 0.90, 0.45, 1.0
-    &#41;,
-
-    GLMakie.RGBAf&#40;
-        1.0, 0.90, 0.0, 1.0
-    &#41;,
-
-    GLMakie.RGBAf&#40;
-        1.0, 0.35, 0.0, 1.0
-    &#41;,
-
-    GLMakie.RGBAf&#40;
-        0.85, 0.0, 0.0, 1.0
-    &#41;
-&#93;
-
 fig &#61; GLMakie.Figure&#40;
-    size &#61; &#40;1100, 900&#41;
+    size &#61; &#40;1000, 800&#41;
 &#41;
 
 ax &#61; GLMakie.Axis3&#40;
-    fig&#91;1,1&#93;,
-    xlabel &#61; &quot;x &#40;m&#41;&quot;,
-    ylabel &#61; &quot;y &#40;m&#41;&quot;,
-    zlabel &#61; &quot;z &#40;m&#41;&quot;,
-    aspect &#61; :data
+    fig&#91;1, 1&#93;,
+    aspect &#61; &#40;1, 1, 1&#41;,
+    xlabel &#61; &quot;&quot;,
+    ylabel &#61; &quot;&quot;,
+    zlabel &#61; &quot;&quot;,
+    title &#61; &quot;&quot;
 &#41;
 
-GLMakie.volume&#33;&#40;
+# &#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;
+# Temperature colour map
+#
+# 20 °C is opaque white, matching the background.
+# &#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;
+
+temperature_colormap &#61; &#91;
+    GLMakie.RGBAf&#40;1.0, 1.0, 1.0, 1.0&#41;,  # 20 °C
+    GLMakie.RGBAf&#40;0.05, 0.10, 0.80, 1.0&#41;,
+    GLMakie.RGBAf&#40;0.0, 0.65, 1.0, 1.0&#41;,
+    GLMakie.RGBAf&#40;0.0, 0.90, 0.45, 1.0&#41;,
+    GLMakie.RGBAf&#40;1.0, 0.90, 0.0, 1.0&#41;,
+    GLMakie.RGBAf&#40;1.0, 0.35, 0.0, 1.0&#41;,
+    GLMakie.RGBAf&#40;0.85, 0.0, 0.0, 1.0&#41;
+&#93;
+
+# Makie expects volume dimensions as two endpoints.
+volume_plot &#61; GLMakie.volume&#33;&#40;
     ax,
-    &#40;-LX/2, LX/2&#41;,
-    &#40;-LY/2, LY/2&#41;,
-    &#40;-LZ/2, LZ/2&#41;,
-    deltaT_obs;
+    &#40;x&#91;1&#93;, x&#91;end&#93;&#41;,
+    &#40;y&#91;1&#93;, y&#91;end&#93;&#41;,
+    &#40;z&#91;1&#93;, z&#91;end&#93;&#41;,
+    T;
     algorithm &#61; :mip,
-    colormap &#61; heat_colormap,
-    colorrange &#61; &#40;
-        0.0,
-        T_BALL - T_ROOM
+    colormap &#61; temperature_colormap,
+    colorrange &#61; &#40;T_ROOM, T_BALL&#41;
+&#41;
+
+# &#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;
+# Colourbar
+# &#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;
+
+GLMakie.Colorbar&#40;
+    fig&#91;1, 2&#93;,
+    volume_plot;
+    label &#61; &quot;Temperature &#40;°C&#41;&quot;,
+    ticks &#61; &#40;
+        collect&#40;20.0:10.0:100.0&#41;,
+        string.&#40;collect&#40;20.0:10.0:100.0&#41;&#41;
     &#41;
 &#41;
 
-# Display actual temperatures on the colourbar.
-GLMakie.Colorbar&#40;
-    fig&#91;1,2&#93;,
-    colormap &#61; heat_colormap,
-    limits &#61; &#40;
-        0.0,
-        T_BALL - T_ROOM
-    &#41;,
-    ticks &#61; &#40;
-        collect&#40;
-            0.0:10.0:80.0
-        &#41;,
-        string.&#40;
-            collect&#40;
-                20.0:10.0:100.0
-            &#41;
-        &#41;
-    &#41;,
-    label &#61; &quot;Temperature &#40;°C&#41;&quot;,
-    height &#61; GLMakie.Relative&#40;0.75&#41;
-&#41;
+# &#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;
+# Simulation time display
+# &#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;
 
 time_label &#61; GLMakie.Label&#40;
-    fig&#91;2,1:2&#93;,
-    &quot;Simulation time: 0.0 s | Maximum temperature: 100.0 °C&quot;,
+    fig&#91;2, 1&#93;,
+    &quot;Simulation time: 0.00 s&quot;;
+    tellwidth &#61; false,
     fontsize &#61; 20
 &#41;
 
 # &#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;
-# Prepare simulation state
+# Animation
 # &#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;
 
-println&#40;&#41;
-
-println&#40;
-    &quot;Starting heat equation simulation...&quot;
-&#41;
-
-println&#40;
-    &quot;Grid: &#36;&#40;NX&#41; × &#36;&#40;NY&#41; × &#36;&#40;NZ&#41;&quot;
-&#41;
-
-println&#40;
-    &quot;Simulation duration: &#36;&#40;SIMULATION_TIME&#41; seconds&quot;
-&#41;
-
-println&#40;
-    &quot;Output frames: &#36;&#40;NUMBER_OF_FRAMES&#41;&quot;
-&#41;
-
-println&#40;
-    &quot;GIF playback duration: &quot; *
-    &quot;&#36;&#40;NUMBER_OF_FRAMES / FRAME_RATE&#41; seconds&quot;
-&#41;
-
-println&#40;
-    &quot;Visualisation threshold: &quot; *
-    &quot;&#36;&#40;VISUAL_THRESHOLD&#41; °C&quot;
-&#41;
-
-println&#40;
-    &quot;Smooth transition width: &quot; *
-    &quot;&#36;&#40;TRANSITION_WIDTH&#41; m &quot; *
-    &quot;&#40;&#36;&#40;TRANSITION_CELLS&#41; grid cells&#41;&quot;
-&#41;
-
-println&#40;
-    @sprintf&#40;
-        &quot;Maximum Fourier eigenvalue magnitude: &#37;.8f s^-1&quot;,
-        lambda_max_abs
+frame_times &#61; collect&#40;
+    range&#40;
+        0.0,
+        SIMULATION_TIME;
+        length &#61; NUMBER_OF_FRAMES
     &#41;
 &#41;
 
-println&#40;
-    @sprintf&#40;
-        &quot;Diffusion stability timestep: &#37;.8f s&quot;,
-        dt_stability
-    &#41;
-&#41;
+u &#61; copy&#40;T&#41;
 
-println&#40;&#41;
+# Keep mutable animation state local to the record callback.
+let t &#61; 0.0,
+    dt &#61; min&#40;INITIAL_DT, dt_stability&#41;
 
-println&#40;
-    @sprintf&#40;
-        &quot;Initial temperature range: &#37;.8f–&#37;.8f °C&quot;,
-        minimum&#40;T&#41;,
-        maximum&#40;T&#41;
-    &#41;
-&#41;
+    GLMakie.record&#40;
+        fig,
+        OUTPUT_FILE,
+        enumerate&#40;frame_times&#41;;
+        framerate &#61; FRAME_RATE
+    &#41; do &#40;frame_number, target_time&#41;
 
-println&#40;
-    @sprintf&#40;
-        &quot;Initial mean temperature: &#37;.8f °C&quot;,
-        sum&#40;T&#41; / length&#40;T&#41;
-    &#41;
-&#41;
+        if frame_number &gt; 1
 
-# Persistent integration state.
-t_state &#61; Ref&#40;0.0&#41;
-h_state &#61; Ref&#40;INITIAL_DT&#41;
+            t, dt &#61; integrate_to&#33;&#40;
+                u,
+                t,
+                target_time,
+                dt,
+                lambda
+            &#41;
 
-output_times &#61; range&#40;
-    0.0,
-    SIMULATION_TIME,
-    length &#61; NUMBER_OF_FRAMES
-&#41;
+        end
 
-# &#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;
-# Generate the animated GIF
-# &#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;&#61;
+        # Update the volume with the actual temperature field.
+        volume_plot&#91;4&#93; &#61; u
 
-GLMakie.record&#40;
-    fig,
-    GIF_FILE,
-    1:NUMBER_OF_FRAMES;
-    framerate &#61; FRAME_RATE
-&#41; do frame
+        # Update simulation time.
+        time_label.text &#61;
+            @sprintf&#40;
+                &quot;Simulation time: &#37;.2f s&quot;,
+                target_time
+            &#41;
 
-    # Target time for this frame.
-    target_time &#61;
-        output_times&#91;frame&#93;
+        # Console diagnostics.
+        Tmin &#61; minimum&#40;u&#41;
+        Tmax &#61; maximum&#40;u&#41;
 
-    # Advance the physical temperature field.
-    new_t, new_h &#61;
-        integrate_to&#33;&#40;
-            T,
-            t_state&#91;&#93;,
-            target_time,
-            h_state&#91;&#93;,
-            lambda,
-            dt_stability
-        &#41;
-
-    t_state&#91;&#93; &#61; new_t
-    h_state&#91;&#93; &#61; new_h
-
-    # Calculate temperature excess for visualisation.
-    #
-    # T itself remains untouched.
-    @. deltaT &#61;
-        max&#40;
-            T - T_ROOM,
-            0.0
-        &#41;
-
-    @. deltaT &#61;
-        ifelse&#40;
-            deltaT &gt;&#61; VISUAL_THRESHOLD,
-            deltaT,
-            0.0
-        &#41;
-
-    # Update the volume-rendering observable.
-    copyto&#33;&#40;
-        deltaT_obs&#91;&#93;,
-        deltaT
-    &#41;
-
-    GLMakie.notify&#40;
-        deltaT_obs
-    &#41;
-
-    # Calculate maximum physical temperature.
-    maximum_temperature &#61;
-        maximum&#40;T&#41;
-
-    minimum_temperature &#61;
-        minimum&#40;T&#41;
-
-    # Update the timer and temperature display.
-    time_label.text&#91;&#93; &#61;
-        @sprintf&#40;
-            &quot;Simulation time: &#37;.1f s &#40;&#37;.1f min&#41; | Maximum temperature: &#37;.4f °C&quot;,
-            t_state&#91;&#93;,
-            t_state&#91;&#93; / 60,
-            maximum_temperature
-        &#41;
-
-    # Print progress and diagnostics.
-    println&#40;
-        @sprintf&#40;
-            &quot;Frame &#37;3d/&#37;3d | t &#61; &#37;8.2f s | dt &#61; &#37;.5f s | T range &#61; &#37;.8f–&#37;.8f °C&quot;,
-            frame,
+        @printf&#40;
+            &quot;Frame &#37;4d/&#37;d | t &#61; &#37;8.2f s | dt &#61; &#37;.5f s | T range &#61; &#37;.8f–&#37;.8f °C\n&quot;,
+            frame_number,
             NUMBER_OF_FRAMES,
-            t_state&#91;&#93;,
-            h_state&#91;&#93;,
-            minimum_temperature,
-            maximum_temperature
+            target_time,
+            dt,
+            Tmin,
+            Tmax
         &#41;
-    &#41;
+    end
 end
 
 println&#40;&#41;
-println&#40;
-    &quot;GIF successfully generated: &#36;GIF_FILE&quot;
-&#41;</code></pre> <figure id=heatan  style="float: right;"><img src="/heat_equation_3d.gif" width=800px /><figcaption> Animation showing the heat distribution of an object and how it changes over time.</figcaption></figure> <h2 id=product_notation ><a href="#product_notation" class=header-anchor >Product notation</a></h2></p> <p>When we wish to denote a multi-term product, we can use the product notation \(\displaystyle \prod_{i=1}^n a_i\). This essentially says that we multiply \(a_1\), \(a_2\), \(a_3\) and so on until \(a_n\). It is similar to the summation notation \(\sum_{i=1}^n a_i\), with the difference being that instead of addition signs being between each term we have multiplication signs instead. </p> <p>For instance, for the product \(\displaystyle \prod_{i=1}^n 2i-1\) we would multiply \(2i-1\) for \(i=1\), \(i=2\), \(i=3\), and so forth up until \(i=n\). If we set \(n=3\), then: <div class=nonumber >\[\begin{aligned} \displaystyle \prod_{i=1}^3 2i-1 &= (2(1)-1) \times (2(2)-1) \times (2(3)-1) \\ &= 1 \times 3 \times 5 \\ &= 15. \end{aligned}\]</div> <h2 id=differential_equations ><a href="#differential_equations" class=header-anchor >Differential equations</a></h2></p> <p>As this article involves a lot of differential equations, I thought I should cover a little on how we categorize and solve differential equations. </p> <p>Differential equations are equations that involve the derivatives of a function and typically the aim in solving them is to determine the original function they pertain to. For instance, say you had the uncoupled, linear, homogeneous, first-order ordinary differential equation: <div class=nonumber >\[\begin{aligned} y' &= y. \end{aligned}\]</div> Our aim would be to determine what \(y\) is. </p> <p>I also showed you this equation to clarify some of the terminology we use with regards to differential equations. So why is this equation <em>uncoupled</em>? Because it is a single equation and not a series of differential equations we need to solve simultaneously. Why is this equation <em>linear</em>? Well, it is because there is no term that is nonlinear in \(y\) or its derivative&#40;s&#41;. For instance, if the equation was \(y'=y^2\), that would make it nonlinear because the right-hand side is nonlinear in \(y\). Why is it an <em>ordinary</em> differential equation &#40;ODE&#41;? Because there are only ordinary derivatives, not partial derivatives. Why is it <em>homogeneous</em>? Because there are no terms that do not involve \(y\) or its derivative&#40;s&#41;. Why is it <em>first order</em>? Because the highest order derivative in the equation is the first derivative. </p> <p>In this example, there would be a few ways we could solve this differential equation. As luckily each of the adjectives we used to describe it implies it should be easy to solve. One option is we could divide both sides by \(y\) and integrate on \(x\): <div class=nonumber >\[\begin{aligned} \int \dfrac{\dfrac{dy}{dx}}{y} dx &= \int dx \\ \int \dfrac{dy}{y} &= \int dx \\ \ln{y} &= x + C \end{aligned}\]</div> Exponentiating both sides yields: <div class=nonumber >\[\begin{aligned} y &= e^{x+C}. \end{aligned}\]</div> Note that we have one unknown constant, \(C\). This is actually a result of our equation being a first-order ordinary differential equation. \(n\)th-order ordinary differential equations give us \(n\) unknown constants and we need to use any initial conditions or other conditions we are given to solve for them. For instance, if \(y(0)=1\), then we can substitute this into our solution to find \(C\). <div class=nonumber >\[\begin{aligned} 1 &= e^{0+C} \\ e^C &= 1 \\ \implies C &= 0. \end{aligned}\]</div> Hence: <div class=nonumber >\[\begin{aligned} y &= e^x. \end{aligned}\]</div></p> <h3 id=numerical_solution_techniques ><a href="#numerical_solution_techniques" class=header-anchor >Numerical solution techniques</a></h3> <p>In this article, however, we will encounter differential equations that have no exact solutions and for which numerical solutions are necessary. Numerical solutions are actually quite interesting, because they typically involve applications of the Taylor series that we have covered. For instance, say we wanted to numerically integrate the differential equation \(y'=y\) with initial condition \(y(0)=1\). Then if we wanted to approximate \(y(h)\) for some small \(h\), we could use the Maclaurin series of \(y\): <div class=nonumber >\[\begin{aligned} y(h) &= y(0) + hy'(0) + \dfrac{h^2}{2}y''(0) + \dfrac{h^3}{6}y'''(0) + ... \end{aligned}\]</div> Now our differential equation makes it very easy to approximate any arbitrary-order derivative of \(y\) at \(x=0\), as we can just keep differentiating our differential equation and find that \(\dfrac{d^n y}{dx^n} = y\) for any \(n\in \mathbb{Z}^{+}\). But say we did not have that luxury. Then what we could do is just approximate \(y(h)\) using the first two terms of the Maclaurin series: <div class=nonumber >\[\begin{aligned} y(h) &\approx y(0) + hy'(0) \\ &= 1 + h \cdot 1 \\ &= 1 + h. \end{aligned}\]</div> We can then approximate \(y(2h)\) using the same method: <div class=nonumber >\[\begin{aligned} y(2h) &\approx y(h) + hy'(h) \\ &\approx (1+h) + h(1+h) \\ &= 1 + 2h + h^2. \end{aligned}\]</div> And continue on from there. This method, where we truncate the Taylor series at the first two terms and numerically approximate our solution by applying this approximation at each step, is called Euler&#39;s method. As we ignore so many terms in the Taylor series, this method is said to be rather inaccurate. Specifically, we call it a first-order method. </p> <p>Other schemes for numerical integration of ordinary differential equations also exist. Among the most popular are the Runge-Kutta family of methods, such as the Runge-Kutta fourth-order method. These methods do not utilize higher-order derivatives, but they use clever tricks for approximating the solution to higher-order accuracy using only first-order derivatives.</p> <p>To illustrate how we use these methods, let us try to solve the differential equation:</p> <div class=nonumber >\[\begin{aligned} y' &= y, \hspace{0.2cm} y(0)=1. \end{aligned}\]</div> <p>So our starting point is going to be \(x=0\). We will call this point \(x_0\); the value of \(y\) at \(x_0\) we will call \(y_0\). The fourth-order Runge-Kutta method, says that we should approximate \(y\) at \(x_0+h\) for the differential equation: <div class=nonumber >\[\begin{aligned} y' &= f(x,y) \end{aligned}\]</div> using: <div class=nonumber >\[\begin{aligned} k_1 &= hf(x_0, y_0) \\ k_2 &= hf\left(x_0 + \dfrac{h}{2}, y_0 + \dfrac{k_1}{2}\right) \\ k_3 &= hf\left(x_0 + \dfrac{h}{2}, y_0 + \dfrac{k_2}{2}\right) \\ k_4 &= hf(x_0 + h, y_0 + k_3) \\ y(x_0+h) &= y_0 + \dfrac{1}{6}(k_1 + 2k_2 + 2k_3 + k_4). \end{aligned}\]</div> And we should repeat this process for all subsequent points we wish to approximate \(y(x)\) at. That is why, when we write numerical integration schemes like this we usually use \(x_n\) to denote the \(n\)th \(x\) value for which we are approximating \(y\). </p> <p>In Code Listing <span class=code-listing-ref  data-label=differential ><a class=code-listing-number  href="#"></a></span>, I have implemented both Euler&#39;s method and the Runge-Kutta fourth-order method to solve this differential equation. The results are displayed, along with the exact solution, in a table below the code. Here we used \(h=0.2\) and continued the approximation for five steps, until \(x=1\). As you can see, the Runge-Kutta fourth-order method is much more accurate than Euler&#39;s method.</p> <span class=code-listing-marker  data-label=differential >Differential equation solution code.</span> <pre><code class=language-julia >using DataFrames;
+println&#40;&quot;Animation written to: &#36;OUTPUT_FILE&quot;&#41;</code></pre> <figure id=heatan  style="float: right;"><img src="/heat_equation_3d.gif" width=800px /><figcaption> Animation showing the heat distribution of an object and how it changes over time.</figcaption></figure> <h2 id=product_notation ><a href="#product_notation" class=header-anchor >Product notation</a></h2></p> <p>When we wish to denote a multi-term product, we can use the product notation \(\displaystyle \prod_{i=1}^n a_i\). This essentially says that we multiply \(a_1\), \(a_2\), \(a_3\) and so on until \(a_n\). It is similar to the summation notation \(\sum_{i=1}^n a_i\), with the difference being that instead of addition signs being between each term we have multiplication signs instead. </p> <p>For instance, for the product \(\displaystyle \prod_{i=1}^n 2i-1\) we would multiply \(2i-1\) for \(i=1\), \(i=2\), \(i=3\), and so forth up until \(i=n\). If we set \(n=3\), then: <div class=nonumber >\[\begin{aligned} \displaystyle \prod_{i=1}^3 2i-1 &= (2(1)-1) \times (2(2)-1) \times (2(3)-1) \\ &= 1 \times 3 \times 5 \\ &= 15. \end{aligned}\]</div> <h2 id=differential_equations ><a href="#differential_equations" class=header-anchor >Differential equations</a></h2></p> <p>As this article involves a lot of differential equations, I thought I should cover a little on how we categorize and solve differential equations. </p> <p>Differential equations are equations that involve the derivatives of a function and typically the aim in solving them is to determine the original function they pertain to. For instance, say you had the uncoupled, linear, homogeneous, first-order ordinary differential equation: <div class=nonumber >\[\begin{aligned} y' &= y. \end{aligned}\]</div> Our aim would be to determine what \(y\) is. </p> <p>I also showed you this equation to clarify some of the terminology we use with regards to differential equations. So why is this equation <em>uncoupled</em>? Because it is a single equation and not a series of differential equations we need to solve simultaneously. Why is this equation <em>linear</em>? Well, it is because there is no term that is nonlinear in \(y\) or its derivative&#40;s&#41;. For instance, if the equation was \(y'=y^2\), that would make it nonlinear because the right-hand side is nonlinear in \(y\). Why is it an <em>ordinary</em> differential equation &#40;ODE&#41;? Because there are only ordinary derivatives, not partial derivatives. Why is it <em>homogeneous</em>? Because there are no terms that do not involve \(y\) or its derivative&#40;s&#41;. Why is it <em>first order</em>? Because the highest order derivative in the equation is the first derivative. </p> <p>In this example, there would be a few ways we could solve this differential equation. As luckily each of the adjectives we used to describe it implies it should be easy to solve. One option is we could divide both sides by \(y\) and integrate on \(x\): <div class=nonumber >\[\begin{aligned} \int \dfrac{\dfrac{dy}{dx}}{y} dx &= \int dx \\ \int \dfrac{dy}{y} &= \int dx \\ \ln{y} &= x + C \end{aligned}\]</div> Exponentiating both sides yields: <div class=nonumber >\[\begin{aligned} y &= e^{x+C}. \end{aligned}\]</div> Note that we have one unknown constant, \(C\). This is actually a result of our equation being a first-order ordinary differential equation. \(n\)th-order ordinary differential equations give us \(n\) unknown constants and we need to use any initial conditions or other conditions we are given to solve for them. For instance, if \(y(0)=1\), then we can substitute this into our solution to find \(C\). <div class=nonumber >\[\begin{aligned} 1 &= e^{0+C} \\ e^C &= 1 \\ \implies C &= 0. \end{aligned}\]</div> Hence: <div class=nonumber >\[\begin{aligned} y &= e^x. \end{aligned}\]</div></p> <h3 id=numerical_solution_techniques ><a href="#numerical_solution_techniques" class=header-anchor >Numerical solution techniques</a></h3> <p>In this article, however, we will encounter differential equations that have no exact solutions and for which numerical solutions are necessary. Numerical solutions are actually quite interesting, because they typically involve applications of the Taylor series that we have covered. For instance, say we wanted to numerically integrate the differential equation \(y'=y\) with initial condition \(y(0)=1\). Then if we wanted to approximate \(y(h)\) for some small \(h\), we could use the Maclaurin series of \(y\): <div class=nonumber >\[\begin{aligned} y(h) &= y(0) + hy'(0) + \dfrac{h^2}{2}y''(0) + \dfrac{h^3}{6}y'''(0) + ... \end{aligned}\]</div> Now our differential equation makes it very easy to approximate any arbitrary-order derivative of \(y\) at \(x=0\), as we can just keep differentiating our differential equation and find that \(\dfrac{d^n y}{dx^n} = y\) for any \(n\in \mathbb{Z}^{+}\). But say we did not have that luxury. Then what we could do is just approximate \(y(h)\) using the first two terms of the Maclaurin series: <div class=nonumber >\[\begin{aligned} y(h) &\approx y(0) + hy'(0) \\ &= 1 + h \cdot 1 \\ &= 1 + h. \end{aligned}\]</div> We can then approximate \(y(2h)\) using the same method: <div class=nonumber >\[\begin{aligned} y(2h) &\approx y(h) + hy'(h) \\ &\approx (1+h) + h(1+h) \\ &= 1 + 2h + h^2. \end{aligned}\]</div> And continue on from there. This method, where we truncate the Taylor series at the first two terms and numerically approximate our solution by applying this approximation at each step, is called Euler&#39;s method. As we ignore so many terms in the Taylor series, this method is said to be rather inaccurate. Specifically, we call it a first-order method. </p> <p>Other schemes for numerical integration of ordinary differential equations also exist. Among the most popular are the Runge-Kutta family of methods, such as the Runge-Kutta fourth-order method. These methods do not utilize higher-order derivatives, but they use clever tricks for approximating the solution to higher-order accuracy using only first-order derivatives.</p> <p>To illustrate how we use these methods, let us try to solve the differential equation:</p> <div class=nonumber >\[\begin{aligned} y' &= y, \hspace{0.2cm} y(0)=1. \end{aligned}\]</div> <p>So our starting point is going to be \(x=0\). We will call this point \(x_0\); the value of \(y\) at \(x_0\) we will call \(y_0\). The fourth-order Runge-Kutta method, says that we should approximate \(y\) at \(x_0+h\) for the differential equation: <div class=nonumber >\[\begin{aligned} y' &= f(x,y) \end{aligned}\]</div> using: <div class=nonumber >\[\begin{aligned} k_1 &= hf(x_0, y_0) \\ k_2 &= hf\left(x_0 + \dfrac{h}{2}, y_0 + \dfrac{k_1}{2}\right) \\ k_3 &= hf\left(x_0 + \dfrac{h}{2}, y_0 + \dfrac{k_2}{2}\right) \\ k_4 &= hf(x_0 + h, y_0 + k_3) \\ y(x_0+h) &= y_0 + \dfrac{1}{6}(k_1 + 2k_2 + 2k_3 + k_4). \end{aligned}\]</div> And we should repeat this process for all subsequent points we wish to approximate \(y(x)\) at. That is why, when we write numerical integration schemes like this we usually use \(x_n\) to denote the \(n\)th \(x\) value for which we are approximating \(y\). </p> <p>In Code Listing <span class=code-listing-ref  data-label=differential ><a class=code-listing-number  href="#"></a></span>, I have implemented both Euler&#39;s method and the Runge-Kutta fourth-order method to solve this differential equation. The results are displayed, along with the exact solution, in a table below the code. Here we used \(h=0.2\) and continued the approximation for five steps, until \(x=1\). As you can see, the Runge-Kutta fourth-order method is much more accurate than Euler&#39;s method.</p> <span class=code-listing-marker  data-label=differential >Differential equation solution code.</span> <pre><code class=language-julia >using DataFrames;
 N &#61; 5;
 a &#61; 0;
 b &#61; 1;
