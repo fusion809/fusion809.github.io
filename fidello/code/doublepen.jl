@@ -120,8 +120,7 @@ anim = @animate for i in eachindex(sol.t)
         ylims=(ymin, ymax),
         aspect_ratio=:equal,
         xlabel=L"x\ (\mathrm{metres})",
-        ylabel=L"y\ (\mathrm{metres})",
-        title="Double pendulum"
+        ylabel=L"y\ (\mathrm{metres})"
     )
 
     scatter!(
