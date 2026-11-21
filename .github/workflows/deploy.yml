@@ -40,14 +40,28 @@ jobs:
             using Franklin;
             Pkg.instantiate();
             using DifferentialEquations, Plots, LaTeXStrings;
-            foreach(file -> begin
-                content = read(file, String);
-                listing = match(r"\\codelisting\{[^}]*\}\{[^}]*\}\{[^}]*\}\{([^}]+)\}", content);
-                isnothing(listing) && error("No four-argument Julia code listing found in $file");
-                code_text = read(strip(listing.captures[1]), String);
-                occursin(r"gif\s*\(", code_text) || error("No GIF generation code found in $file");
-                include_string(Main, code_text, file);
-            end, ["fidello/_01-introduction.md", "fidello/_03fii-wo-air-resistance.md", "fidello/_03h-three-body-problem.md", "fidello/_03i-n-body-problem.md", "fidello/_03fiii-w-air-resistance.md", "fidello/_04biii-projectile-motion.md"]);
+            gif_scripts = Tuple{String,String}[];
+            for (root, dirs, files) in walkdir(".")
+                filter!(dir -> !(dir in [".git", "__site", "node_modules"]), dirs);
+                for name in files
+                    endswith(name, ".md") || continue;
+                    md_file = joinpath(root, name);
+                    content = read(md_file, String);
+                    for source_match in eachmatch(r"fidello/code/[^\s{}]+\.jl", content)
+                        source_file = source_match.match;
+                        isfile(source_file) || continue;
+                        code_text = read(source_file, String);
+                        occursin(r"(?i)\bgif\s*\(|\.gif\b", code_text) || continue;
+                        push!(gif_scripts, (md_file, source_file));
+                    end
+                end
+            end
+            sort!(unique!(gif_scripts));
+            isempty(gif_scripts) && error("No GIF-generating Julia listings found in Markdown files");
+            foreach(script -> begin
+                md_file, source_file = script;
+                include_string(Main, read(source_file, String), md_file);
+            end, gif_scripts);
             include("deploy.jl")'
       env:
           # Allows the use of unicode characters in Plots.jl
