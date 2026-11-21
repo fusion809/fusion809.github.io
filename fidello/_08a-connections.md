@@ -1,4 +1,4 @@
-# Connections to other branches of physics
+# Connections
 Classical mechanics provides the foundation that other fields of physics build on. 
 
 For instance, special relativity provides corrections (often called relativistic corrections) to classical mechanics to account for effects that become pronounced at speeds comparable to $c$, the speed of light in a vacuum. General relativity accounts for these effects, too, but also accounts for effects most noticeable in strong gravitational fields. 
