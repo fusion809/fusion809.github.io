@@ -1,4 +1,4 @@
-### Classical limit of special relativity's kinetic energy
+### Classical limit of kinetic energy
 Using the Maclaurin series, we are going to show that $T(v)$ is well approximated by $T=\dfrac{mv^2}{2}$ when $v << c$. To make things simpler for ourselves, we will consider the Maclaurin series of the function:
 
 \begin{align*}
