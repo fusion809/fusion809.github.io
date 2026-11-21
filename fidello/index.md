@@ -17,12 +17,14 @@
 \includemd{fidello/_03c-stationary-action-principle.md}
 \includemd{fidello/_03d-terminology.md}
 \includemd{fidello/_03e-non-conservative-forces.md}
+\includemd{fidello/_03f-examples.md}
 \includemd{fidello/_03fi-single-pendulum.md}
 \includemd{fidello/_03fii-wo-air-resistance.md}
 \includemd{fidello/_03fiii-w-air-resistance.md}
 \includemd{fidello/_03g-two-body-problem.md}
 \includemd{fidello/_03h-three-body-problem.md}
 \includemd{fidello/_03i-n-body-problem.md}
+\includemd{fidello/_03j-double-pendulum.md}
 \includemd{fidello/_04a-hamiltonian-mechanics.md}
 \includemd{fidello/_04b-examples.md}
 \includemd{fidello/_04bi-simple-pendulum.md} 

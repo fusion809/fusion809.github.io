@@ -1,4 +1,3 @@
-## Examples
 ### Single pendulum
 \figure{fig1}{right}{500px}{/fidello/pendulum.svg}{Single pendulum.}
 
