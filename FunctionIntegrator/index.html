@@ -71,13 +71,13 @@ show&#40;a&#41;</code></pre>
 <pre><code class=language-julia >using FunctionIntegrator
 a &#61; abs&#40;hermite_quadrature&#40;x -&gt; x^2, 100, 2&#41;-sqrt&#40;pi&#41;/2&#41;
 show&#40;a&#41;</code></pre>
-<pre><code class="plaintext code-output">2.4424906541753444e-15</code></pre>
+<pre><code class="plaintext code-output">2.6645352591003757e-15</code></pre>
 <h3 id=jacobi_quadrature ><a href="#jacobi_quadrature" class=header-anchor >jacobi_quadrature</a></h3>
 <p>In this example, we will approximate integral 1 and compare the result to the analytical result of \(1\). For this example, we are setting both \(\alpha\) and \(\beta\) to 1.</p>
 <pre><code class=language-julia >using FunctionIntegrator
 a &#61; abs&#40;jacobi_quadrature&#40;x -&gt; cos&#40;x&#41;, 1000, 1, 1, 0, pi/2&#41;-1&#41;;
 show&#40;a&#41;</code></pre>
-<pre><code class="plaintext code-output">1.5660949106433009e-6</code></pre>
+<pre><code class="plaintext code-output">1.5660949107543232e-6</code></pre>
 <h3 id=laguerre_quadrature ><a href="#laguerre_quadrature" class=header-anchor >laguerre_quadrature</a></h3>
 <p>In this section is the integral:</p>
 \[ \int_0^{\infty} xe^{-x} dx\]
@@ -93,7 +93,7 @@ PyPlot.savefig&#40;joinpath&#40;@OUTPUT, &quot;laguerre_plot.png&quot;&#41;, dpi
 <pre><code class=language-julia >using FunctionIntegrator
 a &#61; abs&#40;laguerre_quadrature&#40;x -&gt; x*exp&#40;-x&#41;, 100, 1&#41;-1&#41;
 show&#40;a&#41;</code></pre>
-<pre><code class="plaintext code-output">3.219646771412954e-15</code></pre>
+<pre><code class="plaintext code-output">3.1086244689504383e-15</code></pre>
 <p>\(k=2\):</p>
 <pre><code class=language-julia >using FunctionIntegrator
 a &#61; abs&#40;laguerre_quadrature&#40;x -&gt; x, 100, 2&#41;-1&#41;
@@ -116,7 +116,7 @@ show&#40;a&#41;</code></pre>
 <pre><code class=language-julia >using FunctionIntegrator
 a &#61; abs&#40;radau_quadrature&#40;x -&gt; cos&#40;x&#41;, 1000, 0, pi/2&#41;-1&#41;
 show&#40;a&#41;</code></pre>
-<pre><code class="plaintext code-output">0.0</code></pre>
+<pre><code class="plaintext code-output">1.1102230246251565e-16</code></pre>
 <h3 id=rectangleruleleft ><a href="#rectangleruleleft" class=header-anchor >rectangle&#95;rule&#95;left</a></h3>
 <p>In this section, integral 1 is being approximated and the result compared to the analytical result. </p>
 <pre><code class=language-julia >using FunctionIntegrator
@@ -447,7 +447,7 @@ PyPlot.savefig&#40;joinpath&#40;@OUTPUT, &quot;trapezoidal_error_plot.png&quot;&
     });
   }
 </script>
-    <br/>Last modified: November 20, 2026.
+    <br/>Last modified: November 21, 2026.
   </div>
 </div>
 </div>
