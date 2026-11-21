@@ -107,26 +107,30 @@ m_2 l_1l_2 \dot{\theta}_2^2\sin{(\theta_2-\theta_1)} - (m_1+m_2)gl_1\cos{\theta_
 \end{bmatrix} \\
 &= \dfrac{1}{(m_1+m_2\sin^2{(\theta_2-\theta_1)})m_2l_1^2 l_2^2} \begin{bmatrix}
 m_2^2 l_1 l_2^3 \dot{\theta}_2^2 \sin{(\theta_2-\theta_1)} - (m_1+m_2)m_2 gl_1 l_2^2 \cos{\theta_1} + m_2^2 l_1^2 l_2^2 \dot{\theta}_1^2 \cos{(\theta_2-\theta_1)}\sin{(\theta_2-\theta_1)} + m_2^2 gl_1 l_2^2 \cos{(\theta_2-\theta_1)}\cos{\theta_2} \\
--m_2^2 l_1^2 l_2^2 \dot{\theta}_2^2 \cos{(\theta_2-\theta_1)}\sin{(\theta_2-\theta_1)} + (m_1+m_2)gl_1^2 l_2\cos{(\theta_2-\theta_1)}\cos{\theta_1} - (m_1+m_2)m_2l_1^3 l_2 \dot{\theta}_1^2 \sin{(\theta_2-\theta_1)} - (m_1+m_2)m_2 gl_1^2 l_2 \cos{\theta_2}
+-m_2^2 l_1^2 l_2^2 \dot{\theta}_2^2 \cos{(\theta_2-\theta_1)}\sin{(\theta_2-\theta_1)} + (m_1+m_2)m_2 gl_1^2 l_2\cos{(\theta_2-\theta_1)}\cos{\theta_1} - (m_1+m_2)m_2l_1^3 l_2 \dot{\theta}_1^2 \sin{(\theta_2-\theta_1)} - (m_1+m_2)m_2 gl_1^2 l_2 \cos{\theta_2}
 \end{bmatrix} \\
 &= \dfrac{1}{(m_1+m_2\sin^2{(\theta_2-\theta_1)})m_2l_1^2 l_2^2} \begin{bmatrix}
 \sin{(\theta_2-\theta_1)} \left[m_2^2 l_1 l_2^3 \dot{\theta}_2^2 + m_2^2 l_1^2 l_2^2 \dot{\theta}_1^2 \cos{(\theta_2-\theta_1)}\right]- m_1 m_2 gl_1 l_2^2 \cos{\theta_1} + m_2^2 gl_1 l_2^2 (\cos{(\theta_2-\theta_1)}\cos{\theta_2}-\cos{\theta_1})  \\
--m_2 l_1^2 l_2\sin{(\theta_2-\theta_1)}\left[m_2 l_2 \dot{\theta}_2^2 \cos{(\theta_2-\theta_1)}+(m_1+m_2)l_1 \dot{\theta}_1^2\right] + (m_1+m_2)gl_1^2 l_2\left[\cos{(\theta_2-\theta_1)}\cos{\theta_1}  - \cos{\theta_2}\right]
+-m_2 l_1^2 l_2\sin{(\theta_2-\theta_1)}\left[m_2 l_2 \dot{\theta}_2^2 \cos{(\theta_2-\theta_1)}+(m_1+m_2)l_1 \dot{\theta}_1^2\right] + (m_1+m_2)m_2gl_1^2 l_2\left[\cos{(\theta_2-\theta_1)}\cos{\theta_1}  - \cos{\theta_2}\right]
 \end{bmatrix} \\
 &= \dfrac{1}{(m_1+m_2\sin^2{(\theta_2-\theta_1)})m_2l_1^2 l_2^2} \begin{bmatrix}
 \sin{(\theta_2-\theta_1)} \left[m_2^2 l_1 l_2^3 \dot{\theta}_2^2 + m_2^2 l_1^2 l_2^2 \dot{\theta}_1^2 \cos{(\theta_2-\theta_1)}\right]- m_1 m_2 gl_1 l_2^2 \cos{\theta_1} + m_2^2 gl_1 l_2^2 (\cos^2{\theta_2}\cos{\theta_1}+\sin{\theta_2}\sin{\theta_1}\cos{\theta_2}-\cos{\theta_1})  \\
--m_2 l_1^2 l_2\sin{(\theta_2-\theta_1)}\left[m_2 l_2 \dot{\theta}_2^2 \cos{(\theta_2-\theta_1)}+(m_1+m_2)l_1 \dot{\theta}_1^2\right] + (m_1+m_2)gl_1^2 l_2\left[\cos{\theta_2}\cos^2{\theta_1}+\sin{\theta_1}\sin{\theta_2}\cos{\theta_1}  - \cos{\theta_2}\right]
+-m_2 l_1^2 l_2\sin{(\theta_2-\theta_1)}\left[m_2 l_2 \dot{\theta}_2^2 \cos{(\theta_2-\theta_1)}+(m_1+m_2)l_1 \dot{\theta}_1^2\right] + (m_1+m_2)m_2gl_1^2 l_2\left[\cos{\theta_2}\cos^2{\theta_1}+\sin{\theta_1}\sin{\theta_2}\cos{\theta_1}  - \cos{\theta_2}\right]
 \end{bmatrix} \\
 &= \dfrac{1}{(m_1+m_2\sin^2{(\theta_2-\theta_1)})m_2l_1^2 l_2^2} \begin{bmatrix}
 \sin{(\theta_2-\theta_1)} \left[m_2^2 l_1 l_2^3 \dot{\theta}_2^2 + m_2^2 l_1^2 l_2^2 \dot{\theta}_1^2 \cos{(\theta_2-\theta_1)}\right]- m_1 m_2 gl_1 l_2^2 \cos{\theta_1} + m_2^2 gl_1 l_2^2 \left[-\cos{\theta_1}\sin^2{\theta_2}  + \sin{\theta_1}\sin{\theta_2}\cos{\theta_2}\right]  \\
--m_2 l_1^2 l_2\sin{(\theta_2-\theta_1)}\left[m_2 l_2 \dot{\theta}_2^2 \cos{(\theta_2-\theta_1)}+(m_1+m_2)l_1 \dot{\theta}_1^2\right] + (m_1+m_2)gl_1^2 l_2\left[-\cos{\theta_2}\sin^2{\theta_1}  + \sin{\theta_1}\sin{\theta_2}\cos{\theta_1}\right]
+-m_2 l_1^2 l_2\sin{(\theta_2-\theta_1)}\left[m_2 l_2 \dot{\theta}_2^2 \cos{(\theta_2-\theta_1)}+(m_1+m_2)l_1 \dot{\theta}_1^2\right] + (m_1+m_2)m_2 gl_1^2 l_2\left[-\cos{\theta_2}\sin^2{\theta_1}  + \sin{\theta_1}\sin{\theta_2}\cos{\theta_1}\right]
 \end{bmatrix} \\
 &= \dfrac{1}{(m_1+m_2\sin^2{(\theta_2-\theta_1)})m_2l_1^2 l_2^2} \begin{bmatrix}
 \sin{(\theta_2-\theta_1)} \left[m_2^2 l_1 l_2^3 \dot{\theta}_2^2 + m_2^2 l_1^2 l_2^2 \dot{\theta}_1^2 \cos{(\theta_2-\theta_1)}\right]- m_1 m_2 gl_1 l_2^2 \cos{\theta_1} + m_2^2 gl_1 l_2^2 \sin{\theta_2}\left[-\cos{\theta_1}\sin{\theta_2}  + \sin{\theta_1}\cos{\theta_2}\right]  \\
--m_2 l_1^2 l_2\sin{(\theta_2-\theta_1)}\left[m_2 l_2 \dot{\theta}_2^2 \cos{(\theta_2-\theta_1)}+(m_1+m_2)l_1 \dot{\theta}_1^2\right] + (m_1+m_2)gl_1^2 l_2 \sin{\theta_1}\left[-\cos{\theta_2}\sin{\theta_1}  + \sin{\theta_2}\cos{\theta_1}\right]
+-m_2 l_1^2 l_2\sin{(\theta_2-\theta_1)}\left[m_2 l_2 \dot{\theta}_2^2 \cos{(\theta_2-\theta_1)}+(m_1+m_2)l_1 \dot{\theta}_1^2\right] + (m_1+m_2)m_2gl_1^2 l_2 \sin{\theta_1}\left[-\cos{\theta_2}\sin{\theta_1}  + \sin{\theta_2}\cos{\theta_1}\right]
 \end{bmatrix} \\
 &= \dfrac{1}{(m_1+m_2\sin^2{(\theta_2-\theta_1)})m_2l_1^2 l_2^2} \begin{bmatrix}
-\sin{(\theta_2-\theta_1)} \left[m_2^2 l_1 l_2^3 \dot{\theta}_2^2 + m_2^2 l_1^2 l_2^2 \dot{\theta}_1^2 \cos{(\theta_2-\theta_1)}\right]- m_1 m_2 gl_1 l_2^2 \cos{\theta_1} - m_2^2 gl_1 l_2^2 \sin{\theta_2}\sin{(\theta_2-\theta_1)}  \\
--m_2 l_1^2 l_2\sin{(\theta_2-\theta_1)}\left[m_2 l_2 \dot{\theta}_2^2 \cos{(\theta_2-\theta_1)}+(m_1+m_2)l_1 \dot{\theta}_1^2\right] + (m_1+m_2)gl_1^2 l_2 \sin{\theta_1}\sin{(\theta_2-\theta_1)}
-\end{bmatrix}.
+m_2^2l_1 l_2^2 \sin{(\theta_2-\theta_1)} \left[l_2 \dot{\theta}_2^2 + l_1 \dot{\theta}_1^2 \cos{(\theta_2-\theta_1)}\right]- m_1 m_2 gl_1 l_2^2 \cos{\theta_1} - m_2^2 gl_1 l_2^2 \sin{\theta_2}\sin{(\theta_2-\theta_1)}  \\
+-m_2 l_1^2 l_2\sin{(\theta_2-\theta_1)}\left[m_2 l_2 \dot{\theta}_2^2 \cos{(\theta_2-\theta_1)}+(m_1+m_2)l_1 \dot{\theta}_1^2\right] + (m_1+m_2)m_2gl_1^2 l_2 \sin{\theta_1}\sin{(\theta_2-\theta_1)}
+\end{bmatrix} \\
+&= \dfrac{1}{(m_1+m_2\sin^2{(\theta_2-\theta_1)})l_1 l_2} \begin{bmatrix}
+l_2 \sin{(\theta_2-\theta_1)} \left[l_2 \dot{\theta}_2^2 + l_1 \dot{\theta}_1^2 \cos{(\theta_2-\theta_1)}\right]- m_1 g l_2\cos{\theta_1} - m_2 g l_2 \sin{\theta_2}\sin{(\theta_2-\theta_1)}  \\
+-l_1\sin{(\theta_2-\theta_1)}\left[m_2 l_2 \dot{\theta}_2^2 \cos{(\theta_2-\theta_1)}+(m_1+m_2)l_1 \dot{\theta}_1^2\right] + (m_1+m_2)gl_1 \sin{\theta_1}\sin{(\theta_2-\theta_1)}
+\end{bmatrix} \\
 \end{align*}
