@@ -53,7 +53,7 @@ Do you remember from your maths class that the second derivative of a function i
 
 Equation \eqref{heat} therefore essentially says that if we are in a region where there is a really cold point surrounded by hotter points, the temperature will increase in the short-term for that colder point. Whereas the equation says that the temperature will decrease in a hotter region surrounded by colder points. If you have ever brought something hot out of the oven, or put something of room temperature into the fridge or freezer, this should make intuitive sense to you. 
 
-Code Listing \coderef{heat} solves the heat equation in 3D for a $50^{\circ}C$ sphere in a $20^{\circ}C$ room. 
+Code Listing \coderef{heat} solves the heat equation in 3D for a $50^{\circ}C$ sphere in a $20^{\circ}C$ room.
 
 \codelisting{heat}{Heat equation simulation code.}{./code/heat}{fidello/code/heat.jl}
-\figure{heatan}{right}{600px}{/heat_equation_3d.gif}{Animation showing the heat distribution of an object and how it changes over time.}
+\figure{heatan}{right}{800px}{/heat_equation_3d.gif}{Animation showing the heat distribution of an object and how it changes over time.}

@@ -241,7 +241,6 @@ ax = GLMakie.Axis3(
     xlabel = "x (m)",
     ylabel = "y (m)",
     zlabel = "z (m)",
-    title = "Three-dimensional heat diffusion",
     aspect = :data
 )
 
