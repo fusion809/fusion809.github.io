@@ -1,0 +1,8 @@
+
+Starting heat equation simulation...
+Grid: 64 × 64 × 64
+Simulation duration: 3600.0 seconds
+Output frames: 600
+GIF playback duration: 30.0 seconds
+Visualisation threshold: 1.0 °C
+
