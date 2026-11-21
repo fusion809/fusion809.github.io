@@ -6,7 +6,7 @@
    version="1.1"
    id="svg8"
    inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
-   sodipodi:docname="Circle with radius 2 and enclave.svg"
+   sodipodi:docname="Circle with radius 2 and enclave (2).svg"
    inkscape:export-filename="/home/fusion809/Documents/2 length circle with pole at x=2.png"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96"
@@ -137,9 +137,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.70710678"
-     inkscape:cx="897.31851"
-     inkscape:cy="343.6539"
+     inkscape:zoom="1"
+     inkscape:cx="524.5"
+     inkscape:cy="689"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -173,10 +173,18 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(23.128053,38.806591)">
-    <path
+    <circle
        id="green-base-shape"
-       style="fill:#00ff00;stroke:none"
-       d="M 99.623111 0.83956785 A 99.43042 99.43042 0 0 0 0.19248736 100.27019 A 99.43042 99.43042 0 0 0 99.623111 199.7003 A 99.43042 99.43042 0 0 0 197.15204 119.6225 A 19.82542 19.82542 0 0 1 196.99391 119.62302 A 19.82542 19.82542 0 0 1 177.16877 99.797869 A 19.82542 19.82542 0 0 1 196.95981 79.972205 A 99.43042 99.43042 0 0 0 99.623111 0.83956785 z " />
+       cx="99.623146"
+       cy="100.26996"
+       r="99.43042"
+       style="fill:#00ff00;stroke:none" />
+    <circle
+       id="white-enclave-cutout"
+       cx="196.99406"
+       cy="99.797707"
+       r="19.82542"
+       style="fill:#ffffff;stroke:none" />
     <g
        id="g856"
        style="stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none">
