@@ -20,6 +20,12 @@ figure {
     margin: 1px !important;
 }
 
+figure:has(> img[width="100%"]),
+figure:has(> img[width="100vw"]) {
+    float: none !important;
+    width: 100%;
+}
+
 figcaption::before {
     content: "Figure " counter(figure) ":";
     font-weight: bold;
