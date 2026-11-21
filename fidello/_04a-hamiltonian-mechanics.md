@@ -49,3 +49,5 @@ To account for non-conservative forces, we merely add the corresponding generali
 \dot{p}_i &= -\dfrac{\partial H}{\partial q_i} + Q_i. \label{HNConseq1}
 \end{align}
 Hamilton's equations creates a new kind of space that we can visualize our solution on that has dimensions $q_i$ and $p_i$. This type of space is known as phase space.
+
+I should also mention that there is a class of methods for numerically integrating Hamilton's equations specifically; they are called symplectic integration schemes. Unlike the numerical integration schemes we have previously covered, symplectic integration schemes are designed to specifically keep the Hamiltonian unchanged over time. Other numerical integration techniques when applied to Hamilton's system with small step sizes or low error tolerances will largely leave the Hamiltonian unchanged in the short-term. Over the long-term small errors can accumulate to markedly change the Hamiltonian. 
