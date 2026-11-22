@@ -22,12 +22,15 @@ As for our covariant basis vectors they are, since we are using Cartesian coordi
 \dfrac{\partial \mathbf{r}}{\partial x} &= (1, 0) \\
 \dfrac{\partial \mathbf{r}}{\partial y} &= (0, 1).
 \end{align*}
-Hence our generalized non-conservative forces are:
+Hence the generalized non-conservative force in the $x$ direction is:
 \begin{align*}
 Q_x &= -\dfrac{\rho C_D A\sqrt{\dot{x}^2+\dot{y}^2}}{2} (\dot{x}, \dot{y}) \cdot (1,0) \\
 &= -\dfrac{\rho C_D A\dot{x}\sqrt{\dot{x}^2+\dot{y}^2}}{2}\\
 &= -\dfrac{\rho C_D A\dfrac{p_x}{m}\sqrt{\dfrac{p_x^2}{m^2}+\dfrac{p_y^2}{m^2}}}{2}\\
-&= -\dfrac{\rho C_D A p_x\sqrt{p_x^2+p_y^2}}{2m^2}\\
+&= -\dfrac{\rho C_D A p_x\sqrt{p_x^2+p_y^2}}{2m^2}.
+\end{align*}
+As for the generalized non-conservative force in the $y$ direction, it is:
+\begin{align*}
 Q_y &= -\dfrac{\rho C_D A\sqrt{\dot{x}^2+\dot{y}^2}}{2} (\dot{x}, \dot{y}) \cdot (0, 1)\\
 &= -\dfrac{\rho C_D A\dot{y}\sqrt{\dot{x}^2+\dot{y}^2}}{2} \\
 &= -\dfrac{\rho C_D A\dfrac{p_y}{m}\sqrt{\dfrac{p_x^2}{m^2}+\dfrac{p_y^2}{m^2}}}{2}\\
@@ -51,6 +54,6 @@ Hence for projectile motion they become:
 Code Listing \coderef{projmotion} is Julia code for implementing an animation based on Equations \eqref{dxpm}, \eqref{dypm}, \eqref{dpxpm} and \eqref{dpypm}.
 
 \codelisting{projmotion}{Projectile motion simulation code.}{./code/projmotion}{fidello/code/projmotion.jl}
-Below is an animation of projectile motion created using the above Julia code.
+Figure \figref{projectile_motion} is an animation of projectile motion created using the above Julia code.
 
 \figure{projectile_motion}{right}{500px}{/projectile_motion.gif}{Projectile motion animation.}

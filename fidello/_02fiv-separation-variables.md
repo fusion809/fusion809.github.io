@@ -85,7 +85,7 @@ Interestingly:
 \end{align*}
 This yields:
 \begin{align*}
-\sin{\dfrac{n \pi}{L} x}\sin{\dfrac{m \pi}{L} x} &= \dfrac{1}{2}\left(\cos{\left(\dfrac{m-n}{\pi}{L}x\right)} - \cos{\left(\dfrac{m+n}{\pi}{L}x\right)}\right).
+\sin{\left(\dfrac{n \pi}{L} x\right)}\sin{\left(\dfrac{m \pi}{L} x\right)} &= \dfrac{1}{2}\left(\cos{\left(\dfrac{m-n}{\pi}{L}x\right)} - \cos{\left(\dfrac{m+n}{\pi}{L}x\right)}\right).
 \end{align*}
 Hence our integral becomes:
 \begin{align*}
