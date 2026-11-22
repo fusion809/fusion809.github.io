@@ -192,7 +192,7 @@ y''_1 &= \dfrac{11y_5 - 56y_4 + 114y_3 - 104y_2+35y_1}{12h^2} \\
 y''_{N-1} &= \dfrac{35y_{N-1}-104y_{N-2}+114y_{N-3}-56y_{N-4}+11y_{N-5}}{12h^2}.
 \end{align*}
 We would obtain Code Listing 
-\codelisting{findiff4th}.{Implementation of the fourth-order finite difference method for $y''=-y$, $y(0)=y(2\pi)=1$.}{./code/findiff4th}{fidello/code/findiff4th.jl}
+\codelisting{findiff4th}{Implementation of the fourth-order finite difference method for $y''=-y$, $y(0)=y(2\pi)=1$.}{./code/findiff4th}{fidello/code/findiff4th.jl}
 Which produces the output:
 \output{./code/findiff4th}
 As we can see, it is more accurate, but definitely not perfect. 

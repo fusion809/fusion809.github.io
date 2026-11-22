@@ -38,11 +38,14 @@ function eager_generate_js()
         elseif hassim
           ids   = split(match(r"ids *= *\[([^\]]+)\]", content).captures[1], r"\s*,\s*")
           funcs   = split(match(r"funcs *= *\[([^\]]+)\]", content).captures[1], r"\s*,\s*")
+        else
+          ids = String[]
+          funcs = String[]
         end
 
         try
           render_js(page_title, page_type, page_vars)
-          render_rmPlot(funcs, ids, page_title)
+          isempty(funcs) || render_rmPlot(funcs, ids, page_title)
         catch e
           @warn "Error generating JS for $file" exception = e
         end
