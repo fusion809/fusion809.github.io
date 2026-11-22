@@ -72,11 +72,22 @@ function generate_fidello_saved_outputs()
 
     open(output_file, "w") do output
       redirect_stdout(output) do
-        include_string(Main, read(source_file, String), source_file)
+        listing_module = Module(gensym(:FidelloListing))
+        Base.include_string(listing_module, read(source_file, String), source_file)
       end
     end
 
     filesize(output_file) > 0 || error("Fidello listing produced empty output: $source_file")
+
+    if source_name == "chebyshev"
+      source = read(source_file, String)
+      n_match = match(r"(?m)^\s*n\s*=\s*(\d+)\s*$", source)
+      isnothing(n_match) && error("Could not determine Chebyshev grid size from $source_file")
+      expected_rows = parse(Int, n_match.captures[1]) + 1
+      output_header = first(eachline(output_file))
+      startswith(output_header, "$(expected_rows)×5 DataFrame") ||
+        error("Chebyshev output is stale: expected $expected_rows rows for n=$(expected_rows - 1), got '$output_header'")
+    end
   end
 end
 

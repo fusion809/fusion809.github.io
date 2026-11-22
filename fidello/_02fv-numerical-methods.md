@@ -267,13 +267,13 @@ Where $L$ is a parameter we might need to fine tune to get the best approximatio
 \end{align*}
 Which allows us to calculate our differentiation matrix for $x$. It will simply be:
 \begin{align*}
-\mathbf{D}_x &= \mathbf{Diag}(\dfrac{(1-y_j)^2}{2L})\mathbf{D}_y.
+\mathbf{D}_x &= \mathbf{Diag}\left(\dfrac{(1-y_j)^2}{2L}\right)\mathbf{D}_y.
 \end{align*}
-Where $\mathbf{Diag}(\dfrac{(1-y_j)^2}{2L})$ represents a matrix with $\dfrac{(1-y_j)^2}{2L}$ on its diagonal and $0$ in all other entries. $\mathbf{D}_x$ is the differentiation matrix with respect to $x$ and $\mathbf{D}_y$ is the differentiation matrix with respect to $y$. Hence we will be solving the matrix equation:
+Where $\mathbf{Diag}\left(\dfrac{(1-y_j)^2}{2L}\right)$ represents a matrix with $\dfrac{(1-y_j)^2}{2L}$ on its diagonal and $0$ in all other entries. $\mathbf{D}_x$ is the differentiation matrix with respect to $x$ and $\mathbf{D}_y$ is the differentiation matrix with respect to $y$. Hence we will be solving the matrix equation:
 \begin{align*}
-\left(\mathbf{D}_x^2 - \mathrm{Diag}{x_j}\right)u &= 0.
+\left(\mathbf{D}_x^2 - \mathbf{Diag}{(x_j)}\right)u &= 0.
 \end{align*}
-Although, we will need to remove two rows from this matrix equation and replace them with rows to impose our boundary conditions. Say these rows are rows 1 and $n+1$, which correspond to $x_0$ and $x_n$. Say we call $\mathbf{A}=\mathbf{D}_x^2 - \mathrm{Diag}{x_j}$. Then the edits we make to impose our boundary conditions will be setting $A_{1,1} = 1$ and all remaining entries in the first row of $\mathbf{A}$ will be $0$. As for $A_{n+1,n+1}=1$ and all other entries in the $n+1$th row of $\mathbf{A}$ will be zero. 
+Although, we will need to remove two rows from this matrix equation and replace them with rows to impose our boundary conditions. Say these rows are rows 1 and $n+1$, which correspond to $x_0$ and $x_n$. Say we call $\mathbf{A}=\mathbf{D}_x^2 - \mathbf{Diag}{(x_j)}$. Then the edits we make to impose our boundary conditions will be setting $A_{1,1} = 1$ and all remaining entries in the first row of $\mathbf{A}$ will be $0$. As for $A_{n+1,n+1}=1$ and all other entries in the $n+1$th row of $\mathbf{A}$ will be zero. 
 
 \codelisting{chebyshev}{Solution to the Airy equation via Chebyshev spectral method.}{./code/chebyshev}{fidello/code/chebyshev.jl}
 \output{./code/chebyshev}
