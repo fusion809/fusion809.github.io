@@ -1,1 +1,0 @@
-Plots.AnimatedGif("/home/runner/work/fusion809.github.io/fusion809.github.io/Simple_pendulum.gif")

@@ -28,29 +28,29 @@
 <pre><code class=language-julia >using FunctionIntegrator
 a &#61; abs&#40;adaptive_simpsons_rule&#40;x -&gt; cos&#40;x&#41;, 0, pi/2&#41;-1&#41;;
 show&#40;a&#41;</code></pre>
-<pre><code class="plaintext code-output">5.160893934430533e-11</code></pre>
+<p><span style="color:red;">// `\output{./code/adaptive_simpsons}`: could not find the relevant output file. //</span></p>
 <h3 id=chebyshev_quadrature ><a href="#chebyshev_quadrature" class=header-anchor >chebyshev_quadrature</a></h3>
 <p>In the following examples, integral 1 is being computing and the result compared to the analytical solution of \(1\). The value being printed is difference between the computed solution and the analytical solution.</p>
 <p>\(k=1\):</p>
 <pre><code class=language-julia >using FunctionIntegrator
 a &#61; abs&#40;chebyshev_quadrature&#40;x -&gt; cos&#40;x&#41;, 1000, 1, 0, pi/2&#41; - 1&#41;;
 show&#40;a&#41;</code></pre>
-<pre><code class="plaintext code-output">3.229819229844111e-7</code></pre>
+<p><span style="color:red;">// `\output{./code/chebyshev1}`: could not find the relevant output file. //</span></p>
 <p>\(k=2\):</p>
 <pre><code class=language-julia >using FunctionIntegrator
 a &#61; abs&#40;chebyshev_quadrature&#40;x -&gt; cos&#40;x&#41;, 1000, 2, 0, pi/2&#41; - 1&#41;;
 show&#40;a&#41;</code></pre>
-<pre><code class="plaintext code-output">6.446739612142594e-7</code></pre>
+<p><span style="color:red;">// `\output{./code/chebyshev2}`: could not find the relevant output file. //</span></p>
 <p>\(k=3\):</p>
 <pre><code class=language-julia >using FunctionIntegrator
 a &#61; abs&#40;chebyshev_quadrature&#40;x -&gt; cos&#40;x&#41;, 1000, 3, 0, pi/2&#41; - 1&#41;;
 show&#40;a&#41;</code></pre>
-<pre><code class="plaintext code-output">6.453189423938355e-7</code></pre>
+<p><span style="color:red;">// `\output{./code/chebyshev3}`: could not find the relevant output file. //</span></p>
 <p>\(k=4\):</p>
 <pre><code class=language-julia >using FunctionIntegrator
 a &#61; abs&#40;chebyshev_quadrature&#40;x -&gt; cos&#40;x&#41;, 1000, 4, 0, pi/2&#41; - 1&#41;;
 show&#40;a&#41;</code></pre>
-<pre><code class="plaintext code-output">3.226596514416258e-7</code></pre>
+<p><span style="color:red;">// `\output{./code/chebyshev4}`: could not find the relevant output file. //</span></p>
 <h3 id=hermite_quadrature ><a href="#hermite_quadrature" class=header-anchor >hermite_quadrature</a></h3>
 <p>In the following examples is the integral:</p>
 \[ \int_{-\infty}^{\infty} x^2 e^{-x^2} dx.\]
@@ -61,23 +61,23 @@ clf&#40;&#41;
 y &#61; &#40;x.^2&#41;.*exp.&#40;-x.^2&#41;;
 PyPlot.plot&#40;x,y&#41;
 PyPlot.savefig&#40;joinpath&#40;@OUTPUT, &quot;hermite_plot.png&quot;&#41;, dpi&#61;80&#41;</code></pre>
-<img src="/assets/FunctionIntegrator/code/output/hermite_plot.png" alt="">
+<p><span style="color:red;">// Image matching '/assets/FunctionIntegrator/code/output/hermite_plot.png' not found. //</span></p>
 <p><br> \(k=1\):</p>
 <pre><code class=language-julia >using FunctionIntegrator
 a &#61; abs&#40;hermite_quadrature&#40;x -&gt; x^2*exp&#40;-x^2&#41;, 100, 1&#41;-sqrt&#40;pi&#41;/2&#41;
 show&#40;a&#41;</code></pre>
-<pre><code class="plaintext code-output">2.6645352591003757e-15</code></pre>
+<p><span style="color:red;">// `\output{./code/hermite1}`: could not find the relevant output file. //</span></p>
 <p>\(k=2\):</p>
 <pre><code class=language-julia >using FunctionIntegrator
 a &#61; abs&#40;hermite_quadrature&#40;x -&gt; x^2, 100, 2&#41;-sqrt&#40;pi&#41;/2&#41;
 show&#40;a&#41;</code></pre>
-<pre><code class="plaintext code-output">2.6645352591003757e-15</code></pre>
+<p><span style="color:red;">// `\output{./code/hermite2}`: could not find the relevant output file. //</span></p>
 <h3 id=jacobi_quadrature ><a href="#jacobi_quadrature" class=header-anchor >jacobi_quadrature</a></h3>
 <p>In this example, we will approximate integral 1 and compare the result to the analytical result of \(1\). For this example, we are setting both \(\alpha\) and \(\beta\) to 1.</p>
 <pre><code class=language-julia >using FunctionIntegrator
 a &#61; abs&#40;jacobi_quadrature&#40;x -&gt; cos&#40;x&#41;, 1000, 1, 1, 0, pi/2&#41;-1&#41;;
 show&#40;a&#41;</code></pre>
-<pre><code class="plaintext code-output">1.5660949107543232e-6</code></pre>
+<p><span style="color:red;">// `\output{./code/jacobi1}`: could not find the relevant output file. //</span></p>
 <h3 id=laguerre_quadrature ><a href="#laguerre_quadrature" class=header-anchor >laguerre_quadrature</a></h3>
 <p>In this section is the integral:</p>
 \[ \int_0^{\infty} xe^{-x} dx\]
@@ -88,77 +88,77 @@ clf&#40;&#41;
 y &#61; x.*exp.&#40;-x&#41;;
 PyPlot.plot&#40;x,y&#41;
 PyPlot.savefig&#40;joinpath&#40;@OUTPUT, &quot;laguerre_plot.png&quot;&#41;, dpi&#61;80&#41;</code></pre>
-<img src="/assets/FunctionIntegrator/code/output/laguerre_plot.png" alt="">
+<p><span style="color:red;">// Image matching '/assets/FunctionIntegrator/code/output/laguerre_plot.png' not found. //</span></p>
 <p><br> \(k=1\):</p>
 <pre><code class=language-julia >using FunctionIntegrator
 a &#61; abs&#40;laguerre_quadrature&#40;x -&gt; x*exp&#40;-x&#41;, 100, 1&#41;-1&#41;
 show&#40;a&#41;</code></pre>
-<pre><code class="plaintext code-output">3.1086244689504383e-15</code></pre>
+<p><span style="color:red;">// `\output{./code/laguerre1}`: could not find the relevant output file. //</span></p>
 <p>\(k=2\):</p>
 <pre><code class=language-julia >using FunctionIntegrator
 a &#61; abs&#40;laguerre_quadrature&#40;x -&gt; x, 100, 2&#41;-1&#41;
 show&#40;a&#41;</code></pre>
-<pre><code class="plaintext code-output">3.1086244689504383e-15</code></pre>
+<p><span style="color:red;">// `\output{./code/laguerre2}`: could not find the relevant output file. //</span></p>
 <h3 id=legendre_quadrature ><a href="#legendre_quadrature" class=header-anchor >legendre_quadrature</a></h3>
 <p>In this section, integral 1 is being approximated and the result compared to the analytical result. </p>
 <pre><code class=language-julia >using FunctionIntegrator
 a &#61; abs&#40;legendre_quadrature&#40;x -&gt; cos&#40;x&#41;, 1000, 0, pi/2&#41;-1&#41;
 show&#40;a&#41;</code></pre>
-<pre><code class="plaintext code-output">1.1102230246251565e-16</code></pre>
+<p><span style="color:red;">// `\output{./code/legendre}`: could not find the relevant output file. //</span></p>
 <h3 id=lobatto_quadrature ><a href="#lobatto_quadrature" class=header-anchor >lobatto_quadrature</a></h3>
 <p>In this section, integral 1 is being approximated and the result compared to the analytical result. </p>
 <pre><code class=language-julia >using FunctionIntegrator
 a &#61; abs&#40;lobatto_quadrature&#40;x -&gt; cos&#40;x&#41;, 1000, 0, pi/2&#41;-1&#41;
 show&#40;a&#41;</code></pre>
-<pre><code class="plaintext code-output">4.440892098500626e-16</code></pre>
+<p><span style="color:red;">// `\output{./code/lobatto}`: could not find the relevant output file. //</span></p>
 <h3 id=radau_quadrature ><a href="#radau_quadrature" class=header-anchor >radau_quadrature</a></h3>
 <p>In this section, integral 1 is being approximated and the result compared to the analytical result. </p>
 <pre><code class=language-julia >using FunctionIntegrator
 a &#61; abs&#40;radau_quadrature&#40;x -&gt; cos&#40;x&#41;, 1000, 0, pi/2&#41;-1&#41;
 show&#40;a&#41;</code></pre>
-<pre><code class="plaintext code-output">1.1102230246251565e-16</code></pre>
+<p><span style="color:red;">// `\output{./code/radau}`: could not find the relevant output file. //</span></p>
 <h3 id=rectangleruleleft ><a href="#rectangleruleleft" class=header-anchor >rectangle&#95;rule&#95;left</a></h3>
 <p>In this section, integral 1 is being approximated and the result compared to the analytical result. </p>
 <pre><code class=language-julia >using FunctionIntegrator
 a &#61; abs&#40;rectangle_rule_left&#40;x -&gt; cos&#40;x&#41;, 1000, 0, pi/2&#41;-1&#41;
 show&#40;a&#41;</code></pre>
-<pre><code class="plaintext code-output">0.00078519254663445</code></pre>
+<p><span style="color:red;">// `\output{./code/rectangle_left}`: could not find the relevant output file. //</span></p>
 <h3 id=rectanglerulemidpoint ><a href="#rectanglerulemidpoint" class=header-anchor >rectangle&#95;rule&#95;midpoint</a></h3>
 <p>In this section, integral 1 is being approximated and the result compared to the analytical result. </p>
 <pre><code class=language-julia >using FunctionIntegrator
 a &#61; abs&#40;rectangle_rule_midpoint&#40;x -&gt; cos&#40;x&#41;, 1000, 0, pi/2&#41;-1&#41;
 show&#40;a&#41;</code></pre>
-<pre><code class="plaintext code-output">1.0280839091159066e-7</code></pre>
+<p><span style="color:red;">// `\output{./code/rectangle_midpoint}`: could not find the relevant output file. //</span></p>
 <h3 id=rectangleruleright ><a href="#rectangleruleright" class=header-anchor >rectangle&#95;rule&#95;right</a></h3>
 <p>In this section, integral 1 is being approximated and the result compared to the analytical result. </p>
 <pre><code class=language-julia >using FunctionIntegrator
 a &#61; abs&#40;rectangle_rule_right&#40;x -&gt; cos&#40;x&#41;, 1000, 0, pi/2&#41;-1&#41;
 show&#40;a&#41;</code></pre>
-<pre><code class="plaintext code-output">0.000785603780161015</code></pre>
+<p><span style="color:red;">// `\output{./code/rectangle_right}`: could not find the relevant output file. //</span></p>
 <h3 id=rombergs_method ><a href="#rombergs_method" class=header-anchor >rombergs_method</a></h3>
 <p>In this section, integral 1 is being approximated and the result compared to the analytical result.</p>
 <pre><code class=language-julia >using FunctionIntegrator
 a &#61; abs&#40;rombergs_method&#40;x -&gt; cos&#40;x&#41;, 10, 0, pi/2&#41;-1&#41;
 show&#40;a&#41;</code></pre>
-<pre><code class="plaintext code-output">3.3306690738754696e-16</code></pre>
+<p><span style="color:red;">// `\output{./code/rombergs}`: could not find the relevant output file. //</span></p>
 <h3 id=simpsons_rule ><a href="#simpsons_rule" class=header-anchor >simpsons_rule</a></h3>
 <p>In this section, integral 1 is being approximated and the result compared to the analytical result. </p>
 <pre><code class=language-julia >using FunctionIntegrator
 a &#61; abs&#40;simpsons_rule&#40;x -&gt; cos&#40;x&#41;, 1000, 0, pi/2&#41;-1&#41;
 show&#40;a&#41;</code></pre>
-<pre><code class="plaintext code-output">8.215650382226158e-15</code></pre>
+<p><span style="color:red;">// `\output{./code/simpsons}`: could not find the relevant output file. //</span></p>
 <h3 id=simpsons38_rule ><a href="#simpsons38_rule" class=header-anchor >simpsons38_rule</a></h3>
 <p>In this section, integral 1 is being approximated and the result compared to the analytical result. </p>
 <pre><code class=language-julia >using FunctionIntegrator
 a &#61; abs&#40;simpsons38_rule&#40;x -&gt; cos&#40;x&#41;, 1002, 0, pi/2&#41;-1&#41;
 show&#40;a&#41;</code></pre>
-<pre><code class="plaintext code-output">8.08242361927114e-14</code></pre>
+<p><span style="color:red;">// `\output{./code/simpsons38}`: could not find the relevant output file. //</span></p>
 <h3 id=trapezoidal_rule ><a href="#trapezoidal_rule" class=header-anchor >trapezoidal_rule</a></h3>
 <p>In this section, integral 1 is being approximated and the result compared to the analytical result. </p>
 <pre><code class=language-julia >using FunctionIntegrator
 a &#61; abs&#40;trapezoidal_rule&#40;x -&gt; cos&#40;x&#41;, 1000, 0, pi/2&#41;-1&#41;
 show&#40;a&#41;</code></pre>
-<pre><code class="plaintext code-output">2.0561676405961293e-7</code></pre>
+<p><span style="color:red;">// `\output{./code/trapezoidal}`: could not find the relevant output file. //</span></p>
 <pre><code class=language-julia >function f</code></pre>
 <h2 id=error_analysis ><a href="#error_analysis" class=header-anchor >Error analysis</a></h2>
 <h3 id=code ><a href="#code" class=header-anchor >Code</a></h3>
@@ -348,7 +348,7 @@ yscale&#40;&quot;log&quot;&#41;
 ylabel&#40;&quot;Error&quot;&#41;
 PyPlot.savefig&#40;joinpath&#40;@OUTPUT, &quot;trapezoidal_error_plot.png&quot;&#41;, dpi&#61;80&#41;</code></pre>
 <h3 id=plots ><a href="#plots" class=header-anchor >Plots</a></h3>
-<p><img src="/assets/FunctionIntegrator/code/output/chebyshev1_error_plot.png" alt=""> <img src="/assets/FunctionIntegrator/code/output/chebyshev2_error_plot.png" alt=""> <img src="/assets/FunctionIntegrator/code/output/chebyshev3_error_plot.png" alt=""> <img src="/assets/FunctionIntegrator/code/output/chebyshev4_error_plot.png" alt=""> <img src="/assets/FunctionIntegrator/code/output/jacobi_error_plot.png" alt=""> <img src="/assets/FunctionIntegrator/code/output/laguerre_error_plot.png" alt=""> <img src="/assets/FunctionIntegrator/code/output/legendre_error_plot.png" alt=""> <img src="/assets/FunctionIntegrator/code/output/lobatto_error_plot.png" alt=""> <img src="/assets/FunctionIntegrator/code/output/radau_error_plot.png" alt=""> <img src="/assets/FunctionIntegrator/code/output/rectangle_left_error_plot.png" alt=""> <img src="/assets/FunctionIntegrator/code/output/rectangle_midpoint_error_plot.png" alt=""> <img src="/assets/FunctionIntegrator/code/output/rectangle_right_error_plot.png" alt=""> <img src="/assets/FunctionIntegrator/code/output/rombergs_error_plot.png" alt=""> <img src="/assets/FunctionIntegrator/code/output/simpsons_error_plot.png" alt=""> <img src="/assets/FunctionIntegrator/code/output/simpsons38_error_plot.png" alt=""> <img src="/assets/FunctionIntegrator/code/output/trapezoidal_error_plot.png" alt=""></p>
+<p><p><span style="color:red;">// Image matching '/assets/FunctionIntegrator/code/output/chebyshev1_error_plot.png' not found. //</span></p> <p><span style="color:red;">// Image matching '/assets/FunctionIntegrator/code/output/chebyshev2_error_plot.png' not found. //</span></p> <p><span style="color:red;">// Image matching '/assets/FunctionIntegrator/code/output/chebyshev3_error_plot.png' not found. //</span></p> <p><span style="color:red;">// Image matching '/assets/FunctionIntegrator/code/output/chebyshev4_error_plot.png' not found. //</span></p> <p><span style="color:red;">// Image matching '/assets/FunctionIntegrator/code/output/jacobi_error_plot.png' not found. //</span></p> <p><span style="color:red;">// Image matching '/assets/FunctionIntegrator/code/output/laguerre_error_plot.png' not found. //</span></p> <p><span style="color:red;">// Image matching '/assets/FunctionIntegrator/code/output/legendre_error_plot.png' not found. //</span></p> <p><span style="color:red;">// Image matching '/assets/FunctionIntegrator/code/output/lobatto_error_plot.png' not found. //</span></p> <p><span style="color:red;">// Image matching '/assets/FunctionIntegrator/code/output/radau_error_plot.png' not found. //</span></p> <p><span style="color:red;">// Image matching '/assets/FunctionIntegrator/code/output/rectangle_left_error_plot.png' not found. //</span></p> <p><span style="color:red;">// Image matching '/assets/FunctionIntegrator/code/output/rectangle_midpoint_error_plot.png' not found. //</span></p> <p><span style="color:red;">// Image matching '/assets/FunctionIntegrator/code/output/rectangle_right_error_plot.png' not found. //</span></p> <p><span style="color:red;">// Image matching '/assets/FunctionIntegrator/code/output/rombergs_error_plot.png' not found. //</span></p> <p><span style="color:red;">// Image matching '/assets/FunctionIntegrator/code/output/simpsons_error_plot.png' not found. //</span></p> <p><span style="color:red;">// Image matching '/assets/FunctionIntegrator/code/output/simpsons38_error_plot.png' not found. //</span></p> <p><span style="color:red;">// Image matching '/assets/FunctionIntegrator/code/output/trapezoidal_error_plot.png' not found. //</span></p></p>
 <h2 id=acknowledgements ><a href="#acknowledgements" class=header-anchor >Acknowledgements</a></h2>
 <p>I would like to thank the Julia discourse community for their help through my Julia journey, and I would also like to thank the developers of Julia, as without their work this package would not even be possible &#40;I know, obviously, as this is a Julia package&#41;. Likewise, I would also like to thank the developers of <a href="https://github.com/JuliaApproximation/FastGaussQuadrature.jl">FastGaussQuadrature.jl</a>, as without their efficient algorithms for finding the nodes and weights for various Gaussian quadrature techniques, several of the functions in this repository would be far less efficient &#40;especially <code>legendre_quadrature</code>&#41;, or may not even exist. I would also like to thank the developers of <a href="https://github.com/JuliaMath/SpecialFunctions.jl">SpecialFunctions.jl</a>, as some of their functions are useful for testing the functions in this package.</p>
 <div class=page-foot >
