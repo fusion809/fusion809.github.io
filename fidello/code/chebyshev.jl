@@ -47,17 +47,17 @@ V = [cos((j-1)*acos(ξ[i])) for i in 1:n+1, j in 1:n+1]
 a = V \ u
 
 # Exact solution
-yexact = [i == n+1 || x[i] > 100 ? 0.0 :
+uexact = [i == n+1 || x[i] > 100 ? 0.0 :
           airyai(x[i])
           for i in 1:n+1]
 
 # Results
 df = DataFrame(
-    ξ = ξ,
+    y = ξ,
     x = x,
     Approximation = u,
     Exact = yexact,
-    Error = abs.(u .- yexact)
+    Error = abs.(u .- uexact)
 )
 
 show(stdout, MIME("text/plain"), df)
