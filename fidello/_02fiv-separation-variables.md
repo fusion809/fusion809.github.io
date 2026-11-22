@@ -158,7 +158,7 @@ then $\lambda$ is said to be an eigenvalue of $\mathbf{A}$ and $\mathbf{x}$ is a
 
 So in the example we solved for the heat equation, $X_n$ were the eigenfunctions and $\lambda_n$ were the eigenvalues. An interesting quality of eigenfunctions is that they are orthogonal. That means that:
 \begin{align*}
-\langle y_m | y_n \rangle &= \int_a^b y_m y_n r(x) dx \
+\langle y_m | y_n \rangle &= \int_a^b y_m y_n r(x) dx \\
 &= c_m \delta_{mn}.
 \end{align*}
 Where $c_m$ is some constant and $\langle y_m | y_n \rangle$ is called the inner product between $y_m$ and $y_n$. Interestingly, the dot product between two vectors is also referred to as the inner product. Just like the function inner product, the dot product also yields zero if two vectors are orthogonal. There are a lot of parallels between Sturm-Liouville theory and the study of matrices and vectors. 
