@@ -17,7 +17,7 @@ y(2h) &\approx y(h) + hy'(h) \\
 \end{align*}
 And continue on from there. This method, where we truncate the Taylor series at the first two terms and numerically approximate our solution by applying this approximation at each step, is called Euler's method. As we ignore so many terms in the Taylor series, this method is rather inaccurate. Specifically, we call it a first-order method. 
 
-Other schemes for numerical integration of ordinary differential equations also exist. Among the most popular are the Runge-Kutta family of methods, such as the Runge-Kutta fourth-order method. These methods do not utilize higher-order derivatives, but they use clever tricks for approximating the solution to higher-order accuracy using only first-order derivatives.
+Other schemes for numerical integration of ordinary differential equations also exist. Among the most popular are the Runge-Kutta family of methods, such as the Runge-Kutta fourth-order method. These methods do not utilize higher-order derivatives, but they use clever tricks for approximating the solution to higher-order accuracy using only first-order derivatives. I should say that Euler's method and the Runge-Kutta methods are all only applicable when we have initial conditions, not boundary or other conditions. There are other integration schemes for ODEs that work well with these other conditions, however.
 
 To illustrate how we use these methods, let us try to solve the differential equation:
 
