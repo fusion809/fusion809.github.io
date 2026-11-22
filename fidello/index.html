@@ -516,10 +516,13 @@ let t &#61; 0.0,
         volume_plot&#91;4&#93; &#61; u
 
         # Update simulation time.
+        elapsed_minutes &#61; floor&#40;Int, target_time / 60&#41;
+        remaining_seconds &#61; target_time - 60 * elapsed_minutes
         time_label.text &#61;
             @sprintf&#40;
-                &quot;Simulation time: &#37;.2f s&quot;,
-                target_time
+                &quot;Simulation time: &#37;d min &#37;.1f s&quot;,
+                elapsed_minutes,
+                remaining_seconds
             &#41;
 
         # Console diagnostics.
@@ -527,10 +530,11 @@ let t &#61; 0.0,
         Tmax &#61; maximum&#40;u&#41;
 
         @printf&#40;
-            &quot;Frame &#37;4d/&#37;d | t &#61; &#37;8.2f s | dt &#61; &#37;.5f s | T range &#61; &#37;.8f–&#37;.8f °C\n&quot;,
+            &quot;Frame &#37;4d/&#37;d | t &#61; &#37;d min &#37;.1f s | dt &#61; &#37;.5f s | T range &#61; &#37;.8f–&#37;.8f °C\n&quot;,
             frame_number,
             NUMBER_OF_FRAMES,
-            target_time,
+            elapsed_minutes,
+            remaining_seconds,
             dt,
             Tmin,
             Tmax

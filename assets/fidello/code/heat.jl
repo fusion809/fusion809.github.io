@@ -384,10 +384,13 @@ let t = 0.0,
         volume_plot[4] = u
 
         # Update simulation time.
+        elapsed_minutes = floor(Int, target_time / 60)
+        remaining_seconds = target_time - 60 * elapsed_minutes
         time_label.text =
             @sprintf(
-                "Simulation time: %.2f s",
-                target_time
+                "Simulation time: %d min %.1f s",
+                elapsed_minutes,
+                remaining_seconds
             )
 
         # Console diagnostics.
@@ -395,10 +398,11 @@ let t = 0.0,
         Tmax = maximum(u)
 
         @printf(
-            "Frame %4d/%d | t = %8.2f s | dt = %.5f s | T range = %.8f–%.8f °C\n",
+            "Frame %4d/%d | t = %d min %.1f s | dt = %.5f s | T range = %.8f–%.8f °C\n",
             frame_number,
             NUMBER_OF_FRAMES,
-            target_time,
+            elapsed_minutes,
+            remaining_seconds,
             dt,
             Tmin,
             Tmax
