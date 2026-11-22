@@ -1,8 +1,8 @@
 using LinearAlgebra, SpecialFunctions, DataFrames
 
 # Parameters
-n = 20
-L = 6.0
+n = 40
+L = 10.0
 
 # Chebyshev extrema
 ξ = -cos.(π .* (0:n) ./ n)
@@ -17,8 +17,7 @@ D = (c * (1 ./ c)') ./ (dX + I)
 D -= Diagonal(vec(sum(D, dims=2)))
 
 # Transformation to the semi-infinite domain
-x = [i == n+1 ? Inf : L*(1 + ξ[i])/(1 - ξ[i])
-     for i in 1:n+1]
+x = L*(ξ.+1)./(-ξ.+1)
 
 # Derivative transformation
 q = (1 .- ξ).^2 ./ (2L)
