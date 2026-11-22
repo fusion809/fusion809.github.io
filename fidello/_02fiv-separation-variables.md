@@ -7,36 +7,39 @@ Dividing both sides by $u(x,t)$ yields:
 \begin{align*}
 \dfrac{\dot{T}(t)}{T(t)} &= \alpha \dfrac{X''(x)}{X(x)}.
 \end{align*}
-The left-hand side depends only on $t$ and the right-hand side only depends on $x$. Hence both sides must equal a constant, which we will call $-\lambda$. The importance of the negative sign will become apparent soon. Hence we can write a pair of ordinary differential equations we need to solve:
+The left-hand side depends only on $t$ and the right-hand side only depends on $x$. Hence both sides must equal a constant, which we will call $-\lambda$. The importance of the negative sign will become apparent soon. Hence we can write a pair of ordinary differential equations we need to solve. For $T(t)$, the equation is:
 \begin{align*}
 \dfrac{\dot{T}(t)}{T(t)} &= -\lambda \\
-\dot{T}(t) &= -\lambda T(t) \\
+\dot{T}(t) &= -\lambda T(t)
+\end{align*}
+As for $X(x)$, its equation is:
+\begin{align*}
 \alpha \dfrac{X''(x)}{X(x)} &= -\lambda \\
 \alpha X''(x) &= -\lambda X(x) \\
-X''(x) &= \dfrac{-\lambda}{\alpha} X(x).
+X''(x) &= -\dfrac{\lambda}{\alpha} X(x).
 \end{align*}
-By assuming exponential solutions, we get:
-\begin{align*}
-T(t) &= C_1 e^{-\lambda t} \\
-X(x) &= C_2 e^{i\sqrt{\dfrac{\lambda}{\alpha}}x} + C_3 e^{-i\sqrt{\dfrac{\lambda}{\alpha}}x}.
-\end{align*}
+These are both linear, homogeneous differential equations with constant coefficients. Hence, our solutions will involve exponential functions. Solving the polynomial equations we get from this knowledge yields:
+\begin{align}
+T(t) &= C_1 e^{-\lambda t} \label{Tt}\\
+X(x) &= C_2 e^{i\sqrt{\dfrac{\lambda}{\alpha}}x} + C_3 e^{-i\sqrt{\dfrac{\lambda}{\alpha}}x}.\label{XxP}
+\end{align}
 $C_1$, $C_2$ and $C_3$ are constants that depend on our boundary and initial conditions. Since $e^{i\theta}=\cos{\theta}+i\sin{\theta}$:
-\begin{align*}
-X(x) &= C_2 \cos{\sqrt{\dfrac{\lambda}{\alpha}}x} + C_3 \sin{\sqrt{\dfrac{\lambda}{\alpha}}x}.
-\end{align*}
-So this is why we had opted to give $\lambda$ a negative sign earlier. As real exponentials will not satisfy our boundary conditions of $X(0)=X(L)=0$ without $C_2$ and $C_3$ both being zero. The $C_2$ and $C_3$ we used here will be different to those used when we presented $X(x)$ in exponential form. Then we apply our boundary and initial conditions, which are often of the form:
+\begin{align}
+X(x) &= C_2 \cos{\sqrt{\dfrac{\lambda}{\alpha}}x} + C_3 \sin{\sqrt{\dfrac{\lambda}{\alpha}}x}.\label{Xx}
+\end{align}
+So this is why we had opted to give $\lambda$ a negative sign earlier. As real exponentials will not satisfy our boundary conditions of $X(0)=X(L)=0$ without $C_2$ and $C_3$ both being zero. The $C_2$ and $C_3$ we used in Equation \eqref{Xx} will be different to those in Equation \eqref{XxP}. Then we apply our boundary and initial conditions, which are often of the form:
 \begin{align*}
 u(x,0)&=f(x) \\
 u(0,t)&=0 \\
 u(L,t)&=0.
 \end{align*}
-Where $x\in [0,L]$ is our spatial domain and $f(x)$ is some specified function. This is why we imposed that $\lambda$ came with a negative sign earlier. You see, next we will impose the $u(0,t)=u(L,t)=0$ condition which will give us that $X(0)=X(L)=0$ and the only way this equation is satisfied without both $C_2$ and $C_3$ being zero is if we are working with cosine and sine and not real exponential functions. In this event, we impose our spatial boundary conditions on $X(x)$, $X(0)=0$ implies that:
+Where $x\in [0,L]$ is our spatial domain and $f(x)$ is some specified function. We will impose our spatial boundary conditions on $X(x)$, $X(0)=0$ implies that:
 \begin{align*}
-C_2 \cos{0} + C_3\sin{0} &= 0
+C_2 \cos{0} + C_3\sin{0} &= 0.
 \end{align*}
 $\sin{0}=0$, $\cos{0}=1$ and hence:
 \begin{align*}
-C_2 &= 0
+C_2 &= 0.
 \end{align*}
 As for our other boundary condition:
 \begin{align*}

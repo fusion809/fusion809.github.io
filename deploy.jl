@@ -85,7 +85,7 @@ fidello_source = joinpath(@__DIR__, "fidello", "index.md")
 fidello_output = joinpath(@__DIR__, "__site", "fidello", "index.html")
 isfile(fidello_source) || error("Required Fidello source page is missing: $fidello_source")
 build_started_at = time()
-optimize(prerender=false)
+optimize(prerender=false, suppress_errors=false)
 
 if !isfile(fidello_output)
   error("Franklin did not generate the required Fidello page: $fidello_output")
@@ -95,12 +95,13 @@ if stat(fidello_output).mtime < build_started_at
 end
 
 fidello_html = read(fidello_output, String)
-if occursin("could not find the relevant output file", fidello_html)
-  error("Fidello page contains an unresolved \\output command: $fidello_output")
-end
-
 for name in ("findiff", "findiff4th")
   output_file = joinpath(@__DIR__, "__site", "assets", "fidello", "code", "output", name * ".out")
   isfile(output_file) && filesize(output_file) > 0 ||
     error("Required Fidello listing output is missing or empty: $output_file")
+
+  output_error = string('`', raw"\output{./code/", name,
+                        "}`: could not find the relevant output file.")
+  occursin(output_error, fidello_html) &&
+    error("Fidello page could not resolve \\output for '$name': $fidello_output")
 end
