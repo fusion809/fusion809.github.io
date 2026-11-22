@@ -34,7 +34,7 @@ Where $x\in [0,L]$ is our spatial domain and $f(x)$ is some specified function. 
 \begin{align*}
 C_2 \cos{0} + C_3\sin{0} &= 0
 \end{align*}
-$\sin{0}=0$ and hence:
+$\sin{0}=0$, $\cos{0}=1$ and hence:
 \begin{align*}
 C_2 &= 0
 \end{align*}
