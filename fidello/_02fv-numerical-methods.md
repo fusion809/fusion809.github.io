@@ -210,9 +210,9 @@ It is important to note, however, that so far we have only applied the finite di
 #### Spectral methods
 Sturm-Liouville problems also give rise to infinite sets of orthogonal functions that are useful when numerically approximating the solution to other differential equations. If $\{\phi_i\}$, $i\in {0,1,2,...}$ is our orthogonal function set, we assume our solution, $u$, to some ordinary differential equation can be written as:
 \begin{align*}
-u(x) &= \sum_{j=0}^{n} a_j \phi_j(x). 
+u(x) &= \sum_{j=0}^{\infty} a_j \phi_j(x). 
 \end{align*}
-Then we discretize our grid into points $x_i$, and can write a matrix equation for $\mathbf{a}$ (a vector containing $\{a_j\}$, the series coefficients). Then this equation would be:
+Then we discretize our grid into points $x_i$, truncate the above series expansion, and can write a matrix equation for $\mathbf{a}$ (a vector containing $\{a_j\}$, the series coefficients). Then this equation would be:
 \begin{align}
 \mathbf{A}\mathbf{a} &= \mathbf{b}. \label{speca}
 \end{align}
