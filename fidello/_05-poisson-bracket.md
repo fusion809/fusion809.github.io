@@ -17,7 +17,7 @@ Further, assuming each of the coordinates of the phase space are independent, it
 \begin{align}
 \{q_j, p_k\} &= \sum_{i=1}^n \left( \dfrac{\partial q_j}{\partial q_i} \dfrac{\partial p_k}{\partial p_i} - \dfrac{\partial q_j}{\partial p_i} \dfrac{\partial p_k}{\partial q_i} \right) \nonumber\\
 &= \sum_{i=1}^n \delta_{ij}\delta_{ik} \nonumber\\
-&= \delta_{jk}. \label{qjpk}
+&= \delta_{jk}. \label{qjpk}\\
 \{q_j, q_k\} &= \sum_{i=1}^n \left( \dfrac{\partial q_j}{\partial q_i} \dfrac{\partial q_k}{\partial p_i} - \dfrac{\partial q_j}{\partial p_i} \dfrac{\partial q_k}{\partial q_i} \right) \nonumber\\
 &= 0 \label{qjqk}\\
 \{p_j, p_k\} &= \sum_{i=1}^n \left(\dfrac{\partial p_j}{\partial q_i}\dfrac{\partial p_k}{\partial p_i} - \dfrac{\partial p_j}{\partial p_i}\dfrac{\partial p_k}{\partial q_i}\right) \nonumber\\
