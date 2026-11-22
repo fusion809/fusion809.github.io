@@ -20,7 +20,7 @@ By assuming exponential solutions, we get:
 T(t) &= C_1 e^{-\lambda t} \\
 X(x) &= C_2 e^{i\sqrt{\dfrac{\lambda}{\alpha}}x} + C_3 e^{-i\sqrt{\dfrac{\lambda}{\alpha}}x}.
 \end{align*}
-$C_1$, $C_2$ and $C_3$ are constants that depend on our boundary and initial conditions. Since $e^{i\theta}\cos{\theta}+i\sin{\theta}$:
+$C_1$, $C_2$ and $C_3$ are constants that depend on our boundary and initial conditions. Since $e^{i\theta}=\cos{\theta}+i\sin{\theta}$:
 \begin{align*}
 X(x) &= C_2 \cos{\sqrt{\dfrac{\lambda}{\alpha}}x} + C_3 \sin{\sqrt{\dfrac{\lambda}{\alpha}}x}.
 \end{align*}
