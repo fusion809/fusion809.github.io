@@ -1326,75 +1326,88 @@ Core.eval(Franklin, quote
     if !isdefined(Franklin, :_fd_loop_hashes_initialized)
         const _fd_loop_hashes_initialized = Ref(false)
     end
-    if !isdefined(Franklin, :_fd_loop_fragment_hashes)
-        const _fd_loop_fragment_hashes = Dict{String,UInt}()
+    if !isdefined(Franklin, :_fd_loop_fragment_mtimes)
+        const _fd_loop_fragment_mtimes = Dict{String,Float64}()
     end
+    if !isdefined(Franklin, :_fd_loop_fragment_mtimes_initialized)
+        const _fd_loop_fragment_mtimes_initialized = Ref(false)
+    end
+    if !isdefined(Franklin, :_fd_loop_native)
+        const _fd_loop_native = Ref{Any}(nothing)
+    end
+
+    # This helper is redefined whenever Franklin reloads utils.jl. The stable
+    # fd_loop wrapper below calls it through invokelatest, so watcher fixes can
+    # be picked up on a full pass without stacking wrappers.
+    function _fd_loop_with_md_fragments(cycle_counter::Int,
+                                        fw::LiveServer.FileWatcher,
+                                        watched_files::NamedTuple)::Nothing
+        if !_fd_loop_fragment_mtimes_initialized[]
+            _fd_loop_native[](cycle_counter, fw, watched_files)
+            for fragment in keys(MD_INCLUDED_IN)
+                fpath = joinpath(path(:folder), fragment)
+                isfile(fpath) || continue
+                _fd_loop_fragment_mtimes[fpath] = mtime(fpath)
+            end
+            _fd_loop_hashes_initialized[] = true
+            _fd_loop_fragment_mtimes_initialized[] = true
+            return nothing
+        end
+
+        # Refresh the include map before polling. This also covers fragments
+        # discovered after Franklin's initial full pass or added while serving.
+        scan_md_includes!()
+        changed_frags = String[]
+        for fragment in keys(MD_INCLUDED_IN)
+            fpath = joinpath(path(:folder), fragment)
+            isfile(fpath) || continue
+            current_mtime = mtime(fpath)
+            previous_mtime = get(_fd_loop_fragment_mtimes, fpath, current_mtime)
+            if current_mtime > previous_mtime
+                _fd_loop_fragment_mtimes[fpath] = current_mtime
+                rp = try norm_site_rpath(relpath(fpath, path(:folder))) catch; "" end
+                isempty(rp) || push!(changed_frags, rp)
+            end
+        end
+
+        # Let Franklin handle regular pages and file touches as usual.
+        _fd_loop_native[](cycle_counter, fw, watched_files)
+
+        isempty(changed_frags) && return nothing
+
+        layout = path(:layout)
+        head   = read(joinpath(layout, "head.html"),      String)
+        pgfoot = read(joinpath(layout, "page_foot.html"), String)
+        foot   = read(joinpath(layout, "foot.html"),      String)
+
+        parents_to_rebuild = Set{String}()
+        scan_md_includes!()
+        for frag_rp in changed_frags
+            union!(parents_to_rebuild, get_parent_pages(frag_rp))
+        end
+        for parent_rp in sort!(collect(parents_to_rebuild))
+            parent_full = joinpath(path(:folder), parent_rp)
+            isfile(parent_full) || continue
+            parent_dir, parent_file = splitdir(parent_full)
+            parent_fpair = parent_dir => parent_file
+            rprint("\u2192 rebuilding $(parent_rp) (included fragment changed)")
+            process_file(:md, parent_fpair, head, pgfoot, foot, 0.0)
+            if haskey(watched_files.md, parent_fpair)
+                watched_files.md[parent_fpair] = mtime(parent_full)
+            end
+        end
+        return nothing
+    end
+
     if !_fd_loop_fragment_wrapped[]
         _fd_loop_fragment_wrapped[] = true
         let _orig_fd_loop = fd_loop
+            _fd_loop_native[] = _orig_fd_loop
             function fd_loop(cycle_counter::Int,
                              fw::LiveServer.FileWatcher,
                              watched_files::NamedTuple)::Nothing
-                if !_fd_loop_hashes_initialized[]
-                    _orig_fd_loop(cycle_counter, fw, watched_files)
-                    # Franklin may omit underscore-prefixed Markdown fragments
-                    # from its watcher. Track included fragments ourselves so
-                    # edits still rebuild their parent pages.
-                    for fragment in keys(MD_INCLUDED_IN)
-                        fpath = joinpath(path(:folder), fragment)
-                        isfile(fpath) || continue
-                        _fd_loop_fragment_hashes[fpath] = hash(read(fpath))
-                    end
-                    _fd_loop_hashes_initialized[] = true
-                    return nothing
-                end
-
-                # Detect included-fragment edits independently of Franklin's
-                # watched_files set; underscore-prefixed Markdown files are
-                # not consistently included in that set.
-                changed_frags = String[]
-                for fragment in keys(MD_INCLUDED_IN)
-                    fpath = joinpath(path(:folder), fragment)
-                    isfile(fpath) || continue
-                    content_hash = hash(read(fpath))
-                    previous = get(_fd_loop_fragment_hashes, fpath, content_hash)
-                    if content_hash != previous
-                        _fd_loop_fragment_hashes[fpath] = content_hash
-                        rp = try norm_site_rpath(relpath(fpath, path(:folder))) catch; "" end
-                        isempty(rp) || push!(changed_frags, rp)
-                    end
-                end
-
-                # Run normal Franklin file-watch loop.
-                _orig_fd_loop(cycle_counter, fw, watched_files)
-
-                isempty(changed_frags) && return nothing
-
-                # Rebuild parent pages of changed fragments.
-                layout = path(:layout)
-                head   = read(joinpath(layout, "head.html"),      String)
-                pgfoot = read(joinpath(layout, "page_foot.html"), String)
-                foot   = read(joinpath(layout, "foot.html"),      String)
-
-                parents_to_rebuild = Set{String}()
-                scan_md_includes!()
-                for frag_rp in changed_frags
-                    union!(parents_to_rebuild, get_parent_pages(frag_rp))
-                end
-                for parent_rp in sort!(collect(parents_to_rebuild))
-                    parent_full = joinpath(path(:folder), parent_rp)
-                    isfile(parent_full) || continue
-                    parent_dir, parent_file = splitdir(parent_full)
-                    parent_fpair = parent_dir => parent_file
-                    rprint("\u2192 rebuilding $(parent_rp) (included fragment changed)")
-                    process_file(:md, parent_fpair, head, pgfoot, foot, 0.0)
-                    # Use the parent's ACTUAL disk mtime so the loop
-                    # doesn't re-trigger a rebuild on the next iteration.
-                    if haskey(watched_files.md, parent_fpair)
-                        watched_files.md[parent_fpair] = mtime(parent_full)
-                    end
-                end
-                return nothing
+                Base.invokelatest(_fd_loop_with_md_fragments,
+                                  cycle_counter, fw, watched_files)
             end
         end
     end
