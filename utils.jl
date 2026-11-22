@@ -1323,16 +1323,12 @@ Core.eval(Franklin, quote
     if !isdefined(Franklin, :_fd_loop_fragment_wrapped)
         const _fd_loop_fragment_wrapped = Ref(false)
     end
-    if !isdefined(Franklin, :_fd_loop_content_hashes)
-        const _fd_loop_content_hashes = Dict{String,UInt}()
-    end
     if !isdefined(Franklin, :_fd_loop_hashes_initialized)
         const _fd_loop_hashes_initialized = Ref(false)
     end
-    if !isdefined(Franklin, :_fd_loop_pending_hashes)
-        const _fd_loop_pending_hashes = Dict{String,Tuple{UInt,Float64,Float64}}()
+    if !isdefined(Franklin, :_fd_loop_fragment_hashes)
+        const _fd_loop_fragment_hashes = Dict{String,UInt}()
     end
-
     if !_fd_loop_fragment_wrapped[]
         _fd_loop_fragment_wrapped[] = true
         let _orig_fd_loop = fd_loop
@@ -1341,70 +1337,36 @@ Core.eval(Franklin, quote
                              watched_files::NamedTuple)::Nothing
                 if !_fd_loop_hashes_initialized[]
                     _orig_fd_loop(cycle_counter, fw, watched_files)
-                    for (_, dict) in pairs(watched_files), (fpair, _) in dict
-                        fpath = joinpath(fpair...)
+                    # Franklin may omit underscore-prefixed Markdown fragments
+                    # from its watcher. Track included fragments ourselves so
+                    # edits still rebuild their parent pages.
+                    for fragment in keys(MD_INCLUDED_IN)
+                        fpath = joinpath(path(:folder), fragment)
                         isfile(fpath) || continue
-                        _fd_loop_content_hashes[fpath] = hash(read(fpath))
+                        _fd_loop_fragment_hashes[fpath] = hash(read(fpath))
                     end
                     _fd_loop_hashes_initialized[] = true
                     return nothing
                 end
 
-                # Ignore timestamp-only touches. Some editors, sync tools, and
-                # generated-file hooks update mtimes without changing source;
-                # Franklin otherwise rebuilds and LiveServer reloads on each one.
-                for (_, dict) in pairs(watched_files), (fpair, t) in dict
-                    fpath = joinpath(fpair...)
-                    isfile(fpath) || continue
-                    cur_t = mtime(fpath)
-                    (cur_t > t || haskey(_fd_loop_pending_hashes, fpath)) || continue
-                    content_hash = hash(read(fpath))
-                    previous = get(_fd_loop_content_hashes, fpath, content_hash)
-                    if content_hash == previous
-                        dict[fpair] = cur_t
-                        delete!(_fd_loop_pending_hashes, fpath)
-                        continue
-                    end
-
-                    now_t = time()
-                    if haskey(_fd_loop_pending_hashes, fpath)
-                        pending_hash, pending_since, original_mtime = _fd_loop_pending_hashes[fpath]
-                        if content_hash == pending_hash && now_t - pending_since >= 0.5
-                            _fd_loop_content_hashes[fpath] = content_hash
-                            delete!(_fd_loop_pending_hashes, fpath)
-                            dict[fpair] = original_mtime
-                        else
-                            _fd_loop_pending_hashes[fpath] = (content_hash, now_t, original_mtime)
-                            dict[fpair] = cur_t
-                        end
-                    else
-                        _fd_loop_pending_hashes[fpath] = (content_hash, now_t, t)
-                        dict[fpair] = cur_t
-                    end
-                end
-
-                # Snapshot changed fragment files BEFORE running normal loop.
+                # Detect included-fragment edits independently of Franklin's
+                # watched_files set; underscore-prefixed Markdown files are
+                # not consistently included in that set.
                 changed_frags = String[]
-                for (fpair, t) in watched_files.md
-                    startswith(fpair.second, "_") || continue
-                    fpath = joinpath(fpair...)
-                    mtime(fpath) > t || continue
-                    rp = try norm_site_rpath(relpath(fpath, path(:folder))) catch; "" end
-                    isempty(rp) || push!(changed_frags, rp)
+                for fragment in keys(MD_INCLUDED_IN)
+                    fpath = joinpath(path(:folder), fragment)
+                    isfile(fpath) || continue
+                    content_hash = hash(read(fpath))
+                    previous = get(_fd_loop_fragment_hashes, fpath, content_hash)
+                    if content_hash != previous
+                        _fd_loop_fragment_hashes[fpath] = content_hash
+                        rp = try norm_site_rpath(relpath(fpath, path(:folder))) catch; "" end
+                        isempty(rp) || push!(changed_frags, rp)
+                    end
                 end
 
                 # Run normal Franklin file-watch loop.
                 _orig_fd_loop(cycle_counter, fw, watched_files)
-
-                # The native loop skips change processing during its periodic
-                # directory scan; consume fragment mtimes here either way.
-                changed_frag_set = Set(changed_frags)
-                for (fpair, _) in watched_files.md
-                    startswith(fpair.second, "_") || continue
-                    fpath = joinpath(fpair...)
-                    rp = try norm_site_rpath(relpath(fpath, path(:folder))) catch; "" end
-                    rp in changed_frag_set && (watched_files.md[fpair] = mtime(fpath))
-                end
 
                 isempty(changed_frags) && return nothing
 

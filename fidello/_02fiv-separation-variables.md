@@ -24,17 +24,22 @@ $C_1$, $C_2$ and $C_3$ are constants that depend on our boundary and initial con
 \begin{align*}
 X(x) &= C_2 \cos{\sqrt{\dfrac{\lambda}{\alpha}}x} + C_3 \sin{\sqrt{\dfrac{\lambda}{\alpha}}x}.
 \end{align*}
-The $C_2$ and $C_3$ we used here will be different to those used when we presented $X(x)$ in exponential form. Then we apply our boundary and initial conditions, which are often of the form:
+So this is why we had opted to give $\lambda$ a negative sign earlier. As real exponentials will not satisfy our boundary conditions of $X(0)=X(L)=0$ without $C_2$ and $C_3$ both being zero. The $C_2$ and $C_3$ we used here will be different to those used when we presented $X(x)$ in exponential form. Then we apply our boundary and initial conditions, which are often of the form:
 \begin{align*}
 u(x,0)&=f(x) \\
 u(0,t)&=0 \\
 u(L,t)&=0.
 \end{align*}
-Where $x\in [0,L]$ is our spatial domain and $f(x)$ is some specified function. In this event, we impose our spatial boundary conditions on $X(x)$:
+Where $x\in [0,L]$ is our spatial domain and $f(x)$ is some specified function. This is why we imposed that $\lambda$ came with a negative sign earlier. You see, next we will impose the $u(0,t)=u(L,t)=0$ condition which will give us that $X(0)=X(L)=0$ and the only way this equation is satisfied without both $C_2$ and $C_3$ being zero is if we are working with cosine and sine and not real exponential functions. In this event, we impose our spatial boundary conditions on $X(x)$, $X(0)=0$ implies that:
 \begin{align*}
-X(0) &= 0 \\
-\implies C_2 \cos{0} + C_3\sin{0} &= 0 \\
-C_2 &= 0 \\
+C_2 \cos{0} + C_3\sin{0} &= 0
+\end{align*}
+$\sin{0}=0$ and hence:
+\begin{align*}
+C_2 &= 0
+\end{align*}
+As for our other boundary condition:
+\begin{align*}
 X(L) &= 0 \\
 C_3\sin{\sqrt{\dfrac{\lambda}{\alpha}}L} &= 0.
 \end{align*}
@@ -44,47 +49,51 @@ This, in turn, implies that
 \end{align*}
 Squaring both sides yields:
 \begin{align*}
-\dfrac{\lambda}{\alpha} L^2 &= n^2 \pi^2 \\
+\dfrac{\lambda}{\alpha} L^2 &= n^2 \pi^2
+\end{align*}
+Multiplying by $\dfrac{\alpha}{L^2}$ yields:
+\begin{align*}
 \lambda &= \dfrac{\alpha n^2 \pi^2}{L^2}.
 \end{align*}
-Hence we do not have a just a singular solution for $\lambda$ and we should really call $\lambda_n$ to reflect this reality. $X(x)$, $T(t)$ and $u(x,t)$ all depend on $\lambda_n$ and hence should get a $n$ subscript.
+Hence we do not have a just a singular solution for $\lambda$ and we should really call it $\lambda_n$ to reflect this reality. $X(x)$, $T(t)$ and $u(x,t)$ all depend on $\lambda_n$ and hence should get a $n$ subscript.
 \begin{align*}
 \lambda_n &= \dfrac{\alpha n^2 \pi^2}{L^2} \\
 X_n(x) &= C_{3n} \sin{\sqrt{\dfrac{n^2 \pi^2}{L^2} x}} \\
 &= C_{3n} \sin{\dfrac{|n| \pi}{L} x} \\
 T_n(t) &= C_{1n}e^{-\dfrac{\alpha n^2 \pi^2}{L^2} t}.
 \end{align*}
-Why have I given the constants $n$ indices? Because they, too, could vary between terms with different $\lambda$. Why the $|n|$ well we square rooted $n^2$, so it will be the absolute value of $n$. We will call $C_{1n}C_{3n}$, $a_n$ when we write $u_n(x,t)$:
+Why have I given the constants $n$ indices? Because they, too, could vary between terms with different $\lambda$. Why the $|n|$? Well, we square rooted $n^2$, so it will be the absolute value of $n$. We will call $C_{1n}C_{3n}$, $a_n$ when we write $u_n(x,t)$:
 Hence:
 \begin{align*}
 u_n(x,t) &= a_n \sin{\dfrac{|n| \pi}{L} x} e^{-\dfrac{\alpha n^2 \pi^2}{L^2} t}.
 \end{align*}
-Keep in mind that $u_{-n}(x,t)=u_n(x,t)$ and that $u_0=0$ (as $\sin{0}=0$) we obtain the following series as our solution:
+Keep in mind that $u_{-n}(x,t)=u_n(x,t)$ and that $u_0=0$ (as $\sin{0}=0$), hence we only need to sum over $n \in \mathbb{Z}^{+}$. Hence, we obtain the following series as our solution:
 \begin{align*}
-u(x,t) &= \sum_{n=1}^{\infty} a_n \sin{\dfrac{n \pi}{\sqrt{\alpha} L} x} e^{-\dfrac{n^2 \pi^2}{L^2} t}.
+u(x,t) &= \sum_{n=1}^{\infty} a_n \sin{\dfrac{n \pi}{L} x} e^{-\dfrac{n^2 \pi^2}{L^2} t}.
 \end{align*}
 Imposing that $u(x,0)=f(x)$ yields:
-\begin{align*}
-f(x) &= \sum_{n=0}^{\infty} a_n \sin{\dfrac{n \pi}{\sqrt{\alpha} L} x}.
-\end{align*}
+\begin{align}
+f(x) &= \sum_{n=0}^{\infty} a_n \sin{\dfrac{n \pi}{L} x}.\label{fxFourier}
+\end{align}
 How can we determine $a_n$ from this? Well, it turns out that if we multiply this by $\sin{\dfrac{m \pi}{L} x}$ and integrate over $x\in [0,L]$ we get:
 \begin{align*}
-\int_0^L f(x) \sin{\dfrac{m \pi}{\sqrt{\alpha} L} x} dx &= \sum_{n=0}^{\infty} a_n \int_0^L\sin{\dfrac{n \pi}{L} x}\sin{\dfrac{m \pi}{L} x} dx.
+\int_0^L f(x) \sin{\dfrac{m \pi}{L} x} dx &= \sum_{n=0}^{\infty} a_n \int_0^L\sin{\dfrac{n \pi}{L} x}\sin{\dfrac{m \pi}{L} x} dx.
 \end{align*}
 Interestingly:
 \begin{align*}
-\sin{A}\sin{B} &= \dfrac{1}{2}(\cos{(A-B)-\cos{A+B}}).
+\sin{A}\sin{B} &= \dfrac{1}{2}(\cos{(A-B)-\cos{(A+B)}}).
 \end{align*}
 This yields:
 \begin{align*}
-\sin{\dfrac{n \pi}{L} x}\sin{\dfrac{m \pi}{L} x} &= \dfrac{1}{2}\left(\cos{\dfrac{m-n}{\pi}{L}x} - \cos{\dfrac{m+n}{\pi}{L}x}\right).
+\sin{\dfrac{n \pi}{L} x}\sin{\dfrac{m \pi}{L} x} &= \dfrac{1}{2}\left(\cos{\left(\dfrac{m-n}{\pi}{L}x\right)} - \cos{\left(\dfrac{m+n}{\pi}{L}x\right)}\right).
 \end{align*}
 Hence our integral becomes:
 \begin{align*}
-\int_0^L f(x) \sin{\dfrac{m \pi}{\sqrt{\alpha} L} x} dx &= \dfrac{1}{2}\sum_{n=0}^{\infty} a_n \int_0^L \left(\cos{\dfrac{(m-n)\pi}{L}x} - \cos{\dfrac{(m+n)\pi}{L}x}\right) dx \\
-&= \dfrac{1}{2}\sum_{n=0}^{\infty} a_n \left(\left[\dfrac{L}{(m-n)\pi}\sin{\dfrac{(m-n)\pi}{L}x}\right]_0^L - \left[\dfrac{L}{(m+n)\pi}\sin{\dfrac{m+n}{\pi}{L}x}\right]_0^L\right).
+\int_0^L f(x) \sin{\dfrac{m \pi}{L} x} dx &= \dfrac{1}{2}\sum_{n=0}^{\infty} a_n \int_0^L \left(\cos{\left(\dfrac{(m-n)\pi}{L}x\right)} - \cos{\left(\dfrac{(m+n)\pi}{L}x\right)}\right) dx \\
+&= \dfrac{1}{2}\sum_{n=0}^{\infty} a_n \left(\left[\dfrac{L}{(m-n)\pi}\sin{\left(\dfrac{(m-n)\pi}{L}x\right)}\right]_0^L - \left[\dfrac{L}{(m+n)\pi}\sin{\left(\dfrac{(m+n)\pi}{L}x\right)}\right]_0^L\right) \\
+&= \dfrac{1}{2}\sum_{n=0}^{\infty} a_n \left(\dfrac{L}{(m-n)\pi}\sin{((m-n)\pi)}-\dfrac{L}{(m-n)\pi}\sin{0} - \left[\dfrac{L}{(m+n)\pi}\sin{((m+n)\pi)}-\dfrac{L}{(m+n)\pi}\sin{0}\right]\right).
 \end{align*}
-Typically we will get zero from these integrals. Evaluating at $x=0$ will always yield $0$ for both integrals. $x=L$ will also yield $0$ if $m\neq n$. If $m=n$ though, we end up dividing by 0 for the first integral, which means we cannot simply declare it zero. Although the second antiderivative, when evaluated at $x=L$ yields $0$. So we will need to take the limit as $m$ approaches $n$ to determine the value of the first integral at its upper bound:
+$m+n$ and $m-n$ is always an integer so the sines should be zero. $\sin{0}=0$, too. Hence, we will get $0$ from this if $m\neq n$. If $m=n$ though, we end up dividing by 0 for the first term, which means we cannot simply declare it zero. So we will need to take the limit as $m$ approaches $n$ to determine the value of the first integral at its upper bound:
 \begin{align*}
 \lim_{m\rightarrow n} \dfrac{L}{(m-n)\pi}\sin{\dfrac{(m-n)\pi}{L}L} &= \lim_{m\rightarrow n} \dfrac{L}{(m-n)\pi}\sin{(m-n)\pi}.
 \end{align*}
@@ -105,18 +114,43 @@ Hence:
 \end{align*}
 Hence:
 \begin{align*}
-\int_0^L f(x) \sin{\dfrac{m \pi}{\sqrt{\alpha} L} x} dx &= \sum_{n=0}^{\infty} a_n L \delta_{mn} \\
-&= La_m.
+\int_0^L f(x) \sin{\dfrac{m \pi}{L} x} dx &= \dfrac{1}{2}\sum_{n=0}^{\infty} a_n L \delta_{mn} \\
+&= \dfrac{La_m}{2}.
 \end{align*}
 Here we have used the fact that $\delta_{mn}$ is zero if $m\neq n$ and one if $m=n$ and hence the only non-zero term corresponds to $m=n$. Hence we can calculate $a_n$ as:
 \begin{align*}
-a_n &= \dfrac{1}{L} \int_0^L f(x) \sin{\dfrac{n \pi}{\sqrt{\alpha} L} x} dx.
+a_n &= \dfrac{2}{L} \int_0^L f(x) \sin{\dfrac{n \pi}{L} x} dx.
 \end{align*}
+Interestingly, Equation \eqref{fxFourier} is called the Fourier series decomposition of $f(x)$ in terms of sines only. Fourier series are a way of rewriting periodic functions in terms of sine and cosine waves. Specifically in general, if we wish to write $f(x)$ as a Fourier series over the domain $x \in [-L,L]$ we would write (keep in mind the series coefficients $a_n$ and $b_n$ are not the same as those we have been using so far):
+\begin{align*}
+f(x) &= a_0 + \sum_{n=1}^{\infty} a_n \cos{\dfrac{n\pi}{L}x} + b_n \sin{\dfrac{n\pi}{L}x}. 
+\end{align*}
+Where:
+\begin{align*}
+a_0 &= \dfrac{1}{2L} \int_{-L}^{L} f(x) dx \\
+a_n &= \dfrac{1}{L} \int_{-L}^{L} f(x) \cos{\left(\dfrac{2\pi nx}{L}\right)} dx \\
+b_n &= \dfrac{1}{L} \int_{-L}^{L} f(x) \sin{\left(\dfrac{2\pi nx}{L}\right)} dx.
+\end{align*}
+We can see our $b_n$ here matches the $a_n$ from the $u_n(x,t)$, except that $a_n$ is calculated by integrating only over $x\in [0,L]$. So what is up with this? Well, interestingly we can only represent $f(x)$ solely with sine terms if and only if $f(x)$ is an odd function, just like $\sin{\left(\dfrac{n\pi x}{L}\right)}$ itself. Meaning that $f(-x)=-f(x)$. Hence we can be split our $b_n$ integral as:
+\begin{align*}
+b_n &= \dfrac{1}{L} \int_{-L}^{L} f(x) \sin{\left(\dfrac{2\pi nx}{L}\right)} dx \\
+&= \dfrac{1}{L} \left[\int_{-L}^{0} f(x) \sin{\left(\dfrac{2\pi nx}{L}\right)} dx + \int_{0}^{L} f(x) \sin{\left(\dfrac{2\pi nx}{L}\right)} dx \right]
+\end{align*}
+In our first integral, we will replace $x$ with $-x$ and hence $dx\rightarrow-dx$ and our domain becomes $x\in [L, 0]$ instead of $x\in [-L, 0]$. 
+\begin{align*}
+b_n &= \dfrac{1}{L} \left[\int_{L}^{0} f(-x) \sin{\left(-\dfrac{2\pi nx}{L}\right)} -dx + \int_{0}^{L} f(x) \sin{\left(\dfrac{2\pi nx}{L}\right)} dx \right]\\
+&= \dfrac{1}{L} \left[\int_{L}^{0} -f(x) \cdot -\sin{\left(\dfrac{2\pi nx}{L}\right)} \cdot -dx + \int_{0}^{L} f(x) \sin{\left(\dfrac{2\pi nx}{L}\right)} dx \right]\\
+&= \dfrac{1}{L} \left[-\int_{L}^{0} f(x) \sin{\left(\dfrac{2\pi nx}{L}\right)} dx + \int_{0}^{L} f(x) \sin{\left(\dfrac{2\pi nx}{L}\right)} dx \right]\\
+&= \dfrac{1}{L} \left[\int_{0}^L f(x) \sin{\left(\dfrac{2\pi nx}{L}\right)} dx + \int_{0}^{L} f(x) \sin{\left(\dfrac{2\pi nx}{L}\right)} dx \right]\\
+&= \dfrac{2}{L} \int_{0}^L f(x) \sin{\left(\dfrac{2\pi nx}{L}\right)} dx.
+\end{align*}
+So we see that our $a_n$ from $u_n(x,t)$ are in fact equivalent to $b_n$, at least for odd functions. 
+
 Interestingly, our differential equation for $X_n$ is an example of a type of ODE known as a Sturm-Liouville problem. Sturm-Liouville problems, in general, are of the form:
 \begin{align}
 \dfrac{d}{dx}\left[p(x) \dfrac{dy}{dx}\right] + q(x)y &= -\lambda r(x) y \label{SLP}
 \end{align}
-Where $p>0$, $r\geq 0$ and $p$, $q$ and $r$ are well-defined and continuous functions throughout the domain in which we are solving this problem (we will denote this domain as $[a,b)$). There are also boundary conditions imposed as part of a Sturm-Liouville problem. $\lambda$ can take on a set of discrete values, which are called eigenvalues. Each eigenvalue corresponds to a different solution $y$ which is called the corresponding eigenfunction. And yes, as you have probably guessed, the "eigen" prefix is German in origin. I should say that eigenvalues also arise in the study of matrices. Namely, if you have the matrix equation:
+Where $p>0$, $r\geq 0$ and $p$, $q$ and $r$ are well-defined and continuous functions throughout the domain in which we are solving this problem (we will denote this domain as $[a,b]$). There are also boundary conditions imposed as part of a Sturm-Liouville problem. $\lambda$ can take on a set of discrete values, which are called eigenvalues. Each eigenvalue corresponds to a different solution $y$ which is called the corresponding eigenfunction. And yes, as you have probably guessed, the "eigen" prefix is German in origin. I should say that eigenvalues also arise in the study of matrices. Namely, if you have the matrix equation:
 \begin{align*}
 \mathbf{A} \mathbf{x} &= \lambda \mathbf{x}
 \end{align*}

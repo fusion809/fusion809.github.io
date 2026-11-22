@@ -10,6 +10,7 @@ The website_* must be defined for the RSS to work
 @def author = "Brenton Horne"
 
 @def mintoclevel = 2
+@def noeval = true
 
 <!--
 Add here files or directories that should be ignored by Franklin, otherwise
