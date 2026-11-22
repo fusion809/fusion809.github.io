@@ -15,7 +15,7 @@ y(2h) &\approx y(h) + hy'(h) \\
 &\approx (1+h) + h(1+h) \\
 &= 1 + 2h + h^2.
 \end{align*}
-And continue on from there. This method, where we truncate the Taylor series at the first two terms and numerically approximate our solution by applying this approximation at each step, is called Euler's method. As we ignore so many terms in the Taylor series, this method is said to be rather inaccurate. Specifically, we call it a first-order method. 
+And continue on from there. This method, where we truncate the Taylor series at the first two terms and numerically approximate our solution by applying this approximation at each step, is called Euler's method. As we ignore so many terms in the Taylor series, this method is rather inaccurate. Specifically, we call it a first-order method. 
 
 Other schemes for numerical integration of ordinary differential equations also exist. Among the most popular are the Runge-Kutta family of methods, such as the Runge-Kutta fourth-order method. These methods do not utilize higher-order derivatives, but they use clever tricks for approximating the solution to higher-order accuracy using only first-order derivatives.
 
