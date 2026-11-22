@@ -387,7 +387,7 @@ let t = 0.0,
         remaining_seconds = target_time - 60 * elapsed_minutes
         time_label.text =
             @sprintf(
-                "Simulation time: %d min %.1f s",
+                "Simulation time: %02d min %04.1f s",
                 elapsed_minutes,
                 remaining_seconds
             )
@@ -397,7 +397,7 @@ let t = 0.0,
         Tmax = maximum(u)
 
         @printf(
-            "Frame %4d/%d | t = %d min %.1f s | dt = %.5f s | T range = %.8f–%.8f °C\n",
+            "Frame %4d/%d | t = %02d min %04.1f s | dt = %.5f s | T range = %.8f–%.8f °C\n",
             frame_number,
             NUMBER_OF_FRAMES,
             elapsed_minutes,
