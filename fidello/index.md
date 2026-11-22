@@ -13,7 +13,13 @@
 \includemd{fidello/_02c-partial-derivatives.md}
 \includemd{fidello/_02ci-heat-equation.md}
 \includemd{fidello/_02d-product-notation.md}
-\includemd{fidello/_02e-differential-equations.md}
+\includemd{fidello/_02e-kronecker-delta.md}
+\includemd{fidello/_02f-differential-equations.md}
+\includemd{fidello/_02fi-rearranging-integrating.md}
+\includemd{fidello/_02fii-power-series.md}
+\includemd{fidello/_02fiii-assuming-exponential.md}
+\includemd{fidello/_02fiv-separation-variables.md}
+\includemd{fidello/_02fv-numerical-methods.md}
 \includemd{fidello/_03-lagrangian-mechanics.md}
 \includemd{fidello/_03a-euler-lagrange-equations.md}
 \includemd{fidello/_03b-stationary-action-principle.md}
