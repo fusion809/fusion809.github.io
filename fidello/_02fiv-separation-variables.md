@@ -146,6 +146,8 @@ b_n &= \dfrac{1}{L} \left[\int_{L}^{0} f(-x) \sin{\left(-\dfrac{2\pi nx}{L}\righ
 \end{align*}
 So we see that our $a_n$ from $u_n(x,t)$ are in fact equivalent to $b_n$, at least for odd functions. 
 
+I should also mention that while Fourier series are technically intended for periodic functions, our function actually does not need to repeat itself within the domain we are calculating it for. Further, how the function behaves outside that domain is irrelevant to the calculation of Fourier series. So the Fourier series can, in fact, match our function perfectly within our domain despite not actually being periodic. Although, this lack of periodicity will cause the Fourier series and the original function to not match outside the domain in which we calculated the series. 
+
 Interestingly, our differential equation for $X_n$ is an example of a type of ODE known as a Sturm-Liouville problem. Sturm-Liouville problems, in general, are of the form:
 \begin{align}
 \dfrac{d}{dx}\left[p(x) \dfrac{dy}{dx}\right] + q(x)y &= -\lambda r(x) y \label{SLP}
