@@ -58,6 +58,7 @@ function generate_fidello_saved_outputs()
   listings = [
     ("fidello", "fidello/code/findiff.jl"),
     ("fidello", "fidello/code/findiff4th.jl"),
+    ("fidello", "fidello/code/chebyshev.jl"),
   ]
 
   for (page_path, source_path) in listings
@@ -95,7 +96,7 @@ if stat(fidello_output).mtime < build_started_at
 end
 
 fidello_html = read(fidello_output, String)
-for name in ("findiff", "findiff4th")
+for name in ("findiff", "findiff4th", "chebyshev")
   output_file = joinpath(@__DIR__, "__site", "assets", "fidello", "code", "output", name * ".out")
   isfile(output_file) && filesize(output_file) > 0 ||
     error("Required Fidello listing output is missing or empty: $output_file")
