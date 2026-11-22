@@ -43,7 +43,7 @@ As for our other boundary condition:
 X(L) &= 0 \\
 C_3\sin{\sqrt{\dfrac{\lambda}{\alpha}}L} &= 0.
 \end{align*}
-This, in turn, implies that
+This, in turn, implies that:
 \begin{align*}
 \sqrt{\dfrac{\lambda}{\alpha}}L &= n\pi,\hspace{0.2cm}n\in \mathbb{Z}.
 \end{align*}
