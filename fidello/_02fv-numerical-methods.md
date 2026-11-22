@@ -1,5 +1,8 @@
 ### Numerical solution techniques
-In this article, however, we will encounter differential equations that have no exact solutions and for which numerical solutions are necessary. Numerical solutions are actually quite interesting, because they typically involve applications of the Taylor series that we have covered. For instance, say we wanted to numerically integrate the differential equation $y'=y$ with initial condition $y(0)=1$. Then if we wanted to approximate $y(h)$ for some small $h$, we could use the Maclaurin series of $y$:
+In this article, however, we will encounter differential equations that have no exact solutions and for which numerical solutions are necessary. Numerical solution methods approximate the solution to a differential equations, and as such they are not exact. Although, quite often we can make them accurate to ten or more significant figures. 
+
+#### Euler's method
+Numerical solutions are actually quite interesting, because they typically involve applications of the Taylor series that we have covered. For instance, say we wanted to numerically integrate the differential equation $y'=y$ with initial condition $y(0)=1$. Then if we wanted to approximate $y(h)$ for some small $h$, we could use the Maclaurin series of $y$:
 \begin{align*}
 y(h) &= y(0) + hy'(0) + \dfrac{h^2}{2}y''(0) + \dfrac{h^3}{6}y'''(0) + ... \\
 \end{align*}
@@ -17,6 +20,7 @@ y(2h) &\approx y(h) + hy'(h) \\
 \end{align*}
 And continue on from there. This method, where we truncate the Taylor series at the first two terms and numerically approximate our solution by applying this approximation at each step, is called Euler's method. As we ignore so many terms in the Taylor series, this method is rather inaccurate. Specifically, we call it a first-order method. 
 
+#### Runge-Kutta methods
 Other schemes for numerical integration of ordinary differential equations also exist. Among the most popular are the Runge-Kutta family of methods, such as the Runge-Kutta fourth-order method. These methods do not utilize higher-order derivatives, but they use clever tricks for approximating the solution to higher-order accuracy using only first-order derivatives. I should say that Euler's method and the Runge-Kutta methods are all only applicable when we have initial conditions, not boundary or other conditions. There are other integration schemes for ODEs that work well with these other conditions, however.
 
 To illustrate how we use these methods, let us try to solve the differential equation:
@@ -45,6 +49,7 @@ In Code Listing \coderef{differential}, I have implemented both Euler's method a
 
 \output{./code/differential}
 
+#### Runge-Kutta-Fehlberg 4/5th-order method
 An arguably better method for numerically solving ordinary differential equations is the Runge-Kutta-Fehlberg fourth/fifth-order method (RKF45), as it adapts our step size $h$ to ensure that the error in our solution never exceeds a certain threshold. In this method, we use:
 
 \begin{align*}
@@ -115,7 +120,8 @@ So we will use the initial conditions $y(0)=0$ and $y'(0)=1$. This gives the sol
 
 In Code Listing \coderef{RKF45coup}, we used $\epsilon=10^{-8}$ as our error tolerance. You may notice that our maximum errors in the output table do indeed exceed this. This is possible as our truncation error estimate is solely for that step, it is not the cumulative error for all steps up until the point we are in our calculation. 
 
-So far I have covered how we can numerically integrate initial value problems. Solving boundary value problems is often more challenging, and we usually need to construct and solve matrix equations instead. For instance, if we had the equation $y''=-y$ and $y(0)=y(2\pi)=1$ (which implies $y(x)=\cos{x}$) we could use the finite difference method as it is called. In this, we discretize our grid. Splitting our domain into steps of size $h$. We will define our grid points as:
+#### Finite difference method
+So far I have covered how we can numerically integrate initial value problems. Solving boundary value problems is often more challenging, and we usually need to construct and solve matrix equations instead. For instance, if we had the equation $y''=-y$ and $y(0)=y(2\pi)=1$ (which implies $y(x)=\cos{x}$) we could use the finite difference method as it is called. In this, we discretize our grid, which means splitting our domain into steps of size $h$. We will define our grid points as:
 \begin{align*}
 x_i &= x_0 + hi.
 \end{align*}
@@ -126,24 +132,24 @@ x_i &= hi \\
 \end{align*}
 Let $y_i$ denote $y(x_i)$. Then using the Taylor series expansion at $a=x_i$:
 \begin{align*}
-y_{i+1} &= y_i + y'_i h + \dfrac{y''_i}{2}h^2 + \dfrac{y'''_i}{6} h^3 + O(h^4)\\
-y_{i-1} &= y_i - y'_i h + \dfrac{y''_i}{2} h^2 - \dfrac{y'''_i}{6} h^3 + O(h^4)\\
-y_{i+1}-y_{i-1} &= y_i + y'_i h + \dfrac{y''_i}{2}h^2 - \left(y_i - y'_i h + \dfrac{y''_i}{2} h^2\right)  + \dfrac{y'''_i}{3} h^3 + O(h^4) \\
-&= 2y'_i h + \dfrac{y'''_i}{3} h^3 + O(h^4) \\
-&= 2y'_i h + O(h^3).
+y_{i+1} &= y_i + y'_i h + \dfrac{y''_i}{2}h^2 + \dfrac{y'''_i}{6} h^3 + \mathcal{O}(h^4)\\
+y_{i-1} &= y_i - y'_i h + \dfrac{y''_i}{2} h^2 - \dfrac{y'''_i}{6} h^3 + \mathcal{O}(h^4)\\
+y_{i+1}-y_{i-1} &= y_i + y'_i h + \dfrac{y''_i}{2}h^2  + \dfrac{y'''_i}{6} h^3- \left(y_i - y'_i h + \dfrac{y''_i}{2} h^2 - \dfrac{y'''_i}{6} h^3\right) + \mathcal{O}(h^4) \\
+&= 2y'_i h + \dfrac{y'''_i}{3} h^3 + \mathcal{O}(h^4) \\
+&= 2y'_i h + \mathcal{O}(h^3).
 \end{align*}
-Now we need to explain what $O(h^4)$ is. It essentially refers to terms proportional to $h^4$ and higher powers of $h$. The reason they did not cancel out when we calculated $y_{i+1}-y_{i-1}$ is because they would differ between $y_{i+1}$ and $y_{i-1}$. Hence we can approximate $y'_i$ as:
+Now we need to explain what $\mathcal{O}(h^4)$ is. It essentially refers to terms proportional to $h^4$ and higher powers of $h$. The reason they did not cancel out when we calculated $y_{i+1}-y_{i-1}$ is because they would differ between $y_{i+1}$ and $y_{i-1}$. Hence we can approximate $y'_i$ as:
 \begin{align*}
-y'_i &= \dfrac{y_{i+1}-y_{i-1}}{2h} + \dfrac{O(h^3)}{2h} \\
-&=\dfrac{y_{i+1}-y_{i-1}}{2h} + O(h^2).
+y'_i &= \dfrac{y_{i+1}-y_{i-1}}{2h} + \dfrac{\mathcal{O}(h^3)}{2h} \\
+&=\dfrac{y_{i+1}-y_{i-1}}{2h} + \mathcal{O}(h^2).
 \end{align*}
 If we add $y_{i+1}$ and $y_{i-1}$, we should cancel out the $y'_i h$ and $\dfrac{y'''_i}{6} h^3$ terms. To get rid of $y_i$, we will subtract $2y_i$:
 \begin{align*}
-y_{i+1}-2y_i+y_{i-1} &= y''_i h^2 + O(h^4) \\
-y''_i &= \dfrac{y_{i+1}-2y_i+y_{i-1}}{h^2} + \dfrac{O(h^4)}{h^2} \\
-&= \dfrac{y_{i+1}-2y_i+y_{i-1}}{h^2} + O(h^2).
+y_{i+1}-2y_i+y_{i-1} &= y''_i h^2 + \mathcal{O}(h^4) \\
+y''_i &= \dfrac{y_{i+1}-2y_i+y_{i-1}}{h^2} + \dfrac{\mathcal{O}(h^4)}{h^2} \\
+&= \dfrac{y_{i+1}-2y_i+y_{i-1}}{h^2} + \mathcal{O}(h^2).
 \end{align*}
-Hence we have estimates for both $y''_i$ and $y'_i$ that have local truncation errors of $O(h^2)$. Consequently, they are second-order estimates for $y''_i$ and $y'_i$, respectively. Substituting into our differential equation, ignoring the $O(h^2)$ yields and adding our boundary conditions:
+Hence we have estimates for both $y''_i$ and $y'_i$ that have local truncation errors of $\mathcal{O}(h^2)$. Consequently, they are second-order estimates for $y''_i$ and $y'_i$, respectively. Substituting into our differential equation, ignoring the $\mathcal{O}(h^2)$ yields and adding our boundary conditions:
 \begin{align*}
 y''_i &= y_i \\
 \dfrac{y_{i+1}-2y_i+y_{i-1}}{h^2} &= y_i \\
@@ -158,8 +164,8 @@ We can now write this in matrix form as:
 1 & 0 & 0 & 0 & 0 & ... \\
 1 & -2+h^2 & 1 & 0 & 0 & ... \\
 0 & 1 & -2+h^2 & 1 & 0 & ... \\
-...
-0 & 0 & 0 & ... & 1
+... & ... & ... & ... & ... & ... \\
+0 & 0 & 0 & 0 & ... & 1
 \end{bmatrix} \begin{bmatrix}
 y_0 \\
 y_1 \\
@@ -191,12 +197,16 @@ For $i=1$ and $i=N-1$, where one of these grid points is not defined, we would i
 y''_1 &= \dfrac{11y_5 - 56y_4 + 114y_3 - 104y_2+35y_1}{12h^2} \\
 y''_{N-1} &= \dfrac{35y_{N-1}-104y_{N-2}+114y_{N-3}-56y_{N-4}+11y_{N-5}}{12h^2}.
 \end{align*}
-We would obtain Code Listing 
+These scheme was used in Code Listing \coderef{findiff4th}.
+
 \codelisting{findiff4th}{Implementation of the fourth-order finite difference method for $y''=-y$, $y(0)=y(2\pi)=1$.}{./code/findiff4th}{fidello/code/findiff4th.jl}
 Which produces the output:
 \output{./code/findiff4th}
 As we can see, it is more accurate, but definitely not perfect. 
 
+It is important to note, however, that so far we have only applied the finite difference method to linear differential equations and this is for good reason. When we try to apply it to nonlinear differential equations, we get a nonlinear coupled system of algebraic equations which are much more challenging to solve. There are ways around this, for instance we can use a method called Newton's method to solve the algebraic equation system that arises, and we can also try linearizing our differential equation using a technique known as the Newton-Kantorovich method. Each of these presents its own challenges though. 
+
+#### Partial differential equations
 The methods for numerically integrating partial differential equations (PDEs) tend to be substantially more complex than those for solving ODEs due to the added complexity of needing to work with more than one independent variable. Although, the finite difference method can be applied directly to boundary value linear PDEs, too. Although the matrices become more complex when we add additional independent variables. Further, some of the other methods used to numerically integrate PDEs utilize ODE methods in some way. 
 
-For instance, the code in Code Listing \coderef{heatan} solves the heat equation by approximating spatial derivatives using something called fast Fourier transforms (FFTs) and their inverses and then integrating on time using RKF45. This is one of many different techniques for numerically solving PDEs. Although, like ODEs, some PDEs also have analytical solutions and this includes the heat equation. 
+For instance, the code in Code Listing \coderef{heatan} solves the heat equation by approximating spatial derivatives using something called the fast Fourier transform (FFT) and its inverse and then integrates on time using RKF45. This is one of many different techniques for numerically solving PDEs.
