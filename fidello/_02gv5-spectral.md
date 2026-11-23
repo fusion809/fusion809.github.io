@@ -68,11 +68,23 @@ Where $L$ is a parameter we might need to fine tune to get the best approximatio
 \end{align*}
 Which allows us to calculate our differentiation matrix for $x$. It will simply be:
 \begin{align*}
-\mathbf{D}_x &= \mathbf{Diag}\left(\dfrac{(1-y_j)^2}{2L}\right)\mathbf{D}_y.
+\mathbf{D}_x &= \mathbf{Diag}\left(\dfrac{(1-y_i)^2}{2L}\right)\mathbf{D}_y.
 \end{align*}
-Where $\mathbf{Diag}\left(\dfrac{(1-y_j)^2}{2L}\right)$ represents a matrix with $\dfrac{(1-y_j)^2}{2L}$ on its diagonal and $0$ in all other entries. $\mathbf{D}_x$ is the differentiation matrix with respect to $x$ and $\mathbf{D}_y$ is the differentiation matrix with respect to $y$. Hence we will be solving the matrix equation:
+$\mathbf{D}_x$ is the differentiation matrix with respect to $x$ and $\mathbf{D}_y$ is the differentiation matrix with respect to $y$. $\mathbf{Diag}\left(\dfrac{(1-y_i)^2}{2L}\right)$ represents a matrix with $\dfrac{(1-y_i)^2}{2L}$ on its diagonal and $0$ in all other entries. To clarify what I mean, I will show you what this matrix looks like:
 \begin{align*}
-\left(\mathbf{D}_x^2 - \mathbf{Diag}{(x_j)}\right)\mathbf{u} &= \mathbf{0}.
+\mathbf{Diag}\left(\dfrac{(1-y_i)^2}{2L}\right) &= \begin{bmatrix}
+\dfrac{(1-y_0)^2}{2L} & 0 & 0 & 0 & ... & 0 \\
+0 & \dfrac{(1-y_1)^2}{2L} & 0 & 0 & ... & 0 \\
+0 & 0 & \dfrac{(1-y_2)^2}{2L} & 0 & ... & 0 \\
+... & ... & ... & ... & ... & ... \\
+0 & 0 & 0 & 0 & ... & \dfrac{(1-y_n)^2}{2L}
+\end{bmatrix}.
+\end{align*}
+Why do we left-multiply $\mathbf{D}_y$ by this matrix? Well, if you manually calculate the matrix product between these matrices you will find that each row of $\mathbf{D}_y$ (which corresponds to a different value of $y_i$) is multiplied by the corresponding value of $\dfrac{(1-y_i)^2}{2L}$. This is the matrix analogue to our expression for $\dfrac{d}{dx}$ in terms of $y$.
+
+Hence we will be solving the matrix equation:
+\begin{align*}
+\left(\mathbf{D}_x^2 - \mathbf{Diag}{(x_i)}\right)\mathbf{u} &= \mathbf{0}.
 \end{align*}
 Where $\mathbf{0}$ denotes a column vector of just zeros. Although, we will need to remove two rows from this matrix equation and replace them with rows to impose our boundary conditions. Say these rows are rows 1 and $n+1$, which correspond to $x_0$ and $x_n$. Say we call $\mathbf{A}=\mathbf{D}_x^2 - \mathbf{Diag}{(x_j)}$. Then the edits we make to impose our boundary conditions will be setting $A_{1,1} = 1$ and all remaining entries in the first row of $\mathbf{A}$ will be $0$. As for $A_{n+1,n+1}=1$ and all other entries in the $n+1$th row of $\mathbf{A}$ will be zero. 
 
