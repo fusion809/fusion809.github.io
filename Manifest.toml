@@ -2580,10 +2580,10 @@ weakdeps = ["FixedPointNumbers"]
 
 [[deps.ReactantCore]]
 deps = ["ExpressionExplorer", "MacroTools"]
-git-tree-sha1 = "1fe4e616752a0c4818ae88a504fc59b0fb016659"
+git-tree-sha1 = "e6c4e08f4bc0d9eb791eab8dbf1b09dd997be1f5"
 registries = "General"
 uuid = "a3311ec8-5e00-46d5-b541-4f83e724a433"
-version = "0.1.26"
+version = "0.1.27"
 
 [[deps.RecipesBase]]
 deps = ["PrecompileTools"]
