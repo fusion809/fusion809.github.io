@@ -48,7 +48,7 @@ We can now write this in matrix form as:
 y_0 \\
 y_1 \\
 y_2 \\
-...
+... \\
 y_n
 \end{bmatrix} &= \begin{bmatrix}
 1 \\
