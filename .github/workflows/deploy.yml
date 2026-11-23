@@ -38,7 +38,9 @@ jobs:
         xvfb-run -a julia -e '
         using Pkg
         Pkg.activate(".")
-        Pkg.add([Pkg.PackageSpec(url="https://github.com/fusion809/FunctionIntegrator.jl", rev="v0.6.1"), Pkg.PackageSpec(name="NodeJS"), Pkg.PackageSpec(name="Franklin"), Pkg.PackageSpec(name="PyPlot"), Pkg.PackageSpec(name="Interpolations"), Pkg.PackageSpec(name="DataFrames"), Pkg.PackageSpec(name="StaticArrays"), Pkg.PackageSpec(name="FFTW"), Pkg.PackageSpec(name="Plots"), Pkg.PackageSpec(name="GLMakie"), Pkg.PackageSpec(name="Colors"), Pkg.PackageSpec(name="Measures"), Pkg.PackageSpec(name="DifferentialEquations"), Pkg.PackageSpec(name="Printf"), Pkg.PackageSpec(name="LaTeXStrings"), Pkg.PackageSpec(name="PlotlyJS")])
+        include(".github/scripts/install_julia_dependencies.jl")
+        install_scanned_julia_dependencies()
+        Pkg.add(Pkg.PackageSpec(name="NodeJS"))
         using NodeJS
         run(`$(npm_cmd()) install highlight.js`)
         using Franklin
