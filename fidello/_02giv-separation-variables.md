@@ -134,7 +134,7 @@ a_0 &= \dfrac{1}{2L} \int_{-L}^{L} f(x) dx \\
 a_n &= \dfrac{1}{L} \int_{-L}^{L} f(x) \cos{\left(\dfrac{2\pi nx}{L}\right)} dx \\
 b_n &= \dfrac{1}{L} \int_{-L}^{L} f(x) \sin{\left(\dfrac{2\pi nx}{L}\right)} dx.
 \end{align*}
-We can see our $b_n$ here matches the $a_n$ from the $u_n(x,t)$, except that $a_n$ is calculated by integrating only over $x\in [0,L]$. So what is up with this? Well, interestingly we can only represent $f(x)$ solely with sine terms if and only if $f(x)$ is an odd function, just like $\sin{\left(\dfrac{n\pi x}{L}\right)}$ itself. Meaning that $f(-x)=-f(x)$. Hence we can be split our $b_n$ integral as:
+We can see our $b_n$ here matches the $a_n$ from the $u_n(x,t)$, except that $a_n$ is calculated by integrating only over $x\in [0,L]$. So what is up with this? Well, interestingly we can only represent $f(x)$ solely with sine terms if and only if $f(x)$ is an odd function, just like $\sin{\left(\dfrac{n\pi x}{L}\right)}$ itself. Meaning that $f(-x)=-f(x)$. Hence we can split our $b_n$ integral as:
 \begin{align*}
 b_n &= \dfrac{1}{L} \int_{-L}^{L} f(x) \sin{\left(\dfrac{2\pi nx}{L}\right)} dx \\
 &= \dfrac{1}{L} \left[\int_{-L}^{0} f(x) \sin{\left(\dfrac{2\pi nx}{L}\right)} dx + \int_{0}^{L} f(x) \sin{\left(\dfrac{2\pi nx}{L}\right)} dx \right]
