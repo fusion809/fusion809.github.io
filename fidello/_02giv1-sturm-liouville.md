@@ -3,19 +3,8 @@ Interestingly, our differential equation for $X_n$ is an example of a type of OD
 \begin{align}
 \dfrac{d}{dx}\left[p(x) \dfrac{dy}{dx}\right] + q(x)y &= -\lambda r(x) y \label{SLP}
 \end{align}
-Where $p>0$, $r\geq 0$ and $p$, $q$ and $r$ are well-defined and continuous functions throughout the domain in which we are solving this problem (we will denote this domain as $[a,b]$). There are also boundary conditions imposed as part of a Sturm-Liouville problem. $\lambda$ can take on a set of discrete values, which are called eigenvalues. Each eigenvalue corresponds to a different solution $y$ which is called the corresponding eigenfunction. And yes, as you have probably guessed, the "eigen" prefix is German in origin. I should say that eigenvalues also arise in the study of matrices. Namely, if you have the matrix equation:
-\begin{align*}
-\mathbf{A} \mathbf{x} &= \lambda \mathbf{x}
-\end{align*}
-then $\lambda$ is said to be an eigenvalue of $\mathbf{A}$ and $\mathbf{x}$ is an eigenvector of $\mathbf{A}$. We solve for $\lambda$ by solving the polynomial equation that results from:
-\begin{align*}
-\det{\left(\mathbf{A}-\lambda \mathbf{I}\right)} &= 0.
-\end{align*}
-Where $\det{\left(\mathbf{A}-\lambda \mathbf{I}\right)}$ denotes the determinant of matrix $\mathbf{A}-\lambda \mathbf{I}$ and $\mathbf{I}$ is the identity matrix. Then we figure out $\mathbf{x}$ by solving:
-\begin{align*}
-(\mathbf{A}-\lambda\mathbf{I})\mathbf{x} = \mathbf{0}.
-\end{align*}
-When we solve for the eigenvectors, we will find that one unknown is left and this means that the scaling of the vector is arbitrary. Often we choose the scaling to make it so that $\mathbf{x} \cdot \mathbf{x} = 1$. 
+Where $p>0$, $r\geq 0$ and $p$, $q$ and $r$ are well-defined and continuous functions throughout the domain in which we are solving this problem (we will denote this domain as $[a,b]$). There are also boundary conditions imposed as part of a Sturm-Liouville problem. $\lambda$ can take on a set of discrete values, which are called eigenvalues. Each eigenvalue corresponds to a different solution $y$ which is called the corresponding eigenfunction. And yes, as you have probably guessed, the "eigen" prefix is German in origin. 
+
 So in the example we solved for the heat equation, $X_n$ were the eigenfunctions and $\lambda_n$ were the eigenvalues. An interesting quality of eigenfunctions is that they are orthogonal (similarly to the eigenvectors of a matrix). That means that:
 \begin{align*}
 \langle y_m | y_n \rangle &= \int_a^b y_m y_n r(x) dx \\

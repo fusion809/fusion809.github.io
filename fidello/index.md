@@ -21,6 +21,7 @@
 \includemd{fidello/_02giii-assuming-exponential.md}
 \includemd{fidello/_02giv-separation-variables.md}
 \includemd{fidello/_02giv1-sturm-liouville.md}
+\includemd{fidello/_02giv1a-matrix-counterpart.md}
 \includemd{fidello/_02gv-numerical-methods.md}
 \includemd{fidello/_02gv1-eulers.md}
 \includemd{fidello/_02gv2-runge-kutta.md}
