@@ -3,7 +3,7 @@ Sturm-Liouville problems also give rise to infinite sets of orthogonal functions
 \begin{align}
 u(x) &= \sum_{j=0}^{\infty} a_j \phi_j(x). \label{spectral} 
 \end{align}
-Then we discretize our grid into points $x_i$, truncate the above series expansion, and can write a matrix equation for $\mathbf{a}$ (a vector containing $\{a_j\}$, the series coefficients). Then this equation would be:
+Then we discretize our grid into points $x_i$ ($i \in \{0, 1, 2,...,n\}$), truncate the above series expansion, and can write a matrix equation for $\mathbf{a}$ (a vector containing $\{a_j\}$, the series coefficients). Then this equation would be:
 \begin{align}
 \mathbf{A}\mathbf{a} &= \mathbf{b}. \label{speca}
 \end{align}
