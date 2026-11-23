@@ -14,10 +14,17 @@ Hence our differential equation becomes:
 \end{align*}
 Equating the coefficients of $x^n$ yields:
 \begin{align*}
-a_{n+1}(n+1) &= a_n \\
-&= \dfrac{a_n}{n+1} \\
-&= \dfrac{a_{n-1}}{(n+1)n} \\
-&= \dfrac{a_0}{\displaystyle \prod_{i=0}^{n}(n+1-i)} \\
+a_{n+1}(n+1) &= a_n.
+\end{align*}
+Dividing by $n+1$ yields:
+\begin{align*}
+a_{n+1} &= \dfrac{a_n}{n+1}
+\end{align*}
+Applying this recursive relationship over and over yields:
+\begin{align*}
+a_{n+1} &= \dfrac{a_{n-1}}{(n+1)n} \\
+&= \dfrac{a_{n-2}}{(n+1)n(n-1)} \\
+&= \dfrac{a_0}{(n+1)\times n\times(n-1)\times...\times1} \\
 &= \dfrac{a_0}{(n+1)!}.
 \end{align*}
 Hence the coefficients of our power series are:

@@ -49,8 +49,11 @@ Hence our polynomial equation becomes:
 \end{align*}
 3 and 2 multiply to give 6 and add to give 5, hence the quadratic factor can be factorized as $(r_j+2)(r_j+3)$:
 \begin{align*}
-(r_j+1)(r_j+2)(r_j+3) &= 0 \\
-\implies r_1 &= -1 \\
+(r_j+1)(r_j+2)(r_j+3) &= 0.
+\end{align*}
+Applying the null factor law and rearranging yields:
+\begin{align*}
+r_1 &= -1 \\
 r_2 &= -2 \\
 r_3 &= -3.
 \end{align*}
