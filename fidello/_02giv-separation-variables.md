@@ -113,7 +113,7 @@ We can use the Maclaurin series to approximate $\sin{x}$ as $x\rightarrow 0$:
 Hence:
 \begin{align*}
 \left[\dfrac{L}{(m-n)\pi}\sin{\left(\dfrac{(m-n)\pi}{L}x\right)}\right]_0^L &= L\delta_{mn} \\
-\left[\dfrac{L}{(m+n)\pi}\sin{\left(\dfrac{m+n}{\pi}{L}x\right)}\right]_0^L &= 0.
+\left[\dfrac{L}{(m+n)\pi}\sin{\left(\dfrac{(m+n)\pi}{L}x\right)}\right]_0^L &= 0.
 \end{align*}
 Hence:
 \begin{align*}
