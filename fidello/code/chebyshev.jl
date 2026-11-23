@@ -56,11 +56,11 @@ df = DataFrame(
     y = ξ,
     x = x,
     Approximation = u,
-    Exact = yexact,
+    Exact = uexact,
     Error = abs.(u .- uexact)
 )
 
 show(stdout, MIME("text/plain"), df)
 println()
 
-println("\nMaximum absolute error: ", maximum(abs.(u .- yexact)))
+println("\nMaximum absolute error: ", maximum(abs.(u .- uexact)))
