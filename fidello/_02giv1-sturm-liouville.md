@@ -15,7 +15,8 @@ Where $\det{\mathbf{B}}$ denotes the determinant of matrix $\mathbf{B}$ and $\ma
 \begin{align*}
 (\mathbf{A}-\lambda\mathbf{I})\mathbf{x} = \mathbf{0}.
 \end{align*}
-So in the example we solved for the heat equation, $X_n$ were the eigenfunctions and $\lambda_n$ were the eigenvalues. An interesting quality of eigenfunctions is that they are orthogonal. That means that:
+When we solve for the eigenvectors, we will find that one unknown is left and this means that the scaling of the vector is arbitrary. Often we choose the scaling to make it so that $\mathbf{x} \cdot \mathbf{x} = 1$. 
+So in the example we solved for the heat equation, $X_n$ were the eigenfunctions and $\lambda_n$ were the eigenvalues. An interesting quality of eigenfunctions is that they are orthogonal (similarly to the eigenvectors of a matrix). That means that:
 \begin{align*}
 \langle y_m | y_n \rangle &= \int_a^b y_m y_n r(x) dx \\
 &= c_m \delta_{mn}.
