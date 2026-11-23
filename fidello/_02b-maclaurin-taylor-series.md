@@ -77,4 +77,4 @@ Which is actually true. As this sum does, indeed, equal $\ln{2}$. But because th
 \end{align}
 This sum does not converge, hence it actually equals $\infty$. Hence why $|x| < 1$ is a requirement for this Maclaurin series to converge, or at least converge at a reasonable pace, although it does also converge, albeit slowly, for $x=1$. 
 
-Maclaurin and Taylor series have broad applications in physics. One application they have is in helping us connect more general and robust laws of physics to older approximations. For more on this, see the section on [the classical limit of special relativity's kinetic energy](#classical_limit_of_special_relativitys_kinetic_energy).
+Maclaurin and Taylor series have broad applications in physics. One application they have is in helping us connect more general and robust laws of physics to older approximations. For more on this, see the section on [the classical limit of special relativity's kinetic energy](#classical_limit_of_kinetic_energy).
