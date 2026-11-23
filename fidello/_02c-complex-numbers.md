@@ -35,7 +35,7 @@ Here I used the trigonometric identity:
 \end{align}
 Where $\mathbb{R}$ is the set of real numbers. Okay, so getting back to how $l$ and $\theta$ can uniquely define a complex number. Well, interestingly you can write any complex number in the form $le^{i\theta}$. Why? Well, recall that $e^{i\theta}$ is just $\cos{\theta}+i\sin{\theta}$. Looking at Figure \figref{complex} we can clearly see that the $x$ component of our vector is just $l\cos{\theta}$, right? And we can also see that the $y$ component is just $l\sin{\theta}$ and if we expand our $le^{i\theta}$ we get:
 \begin{align*}
-le^{i\theta} &= l\cos{\theta} + i\sin{\theta}.
+le^{i\theta} &= l\cos{\theta} + il\sin{\theta}.
 \end{align*}
 Hence $le^{i\theta} = x+iy$. For instance, for the complex number $2+3i$ we can rewrite it as:
 \begin{align*}
