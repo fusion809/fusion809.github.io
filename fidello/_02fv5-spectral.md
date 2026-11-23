@@ -1,5 +1,5 @@
 #### Spectral methods
-Sturm-Liouville problems also give rise to infinite sets of orthogonal functions that are useful when numerically approximating the solution to other differential equations.[^1] If $\{\phi_i\}$, $i\in {0,1,2,...}$ is our orthogonal function set, we assume our solution, $u$, to some ordinary differential equation can be written as:
+Sturm-Liouville problems also give rise to infinite sets of orthogonal functions that are useful when numerically approximating the solution to other differential equations.[^1] If $\{\phi_i\}$, $i\in \{0,1,2,...\}$ is our orthogonal function set, we assume our solution, $u$, to some ordinary differential equation can be written as:
 \begin{align}
 u(x) &= \sum_{j=0}^{\infty} a_j \phi_j(x). \label{spectral} 
 \end{align}
