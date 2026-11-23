@@ -62,25 +62,25 @@ Hence we do not have a just a singular solution for $\lambda$ and we should real
 \begin{align*}
 \lambda_n &= \dfrac{\alpha n^2 \pi^2}{L^2} \\
 X_n(x) &= C_{3n} \sin{\sqrt{\dfrac{n^2 \pi^2}{L^2} x}} \\
-&= C_{3n} \sin{\dfrac{|n| \pi}{L} x} \\
+&= C_{3n} \sin{\left(\dfrac{|n| \pi}{L} x\right)} \\
 T_n(t) &= C_{1n}e^{-\frac{\alpha n^2 \pi^2}{L^2} t}.
 \end{align*}
 Why have I given the constants $n$ indices? Because they, too, could vary between terms with different $\lambda$. Why the $|n|$? Well, we square rooted $n^2$, so it will be the absolute value of $n$. We will call $C_{1n}C_{3n}$, $a_n$ when we write $u_n(x,t)$:
 Hence:
 \begin{align*}
-u_n(x,t) &= a_n \sin{\dfrac{|n| \pi}{L} x} e^{-\frac{\alpha n^2 \pi^2}{L^2} t}.
+u_n(x,t) &= a_n \sin{\left(\dfrac{|n| \pi}{L} x\right)} e^{-\frac{\alpha n^2 \pi^2}{L^2} t}.
 \end{align*}
 Keep in mind that $u_{-n}(x,t)=u_n(x,t)$ and that $u_0=0$ (as $\sin{0}=0$), hence we only need to sum over $n \in \mathbb{Z}^{+}$. Hence, we obtain the following series as our solution:
 \begin{align*}
-u(x,t) &= \sum_{n=1}^{\infty} a_n \sin{\dfrac{n \pi}{L} x} e^{-\frac{n^2 \pi^2}{L^2} t}.
+u(x,t) &= \sum_{n=1}^{\infty} a_n \sin{\left(\dfrac{n \pi}{L} x\right)} e^{-\frac{n^2 \pi^2}{L^2} t}.
 \end{align*}
 Imposing that $u(x,0)=f(x)$ yields:
 \begin{align}
-f(x) &= \sum_{n=0}^{\infty} a_n \sin{\dfrac{n \pi}{L} x}.\label{fxFourier}
+f(x) &= \sum_{n=0}^{\infty} a_n \sin{\left(\dfrac{n \pi}{L} x\right)}.\label{fxFourier}
 \end{align}
-How can we determine $a_n$ from this? Well, it turns out that if we multiply this by $\sin{\dfrac{m \pi}{L} x}$ and integrate over $x\in [0,L]$ we get:
+How can we determine $a_n$ from this? Let us investigate what happens if we multiply this by $\sin{\left(\dfrac{n \pi}{L} x\right)}$ and integrate over $x\in [0,L]$:
 \begin{align*}
-\int_0^L f(x) \sin{\dfrac{m \pi}{L} x} dx &= \sum_{n=0}^{\infty} a_n \int_0^L\sin{\dfrac{n \pi}{L} x}\sin{\dfrac{m \pi}{L} x} dx.
+\int_0^L f(x) \sin{\left(\dfrac{n \pi}{L} x\right)} dx &= \sum_{n=0}^{\infty} a_n \int_0^L\sin{\left(\dfrac{n \pi}{L} x\right)}\sin{\left(\dfrac{m \pi}{L} x\right)} dx.
 \end{align*}
 Interestingly:
 \begin{align*}
@@ -92,17 +92,17 @@ This yields:
 \end{align*}
 Hence our integral becomes:
 \begin{align*}
-\int_0^L f(x) \sin{\dfrac{m \pi}{L} x} dx &= \dfrac{1}{2}\sum_{n=0}^{\infty} a_n \int_0^L \left(\cos{\left(\dfrac{(m-n)\pi}{L}x\right)} - \cos{\left(\dfrac{(m+n)\pi}{L}x\right)}\right) dx \\
+\int_0^L f(x) \sin{\left(\dfrac{m \pi}{L} x\right)} dx &= \dfrac{1}{2}\sum_{n=0}^{\infty} a_n \int_0^L \left(\cos{\left(\dfrac{(m-n)\pi}{L}x\right)} - \cos{\left(\dfrac{(m+n)\pi}{L}x\right)}\right) dx \\
 &= \dfrac{1}{2}\sum_{n=0}^{\infty} a_n \left(\left[\dfrac{L}{(m-n)\pi}\sin{\left(\dfrac{(m-n)\pi}{L}x\right)}\right]_0^L - \left[\dfrac{L}{(m+n)\pi}\sin{\left(\dfrac{(m+n)\pi}{L}x\right)}\right]_0^L\right) \\
 &= \dfrac{1}{2}\sum_{n=0}^{\infty} a_n \left(\dfrac{L}{(m-n)\pi}\sin{((m-n)\pi)}-\dfrac{L}{(m-n)\pi}\sin{0} - \left[\dfrac{L}{(m+n)\pi}\sin{((m+n)\pi)}-\dfrac{L}{(m+n)\pi}\sin{0}\right]\right).
 \end{align*}
 $m+n$ and $m-n$ is always an integer so the sines should be zero. $\sin{0}=0$, too. Hence, we will get $0$ from this if $m\neq n$. If $m=n$ though, we end up dividing by 0 for the first term, which means we cannot simply declare it zero. So we will need to take the limit as $m$ approaches $n$ to determine the value of the first integral at its upper bound:
 \begin{align*}
-\lim_{m\rightarrow n} \dfrac{L}{(m-n)\pi}\sin{\dfrac{(m-n)\pi}{L}L} &= \lim_{m\rightarrow n} \dfrac{L}{(m-n)\pi}\sin{(m-n)\pi}.
+\lim_{m\rightarrow n} \dfrac{L}{(m-n)\pi}\sin{\left(\dfrac{(m-n)\pi}{L}L\right)} &= \lim_{m\rightarrow n} \dfrac{L}{(m-n)\pi}\sin{(m-n)\pi}.
 \end{align*}
 Let $x=(m-n)\pi$:
 \begin{align*}
-\lim_{m\rightarrow n} \dfrac{L}{(m-n)\pi}\sin{(m-n)\pi} &= \lim_{x\rightarrow 0} \dfrac{L}{x} \sin{x}.
+\lim_{m\rightarrow n} \dfrac{L}{(m-n)\pi}\sin{\left((m-n)\pi\right)} &= \lim_{x\rightarrow 0} \dfrac{L}{x} \sin{x}.
 \end{align*}
 We can use the Maclaurin series to approximate $\sin{x}$ as $x\rightarrow 0$:
 \begin{align*}
@@ -112,21 +112,21 @@ We can use the Maclaurin series to approximate $\sin{x}$ as $x\rightarrow 0$:
 \end{align*}
 Hence:
 \begin{align*}
-\left[\dfrac{L}{(m-n)\pi}\sin{\dfrac{(m-n)\pi}{L}x}\right]_0^L &= L\delta_{mn} \\
-\left[\dfrac{L}{(m+n)\pi}\sin{\dfrac{m+n}{\pi}{L}x}\right]_0^L &= 0.
+\left[\dfrac{L}{(m-n)\pi}\sin{\left(\dfrac{(m-n)\pi}{L}x\right)}\right]_0^L &= L\delta_{mn} \\
+\left[\dfrac{L}{(m+n)\pi}\sin{\left(\dfrac{m+n}{\pi}{L}x\right)}\right]_0^L &= 0.
 \end{align*}
 Hence:
 \begin{align*}
-\int_0^L f(x) \sin{\dfrac{m \pi}{L} x} dx &= \dfrac{1}{2}\sum_{n=0}^{\infty} a_n L \delta_{mn} \\
+\int_0^L f(x) \sin{\left(\dfrac{m \pi}{L} x\right)} dx &= \dfrac{1}{2}\sum_{n=0}^{\infty} a_n L \delta_{mn} \\
 &= \dfrac{La_m}{2}.
 \end{align*}
 Here we have used the fact that $\delta_{mn}$ is zero if $m\neq n$ and one if $m=n$ and hence the only non-zero term corresponds to $m=n$. Hence we can calculate $a_n$ as:
 \begin{align*}
-a_n &= \dfrac{2}{L} \int_0^L f(x) \sin{\dfrac{n \pi}{L} x} dx.
+a_n &= \dfrac{2}{L} \int_0^L f(x) \sin{\left(\dfrac{n \pi}{L} x\right)} dx.
 \end{align*}
 Interestingly, Equation \eqref{fxFourier} is called the Fourier series decomposition of $f(x)$ in terms of sines only. Fourier series are a way of rewriting periodic functions in terms of sine and cosine waves. Specifically in general, if we wish to write $f(x)$ as a Fourier series over the domain $x \in [-L,L]$ we would write (keep in mind the series coefficients $a_n$ and $b_n$ are not the same as those we have been using so far):
 \begin{align*}
-f(x) &= a_0 + \sum_{n=1}^{\infty} a_n \cos{\dfrac{n\pi}{L}x} + b_n \sin{\dfrac{n\pi}{L}x}. 
+f(x) &= a_0 + \sum_{n=1}^{\infty} a_n \cos{\left(\dfrac{n\pi}{L}x\right)} + b_n \sin{\left(\dfrac{n\pi}{L}x\right)}. 
 \end{align*}
 Where:
 \begin{align*}
