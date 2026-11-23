@@ -208,7 +208,7 @@ It is important to note, however, that so far we have only applied the finite di
 
 
 #### Spectral methods
-Sturm-Liouville problems also give rise to infinite sets of orthogonal functions that are useful when numerically approximating the solution to other differential equations. If $\{\phi_i\}$, $i\in {0,1,2,...}$ is our orthogonal function set, we assume our solution, $u$, to some ordinary differential equation can be written as:
+Sturm-Liouville problems also give rise to infinite sets of orthogonal functions that are useful when numerically approximating the solution to other differential equations.[^1] If $\{\phi_i\}$, $i\in {0,1,2,...}$ is our orthogonal function set, we assume our solution, $u$, to some ordinary differential equation can be written as:
 \begin{align*}
 u(x) &= \sum_{j=0}^{\infty} a_j \phi_j(x). 
 \end{align*}
@@ -226,14 +226,22 @@ We can substitute Equation \eqref{afromu} into Equation \eqref{speca}, yielding:
 \end{align*}
 In this case, we would be solving for $\mathbf{u}$ instead of $\mathbf{a}$. Methods that approximate the solution to a differential equation using a sum of basis functions like this are called spectral methods. 
 
-Many different orthogonal functions can be used; among the most popular are Chebyshev polynomials of the first kind and Fourier basis functions. Chebyshev polynomials of the first kind, $T_i(x)$, are defined on $x\in [-1,1]$ as:
+Many different orthogonal functions can be used; among the most popular are Chebyshev polynomials of the first kind and Fourier series functions. Chebyshev polynomials of the first kind, $T_i(x)$, are defined on $x\in [-1,1]$ as:
 \begin{align*}
 T_j(x) = \cos(j\cos^{-1}{x}).
 \end{align*}
-The grid points normally used as:
+I would imagine that you are looking at this expression and wondering, how can $T_j$ be a polynomial when it is defined in terms of cosine and its inverse? Well, this is just one way to define Chebyshev polynomials of the first kind and is the most convenient way for when you are using them to approximate the solution to differential equations. That being said, they can also be defined using a recursion relation that makes the fact that they are polynomials all the more clear. Specifically this is the recursion relation:[^1]
+\begin{align*}
+T_0 &= 1, \hspace{0.2cm} T_1 &&= x \\
+T_{j+1}(x) &= 2xT_j(x) - T_{j-1}(x) \forall j \geq 2.
+\end{align*}
+
+The grid points normally used are:
 \begin{align*}
 x_i &= \cos{\dfrac{\pi i}{n}}.
 \end{align*}
+These points extremize the $n$th Chebyshev polynomial of the first kind and this makes the matrices we get easier to work with. 
+
 I should mention that while our basis functions are limited to $x\in [-1,1]$, this does not mean we are limited to $x\in[-1,1]$ for the differential equations we can solve. As we can apply any number of different transformations to transform $x_i$ from $[-1,1]$ to other domains. 
 
 We can also define a differentiation matrix. If $\mathbf{dT} = (T'_j(x_i))$ and $\mathbf{T}=(T_j(x_i))$ we can define the differentiation matrix:
