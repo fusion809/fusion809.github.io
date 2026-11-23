@@ -58,6 +58,7 @@ function generate_fidello_saved_outputs()
   listings = [
     ("fidello", "fidello/code/findiff.jl"),
     ("fidello", "fidello/code/findiff4th.jl"),
+    ("fidello", "fidello/code/chebyshev.jl"),
   ]
 
   for (page_path, source_path) in listings
@@ -71,11 +72,22 @@ function generate_fidello_saved_outputs()
 
     open(output_file, "w") do output
       redirect_stdout(output) do
-        include_string(Main, read(source_file, String), source_file)
+        listing_module = Module(gensym(:FidelloListing))
+        Base.include_string(listing_module, read(source_file, String), source_file)
       end
     end
 
     filesize(output_file) > 0 || error("Fidello listing produced empty output: $source_file")
+
+    if source_name == "chebyshev"
+      source = read(source_file, String)
+      n_match = match(r"(?m)^\s*n\s*=\s*(\d+)\s*$", source)
+      isnothing(n_match) && error("Could not determine Chebyshev grid size from $source_file")
+      expected_rows = parse(Int, n_match.captures[1]) + 1
+      output_header = first(eachline(output_file))
+      startswith(output_header, "$(expected_rows)×5 DataFrame") ||
+        error("Chebyshev output is stale: expected $expected_rows rows for n=$(expected_rows - 1), got '$output_header'")
+    end
   end
 end
 
@@ -95,7 +107,7 @@ if stat(fidello_output).mtime < build_started_at
 end
 
 fidello_html = read(fidello_output, String)
-for name in ("findiff", "findiff4th")
+for name in ("findiff", "findiff4th", "chebyshev")
   output_file = joinpath(@__DIR__, "__site", "assets", "fidello", "code", "output", name * ".out")
   isfile(output_file) && filesize(output_file) > 0 ||
     error("Required Fidello listing output is missing or empty: $output_file")
