@@ -124,7 +124,7 @@ Here we have used the fact that $\delta_{mn}$ is zero if $m\neq n$ and one if $m
 \begin{align*}
 a_n &= \dfrac{2}{L} \int_0^L f(x) \sin{\left(\dfrac{n \pi}{L} x\right)} dx.
 \end{align*}
-Interestingly, Equation \eqref{fxFourier} is called the Fourier series decomposition of $f(x)$ in terms of sines only. Fourier series are a way of rewriting periodic functions in terms of sine and cosine waves. Specifically in general, if we wish to write $f(x)$ as a Fourier series over the domain $x \in [-L,L]$ we would write (keep in mind the series coefficients $a_n$ and $b_n$ are not the same as those we have been using so far):
+Interestingly, Equation \eqref{fxFourier} is called the Fourier series decomposition of $f(x)$ in terms of sines only. Fourier series are a way of rewriting periodic functions in terms of sine and cosine waves. Specifically, if we wish to write $f(x)$ as a Fourier series over the domain $x \in [-L,L]$, we would write (keep in mind the series coefficients $a_n$ and $b_n$ are not the same as those we have been using so far):
 \begin{align*}
 f(x) &= a_0 + \sum_{n=1}^{\infty} a_n \cos{\left(\dfrac{n\pi}{L}x\right)} + b_n \sin{\left(\dfrac{n\pi}{L}x\right)}. 
 \end{align*}
