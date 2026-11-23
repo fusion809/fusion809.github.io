@@ -104,7 +104,7 @@ Let $x=(m-n)\pi$:
 \begin{align*}
 \lim_{m\rightarrow n} \dfrac{L}{(m-n)\pi}\sin{\left((m-n)\pi\right)} &= \lim_{x\rightarrow 0} \dfrac{L}{x} \sin{x}.
 \end{align*}
-We can use the Maclaurin series to approximate $\sin{x}$ as $x\rightarrow 0$:
+We can use the first term of the Maclaurin series to approximate $\sin{x}$ as $x\rightarrow 0$:
 \begin{align*}
 \lim_{x\rightarrow 0} \dfrac{L}{x} \sin{x} &= \lim_{x\rightarrow 0} \dfrac{L}{x} x \\
 &= \lim_{x\rightarrow 0} L \\
