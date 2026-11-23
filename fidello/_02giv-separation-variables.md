@@ -1,5 +1,5 @@
 ### PDEs: Separation of variables
-I thought I should also cover one technique for solving partial differential equations, too. Say we had the heat equation, Equation \eqref{heat}, we would assume that $u(x,t)$ can be written as $u(x,t)=X(x)T(t)$. Then Equation \eqref{heat} becomes:
+I thought I should cover one technique for solving partial differential equations, too. Say we had the heat equation, Equation \eqref{heat}. Then, if we are using the separation of variables technique, we would assume that $u(x,t)$ can be written as $u(x,t)=X(x)T(t)$. Then Equation \eqref{heat} becomes:
 \begin{align*}
 X(x)\dot{T}(t) &= \alpha X''(x)T(t).
 \end{align*}
