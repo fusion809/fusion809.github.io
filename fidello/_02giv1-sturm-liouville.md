@@ -11,7 +11,7 @@ then $\lambda$ is said to be an eigenvalue of $\mathbf{A}$ and $\mathbf{x}$ is a
 \begin{align*}
 \det{\left(\mathbf{A}-\lambda \mathbf{I}\right)} &= 0.
 \end{align*}
-Where $\det{\mathbf{B}}$ denotes the determinant of matrix $\mathbf{B}$ and $\mathbf{I}$ is the identity matrix. Then we figure out $\mathbf{x}$ by solving:
+Where $\det{\left(\mathbf{A}-\lambda \mathbf{I}\right)}$ denotes the determinant of matrix $\mathbf{A}-\lambda \mathbf{I}$ and $\mathbf{I}$ is the identity matrix. Then we figure out $\mathbf{x}$ by solving:
 \begin{align*}
 (\mathbf{A}-\lambda\mathbf{I})\mathbf{x} = \mathbf{0}.
 \end{align*}
