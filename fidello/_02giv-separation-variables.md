@@ -141,7 +141,7 @@ b_n &= \dfrac{1}{L} \int_{-L}^{L} f(x) \sin{\left(\dfrac{2\pi nx}{L}\right)} dx 
 \end{align*}
 In our first integral, we will replace $x$ with $-x$ and hence $dx\rightarrow-dx$ and our domain becomes $x\in [L, 0]$ instead of $x\in [-L, 0]$. 
 \begin{align*}
-b_n &= \dfrac{1}{L} \left[\int_{L}^{0} f(-x) \sin{\left(-\dfrac{2\pi nx}{L}\right)} -dx + \int_{0}^{L} f(x) \sin{\left(\dfrac{2\pi nx}{L}\right)} dx \right]\\
+b_n &= \dfrac{1}{L} \left[\int_{L}^{0} f(-x) \sin{\left(-\dfrac{2\pi nx}{L}\right)} \cdot -dx + \int_{0}^{L} f(x) \sin{\left(\dfrac{2\pi nx}{L}\right)} dx \right]\\
 &= \dfrac{1}{L} \left[\int_{L}^{0} -f(x) \cdot -\sin{\left(\dfrac{2\pi nx}{L}\right)} \cdot -dx + \int_{0}^{L} f(x) \sin{\left(\dfrac{2\pi nx}{L}\right)} dx \right]\\
 &= \dfrac{1}{L} \left[-\int_{L}^{0} f(x) \sin{\left(\dfrac{2\pi nx}{L}\right)} dx + \int_{0}^{L} f(x) \sin{\left(\dfrac{2\pi nx}{L}\right)} dx \right]\\
 &= \dfrac{1}{L} \left[\int_{0}^L f(x) \sin{\left(\dfrac{2\pi nx}{L}\right)} dx + \int_{0}^{L} f(x) \sin{\left(\dfrac{2\pi nx}{L}\right)} dx \right]\\
