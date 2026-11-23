@@ -54,20 +54,39 @@ function eager_generate_js()
   end
 end
 
-function generate_fidello_saved_outputs()
-  listings = [
-    ("fidello", "fidello/code/findiff.jl"),
-    ("fidello", "fidello/code/findiff4th.jl"),
-    ("fidello", "fidello/code/chebyshev.jl"),
-  ]
+function fidello_saved_output_listings()
+  fidello_dir = joinpath(@__DIR__, "fidello")
+  output_names = Set{String}()
+  source_paths = Dict{String,String}()
+  output_pattern = r"\\output\{\./code/([^}]+)\}"
+  listing_pattern = r"\\codelisting\{([^}]+)\}\{[^\n]*?\}\{\./code/([^}]+)\}\{([^}]+\.jl)\}"
 
-  for (page_path, source_path) in listings
+  for (root, _, files) in walkdir(fidello_dir)
+    for file in files
+      endswith(file, ".md") || continue
+      content = read(joinpath(root, file), String)
+      union!(output_names, (m.captures[1] for m in eachmatch(output_pattern, content)))
+      for m in eachmatch(listing_pattern, content)
+        source_paths[m.captures[2]] = m.captures[3]
+      end
+    end
+  end
+
+  missing = setdiff(output_names, Set(keys(source_paths)))
+  isempty(missing) || error("Fidello output commands have no matching codelisting source: $(join(sort!(collect(missing)), ", "))")
+
+  return [("fidello", name, source_paths[name]) for name in sort!(collect(output_names))]
+end
+
+function generate_fidello_saved_outputs()
+  listings = fidello_saved_output_listings()
+
+  for (page_path, output_name, source_path) in listings
     source_file = joinpath(@__DIR__, source_path)
     isfile(source_file) || error("Required Fidello listing source is missing: $source_file")
 
-    source_name = splitext(basename(source_file))[1]
     output_dir = joinpath(@__DIR__, "__site", "assets", page_path, "code", "output")
-    output_file = joinpath(output_dir, source_name * ".out")
+    output_file = joinpath(output_dir, output_name * ".out")
     mkpath(output_dir)
 
     open(output_file, "w") do output
@@ -79,7 +98,7 @@ function generate_fidello_saved_outputs()
 
     filesize(output_file) > 0 || error("Fidello listing produced empty output: $source_file")
 
-    if source_name == "chebyshev"
+    if output_name == "chebyshev"
       source = read(source_file, String)
       n_match = match(r"(?m)^\s*n\s*=\s*(\d+)\s*$", source)
       isnothing(n_match) && error("Could not determine Chebyshev grid size from $source_file")
@@ -89,10 +108,12 @@ function generate_fidello_saved_outputs()
         error("Chebyshev output is stale: expected $expected_rows rows for n=$(expected_rows - 1), got '$output_header'")
     end
   end
+
+  return [name for (_, name, _) in listings]
 end
 
 eager_generate_js()
-generate_fidello_saved_outputs()
+fidello_output_names = generate_fidello_saved_outputs()
 fidello_source = joinpath(@__DIR__, "fidello", "index.md")
 fidello_output = joinpath(@__DIR__, "__site", "fidello", "index.html")
 isfile(fidello_source) || error("Required Fidello source page is missing: $fidello_source")
@@ -107,7 +128,7 @@ if stat(fidello_output).mtime < build_started_at
 end
 
 fidello_html = read(fidello_output, String)
-for name in ("findiff", "findiff4th", "chebyshev")
+for name in fidello_output_names
   output_file = joinpath(@__DIR__, "__site", "assets", "fidello", "code", "output", name * ".out")
   isfile(output_file) && filesize(output_file) > 0 ||
     error("Required Fidello listing output is missing or empty: $output_file")

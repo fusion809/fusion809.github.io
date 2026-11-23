@@ -1,0 +1,4 @@
+#### Partial differential equations
+The methods for numerically integrating partial differential equations (PDEs) tend to be substantially more complex than those for solving ODEs due to the added complexity of needing to work with more than one independent variable. Although, the finite difference, finite element, spectral and spectral element methods can be applied directly to PDEs, especially linear PDEs, too. Although the matrices become more complex when we add additional independent variables. Further, some of the other methods used to numerically integrate PDEs utilize ODE methods in some way. 
+
+For instance, the code in Code Listing \coderef{heat} solves the heat equation by approximating spatial derivatives using something called the fast Fourier transform (FFT) and its inverse and then integrates on time using RKF45. This is one of many different techniques for numerically solving PDEs.

@@ -20,6 +20,12 @@
 \includemd{fidello/_02fiii-assuming-exponential.md}
 \includemd{fidello/_02fiv-separation-variables.md}
 \includemd{fidello/_02fv-numerical-methods.md}
+\includemd{fidello/_02fv1-eulers.md}
+\includemd{fidello/_02fv2-runge-kutta.md}
+\includemd{fidello/_02fv3-runge-kutta-fehlberg.md}
+\includemd{fidello/_02fv4-finite-difference.md}
+\includemd{fidello/_02fv5-spectral.md}
+\includemd{fidello/_02fv6-pde.md}
 \includemd{fidello/_03-lagrangian-mechanics.md}
 \includemd{fidello/_03a-euler-lagrange-equations.md}
 \includemd{fidello/_03b-stationary-action-principle.md}
@@ -53,8 +59,4 @@
 \includemd{fidello/_08dii-path-integral-formulation.md}
 \includemd{fidello/_08diii-operator-formalism.md}
 \includemd{fidello/_08e-quantum-field-theory.md}
-
-# Reference list
-[^1]: Boyd JP (2000). [*Chebyshev and Fourier Spectral Methods (2nd ed.)*](https://depts.washington.edu/ph506/Boyd.pdf). DOVER Publications, Inc.
-[^2]: Cline D (2026). [15.2: Poisson bracket Representation of Hamiltonian Mechanics](https://phys.libretexts.org/Bookshelves/Classical_Mechanics/Variational_Principles_in_Classical_Mechanics_(Cline)/15%3A_Advanced_Hamiltonian_Mechanics/15.02%3A_Poisson_bracket_Representation_of_Hamiltonian_Mechanics). In *Variational Principles in Classical Mechanics*. LibreTexts.
-[^3]: Tatum J (2026). [2.6: Euler’s Theorem for Homogeneous Functions](https://phys.libretexts.org/Bookshelves/Thermodynamics_and_Statistical_Mechanics/Heat_and_Thermodynamics_(Tatum)/02%3A_Partial_Derivatives/2.06%3A_Euler's_Theorem_for_Homogeneous_Functions). In *Heat and Thermodynamics*. LibreTexts. 
+\includemd{fidello/_09-references.md}
