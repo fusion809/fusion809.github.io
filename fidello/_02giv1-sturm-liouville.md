@@ -7,8 +7,14 @@ Where $p>0$, $r\geq 0$ and $p$, $q$ and $r$ are well-defined and continuous func
 \begin{align*}
 \mathbf{A} \mathbf{x} &= \lambda \mathbf{x}
 \end{align*}
-then $\lambda$ is said to be an eigenvalue of $\mathbf{A}$ and $\mathbf{x}$ is an eigenvector of $\mathbf{A}$. 
-
+then $\lambda$ is said to be an eigenvalue of $\mathbf{A}$ and $\mathbf{x}$ is an eigenvector of $\mathbf{A}$. We solve for $\lambda$ by solving the polynomial equation that results from:
+\begin{align*}
+\det{\left(\mathbf{A}-\lambda \mathbf{I}\right)} &= 0.
+\end{align*}
+Where $\det{\mathbf{B}}$ denotes the determinant of matrix $\mathbf{B}$ and $\mathbf{I}$ is the identity matrix. Then we figure out $\mathbf{x}$ by solving:
+\begin{align*}
+(\mathbf{A}-\lambda\mathbf{I})\mathbf{x} = \mathbf{0}.
+\end{align*}
 So in the example we solved for the heat equation, $X_n$ were the eigenfunctions and $\lambda_n$ were the eigenvalues. An interesting quality of eigenfunctions is that they are orthogonal. That means that:
 \begin{align*}
 \langle y_m | y_n \rangle &= \int_a^b y_m y_n r(x) dx \\
