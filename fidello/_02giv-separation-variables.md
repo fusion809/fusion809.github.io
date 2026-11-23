@@ -63,16 +63,16 @@ Hence we do not have a just a singular solution for $\lambda$ and we should real
 \lambda_n &= \dfrac{\alpha n^2 \pi^2}{L^2} \\
 X_n(x) &= C_{3n} \sin{\sqrt{\dfrac{n^2 \pi^2}{L^2} x}} \\
 &= C_{3n} \sin{\dfrac{|n| \pi}{L} x} \\
-T_n(t) &= C_{1n}e^{-\dfrac{\alpha n^2 \pi^2}{L^2} t}.
+T_n(t) &= C_{1n}e^{-\frac{\alpha n^2 \pi^2}{L^2} t}.
 \end{align*}
 Why have I given the constants $n$ indices? Because they, too, could vary between terms with different $\lambda$. Why the $|n|$? Well, we square rooted $n^2$, so it will be the absolute value of $n$. We will call $C_{1n}C_{3n}$, $a_n$ when we write $u_n(x,t)$:
 Hence:
 \begin{align*}
-u_n(x,t) &= a_n \sin{\dfrac{|n| \pi}{L} x} e^{-\dfrac{\alpha n^2 \pi^2}{L^2} t}.
+u_n(x,t) &= a_n \sin{\dfrac{|n| \pi}{L} x} e^{-\frac{\alpha n^2 \pi^2}{L^2} t}.
 \end{align*}
 Keep in mind that $u_{-n}(x,t)=u_n(x,t)$ and that $u_0=0$ (as $\sin{0}=0$), hence we only need to sum over $n \in \mathbb{Z}^{+}$. Hence, we obtain the following series as our solution:
 \begin{align*}
-u(x,t) &= \sum_{n=1}^{\infty} a_n \sin{\dfrac{n \pi}{L} x} e^{-\dfrac{n^2 \pi^2}{L^2} t}.
+u(x,t) &= \sum_{n=1}^{\infty} a_n \sin{\dfrac{n \pi}{L} x} e^{-\frac{n^2 \pi^2}{L^2} t}.
 \end{align*}
 Imposing that $u(x,0)=f(x)$ yields:
 \begin{align}
