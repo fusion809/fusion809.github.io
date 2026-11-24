@@ -3,7 +3,7 @@ Interestingly, our differential equation for $X_n$ is an example of a type of OD
 \begin{align}
 \dfrac{d}{dx}\left[p(x) \dfrac{dy}{dx}\right] + q(x)y &= -\lambda r(x) y. \label{SLP}
 \end{align}
-Where $p>0$, $r\geq 0$ and $p$, $q$ and $r$ are well-defined and continuous functions throughout the domain in which we are solving this problem (we will denote this domain as $[a,b]$). There are also boundary conditions imposed as part of a Sturm-Liouville problem, namely:[^2]
+Where $p>0$, $r\geq 0$. Typically, $p$, $q$ and $r$ are well-defined and continuous functions throughout the domain in which we are solving this problem (we will denote this domain as $[a,b]$), except perhaps the endpoints. Although there are exceptions where these functions do have undefined regions within the domain of the problem. There are also boundary conditions imposed as part of a Sturm-Liouville problem, namely:[^2]
 \begin{align*}
 \alpha_1 y(a) -\alpha_2 y'(a) &= 0 \\
 \beta_1 y(b) + \beta_2 y'(b) &= 0.
