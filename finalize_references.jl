@@ -9,6 +9,68 @@ function html_attribute(attributes, name)
   return something(matched.captures...)
 end
 
+function bibtex_source_entry(bib_path, key)
+  source = read(bib_path, String)
+  pattern = Regex("(?is)@([a-z]+)\\s*([({])\\s*" * replace(key, r"([\\.^$|?*+()\[\]{}])" => s"\\\1") * "\\s*,")
+  matched = match(pattern, source)
+  isnothing(matched) && error("Citation key '$key' was not found in $bib_path")
+  start = matched.offset
+  openchar = only(matched.captures[2])
+  closechar = openchar == '{' ? '}' : ')'
+  depth, quoted, escaped = 0, false, false
+  for pos in eachindex(source)
+    pos < start && continue
+    c = source[pos]
+    if escaped
+      escaped = false
+    elseif c == '\\'
+      escaped = true
+    elseif c == '"'
+      quoted = !quoted
+    elseif !quoted && c == openchar
+      depth += 1
+    elseif !quoted && c == closechar
+      depth -= 1
+      depth == 0 && return strip(source[start:pos])
+    end
+  end
+  error("Unclosed BibTeX entry '$key' in $bib_path")
+end
+
+function append_fallback_reference_list(html, html_path, site_dir)
+  source_md = joinpath(dirname(site_dir), replace(relpath(html_path, site_dir), r"\.html$" => ".md"))
+  isfile(source_md) || return nothing
+  source = read(source_md, String)
+  ref_match = match(r"(?m)^\s*@def\s+ref\s*=\s*[\"']([^\"']+)[\"']", source)
+  isnothing(ref_match) && return nothing
+  bib_path = normpath(joinpath(dirname(source_md), ref_match.captures[1]))
+  isfile(bib_path) || return nothing
+
+  citations = Dict{String,String}()
+  for m in eachmatch(r"<a\b([^>]*)>", html)
+    attrs = m.captures[1]
+    occursin(r"(?:^|\s)class=(?:\"[^\"]*\bcitation\b[^\"]*\"|'[^']*\bcitation\b[^']*')", attrs) || continue
+    href = something(html_attribute(attrs, "href"), "")
+    target_match = match(r"^#(reference-([[:xdigit:]]+))$", href)
+    isnothing(target_match) && continue
+    target, key_hex = target_match.captures
+    key = String(hex2bytes(key_hex))
+    citations[target] = bibtex_source_entry(bib_path, key)
+  end
+  isempty(citations) && return nothing
+
+  items = join("<li id=\"$(target)\" style=\"padding-left:2em;text-indent:-2em;\"><pre><code>" * reference_html_escape(entry) * "</code></pre></li>" for (target, entry) in sort(collect(citations); by=first))
+  section = "<section class=\"reference-list\" aria-labelledby=\"reference-list-title\"><h1 id=\"reference-list-title\">Reference list</h1><ul style=\"list-style:none;margin:0;padding-left:0;\">$(items)</ul></section>"
+  if occursin("<div class=\"page-foot\">", html)
+    return replace(html, "<div class=\"page-foot\">" => section * "<div class=\"page-foot\">"; count=1)
+  elseif occursin("<!-- CONTENT ENDS HERE -->", html)
+    return replace(html, "<!-- CONTENT ENDS HERE -->" => section * "<!-- CONTENT ENDS HERE -->"; count=1)
+  elseif occursin("</article>", html)
+    return replace(html, "</article>" => section * "</article>"; count=1)
+  end
+  return occursin("</body>", html) ? replace(html, "</body>" => section * "</body>"; count=1) : html * section
+end
+
 function append_reference_lists(site_dir, output_names)
   citation_span = r"<span\b([^>]*)>([\s\S]*?)</span>"
   citation_anchor = r"<a\b([^>]*)>([^<]*)</a>"
@@ -45,6 +107,12 @@ function append_reference_lists(site_dir, output_names)
       span_matches = [m for m in eachmatch(citation_span, html) if !isnothing(html_attribute(m.captures[1], "data-bib-key")) && !isnothing(html_attribute(m.captures[1], "data-bib-entry"))]
       anchor_matches = [m for m in eachmatch(citation_anchor, html) if occursin(r"(?:^|\s)class=(?:\"[^\"]*\bcitation\b[^\"]*\"|'[^']*\bcitation\b[^']*'|[^\s>]*\bcitation\b[^\s>]*)", m.captures[1]) && !isnothing(html_attribute(m.captures[1], "data-bib-key")) && !isnothing(html_attribute(m.captures[1], "data-bib-entry"))]
       if isempty(span_matches) && isempty(anchor_matches)
+        if !has_reference_list
+          fallback_html = append_fallback_reference_list(html, path, site_dir)
+          if !isnothing(fallback_html)
+            html = fallback_html
+          end
+        end
         if html != original
           write(path, html)
           processed += 1
