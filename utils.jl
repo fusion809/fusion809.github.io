@@ -1,5 +1,6 @@
 using SHA
 import Franklin
+using Base64
 
 # Keep GR headless during Franklin's build-time evaluation of code listings.
 ENV["GKSwstype"] = "100"
@@ -28,6 +29,177 @@ end
 function lx_Figref(com, _)
   brace_content = strip(Franklin.content(com.braces[1]))
   return "~~~<a class=\"figref-full\" href=\"#$brace_content\"></a>~~~"
+end
+
+# BibTeX-style citations.  The citation macro emits a compact build-time
+# marker; deploy.jl turns these into APA author-date citations and appends the
+# page's cited reference list after Franklin has rendered the page.
+function bibtex_entries(source::AbstractString)
+  entries = Dict{String,Dict{String,String}}()
+  for m in eachmatch(r"(?is)@([a-z]+)\s*([({])\s*([^,\s]+)\s*,", source)
+    kind, key = lowercase(m.captures[1]), strip(m.captures[3])
+    start = m.offset + ncodeunits(m.match)
+    openchar = only(m.captures[2])
+    closechar = openchar == '{' ? '}' : ')'
+    depth, quoted, escaped, stop = 1, false, false, 0
+    for pos in eachindex(source)
+      pos < start && continue
+      c = source[pos]
+      if escaped
+        escaped = false
+      elseif c == '\\'
+        escaped = true
+      elseif c == '"'
+        quoted = !quoted
+      elseif !quoted && c == openchar
+        depth += 1
+      elseif !quoted && c == closechar
+        depth -= 1
+        if depth == 0
+          stop = pos
+          break
+        end
+      end
+    end
+    stop == 0 && error("Unclosed BibTeX entry '$key'")
+    body = source[start:prevind(source, stop)]
+    fields = Dict{String,String}()
+    for fm in eachmatch(r"(?is)([\w-]+)\s*=\s*(\{(?:[^{}]|\{[^{}]*\})*\}|\"(?:[^\"\\]|\\.)*\"|[^,]+)", body)
+      value = strip(fm.captures[2])
+      value = (startswith(value, "{") && endswith(value, "}")) ||
+              (startswith(value, "\"") && endswith(value, "\"")) ? chop(value; head=1, tail=1) : value
+      value = replace(value, r"\\[a-zA-Z]+\s*" => "", "~" => " ", r"\s+" => " ")
+      value = replace(value, "{" => "", "}" => "")
+      fields[lowercase(fm.captures[1])] = strip(value)
+    end
+    entries[key] = merge(Dict("_type" => kind), fields)
+  end
+  return entries
+end
+
+html_escape(s) = replace(string(s), "&" => "&amp;", "<" => "&lt;", ">" => "&gt;", "\"" => "&quot;", "'" => "&#39;")
+
+function bib_authors(entry)
+  names = strip.(split(get(entry, "author", get(entry, "editor", "Unknown author")), r"\s+and\s+"))
+  surnames, formatted = String[], String[]
+  for name in names
+    pieces = strip.(split(name, ","))
+    if length(pieces) > 1
+      surname, given = first(pieces), join(pieces[2:end], " ")
+    else
+      words = split(strip(replace(name, "{" => "", "}" => "")))
+      surname = length(words) > 1 ? last(words) : join(words, " ")
+      given = length(words) > 1 ? join(words[1:end-1], " ") : ""
+    end
+    push!(surnames, surname)
+    initials = join((uppercase(first(strip(w))) * "." for w in split(given) if !isempty(strip(w))), " ")
+    push!(formatted, isempty(initials) ? surname : surname * ", " * initials)
+  end
+  intext = length(surnames) == 1 ? surnames[1] : length(surnames) == 2 ? join(surnames, " & ") : surnames[1] * " et al."
+  list = length(formatted) > 20 ? join(formatted[1:19], ", ") * ", … " * last(formatted) : length(formatted) > 1 ? join(formatted[1:end-1], ", ") * ", & " * last(formatted) : only(formatted)
+  return intext, list
+end
+
+function bib_apa_entry(key, entry)
+  _, authors = bib_authors(entry)
+  year = get(entry, "year", "n.d.")
+  title = get(entry, "title", "Untitled")
+  kind = get(entry, "_type", "")
+  italic = s -> "<em>" * html_escape(s) * "</em>"
+  linked_title = function(text, url; is_italic=false)
+    rendered = is_italic ? italic(text) : html_escape(text)
+    isempty(url) && return rendered
+    return "<a href=\"$(html_escape(url))\">$(rendered)</a>"
+  end
+  title_html = linked_title(title, get(entry, "url", ""); is_italic=true)
+  if kind == "article"
+    journal = get(entry, "journal", "")
+    vol = get(entry, "volume", "")
+    issue = get(entry, "number", "")
+    pages = get(entry, "pages", "")
+    journalpart = isempty(journal) ? "" : italic(journal) * (isempty(vol) ? "" : ", " * italic(vol)) * (isempty(issue) ? "" : "(" * html_escape(issue) * ")") * (isempty(pages) ? "" : ", " * html_escape(replace(pages, "--" => "–"))) * ". "
+    doi = get(entry, "doi", "")
+    doi_url = isempty(doi) ? "" : "https://doi.org/" * replace(doi, r"^https?://(dx\.)?doi.org/" => "")
+    return "$(html_escape(authors)) ($(html_escape(year))). $(linked_title(title, get(entry, "url", ""))). $(journalpart)" * (isempty(doi_url) ? "" : "<a href=\"$(html_escape(doi_url))\">$(html_escape(doi_url))</a>")
+  elseif kind == "book"
+    publisher = get(entry, "publisher", "")
+    return "$(html_escape(authors)) ($(html_escape(year))). $(title_html)." * (isempty(publisher) ? "" : " " * html_escape(publisher) * ".")
+  elseif kind in ("inbook", "incollection")
+    chapter = kind == "incollection" ? get(entry, "title", "Untitled") : get(entry, "chapter", "")
+    booktitle = get(entry, "booktitle", get(entry, "title", ""))
+    booktitle_html = italic(booktitle)
+    editor = get(entry, "editor", "")
+    editor_text = isempty(editor) ? "" : html_escape(bib_authors(Dict("author" => editor))[2]) * (occursin(r"\s+and\s+", editor) ? " (Eds.), " : " (Ed.), ")
+    pages = get(entry, "pages", "")
+    page_text = isempty(pages) ? "" : " (pp. $(html_escape(replace(pages, "--" => "–"))))."
+    publisher = get(entry, "publisher", "")
+    chapter_text = isempty(chapter) ? "" : linked_title(chapter, get(entry, "url", "")) * ". "
+    in_book = isempty(booktitle) ? "" : "In " * editor_text * booktitle_html * (isempty(page_text) ? "." : page_text)
+    return "$(html_escape(authors)) ($(html_escape(year))). $(chapter_text)$(in_book)" * (isempty(publisher) ? "" : " " * html_escape(publisher) * ".")
+  elseif kind in ("inproceedings", "conference")
+    booktitle = get(entry, "booktitle", "")
+    publisher = get(entry, "publisher", "")
+    return "$(html_escape(authors)) ($(html_escape(year))). $(linked_title(title, get(entry, "url", "")))." * (isempty(booktitle) ? "" : " In " * italic(booktitle) * ".") * (isempty(publisher) ? "" : " " * html_escape(publisher) * ".")
+  end
+  return "$(html_escape(authors)) ($(html_escape(year))). $(linked_title(title, get(entry, "url", "")))."
+end
+
+function inherited_bib_setting(dir, name)
+  project_root = normpath(@__DIR__)
+  current = normpath(dir)
+  while startswith(current, project_root)
+    index_file = joinpath(current, "index.md")
+    if isfile(index_file)
+      pattern = Regex("(?m)^\\s*@def\\s+" * name * "\\s*=\\s*([^\\n;]+)")
+      m = match(pattern, read(index_file, String))
+      if m !== nothing
+        value = strip(m.captures[1])
+        if (startswith(value, "\"") && endswith(value, "\"")) ||
+           (startswith(value, "'") && endswith(value, "'"))
+          value = chop(value; head=1, tail=1)
+        end
+        return value, current
+      end
+    end
+    current == project_root && break
+    parent = dirname(current)
+    parent == current && break
+    current = parent
+  end
+  return nothing, normpath(dir)
+end
+
+function bib_citation(com, _)
+  keys = strip.(split(Franklin.content(com.braces[1]), ","))
+  bibfile = Franklin.locvar("ref")
+  page_path = normpath(joinpath(@__DIR__, String(Franklin.locvar(:fd_rpath))))
+  page_dir = dirname(page_path)
+  inherited_ref, inherited_dir = inherited_bib_setting(page_dir, "ref")
+  isnothing(bibfile) && (bibfile = inherited_ref)
+  isnothing(bibfile) && throw(ArgumentError("\\cite requires @def ref=\"file.bib\" in this page or its directory index.md"))
+  style = Franklin.locvar("style")
+  if isnothing(style)
+    inherited_style, _ = inherited_bib_setting(page_dir, "style")
+    style = something(inherited_style, "apa")
+  end
+  style = lowercase(string(style))
+  style == "apa" || throw(ArgumentError("Unsupported citation style '$style'; currently supported: apa"))
+  root = isnothing(Franklin.locvar("ref")) ? inherited_dir : page_dir
+  path = normpath(joinpath(root, string(bibfile)))
+  isfile(path) || throw(ArgumentError("BibTeX file not found: $path"))
+  entries = bibtex_entries(read(path, String))
+  citations = String[]
+  for key in keys
+    haskey(entries, key) || throw(ArgumentError("Citation key '$key' not found in $bibfile"))
+    author, _ = bib_authors(entries[key])
+    year = get(entries[key], "year", "n.d.")
+    push!(citations, "<span data-bib-key=\"$(base64encode(key))\" data-bib-entry=\"$(base64encode(bib_apa_entry(key, entries[key])))\">$(html_escape(author)), $(html_escape(year))</span>")
+  end
+  return "(" * join(citations, "; ") * ")"
+end
+
+@eval Franklin function lx_cite(com::LxCom, lxdefs)
+  return getproperty(utils_module(), :bib_citation)(com, lxdefs)
 end
 
 function add_params_bef(params_val, params_desc, params_list, var_next, var, val, explanation)

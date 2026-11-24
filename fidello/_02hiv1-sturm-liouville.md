@@ -1,9 +1,9 @@
 #### Sturm-Liouville problems
-Interestingly, our differential equation for $X_n$ is an example of a type of ODE problem known as a Sturm-Liouville problem. Sturm-Liouville problems, in general, are of the form:[^1]
+Interestingly, our differential equation for $X_n$ is an example of a type of ODE problem known as a Sturm-Liouville problem. Sturm-Liouville problems, in general, are of the form \cite{trench_132_2024}:
 \begin{align}
 \dfrac{d}{dx}\left[p(x) \dfrac{dy}{dx}\right] + q(x)y &= -\lambda r(x) y. \label{SLP}
 \end{align}
-Where $p>0$, $r\geq 0$. Typically, $p$, $q$ and $r$ are well-defined and continuous functions throughout the domain in which we are solving this problem (we will denote this domain as $[a,b]$), except perhaps the endpoints.[^2] Although there are exceptions where these functions do have undefined regions within the domain of the problem. There are also boundary conditions imposed as part of a Sturm-Liouville problem, namely:[^3]
+Where $p>0$, $r\geq 0$. Typically, $p$, $q$ and $r$ are well-defined and continuous functions throughout the domain in which we are solving this problem (we will denote this domain as $[a,b]$), except perhaps the endpoints \cite{boyd_chebyshev_2000}. Although there are exceptions where these functions do have undefined regions within the domain of the problem\cite{boyd_chebyshev_2000}. There are also boundary conditions imposed as part of a Sturm-Liouville problem, namely \cite{lebl_51_2025}:
 \begin{align*}
 \alpha_1 y(a) -\alpha_2 y'(a) &= 0 \\
 \beta_1 y(b) + \beta_2 y'(b) &= 0.

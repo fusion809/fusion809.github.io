@@ -1,6 +1,8 @@
 @def hassim=false;
 @def title="An introduction to university physics for Fidello."
 @def tag=["Mathematics", "Physics"]
+@def ref="fidello.bib"
+@def style="apa"
 @def mintoclevel=1
 
 \includemd{fidello/_01-introduction.md}
@@ -62,4 +64,3 @@
 \includemd{fidello/_08dii-path-integral-formulation.md}
 \includemd{fidello/_08diii-operator-formalism.md}
 \includemd{fidello/_08e-quantum-field-theory.md}
-\includemd{fidello/_09-references.md}
