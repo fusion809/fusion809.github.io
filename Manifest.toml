@@ -697,10 +697,10 @@ version = "0.1.12"
 
 [[deps.Expat_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "f2659a735f9360fedfa29925812380f322679e93"
+git-tree-sha1 = "30fbbf8fb9d4e5d3264b4eb10c04f8a9ebaf9381"
 registries = "General"
 uuid = "2e619515-83b5-522b-bb60-26c02a35a201"
-version = "2.10.0+0"
+version = "2.11.0+0"
 
 [[deps.ExprTools]]
 git-tree-sha1 = "d2e49e7efd29719d6f28b891b0e0e159daa9d2b4"
@@ -1038,10 +1038,10 @@ version = "1.11.0"
 
 [[deps.GLFW]]
 deps = ["GLFW_jll"]
-git-tree-sha1 = "f16f6d47e3c8f17ef184f6f09ee793dbd2a4c2c0"
+git-tree-sha1 = "26183d6bd92658e493a6c008776af936dbce803e"
 registries = "General"
 uuid = "f7f18e0c-5ee9-5ccd-a5bf-e8befd85ed98"
-version = "4.0.0"
+version = "4.0.1"
 
 [[deps.GLFW_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Libglvnd_jll", "Xorg_libXcursor_jll", "Xorg_libXi_jll", "Xorg_libXinerama_jll", "Xorg_libXrandr_jll", "libdecor_jll", "xkbcommon_jll"]
@@ -2070,10 +2070,10 @@ version = "0.3.3"
 
 [[deps.OpenEXR_jll]]
 deps = ["Artifacts", "Imath_jll", "JLLWrappers", "Libdl", "OpenJPH_jll", "Zlib_jll", "Zstd_jll", "libdeflate_jll"]
-git-tree-sha1 = "db5f91397090eab5dc6899a61f20d54505b49995"
+git-tree-sha1 = "f830016dd5ff36dd0b70e57c5b1563cc8559b4db"
 registries = "General"
 uuid = "18a262bb-aa17-5467-a713-aee519bc75cb"
-version = "3.5.4+0"
+version = "3.5.5+0"
 
 [[deps.OpenJPH_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Libtiff_jll"]
