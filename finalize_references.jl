@@ -122,13 +122,17 @@ function validate_reference_links(html_path)
                       if !isnothing(html_attribute(m.captures[1], "data-bib-key"))]
   isempty(citation_markers) || error("Unprocessed citation marker in $html_path")
   citation_links = collect(eachmatch(r"<a\b([^>]*)>", document_html))
-  has_citations = any(m -> occursin(r"(?:^|\s)class=(?:\"[^\"]*\bcitation\b[^\"]*\"|'[^']*\bcitation\b[^']*')", m.captures[1]), citation_links)
+  is_reference_citation(attributes) =
+    occursin(r"(?:^|\s)class=(?:\"[^\"]*\bcitation\b[^\"]*\"|'[^']*\bcitation\b[^']*')", attributes) &&
+    startswith(something(html_attribute(attributes, "href"), ""), "#reference-")
+  reference_citations = [m for m in citation_links if is_reference_citation(m.captures[1])]
+  has_citations = !isempty(reference_citations)
   has_reference_list = occursin(r"<section\b[^>]*\bclass=(?:\"[^\"]*\breference-list\b[^\"]*\"|'[^']*\breference-list\b[^']*')", document_html)
   has_citations && !has_reference_list &&
     error("Reference list missing from $html_path despite citation links")
   ids = Set(String(m.captures[1]) for m in eachmatch(r"id=\"([^\"]+)\"", document_html))
-  for m in eachmatch(r"<a class=\"citation\"[^>]*href=\"#([^\"]+)\"", document_html)
-    target = String(m.captures[1])
+  for m in reference_citations
+    target = something(html_attribute(m.captures[1], "href"), "")[2:end]
     target in ids || error("Citation target '#$target' is missing from $html_path")
   end
   return true
