@@ -9,6 +9,20 @@ function html_attribute(attributes, name)
   return something(matched.captures...)
 end
 
+function insert_reference_list(html, section)
+  page_foot = r"<div\b[^>]*\bclass=(?:\"[^\"]*\bpage-foot\b[^\"]*\"|'[^']*\bpage-foot\b[^']*')[^>]*>"
+  if occursin(page_foot, html)
+    return replace(html, page_foot => matched -> section * matched; count=1)
+  elseif occursin("<!-- CONTENT ENDS HERE -->", html)
+    return replace(html, "<!-- CONTENT ENDS HERE -->" => section * "<!-- CONTENT ENDS HERE -->"; count=1)
+  elseif occursin(r"(?i)</article\s*>", html)
+    return replace(html, r"(?i)</article\s*>" => section * "</article>"; count=1)
+  elseif occursin(r"(?i)</body\s*>", html)
+    return replace(html, r"(?i)</body\s*>" => section * "</body>"; count=1)
+  end
+  return html * section
+end
+
 function bibtex_source_entry(bib_path, key)
   source = read(bib_path, String)
   pattern = Regex("(?is)@([a-z]+)\\s*([({])\\s*" * replace(key, r"([\\.^$|?*+()\[\]{}])" => s"\\\1") * "\\s*,")
@@ -61,14 +75,23 @@ function append_fallback_reference_list(html, html_path, site_dir)
 
   items = join("<li id=\"$(target)\" style=\"padding-left:2em;text-indent:-2em;\"><pre><code>" * reference_html_escape(entry) * "</code></pre></li>" for (target, entry) in sort(collect(citations); by=first))
   section = "<section class=\"reference-list\" aria-labelledby=\"reference-list-title\"><h1 id=\"reference-list-title\">Reference list</h1><ul style=\"list-style:none;margin:0;padding-left:0;\">$(items)</ul></section>"
-  if occursin("<div class=\"page-foot\">", html)
-    return replace(html, "<div class=\"page-foot\">" => section * "<div class=\"page-foot\">"; count=1)
-  elseif occursin("<!-- CONTENT ENDS HERE -->", html)
-    return replace(html, "<!-- CONTENT ENDS HERE -->" => section * "<!-- CONTENT ENDS HERE -->"; count=1)
-  elseif occursin("</article>", html)
-    return replace(html, "</article>" => section * "</article>"; count=1)
+  return insert_reference_list(html, section)
+end
+
+function append_link_label_reference_list(html)
+  cited = Dict{String,String}()
+  for m in eachmatch(r"<a\b([^>]*)>([\s\S]*?)</a>", html)
+    attributes, label = m.captures
+    occursin(r"(?:^|\s)class=(?:\"[^\"]*\bcitation\b[^\"]*\"|'[^']*\bcitation\b[^']*')", attributes) || continue
+    href = something(html_attribute(attributes, "href"), "")
+    startswith(href, "#reference-") || continue
+    cited[href[2:end]] = label
   end
-  return occursin("</body>", html) ? replace(html, "</body>" => section * "</body>"; count=1) : html * section
+  isempty(cited) && return nothing
+
+  items = join("<li id=\"$(target)\" style=\"padding-left:2em;text-indent:-2em;\">" * label * "</li>" for (target, label) in sort(collect(cited); by=first))
+  section = "<section class=\"reference-list\" aria-labelledby=\"reference-list-title\"><h1 id=\"reference-list-title\">Reference list</h1><ul style=\"list-style:none;margin:0;padding-left:0;\">$(items)</ul></section>"
+  return insert_reference_list(html, section)
 end
 
 function append_reference_lists(site_dir, output_names)
@@ -111,6 +134,9 @@ function append_reference_lists(site_dir, output_names)
           fallback_html = append_fallback_reference_list(html, path, site_dir)
           if !isnothing(fallback_html)
             html = fallback_html
+          else
+            fallback_html = append_link_label_reference_list(html)
+            !isnothing(fallback_html) && (html = fallback_html)
           end
         end
         if html != original
@@ -164,15 +190,7 @@ function append_reference_lists(site_dir, output_names)
       if !occursin("href=\"#reference-list-title\"", html)
         html = replace(html, "</ol></div>" => toc_link * "</ol></div>"; count=1)
       end
-      if occursin("<div class=\"page-foot\">", html)
-        html = replace(html, "<div class=\"page-foot\">" => section * "<div class=\"page-foot\">"; count=1)
-      elseif occursin("<!-- CONTENT ENDS HERE -->", html)
-        html = replace(html, "<!-- CONTENT ENDS HERE -->" => section * "<!-- CONTENT ENDS HERE -->"; count=1)
-      elseif occursin("</article>", html)
-        html = replace(html, "</article>" => section * "</article>"; count=1)
-      else
-        html = replace(html, "</body>" => section * "</body>"; count=1)
-      end
+      html = insert_reference_list(html, section)
       write(path, html)
       processed += 1
     end
