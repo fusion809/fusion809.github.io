@@ -1624,11 +1624,11 @@ uuid = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
 version = "1.13.0"
 
 [[deps.LinearSolve]]
-deps = ["AMD", "ArrayInterface", "ConcreteStructs", "DocStringExtensions", "EnumX", "GPUArraysCore", "InteractiveUtils", "Krylov", "LHLFactorization", "Libdl", "LinearAlgebra", "MKL_jll", "Markdown", "OpenBLAS_jll", "PrecompileTools", "Preferences", "PureKLU", "RecursiveArrayTools", "Reexport", "SciMLBase", "SciMLLogging", "SciMLOperators", "SciMLStructures", "Setfield", "SparseArrays", "SparseColumnPivotedQR", "StaticArraysCore"]
-git-tree-sha1 = "e3e84c5c330ea65568a85aef00031e2b870b0e99"
+deps = ["AMD", "ArrayInterface", "ConcreteStructs", "DocStringExtensions", "EnumX", "GPUArraysCore", "InteractiveUtils", "Krylov", "LHLFactorization", "Libdl", "LinearAlgebra", "MKL_jll", "Markdown", "OpenBLAS_jll", "PrecompileTools", "Preferences", "PureKLU", "RecursiveArrayTools", "Reexport", "SciMLBase", "SciMLLogging", "SciMLOperators", "SciMLStructures", "Setfield", "SparseArrays", "SparseColumnPivotedQR", "SpecializedDeepcopy", "StaticArraysCore"]
+git-tree-sha1 = "435442a14ffc8987828baa17080d8103d4c9e02e"
 registries = "General"
 uuid = "7ed4a6bd-45f5-4d41-b270-4a48e9bafcae"
-version = "5.18.3"
+version = "5.19.0"
 
     [deps.LinearSolve.extensions]
     LinearSolveAMDGPUExt = "AMDGPU"
@@ -2989,6 +2989,19 @@ weakdeps = ["ChainRulesCore"]
 
     [deps.SpecialFunctions.extensions]
     SpecialFunctionsChainRulesCoreExt = "ChainRulesCore"
+
+[[deps.SpecializedDeepcopy]]
+git-tree-sha1 = "83c49ada5de4528ed636619317bbe4646542095b"
+registries = "General"
+uuid = "d9f839d0-568b-4a2d-afd8-98575451154f"
+version = "0.2.2"
+weakdeps = ["FunctionWrappers", "PreallocationTools", "SharedArrays", "SparseArrays"]
+
+    [deps.SpecializedDeepcopy.extensions]
+    SpecializedDeepcopyFunctionWrappersExt = "FunctionWrappers"
+    SpecializedDeepcopyPreallocationToolsExt = "PreallocationTools"
+    SpecializedDeepcopySharedArraysExt = "SharedArrays"
+    SpecializedDeepcopySparseArraysExt = "SparseArrays"
 
 [[deps.StackViews]]
 deps = ["OffsetArrays"]
