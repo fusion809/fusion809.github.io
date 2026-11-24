@@ -3,7 +3,12 @@ Interestingly, our differential equation for $X_n$ is an example of a type of OD
 \begin{align}
 \dfrac{d}{dx}\left[p(x) \dfrac{dy}{dx}\right] + q(x)y &= -\lambda r(x) y. \label{SLP}
 \end{align}
-Where $p>0$, $r\geq 0$ and $p$, $q$ and $r$ are well-defined and continuous functions throughout the domain in which we are solving this problem (we will denote this domain as $[a,b]$). There are also boundary conditions imposed as part of a Sturm-Liouville problem. $\lambda$ can take on a set of discrete values, which are called eigenvalues. Each eigenvalue corresponds to a different solution $y$ which is called the corresponding eigenfunction. And yes, as you have probably guessed, the "eigen" prefix is German in origin. 
+Where $p>0$, $r\geq 0$ and $p$, $q$ and $r$ are well-defined and continuous functions throughout the domain in which we are solving this problem (we will denote this domain as $[a,b]$). There are also boundary conditions imposed as part of a Sturm-Liouville problem, namely:[^2]
+\begin{align*}
+\alpha_1 y(a) -\alpha_2 y'(a) &= 0 \\
+\beta_1 y(b) + \beta_2 y'(b) &= 0.
+\end{align*}
+Where $\alpha_1$ and $\alpha_2$ cannot both be simultaneously zero and nor can $\beta_1$ and $\beta_2$. $\lambda$ can take on a set of discrete values, which are called eigenvalues. Each eigenvalue corresponds to a different solution $y$ which is called the corresponding eigenfunction. And yes, as you have probably guessed, the "eigen" prefix is German in origin. 
 
 So in the example we solved for the heat equation, $X_n$ were the eigenfunctions and $\lambda_n$ were the eigenvalues. An interesting quality of eigenfunctions is that they are orthogonal (similarly to the eigenvectors of a matrix). That means that:
 \begin{align*}
