@@ -78,6 +78,8 @@ jobs:
           GKSwstype: "100"
     - name: Verify Fidello page was generated
       run: test -s __site/fidello/index.html
+    - name: Finalize and verify reference lists
+      run: julia --project=. finalize_references.jl
     - name: Include generated GIFs in site
       run: find . -maxdepth 1 -type f -iname '*.gif' -exec cp -t __site/ {} +
     - name: Build and Deploy

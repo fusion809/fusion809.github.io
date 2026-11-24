@@ -224,5 +224,3 @@ for name in fidello_output_names
   occursin(output_error, fidello_html) &&
     error("Fidello page could not resolve \\output for '$name': $fidello_output")
 end
-reference_list_pages = append_reference_lists(joinpath(@__DIR__, "__site"), fidello_output_names)
-println("Added reference lists to $reference_list_pages generated page(s).")
