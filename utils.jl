@@ -32,8 +32,8 @@ function lx_Figref(com, _)
 end
 
 # BibTeX-style citations.  The citation macro emits a compact build-time
-# marker; deploy.jl turns these into APA author-date citations and appends the
-# page's cited reference list after Franklin has rendered the page.
+# marker; finalize_references.jl turns these into APA author-date citations
+# and appends the page's cited reference list after Franklin has rendered it.
 function bibtex_entries(source::AbstractString)
   entries = Dict{String,Dict{String,String}}()
   for m in eachmatch(r"(?is)@([a-z]+)\s*([({])\s*([^,\s]+)\s*,", source)
