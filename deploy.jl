@@ -85,18 +85,22 @@ function generate_fidello_saved_outputs()
     source_file = joinpath(@__DIR__, source_path)
     isfile(source_file) || error("Required Fidello listing source is missing: $source_file")
 
+    source_output_dir = joinpath(@__DIR__, page_path, "code", "output")
     output_dir = joinpath(@__DIR__, "__site", "assets", page_path, "code", "output")
+    source_output_file = joinpath(source_output_dir, output_name * ".out")
     output_file = joinpath(output_dir, output_name * ".out")
+    mkpath(source_output_dir)
     mkpath(output_dir)
 
-    open(output_file, "w") do output
+    open(source_output_file, "w") do output
       redirect_stdout(output) do
         listing_module = Module(gensym(:FidelloListing))
         Base.include_string(listing_module, read(source_file, String), source_file)
       end
     end
+    cp(source_output_file, output_file; force=true)
 
-    filesize(output_file) > 0 || error("Fidello listing produced empty output: $source_file")
+    filesize(source_output_file) > 0 || error("Fidello listing produced empty output: $source_file")
 
     if output_name == "chebyshev"
       source = read(source_file, String)
@@ -112,7 +116,7 @@ function generate_fidello_saved_outputs()
   return [name for (_, name, _) in listings]
 end
 
-function append_reference_lists(site_dir)
+function append_reference_lists(site_dir, output_names)
   citation_pattern = r"<span data-bib-key=\"([^\"]+)\" data-bib-entry=\"([^\"]+)\">([\s\S]*?)</span>"
   preview_script = r"<script>\(function\(\)\{\s*if \(window\.__bibReferenceListInstalled[\s\S]*?</script>"
   page_locator = r"(<a class=\"citation\" href=\"#[^\"]+\">)([^<]*)(</a>\s*\))\s*(?:&#123;|\{)([^{}&]+)(?:&#125;|\})"
@@ -121,20 +125,36 @@ function append_reference_lists(site_dir)
     for file in files
       endswith(file, ".html") || continue
       path = joinpath(root, file)
-      html = read(path, String)
+      original = read(path, String)
+      html = original
       html = replace(html, preview_script => "")
+      for name in output_names
+        output_file = joinpath(site_dir, "assets", "fidello", "code", "output", name * ".out")
+        isfile(output_file) || continue
+        error_span = "<span style=\"color:red;\">// `" * raw"\output{./code/" * name * "}`: could not find the relevant output file. //</span>"
+        rendered_output = "<pre><code class=\"plaintext code-output\">" * html_escape(read(output_file, String)) * "</code></pre>"
+        html = replace(html, error_span => rendered_output)
+      end
       if occursin("<section class=\"reference-list\"", html)
         html = replace(html, "<h2 id=\"reference-list-title\">Reference list</h2>" => "<h1 id=\"reference-list-title\">Reference list</h1>")
         toc_link = "<li><a href=\"#reference-list-title\">Reference list</a></li>"
         if !occursin("href=\"#reference-list-title\"", html)
           html = replace(html, "</ol></div>" => toc_link * "</ol></div>"; count=1)
         end
-        write(path, html)
-        processed += 1
+        if html != original
+          write(path, html)
+          processed += 1
+        end
         continue
       end
       matches = collect(eachmatch(citation_pattern, html))
-      isempty(matches) && continue
+      if isempty(matches)
+        if html != original
+          write(path, html)
+          processed += 1
+        end
+        continue
+      end
       cited = Dict{String,String}()
       reference_id(key) = "reference-" * bytes2hex(codeunits(key))
       for m in matches
@@ -200,5 +220,5 @@ for name in fidello_output_names
   occursin(output_error, fidello_html) &&
     error("Fidello page could not resolve \\output for '$name': $fidello_output")
 end
-reference_list_pages = append_reference_lists(joinpath(@__DIR__, "__site"))
+reference_list_pages = append_reference_lists(joinpath(@__DIR__, "__site"), fidello_output_names)
 println("Added reference lists to $reference_list_pages generated page(s).")

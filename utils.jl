@@ -859,6 +859,14 @@ end
 function lx_codelisting(com, lxdefs)
     label = strip(Franklin.content(com.braces[1]))
     caption = Franklin.content(com.braces[2])
+    eqref_pattern = r"\\eqref\{([^{}]+)\}"
+    caption = replace(caption, eqref_pattern => matched -> begin
+        captures = match(eqref_pattern, matched).captures
+        ref = strip(captures[1])
+        number = get(Franklin.PAGE_EQREFS, Franklin.refstring(ref), nothing)
+        isnothing(number) && return String(matched)
+        "<a class=\"eqref\" href=\"#$(html_escape(ref))\">($(number))</a>"
+    end)
     rpath = strip(Franklin.content(com.braces[3]))
     source_path = strip(Franklin.content(com.braces[4]))
     source_file = isabspath(source_path) ? source_path : joinpath(Franklin.path(:folder), source_path)
