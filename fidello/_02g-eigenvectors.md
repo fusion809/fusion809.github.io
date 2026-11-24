@@ -1,9 +1,11 @@
-##### Matrix counterpart
-Eigenvalues also arise in the study of matrices. Namely, if you have the matrix equation:
+## Eigenvectors and eigenvalues of matrices
+If you have the matrix equation:
 \begin{align*}
 \mathbf{A} \mathbf{x} &= \lambda \mathbf{x}
 \end{align*}
-then $\lambda$ is said to be an eigenvalue of $\mathbf{A}$ and $\mathbf{x}$ is an eigenvector of $\mathbf{A}$. Eigenvectors are all column vectors to be clear. We solve for $\lambda$ by solving the polynomial equation that results from:
+then $\lambda$ is said to be an eigenvalue of $\mathbf{A}$ and $\mathbf{x}$ is an eigenvector of $\mathbf{A}$. A square matrix of dimensions $n\times n$ will have $n$ distinct eigenvalues and eigenvectors. Each eigenvector will be of dimensions $n\times 1$. Interestingly, each eigenvector of a matrix is orthogonal to the others. In other words, they are perpendicular to each other &mdash; the angle between them is $90^{\circ}$. This also means that their dot product will be zero.
+
+We solve for $\lambda$ by solving the polynomial equation that results from:
 \begin{align*}
 \det{\left(\mathbf{A}-\lambda \mathbf{I}\right)} &= 0.
 \end{align*}
