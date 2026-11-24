@@ -123,6 +123,16 @@ function append_reference_lists(site_dir)
       path = joinpath(root, file)
       html = read(path, String)
       html = replace(html, preview_script => "")
+      if occursin("<section class=\"reference-list\"", html)
+        html = replace(html, "<h2 id=\"reference-list-title\">Reference list</h2>" => "<h1 id=\"reference-list-title\">Reference list</h1>")
+        toc_link = "<li><a href=\"#reference-list-title\">Reference list</a></li>"
+        if !occursin("href=\"#reference-list-title\"", html)
+          html = replace(html, "</ol></div>" => toc_link * "</ol></div>"; count=1)
+        end
+        write(path, html)
+        processed += 1
+        continue
+      end
       matches = collect(eachmatch(citation_pattern, html))
       isempty(matches) && continue
       cited = Dict{String,String}()
@@ -145,7 +155,9 @@ function append_reference_lists(site_dir)
       end)
       sorted = sort(collect(cited); by=pair -> lowercase(strip(replace(last(pair), r"<[^>]+>" => ""))))
       items = join("<li id=\"$(reference_id(first(pair)))\">" * last(pair) * "</li>" for pair in sorted)
-      section = "<section class=\"reference-list\" aria-labelledby=\"reference-list-title\"><h2 id=\"reference-list-title\">Reference list</h2><ol>$(items)</ol></section>"
+      section = "<section class=\"reference-list\" aria-labelledby=\"reference-list-title\"><h1 id=\"reference-list-title\">Reference list</h1><ol>$(items)</ol></section>"
+      toc_link = "<li><a href=\"#reference-list-title\">Reference list</a></li>"
+      html = replace(html, "</ol></div>" => toc_link * "</ol></div>"; count=1)
       if occursin("<div class=\"page-foot\">", html)
         html = replace(html, "<div class=\"page-foot\">" => section * "<div class=\"page-foot\">"; count=1)
       elseif occursin("<!-- CONTENT ENDS HERE -->", html)
