@@ -104,7 +104,7 @@ We could, at this point, scale our eigenvectors so that its inner product with i
 \end{align*}
 Hence our normalized eigenvectors, which we will denote as $\mathbf{\hat{x}}$ would be:
 \begin{align*}
-\mathbf{\hat{x}} &= \dfrac{\mathbf{x}}{\sqrt{\dfrac{1}{16} \left(58\pm 24\sqrt{33}\right)}} \\
+\mathbf{\hat{x}} &= \dfrac{\mathbf{x}}{\sqrt{\mathbf{x}\cdot \mathbf{x}}} \\
 &= \dfrac{1}{\sqrt{\dfrac{1}{16} \left(58\pm 24\sqrt{33}\right)}} \begin{bmatrix}
 1 \\
 \dfrac{3\pm \sqrt{33}}{4}
