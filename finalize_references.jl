@@ -31,7 +31,7 @@ function append_reference_lists(site_dir, output_names)
         html = replace(html, error_span => rendered_output)
       end
 
-      has_reference_list = occursin("<section class=\"reference-list\"", html)
+      has_reference_list = occursin(r"<section\b[^>]*\bclass=(?:\"[^\"]*\breference-list\b[^\"]*\"|'[^']*\breference-list\b[^']*')", html)
       if has_reference_list
         html = replace(html, "<h2 id=\"reference-list-title\">Reference list</h2>" => "<h1 id=\"reference-list-title\">Reference list</h1>")
         html = replace(html, r"(<section class=\"reference-list\"[^>]*>[\s\S]*?<h1 id=\"reference-list-title\">Reference list</h1>)<ol>" => s"\1<ul style=\"list-style:none;margin:0;padding-left:0;\">")
@@ -52,7 +52,7 @@ function append_reference_lists(site_dir, output_names)
         continue
       end
 
-      has_reference_list && (html = replace(html, r"<section class=\"reference-list\"[\s\S]*?</section>" => ""; count=1))
+      has_reference_list && (html = replace(html, r"<section\b[^>]*\bclass=(?:\"[^\"]*\breference-list\b[^\"]*\"|'[^']*\breference-list\b[^']*')[^>]*>[\s\S]*?</section>" => ""; count=1))
       reference_id(key) = "reference-" * bytes2hex(codeunits(key))
       cited = Dict{String,String}()
       for m in span_matches
@@ -123,7 +123,8 @@ function validate_reference_links(html_path)
   isempty(citation_markers) || error("Unprocessed citation marker in $html_path")
   citation_links = collect(eachmatch(r"<a\b([^>]*)>", document_html))
   has_citations = any(m -> occursin(r"(?:^|\s)class=(?:\"[^\"]*\bcitation\b[^\"]*\"|'[^']*\bcitation\b[^']*')", m.captures[1]), citation_links)
-  has_citations && !occursin("<section class=\"reference-list\"", document_html) &&
+  has_reference_list = occursin(r"<section\b[^>]*\bclass=(?:\"[^\"]*\breference-list\b[^\"]*\"|'[^']*\breference-list\b[^']*')", document_html)
+  has_citations && !has_reference_list &&
     error("Reference list missing from $html_path despite citation links")
   ids = Set(String(m.captures[1]) for m in eachmatch(r"id=\"([^\"]+)\"", document_html))
   for m in eachmatch(r"<a class=\"citation\"[^>]*href=\"#([^\"]+)\"", document_html)
