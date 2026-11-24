@@ -195,7 +195,67 @@ function bib_citation(com, _)
     year = get(entries[key], "year", "n.d.")
     push!(citations, "<span data-bib-key=\"$(base64encode(key))\" data-bib-entry=\"$(base64encode(bib_apa_entry(key, entries[key])))\">$(html_escape(author)), $(html_escape(year))</span>")
   end
-  return "(" * join(citations, "; ") * ")"
+  preview_script = raw"""
+  <script>(function(){
+    if (window.__bibReferenceListInstalled) return;
+    window.__bibReferenceListInstalled = true;
+    function decode(value){ return new TextDecoder().decode(Uint8Array.from(atob(value), function(c){ return c.charCodeAt(0); })); }
+    function referenceId(key){ return 'reference-' + Array.from(new TextEncoder().encode(key), function(b){ return b.toString(16).padStart(2, '0'); }).join(''); }
+    function renderBibReferences(){
+      var markers = Array.from(document.querySelectorAll('.franklin-content span[data-bib-key]'));
+      var entries = new Map();
+      markers.forEach(function(marker){
+        var key = decode(marker.getAttribute('data-bib-key'));
+        entries.set(key, decode(marker.getAttribute('data-bib-entry')));
+        var label = marker.innerHTML;
+        // Franklin inserts this preview script between the citation and any
+        // following page locator, so inspect the text immediately after it.
+        var preview = marker.nextSibling;
+        while (preview && !(preview.nodeType === Node.ELEMENT_NODE && preview.tagName === 'SCRIPT' && preview.textContent.indexOf('__bibReferenceListInstalled') >= 0)) {
+          preview = preview.nextSibling;
+        }
+        var following = preview ? preview.nextSibling : null;
+        while (following && following.nodeType === Node.TEXT_NODE && !following.textContent.trim()) {
+          following = following.nextSibling;
+        }
+        if (following && following.nodeType === Node.TEXT_NODE) {
+          var locator = following.textContent.match(/^\s*\{([^{}]+)\}/);
+          if (locator) {
+            label += ', p. ' + locator[1].trim();
+            following.textContent = following.textContent.replace(locator[0], '');
+          }
+        }
+        marker.outerHTML = '<a class="citation" href="#' + referenceId(key) + '">' + label + '</a>';
+      });
+      if (!entries.size || document.querySelector('.reference-list')) return;
+      var section = document.createElement('section');
+      section.className = 'reference-list';
+      section.setAttribute('aria-labelledby', 'reference-list-title');
+      section.innerHTML = '<h1 id="reference-list-title">Reference list</h1><ul style="list-style:none;margin:0;padding-left:0;"></ul>';
+      Array.from(entries.entries()).sort(function(a,b){ return a[1].replace(/<[^>]+>/g,'').localeCompare(b[1].replace(/<[^>]+>/g,'')); }).forEach(function(item){
+        var li = document.createElement('li'); li.id = referenceId(item[0]); li.style.paddingLeft = '2em'; li.style.textIndent = '-2em'; li.innerHTML = item[1]; section.querySelector('ul').appendChild(li);
+      });
+      var pageFoot = document.querySelector('.page-foot');
+      if (pageFoot && pageFoot.parentNode) pageFoot.parentNode.insertBefore(section, pageFoot);
+      else (document.querySelector('.franklin-content') || document.body).appendChild(section);
+      var toc = document.querySelector('.franklin-toc > ol');
+      if (toc && !toc.querySelector('a[href="#reference-list-title"]')) {
+        var tocItem = document.createElement('li');
+        tocItem.innerHTML = '<a href="#reference-list-title">Reference list</a>';
+        toc.appendChild(tocItem);
+      }
+      var nav = document.querySelector('#toc-list');
+      if (nav && !nav.querySelector('a[href="#reference-list-title"]')) {
+        var navItem = document.createElement('li');
+        navItem.innerHTML = '<a href="#reference-list-title">Reference list</a>';
+        nav.appendChild(navItem);
+      }
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', renderBibReferences);
+    else renderBibReferences();
+  })();</script>
+  """
+  return "(" * join(citations, "; ") * ")" * preview_script
 end
 
 @eval Franklin function lx_cite(com::LxCom, lxdefs)

@@ -24,7 +24,7 @@ Many different orthogonal functions can be used when applying spectral methods. 
 \begin{align*}
 T_j(x) = \cos(j\cos^{-1}{x}).
 \end{align*}
-I would imagine that you are looking at this expression and wondering, how can $T_j$ be a polynomial when it is defined in terms of cosine and its inverse? Well, this is just one way to define Chebyshev polynomials of the first kind and is the most convenient way for when you are using them to approximate the solution to differential equations. That being said, they can also be defined using a recursion relation that makes the fact that they are polynomials all the more clear. Specifically this is the recursion relation \cite{boyd_chebyshev_2000}:
+I would imagine that you are looking at this expression and wondering, how can $T_j$ be a polynomial when it is defined in terms of cosine and its inverse? Well, this is just one way to define Chebyshev polynomials of the first kind and is the most convenient way for when you are using them to approximate the solution to differential equations. That being said, they can also be defined using a recursion relation that makes the fact that they are polynomials all the more clear. Specifically this is the recursion relation \cite{boyd_chebyshev_2000}{323}:
 \begin{align*}
 T_0 &= 1, \hspace{0.2cm} T_1 &&= x \\
 T_{j+1}(x) &= 2xT_j(x) - T_{j-1}(x) && \forall j \geq 1.
