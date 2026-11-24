@@ -98,24 +98,24 @@ We could, at this point, scale our eigenvectors so that its inner product with i
 
 \begin{align*}
 \mathbf{x} \cdot \mathbf{x} &= 1^2 + \left(\dfrac{3\pm \sqrt{33}}{4}\right)^2 \\
-&= 1 + \left(\dfrac{3}{4}\right)^2 + \left(\dfrac{\sqrt{33}}{4}\right)^2 \pm 2 \cdot 3 \cdot \dfrac{\sqrt{33}}{4} \\
-&= 1 + \dfrac{9}{16} + \dfrac{33}{16} \pm \dfrac{3\sqrt{33}}{2} \\
-&= 1 + \dfrac{42}{16} \pm \dfrac{3\sqrt{33}}{2} \\
-&= \dfrac{58}{16} \pm \dfrac{3\sqrt{33}}{2} \\
-&= \dfrac{1}{16} \left(58\pm 24\sqrt{33}\right).
+&= 1 + \left(\dfrac{3}{4}\right)^2 + \left(\dfrac{\sqrt{33}}{4}\right)^2 \pm 2 \cdot \dfrac{3}{4} \cdot \dfrac{\sqrt{33}}{4} \\
+&= 1 + \dfrac{9}{16} + \dfrac{33}{16} \pm \dfrac{3\sqrt{33}}{8} \\
+&= 1 + \dfrac{42}{16} \pm \dfrac{3\sqrt{33}}{8} \\
+&= \dfrac{58}{16} \pm \dfrac{3\sqrt{33}}{8} \\
+&= \dfrac{1}{16} \left(58\pm 6\sqrt{33}\right).
 \end{align*}
 Hence our normalized eigenvectors, which we will denote as $\mathbf{\hat{x}}$ would be:
 \begin{align*}
 \mathbf{\hat{x}} &= \dfrac{\mathbf{x}}{\sqrt{\mathbf{x}\cdot \mathbf{x}}} \\
-&= \dfrac{1}{\sqrt{\dfrac{1}{16} \left(58\pm 24\sqrt{33}\right)}} \begin{bmatrix}
+&= \dfrac{1}{\sqrt{\dfrac{1}{16} \left(58\pm 6\sqrt{33}\right)}} \begin{bmatrix}
 1 \\
 \dfrac{3\pm \sqrt{33}}{4}
 \end{bmatrix} \\
-&= \dfrac{4}{\sqrt{58\pm 24\sqrt{33}}} \begin{bmatrix}
+&= \dfrac{4}{\sqrt{58\pm 6\sqrt{33}}} \begin{bmatrix}
 1 \\
 \dfrac{3\pm \sqrt{33}}{4}
 \end{bmatrix} \\
-&= \dfrac{1}{\sqrt{58\pm 24\sqrt{33}}} \begin{bmatrix}
+&= \dfrac{1}{\sqrt{58\pm 6\sqrt{33}}} \begin{bmatrix}
 4 \\
 3\pm \sqrt{33}
 \end{bmatrix}.
