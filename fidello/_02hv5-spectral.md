@@ -3,7 +3,7 @@ Sturm-Liouville problems also give rise to infinite sets of orthogonal functions
 \begin{align}
 u(x) &= \sum_{j=0}^{\infty} a_j \phi_j(x). \label{spectral} 
 \end{align}
-Then we discretize our grid into points $x_i$ ($i \in \{0, 1, 2,...,n\}$), truncate the above series expansion, and can write a matrix equation for $\mathbf{a}$ (a vector containing $\{a_j\}$, the series coefficients). Then this equation would be:
+Then we discretize our grid into points $x_i$ ($i \in \{0, 1, 2,...,n\}$) and truncate the above series expansion. What we do next depends on the precise method we are using. The simplest method we can use is to write a matrix equation for $\mathbf{a}$ (a vector containing $\{a_j\}$, the series coefficients). Then this equation would be:
 \begin{align}
 \mathbf{A}\mathbf{a} &= \mathbf{b}. \label{speca}
 \end{align}
@@ -15,7 +15,7 @@ We can substitute Equation \eqref{afromu} into Equation \eqref{speca}, yielding:
 \begin{align*}
 \mathbf{A}\boldsymbol{\phi}^{-1}\mathbf{u} &= \mathbf{b}.
 \end{align*}
-In this case, we would be solving for $\mathbf{u}$ instead of $\mathbf{a}$. Methods that approximate the solution to a differential equation over the entire domain of the problem using a single sum of basis functions whose number of terms is equal to the number of grid points like this are called spectral methods. As we can represent our spectral method solution to a differential equation as a function (the sum in Equation \eqref{spectral}) that approximates the true solution, spectral methods are sometimes called semi-analytical methods instead of true numerical methods. 
+In this case, we would be solving for $\mathbf{u}$ instead of $\mathbf{a}$. Methods that approximate the solution to a differential equation over the entire domain of the problem using a single sum of basis functions whose number of terms is equal to the number of grid points like this are called spectral methods. As we can represent our spectral method solution to a differential equation as a function (the sum in Equation \eqref{spectral}) that approximates the true solution, spectral methods are sometimes called semi-analytical methods instead of true numerical methods which give us only approximated values of our solution.
 
 If the domain is split up into smaller sections with a separate function of the form Equation \eqref{spectral} defined on each, this is called a spectral element method. Finite element methods are very similar as they do split the domain up and define a series-based solution on each part of the domain. The difference is that the series usually has fewer terms and achieves lower accuracy than their spectral element counterparts.
 
