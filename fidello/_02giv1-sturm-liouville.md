@@ -1,7 +1,7 @@
 #### Sturm-Liouville problems
 Interestingly, our differential equation for $X_n$ is an example of a type of ODE problem known as a Sturm-Liouville problem. Sturm-Liouville problems, in general, are of the form:[^1]
 \begin{align}
-\dfrac{d}{dx}\left[p(x) \dfrac{dy}{dx}\right] + q(x)y &= -\lambda r(x) y \label{SLP}
+\dfrac{d}{dx}\left[p(x) \dfrac{dy}{dx}\right] + q(x)y &= -\lambda r(x) y. \label{SLP}
 \end{align}
 Where $p>0$, $r\geq 0$ and $p$, $q$ and $r$ are well-defined and continuous functions throughout the domain in which we are solving this problem (we will denote this domain as $[a,b]$). There are also boundary conditions imposed as part of a Sturm-Liouville problem. $\lambda$ can take on a set of discrete values, which are called eigenvalues. Each eigenvalue corresponds to a different solution $y$ which is called the corresponding eigenfunction. And yes, as you have probably guessed, the "eigen" prefix is German in origin. 
 
