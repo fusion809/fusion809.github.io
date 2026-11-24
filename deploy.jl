@@ -135,17 +135,16 @@ function append_reference_lists(site_dir, output_names)
         rendered_output = "<pre><code class=\"plaintext code-output\">" * html_escape(read(output_file, String)) * "</code></pre>"
         html = replace(html, error_span => rendered_output)
       end
-      if occursin("<section class=\"reference-list\"", html)
+      has_reference_list = occursin("<section class=\"reference-list\"", html)
+      if has_reference_list
         html = replace(html, "<h2 id=\"reference-list-title\">Reference list</h2>" => "<h1 id=\"reference-list-title\">Reference list</h1>")
-        toc_link = "<li><a href=\"#reference-list-title\">Reference list</a></li>"
-        if !occursin("href=\"#reference-list-title\"", html)
-          html = replace(html, "</ol></div>" => toc_link * "</ol></div>"; count=1)
-        end
-        if html != original
-          write(path, html)
-          processed += 1
-        end
-        continue
+        html = replace(html, r"(<section class=\"reference-list\"[^>]*>[\s\S]*?<h1 id=\"reference-list-title\">Reference list</h1>)<ol>" => s"\1<ul style=\"list-style:none;margin:0;padding-left:0;\">")
+        html = replace(html, "</ol></section>" => "</ul></section>"; count=1)
+        reference_item = r"<li id=\"(reference-[^\"]+)\">"
+        html = replace(html, reference_item => matched -> begin
+          id = match(reference_item, matched).captures[1]
+          "<li id=\"$(id)\" style=\"padding-left:2em;text-indent:-2em;\">"
+        end)
       end
       matches = collect(eachmatch(citation_pattern, html))
       if isempty(matches)
@@ -154,6 +153,9 @@ function append_reference_lists(site_dir, output_names)
           processed += 1
         end
         continue
+      end
+      if has_reference_list
+        html = replace(html, r"<section class=\"reference-list\"[\s\S]*?</section>" => ""; count=1)
       end
       cited = Dict{String,String}()
       reference_id(key) = "reference-" * bytes2hex(codeunits(key))
@@ -174,10 +176,12 @@ function append_reference_lists(site_dir, output_names)
         captures[1] * captures[2] * ", p. " * strip(captures[4]) * captures[3]
       end)
       sorted = sort(collect(cited); by=pair -> lowercase(strip(replace(last(pair), r"<[^>]+>" => ""))))
-      items = join("<li id=\"$(reference_id(first(pair)))\">" * last(pair) * "</li>" for pair in sorted)
-      section = "<section class=\"reference-list\" aria-labelledby=\"reference-list-title\"><h1 id=\"reference-list-title\">Reference list</h1><ol>$(items)</ol></section>"
+      items = join("<li id=\"$(reference_id(first(pair)))\" style=\"padding-left:2em;text-indent:-2em;\">" * last(pair) * "</li>" for pair in sorted)
+      section = "<section class=\"reference-list\" aria-labelledby=\"reference-list-title\"><h1 id=\"reference-list-title\">Reference list</h1><ul style=\"list-style:none;margin:0;padding-left:0;\">$(items)</ul></section>"
       toc_link = "<li><a href=\"#reference-list-title\">Reference list</a></li>"
-      html = replace(html, "</ol></div>" => toc_link * "</ol></div>"; count=1)
+      if !occursin("href=\"#reference-list-title\"", html)
+        html = replace(html, "</ol></div>" => toc_link * "</ol></div>"; count=1)
+      end
       if occursin("<div class=\"page-foot\">", html)
         html = replace(html, "<div class=\"page-foot\">" => section * "<div class=\"page-foot\">"; count=1)
       elseif occursin("<!-- CONTENT ENDS HERE -->", html)
