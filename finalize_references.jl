@@ -114,15 +114,19 @@ end
 
 function validate_reference_links(html_path)
   html = read(html_path, String)
-  citation_markers = [m for m in eachmatch(r"<span\b([^>]*)>", html)
+  # Citation markup appears as string literals inside the browser preview
+  # script. Validate the rendered HTML, not markup-shaped text in scripts or
+  # comments.
+  document_html = replace(html, r"<script\b[\s\S]*?</script>" => "", r"<!--[\s\S]*?-->" => "")
+  citation_markers = [m for m in eachmatch(r"<span\b([^>]*)>", document_html)
                       if !isnothing(html_attribute(m.captures[1], "data-bib-key"))]
   isempty(citation_markers) || error("Unprocessed citation marker in $html_path")
-  citation_links = collect(eachmatch(r"<a\b([^>]*)>", html))
+  citation_links = collect(eachmatch(r"<a\b([^>]*)>", document_html))
   has_citations = any(m -> occursin(r"(?:^|\s)class=(?:\"[^\"]*\bcitation\b[^\"]*\"|'[^']*\bcitation\b[^']*')", m.captures[1]), citation_links)
-  has_citations && !occursin("<section class=\"reference-list\"", html) &&
+  has_citations && !occursin("<section class=\"reference-list\"", document_html) &&
     error("Reference list missing from $html_path despite citation links")
-  ids = Set(String(m.captures[1]) for m in eachmatch(r"id=\"([^\"]+)\"", html))
-  for m in eachmatch(r"<a class=\"citation\"[^>]*href=\"#([^\"]+)\"", html)
+  ids = Set(String(m.captures[1]) for m in eachmatch(r"id=\"([^\"]+)\"", document_html))
+  for m in eachmatch(r"<a class=\"citation\"[^>]*href=\"#([^\"]+)\"", document_html)
     target = String(m.captures[1])
     target in ids || error("Citation target '#$target' is missing from $html_path")
   end
