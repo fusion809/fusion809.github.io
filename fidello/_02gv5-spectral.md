@@ -15,10 +15,11 @@ We can substitute Equation \eqref{afromu} into Equation \eqref{speca}, yielding:
 \begin{align*}
 \mathbf{A}\boldsymbol{\phi}^{-1}\mathbf{u} &= \mathbf{b}.
 \end{align*}
-In this case, we would be solving for $\mathbf{u}$ instead of $\mathbf{a}$. Methods that approximate the solution to a differential equation over the entire domain of the problem using a single sum of basis functions like this are called spectral methods. 
+In this case, we would be solving for $\mathbf{u}$ instead of $\mathbf{a}$. Methods that approximate the solution to a differential equation over the entire domain of the problem using a single sum of basis functions whose number of terms is equal to the number of grid points like this are called spectral methods. As we can represent our spectral method solution to a differential equation as a function (the sum in Equation \eqref{spectral}) that approximates the true solution, spectral methods are sometimes called semi-analytical methods instead of true numerical methods. 
 
 If the domain is split up into smaller sections with a separate function of the form Equation \eqref{spectral} defined on each, this is called a spectral element method. Finite element methods are very similar as they do split the domain up and define a series-based solution on each part of the domain. The difference is that the series usually has fewer terms and achieves lower accuracy than their spectral element counterparts.
 
+##### Chebyshev spectral methods
 Many different orthogonal functions can be used when applying spectral methods. Among the most popular are Chebyshev polynomials of the first kind and Fourier series functions. Chebyshev polynomials of the first kind, $T_i(x)$, are defined on $x\in [-1,1]$ as:
 \begin{align*}
 T_j(x) = \cos(j\cos^{-1}{x}).
@@ -43,6 +44,7 @@ We can also define a differentiation matrix. If $\mathbf{dT} = (T'_j(x_i))$ and 
 \end{align*}
 This matrix, when run on a vector of function values at $x_i$ computes its first derivative. If you multiply the vector by $\mathbf{D}$ twice, you will get the second derivative. Luckily, there are also more efficient ways of calculating $\mathbf{D}$. Like with the finite difference method, spectral methods are also easiest applied to linear differential equations. Interestingly, spectral methods are of order that is proportional to the number of grid points used. Which means that while increasing the number of grid points does improve the accuracy of every method one can use for solving differential equations, spectral methods take this to a whole other level. They are often orders of magnitude more accurate than other methods at a given $n$. 
 
+##### Example: Airy equation on semi-infinite domain
 Say we wish to solve $u''-xu=0$ on $x\in[0,\infty]$. The exact solution to this differential equation is:
 \begin{align*}
 u(x) &= C_1 \mathrm{Ai}(x) + C_2 \mathrm{Bi}(x).
@@ -93,8 +95,9 @@ Code Listing \coderef{chebyshev} was used to solve our Airy equation ODE.
 \codelisting{chebyshev}{Solution to the Airy equation via Chebyshev spectral method.}{./code/chebyshev}{fidello/code/chebyshev.jl}
 \output{./code/chebyshev}
 
+##### Eigenvalue problems
 An important issue I should probably address is how do we solve Sturm-Liouville and other differential equations with eigenvalues? Well, the answer is that we construct an eigenvector equation of the form:
 \begin{align*}
 \mathbf{A} \mathbf{u} = \lambda \mathbf{u}.
 \end{align*}
-Where $\mathbf{u}$ is our vector of values of our function at our grid values. Typically, we omit the endpoints from our matrices to impose our boundary conditions. Then we use established techniques for finding eigenvalues and eigenvectors. 
+Where $\mathbf{u}$ is our vector of values of our function at our grid values. Typically, we omit the endpoints from our matrices to impose our boundary conditions. Then we use established techniques for finding eigenvalues and eigenvectors of matrices. We can construct such an equation when we apply finite difference, spectral, finite element and spectral element methods to our linear eigenvalue differential equation problem. 
