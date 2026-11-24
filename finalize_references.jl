@@ -114,8 +114,13 @@ end
 
 function validate_reference_links(html_path)
   html = read(html_path, String)
-  occursin("<section class=\"reference-list\"", html) || error("Reference list missing from $html_path")
-  any(m -> !isnothing(html_attribute(m.captures[1], "data-bib-key")), eachmatch(r"<span\b([^>]*)>", html)) && error("Unprocessed citation marker in $html_path")
+  citation_markers = [m for m in eachmatch(r"<span\b([^>]*)>", html)
+                      if !isnothing(html_attribute(m.captures[1], "data-bib-key"))]
+  isempty(citation_markers) || error("Unprocessed citation marker in $html_path")
+  citation_links = collect(eachmatch(r"<a\b([^>]*)>", html))
+  has_citations = any(m -> occursin(r"(?:^|\s)class=(?:\"[^\"]*\bcitation\b[^\"]*\"|'[^']*\bcitation\b[^']*')", m.captures[1]), citation_links)
+  has_citations && !occursin("<section class=\"reference-list\"", html) &&
+    error("Reference list missing from $html_path despite citation links")
   ids = Set(String(m.captures[1]) for m in eachmatch(r"id=\"([^\"]+)\"", html))
   for m in eachmatch(r"<a class=\"citation\"[^>]*href=\"#([^\"]+)\"", html)
     target = String(m.captures[1])
