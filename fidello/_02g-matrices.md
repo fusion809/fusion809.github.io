@@ -28,10 +28,11 @@ Then:
 43 & 50
 \end{bmatrix}.
 \end{align*}
-Due to how we multiply matrices, the matrix product is only defined if we are multiplying by a $m\times n$ matrix by a $n\times p$ matrix. The number of columns of the first matrix must match the number of rows of the second. And the result of this multiplication will be a $m\times p$ matrix. Further, because of this definition of matrix multiplication, the operation is non-commutative. Which means that if we left-multiply one matrix, say $\mathbf{A}$, by another, say $\mathbf{B}$, this is not the equivalent to right-multiply $\mathbf{A}$ by $\mathbf{B}$. In other words:
+Due to how we multiply matrices, the matrix product is only defined if we are multiplying by a $m\times n$ matrix by a $n\times p$ matrix. The number of columns of the first matrix must match the number of rows of the second. And the result of this multiplication will be a $m\times p$ matrix. Further, because of this definition of matrix multiplication, the operation is non-commutative. Which means that if we left-multiply one matrix, say $\mathbf{A}$, by another, say $\mathbf{B}$, this is not the equivalent to right-multiply $\mathbf{A}$ by $\mathbf{B}$. In other words, in general:
 \begin{align*}
 \mathbf{A} \mathbf{B} \neq \mathbf{B}\mathbf{A}.
 \end{align*}
+Although there are some matrices $\mathbf{A}$ and $\mathbf{B}$ that are exceptions to this rule.
 
 We can write a series of linear simultaneous equations using matrices. Specifically, say we wanted to express:
 \begin{align*}
@@ -69,7 +70,7 @@ Then our equation can be written as:
 \end{align}
 And yes, $\mathbf{x}$ and $\mathbf{b}$ are both column vectors. 
 
-Square matrices like $\mathbf{A}$ can be inverted. Which is the matrix equivalent to the reciprocal. So if you want to solve the equation: $3x=5$ you would multiply both sides by $\dfrac{1}{3}$ because this is the reciprocal of $3$, the coefficient of $x$. Whereas to solve $\mathbf{A}\mathbf{x}=\mathbf{b}$ we would multiply both sides by $\mathbf{A}^{-1}$, the inverse of $\mathbf{A}$ to get:
+Square matrices like $\mathbf{A}$ can be inverted. Which is the matrix equivalent to the reciprocal. So if you want to solve the equation: $3x=5$ you would multiply both sides by $\dfrac{1}{3}$ because this is the reciprocal of $3$, the coefficient of $x$. Whereas to solve $\mathbf{A}\mathbf{x}=\mathbf{b}$ we could multiply both sides by $\mathbf{A}^{-1}$, the inverse of $\mathbf{A}$ to get:
 \begin{align*}
 \mathbf{A}^{-1}\mathbf{A} \mathbf{x} &= \mathbf{A}^{-1}\mathbf{b} \\
 \mathbf{I}\mathbf{x} &= \mathbf{A}^{-1}\mathbf{b} \\
