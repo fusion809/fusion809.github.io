@@ -1,5 +1,5 @@
 #### Spectral methods
-Sturm-Liouville problems also give rise to infinite sets of orthogonal functions that are useful when numerically approximating the solution to other differential equations.[^3] If $\{\phi_i\}$, $i\in \{0,1,2,...\}$ is our orthogonal function set, we assume our solution, $u$, to some ordinary differential equation can be written as:
+Sturm-Liouville problems also give rise to infinite sets of orthogonal functions that are useful when numerically approximating the solution to other differential equations.[^2] If $\{\phi_i\}$, $i\in \{0,1,2,...\}$ is our orthogonal function set, we assume our solution, $u$, to some ordinary differential equation can be written as:
 \begin{align}
 u(x) &= \sum_{j=0}^{\infty} a_j \phi_j(x). \label{spectral} 
 \end{align}
@@ -24,7 +24,7 @@ Many different orthogonal functions can be used when applying spectral methods. 
 \begin{align*}
 T_j(x) = \cos(j\cos^{-1}{x}).
 \end{align*}
-I would imagine that you are looking at this expression and wondering, how can $T_j$ be a polynomial when it is defined in terms of cosine and its inverse? Well, this is just one way to define Chebyshev polynomials of the first kind and is the most convenient way for when you are using them to approximate the solution to differential equations. That being said, they can also be defined using a recursion relation that makes the fact that they are polynomials all the more clear. Specifically this is the recursion relation:[^3]
+I would imagine that you are looking at this expression and wondering, how can $T_j$ be a polynomial when it is defined in terms of cosine and its inverse? Well, this is just one way to define Chebyshev polynomials of the first kind and is the most convenient way for when you are using them to approximate the solution to differential equations. That being said, they can also be defined using a recursion relation that makes the fact that they are polynomials all the more clear. Specifically this is the recursion relation:[^2]
 \begin{align*}
 T_0 &= 1, \hspace{0.2cm} T_1 &&= x \\
 T_{j+1}(x) &= 2xT_j(x) - T_{j-1}(x) && \forall j \geq 1.
