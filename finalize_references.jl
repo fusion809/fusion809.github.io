@@ -1,5 +1,7 @@
 using Base64
 
+const PAGE_FOOT_TAG = r"<div\b(?=[^>]*\bclass\s*=\s*(?:\"[^\"]*\bpage-foot\b[^\"]*\"|'[^']*\bpage-foot\b[^']*'|[^\s>]*\bpage-foot\b[^\s>]*))[^>]*>"
+
 reference_html_escape(s) = replace(string(s), "&" => "&amp;", "<" => "&lt;", ">" => "&gt;", "\"" => "&quot;", "'" => "&#39;")
 
 function html_attribute(attributes, name)
@@ -10,9 +12,8 @@ function html_attribute(attributes, name)
 end
 
 function insert_reference_list(html, section)
-  page_foot = r"<div\b[^>]*\bclass=(?:\"[^\"]*\bpage-foot\b[^\"]*\"|'[^']*\bpage-foot\b[^']*')[^>]*>"
-  if occursin(page_foot, html)
-    return replace(html, page_foot => matched -> section * matched; count=1)
+  if occursin(PAGE_FOOT_TAG, html)
+    return replace(html, PAGE_FOOT_TAG => matched -> section * matched; count=1)
   elseif occursin("<!-- CONTENT ENDS HERE -->", html)
     return replace(html, "<!-- CONTENT ENDS HERE -->" => section * "<!-- CONTENT ENDS HERE -->"; count=1)
   elseif occursin(r"(?i)</article\s*>", html)
@@ -216,6 +217,12 @@ function validate_reference_links(html_path)
   has_reference_list = occursin(r"<section\b[^>]*\bclass=(?:\"[^\"]*\breference-list\b[^\"]*\"|'[^']*\breference-list\b[^']*')", document_html)
   has_citations && !has_reference_list &&
     error("Reference list missing from $html_path despite citation links")
+  reference_list = match(r"<section\b[^>]*\bclass=(?:\"[^\"]*\breference-list\b[^\"]*\"|'[^']*\breference-list\b[^']*')", document_html)
+  page_foot = match(PAGE_FOOT_TAG, document_html)
+  if !isnothing(reference_list) && !isnothing(page_foot)
+    reference_list.offset < page_foot.offset ||
+      error("Reference list appears after the page footer in $html_path")
+  end
   ids = Set(String(m.captures[1]) for m in eachmatch(r"id=\"([^\"]+)\"", document_html))
   for m in reference_citations
     target = something(html_attribute(m.captures[1], "href"), "")[2:end]
