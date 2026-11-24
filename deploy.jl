@@ -112,6 +112,56 @@ function generate_fidello_saved_outputs()
   return [name for (_, name, _) in listings]
 end
 
+function append_reference_lists(site_dir)
+  citation_pattern = r"<span data-bib-key=\"([^\"]+)\" data-bib-entry=\"([^\"]+)\">([\s\S]*?)</span>"
+  preview_script = r"<script>\(function\(\)\{\s*if \(window\.__bibReferenceListInstalled[\s\S]*?</script>"
+  page_locator = r"(<a class=\"citation\" href=\"#[^\"]+\">)([^<]*)(</a>\s*\))\s*(?:&#123;|\{)([^{}&]+)(?:&#125;|\})"
+  processed = 0
+  for (root, _, files) in walkdir(site_dir)
+    for file in files
+      endswith(file, ".html") || continue
+      path = joinpath(root, file)
+      html = read(path, String)
+      html = replace(html, preview_script => "")
+      matches = collect(eachmatch(citation_pattern, html))
+      isempty(matches) && continue
+      cited = Dict{String,String}()
+      reference_id(key) = "reference-" * bytes2hex(codeunits(key))
+      for m in matches
+        key, entry = String(base64decode(m.captures[1])), String(base64decode(m.captures[2]))
+        cited[key] = entry
+      end
+      # Link each in-text citation to its one bibliography entry.
+      html = replace(html, citation_pattern => m -> begin
+        captures = match(citation_pattern, m).captures
+        key = String(base64decode(captures[1]))
+        "<a class=\"citation\" href=\"#$(reference_id(key))\">$(captures[3])</a>"
+      end)
+      # Franklin escapes literal braces in prose as entities, and the locator
+      # follows the parenthesized citation in rendered HTML.
+      html = replace(html, page_locator => m -> begin
+        captures = match(page_locator, m).captures
+        captures[1] * captures[2] * ", p. " * strip(captures[4]) * captures[3]
+      end)
+      sorted = sort(collect(cited); by=pair -> lowercase(strip(replace(last(pair), r"<[^>]+>" => ""))))
+      items = join("<li id=\"$(reference_id(first(pair)))\">" * last(pair) * "</li>" for pair in sorted)
+      section = "<section class=\"reference-list\" aria-labelledby=\"reference-list-title\"><h2 id=\"reference-list-title\">Reference list</h2><ol>$(items)</ol></section>"
+      if occursin("<div class=\"page-foot\">", html)
+        html = replace(html, "<div class=\"page-foot\">" => section * "<div class=\"page-foot\">"; count=1)
+      elseif occursin("<!-- CONTENT ENDS HERE -->", html)
+        html = replace(html, "<!-- CONTENT ENDS HERE -->" => section * "<!-- CONTENT ENDS HERE -->"; count=1)
+      elseif occursin("</article>", html)
+        html = replace(html, "</article>" => section * "</article>"; count=1)
+      else
+        html = replace(html, "</body>" => section * "</body>"; count=1)
+      end
+      write(path, html)
+      processed += 1
+    end
+  end
+  return processed
+end
+
 eager_generate_js()
 fidello_output_names = generate_fidello_saved_outputs()
 fidello_source = joinpath(@__DIR__, "fidello", "index.md")
@@ -138,3 +188,5 @@ for name in fidello_output_names
   occursin(output_error, fidello_html) &&
     error("Fidello page could not resolve \\output for '$name': $fidello_output")
 end
+reference_list_pages = append_reference_lists(joinpath(@__DIR__, "__site"))
+println("Added reference lists to $reference_list_pages generated page(s).")
