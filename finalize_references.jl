@@ -2,9 +2,16 @@ using Base64
 
 reference_html_escape(s) = replace(string(s), "&" => "&amp;", "<" => "&lt;", ">" => "&gt;", "\"" => "&quot;", "'" => "&#39;")
 
+function html_attribute(attributes, name)
+  pattern = Regex("\\b" * name * "\\s*=\\s*(?:\"([^\"]*)\"|'([^']*)'|([^\\s>]+))")
+  matched = match(pattern, attributes)
+  isnothing(matched) && return nothing
+  return something(matched.captures...)
+end
+
 function append_reference_lists(site_dir, output_names)
-  citation_span = r"<span data-bib-key=\"([^\"]+)\" data-bib-entry=\"([^\"]+)\">([\s\S]*?)</span>"
-  citation_anchor = r"<a class=\"citation\" data-bib-key=\"([^\"]+)\" data-bib-entry=\"([^\"]+)\" href=\"[^\"]+\">([^<]*)</a>"
+  citation_span = r"<span\b([^>]*)>([\s\S]*?)</span>"
+  citation_anchor = r"<a\b([^>]*)>([^<]*)</a>"
   preview_script = r"<script>\(function\(\)\{\s*if \(window\.__bibReferenceListInstalled[\s\S]*?</script>"
   page_locator = r"(<a class=\"citation\"[^>]*href=\"#[^\"]+\">)([^<]*)(</a>\s*\))\s*(?:&#123;|\{)([^{}&]+)(?:&#125;|\})"
   processed = 0
@@ -35,8 +42,8 @@ function append_reference_lists(site_dir, output_names)
         end)
       end
 
-      span_matches = collect(eachmatch(citation_span, html))
-      anchor_matches = collect(eachmatch(citation_anchor, html))
+      span_matches = [m for m in eachmatch(citation_span, html) if !isnothing(html_attribute(m.captures[1], "data-bib-key")) && !isnothing(html_attribute(m.captures[1], "data-bib-entry"))]
+      anchor_matches = [m for m in eachmatch(citation_anchor, html) if occursin(r"(?:^|\s)class=(?:\"[^\"]*\bcitation\b[^\"]*\"|'[^']*\bcitation\b[^']*'|[^\s>]*\bcitation\b[^\s>]*)", m.captures[1]) && !isnothing(html_attribute(m.captures[1], "data-bib-key")) && !isnothing(html_attribute(m.captures[1], "data-bib-entry"))]
       if isempty(span_matches) && isempty(anchor_matches)
         if html != original
           write(path, html)
@@ -49,22 +56,33 @@ function append_reference_lists(site_dir, output_names)
       reference_id(key) = "reference-" * bytes2hex(codeunits(key))
       cited = Dict{String,String}()
       for m in span_matches
-        cited[String(base64decode(m.captures[1]))] = String(base64decode(m.captures[2]))
+        key = html_attribute(m.captures[1], "data-bib-key")
+        entry = html_attribute(m.captures[1], "data-bib-entry")
+        cited[String(base64decode(key))] = String(base64decode(entry))
       end
       for m in anchor_matches
-        cited[String(base64decode(m.captures[1]))] = String(base64decode(m.captures[2]))
+        key = html_attribute(m.captures[1], "data-bib-key")
+        entry = html_attribute(m.captures[1], "data-bib-entry")
+        cited[String(base64decode(key))] = String(base64decode(entry))
       end
 
       html = replace(html, citation_span => matched -> begin
         captures = match(citation_span, matched).captures
-        key = String(base64decode(captures[1]))
-        entry = captures[2]
-        "<a class=\"citation\" data-bib-key=\"$(captures[1])\" data-bib-entry=\"$entry\" href=\"#$(reference_id(key))\">$(captures[3])</a>"
+        key_encoded = html_attribute(captures[1], "data-bib-key")
+        entry_encoded = html_attribute(captures[1], "data-bib-entry")
+        isnothing(key_encoded) && return matched
+        isnothing(entry_encoded) && return matched
+        key = String(base64decode(key_encoded))
+        "<a class=\"citation\" data-bib-key=\"$key_encoded\" data-bib-entry=\"$entry_encoded\" href=\"#$(reference_id(key))\">$(captures[2])</a>"
       end)
       html = replace(html, citation_anchor => matched -> begin
         captures = match(citation_anchor, matched).captures
-        key = String(base64decode(captures[1]))
-        "<a class=\"citation\" data-bib-key=\"$(captures[1])\" data-bib-entry=\"$(captures[2])\" href=\"#$(reference_id(key))\">$(captures[3])</a>"
+        key_encoded = html_attribute(captures[1], "data-bib-key")
+        entry_encoded = html_attribute(captures[1], "data-bib-entry")
+        isnothing(key_encoded) && return matched
+        isnothing(entry_encoded) && return matched
+        key = String(base64decode(key_encoded))
+        "<a class=\"citation\" data-bib-key=\"$key_encoded\" data-bib-entry=\"$entry_encoded\" href=\"#$(reference_id(key))\">$(captures[2])</a>"
       end)
       html = replace(html, page_locator => matched -> begin
         captures = match(page_locator, matched).captures
@@ -97,7 +115,7 @@ end
 function validate_reference_links(html_path)
   html = read(html_path, String)
   occursin("<section class=\"reference-list\"", html) || error("Reference list missing from $html_path")
-  occursin(r"<span data-bib-key=", html) && error("Unprocessed citation marker in $html_path")
+  any(m -> !isnothing(html_attribute(m.captures[1], "data-bib-key")), eachmatch(r"<span\b([^>]*)>", html)) && error("Unprocessed citation marker in $html_path")
   ids = Set(String(m.captures[1]) for m in eachmatch(r"id=\"([^\"]+)\"", html))
   for m in eachmatch(r"<a class=\"citation\"[^>]*href=\"#([^\"]+)\"", html)
     target = String(m.captures[1])
