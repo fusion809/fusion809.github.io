@@ -1,5 +1,5 @@
 ### Determinant
-There's one last matrix concept I should probably cover with you; it is called the determinant. It is a single number value you can obtain from the elements of a square matrix. For a matrix of size $2\times 2$ it is defined as:
+Another matrix concept I should probably cover with you is called the determinant. It is a single number value you can obtain from the elements of a square matrix. For a matrix of size $2\times 2$ it is defined as:
 \begin{align*}
 \det\begin{bmatrix}
 a & b \\
@@ -33,3 +33,4 @@ A_{3,1} & A_{3,2}
 \end{vmatrix} \\
 &= A_{1,1}(A_{2,2}A_{3,3}-A_{2,3}A_{3,2}) - A_{1,2}(A_{2,1}A_{3,3}-A{2,3}A_{3,1}) + A_{1,3}(A_{2,1}A_{3,2}-A{2,2}A_{3,1}).
 \end{align*}
+If the determinant is zero, the matrix will be singular. This is because the inverse of a square matrix can be calculated in terms of the reciprocal of the determinant. 

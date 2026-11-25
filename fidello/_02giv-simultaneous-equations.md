@@ -33,4 +33,6 @@ Then our equation can be written as:
 \begin{align}
 \mathbf{A}\mathbf{x} &= \mathbf{b}.\label{Axb}
 \end{align}
-And yes, $\mathbf{x}$ and $\mathbf{b}$ are both column vectors. 
+And yes, $\mathbf{x}$ and $\mathbf{b}$ are both column vectors. Typically, in these equations $\mathbf{A}$ is a square matrix. If it is a square matrix, we will get exact solutions to our equation. 
+
+If it has more rows than columns, then we have an overdetermined system and our solution for $\mathbf{x}$ will be approximate. Overdetermined systems arise when we are fitting lines of best fit to bivariate data. In that example, you will notice that some of the scatter plot data will not be exactly on the line of best fit. This is precisely because of the approximate nature of our solution. Underdetermined systems have the opposite issue, as we have more columns than rows. This gives us freedom to choose one or more elements of our solution vector $\mathbf{x}$. 

@@ -12,3 +12,12 @@ What is $\mathbf{I}$? It is the so called identity matrix. It is essentially the
 0 & 1
 \end{bmatrix}.
 \end{align*}
+I should also mention that some square matrices have no inverse. This is usually the case when one or more rows can be written as linear combinations of the other rows. For instance:
+\begin{align*}
+\mathbf{A} &= \begin{bmatrix}
+1 & 2 & 3 \\
+2 & 4 & 6 \\
+4 & 5 & 6
+\end{bmatrix}
+\end{align*}
+is singular because row 2 is row 1 times two. 
