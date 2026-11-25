@@ -53,10 +53,10 @@ t+\beta &= \dfrac{\partial W}{\partial E}.
 \end{align*}
 
 Hence:
-\begin{align*}
-t+\beta &= \pm \sqrt{2m}l\int \dfrac{1}{2\sqrt{E-mgl\sin{\theta}}} d\theta \\
-&= \pm \int \sqrt{\dfrac{ml^2}{2(E-mgl\sin{\theta})}} d\theta.
-\end{align*}
+\begin{align}
+t+\beta &= \pm \sqrt{2m}l\int \dfrac{1}{2\sqrt{E-mgl\sin{\theta}}} d\theta \nonumber \\
+&= \pm \int \sqrt{\dfrac{ml^2}{2(E-mgl\sin{\theta})}} d\theta.\label{tsimppen}
+\end{align}
 The integrand &mdash; given it is integrated with respect to $\theta$ to obtain $t$ (plus some constant) &mdash; must be $\dfrac{dt}{d\theta}$ which is one over $\dfrac{d\theta}{dt}$ or $\dot{\theta}$. Therefore:
 
 \begin{align*}
