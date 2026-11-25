@@ -31,6 +31,6 @@ A_{3,1} & A_{3,3}
 A_{2,1} & A_{2,2} \\
 A_{3,1} & A_{3,2}
 \end{vmatrix} \\
-&= A_{1,1}(A_{2,2}A_{3,3}-A_{2,3}A_{3,2}) - A_{1,2}(A_{2,1}A_{3,3}-A{2,3}A_{3,1}) + A_{1,3}(A_{2,1}A_{3,2}-A{2,2}A_{3,1}).
+&= A_{1,1}(A_{2,2}A_{3,3}-A_{2,3}A_{3,2}) - A_{1,2}(A_{2,1}A_{3,3}-A_{2,3}A_{3,1}) + A_{1,3}(A_{2,1}A_{3,2}-A_{2,2}A_{3,1}).
 \end{align*}
 If the determinant is zero, the matrix will be singular. This is because the inverse of a square matrix can be calculated in terms of the reciprocal of the determinant. 
