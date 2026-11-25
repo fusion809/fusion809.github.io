@@ -1,4 +1,4 @@
-### PDEs: Separation of variables
+### Separation of variables
 I thought I should cover one technique for solving partial differential equations, too. Say we had the heat equation, Equation \eqref{heat}. Then, if we are using the separation of variables technique, we would assume that $u(x,t)$ can be written as $u(x,t)=X(x)T(t)$. Then Equation \eqref{heat} becomes:
 \begin{align*}
 X(x)\dot{T}(t) &= \alpha X''(x)T(t).
@@ -150,3 +150,5 @@ b_n &= \dfrac{1}{L} \left[\int_{L}^{0} f(-x) \sin{\left(-\dfrac{2\pi nx}{L}\righ
 So we see that our $a_n$ from $u_n(x,t)$ are in fact equivalent to $b_n$, at least for odd functions. 
 
 I should also mention that while Fourier series are technically intended for periodic functions, our function actually does not need to repeat itself within the domain we are calculating it for. Further, how the function behaves outside that domain is irrelevant to the calculation of Fourier series. So the Fourier series can, in fact, match our function perfectly within our domain despite not actually being periodic. Although, this lack of periodicity will cause the Fourier series and the original function to not match outside the domain in which we calculated the series. 
+
+Interestingly, our differential equation for $X_n$ is an example of a Sturm-Liouville problem. $X_n$ were the eigenfunctions and $\lambda_n$ were the eigenvalues. The orthogonality quality of eigenfunctions is quite useful to us when we are solving linear partial differential equations using separation of variables and at least one of the equations we get from this is a Sturm-Liouville problem. As it often makes finding the coefficients of the series expansion of our solution easier. Another partial differential equation whose solution gives rise to Sturm-Liouville problems is the Schrödinger equation.
