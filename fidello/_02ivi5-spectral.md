@@ -122,8 +122,11 @@ u'' - (x+\lambda)u &= 0
 If we define a new variable, say $y=x+\lambda$ then:
 \begin{align*}
 dy &= \dfrac{dy}{dx}dx \\
-&= dx \\
-\therefore \dfrac{d}{dx} &= \dfrac{d}{dy}.
+&= dx.
+\end{align*}
+Therefore:
+\begin{align*}
+\dfrac{d}{dx} &= \dfrac{d}{dy}.
 \end{align*}
 Hence our equation would become, if we rewrite it in terms of $y$:
 \begin{align*}
