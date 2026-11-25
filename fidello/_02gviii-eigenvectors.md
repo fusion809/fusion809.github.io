@@ -1,4 +1,4 @@
-## Eigenvectors and eigenvalues of matrices
+### Eigenvectors and eigenvalues
 If you have the matrix equation:
 \begin{align*}
 \mathbf{A} \mathbf{x} &= \lambda \mathbf{x}
