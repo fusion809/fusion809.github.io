@@ -129,7 +129,7 @@ Hence our equation would become, if we rewrite it in terms of $y$:
 \begin{align*}
 \dfrac{d^2u}{dy^2} - yu &= 0.
 \end{align*}
-Which is the Airy equation, hence $u(y) = C_1 \mathrm{Ai}(y) + C_2 \mathrm{Bi}(y)$. Hence rewrite $u$ to be in terms of $x$ yields:
+Which is the Airy equation, hence $u(y) = C_1 \mathrm{Ai}(y) + C_2 \mathrm{Bi}(y)$. Hence rewriting $u$ to be in terms of $x$ yields:
 \begin{align*}
 u(x) &= C_1 \mathrm{Ai}(x+\lambda) + C_2 \mathrm{Bi}(x+\lambda).
 \end{align*}
