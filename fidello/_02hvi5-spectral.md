@@ -117,7 +117,20 @@ u(0) &= u(\infty) && = 0. \label{airyeigbc}
 \end{align}
 Rearranging yields:
 \begin{align*}
-u'' - (x+\lambda)u &= 0 \\
+u'' - (x+\lambda)u &= 0
+\end{align*}
+If we define a new variable, say $y=x+\lambda$ then:
+\begin{align*}
+dy &= \dfrac{dy}{dx}dx \\
+&= dx \\
+\therefore \dfrac{d}{dx} &= \dfrac{d}{dy}.
+\end{align*}
+Hence our equation would become, if we rewrite it in terms of $y$:
+\begin{align*}
+\dfrac{d^2u}{dy^2} - yu &= 0.
+\end{align*}
+Which is the Airy equation, hence $u(y) = C_1 \mathrm{Ai}(y) + C_2 \mathrm{Bi}(y)$. Hence rewrite $u$ to be in terms of $x$ yields:
+\begin{align*}
 u(x) &= C_1 \mathrm{Ai}(x+\lambda) + C_2 \mathrm{Bi}(x+\lambda).
 \end{align*}
 Only $\mathrm{Ai}(x)$ goes to $0$ as $x\rightarrow\infty$. Its derivative also goes to $0$ in this limit. Imposing our other boundary condition, $u'(0)=0$, yields:
