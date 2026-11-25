@@ -21,3 +21,5 @@ I should also mention that some square matrices have no inverse. This is usually
 \end{bmatrix}
 \end{align*}
 is singular because row 2 is row 1 times two. 
+
+It is also possible for a matrix to be invertible, but for inverting the matrix to not be a great idea for another reason. Beyond invertibility, when dealing with a square matrix we also often care about its *condition* number. A matrix with a large, yet finite condition number may be technically invertible but even small errors (such as due to floating point arithmetic errors) in the elements of that matrix can massively change the contents of its inverse. Whereas a matrix with a condition number close to one should not suffer this problem at all. I should also mention that singular matrices have an infinite condition number.

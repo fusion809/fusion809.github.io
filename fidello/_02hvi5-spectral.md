@@ -34,7 +34,7 @@ The grid points normally used are:
 \begin{align*}
 x_i &= -\cos{\left(\dfrac{\pi i}{n}\right)}.
 \end{align*}
-These points extremize the $n$th Chebyshev polynomial of the first kind and this makes the matrices we get easier to work with. 
+These points extremize the $n$th Chebyshev polynomial of the first kind and this makes the matrices we get easier to work with, as these matrices will be better conditioned (that is, have a condition number close to one). 
 
 I should mention that while our basis functions are limited to $x\in [-1,1]$, this does not mean we are limited to $x\in[-1,1]$ for the differential equations we can solve. As we can apply any number of different transformations to transform $x_i$ from $[-1,1]$ to other domains. 
 
