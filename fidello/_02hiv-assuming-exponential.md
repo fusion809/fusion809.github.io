@@ -1,5 +1,5 @@
 ### Assuming an exponential solution
-A final method we could use for this sort of ODE is only applicable to ODEs with constant coefficients. That is, ODEs of the form:
+Another method we could use for this sort of ODE is only applicable to ODEs with constant coefficients. That is, ODEs of the form:
 \begin{align*}
 \sum_{i=0}^{n} a_i \dfrac{d^i y}{dx^i} &= 0.
 \end{align*}
