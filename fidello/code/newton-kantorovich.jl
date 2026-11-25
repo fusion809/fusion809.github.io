@@ -13,7 +13,7 @@ l = 1.0
 f(θ) = 1 / sqrt(- sin(θ))
 
 # Numerical integration
-int, error = quadgk(f, -π, 0)
+int, _ = quadgk(f, -π, 0)
 
 # Period
 T = 2 * sqrt(l / (2gravity)) * int
@@ -46,66 +46,52 @@ D2t = Dt * Dt
 θ = -(π / 2) .* (1 .- cos.(2π .* t ./ T) )
 
 # Newton-Kantorovich iteration
-converged = false
+let converged = false
+    for n in 1:maxiter
 
-for n in 1:maxiter
+        # Residual of the nonlinear differential equation
+        F = D2t * θ + α .* cos.(θ)
 
-    # Residual of the nonlinear differential equation
-    F = D2t * θ + α .* cos.(θ)
+        # Jacobian of the nonlinear system
+        J = D2t - Diagonal(α .* sin.(θ))
 
-    # Jacobian of the nonlinear system
-    J = D2t - Diagonal(α .* sin.(θ))
+        # Right-hand side of Newton correction equation
+        rhs = -F
 
-    # Right-hand side of Newton correction equation
-    rhs = -F
+        # Initial condition: Δ(0) = -θ_n(0)
+        J[1, :] .= 0.0
+        J[1, 1] = 1.0
+        rhs[1] = -θ[1]
 
-    # Initial condition: Δ(0) = -θ_n(0)
-    J[1, :] .= 0.0
-    J[1, 1] = 1.0
-    rhs[1] = -θ[1]
+        # Initial condition: Δ'(0) = -θ_n'(0)
+        J[2, :] = Dt[1, :]
+        rhs[2] = -(Dt * θ)[1]
 
-    # Initial condition: Δ'(0) = -θ_n'(0)
-    J[2, :] = Dt[1, :]
-    rhs[2] = -(Dt * θ)[1]
+        # Solve for the correction
+        Δ = J \ rhs
 
-    # Solve for the correction
-    Δ = J \ rhs
+        # Update approximation
+        θ .+= Δ
 
-    # Update approximation
-    θ .+= Δ
+        # Check convergence
+        iteration_error = norm(Δ, Inf)
 
-    # Check convergence
-    error = norm(Δ, Inf)
+        println("Iteration $n: error = $iteration_error")
 
-    println("Iteration $n: error = $error")
-
-    if error < tol
-        converged = true
-        println("Newton-Kantorovich iteration converged.")
-        break
+        if iteration_error < tol
+            converged = true
+            println("Newton-Kantorovich iteration converged.")
+            break
+        end
     end
-end
 
-if !converged
-    @warn "Newton-Kantorovich iteration did not converge."
+    if !converged
+        @warn "Newton-Kantorovich iteration did not converge."
+    end
 end
 
 # Calculate angular velocity and acceleration
 θdot = Dt * θ
-θddot = D2t * θ
-
-# Display numerical results
-df = DataFrame(
-    t = t,
-    θ = θ,
-    θdot = θdot,
-    θddot = θddot
-)
-
-println("\nNumerical solution:")
-show(df, allrows=true, allcols=true)
-println()
-
 # Plot angular displacement
 p1 = plot(
     t, θ,
