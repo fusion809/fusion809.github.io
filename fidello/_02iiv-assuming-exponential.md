@@ -30,7 +30,7 @@ And with $y(0)=1$ we obtain $C_1=1$. Hence $y(x)=e^x$. To see how it works, let 
 \begin{align*}
 r_j^3 + 6r_j^2 + 11r_j + 6 = 0.
 \end{align*}
-Substituting $r_j=-1$ into the left-hand side of this equation yields $0$. Hence $r_j+1$ is a factor. Using synthetic division we get:
+Substituting $r_j=-1$ into the left-hand side of this equation yields $0$. Hence $r_j+1$ is a factor. Using synthetic division (polynomial long division will work equally well) we get:
 \begin{align*}
 \begin{array}{cc}
     \begin{array}{r} \\ -1 \\ \end{array}
