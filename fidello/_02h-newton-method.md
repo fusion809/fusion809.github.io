@@ -27,6 +27,9 @@ For $n=0$ we get:
 \begin{align*}
 x_1 &= 1 - \dfrac{1-\cos^2{1}}{1+\sin{2}} \\
 &\approx 0.6291445.
+\end{align*}
+For $n=1$ and $n=2$, we get:
+\begin{align*}
 x_2 &= x_1 - \dfrac{x_1-\cos^2{x_1}}{1+\sin{2x_1}} \\
 &= 0.6417386 \\
 x_3 &= x_2 - \dfrac{x_2-\cos^2{x_2}}{1+\sin{2x_2}} \\
@@ -38,7 +41,7 @@ How do we extend this method to solving a system of algebraic equations? We use 
 \begin{align*}
 \mathbf{x}_{n+1} &= \mathbf{x}_n - \mathbf{J}_n^{-1}\mathbf{f}_n.
 \end{align*}
-$\mathbf{x}_{n}$ is a column vector of our $n$th approximation to the independent variables that our system of equations depends on. $\mathbf{f}_n$ is our system of equations written as a vector of functions we are simultaneously setting to zero evaluated at $\mathbf{x}=\mathbf{x}_n$. $\mathbf{J}_n$ is the Jacobian matrix evaluated at $\mathbf{x}=\mathbf{x}_n$. If the elements of $\mathbf{x}_n$ and $\mathbf{f}_n$ are numbered $1$ to $m$ (where $m$ is the number of equations we are solving). What is the Jacobian matrix? Well, it is a matrix with elements \cite{boyd_chebyshev_2000}{526}:
+$\mathbf{x}_{n}$ is a column vector of our $n$th approximation to the independent variables that our system of equations depends on. $\mathbf{f}_n$ is our system of equations written as a vector of functions we are simultaneously setting to zero evaluated at $\mathbf{x}=\mathbf{x}_n$. $\mathbf{J}_n$ is the Jacobian matrix evaluated at $\mathbf{x}=\mathbf{x}_n$. Let the elements of $\mathbf{x}_n$ and $\mathbf{f}_n$ be numbered $1$ to $m$ (where $m$ is the number of equations we are solving). What is the Jacobian matrix? Well, it is a matrix with elements \cite{boyd_chebyshev_2000}{526}:
 \begin{align*}
 \mathbf{J} &= \begin{bmatrix}
 \dfrac{\partial f_1}{\partial x_1} & \dfrac{\partial f_1}{\partial x_2} & \dfrac{\partial f_1}{\partial x_3} & ... & \dfrac{\partial f_1}{\partial x_m} \\
