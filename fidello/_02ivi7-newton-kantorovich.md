@@ -18,11 +18,11 @@ Why? Because then $\theta_{n+1}$ should automatically satisfy the initial condit
 \begin{align*}
 \theta(t) &= -\dfrac{\pi}{2}\left[1-\cos{\left(\dfrac{2\pi t}{T}\right)}\right].
 \end{align*}
-How would we determine $T$? We can use Equation \eqref{tsimppen}. Ignoring $\beta$ (which is a product of the indefinite nature of the integral), making our integral definite from $-\pi$ to $0$ (this interval should give us half the period) and assuming $t$ must be positive gives:
+How would we determine $T$? We can use Equation \eqref{tsimppen}. Ignoring $\beta$ (which is a product of the indefinite nature of the integral), making our integral definite from $-\pi$ to $0$ and assuming $t$ must be positive gives:
 \begin{align*}
 t &= \int_{-\pi}^0 \sqrt{\dfrac{ml^2}{2(E-mgl\sin{\theta})}} d\theta
 \end{align*}
-$\theta(0)=0$ and hence $V=mgl\sin{\theta}$ should also be zero at $t=0$. $\dot{\theta}(0)=0$ would also imply that $T=\dfrac{ml^2\dot{\theta}^2}{2}$ is zero. Hence the total energy of the system, $E$, is $0$. Hence:
+This should be half our period, as a full period should take us back to $0$, but we cannot integrate from $0$ to $0$ as when the upper and lower bounds are the same, integrals return $0$. $\theta(0)=0$ and hence $V=mgl\sin{\theta}$ should also be zero at $t=0$. $\dot{\theta}(0)=0$ would also imply that $T=\dfrac{ml^2\dot{\theta}^2}{2}$ is zero. Hence the total energy of the system, $E$, is $0$. Hence:
 \begin{align*}
 t &= \int_{-\pi}^0 \sqrt{\dfrac{ml^2}{2(-mgl\sin{\theta})}} d\theta \\
 &= \int_{-\pi}^0 \sqrt{\dfrac{l}{2(-g\sin{\theta})}} d\theta \\
