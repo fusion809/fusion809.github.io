@@ -32,7 +32,7 @@ T_{j+1}(x) &= 2xT_j(x) - T_{j-1}(x) && \forall j \geq 1.
 
 The grid points normally used are:
 \begin{align*}
-x_i &= \cos{\dfrac{\pi i}{n}}.
+x_i &= -\cos{\left(\dfrac{\pi i}{n}\right)}.
 \end{align*}
 These points extremize the $n$th Chebyshev polynomial of the first kind and this makes the matrices we get easier to work with. 
 
@@ -67,8 +67,10 @@ x &= L \dfrac{1+y}{1-y}.
 \end{align*}
 Where $L$ is a parameter we might need to fine tune to get the best approximation. Hence:
 \begin{align*}
-\dfrac{d}{dx} &= \dfrac{1}{x'(y)} \dfrac{d}{dy} \\
-&= \dfrac{1}{\dfrac{(1-y)+(1+y)}{(1-y)^2}} \dfrac{d}{dy} \\
+\dfrac{d}{dx} &= \dfrac{dy}{dx} \dfrac{d}{dy} \\
+&= \dfrac{1}{\dfrac{dx}{dy}} \dfrac{d}{dy} \\
+&= \dfrac{1}{x'(y)} \dfrac{d}{dy} \\
+&= \dfrac{1}{\dfrac{L[(1-y)+(1+y)]}{(1-y)^2}} \dfrac{d}{dy} \\
 &= \dfrac{1}{\dfrac{2L}{(1-y)^2}} \dfrac{d}{dy} \\
 &= \dfrac{(1-y)^2}{2L} \dfrac{d}{dy}.
 \end{align*}
