@@ -106,7 +106,7 @@ An important issue I should probably address is how do we solve Sturm-Liouville 
 \begin{align*}
 \mathbf{A} \mathbf{u} = \lambda \mathbf{R}\mathbf{u}.
 \end{align*}
-Where $\mathbf{u}$ is our vector of values of our function at our grid values and $\mathbf{R}=\mathbf{Diag}(r(x_i))$. Typically, we omit the endpoints from our matrices to impose our boundary conditions when those boundary conditions are of the form $u(a)=u(b)=0$. We can impose other boundary conditions by including them in the first and final row of our matrix and if they are zero, the corresponding rows of $\mathbf{R}$ should be zero, too. 
+Where $\mathbf{u}$ is our vector of values of our function at our grid values and $\mathbf{R}=\mathbf{Diag}(r(x_i))$. These eigenvalue matrix problems can be solved by first multiplying by $\mathbf{R}^{-1}$ before applying the techniques previously mentioned. Typically, we omit the endpoints from our matrices to impose our boundary conditions when those boundary conditions are of the form $u(a)=u(b)=0$. We can impose other boundary conditions by including them in the first and final row of our matrix and if they are zero, the corresponding rows of $\mathbf{R}$ should be zero, too. 
 
 Then we use established techniques for finding eigenvalues and eigenvectors of matrices. We can construct such an equation when we apply finite difference, spectral, finite element and spectral element methods to our linear eigenvalue differential equation problem. 
 
