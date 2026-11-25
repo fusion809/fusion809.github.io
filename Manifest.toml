@@ -2,7 +2,7 @@
 
 julia_version = "1.13.4"
 manifest_format = "2.1"
-project_hash = "80fdb317a491a9bef6c683242ea765120b7dda83"
+project_hash = "ee36243011140fe1dff85725442747ec0ab42699"
 
 [[deps.ADTypes]]
 deps = ["PrecompileTools"]
@@ -2580,10 +2580,10 @@ weakdeps = ["FixedPointNumbers"]
 
 [[deps.ReactantCore]]
 deps = ["ExpressionExplorer", "MacroTools"]
-git-tree-sha1 = "e6c4e08f4bc0d9eb791eab8dbf1b09dd997be1f5"
+git-tree-sha1 = "a995d76028ffa171906871188412a310a3c7ec18"
 registries = "General"
 uuid = "a3311ec8-5e00-46d5-b541-4f83e724a433"
-version = "0.1.27"
+version = "0.1.28"
 
 [[deps.RecipesBase]]
 deps = ["PrecompileTools"]
