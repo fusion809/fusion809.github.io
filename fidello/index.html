@@ -1038,20 +1038,20 @@ println&#40;&quot;\nMaximum absolute error: &quot;, maximum&#40;abs.&#40;u .- ue
  Row │ y             x             Approximation  Exact         Error
      │ Float64       Float64       Float64        Float64       Float64
 ─────┼──────────────────────────────────────────────────────────────────────
-   1 │ -1.0             0.0          0.355028     0.355028      1.66533e-16
-   2 │ -0.996917        0.0154371    0.351033     0.351033      3.35676e-13
-   3 │ -0.987688        0.0619396    0.339011     0.339011      5.2458e-14
+   1 │ -1.0             0.0          0.355028     0.355028      0.0
+   2 │ -0.996917        0.0154371    0.351033     0.351033      3.35565e-13
+   3 │ -0.987688        0.0619396    0.339011     0.339011      5.25691e-14
    4 │ -0.97237         0.140086     0.318926     0.318926      4.11449e-13
-   5 │ -0.951057        0.250856     0.290951     0.290951      2.11553e-13
-   6 │ -0.92388         0.395661     0.255767     0.255767      5.67879e-13
-   7 │ -0.891007        0.576378     0.214862     0.214862      4.80088e-13
-   8 │ -0.85264         0.795405     0.170704     0.170704      8.12378e-13
-   9 │ -0.809017        1.05573      0.126633     0.126633      8.54899e-13
-  10 │ -0.760406        1.36102      0.0863562    0.0863562     1.15404e-12
-  11 │ -0.707107        1.71573      0.0531192    0.0531192     1.31132e-12
-  12 │ -0.649448        2.12527      0.0287986    0.0287986     1.57738e-12
-  13 │ -0.587785        2.59616      0.0133761    0.0133761     1.78133e-12
-  14 │ -0.522499        3.1363       0.00513926   0.00513926    1.98336e-12
+   5 │ -0.951057        0.250856     0.290951     0.290951      2.11386e-13
+   6 │ -0.92388         0.395661     0.255767     0.255767      5.68212e-13
+   7 │ -0.891007        0.576378     0.214862     0.214862      4.79644e-13
+   8 │ -0.85264         0.795405     0.170704     0.170704      8.12739e-13
+   9 │ -0.809017        1.05573      0.126633     0.126633      8.5465e-13
+  10 │ -0.760406        1.36102      0.0863562    0.0863562     1.1542e-12
+  11 │ -0.707107        1.71573      0.0531192    0.0531192     1.31124e-12
+  12 │ -0.649448        2.12527      0.0287986    0.0287986     1.57742e-12
+  13 │ -0.587785        2.59616      0.0133761    0.0133761     1.78131e-12
+  14 │ -0.522499        3.1363       0.00513926   0.00513926    1.98337e-12
   15 │ -0.45399         3.75525      0.00156358   0.00156358    2.11517e-12
   16 │ -0.382683        4.46463      0.000356595  0.000356595   2.1652e-12
   17 │ -0.309017        5.27864      5.68688e-5   5.68688e-5    2.12113e-12
@@ -1080,8 +1080,8 @@ println&#40;&quot;\nMaximum absolute error: &quot;, maximum&#40;abs.&#40;u .- ue
   40 │  0.996917     6477.89        -3.83156e-20  0.0           3.83156e-20
   41 │  1.0           Inf            0.0          0.0           0.0
 
-Maximum absolute error: 2.165203021216311e-12
-</code></pre></p> <h5 id=eigenvalue_problems ><a href="#eigenvalue_problems" class=header-anchor >Eigenvalue problems</a></h5> <p>An important issue I should probably address is how do we solve Sturm-Liouville and other differential equations with eigenvalues? Well, the answer is that we construct an eigenvector equation of the form: <div class=nonumber >\[\begin{aligned} \mathbf{A} \mathbf{u} = \lambda \mathbf{R}\mathbf{u}. \end{aligned}\]</div> Where \(\mathbf{u}\) is our vector of values of our function at our grid values and \(\mathbf{R}=\mathbf{Diag}(r(x_i))\). Typically, we omit the endpoints from our matrices to impose our boundary conditions when those boundary conditions are of the form \(u(a)=u(b)=0\). We can impose other boundary conditions by including them in the first and final row of our matrix and if they are zero, the corresponding rows of \(\mathbf{R}\) should be zero, too. </p> <p>Then we use established techniques for finding eigenvalues and eigenvectors of matrices. We can construct such an equation when we apply finite difference, spectral, finite element and spectral element methods to our linear eigenvalue differential equation problem. </p> <p>For example, say we have: <a id=airyeig  class=anchor ></a><a id=airyeigbc  class=anchor ></a><div class="nonumber numbered-align">\[\begin{alignat}{2} u'' - xu &= \lambda u \tag{29} \\ u(0) &= u(\infty) && = 0. \tag{30} \end{alignat}\]</div> Rearranging yields: <div class=nonumber >\[\begin{aligned} u'' - (x+\lambda)u &= 0 \\ u(x) &= C_1 \mathrm{Ai}(x+\lambda) + C_2 \mathrm{Bi}(x+\lambda). \end{aligned}\]</div> Only \(\mathrm{Ai}(x)\) goes to \(0\) as \(x\rightarrow\infty\). Its derivative also goes to \(0\) in this limit. Imposing our other boundary condition, \(u'(0)=0\), yields: <div class=nonumber >\[\begin{aligned} u'(x) &= C_1 \mathrm{Ai}'(x+\lambda) \\ u'(0) &= C_1 \mathrm{Ai}'(\lambda) \\ &= 0. \end{aligned}\]</div> Which implies that \(\lambda_n\) will be the turning points of the Airy \(\mathrm{Ai}(x)\) function. <span class=code-listing-marker  data-label=airyeigen >Solution to Equations <a class=eqref  href="#airyeig">(29)</a> and <a class=eqref  href="#airyeigbc">(30)</a>.</span> <pre><code class=language-julia >using LinearAlgebra
+Maximum absolute error: 2.1652029127960937e-12
+</code></pre></p> <h5 id=eigenvalue_problems ><a href="#eigenvalue_problems" class=header-anchor >Eigenvalue problems</a></h5> <p>An important issue I should probably address is how do we solve Sturm-Liouville and other differential equations with eigenvalues? Well, the answer is that we construct an eigenvector equation of the form: <div class=nonumber >\[\begin{aligned} \mathbf{A} \mathbf{u} = \lambda \mathbf{R}\mathbf{u}. \end{aligned}\]</div> Where \(\mathbf{u}\) is our vector of values of our function at our grid values and \(\mathbf{R}=\mathbf{Diag}(r(x_i))\). Typically, we omit the endpoints from our matrices to impose our boundary conditions when those boundary conditions are of the form \(u(a)=u(b)=0\). We can impose other boundary conditions by including them in the first and final row of our matrix and if they are zero, the corresponding rows of \(\mathbf{R}\) should be zero, too. </p> <p>Then we use established techniques for finding eigenvalues and eigenvectors of matrices. We can construct such an equation when we apply finite difference, spectral, finite element and spectral element methods to our linear eigenvalue differential equation problem. </p> <p>For example, say we have: <a id=airyeig  class=anchor ></a><a id=airyeigbc  class=anchor ></a><div class="nonumber numbered-align">\[\begin{alignat}{2} u'' - xu &= \lambda u \tag{29} \\ u(0) &= u(\infty) && = 0. \tag{30} \end{alignat}\]</div> Rearranging yields: <div class=nonumber >\[\begin{aligned} u'' - (x+\lambda)u &= 0 \end{aligned}\]</div> If we define a new variable, say \(y=x+\lambda\) then: <div class=nonumber >\[\begin{aligned} dy &= \dfrac{dy}{dx}dx \\ &= dx \\ \therefore \dfrac{d}{dx} &= \dfrac{d}{dy}. \end{aligned}\]</div> Hence our equation would become, if we rewrite it in terms of \(y\): <div class=nonumber >\[\begin{aligned} \dfrac{d^2u}{dy^2} - yu &= 0. \end{aligned}\]</div> Which is the Airy equation, hence \(u(y) = C_1 \mathrm{Ai}(y) + C_2 \mathrm{Bi}(y)\). Hence rewrite \(u\) to be in terms of \(x\) yields: <div class=nonumber >\[\begin{aligned} u(x) &= C_1 \mathrm{Ai}(x+\lambda) + C_2 \mathrm{Bi}(x+\lambda). \end{aligned}\]</div> Only \(\mathrm{Ai}(x)\) goes to \(0\) as \(x\rightarrow\infty\). Its derivative also goes to \(0\) in this limit. Imposing our other boundary condition, \(u'(0)=0\), yields: <div class=nonumber >\[\begin{aligned} u'(x) &= C_1 \mathrm{Ai}'(x+\lambda) \\ u'(0) &= C_1 \mathrm{Ai}'(\lambda) \\ &= 0. \end{aligned}\]</div> Which implies that \(\lambda_n\) will be the turning points of the Airy \(\mathrm{Ai}(x)\) function. <span class=code-listing-marker  data-label=airyeigen >Solution to Equations <a class=eqref  href="#airyeig">(29)</a> and <a class=eqref  href="#airyeigbc">(30)</a>.</span> <pre><code class=language-julia >using LinearAlgebra
 using DataFrames
 using SpecialFunctions, Plots
 
