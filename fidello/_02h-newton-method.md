@@ -1,7 +1,7 @@
 ## Newton's method
 Given we do later cover the Newton-Kantorovich method, which is closely related to Newton's method, I thought I should probably cover Newton's method here. Newton's method is a method for solving nonlinear algebraic equations, including systems of nonlinear algebraic equations. For instance, say we wanted to solve:
 \begin{align*}
-x = cos^2{x}.
+x = \cos^2{x}.
 \end{align*}
 Then Newton's method would provide us a way to do so. Newton's method essentially finds the root of a function by looking at where its tangent line intersects the $x$ axis. Another way to think about it is that it uses the first two terms (the constant term and the linear term) of the function's Taylor series to determine its $x$ intercept. 
 
