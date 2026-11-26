@@ -32,7 +32,10 @@ Hence the determinant equation is:
 \det{\left(\begin{bmatrix}
 1 - \lambda & 2 \\
 3 & 4 - \lambda
-\end{bmatrix}\right)} &= 0 \\
+\end{bmatrix}\right)} &= 0.
+\end{align*}
+Taking the determinant:
+\begin{align*}
 \begin{vmatrix}
 1 - \lambda & 2 \\
 3 & 4-\lambda
@@ -40,7 +43,7 @@ Hence the determinant equation is:
 (1-\lambda)(4-\lambda)-2\times 3 &= 0 \\
 4 - 4\lambda - 1 \lambda + \lambda^2 -6 &= 0 \\
 -2-5\lambda + \lambda^2 &= 0 \\
-\lambda^2 -5 \lambda - 2 &= 0
+\lambda^2 -5 \lambda - 2 &= 0.
 \end{align*}
 Next we will use the completing the square technique to solve our quadratic equation:
 \begin{align*}
