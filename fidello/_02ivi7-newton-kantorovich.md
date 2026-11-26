@@ -36,4 +36,5 @@ T &= 2 \sqrt{\dfrac{l}{2g}} \int_{-\pi}^0 \dfrac{1}{\sqrt{-\sin{\theta}}} d\thet
 
 Code Listing \coderef{newtonkantorovich} displays the code we used to implement this solution on $t\in[0, T]$. 
 \codelisting{newtonkantorovich}{Script for solving simple pendulum problem with the Newton-Kantorovich method.}{./code/newtonkantorovich}{fidello/code/newton-kantorovich.jl}
+\output{./code/newtonkantorovich}
 \figure{newtonkantorovichplot}{right}{600px}{/pendulum_theta.svg}{Newton-Kantorovich solution to the simple pendulum equation.}
