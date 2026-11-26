@@ -77,7 +77,7 @@ Hence our Taylor series is:
 \cos{\theta} &= \sum_{n=0}^{\infty} \dfrac{(-1)^{n} \left(\theta-(-\dfrac{\pi}{2})\right)^{2n+1}}{(2n+1)!} \\
 &= \sum_{n=0}^{\infty} \dfrac{(-1)^{n} \left(\theta+\dfrac{\pi}{2}\right)^{2n+1}}{(2n+1)!}.
 \end{align*}
-Now we want to make our differential equation as simple as possible, so we will only consider the first term in this Taylor series, the $n=1$ term. In which case $\cos{\theta} \approx \theta + \dfrac{\pi}{2}$. Hence Equation \eqref{simppen} becomes:
+Now we want to make our differential equation as simple as possible, so we will only consider the first term in this Taylor series, the $n=0$ term. In which case $\cos{\theta} \approx \theta + \dfrac{\pi}{2}$. Hence Equation \eqref{simppen} becomes:
 \begin{align}
 \ddot{\theta} &=-\dfrac{g}{l}\theta - \dfrac{g\pi}{2l}.\label{simppenlin}
 \end{align}
