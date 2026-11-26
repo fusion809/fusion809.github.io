@@ -88,7 +88,7 @@ y - \dfrac{1}{x_n+y_n} & x- \dfrac{1}{x_n+y_n} \\
 \end{align*}
 Hence Newton's method boils down to applying:
 \begin{align*}
-\mathbf{x}_{n+1} &= \mathbf{x}_n - \mathbf{J}_n^{-1}\mathbf{f} \\
+\mathbf{x}_{n+1} &= \mathbf{x}_n - \mathbf{J}_n^{-1}\mathbf{f}_n \\
 \begin{bmatrix}
 x_{n+1} \\
 y_{n+1}
