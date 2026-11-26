@@ -35,9 +35,9 @@ x_2 &= x_1 - \dfrac{x_1-\cos^2{x_1}}{1+\sin{2x_1}} \\
 x_3 &= x_2 - \dfrac{x_2-\cos^2{x_2}}{1+\sin{2x_2}} \\
 &= 0.6417144.
 \end{align*}
-If we continue further iterations of Newton's method, we will find that $x_n$ stays $0.6417144$ when rounding to seven decimal places. 
+If we continue further iterations of Newton's method, we will find that $x_n$ stays at $0.6417144$ when rounding to seven decimal places. 
 
-How do we extend this method to solving a system of algebraic equations? We use \cite{boyd_chebyshev_2000}{527}:
+How do we extend this method to solving a system of nonlinear algebraic equations? We use \cite{boyd_chebyshev_2000}{527}:
 \begin{align*}
 \mathbf{x}_{n+1} &= \mathbf{x}_n - \mathbf{J}_n^{-1}\mathbf{f}_n.
 \end{align*}
