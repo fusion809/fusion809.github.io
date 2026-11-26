@@ -17,7 +17,7 @@ We can substitute Equation \eqref{afromu} into Equation \eqref{speca}, yielding:
 \end{align*}
 In this case, we would be solving for $\mathbf{u}$ instead of $\mathbf{a}$. Methods that approximate the solution to a differential equation over the entire domain of the problem using a single sum of basis functions whose number of terms is equal to the number of grid points like this are called spectral methods. 
 
-Why do we choose orthogonal function as our basis set for spectral methods? Well, we want our basis functions to be as different from one another as possible to ensure that they can, as accurately as possible, represent all the variation in our solution. This difference helps spectral methods achieve exponential convergence instead of polynomial convergence. 
+Why do we choose orthogonal function as our basis set for spectral methods? Well, orthogonality means our basis functions will be very different to one another and we want our basis functions to be as different from one another as possible to ensure that they can, as accurately as possible, represent all the variation in our solution. This difference helps spectral methods achieve exponential convergence instead of polynomial convergence. 
 
 What does this mean? Well, remember how the truncation error for Euler's method, Runge-Kutta methods, Runge-Kutta-Fehlberg method, etc. were all of the form $\mathcal{O}(h^k)$ where $k$ is some fixed number that depends on the precise method used and $h$ is the step size? Well, this is what we call polynomial convergence. As $h \propto n^{-1}$ (where $n+1$ is our number of grid points), this can be rewritten as $\mathcal{O}(n^{-k})$. Spectral methods, however, have a truncation error of $O(e^{-qn^{r}})$ where $q>0$ and $r>0$.
 
