@@ -3,7 +3,7 @@ Sturm-Liouville problems also give rise to infinite sets of orthogonal functions
 \begin{align}
 u(x) &= \sum_{j=0}^{\infty} a_j \phi_j(x). \label{spectral} 
 \end{align}
-Then we discretize our grid into points $x_i$ ($i \in \{0, 1, 2,...,n\}$) and truncate the above series expansion. What we do next depends on the precise method we are using. The simplest method we can use is to write a matrix equation for $\mathbf{a}$ (a vector containing $\{a_j\}$, the series coefficients). Then this equation would be:
+Then we discretize our grid into points $x_i$ ($i \in \{0, 1, 2,...,n\}$) and truncate the above series expansion to $j\in \{0, 1, 2, ..., n\}$. What we do next depends on the precise method we are using. The simplest method we can use is to write a matrix equation for $\mathbf{a}$ (a vector containing $\{a_j\}$, the series coefficients). Then this equation would be:
 \begin{align}
 \mathbf{A}\mathbf{a} &= \mathbf{b}. \label{speca}
 \end{align}
@@ -15,7 +15,13 @@ We can substitute Equation \eqref{afromu} into Equation \eqref{speca}, yielding:
 \begin{align*}
 \mathbf{A}\boldsymbol{\phi}^{-1}\mathbf{u} &= \mathbf{b}.
 \end{align*}
-In this case, we would be solving for $\mathbf{u}$ instead of $\mathbf{a}$. Methods that approximate the solution to a differential equation over the entire domain of the problem using a single sum of basis functions whose number of terms is equal to the number of grid points like this are called spectral methods. As we can represent our spectral method solution to a differential equation as a function (the sum in Equation \eqref{spectral}) that approximates the true solution, spectral methods are sometimes called semi-analytical methods instead of true numerical methods which give us only approximated values of our solution.
+In this case, we would be solving for $\mathbf{u}$ instead of $\mathbf{a}$. Methods that approximate the solution to a differential equation over the entire domain of the problem using a single sum of basis functions whose number of terms is equal to the number of grid points like this are called spectral methods. 
+
+Why do we choose orthogonal function as our basis set for spectral methods? Well, we want our basis functions to be as different from one another as possible to ensure that they can, as accurately as possible, represent all the variation in our solution. This difference helps spectral methods achieve exponential convergence instead of polynomial convergence. 
+
+What does this mean? Well, remember how the truncation error for Euler's method, Runge-Kutta methods, Runge-Kutta-Fehlberg method, etc. were all of the form $\mathcal{O}(h^k)$ where $k$ is some fixed number that depends on the precise method used and $h$ is the step size? Well, this is what we call polynomial convergence. As $h \propto n^{-1}$ (where $n+1$ is our number of grid points), this can be rewritten as $\mathcal{O}(n^{-k})$. Spectral methods, however, have a truncation error of $O(e^{-qn^{r}})$ where $q>0$ and $r>0$.
+
+As we can represent our spectral method solution to a differential equation as a function (the sum in Equation \eqref{spectral}) that approximates the true solution, spectral methods are sometimes called semi-analytical methods instead of true numerical methods which give us only approximated values of our solution.
 
 If the domain is split up into smaller sections with a separate function of the form Equation \eqref{spectral} defined on each, this is called a spectral element method. Finite element methods are very similar as they do split the domain up and define a series-based solution on each part of the domain. The difference is that the series usually has fewer terms and achieves lower accuracy than their spectral element counterparts.
 
@@ -42,7 +48,7 @@ We can also define a differentiation matrix. If $\mathbf{dT} = (T'_j(x_i))$ and 
 \begin{align*}
 \mathbf{D} &= \mathbf{dT} \mathbf{T}^{-1}.
 \end{align*}
-This matrix, when run on a vector of function values at $x_i$ computes its first derivative. If you multiply the vector by $\mathbf{D}$ twice, you will get the second derivative. Luckily, there are also more efficient ways of calculating $\mathbf{D}$. Like with the finite difference method, spectral methods are also easiest applied to linear differential equations. Interestingly, spectral methods are of order that is proportional to the number of grid points used. Which means that while increasing the number of grid points does improve the accuracy of every method one can use for solving differential equations, spectral methods take this to a whole other level. They are often orders of magnitude more accurate than other methods at a given $n$. 
+This matrix, when run on a vector of function values at $x_i$ computes its first derivative. If you multiply the vector by $\mathbf{D}$ twice, you will get the second derivative. Luckily, there are also more efficient ways of calculating $\mathbf{D}$. Like with the finite difference method, spectral methods are also easiest applied to linear differential equations. 
 
 ##### Example: Airy equation
 Say we wish to solve:
