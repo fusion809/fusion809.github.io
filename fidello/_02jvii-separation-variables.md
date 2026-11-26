@@ -124,17 +124,7 @@ Here we have used the fact that $\delta_{mn}$ is zero if $m\neq n$ and one if $m
 \begin{align*}
 a_n &= \dfrac{2}{L} \int_0^L f(x) \sin{\left(\dfrac{n \pi}{L} x\right)} dx.
 \end{align*}
-Interestingly, Equation \eqref{fxFourier} is called the Fourier series decomposition of $f(x)$ in terms of sines only. Fourier series are a way of rewriting periodic functions in terms of sine and cosine waves. Specifically, if we wish to write $f(x)$ as a Fourier series over the domain $x \in [-L,L]$, we would write (keep in mind the series coefficients $a_n$ and $b_n$ are not the same as those we have been using so far):
-\begin{align*}
-f(x) &= a_0 + \sum_{n=1}^{\infty} a_n \cos{\left(\dfrac{n\pi}{L}x\right)} + b_n \sin{\left(\dfrac{n\pi}{L}x\right)}. 
-\end{align*}
-Where:
-\begin{align*}
-a_0 &= \dfrac{1}{2L} \int_{-L}^{L} f(x) dx \\
-a_n &= \dfrac{1}{L} \int_{-L}^{L} f(x) \cos{\left(\dfrac{2\pi nx}{L}\right)} dx \\
-b_n &= \dfrac{1}{L} \int_{-L}^{L} f(x) \sin{\left(\dfrac{2\pi nx}{L}\right)} dx.
-\end{align*}
-We can see our $b_n$ here matches the $a_n$ from the $u_n(x,t)$, except that $a_n$ is calculated by integrating only over $x\in [0,L]$. So what is up with this? Well, interestingly we can only represent $f(x)$ solely with sine terms if and only if $f(x)$ is an odd function, just like $\sin{\left(\dfrac{n\pi x}{L}\right)}$ itself. Meaning that $f(-x)=-f(x)$. Hence we can split our $b_n$ integral as:
+Interestingly, Equation \eqref{fxFourier} is called the Fourier series decomposition of $f(x)$ in terms of sines only. From Equation \eqref{Fourierbn}we can see our $b_n$ here matches the $a_n$ from the $u_n(x,t)$, except that $a_n$ is calculated by integrating only over $x\in [0,L]$. So what is up with this? Well, interestingly we can only represent $f(x)$ solely with sine terms if and only if $f(x)$ is an odd function, just like $\sin{\left(\dfrac{n\pi x}{L}\right)}$ itself. Meaning that $f(-x)=-f(x)$. Hence we can split our $b_n$ integral as:
 \begin{align*}
 b_n &= \dfrac{1}{L} \int_{-L}^{L} f(x) \sin{\left(\dfrac{2\pi nx}{L}\right)} dx \\
 &= \dfrac{1}{L} \left[\int_{-L}^{0} f(x) \sin{\left(\dfrac{2\pi nx}{L}\right)} dx + \int_{0}^{L} f(x) \sin{\left(\dfrac{2\pi nx}{L}\right)} dx \right]
