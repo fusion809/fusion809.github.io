@@ -1,0 +1,15 @@
+Iteration 1: correction magnitude = 7.171592071160942
+Iteration 2: correction magnitude = 3.3846060587446156
+Iteration 3: correction magnitude = 1.558372734342074
+Iteration 4: correction magnitude = 0.6015046278196632
+Iteration 5: correction magnitude = 0.1278352945181429
+Iteration 6: correction magnitude = 0.00634735828336772
+Iteration 7: correction magnitude = 1.5726214269007225e-5
+Iteration 8: correction magnitude = 9.653699887703496e-11
+Iteration 9: correction magnitude = 3.006347332366074e-16
+
+Newton iteration converged.
+
+Numerical solution:
+x = 0.4099865626018238
+y = 2.971853128686871
