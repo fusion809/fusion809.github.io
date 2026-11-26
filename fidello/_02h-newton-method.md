@@ -53,7 +53,7 @@ $\mathbf{x}_{n}$ is a column vector of our $n$th approximation to the independen
 \end{align*}
 Which can be written more succinctly as:
 \begin{align*}
-J_{ij} = \left(\dfrac{\partial f_i}{\partial x_j}\right).
+(J_{ij}) = \left(\dfrac{\partial f_i}{\partial x_j}\right).
 \end{align*}
 
 For example, say we have the equations:
