@@ -9,7 +9,7 @@ Interestingly, these two qualities, the length of the complex number's vector an
 \begin{align*}
 e^{iz} &= \cos{z} + i\sin{z}. 
 \end{align*}
-Why is this the case? Replacing $x$ with $iz$ in Equation \eqref{ex} yields:
+This is known as Euler's formula. Why does this formula hold? Replacing $x$ with $iz$ in Equation \eqref{ex} yields:
 \begin{align*}
 e^{iz} &= \sum_{n=0}^{\infty} \dfrac{(iz)^n}{n!}.
 \end{align*}
