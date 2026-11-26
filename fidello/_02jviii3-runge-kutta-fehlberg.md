@@ -60,7 +60,7 @@ y_{5,n+1} &= y_{n} + \dfrac{16k_1}{135} + \dfrac{6656k_3}{12825} + \dfrac{28561k
 \mathrm{TE} &= \max_{f \in \{u, y\}} \Big|f_{5,n+1}-f_{4,n+1}\Big|\\
 s &= \left(\dfrac{\epsilon}{2\mathrm{TE}}\right)^{1/5}.
 \end{align*}
-I should clarify that we are maximizing over the error estimates in our two functions $u$ and $y$ to calculate $\mathrm{TE}$. So whichever error estimate is bigger out of those for $u$ and $y$, we choose for $\mathrm{TE}$. If $\mathrm{TE} < \epsilon$, we continue onto the next step with our new $y_n$ being the old $y_{5,n+1}$ and the new $u_n$ being the old $u_{5,n+1}$ and obtain our new $h$ by multiplying it by $s$. If $TE \geq \epsilon$, we multiply $h$ by $s$ and repeat the above calculations again.
+I should clarify that we are maximizing over the error estimates in our two functions $u$ and $y$ to calculate $\mathrm{TE}$. So whichever error estimate is bigger out of those for $u$ and $y$, we choose for $\mathrm{TE}$. If $\mathrm{TE} < \epsilon$, we continue onto the next step with our new $y_n$ being the old $y_{5,n+1}$ and the new $u_n$ being the old $u_{5,n+1}$ and obtain our new $h$ by multiplying it by $s$. If $\mathrm{TE} \geq \epsilon$, we multiply $h$ by $s$ and repeat the above calculations again.
 
 So we will use the initial conditions $y(0)=0$ and $y'(0)=1$. This gives the solution $y(x)=\sin{x}$ and integrate our ordinary differential equation on the interval $x\in [0, 2\pi]$.
 
