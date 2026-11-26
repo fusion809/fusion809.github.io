@@ -76,7 +76,7 @@ let converged = false
         # Check convergence
         iteration_error = norm(Δ, Inf)
 
-        println("Iteration $n: error = $iteration_error")
+        println("Iteration $n: correction magnitude = $iteration_error")
 
         if iteration_error < tol
             converged = true
