@@ -9,3 +9,11 @@ a_0 &= \dfrac{1}{2L} \int_{-L}^{L} f(x) dx \label{Fouriera0} \\
 a_n &= \dfrac{1}{L} \int_{-L}^{L} f(x) \cos{\left(\dfrac{2\pi nx}{L}\right)} dx \label{Fourieran}\\
 b_n &= \dfrac{1}{L} \int_{-L}^{L} f(x) \sin{\left(\dfrac{2\pi nx}{L}\right)} dx \label{Fourierbn}.
 \end{align}
+The Fourier series can also be represented in terms of complex exponentials as:
+\begin{align*}
+f(x) &= \sum_{n=-\infty}^{\infty} c_n e^{\frac{2\pi n x}{T}}.
+\end{align*}
+Where:
+\begin{align*}
+c_n &= \dfrac{1}{T} \int_0^T f(x) e^{-\frac{2\pi i nx}{T}} dx.
+\end{align*}

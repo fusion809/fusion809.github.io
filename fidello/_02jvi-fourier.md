@@ -11,7 +11,7 @@ We denote the Fourier transform of a specified function as $\mathcal{F}(f)$. It 
 
 It also has a discrete counterpart called the discrete Fourier transform. If you have a sequence of numbers $\{x_j\}=\{x_0, x_1, x_2, ..., x_{n-1}\}$, the discrete Fourier transform yields:
 \begin{align*}
-X_j &= \sum_{k=0}^{n-1} x_j e^{-\frac{2\pi i jk}{n}}.
+X_j &= \sum_{k=0}^{n-1} x_k e^{-\frac{2\pi i jk}{n}}.
 \end{align*}
 Its inverse is defined as:
 \begin{align*}
