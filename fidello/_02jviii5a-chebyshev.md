@@ -45,8 +45,8 @@ We can also define a differentiation matrix. If $\mathbf{dT} = (T'_j(x_i))$ and 
 This matrix, when run on a vector of function values at $x_i$ computes its first derivative. If you multiply the vector by $\mathbf{D}$ twice, you will get the second derivative. Let $\mathbf{D}^{(2)}$ represent the second derivative matrix; it will equal $\mathbf{D}^2=\mathbf{D}\mathbf{D}$. It can also be calculated using $\mathbf{d^2T}=(T''_j(x_i))$ as $\mathbf{D}^{(2)}=\mathbf{d^2T}\mathbf{T}^{-1}$. Luckily, there are also more efficient ways of calculating $\mathbf{D}$, such as using \cite{trefethen_spectral_2000}{53}:
 \begin{align*}
 D_{ij} = \begin{cases}
-    \dfrac{2n^2+1}{6}, & i=j=0 \\\\
-    -\dfrac{2n^2+1}{6}, & i=j=n \\\\
+    -\dfrac{2n^2+1}{6}, & i=j=0 \\\\
+    \dfrac{2n^2+1}{6}, & i=j=n \\\\
     -\dfrac{x_j}{2(1-x_j^2)}, & i=j, i\neq 0, n \\\\
     \dfrac{(1+\delta_{i0}+\delta_{in})(-1)^{i+j}}{(1+\delta_{j0}+\delta_{jn})(x_i-x_j)}, & i\neq j
 \end{cases}.
