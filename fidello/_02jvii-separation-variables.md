@@ -124,7 +124,7 @@ Here we have used the fact that $\delta_{mn}$ is zero if $m\neq n$ and one if $m
 \begin{align*}
 a_n &= \dfrac{2}{L} \int_0^L f(x) \sin{\left(\dfrac{n \pi}{L} x\right)} dx.
 \end{align*}
-Interestingly, Equation \eqref{fxFourier} is called the Fourier series decomposition of $f(x)$ in terms of sines only. From Equation \eqref{Fourierbn}we can see our $b_n$ here matches the $a_n$ from the $u_n(x,t)$, except that $a_n$ is calculated by integrating only over $x\in [0,L]$. So what is up with this? Well, interestingly we can only represent $f(x)$ solely with sine terms if and only if $f(x)$ is an odd function, just like $\sin{\left(\dfrac{n\pi x}{L}\right)}$ itself. Meaning that $f(-x)=-f(x)$. Hence we can split our $b_n$ integral as:
+Interestingly, Equation \eqref{fxFourier} is called the Fourier series decomposition of $f(x)$ in terms of sines only. From Equation \eqref{Fourierbn}, we can see our $b_n$ here matches the $a_n$ from the $u_n(x,t)$, except that $a_n$ is calculated by integrating only over $x\in [0,L]$. So what is up with this? Well, interestingly we can only represent $f(x)$ solely with sine terms if and only if $f(x)$ is an odd function, just like $\sin{\left(\dfrac{n\pi x}{L}\right)}$ itself. Meaning that $f(-x)=-f(x)$. Hence we can split our $b_n$ integral as:
 \begin{align*}
 b_n &= \dfrac{1}{L} \int_{-L}^{L} f(x) \sin{\left(\dfrac{2\pi nx}{L}\right)} dx \\
 &= \dfrac{1}{L} \left[\int_{-L}^{0} f(x) \sin{\left(\dfrac{2\pi nx}{L}\right)} dx + \int_{0}^{L} f(x) \sin{\left(\dfrac{2\pi nx}{L}\right)} dx \right]
