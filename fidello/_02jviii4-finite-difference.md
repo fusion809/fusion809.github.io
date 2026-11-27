@@ -63,7 +63,7 @@ Code Listing \coderef{findiff} contains code for implementing the finite differe
 
 \codelisting{findiff}{Implementation of a second-order finite difference method for solving $y''=-y$ with $y(0)=y(2\pi)=1$.}{./code/findiff}{fidello/code/findiff.jl}
 
-As we can see from the below output, our implementation of the finite difference method is rather inaccurate. Higher order approximations for the derivative can be achieved by using more grid point values at each step, but this does not make the matrices more complex. 
+As we can see from the below output, our implementation of the finite difference method is rather inaccurate. Higher order approximations for the derivative can be achieved by using more grid point values at each step, but this does make the matrices more complex. 
 \output{./code/findiff}
 
 For instance, if we use the fourth-order approximation to $y''_i$:
