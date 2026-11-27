@@ -945,7 +945,7 @@ y &#61; A \ b
 yex &#61; cos.&#40;x&#41;;
 df &#61; DataFrame&#40;x&#61;x, Approximation&#61;y, Exact&#61;yex, Error&#61;abs.&#40;y.-yex&#41;&#41;
 show&#40;stdout, MIME&#40;&quot;text/plain&quot;&#41;, df&#41;
-println&#40;&#41;</code></pre> <p>As we can see from the below output, our implementation of the finite difference method is rather inaccurate. Higher order approximations for the derivative can be achieved by using more grid point values at each step, but this does make the matrices more complex. <pre><code class="plaintext code-output">21×4 DataFrame
+println&#40;&#41;</code></pre> <p>As we can see from the below output, our implementation of the finite difference method is rather inaccurate. Higher order approximations for the derivative can be achieved by using more grid point values at each step, but this does not make the matrices more complex. <pre><code class="plaintext code-output">21×4 DataFrame
  Row │ x         Approximation  Exact         Error
      │ Float64   Float64        Float64       Float64
 ─────┼────────────────────────────────────────────────────
