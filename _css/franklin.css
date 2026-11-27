@@ -671,3 +671,127 @@ ul.flexcols li {
     font-size: 12px;
     font-style: italic;
 }
+
+@media (max-width: 768px) {
+    html,
+    body {
+        max-width: 100%;
+        margin: 0;
+        overflow-x: hidden;
+        overflow-x: clip;
+    }
+
+    #layout,
+    #main,
+    .franklin-content {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        overflow-x: hidden;
+        overflow-x: clip;
+    }
+
+    .header {
+        max-width: 100%;
+        box-sizing: border-box;
+        padding: 2.2em 12px 0.5em;
+    }
+
+    .header h1 {
+        overflow-wrap: break-word;
+    }
+
+    body .franklin-content {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .franklin-content img,
+    .franklin-content video,
+    .franklin-content iframe {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .franklin-content figure {
+        float: none !important;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .franklin-content .img-small img {
+        width: 100%;
+        padding-left: 0;
+    }
+
+    .franklin-content pre {
+        max-width: 100%;
+        overflow-x: auto;
+        box-sizing: border-box;
+    }
+
+    .franklin-content table {
+        display: block;
+        width: max-content;
+        max-width: 100%;
+        overflow-x: auto;
+        box-sizing: border-box;
+    }
+
+    .franklin-content div[id^="container"] {
+        max-width: 100%;
+        overflow-x: auto;
+        box-sizing: border-box;
+    }
+
+    .franklin-toc {
+        max-width: 100%;
+        box-sizing: border-box;
+        overflow-x: auto;
+    }
+
+    .katex-display {
+        max-width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+
+    .numbered-align .katex-display {
+        width: 100%;
+    }
+
+    .numbered-align .katex-display > .katex,
+    .numbered-align .katex-display > .katex > .katex-html {
+        width: max-content;
+        min-width: 100%;
+    }
+
+    .liCol,
+    .liCol50 {
+        width: 100%;
+        float: none;
+    }
+
+    #toc-toggle {
+        position: fixed;
+        right: 8px;
+        top: 6px;
+        z-index: 1000;
+    }
+
+    #toc-panel {
+        position: fixed;
+        right: 8px;
+        top: 38px;
+        width: min(260px, calc(100vw - 16px));
+        max-width: calc(100vw - 16px);
+        max-height: calc(100vh - 48px);
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    #toc-panel a {
+        overflow-wrap: break-word;
+    }
+}
