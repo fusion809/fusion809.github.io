@@ -47,7 +47,7 @@ Substituting the first of these into Equation \eqref{ac1} yields:
 \begin{align*}
 A-(-A) &= 1 \\
 2A &= 1 \\
-A &= \dfrac{1}{2}
+A &= \dfrac{1}{2}.
 \end{align*}
 Hence $C$ is:
 \begin{align*}
@@ -57,7 +57,7 @@ Substituting $D=-B$ into Equation \eqref{bmd0} yields:
 \begin{align*}
 B-(-B) &= 0 \\
 2B &= 0 \\
-B &= 0
+B &= 0.
 \end{align*}
 Which also implies that:
 \begin{align*}
