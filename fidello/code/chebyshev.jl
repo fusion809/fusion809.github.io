@@ -13,9 +13,7 @@ c = [2.0; ones(n-1); 2.0] .* (-1.0).^(0:n)
 X = repeat(ξ, 1, n+1)
 dX = X - X'
 
-# This is the i!=j part of the differentiation matrix. 
 D = (c * (1 ./ c)') ./ (dX + I)
-# This imposes that the sum of each row of D = 0, that way D*constant=0
 D -= Diagonal(vec(sum(D, dims=2)))
 
 # Transformation to the semi-infinite domain
