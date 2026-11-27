@@ -48,6 +48,6 @@ D_{ij} = \begin{cases}
     -\dfrac{2n^2+1}{6}, & i=j=0 \\\\
     \dfrac{2n^2+1}{6}, & i=j=n \\\\
     -\dfrac{x_j}{2(1-x_j^2)}, & i=j, i\neq 0, n \\\\
-    \dfrac{(1+\delta_{i0}+\delta_{in})(-1)^{i+j}}{(1+\delta_{j0}+\delta_{jn})(x_i-x_j)}, & i\neq j
-\end{cases}.
+    \dfrac{(1+\delta_{i0}+\delta_{in})(-1)^{i+j}}{(1+\delta_{j0}+\delta_{jn})(x_i-x_j)}, & i\neq j.
+\end{cases}
 \end{align*}
