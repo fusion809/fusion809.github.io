@@ -1,8 +1,5 @@
-Iteration 1: correction magnitude = 0.03708226702644607
-Iteration 2: correction magnitude = 0.0009045032574703163
-Iteration 3: correction magnitude = 1.773246699049662e-7
-Iteration 4: correction magnitude = 2.415273330948051e-12
-Iteration 5: correction magnitude = 2.6169489335229478e-12
-Iteration 6: correction magnitude = 3.6237645595993394e-12
-Iteration 7: correction magnitude = 9.811018162891857e-13
+Iteration 1: correction magnitude = 0.03708226702359711
+Iteration 2: correction magnitude = 0.0009045032554022505
+Iteration 3: correction magnitude = 1.7732465343176035e-7
+Iteration 4: correction magnitude = 5.108283309043039e-13
 Newton-Kantorovich iteration converged.
