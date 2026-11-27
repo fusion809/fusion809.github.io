@@ -19,7 +19,7 @@ k_3 &= hf\left(x_0 + \dfrac{h}{2}, y_0 + \dfrac{k_2}{2}\right) \\
 k_4 &= hf(x_0 + h, y_0 + k_3) \\
 y(x_0+h) &= y_0 + \dfrac{1}{6}(k_1 + 2k_2 + 2k_3 + k_4).
 \end{align*}
-And we should repeat this process for all subsequent points we wish to approximate $y(x)$ at. That is why, when we write numerical integration schemes like this we usually use $x_n$ to denote the $n$th $x$ value for which we are approximating $y$. 
+And we should repeat this process for all subsequent points we wish to approximate $y(x)$ at. That is why, when we write numerical integration schemes like this we usually use $x_i$ to denote the $i$th $x$ value for which we are approximating $y$. 
 
 In Code Listing \coderef{differential}, I have implemented both Euler's method and the Runge-Kutta fourth-order method to solve this differential equation. The results are displayed, along with the exact solution, in a table below the code. Here we used $h=0.2$ and continued the approximation for five steps, until $x=1$. As you can see, the Runge-Kutta fourth-order method is much more accurate than Euler's method.
 

@@ -3,10 +3,10 @@ So far I have covered how we can numerically integrate initial value problems. S
 \begin{align*}
 x_i &= x_0 + hi.
 \end{align*}
-Where $x_0$ is the start of our domain, which is $0$. If we divide our domain into $N+1$ equally spaced points then $h=\dfrac{2\pi}{N}$. Hence:
+Where $x_0$ is the start of our domain, which is $0$. If we divide our domain into $n+1$ equally spaced points then $h=\dfrac{2\pi}{n}$. Hence:
 \begin{align*}
 x_i &= hi \\
-&= \dfrac{2\pi i}{N}.
+&= \dfrac{2\pi i}{n}.
 \end{align*}
 Let $y_i$ denote $y(x_i)$. Then using the Taylor series expansion at $a=x_i$:
 \begin{align*}

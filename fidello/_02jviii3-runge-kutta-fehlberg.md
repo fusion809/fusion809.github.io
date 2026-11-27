@@ -2,18 +2,18 @@
 An arguably better method for numerically solving ordinary differential equations is the Runge-Kutta-Fehlberg fourth/fifth-order method (RKF45), as it adapts our step size $h$ to ensure that the error in our solution never exceeds a certain threshold. In this method, we use:
 
 \begin{align*}
-k_1 &= hf(x_n, y_n) \\
-k_2 &= hf\left(x_n + \dfrac{h}{4}, y_n + \dfrac{k_1}{4}\right) \\
-k_3 &= hf\left(x_n + \dfrac{3h}{8}, y_n + \dfrac{3k_1}{32} + \dfrac{9k_2}{32}\right) \\
-k_4 &= hf\left(x_n + \dfrac{12h}{13}, y_n + \dfrac{1932k_1}{2197} - \dfrac{7200k_2}{2197} + \dfrac{7296k_3}{2197}\right) \\
-k_5 &= hf\left(x_n + h, y_n + \dfrac{439k_1}{216} - 8k_2 + \dfrac{3680k_3}{513} - \dfrac{845k_4}{4104}\right) \\
-k_6 &= hf\left(x_n + \dfrac{h}{2}, y_n - \dfrac{8k_1}{27} + 2k_2 - \dfrac{3544k_3}{2565} + \dfrac{1859k_4}{4104} - \dfrac{11k_5}{40}\right) \\
-z_{n+1} &= y_n + \dfrac{16k_1}{135} + \dfrac{6656k_3}{12825} + \dfrac{28561k_4}{56430} - \dfrac{9k_5}{50} + \dfrac{2k_6}{55} \\
-y_{n+1} &= y_n + \dfrac{25k_1}{216} + \dfrac{1408k_3}{2565} + \dfrac{2197k_4}{4104} - \dfrac{k_5}{5} \\
-\mathrm{TE} &= |y_{n+1} - z_{n+1}| \\
+k_1 &= hf(x_i, y_i) \\
+k_2 &= hf\left(x_i + \dfrac{h}{4}, y_i + \dfrac{k_1}{4}\right) \\
+k_3 &= hf\left(x_i + \dfrac{3h}{8}, y_i + \dfrac{3k_1}{32} + \dfrac{9k_2}{32}\right) \\
+k_4 &= hf\left(x_i + \dfrac{12h}{13}, y_i + \dfrac{1932k_1}{2197} - \dfrac{7200k_2}{2197} + \dfrac{7296k_3}{2197}\right) \\
+k_5 &= hf\left(x_i + h, y_i + \dfrac{439k_1}{216} - 8k_2 + \dfrac{3680k_3}{513} - \dfrac{845k_4}{4104}\right) \\
+k_6 &= hf\left(x_i + \dfrac{h}{2}, y_i - \dfrac{8k_1}{27} + 2k_2 - \dfrac{3544k_3}{2565} + \dfrac{1859k_4}{4104} - \dfrac{11k_5}{40}\right) \\
+z_{i+1} &= y_i + \dfrac{16k_1}{135} + \dfrac{6656k_3}{12825} + \dfrac{28561k_4}{56430} - \dfrac{9k_5}{50} + \dfrac{2k_6}{55} \\
+y_{i+1} &= y_i + \dfrac{25k_1}{216} + \dfrac{1408k_3}{2565} + \dfrac{2197k_4}{4104} - \dfrac{k_5}{5} \\
+\mathrm{TE} &= |y_{i+1} - z_{i+1}| \\
 s &= \left(\dfrac{\epsilon}{2\mathrm{TE}}\right)^{1/5}.
 \end{align*}
-Here $\epsilon$ is the maximum absolute error in our approximation we are willing to accept. $\mathrm{TE}$ is our approximation of the truncation error as our estimate for $y_{n+1}$ is fourth-order and $z_{n+1}$ is the fifth-order estimate. If $\mathrm{TE} \geq \epsilon$, then we rescale $h$ using $h=h\cdot s$ and repeat the approximation again. If not, then we accept our approximation to the next $y$ value and rescale $h$ using $h=h\cdot s$. This method is very efficient and is the numerical technique I use for integrating ordinary differential equations in all of my JavaScript-based ordinary differential equations solver webpages. 
+Here $\epsilon$ is the maximum absolute error in our approximation we are willing to accept. $\mathrm{TE}$ is our approximation of the truncation error as our estimate for $y_{i+1}$ is fourth-order and $z_{i+1}$ is the fifth-order estimate. If $\mathrm{TE} \geq \epsilon$, then we rescale $h$ using $h=h\cdot s$ and repeat the approximation again. If not, then we accept our approximation to the next $y$ value and rescale $h$ using $h=h\cdot s$. This method is very efficient and is the numerical technique I use for integrating ordinary differential equations in all of my JavaScript-based ordinary differential equations solver webpages. 
 
 \codelisting{RKF45}{Runge-Kutta-Fehlberg fourth/fifth-order method solution to $y'=y, y(0)=1$.}{./code/RKF45}{fidello/code/RKF45.jl}
 
@@ -39,28 +39,28 @@ So we would need two conditions to uniquely determine $y$. We could rewrite our 
 u &= y' \\
 u' &= -y.
 \end{align*}
-How would we numerically integrate this system? We could apply RKF45 to determine $y_{n+1}$ (where $y_0$ and $y'_0$ will be our initial conditions) using this scheme:
+How would we numerically integrate this system? We could apply RKF45 to determine $y_{i+1}$ (where $y_0$ and $y'_0$ will be our initial conditions) using this scheme:
 \begin{align*}
-k_1 &= hu_n\\
-l_1 &= -hy_n \\
-k_2 &= h\left(u_n+\dfrac{l_1}{4}\right) \\
-l_2 &= -h\left(y_n+\dfrac{k_1}{4}\right) \\
-k_3 &= h\left(u_n+\dfrac{3l_1}{32}+\dfrac{9l_2}{32}\right) \\
-l_3 &= -h\left(y_n+\dfrac{3k_1}{32}+\dfrac{9k_2}{32}\right) \\
-k_4 &= h\left(u_n+\dfrac{1932l_1}{2197}-\dfrac{7200l_2}{2197}+\dfrac{7296l_3}{2197}\right) \\
-l_4 &= -h\left(y_n+\dfrac{1932k_1}{2197}-\dfrac{7200k_2}{2197}+\dfrac{7296k_3}{2197}\right) \\
-k_5 &= h\left(u_n+\dfrac{439l_1}{216}-8l_2+\dfrac{3680l_3}{513}-\dfrac{845l_4}{4104}\right) \\
-l_5 &= -h\left(y_n+\dfrac{439k_1}{216}-8k_2+\dfrac{3680k_3}{513}-\dfrac{845k_4}{4104}\right) \\
-k_6 &= h\left(u_n-\dfrac{8l_1}{27}+2l_2-\dfrac{3544l_3}{2565}+\dfrac{1859l_4}{4104}-\dfrac{11l_5}{40}\right) \\
-l_6 &= -h\left(y_n-\dfrac{8k_1}{27}+2k_2-\dfrac{3544k_3}{2565}+\dfrac{1859k_4}{4104}-\dfrac{11k_5}{40}\right) \\
-u_{4,n+1} &= u_{n} + \dfrac{25l_1}{216} + \dfrac{1408l_3}{2565} + \dfrac{2197l_4}{4104} - \dfrac{l_5}{5}\\
-u_{5,n+1} &= u_{n} + \dfrac{16l_1}{135} + \dfrac{6656l_3}{12825} + \dfrac{28561l_4}{56430} - \dfrac{9l_5}{50} + \dfrac{2l_6}{55}\\
-y_{4,n+1} &= y_{n} + \dfrac{25k_1}{216} + \dfrac{1408k_3}{2565} + \dfrac{2197k_4}{4104} - \dfrac{k_5}{5}\\
-y_{5,n+1} &= y_{n} + \dfrac{16k_1}{135} + \dfrac{6656k_3}{12825} + \dfrac{28561k_4}{56430} - \dfrac{9k_5}{50} + \dfrac{2k_6}{55}\\
-\mathrm{TE} &= \max_{f \in \{u, y\}} \Big|f_{5,n+1}-f_{4,n+1}\Big|\\
+k_1 &= hu_i\\
+l_1 &= -hy_i \\
+k_2 &= h\left(u_i+\dfrac{l_1}{4}\right) \\
+l_2 &= -h\left(y_i+\dfrac{k_1}{4}\right) \\
+k_3 &= h\left(u_i+\dfrac{3l_1}{32}+\dfrac{9l_2}{32}\right) \\
+l_3 &= -h\left(y_i+\dfrac{3k_1}{32}+\dfrac{9k_2}{32}\right) \\
+k_4 &= h\left(u_i+\dfrac{1932l_1}{2197}-\dfrac{7200l_2}{2197}+\dfrac{7296l_3}{2197}\right) \\
+l_4 &= -h\left(y_i+\dfrac{1932k_1}{2197}-\dfrac{7200k_2}{2197}+\dfrac{7296k_3}{2197}\right) \\
+k_5 &= h\left(u_i+\dfrac{439l_1}{216}-8l_2+\dfrac{3680l_3}{513}-\dfrac{845l_4}{4104}\right) \\
+l_5 &= -h\left(y_i+\dfrac{439k_1}{216}-8k_2+\dfrac{3680k_3}{513}-\dfrac{845k_4}{4104}\right) \\
+k_6 &= h\left(u_i-\dfrac{8l_1}{27}+2l_2-\dfrac{3544l_3}{2565}+\dfrac{1859l_4}{4104}-\dfrac{11l_5}{40}\right) \\
+l_6 &= -h\left(y_i-\dfrac{8k_1}{27}+2k_2-\dfrac{3544k_3}{2565}+\dfrac{1859k_4}{4104}-\dfrac{11k_5}{40}\right) \\
+u_{4,i+1} &= u_{i} + \dfrac{25l_1}{216} + \dfrac{1408l_3}{2565} + \dfrac{2197l_4}{4104} - \dfrac{l_5}{5}\\
+u_{5,i+1} &= u_{i} + \dfrac{16l_1}{135} + \dfrac{6656l_3}{12825} + \dfrac{28561l_4}{56430} - \dfrac{9l_5}{50} + \dfrac{2l_6}{55}\\
+y_{4,i+1} &= y_{i} + \dfrac{25k_1}{216} + \dfrac{1408k_3}{2565} + \dfrac{2197k_4}{4104} - \dfrac{k_5}{5}\\
+y_{5,i+1} &= y_{i} + \dfrac{16k_1}{135} + \dfrac{6656k_3}{12825} + \dfrac{28561k_4}{56430} - \dfrac{9k_5}{50} + \dfrac{2k_6}{55}\\
+\mathrm{TE} &= \max_{f \in \{u, y\}} \Big|f_{5,i+1}-f_{4,i+1}\Big|\\
 s &= \left(\dfrac{\epsilon}{2\mathrm{TE}}\right)^{1/5}.
 \end{align*}
-I should clarify that we are maximizing over the error estimates in our two functions $u$ and $y$ to calculate $\mathrm{TE}$. So whichever error estimate is bigger out of those for $u$ and $y$, we choose for $\mathrm{TE}$. If $\mathrm{TE} < \epsilon$, we continue onto the next step with our new $y_n$ being the old $y_{5,n+1}$ and the new $u_n$ being the old $u_{5,n+1}$ and obtain our new $h$ by multiplying it by $s$. If $\mathrm{TE} \geq \epsilon$, we multiply $h$ by $s$ and repeat the above calculations again.
+I should clarify that we are maximizing over the error estimates in our two functions $u$ and $y$ to calculate $\mathrm{TE}$. So whichever error estimate is bigger out of those for $u$ and $y$, we choose for $\mathrm{TE}$. If $\mathrm{TE} < \epsilon$, we continue onto the next step with our new $y_i$ being the old $y_{5,i+1}$ and the new $u_i$ being the old $u_{5,i+1}$ and obtain our new $h$ by multiplying it by $s$. If $\mathrm{TE} \geq \epsilon$, we multiply $h$ by $s$ and repeat the above calculations again.
 
 So we will use the initial conditions $y(0)=0$ and $y'(0)=1$. This gives the solution $y(x)=\sin{x}$ and integrate our ordinary differential equation on the interval $x\in [0, 2\pi]$.
 
