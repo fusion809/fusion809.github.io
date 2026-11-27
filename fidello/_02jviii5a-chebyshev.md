@@ -13,7 +13,7 @@ If $j=1$, we get:
 T_1 &=\cos{\left(\cos^{-1}{x}\right)} \\
 &=x.
 \end{align*} 
-If $j_2$, we get:
+If $j=2$, we get:
 \begin{align*}
 T_2 &= \cos{\left(2\cos^{-1}{x}\right)} \\
 &= \cos^2{\left(\cos^{-1}{x}\right)}-\sin^2{\left(\cos^{-1}{x}\right)} \\
