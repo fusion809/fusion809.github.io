@@ -7,11 +7,6 @@ Where $s$ is a complex number. It is invertible, although the inverse Laplace tr
 \begin{align*}
 \mathcal{L}(f^{(n)}) &= s^n \mathcal{L}(f) - \sum_{k=1}^{n} s^{n-k} f^{(k-1)}(0).
 \end{align*}
-$f^{(k-1)}(0-)=f^{(k-1)}(0)$ typically. If $f^{(k-1)}(0)$ is not clearly defined, we are required to determine $f^{(k-1)}(0-)$ through the limit:
-\begin{align*}
-f^{(k-1)}(0-) &= \lim_{x\rightarrow 0^{-}} f^{(k-1)}(x).
-\end{align*}
-$x\rightarrow 0^{-}$ means that we approach $0$ from the negative side of the number line. 
 
 #### Example
 To see the power of this approach, let us consider the equation:
