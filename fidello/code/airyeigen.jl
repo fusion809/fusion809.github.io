@@ -9,24 +9,24 @@ L = 10.0
 nev = 6
 
 # Ascending Chebyshev-Lobatto grid
-ξ = -cos.(π .* (0:N) ./ N)
+y = -cos.(π .* (0:N) ./ N)
 
 # Chebyshev differentiation matrix
 c = [2.0; ones(N-1); 2.0] .* (-1.0).^(0:N)
 
-X = repeat(ξ, 1, N+1)
-dX = X - X'
+Y = repeat(y, 1, N+1)
+dY = Y - Y'
 
-D = (c * (1 ./ c)') ./ (dX + I)
+D = (c * (1 ./ c)') ./ (dY + I)
 D -= Diagonal(vec(sum(D, dims=2)))
 
 # Map to the semi-infinite interval
-x = L .* (1 .+ ξ) ./ (1 .- ξ)
+x = L .* (1 .+ y) ./ (1 .- y)
 x[1] = 0.0
 x[end] = Inf
 
 # Differentiation matrices with respect to x
-q = (1 .- ξ).^2 ./ (2L)
+q = (1 .- y).^2 ./ (2L)
 
 Dx = Diagonal(q) * D
 D2 = Dx * Dx
@@ -87,7 +87,7 @@ println(df)
 x_linear = collect(range(0.0, 10.0, length=500))
 
 # Transform physical coordinates to Chebyshev coordinates
-ξ_linear = (x_linear .- L) ./ (x_linear .+ L)
+y_linear = (x_linear .- L) ./ (x_linear .+ L)
 
 # Barycentric interpolation weights
 w = 1.0 ./ c
@@ -96,14 +96,14 @@ w = 1.0 ./ c
 u_linear = zeros(length(x_linear))
 
 for i in eachindex(x_linear)
-    k = findfirst(j -> isapprox(ξ_linear[i], ξ[j];
+    k = findfirst(j -> isapprox(y_linear[i], y[j];
                                 atol=8eps(Float64), rtol=0.0),
-                  eachindex(ξ))
+                  eachindex(y))
 
     if !isnothing(k)
         u_linear[i] = U[k, 1]
     else
-        terms = w ./ (ξ_linear[i] .- ξ)
+        terms = w ./ (y_linear[i] .- y)
         u_linear[i] = sum(terms .* U[:, 1]) / sum(terms)
     end
 end

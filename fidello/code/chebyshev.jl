@@ -5,22 +5,24 @@ n = 40
 L = 10.0
 
 # Chebyshev extrema
-ξ = -cos.(π .* (0:n) ./ n)
+y = -cos.(π .* (0:n) ./ n)
 
 # Chebyshev differentiation matrix
 c = [2.0; ones(n-1); 2.0] .* (-1.0).^(0:n)
 
-X = repeat(ξ, 1, n+1)
+X = repeat(y, 1, n+1)
 dX = X - X'
 
+# This is the i!=j part of the differentiation matrix. 
 D = (c * (1 ./ c)') ./ (dX + I)
+# This imposes that the sum of each row of D = 0, that way D*constant=0
 D -= Diagonal(vec(sum(D, dims=2)))
 
 # Transformation to the semi-infinite domain
-x = L*(ξ.+1)./(-ξ.+1)
+x = L*(y.+1)./(-y.+1)
 
 # Derivative transformation
-q = (1 .- ξ).^2 ./ (2L)
+q = (1 .- y).^2 ./ (2L)
 
 # Second derivative matrix
 D2 = Diagonal(q) * D * Diagonal(q) * D
@@ -43,7 +45,7 @@ b[1] = airyai(0)
 u = A \ b
 
 # Chebyshev coefficients
-V = [cos((j-1)*acos(ξ[i])) for i in 1:n+1, j in 1:n+1]
+V = [cos((j-1)*acos(y[i])) for i in 1:n+1, j in 1:n+1]
 a = V \ u
 
 # Exact solution
@@ -53,7 +55,7 @@ uexact = [i == n+1 || x[i] > 100 ? 0.0 :
 
 # Results
 df = DataFrame(
-    y = ξ,
+    y = y,
     x = x,
     Approximation = u,
     Exact = uexact,
