@@ -54,3 +54,5 @@ Code Listing \coderef{chebyshev} was used to solve our Airy equation ODE.
 
 \codelisting{chebyshev}{Solution to the Airy equation via Chebyshev spectral method.}{./code/chebyshev}{fidello/code/chebyshev.jl}
 \output{./code/chebyshev}
+
+The condition number of our matrix $A$ ($=\mathbf{D}_x^2 - \mathbf{Diag}{(x_i)}$) was 15522.6. Which is much smaller than the matrices we obtained for the fourth and tenth-order finite difference method. 
