@@ -32,24 +32,36 @@ s &= (As+B)(s^2+1) + (Cs+D)(s^2-1) \\
 &= (A+C)s^3 + (B+D)s^2 + (A-C)s + B-D.
 \end{align*}
 Equating coefficients yields:
-\begin{align*}
-A+C &= 0 \\
-B+D &= 0 \\
-A-C &= 1 \\
-B-D &= 0.
-\end{align*}
-Rearranging and substituting yields:
+\begin{align}
+A+C &= 0 \label{ac0}\\
+B+D &= 0 \label{bpd0}\\
+A-C &= 1 \label{ac1}\\
+B-D &= 0. \label{bmd0}
+\end{align}
+Rearranging Equations \eqref{ac0} and \eqref{bpd0} yields:
 \begin{align*}
 C &= -A \\
-D &= -B \\
+D &= -B.
+\end{align*}
+Substituting the first of these into Equation \eqref{ac1} yields:
+\begin{align*}
 A-(-A) &= 1 \\
 2A &= 1 \\
-A &= \dfrac{1}{2} \\
-C &= -\dfrac{1}{2} \\
+A &= \dfrac{1}{2}
+\end{align*}
+Hence $C$ is:
+\begin{align*}
+C &= -\dfrac{1}{2}.
+\end{align*}
+Substituting $D=-B$ into Equation \eqref{bmd0} yields:
+\begin{align*}
 B-(-B) &= 0 \\
 2B &= 0 \\
-B &= 0 \\
-\implies D &= 0.
+B &= 0
+\end{align*}
+Which also implies that:
+\begin{align*}
+D &= 0.
 \end{align*}
 Hence:
 \begin{align*}
