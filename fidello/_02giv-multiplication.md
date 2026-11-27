@@ -1,4 +1,4 @@
-### Multiplication
+### Matrix multiplication
 If you multiply two matrices, you multiply the elements along the corresponding row of the first matrix by the elements of the corresponding column of the second matrix and sum them up. For instance, say we multiplied $\mathbf{A}$ by this matrix:
 \begin{align*}
 \mathbf{B} &= \begin{bmatrix}
