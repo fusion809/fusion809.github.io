@@ -36,15 +36,6 @@ function newton_system()
         iteration_error = norm(Δ, Inf)
 
         println("Iteration $n: correction magnitude = $iteration_error")
-
-        if iteration_error < tol
-            println("\nNewton iteration converged.")
-            break
-        end
-
-        if n == maxiter
-            @warn "Newton iteration did not converge."
-        end
     end
 
     println("\nNumerical solution:")
