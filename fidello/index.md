@@ -42,6 +42,9 @@
 \includemd{fidello/_02jviii3-runge-kutta-fehlberg.md}
 \includemd{fidello/_02jviii4-finite-difference.md}
 \includemd{fidello/_02jviii5-spectral.md}
+\includemd{fidello/_02jviii5a-chebyshev.md}
+\includemd{fidello/_02jviii5b-airy.md}
+\includemd{fidello/_02jviii5c-eigenvalue.md}
 \includemd{fidello/_02jviii6-pde.md}
 \includemd{fidello/_02jviii7-newton-kantorovich.md}
 \includemd{fidello/_03-lagrangian-mechanics.md}
