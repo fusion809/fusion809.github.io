@@ -61,7 +61,7 @@ y_n
 \end{align*}
 Code Listing \coderef{findiff} contains code for implementing the finite difference method for our ODE. 
 
-\codelisting{findiff}{Implementation of the finite difference method for solving $y''=-y$ with $y(0)=y(2\pi)=1$.}{./code/findiff}{fidello/code/findiff.jl}
+\codelisting{findiff}{Implementation of a second-order finite difference method for solving $y''=-y$ with $y(0)=y(2\pi)=1$.}{./code/findiff}{fidello/code/findiff.jl}
 
 As we can see from the below output, our implementation of the finite difference method is rather inaccurate. Higher order approximations for the derivative can be achieved by using more grid point values at each step, but this does not make the matrices more complex. 
 \output{./code/findiff}
@@ -70,10 +70,10 @@ For instance, if we use the fourth-order approximation to $y''_i$:
 \begin{align*}
 y''_i &= \dfrac{-y_{i+2}+16y_{i+1}-30y_i + 16y_{i-1}-y_{i-2}}{12h^2}.
 \end{align*}
-For $i=1$ and $i=N-1$, where one of these grid points is not defined, we would instead use:
+For $i=1$ and $i=n-1$, where one of these grid points is not defined, we would instead use:
 \begin{align*}
 y''_1 &= \dfrac{11y_5 - 56y_4 + 114y_3 - 104y_2+35y_1}{12h^2} \\
-y''_{N-1} &= \dfrac{35y_{N-1}-104y_{N-2}+114y_{N-3}-56y_{N-4}+11y_{N-5}}{12h^2}.
+y''_{n-1} &= \dfrac{35y_{n-1}-104y_{n-2}+114y_{n-3}-56y_{n-4}+11y_{n-5}}{12h^2}.
 \end{align*}
 This scheme was used in Code Listing \coderef{findiff4th}.
 
@@ -82,4 +82,4 @@ Which produces the output:
 \output{./code/findiff4th}
 As we can see, it is more accurate, but definitely not perfect. 
 
-It is important to note, however, that so far we have only applied the finite difference method to linear differential equations and this is for good reason. When we try to apply it to nonlinear differential equations, we get a nonlinear coupled system of algebraic equations which are much more challenging to solve. There are ways around this, for instance we can use a method called Newton's method to solve the algebraic equation system that arises, and we can also try linearizing our differential equation using a technique known as the Newton-Kantorovich method \cite{boyd_chebyshev_2000}{526-535}. Each of these presents its own challenges though. 
+It is important to note, however, that so far we have only applied the finite difference method to linear differential equations and this is for good reason. When we try to apply it to nonlinear differential equations, we get a nonlinear coupled system of algebraic equations which are much more challenging to solve. There are ways around this, for instance we can use Newton's method to solve the algebraic equation system that arises, and we can also try linearizing our differential equation using a technique known as the Newton-Kantorovich method \cite{boyd_chebyshev_2000}{526-535}. Each of these presents its own challenges though. 
