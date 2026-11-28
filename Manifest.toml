@@ -806,10 +806,10 @@ version = "0.4.20"
 
 [[deps.FastPower]]
 deps = ["PrecompileTools"]
-git-tree-sha1 = "a6bcbd090fc6b6f022fc0ad96f77ba31b9577282"
+git-tree-sha1 = "0fc3c6aa54999d22f8888df423b22f1c780d9aa2"
 registries = "General"
 uuid = "a4df4552-cc26-4903-aec0-212e50a0e84b"
-version = "1.5.1"
+version = "1.5.2"
 
     [deps.FastPower.extensions]
     FastPowerEnzymeExt = "Enzyme"
