@@ -19,7 +19,7 @@ Then:
 \end{align*}
 As you can see the first row first column element of the product matrix was obtained by multiplying the first row of $\mathbf{A}$ by the first column of $\mathbf{B}$. Likewise, the second row first column element of the product matrix was obtained by multiplying the second row of $\mathbf{A}$ by the first column of $\mathbf{B}$. 
 
-Due to how we multiply matrices, the matrix product is only defined if we are multiplying by a $m\times n$ matrix by a $n\times p$ matrix. The number of columns of the first matrix must match the number of rows of the second. And the result of this multiplication will be a $m\times p$ matrix. Further, because of this definition of matrix multiplication, the operation is non-commutative. In other words, the order in which we multiply matrices matters. So that if we left-multiply one matrix, say $\mathbf{A}$, by another, say $\mathbf{B}$, this is not the equivalent to right-multiplying $\mathbf{A}$ by $\mathbf{B}$. In other words, in general:
+Due to how we multiply matrices, the matrix product is only defined if we are multiplying a $m\times n$ matrix by a $n\times p$ matrix. The number of columns of the first matrix must match the number of rows of the second. The result of this multiplication will be a $m\times p$ matrix. Further, because of this definition of matrix multiplication, the operation is non-commutative. In other words, the order in which we multiply matrices matters. So that if we left-multiply one matrix, say $\mathbf{A}$, by another, say $\mathbf{B}$, this is not the equivalent to right-multiplying $\mathbf{A}$ by $\mathbf{B}$. In other words, in general:
 \begin{align*}
 \mathbf{A} \mathbf{B} \neq \mathbf{B}\mathbf{A}.
 \end{align*}
